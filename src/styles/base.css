@@ -64,6 +64,6 @@ em {
 	scroll-margin-top: 1rem;
 }
 
-.twitter-tweet {
+.twitter-tweet-rendered {
 	@apply !my-0;
 }
