@@ -1,0 +1,43 @@
+---
+import { JSDOM } from "jsdom";
+import Layout from "../components/Layout.astro";
+
+export interface Props {
+	content: {
+		title: string;
+		published: string;
+		ogImage?: string;
+	};
+}
+
+const { content } = Astro.props;
+const { title, published, ogImage } = content;
+
+const htmlContent = await (Astro as any).__renderMarkdown(content.astro.source, { mode: "md" });
+const description = JSDOM.fragment(htmlContent).querySelector("p").textContent;
+---
+
+<Layout {title} {description} {ogImage}>
+	<article>
+		<header class="container">
+			<h1
+				class="text-2xl leading-tight font-bold [font-kerning:auto] [font-feature-settings:'palt'_1]"
+				set:html={title}
+			>
+			</h1>
+			<p class="mt-6 text-sm text-on-background-muted">
+				<time datetime={new Date(published).toISOString()}>
+					{new Date(published).toLocaleDateString("ja-JP", { dateStyle: "long" })}
+				</time>
+			</p>
+		</header>
+
+		<div class="my-12 border-t"></div>
+
+		<div class="container">
+			<div class="prose">
+				<slot />
+			</div>
+		</div>
+	</article>
+</Layout>

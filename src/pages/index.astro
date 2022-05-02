@@ -1,0 +1,170 @@
+---
+import Layout from "../components/Layout.astro";
+import DetailsList from "../components/DetailsList.astro";
+
+let allPosts = await Astro.glob<{ title: string; published: string }>("./*.md");
+allPosts = allPosts.sort(
+	(a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.frontmatter.published)
+);
+
+const title = "安田 祐平";
+
+const description =
+	"フロントエンドウェブ開発者。HTMLやWAI-ARIA、CSS設計、レスポンシブデザイン、Jamstack、シングルページアプリケーション、アクセシビリティ、インターフェースデザインが関心領域。業務では、運用を見据えたコーポレートサイトやメディアサイトなどの受託開発に携わる。";
+
+const primaryPosts = [
+	{
+		title: "『Every Layout』に到った背景と思想についての私の解釈",
+		url: "https://note.com/shiftbrain/n/n0a01726673e0",
+		meta: "SHIFTBRAIN note",
+	},
+	{
+		title: "「Every Layout」をめぐる座談会",
+		url: "https://www.codegrid.net/series/2021-talk-about-every-layout",
+		meta: "CodeGrid",
+	},
+	{
+		title:
+			"『Every Layout─モジュラーなレスポンシブデザインを実現するCSS設計論』、素直さという選択 &#35;everylayout-ja",
+		url: "/20211011-publication-of-everylayout",
+		meta: "Yuhei Yasuda",
+	},
+	{
+		title: "垂直方向のマージンにはmargin-topを優先的に使う理由",
+		url: "/20210127-prefer-margin-top",
+		meta: "Yuhei Yasuda",
+	},
+	{
+		title: "Tailwind CSSの設計思想を業務に活かす",
+		url: "https://www.codegrid.net/series/2020-tailwind-talk",
+		meta: "CodeGrid",
+	},
+	{
+		title: "UIにおける見えるけど利用できない非活性な領域の実装とinert属性について",
+		url: "https://standard.shiftbrain.com/blog/unavailable-inert-regions-and-inert-attribute",
+		meta: "シフトブレイン／スタンダードデザインユニット",
+	},
+	{
+		title:
+			"CSSのユーティリティクラスと「関心の分離」――いかにしてユーティリティファーストにたどり着いたか（翻訳）",
+		url: "https://yuheiy.hatenablog.com/entry/2020/05/25/021342",
+		meta: "yuhei blog",
+	},
+	{
+		title:
+			"翻訳：Rich Harris「形而上学とJavaScript」に関する見解（ReactによるDOMの抽象化の不完全性について）",
+		url: "https://yuheiy.hatenablog.com/entry/2020/01/25/230154",
+		meta: "yuhei blog",
+	},
+	{
+		title: "「代替」の意味を探して",
+		url: "https://yuheiy.github.io/meanings-of-the-alternative/",
+		meta: "yuheiy.github.io",
+	},
+	{
+		title: "制作者のためのHTML",
+		url: "https://yuheiy.github.io/html-for-creators/",
+		meta: "yuheiy.github.io",
+	},
+	{
+		title: "ページ内リンクの実装から考える、a要素のclickイベントとその振る舞い",
+		url: "https://standard.shiftbrain.com/blog/default-action-for-click-event-of-a-element",
+		meta: "シフトブレイン／スタンダードデザインユニット",
+	},
+];
+
+const projects = [
+	{
+		title: "ゆうへいのプリントTシャツ",
+		url: "https://scrapbox.io/yuhei-print-tshirt/",
+		meta: '<time datetime="2020-10">2020年10月</time> &#x2015;',
+		description: "自分が集めたプリントTシャツを記録しているScrapbox。",
+	},
+	{
+		title: "boilerplate-wordpress",
+		url: "https://github.com/devjam/boilerplate-wordpress",
+		meta: '<time datetime="2020-08">2020年8月</time> &#x2015;',
+		description: "WordPressテーマ構築のための開発環境。",
+	},
+	{
+		title: "accrefs",
+		url: "https://accrefs.jp/",
+		meta: '<time datetime="2019-09">2019年9月</time> &#x2015;',
+		description:
+			"ウェブアクセシビリティの参考資料をまとめたサイト。日本語の資料を中心にリンク数は200を超える。サイトのデザインおよび実装に携わる。有志のメンバーにより制作・運営されている。",
+	},
+	{
+		title: "shifted",
+		url: "https://github.com/yuheiy/shifted",
+		meta: '<time datetime="2019-05">2019年5月</time> &#x2015;',
+		description: "静的サイト構築のための開発環境。",
+	},
+	{
+		title: "シフトブレイン／スタンダードデザインユニット",
+		url: "https://standard.shiftbrain.com/",
+		meta: '<time datetime="2018-10">2018年10月</time> &#x2015; <time datetime="2020-06">2020年6月</time>',
+		description: "自社で所属していたチームのウェブサイト。",
+	},
+	{
+		title: "yuhei blog",
+		url: "https://yuheiy.hatenablog.com/",
+		meta: '<time datetime="2015-10">2015年10月</time> &#x2015; <time datetime="2020-11">2020年11月</time>',
+		description: "過去に更新していた個人ブログ。",
+	},
+];
+---
+
+<Layout {title} {description}>
+	<div class="container">
+		<h1
+			class="text-2xl leading-tight font-bold [font-kerning:auto] [font-feature-settings:'palt'_1]"
+		>
+			{title}
+		</h1>
+
+		<div class="mt-6 space-y-4 text-on-background-muted">
+			<p>{description}</p>
+			<p>
+				監訳を担当した書籍『<a href="/20211011-publication-of-everylayout"
+					>Every Layout─モジュラーなレスポンシブデザインを実現するCSS設計論</a
+				>』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a
+				>。
+			</p>
+		</div>
+	</div>
+
+	<div class="my-12 border-t"></div>
+
+	<section class="container">
+		<h2 class="mb-8 font-bold text-sm">主な投稿</h2>
+
+		<DetailsList items={primaryPosts} />
+	</section>
+
+	<div class="my-12 border-t"></div>
+
+	<section class="container">
+		<h2 class="mb-8 font-bold text-sm">プロジェクト</h2>
+
+		<DetailsList items={projects} />
+	</section>
+
+	<div class="my-12 border-t"></div>
+
+	<section class="container">
+		<h2 class="mb-8 font-bold text-sm">最新記事</h2>
+
+		<DetailsList
+			items={allPosts
+				.map((post) => ({
+					title: post.frontmatter.title,
+					url: post.url,
+					meta: `<time datetime="${new Date(post.frontmatter.published).toISOString()}">
+						${new Date(post.frontmatter.published).toLocaleDateString("ja-JP", { dateStyle: "long" })}
+					</time>`,
+				}))
+				.slice(0, 3)}
+			ordered={true}
+		/>
+	</section>
+</Layout>

@@ -1,0 +1,31 @@
+---
+export interface Props {
+	items: {
+		title: string;
+		url: string;
+		meta?: string;
+		description?: string;
+	}[];
+	ordered?: boolean
+}
+
+const { items, ordered = false } = Astro.props;
+
+const List = ordered ? 'ol' : 'ul';
+---
+
+<List class="space-y-8">
+	{items.map((item) => (
+		<li>
+			{item.meta && (
+				<p class="text-sm text-on-background-muted" set:html={item.meta} />
+			)}
+			<p>
+				<a href={item.url} set:html={item.title} />
+			</p>
+			{item.description && (
+				<p class="mt-1 text-sm text-on-background-muted" set:html={item.description} />
+			)}
+		</li>
+	))}
+</List>

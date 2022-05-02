@@ -1,0 +1,68 @@
+:root {
+	--astro-code-color-text: var(--color-on-background);
+	--astro-code-color-background: transparent;
+	--astro-code-token-constant: #0550ae;
+	--astro-code-token-string: #0a3069;
+	--astro-code-token-comment: #6e7781;
+	--astro-code-token-keyword: #cf222e;
+	--astro-code-token-parameter: #24292f;
+	--astro-code-token-function: #8250df;
+	--astro-code-token-string-expression: #0a3069;
+	--astro-code-token-punctuation: #0a3069;
+	--astro-code-token-link: #0a3069;
+
+	@media (prefers-color-scheme: dark) {
+		--astro-code-token-constant: #79c0ff;
+		--astro-code-token-string: #a5d6ff;
+		--astro-code-token-comment: #8b949e;
+		--astro-code-token-keyword: #ff7b72;
+		--astro-code-token-parameter: #c9d1d9;
+		--astro-code-token-function: #d2a8ff;
+		--astro-code-token-string-expression: #a5d6ff;
+		--astro-code-token-punctuation: #a5d6ff;
+		--astro-code-token-link: #a5d6ff;
+	}
+}
+
+html {
+	@apply leading-normal;
+	hanging-punctuation: allow-end;
+	font-kerning: none;
+	line-break: strict;
+	text-underline-position: under;
+	overflow-wrap: break-word;
+
+	/* https://schepp.dev/posts/smooth-scrolling-and-page-search/ */
+	&:focus-within {
+		@media (prefers-reduced-motion: no-preference) {
+			scroll-behavior: smooth;
+		}
+	}
+}
+
+/* https://css-tricks.com/a-clever-sticky-footer-technique/ */
+html,
+body {
+	height: 100%;
+}
+
+a:any-link {
+	text-decoration: underline;
+	text-decoration-color: var(--color-underline);
+}
+
+a:visited {
+	@apply text-on-background-muted;
+}
+
+em {
+	@apply not-italic font-bold;
+}
+
+[id] {
+	scroll-margin-top: 1rem;
+}
+
+.twitter-tweet {
+	@apply !my-0;
+}

@@ -1,0 +1,70 @@
+.prose {
+	@apply space-y-6;
+
+	* + :is(h2, hr, pre, figure, .twitter-tweet),
+	:is(hr, pre, figure, .twitter-tweet + script) + * {
+		@apply !mt-10;
+	}
+
+	h3 + * {
+		@apply !mt-2;
+	}
+
+	h2 {
+		@apply -ml-[0.75em] pl-[0.5em] text-xl leading-tight border-l-[0.25em];
+	}
+
+	h3 {
+		@apply text-lg leading-tight font-bold;
+	}
+
+	hr {
+		@apply h-auto border-0 text-on-background-muted text-center;
+	}
+
+	hr::before {
+		@apply content-["\2042\2003\2042\2003\2042"];
+	}
+
+	pre {
+		@apply -ml-[var(--container-margin-left)] -mr-[var(--container-margin-right)] pl-[var(--container-margin-left)] pr-[var(--container-margin-right)] text-sm;
+	}
+
+	blockquote {
+		@apply pl-[2em];
+	}
+
+	:is(ol, ul) {
+		@apply pl-[2em] list-[revert];
+	}
+
+	li {
+		@apply mt-1;
+	}
+
+	> :is(ol, ul):first-child > li:first-child {
+		@apply mt-0;
+	}
+
+	figure {
+		@apply space-y-3;
+	}
+
+	figcaption {
+		@apply text-sm;
+	}
+
+	code::before,
+	code::after {
+		@apply content-["`"];
+	}
+
+	pre > code::before,
+	pre > code::after {
+		@apply content-none;
+	}
+
+	img {
+		@apply bg-white;
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"type": "module",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"format": "prettier . --write || true"
+	},
+	"devDependencies": {
+		"@astrojs/tailwind": "^0.2.1",
+		"@wordpress/browserslist-config": "^4.1.2",
+		"astro": "^1.0.0-beta.20",
+		"image-size": "^1.0.1",
+		"jsdom": "^19.0.0",
+		"postcss-import": "^14.1.0",
+		"prettier": "^2.6.2",
+		"prettier-plugin-astro": "^0.0.12",
+		"prettier-plugin-css-order": "^1.2.0",
+		"unist-util-visit": "^4.1.0"
+	},
+	"engines": {
+		"node": "16"
+	},
+	"private": true
+}

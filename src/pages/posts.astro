@@ -1,0 +1,32 @@
+---
+import Layout from "../components/Layout.astro";
+import DetailsList from "../components/DetailsList.astro";
+
+const title = "記事";
+
+let allPosts = await Astro.glob<{ title: string; published: string }>("./*.md");
+allPosts = allPosts.sort(
+	(a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.frontmatter.published)
+);
+---
+
+<Layout {title}>
+	<div class="container">
+		<h1
+			class="mb-12 text-2xl leading-tight font-bold [font-kerning:auto] [font-feature-settings:'palt'_1]"
+		>
+			{title}
+		</h1>
+
+		<DetailsList
+			items={allPosts.map((post) => ({
+				title: post.frontmatter.title,
+				url: post.url,
+				meta: `<time datetime="${new Date(post.frontmatter.published).toISOString()}">
+					${new Date(post.frontmatter.published).toLocaleDateString("ja-JP", { dateStyle: "long" })}
+				</time>`,
+			}))}
+			ordered={true}
+		/>
+	</div>
+</Layout>

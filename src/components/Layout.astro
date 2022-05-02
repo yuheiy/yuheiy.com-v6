@@ -1,0 +1,78 @@
+---
+import "../styles/main.css";
+
+export interface Props {
+	title?: string;
+	description?: string;
+	ogImage?: string;
+}
+
+const { title, description } = Astro.props;
+
+let { ogImage = "/apple-touch-icon.png" } = Astro.props;
+ogImage = new URL(ogImage, Astro.site.origin);
+
+const siteTitle = "Yuhei Yasuda";
+---
+
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, viewport-fit=cover" />
+		<meta name="color-scheme" content="light dark" />
+
+		<title>{title || siteTitle}</title>
+
+		{description && <meta name="description" content={description} />}
+
+		<meta property="og:title" content={title || siteTitle} />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:url" content={Astro.canonicalURL.href} />
+		{description && <meta property="og:description" content={description} />}
+		<meta property="og:site_name" content={siteTitle} />
+		<meta property="og:locale" content="ja_JP" />
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:site" content="@_yuheiy" />
+
+		<link rel="canonical" href={Astro.canonicalURL.href} />
+		<link rel="alternate" href="/posts-feed.xml" type="application/rss+xml" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	</head>
+
+	<body class="text-on-background bg-background">
+		<header class="container mb-6 pt-12 text-sm [font-kerning:auto]">
+			<a class="flex items-center gap-x-2 w-fit" href={Astro.canonicalURL.pathname !== "/" && "/"}>
+				<img
+					class="w-7 border dark:border-0 rounded-full"
+					src="/apple-touch-icon.png"
+					width="180"
+					height="180"
+					decoding="async"
+					alt=""
+				/>
+				{siteTitle}
+			</a>
+		</header>
+
+		<main>
+			<slot />
+		</main>
+
+		<footer class="sticky top-full mt-14 py-8 text-sm bg-background-variant">
+			<nav class="container space-y-4">
+				<p>
+					<a href="/">ホーム</a>&#x2003;<a href="/posts">すべての記事</a>&#x2003;<a
+						href="/posts-feed.xml">RSS</a
+					>
+				</p>
+				<p>
+					<a href="https://twitter.com/_yuheiy">Twitter</a>&#x2003;<a
+						href="https://github.com/yuheiy">GitHub</a
+					>&#x2003;<a href="mailto:yuhei.yasuda1003@gmail.com">Eメール</a>
+				</p>
+			</nav>
+		</footer>
+	</body>
+</html>
