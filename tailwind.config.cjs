@@ -107,7 +107,7 @@ module.exports = {
 				"on-background": "gray.50",
 				"on-background-muted": "gray.400",
 				underline: "gray.500",
-				outline: "gray.700",
+				outline: "neutral.700",
 			},
 		}),
 		container,
