@@ -5,9 +5,10 @@ export interface Props {
 	title?: string;
 	description?: string;
 	ogImage?: string;
+	twitterCard?: "summary" | "summary_large_image"
 }
 
-const { title, description } = Astro.props;
+const { title, description, twitterCard = "summary" } = Astro.props;
 
 let { ogImage = "/apple-touch-icon.png" } = Astro.props;
 ogImage = new URL(ogImage, Astro.site.origin);
@@ -33,7 +34,7 @@ const siteTitle = "Yuhei Yasuda";
 		<meta property="og:site_name" content={siteTitle} />
 		<meta property="og:locale" content="ja_JP" />
 
-		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:card" content={twitterCard} />
 		<meta name="twitter:site" content="@_yuheiy" />
 
 		<link rel="canonical" href={Astro.canonicalURL.href} />

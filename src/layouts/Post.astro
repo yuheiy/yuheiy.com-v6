@@ -7,17 +7,18 @@ export interface Props {
 		title: string;
 		published: string;
 		ogImage?: string;
+		twitterCard?: "summary" | "summary_large_image";
 	};
 }
 
 const { content } = Astro.props;
-const { title, published, ogImage } = content;
+const { title, published, ogImage, twitterCard } = content;
 
 const htmlContent = await (Astro as any).__renderMarkdown(content.astro.source, { mode: "md" });
 const description = JSDOM.fragment(htmlContent).querySelector("p").textContent;
 ---
 
-<Layout {title} {description} {ogImage}>
+<Layout {title} {description} {ogImage} {twitterCard}>
 	<article>
 		<header class="container">
 			<h1
