@@ -47,6 +47,7 @@ body {
 }
 
 a:any-link {
+	@apply text-on-background;
 	text-decoration: underline;
 	text-decoration-color: var(--color-underline);
 }
