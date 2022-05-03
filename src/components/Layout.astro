@@ -16,10 +16,14 @@ const { title = siteTitle, description, ogType = "website", twitterCard = "summa
 let { ogImage = "/apple-touch-icon.png" } = Astro.props;
 ogImage = new URL(ogImage, Astro.site.origin);
 
-const canonicalURL =
-	Astro.canonicalURL.pathname === "/"
-		? Astro.canonicalURL.href
-		: Astro.canonicalURL.href.replace(/\/$/, "");
+let canonicalURL;
+if (Astro.canonicalURL.pathname === "/404/") {
+	// do nothing
+} else if (Astro.canonicalURL.pathname === "/") {
+	canonicalURL = Astro.canonicalURL.href;
+} else {
+	canonicalURL = Astro.canonicalURL.href.replace(/\/$/, "");
+}
 ---
 
 <html lang="ja">
@@ -35,7 +39,7 @@ const canonicalURL =
 		<meta property="og:title" content={title} />
 		<meta property="og:type" content={ogType} />
 		<meta property="og:image" content={ogImage} />
-		<meta property="og:url" content={canonicalURL} />
+		{canonicalURL && <meta property="og:url" content={canonicalURL} />}
 		{description && <meta property="og:description" content={description} />}
 		<meta property="og:site_name" content={siteTitle} />
 		<meta property="og:locale" content="ja_JP" />
@@ -43,7 +47,7 @@ const canonicalURL =
 		<meta name="twitter:card" content={twitterCard} />
 		<meta name="twitter:site" content="@_yuheiy" />
 
-		<link rel="canonical" href={canonicalURL} />
+		{canonicalURL && <link rel="canonical" href={canonicalURL} />}
 		<link rel="alternate" href="/posts-feed.xml" type="application/rss+xml" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 	</head>
