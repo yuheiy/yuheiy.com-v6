@@ -15,7 +15,7 @@ const { content } = Astro.props;
 const { title, published, ogImage, twitterCard } = content;
 
 const htmlContent = await (Astro as any).__renderMarkdown(content.astro.source, { mode: "md" });
-const description = JSDOM.fragment(htmlContent).querySelector("p").textContent;
+const description = JSDOM.fragment(htmlContent).querySelector("p")?.textContent;
 ---
 
 <Layout {title} {description} {ogImage} {twitterCard}>
