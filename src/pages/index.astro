@@ -7,8 +7,6 @@ allPosts = allPosts.sort(
 	(a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.frontmatter.published)
 );
 
-const title = "安田 祐平";
-
 const description =
 	"フロントエンドウェブ開発者。HTMLやWAI-ARIA、CSS設計、レスポンシブデザイン、Jamstack、シングルページアプリケーション、アクセシビリティ、インターフェースデザインが関心領域。業務では、運用を見据えたコーポレートサイトやメディアサイトなどの受託開発に携わる。";
 
@@ -114,12 +112,12 @@ const projects = [
 ];
 ---
 
-<Layout {title} {description}>
+<Layout {description}>
 	<div class="container">
 		<h1
 			class="text-2xl leading-tight font-bold [font-kerning:auto] [font-feature-settings:'palt'_1]"
 		>
-			{title}
+			安田 祐平
 		</h1>
 
 		<div class="mt-6 space-y-4 text-on-background-muted">

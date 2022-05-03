@@ -2,14 +2,16 @@
 import "../styles/main.css";
 
 export interface Props {
-	title: string;
+	title?: string;
 	description?: string;
 	ogImage?: string;
 	ogType?: "website" | "article";
 	twitterCard?: "summary" | "summary_large_image";
 }
 
-const { title, description, ogType = "website", twitterCard = "summary" } = Astro.props;
+const siteTitle = "Yuhei Yasuda";
+
+const { title = siteTitle, description, ogType = "website", twitterCard = "summary" } = Astro.props;
 
 let { ogImage = "/apple-touch-icon.png" } = Astro.props;
 ogImage = new URL(ogImage, Astro.site.origin);
@@ -18,8 +20,6 @@ const canonicalURL =
 	Astro.canonicalURL.pathname === "/"
 		? Astro.canonicalURL.href
 		: Astro.canonicalURL.href.replace(/\/$/, "");
-
-const siteTitle = "Yuhei Yasuda";
 ---
 
 <html lang="ja">
