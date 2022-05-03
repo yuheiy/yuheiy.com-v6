@@ -31,7 +31,7 @@
 	}
 
 	blockquote {
-		@apply pl-[2em];
+		@apply ml-[2em];
 	}
 
 	:is(ol, ul) {
