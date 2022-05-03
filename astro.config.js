@@ -6,6 +6,7 @@ import { visit } from "unist-util-visit";
 
 export default defineConfig({
 	site: "https://yuheiy.com",
+	trailingSlash: "never",
 	markdown: {
 		shikiConfig: {
 			theme: "css-variables",
