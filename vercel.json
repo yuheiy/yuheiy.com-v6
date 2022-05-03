@@ -1,6 +1,12 @@
 {
 	"cleanUrls": true,
 	"trailingSlash": false,
+	"redirects": [
+		{
+			"source": "/retrospective-on-utopia",
+			"destination": "/2022-01-24-retrospective-on-utopia"
+		}
+	],
 	"github": {
 		"silent": true
 	}
