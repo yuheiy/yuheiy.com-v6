@@ -13,11 +13,15 @@ allPosts = allPosts.sort(
 <Layout {title}>
 	<div class="container">
 		<h1
-			class="mb-12 text-2xl leading-tight font-bold [font-kerning:auto] [font-feature-settings:'palt'_1]"
+			class="text-2xl leading-tight font-bold [font-kerning:auto] [font-feature-settings:'palt'_1]"
 		>
 			{title}
 		</h1>
+	</div>
 
+	<div class="my-12 border-t"></div>
+
+	<div class="container">
 		<DetailsList
 			items={allPosts.map((post) => ({
 				title: post.frontmatter.title,
