@@ -157,7 +157,7 @@ const projects = [
 				.map((post) => ({
 					title: post.frontmatter.title,
 					url: post.url,
-					meta: `<time datetime="${new Date(post.frontmatter.published).toISOString()}">
+					meta: `<time datetime="${post.frontmatter.published}">
 						${new Date(post.frontmatter.published).toLocaleDateString("ja-JP", { dateStyle: "long" })}
 					</time>`,
 				}))

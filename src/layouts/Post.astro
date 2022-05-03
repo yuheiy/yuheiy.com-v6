@@ -27,7 +27,7 @@ const description = JSDOM.fragment(htmlContent).querySelector("p")?.textContent;
 			>
 			</h1>
 			<p class="mt-6 text-sm text-on-background-muted">
-				<time datetime={new Date(published).toISOString()}>
+				<time datetime={published}>
 					{new Date(published).toLocaleDateString("ja-JP", { dateStyle: "long" })}
 				</time>
 			</p>
