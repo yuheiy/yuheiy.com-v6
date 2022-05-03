@@ -18,7 +18,7 @@ const htmlContent = await (Astro as any).__renderMarkdown(content.astro.source, 
 const description = JSDOM.fragment(htmlContent).querySelector("p")?.textContent;
 ---
 
-<Layout {title} {description} {ogImage} {twitterCard}>
+<Layout {title} {description} {ogImage} ogType="article" {twitterCard}>
 	<article>
 		<header class="container">
 			<h1
