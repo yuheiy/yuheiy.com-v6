@@ -114,50 +114,52 @@ const projects = [
 ---
 
 <Layout {description}>
-	<PageHeader title="安田 祐平">
-		<div class="space-y-4 text-on-background-muted">
-			<p>{description}</p>
-			<p>
-				監訳を担当した書籍『<a href="/20211011-publication-of-everylayout"
-					>Every Layout─モジュラーなレスポンシブデザインを実現するCSS設計論</a
-				>』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a
-				>。
-			</p>
-		</div>
-	</PageHeader>
+	<div class="space-y-12">
+		<PageHeader title="安田 祐平">
+			<div class="space-y-4 text-on-background-muted">
+				<p>{description}</p>
+				<p>
+					監訳を担当した書籍『<a href="/20211011-publication-of-everylayout"
+						>Every Layout─モジュラーなレスポンシブデザインを実現するCSS設計論</a
+					>』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a
+					>。
+				</p>
+			</div>
+		</PageHeader>
 
-	<div class="my-12 border-t"></div>
+		<div class="border-t"></div>
 
-	<section class="container">
-		<h2 class="mb-8 font-bold text-sm">主な投稿</h2>
+		<section class="container">
+			<h2 class="mb-8 font-bold text-sm">主な投稿</h2>
 
-		<DetailsList items={primaryPosts} />
-	</section>
+			<DetailsList items={primaryPosts} />
+		</section>
 
-	<div class="my-12 border-t"></div>
+		<div class="border-t"></div>
 
-	<section class="container">
-		<h2 class="mb-8 font-bold text-sm">プロジェクト</h2>
+		<section class="container">
+			<h2 class="mb-8 font-bold text-sm">プロジェクト</h2>
 
-		<DetailsList items={projects} />
-	</section>
+			<DetailsList items={projects} />
+		</section>
 
-	<div class="my-12 border-t"></div>
+		<div class="border-t"></div>
 
-	<section class="container">
-		<h2 class="mb-8 font-bold text-sm">最新記事</h2>
+		<section class="container">
+			<h2 class="mb-8 font-bold text-sm">最新記事</h2>
 
-		<DetailsList
-			items={allPosts
-				.map((post) => ({
-					title: post.frontmatter.title,
-					url: post.url,
-					meta: `<time datetime="${post.frontmatter.published}">
-						${new Date(post.frontmatter.published).toLocaleDateString("ja-JP", { dateStyle: "long" })}
-					</time>`,
-				}))
-				.slice(0, 3)}
-			ordered={true}
-		/>
-	</section>
+			<DetailsList
+				items={allPosts
+					.map((post) => ({
+						title: post.frontmatter.title,
+						url: post.url,
+						meta: `<time datetime="${post.frontmatter.published}">
+							${new Date(post.frontmatter.published).toLocaleDateString("ja-JP", { dateStyle: "long" })}
+						</time>`,
+					}))
+					.slice(0, 3)}
+				ordered={true}
+			/>
+		</section>
+	</div>
 </Layout>

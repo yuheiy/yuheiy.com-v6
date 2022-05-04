@@ -20,7 +20,7 @@ const description = JSDOM.fragment(htmlContent).querySelector("p")?.textContent;
 ---
 
 <Layout {title} {description} {ogImage} ogType="article" {twitterCard}>
-	<article>
+	<article class="space-y-12">
 		<PageHeader Component="header" {title}>
 			<p class="text-sm text-on-background-muted">
 				<time datetime={published}>
@@ -29,12 +29,10 @@ const description = JSDOM.fragment(htmlContent).querySelector("p")?.textContent;
 			</p>
 		</PageHeader>
 
-		<div class="my-12 border-t"></div>
+		<div class="border-t"></div>
 
-		<div class="container">
-			<div class="prose">
-				<slot />
-			</div>
+		<div class="container prose">
+			<slot />
 		</div>
 	</article>
 </Layout>
