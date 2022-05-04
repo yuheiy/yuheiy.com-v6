@@ -3,6 +3,7 @@ layout: "../layouts/Post.astro"
 title: 『Every Layout─モジュラーなレスポンシブデザインを実現するCSS設計論』、素直さという選択 &#35;everylayout_ja
 published: "2021-10-11T09:20:00.000+09:00"
 ogImage: /assets/20211011-publication-of-everylayout/ogp.png
+twitterCard: summary_large_image
 ---
 
 <figure>
