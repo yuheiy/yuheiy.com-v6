@@ -24,7 +24,7 @@ const List = ordered ? 'ol' : 'ul';
 				<a href={item.url} set:html={item.title} />
 			</p>
 			{item.description && (
-				<p class="mt-[0.125rem] text-sm text-on-background-muted" set:html={item.description} />
+				<p class="mt-1 text-sm text-on-background-muted" set:html={item.description} />
 			)}
 		</li>
 	))}
