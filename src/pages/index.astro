@@ -1,6 +1,7 @@
 ---
-import Layout from "../components/Layout.astro";
 import DetailsList from "../components/DetailsList.astro";
+import Layout from "../components/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
 
 let allPosts = await Astro.glob<{ title: string; published: string }>("./*.md");
 allPosts = allPosts.sort(
@@ -113,14 +114,8 @@ const projects = [
 ---
 
 <Layout {description}>
-	<div class="container">
-		<h1
-			class="text-2xl leading-tight font-bold [font-kerning:auto] [font-feature-settings:'palt'_1]"
-		>
-			安田 祐平
-		</h1>
-
-		<div class="mt-6 space-y-4 text-on-background-muted">
+	<PageHeader title="安田 祐平">
+		<div class="space-y-4 text-on-background-muted">
 			<p>{description}</p>
 			<p>
 				監訳を担当した書籍『<a href="/20211011-publication-of-everylayout"
@@ -129,7 +124,7 @@ const projects = [
 				>。
 			</p>
 		</div>
-	</div>
+	</PageHeader>
 
 	<div class="my-12 border-t"></div>
 

@@ -1,6 +1,7 @@
 ---
-import Layout from "../components/Layout.astro";
 import DetailsList from "../components/DetailsList.astro";
+import Layout from "../components/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
 
 const title = "記事";
 
@@ -11,13 +12,7 @@ allPosts = allPosts.sort(
 ---
 
 <Layout {title}>
-	<div class="container">
-		<h1
-			class="text-2xl leading-tight font-bold [font-kerning:auto] [font-feature-settings:'palt'_1]"
-		>
-			{title}
-		</h1>
-	</div>
+	<PageHeader {title} />
 
 	<div class="my-12 border-t"></div>
 

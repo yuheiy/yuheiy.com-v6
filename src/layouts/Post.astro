@@ -1,6 +1,7 @@
 ---
 import { JSDOM } from "jsdom";
 import Layout from "../components/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
 
 export interface Props {
 	content: {
@@ -20,18 +21,13 @@ const description = JSDOM.fragment(htmlContent).querySelector("p")?.textContent;
 
 <Layout {title} {description} {ogImage} ogType="article" {twitterCard}>
 	<article>
-		<header class="container">
-			<h1
-				class="text-2xl leading-tight font-bold [font-kerning:auto] [font-feature-settings:'palt'_1]"
-				set:html={title}
-			>
-			</h1>
-			<p class="mt-6 text-sm text-on-background-muted">
+		<PageHeader Component="header" {title}>
+			<p class="text-sm text-on-background-muted">
 				<time datetime={published}>
 					{new Date(published).toLocaleDateString("ja-JP", { dateStyle: "long" })}
 				</time>
 			</p>
-		</header>
+		</PageHeader>
 
 		<div class="my-12 border-t"></div>
 
