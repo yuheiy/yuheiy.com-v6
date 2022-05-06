@@ -39,8 +39,8 @@ const semanticColors = plugin.withOptions(
 const container = plugin(function ({ addBase, addComponents }) {
 	addBase({
 		":root": {
-			"--container-margin-left": "calc(env(safe-area-inset-left) + max(5vw, 1.25rem))",
-			"--container-margin-right": "calc(env(safe-area-inset-right) + max(5vw, 1.25rem))",
+			"--gutter-left": "calc(env(safe-area-inset-left) + max(5vw, 1.25rem))",
+			"--gutter-right": "calc(env(safe-area-inset-right) + max(5vw, 1.25rem))",
 		},
 	});
 
@@ -51,8 +51,8 @@ const container = plugin(function ({ addBase, addComponents }) {
 			display: "grid",
 			gridTemplateColumns: "repeat(auto-fill, 1rem)",
 			justifyContent: "center",
-			paddingLeft: "var(--container-margin-left)",
-			paddingRight: "var(--container-margin-right)",
+			paddingLeft: "var(--gutter-left)",
+			paddingRight: "var(--gutter-right)",
 			"> *": {
 				gridColumn: "1 / -1",
 			},
