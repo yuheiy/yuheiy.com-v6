@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import vercel from "@astrojs/vercel";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import { Window } from "happy-dom";
@@ -15,7 +14,6 @@ export default defineConfig({
 		},
 		rehypePlugins: [processImage],
 	},
-	adapter: vercel(),
 	integrations: [
 		sitemap(),
 		tailwind({

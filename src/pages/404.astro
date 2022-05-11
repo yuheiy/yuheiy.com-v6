@@ -16,10 +16,17 @@ googleURL.searchParams.set("q", `site:${Astro.canonicalURL.hostname}`);
 
 		<div class="container prose">
 			<p>
-				<a href={`https://web.archive.org/web/*/${Astro.request.url}`} data-internet-archive
-					>インターネットアーカイブ</a
+				<a
+					href={`https://web.archive.org/web/*/${Astro.canonicalURL.origin}/`}
+					data-internet-archive>インターネットアーカイブ</a
 				>を参照するか、<a href={googleURL}>サイト内を検索する</a>と見つかるかもしれません。
 			</p>
 		</div>
 	</div>
+
+	<script is:inline>
+		document.querySelector(
+			"[data-internet-archive]"
+		).href = `https://web.archive.org/web/*/${location.href}`;
+	</script>
 </Layout>
