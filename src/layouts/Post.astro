@@ -1,5 +1,5 @@
 ---
-import { JSDOM } from "jsdom";
+import { Window } from "happy-dom";
 import Layout from "../components/Layout.astro";
 import PageHeader from "../components/PageHeader.astro";
 
@@ -16,7 +16,9 @@ const { content } = Astro.props;
 const { title, published, ogImage, twitterCard } = content;
 
 const htmlContent = await (Astro as any).__renderMarkdown(content.astro.source, { mode: "md" });
-const description = JSDOM.fragment(htmlContent).querySelector("p")?.textContent;
+const { document } = new Window();
+document.body.innerHTML = htmlContent;
+const description = document.querySelector("p")?.textContent;
 ---
 
 <Layout {title} {description} {ogImage} ogType="article" {twitterCard}>

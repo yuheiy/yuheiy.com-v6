@@ -1,8 +1,9 @@
 import { defineConfig } from "astro/config";
+import vercel from "@astrojs/vercel";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
+import { Window } from "happy-dom";
 import sizeOf from "image-size";
-import { JSDOM } from "jsdom";
 import { visit } from "unist-util-visit";
 
 export default defineConfig({
@@ -14,6 +15,7 @@ export default defineConfig({
 		},
 		rehypePlugins: [processImage],
 	},
+	adapter: vercel(),
 	integrations: [
 		sitemap(),
 		tailwind({
@@ -26,16 +28,14 @@ export default defineConfig({
 
 function processImage() {
 	return (tree) => {
+		const { document } = new Window();
+
 		visit(tree, "raw", (node) => {
-			const frag = JSDOM.fragment(node.value);
-			const imgEls = Array.from(frag.querySelectorAll("img"));
+			document.body.innerHTML = node.value;
+			const imgEls = Array.from(document.querySelectorAll("img"));
 
 			if (!imgEls.length) {
 				return;
-			}
-
-			if (frag.childNodes.length > 1) {
-				throw new Error("multiple nodes are not supported");
 			}
 
 			for (const imgEl of imgEls) {
@@ -45,7 +45,7 @@ function processImage() {
 				imgEl.setAttribute("decoding", "async");
 			}
 
-			node.value = frag.firstChild.outerHTML;
+			node.value = document.body.innerHTML;
 		});
 	};
 }
