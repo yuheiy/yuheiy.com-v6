@@ -1,8 +1,8 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-import { Window } from "happy-dom";
 import sizeOf from "image-size";
+import { JSDOM } from "jsdom";
 import { visit } from "unist-util-visit";
 
 export default defineConfig({
@@ -26,11 +26,9 @@ export default defineConfig({
 
 function processImage() {
 	return (tree) => {
-		const { document } = new Window();
-
 		visit(tree, "raw", (node) => {
-			document.body.innerHTML = node.value;
-			const imgEls = Array.from(document.querySelectorAll("img"));
+			const frag = JSDOM.fragment(`<div>${node.value}</div>`);
+			const imgEls = Array.from(frag.querySelectorAll("img"));
 
 			if (!imgEls.length) {
 				return;
@@ -43,7 +41,7 @@ function processImage() {
 				imgEl.setAttribute("decoding", "async");
 			}
 
-			node.value = document.body.innerHTML;
+			node.value = frag.firstChild.innerHTML;
 		});
 	};
 }
