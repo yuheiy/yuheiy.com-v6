@@ -6,16 +6,20 @@
 		@apply !mt-10;
 	}
 
-	h3 + * {
-		@apply !mt-2;
+	h2 {
+		@apply flex items-center text-xl leading-tight;
 	}
 
-	h2 {
-		@apply -ml-[0.75em] pl-[0.5em] text-xl leading-tight border-l-[0.25em];
+	h2::before {
+		@apply content-[""] h-[calc(100%-0.5em)] mr-3 -ml-[calc(6px+0.75rem)] border-l-[6px];
 	}
 
 	h3 {
 		@apply text-lg leading-tight font-bold;
+	}
+
+	h3 + * {
+		@apply !mt-2;
 	}
 
 	hr {
