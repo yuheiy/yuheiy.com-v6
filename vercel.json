@@ -1,6 +1,5 @@
 {
 	"cleanUrls": true,
-	"trailingSlash": false,
 	"redirects": [
 		{
 			"source": "/retrospective-on-utopia",
