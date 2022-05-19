@@ -6,9 +6,7 @@ import PageHeader from "../components/PageHeader.astro";
 const title = "記事";
 
 let allPosts = await Astro.glob<{ title: string; published: string }>("./*.md");
-allPosts = allPosts.sort(
-	(a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.frontmatter.published)
-);
+allPosts.sort((a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.frontmatter.published));
 ---
 
 <Layout {title}>

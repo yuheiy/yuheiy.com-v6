@@ -4,9 +4,7 @@ import Layout from "../components/Layout.astro";
 import PageHeader from "../components/PageHeader.astro";
 
 let allPosts = await Astro.glob<{ title: string; published: string }>("./*.md");
-allPosts = allPosts.sort(
-	(a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.frontmatter.published)
-);
+allPosts.sort((a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.frontmatter.published));
 
 const description =
 	"フロントエンドウェブ開発者。HTMLやWAI-ARIA、CSS設計、レスポンシブデザイン、Jamstack、シングルページアプリケーション、アクセシビリティ、インターフェースデザインが関心領域。業務では、運用を見据えたコーポレートサイトやメディアサイトなどの受託開発に携わる。";
