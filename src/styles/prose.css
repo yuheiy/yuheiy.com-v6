@@ -1,5 +1,5 @@
 .prose {
-	@apply space-y-6;
+	@apply space-y-6 font-[sans-serif];
 
 	* + :is(h2, hr, pre, figure, iframe, .twitter-tweet-rendered),
 	:is(hr, pre, figure, iframe, .twitter-tweet-rendered + script) + * {
