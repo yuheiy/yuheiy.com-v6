@@ -32,7 +32,7 @@ if (Astro.canonicalURL.pathname === "/404/") {
 		<meta name="viewport" content="width=device-width, viewport-fit=cover" />
 		<meta name="color-scheme" content="light dark" />
 
-		<title>{title}</title>
+		<title set:html={title} />
 
 		{description && <meta name="description" content={description} />}
 
