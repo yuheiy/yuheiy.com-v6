@@ -2,34 +2,67 @@ const plugin = require("tailwindcss/plugin");
 
 const semanticColors = plugin.withOptions(
 	function (options) {
+		options = {
+			DEFAULT: {},
+			light: {},
+			dark: {},
+			...options,
+		};
+
 		return function ({ addBase, theme }) {
-			const forLight = Object.entries(options.light).reduce((previousValue, [key, value]) => {
-				previousValue[`--color-${key}`] = theme(`colors.${value}`);
-				return previousValue;
-			}, {});
-			const forDark = Object.entries(options.dark).reduce((previousValue, [key, value]) => {
-				previousValue[`--color-${key}`] = theme(`colors.${value}`);
-				return previousValue;
-			}, {});
+			const [forDefault, forLight, forDark] = [options.DEFAULT, options.light, options.dark].map(
+				(colors) => {
+					const result = {};
+
+					for (const [key, value] of Object.entries(colors)) {
+						result[`--color-${key}`] = theme(`colors.${value}`);
+					}
+
+					return result;
+				}
+			);
+
+			const result = {
+				...forDefault,
+			};
+
+			for (const [type, colors] of [
+				["light", forLight],
+				["dark", forDark],
+			]) {
+				if (Object.keys(colors).length) {
+					result[`@media (prefers-color-scheme: ${type})`] = colors;
+				}
+			}
 
 			addBase({
-				":root": {
-					...forLight,
-					"@media (prefers-color-scheme: dark)": forDark,
-				},
+				":root": result,
 			});
 		};
 	},
 	function (options) {
-		const colors = Object.keys(options.light).reduce((previousValue, key) => {
-			previousValue[key] = `var(--color-${key})`;
-			return previousValue;
-		}, {});
+		options = {
+			DEFAULT: {},
+			light: {},
+			dark: {},
+			...options,
+		};
+
+		let keys = [];
+		for (const colors of [options.DEFAULT, options.light, options.dark]) {
+			keys.push(...Object.keys(colors));
+		}
+		keys = new Set(keys);
+
+		const result = {};
+		for (const key of keys) {
+			result[key] = `var(--color-${key})`;
+		}
 
 		return {
 			theme: {
 				extend: {
-					colors,
+					colors: result,
 				},
 			},
 		};
@@ -93,7 +126,7 @@ module.exports = {
 	},
 	plugins: [
 		semanticColors({
-			light: {
+			DEFAULT: {
 				background: "white",
 				"background-variant": "slate.100",
 				"on-background": "gray.800",
