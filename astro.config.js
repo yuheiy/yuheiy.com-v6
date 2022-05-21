@@ -35,10 +35,19 @@ function processImage() {
 			}
 
 			for (const imgEl of imgEls) {
-				const dimensions = sizeOf(`public${imgEl.src}`);
-				imgEl.setAttribute("width", dimensions.width);
-				imgEl.setAttribute("height", dimensions.height);
-				imgEl.setAttribute("decoding", "async");
+				const { width, height } = sizeOf(`public${imgEl.src}`);
+
+				if (!imgEl.hasAttribute("width")) {
+					imgEl.setAttribute("width", width);
+				}
+
+				if (!imgEl.hasAttribute("height")) {
+					imgEl.setAttribute("height", height);
+				}
+
+				if (!imgEl.hasAttribute("decoding")) {
+					imgEl.setAttribute("decoding", "async");
+				}
 			}
 
 			node.value = frag.firstChild.innerHTML;
