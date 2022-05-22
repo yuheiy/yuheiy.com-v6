@@ -15,7 +15,7 @@ const semanticColors = plugin.withOptions(
 					const result = {};
 
 					for (const [key, value] of Object.entries(colors)) {
-						result[`--color-${key}`] = theme(`colors.${value}`);
+						result[`--color-${key}`] = theme(`colors.${value}`) || value;
 					}
 
 					return result;
@@ -131,7 +131,7 @@ module.exports = {
 				"background-variant": "slate.100",
 				"on-background": "gray.800",
 				"on-background-muted": "gray.500",
-				underline: "gray.300",
+				underline: "#b8bdc6",
 				outline: "gray.200",
 			},
 			dark: {
