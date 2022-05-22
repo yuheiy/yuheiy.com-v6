@@ -93,6 +93,15 @@ const container = plugin(function ({ addBase, addComponents }) {
 	});
 });
 
+const kerning = plugin(function ({ addUtilities }) {
+	addUtilities({
+		".kerning": {
+			fontKerning: "auto",
+			fontFeatureSettings: `"palt"`,
+		},
+	});
+});
+
 module.exports = {
 	content: ["./src/**/*.{astro,html,md,js,jsx,svelte,ts,tsx,vue}"],
 	theme: {
@@ -116,9 +125,12 @@ module.exports = {
 			normal: "1.8",
 		},
 		extend: {
-			borderColor: () => ({
+			fontFamily: {
+				sans: ["sans-serif"],
+			},
+			borderColor: {
 				DEFAULT: "var(--color-outline)",
-			}),
+			},
 		},
 	},
 	corePlugins: {
@@ -144,5 +156,6 @@ module.exports = {
 			},
 		}),
 		container,
+		kerning,
 	],
 };

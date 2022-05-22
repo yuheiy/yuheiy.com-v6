@@ -1,5 +1,5 @@
 .prose {
-	@apply space-y-6 font-[sans-serif];
+	@apply space-y-6;
 
 	* + :is(h2, hr, pre, figure, iframe, .twitter-tweet-rendered),
 	:is(hr, pre, figure, iframe, .twitter-tweet-rendered + script) + * {
@@ -7,7 +7,7 @@
 	}
 
 	h2 {
-		@apply flex items-center text-xl leading-tight [font-kerning:auto] [font-feature-settings:'palt'];
+		@apply flex items-center text-xl leading-tight kerning;
 	}
 
 	h2::before {
