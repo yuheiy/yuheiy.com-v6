@@ -7,7 +7,7 @@
 	}
 
 	h2 {
-		@apply flex items-center text-xl leading-tight;
+		@apply flex items-center text-xl leading-tight [font-kerning:auto] [font-feature-settings:'palt'];
 	}
 
 	h2::before {
