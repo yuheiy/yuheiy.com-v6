@@ -35,11 +35,11 @@
 	}
 
 	blockquote {
-		@apply ml-[2em];
+		@apply ml-8;
 	}
 
 	:is(ol, ul) {
-		@apply pl-[2em] list-[revert];
+		@apply pl-8 list-[revert];
 	}
 
 	li {

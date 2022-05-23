@@ -1,5 +1,5 @@
 :root {
-	--astro-code-color-text: var(--color-on-background);
+	--astro-code-color-text: theme("colors.on-background");
 	--astro-code-color-background: transparent;
 	--astro-code-token-constant: #0550ae;
 	--astro-code-token-string: #0a3069;
@@ -25,18 +25,18 @@
 }
 
 html {
-	@apply leading-normal;
 	hanging-punctuation: allow-end;
+	line-height: theme("lineHeight.normal");
 	font-kerning: none;
 	line-break: strict;
 	text-underline-offset: 0.11em;
 	overflow-wrap: break-word;
+}
 
-	/* https://schepp.dev/posts/smooth-scrolling-and-page-search/ */
-	&:focus-within {
-		@media (prefers-reduced-motion: no-preference) {
-			scroll-behavior: smooth;
-		}
+/* https://schepp.dev/posts/smooth-scrolling-and-page-search/ */
+html:focus-within {
+	@media (prefers-reduced-motion: no-preference) {
+		scroll-behavior: smooth;
 	}
 }
 
@@ -47,23 +47,25 @@ body {
 }
 
 a:any-link {
-	@apply text-on-background;
+	color: theme("colors.on-background");
 	text-decoration: underline;
-	text-decoration-color: var(--color-underline);
+	text-decoration-color: theme("colors.underline");
 }
 
 a:visited {
-	@apply text-on-background-muted;
+	color: theme("colors.on-background-muted");
 }
 
 em {
-	@apply not-italic font-bold;
+	font-style: normal;
+	font-weight: bolder;
 }
 
 [id] {
-	scroll-margin-top: 1rem;
+	scroll-margin-top: theme("spacing.4");
 }
 
 .twitter-tweet-rendered {
-	@apply !my-0;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
 }

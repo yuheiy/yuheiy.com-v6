@@ -129,9 +129,9 @@ module.exports = {
 			fontFamily: {
 				sans: ["sans-serif"],
 			},
-			borderColor: {
-				DEFAULT: "var(--color-outline)",
-			},
+			borderColor: ({ theme }) => ({
+				DEFAULT: theme("colors.outline"),
+			}),
 		},
 	},
 	corePlugins: {
