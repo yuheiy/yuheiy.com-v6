@@ -48,7 +48,7 @@ body {
 
 a:any-link {
 	color: theme("colors.on-background");
-	text-decoration: underline;
+	text-decoration-line: underline;
 	text-decoration-color: theme("colors.underline");
 }
 
