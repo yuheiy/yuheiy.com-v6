@@ -100,6 +100,10 @@ const kerning = plugin(function ({ addUtilities }) {
 			fontKerning: "auto",
 			fontFeatureSettings: `"palt"`,
 		},
+		".not-kerning": {
+			fontKerning: "none",
+			fontFeatureSettings: "normal",
+		},
 	});
 });
 
