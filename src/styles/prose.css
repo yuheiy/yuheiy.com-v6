@@ -11,7 +11,7 @@
 	}
 
 	h2::before {
-		@apply content-[""] h-[calc(100%-0.5em)] mr-3 -ml-[calc(6px+0.75rem)] border-l-[6px];
+		@apply content-[""] h-[calc(100%-0.5em)] mr-3 border-l-[6px];
 	}
 
 	h3 {

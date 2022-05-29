@@ -73,8 +73,8 @@ const semanticColors = plugin.withOptions(
 const container = plugin(function ({ addBase, addComponents }) {
 	addBase({
 		":root": {
-			"--gutter-left": "calc(env(safe-area-inset-left) + max(5vw, 1.25rem))",
-			"--gutter-right": "calc(env(safe-area-inset-right) + max(5vw, 1.25rem))",
+			"--gutter-left": "calc(env(safe-area-inset-left) + max(5vw, 1rem))",
+			"--gutter-right": "calc(env(safe-area-inset-right) + max(5vw, 1rem))",
 		},
 	});
 
