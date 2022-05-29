@@ -12,10 +12,10 @@ export interface Props {
 	};
 }
 
-const { content } = Astro.props;
+const { content } = Astro.props as Props;
 const { title, published, ogImage, twitterCard } = content;
 
-const frag = JSDOM.fragment(content.astro.html);
+const frag = JSDOM.fragment((content as any).astro.html);
 const description = frag.querySelector("p")?.textContent;
 ---
 

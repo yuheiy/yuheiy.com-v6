@@ -9,12 +9,12 @@ export interface Props {
 	ordered?: boolean
 }
 
-const { items, ordered = false } = Astro.props;
+const { items, ordered = false } = Astro.props as Props;
 
-const List = ordered ? 'ol' : 'ul';
+const Component = ordered ? 'ol' : 'ul';
 ---
 
-<List class="space-y-8">
+<Component class="space-y-8">
 	{items.map((item) => (
 		<li>
 			{item.meta && (
@@ -28,4 +28,4 @@ const List = ordered ? 'ol' : 'ul';
 			)}
 		</li>
 	))}
-</List>
+</Component>

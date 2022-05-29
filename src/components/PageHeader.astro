@@ -1,10 +1,10 @@
 ---
 export interface Props {
-	Component?: string;
+	Component?: keyof HTMLElementTagNameMap;
 	title: string;
 }
 
-const { Component = "div", title } = Astro.props;
+const { Component = "div", title } = Astro.props as Props;
 ---
 
 <Component class="container space-y-6">

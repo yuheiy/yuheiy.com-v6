@@ -11,10 +11,10 @@ export interface Props {
 
 const siteTitle = "Yuhei Yasuda";
 
-const { title = siteTitle, description, ogType = "website", twitterCard = "summary" } = Astro.props;
+const { title = siteTitle, description, ogType = "website", twitterCard = "summary" } = Astro.props as Props;
 
-let { ogImage = "/apple-touch-icon.png" } = Astro.props;
-ogImage = new URL(ogImage, Astro.site.origin);
+let { ogImage = "/apple-touch-icon.png" } = Astro.props as Props;
+ogImage = new URL(ogImage, Astro.site.origin).href;
 
 let canonicalURL;
 if (Astro.canonicalURL.pathname === "/404/") {
