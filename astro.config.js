@@ -2,7 +2,6 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import sizeOf from "image-size";
-import { JSDOM } from "jsdom";
 import { visit } from "unist-util-visit";
 
 export default defineConfig({
@@ -26,31 +25,31 @@ export default defineConfig({
 
 function processImage() {
 	return (tree) => {
-		visit(tree, "raw", (node) => {
-			const frag = JSDOM.fragment(`<div>${node.value}</div>`);
-			const imgEls = Array.from(frag.querySelectorAll("img"));
+		visit(tree, "mdxJsxFlowElement", ({ name, attributes }) => {
+			if (name !== "img") return;
 
-			if (!imgEls.length) {
-				return;
-			}
+			const src = attributes.find(({ name }) => name === "src")?.value;
+			if (!src) return;
 
-			for (const imgEl of imgEls) {
-				const { width, height } = sizeOf(`public${imgEl.src}`);
+			const { width, height } = sizeOf(`public${src}`);
 
-				if (!imgEl.hasAttribute("width")) {
-					imgEl.setAttribute("width", width);
+			attributes.push(
+				{
+					type: "mdxJsxAttribute",
+					name: "width",
+					value: width,
+				},
+				{
+					type: "mdxJsxAttribute",
+					name: "height",
+					value: height,
+				},
+				{
+					type: "mdxJsxAttribute",
+					name: "decoding",
+					value: "async",
 				}
-
-				if (!imgEl.hasAttribute("height")) {
-					imgEl.setAttribute("height", height);
-				}
-
-				if (!imgEl.hasAttribute("decoding")) {
-					imgEl.setAttribute("decoding", "async");
-				}
-			}
-
-			node.value = frag.firstChild.innerHTML;
+			);
 		});
 	};
 }
