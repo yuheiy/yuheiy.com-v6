@@ -8,7 +8,7 @@ published: "2022-01-24T01:35:00.000+09:00"
 
 <figure>
 <img src="/assets/2022-01-24-retrospective-on-utopia/fluid-type-scale-visualisation.png" alt="H1、H2、H3、H4、Pという要素の値が、320pxから1500pxというビューポート幅において流動的に増大する" />
-<figcaption>──<a href="https://utopia.fyi/blog/designing-with-fluid-type-scales">Designing with fluid type scales | Utopia</a></figcaption>
+<figcaption>&mdash;&mdash;<a href="https://utopia.fyi/blog/designing-with-fluid-type-scales">Designing with fluid type scales | Utopia</a></figcaption>
 </figure>
 
 レスポンシブデザインのパターンとして、ビューポートの幅が狭ければテキストのフォントサイズは小さめで、広ければ大きめにしたい、という場面がよくある。そうしたとき、フォントサイズを変更するために、ブレイクポイントごとに値を上書きする設定をしていくと、組み合わせ地獄になってデザインルールが非常に複雑化してしまう。フォントサイズの数とブレイクポイントの数がかけ合わさった分のルールが生まれて、後から整理しようとしても手に負えない状況になる。
@@ -19,17 +19,17 @@ CSSにおいては、特定のステップ数をフォントサイズの値と�
 
 <figure>
 <img src="/assets/2022-01-24-retrospective-on-utopia/the-result.png" alt="320pxと1500pxにおけるタイプスケールの係数さえ設定すれば、中間に当たる1024pxなどの幅では自動的にサイズが算出される" />
-<figcaption>──<a href="https://utopia.fyi/blog/designing-with-fluid-type-scales">Designing with fluid type scales | Utopia</a></figcaption>
+<figcaption>&mdash;&mdash;<a href="https://utopia.fyi/blog/designing-with-fluid-type-scales">Designing with fluid type scales | Utopia</a></figcaption>
 </figure>
 
 フォントサイズの値が変化する始点と終点に当たる数値は、モジュラースケールによって導出される。
 
-幅が375pxの場合——
+幅が375pxの場合&mdash;&mdash;
 
 - 基準となるフォントサイズは14px
 - モジュラースケールの係数は1.2
 
-幅が1440pxの場合——
+幅が1440pxの場合&mdash;&mdash;
 
 - 基準となるフォントサイズは18px
 - モジュラースケールの係数は1.25
@@ -38,14 +38,14 @@ CSSにおいては、特定のステップ数をフォントサイズの値と�
 
 <figure>
 <img src="/assets/2022-01-24-retrospective-on-utopia/calculated-font-sizes.png" alt="スケールのステップが5、4、3、2、1、0、-1、-2と用意されており、ビューポート幅が320pxのときと1140pxのときのフォントサイズが並んでいる" />
-<figcaption>──<a href="https://utopia.fyi/type/calculator/">Fluid type scale calculator | Utopia</a></figcaption>
+<figcaption>&mdash;&mdash;<a href="https://utopia.fyi/type/calculator/">Fluid type scale calculator | Utopia</a></figcaption>
 </figure>
 
 フォントサイズだけでなく、似たロジックを使ってスペーシングの値のセットを生成する仕組みも備わっている。これらの値は、マージンや要素のサイズ設定などのために使用できる。
 
 <figure>
 <img src="/assets/2022-01-24-retrospective-on-utopia/individual-space-values.png" alt="3XS、2XS、XS、S、M、L、XL、2XL、3XLというステップごとに、最小値と最大値が並んでいる" />
-<figcaption>──<a href="https://utopia.fyi/space/calculator/">Fluid Space Calculator | Utopia</a></figcaption>
+<figcaption>&mdash;&mdash;<a href="https://utopia.fyi/space/calculator/">Fluid Space Calculator | Utopia</a></figcaption>
 </figure>
 
 案件を担当するデザイナーとはUtopiaの考え方について話して、これを使ってフォントサイズとスペーシングの値を設定してもらうことになった。Figmaで作るデザインカンプでももちろんこのルールに基づいてデザインする。
@@ -74,7 +74,7 @@ CSSにおいては、特定のステップ数をフォントサイズの値と�
 
 <figure>
 <img src="/assets/2022-01-24-retrospective-on-utopia/scales.png" alt="調和数列にもとづくスケールでは、導出されるフォントサイズは16px近辺に集中しているが、等比数列にもとづくスケールでは、比較的均等にばらけている" />
-<figcaption>──<a href="https://standard.shiftbrain.com/blog/music-math-typography">音楽、数学、タイポグラフィ - シフトブレイン／スタンダードデザインユニット</a></figcaption>
+<figcaption>&mdash;&mdash;<a href="https://standard.shiftbrain.com/blog/music-math-typography">音楽、数学、タイポグラフィ - シフトブレイン／スタンダードデザインユニット</a></figcaption>
 </figure>
 
 スペーシングについては、Utopiaの値を使いつつも、けっきょくブレイクポイントで上書きする場面が多かった。フォントサイズと違って、マージンなどについては、一般化したルールに則ってやるのが難しかったということだ。
@@ -87,14 +87,14 @@ CSSにおいては、特定のステップ数をフォントサイズの値と�
 
 <figure>
 <img src="/assets/2022-01-24-retrospective-on-utopia/adaptive-type-scale.png" alt="タイプスケールの値がデバイス間で自動的に変化するようになっている" />
-<figcaption>──<a href="https://m3.material.io/styles/typography/overview">Typography – Material Design 3</a></figcaption>
+<figcaption>&mdash;&mdash;<a href="https://m3.material.io/styles/typography/overview">Typography – Material Design 3</a></figcaption>
 </figure>
 
 これらのパターンのなかに、行の高さやトラッキングなどもいっしょに含めておくと、さらにルールの一貫性を高めることができるし、開発も楽になる。いま担当している案件では、デザイナーがページの制作を進める傍らで、こうしたタイプスケールも定義してもらっている。
 
 <figure>
 <img src="/assets/2022-01-24-retrospective-on-utopia/type-scale.png" alt="H1、H2、Subtitle、Body、Captionのようなカテゴリごとに、Typeface、Weight、Size、Case、Letter spacingの値が設定されている" />
-<figcaption>──<a href="https://material.io/design/typography/the-type-system.html#type-scale">The type system - Material Design</a></figcaption>
+<figcaption>&mdash;&mdash;<a href="https://material.io/design/typography/the-type-system.html#type-scale">The type system - Material Design</a></figcaption>
 </figure>
 
 さらに、タイプスケールやスペーシングだけでなく、そのほかのいろいろな値（デザイントークン）を一元管理できればなおよい。そこで、[Figma Tokens](https://jansix.at/resources/figma-tokens)というプラグインを導入することにした。これを使えば、テキストやスペーシングに限らず、カラーパレットやボーダー、不透明度などもトークンとして管理できるようになる。Figma Tokensにトークンを設定すると、それらに対応するボタンが出現して、クリックするとレイヤーに適用できるという仕組みになっている。トークンの設定はJSONで入出力できるので、[Tailwind CSSのデフォルト値をJSON化](https://gist.github.com/yuheiy/e1fc01fc0a4816924d1959221fdba46c)し、デザイナーと共有している。
