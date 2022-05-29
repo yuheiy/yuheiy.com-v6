@@ -16,7 +16,7 @@ const Component = ordered ? 'ol' : 'ul';
 
 <Component class="space-y-8">
 	{items.map((item) => (
-		<li>
+		<li class="space-y-[0.125rem]">
 			{item.meta && (
 				<p class="text-sm text-on-background-muted" set:html={item.meta} />
 			)}
@@ -24,7 +24,7 @@ const Component = ordered ? 'ol' : 'ul';
 				<a href={item.url} set:html={item.title} />
 			</p>
 			{item.description && (
-				<p class="mt-[0.125rem] text-sm text-on-background-muted" set:html={item.description} />
+				<p class="text-sm text-on-background-muted" set:html={item.description} />
 			)}
 		</li>
 	))}
