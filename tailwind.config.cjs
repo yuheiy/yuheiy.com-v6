@@ -98,7 +98,7 @@ const kerning = plugin(function ({ addUtilities }) {
 	addUtilities({
 		".kerning": {
 			fontKerning: "auto",
-			fontFeatureSettings: `"palt"`,
+			fontFeatureSettings: "'palt'",
 		},
 		".not-kerning": {
 			fontKerning: "none",
