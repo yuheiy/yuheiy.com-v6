@@ -148,7 +148,7 @@ module.exports = {
 				"background-variant": colors.slate["100"],
 				"on-background": colors.gray["800"],
 				"on-background-muted": colors.gray["500"],
-				underline: "#b8bdc6",
+				underline: colors.gray["400"],
 				outline: colors.gray["200"],
 			},
 			dark: {

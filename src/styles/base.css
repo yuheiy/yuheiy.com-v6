@@ -29,7 +29,7 @@ html {
 	line-height: theme("lineHeight.normal");
 	font-kerning: none;
 	line-break: strict;
-	text-underline-offset: 0.11em;
+	text-underline-offset: 0.125em;
 	overflow-wrap: break-word;
 }
 
@@ -49,6 +49,7 @@ body {
 a:any-link {
 	text-decoration: underline;
 	text-decoration-color: theme("colors.underline");
+	text-decoration-thickness: 1px;
 }
 
 em {
