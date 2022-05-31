@@ -156,7 +156,7 @@ module.exports = {
 				"background-variant": colors.neutral["800"],
 				"on-background": colors.gray["50"],
 				"on-background-muted": colors.gray["400"],
-				underline: colors.gray["500"],
+				underline: colors.gray["400"],
 				outline: colors.neutral["700"],
 			},
 		}),
