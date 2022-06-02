@@ -10,7 +10,7 @@ export const get = () =>
 	rss({
 		title: "記事: Yuhei Yasuda",
 		description: "日記や技術情報など",
-		site: import.meta.env.SITE || "https://yuheiy.com", // fixme: `import.meta.env.SITE` is undefined in `astro build`
+		site: import.meta.env.SITE,
 		items: posts.map((post) => ({
 			link: post.url,
 			title: post.frontmatter.title,
