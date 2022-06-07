@@ -115,14 +115,9 @@ const projects = [
 		<PageHeader title="安田 祐平">
 			<div class="space-y-4 text-on-background-muted">
 				<p>{description}</p>
-				<p>
-					監訳を担当した書籍『<a
-						class="text-on-background"
-						href="/20211011-publication-of-everylayout"
-						>Every Layout&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a
-					>』が<a class="text-on-background" href="https://www.hanmoto.com/bd/isbn/9784862465177"
-						>オンライン書店などで発売中</a
-					>。
+				<p
+					set:html={`監訳を担当した書籍『<a class="text-on-background" href="/20211011-publication-of-everylayout">Every Layout—モジュラーなレスポンシブデザインを実現するCSS設計論</a>』が<a class="text-on-background" href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a>。`}
+				>
 				</p>
 			</div>
 		</PageHeader>

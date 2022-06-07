@@ -21,7 +21,7 @@ const description = frag.querySelector("p")?.textContent;
 
 <Layout {title} {description} {ogImage} ogType="article" {twitterCard}>
 	<article class="space-y-16">
-		<PageHeader Component="header" {title}>
+		<PageHeader Component="header" title={title}>
 			<p class="text-sm text-on-background-muted">
 				<time datetime={published}>
 					{new Date(published).toLocaleDateString("ja-JP", { dateStyle: "long" })}
@@ -32,7 +32,7 @@ const description = frag.querySelector("p")?.textContent;
 		<div class="border-t"></div>
 
 		<div class="container prose">
-			<slot />
+			<slot></slot>
 		</div>
 	</article>
 </Layout>

@@ -11,7 +11,7 @@ allPosts.sort((a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.front
 
 <Layout {title}>
 	<div class="space-y-16">
-		<PageHeader {title}><!--  --></PageHeader>
+		<PageHeader title={title} />
 
 		<div class="border-t"></div>
 

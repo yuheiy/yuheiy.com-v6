@@ -11,7 +11,12 @@ export interface Props {
 
 const siteTitle = "Yuhei Yasuda";
 
-const { title = siteTitle, description, ogType = "website", twitterCard = "summary" } = Astro.props as Props;
+const {
+	title = siteTitle,
+	description,
+	ogType = "website",
+	twitterCard = "summary",
+} = Astro.props as Props;
 
 let { ogImage = "/apple-touch-icon.png" } = Astro.props as Props;
 ogImage = new URL(ogImage, Astro.site.origin).href;
@@ -24,6 +29,8 @@ if (Astro.canonicalURL.pathname === "/404/") {
 } else {
 	canonicalURL = Astro.canonicalURL.href.replace(/\/$/, "");
 }
+
+const EM_SPACE = "&#x2003;";
 ---
 
 <html lang="ja">
@@ -32,7 +39,7 @@ if (Astro.canonicalURL.pathname === "/404/") {
 		<meta name="viewport" content="width=device-width, viewport-fit=cover" />
 		<meta name="color-scheme" content="light dark" />
 
-		<title set:html={title} />
+		<title set:html={title}></title>
 
 		{description && <meta name="description" content={description} />}
 
@@ -68,20 +75,18 @@ if (Astro.canonicalURL.pathname === "/404/") {
 		</header>
 
 		<main>
-			<slot />
+			<slot></slot>
 		</main>
 
 		<footer class="sticky top-full mt-[4.5rem] py-8 text-sm bg-background-variant">
 			<nav class="container space-y-4">
-				<p>
-					<a href="/">ホーム</a>&#x2003;<a href="/posts">すべての記事</a>&#x2003;<a
-						href="/posts-feed.xml">RSS</a
-					>
+				<p
+					set:html={`<a href="/">ホーム</a>${EM_SPACE}<a href="/posts">すべての記事</a>${EM_SPACE}<a href="/posts-feed.xml">RSS</a>`}
+				>
 				</p>
-				<p>
-					<a href="https://twitter.com/_yuheiy">Twitter</a>&#x2003;<a
-						href="https://github.com/yuheiy">GitHub</a
-					>&#x2003;<a href="mailto:yuhei.yasuda1003@gmail.com">メール</a>
+				<p
+					set:html={`<a href="https://twitter.com/_yuheiy">Twitter</a>${EM_SPACE}<a href="https://github.com/yuheiy">GitHub</a>${EM_SPACE}<a href="mailto:yuhei.yasuda1003@gmail.com">メール</a>`}
+				>
 				</p>
 			</nav>
 		</footer>
