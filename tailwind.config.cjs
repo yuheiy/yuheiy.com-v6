@@ -49,11 +49,12 @@ const semanticColors = plugin.withOptions(
 			...options,
 		};
 
-		let keys = [];
+		const keys = new Set();
 		for (const colors of [options.DEFAULT, options.light, options.dark]) {
-			keys.push(...Object.keys(colors));
+			for (const key of Object.keys(colors)) {
+				keys.add(key);
+			}
 		}
-		keys = new Set(keys);
 
 		const result = {};
 		for (const key of keys) {
