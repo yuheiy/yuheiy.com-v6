@@ -1,5 +1,5 @@
 :root {
-	--astro-code-color-text: theme("colors.on-background");
+	--astro-code-color-text: theme(colors.on-background);
 	--astro-code-color-background: transparent;
 	--astro-code-token-constant: #0550ae;
 	--astro-code-token-string: #0a3069;
@@ -26,7 +26,7 @@
 
 html {
 	hanging-punctuation: allow-end;
-	line-height: theme("lineHeight.normal");
+	line-height: theme(lineHeight.normal);
 	font-kerning: none;
 	line-break: strict;
 	text-underline-offset: 0.125em;
@@ -48,7 +48,7 @@ body {
 
 a:any-link {
 	text-decoration: underline;
-	text-decoration-color: theme("colors.underline");
+	text-decoration-color: theme(colors.underline);
 	text-decoration-thickness: 1px;
 }
 
@@ -58,7 +58,7 @@ em {
 }
 
 [id] {
-	scroll-margin-top: theme("spacing.4");
+	scroll-margin-top: theme(spacing.4);
 }
 
 .twitter-tweet-rendered {

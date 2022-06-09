@@ -108,6 +108,7 @@ const kerning = plugin(function ({ addUtilities }) {
 	});
 });
 
+/** @type {import('tailwindcss/types').Config} */
 module.exports = {
 	content: ["./src/**/*.{astro,html,md,js,jsx,svelte,ts,tsx,vue}"],
 	theme: {
