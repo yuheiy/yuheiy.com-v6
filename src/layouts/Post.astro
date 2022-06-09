@@ -19,7 +19,13 @@ const frag = JSDOM.fragment((content as any).astro.html);
 const description = frag.querySelector("p")?.textContent;
 ---
 
-<Layout {title} {description} {ogImage} ogType="article" {twitterCard}>
+<Layout
+	title={title}
+	description={description}
+	ogImage={ogImage}
+	ogType="article"
+	twitterCard={twitterCard}
+>
 	<article class="space-y-16">
 		<PageHeader Component="header" title={title}>
 			<p class="text-sm text-on-background-muted">

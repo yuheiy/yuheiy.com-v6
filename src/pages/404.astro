@@ -8,7 +8,7 @@ const googleURL = new URL("https://www.google.com/search");
 googleURL.searchParams.set("q", `site:${Astro.canonicalURL.hostname}`);
 ---
 
-<Layout {title}>
+<Layout title={title}>
 	<div class="space-y-16">
 		<PageHeader title={title} />
 
