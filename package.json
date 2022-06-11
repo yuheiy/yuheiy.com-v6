@@ -8,10 +8,10 @@
 	},
 	"devDependencies": {
 		"@astrojs/rss": "^0.2.0",
-		"@astrojs/sitemap": "^0.1.0",
+		"@astrojs/sitemap": "^0.1.2",
 		"@astrojs/tailwind": "^0.2.1",
 		"@wordpress/browserslist-config": "^4.1.2",
-		"astro": "^1.0.0-beta.42",
+		"astro": "^1.0.0-beta.44",
 		"image-size": "^1.0.1",
 		"jsdom": "^19.0.0",
 		"postcss-import": "^14.1.0",
