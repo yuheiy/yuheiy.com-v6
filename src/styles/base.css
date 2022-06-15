@@ -57,6 +57,11 @@ em {
 	font-weight: bolder;
 }
 
+iframe {
+	max-width: 100%;
+	height: auto;
+}
+
 [id] {
 	scroll-margin-top: theme(spacing.4);
 }
