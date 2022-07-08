@@ -8,11 +8,11 @@
 	}
 
 	h2 {
-		@apply flex items-center text-xl leading-tight kerning;
+		@apply flex gap-x-3 text-xl leading-tight kerning;
 	}
 
 	h2::before {
-		@apply content-[""] h-[calc(100%-0.5em)] mr-3 border-l-[6px];
+		@apply content-[""] my-[calc((1.5em-1em)/2)] border-l-[6px];
 	}
 
 	h3 {
