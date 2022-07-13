@@ -40,7 +40,7 @@
 	}
 
 	:is(ol, ul) {
-		@apply pl-8 list-[revert];
+		@apply pl-[2em] list-[revert];
 	}
 
 	li {
