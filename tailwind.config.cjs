@@ -81,13 +81,11 @@ const container = plugin(function ({ addBase, addComponents }) {
 
 	addComponents({
 		".container": {
-			boxSizing: "content-box",
-			maxWidth: "48rem",
 			display: "grid",
 			gridTemplateColumns: "repeat(auto-fill, 1rem)",
 			justifyContent: "center",
-			paddingLeft: "var(--gutter-left)",
-			paddingRight: "var(--gutter-right)",
+			width: "clamp(0px, 48rem, 100% - var(--gutter-left) - var(--gutter-right))",
+			marginLeft: "var(--gutter-left)",
 			"> *": {
 				gridColumn: "1 / -1",
 			},
