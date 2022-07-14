@@ -24,7 +24,7 @@
 	}
 
 	hr {
-		@apply h-auto ml-8 border-0 text-on-background-muted;
+		@apply h-auto pl-[2em] border-0 text-on-background-muted;
 	}
 
 	hr::before {
