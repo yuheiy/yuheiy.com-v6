@@ -32,7 +32,7 @@
 	}
 
 	pre {
-		@apply -ml-[var(--gutter-left)] -mr-[var(--gutter-right)] pl-[var(--gutter-left)] pr-[var(--gutter-right)] text-sm leading-tight;
+		@apply -ml-[var(--container-margin-left)] -mr-[var(--container-margin-right)] pl-[var(--container-margin-left)] pr-[var(--container-margin-right)] text-sm leading-tight;
 	}
 
 	blockquote {

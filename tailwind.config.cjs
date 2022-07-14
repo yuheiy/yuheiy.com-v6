@@ -74,8 +74,11 @@ const semanticColors = plugin.withOptions(
 const container = plugin(function ({ addBase, addComponents }) {
 	addBase({
 		":root": {
-			"--gutter-left": "calc(env(safe-area-inset-left) + max(5vw, 1rem))",
-			"--gutter-right": "calc(env(safe-area-inset-right) + max(5vw, 1rem))",
+			"--container-width": "46rem",
+			"--container-margin-left":
+				"calc(env(safe-area-inset-left) + clamp(1rem, max((100% - var(--container-width)) / 2, 5vw), 6rem))",
+			"--container-margin-right":
+				"calc(env(safe-area-inset-right) + clamp(1rem, max((100% - var(--container-width)) / 2, 5vw), 6rem))",
 		},
 	});
 
@@ -84,8 +87,10 @@ const container = plugin(function ({ addBase, addComponents }) {
 			display: "grid",
 			gridTemplateColumns: "repeat(auto-fill, 1rem)",
 			justifyContent: "center",
-			width: "clamp(0px, 48rem, 100% - var(--gutter-left) - var(--gutter-right))",
-			marginLeft: "var(--gutter-left)",
+			width:
+				"clamp(0px, var(--container-width), 100% - var(--container-margin-left) - var(--container-margin-right))",
+			marginLeft: "var(--container-margin-left)",
+			marginRight: "auto",
 			"> *": {
 				gridColumn: "1 / -1",
 			},
