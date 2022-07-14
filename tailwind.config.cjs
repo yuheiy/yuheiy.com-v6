@@ -75,10 +75,9 @@ const container = plugin(function ({ addBase, addComponents }) {
 	addBase({
 		":root": {
 			"--container-width": "46rem",
-			"--container-margin-left":
-				"calc(env(safe-area-inset-left) + clamp(1rem, max((100% - var(--container-width)) / 2, 5vw), 6rem))",
-			"--container-margin-right":
-				"calc(env(safe-area-inset-right) + clamp(1rem, max((100% - var(--container-width)) / 2, 5vw), 6rem))",
+			"--_container-margin": "clamp(1rem, max((100% - var(--container-width)) / 2, 5vw), 6rem)",
+			"--container-margin-left": "calc(env(safe-area-inset-left) + var(--_container-margin))",
+			"--container-margin-right": "calc(env(safe-area-inset-right) + var(--_container-margin))",
 		},
 	});
 
@@ -87,10 +86,9 @@ const container = plugin(function ({ addBase, addComponents }) {
 			display: "grid",
 			gridTemplateColumns: "repeat(auto-fill, 1rem)",
 			justifyContent: "center",
-			width:
-				"clamp(0px, var(--container-width), 100% - var(--container-margin-left) - var(--container-margin-right))",
+			maxWidth: "var(--container-width)",
 			marginLeft: "var(--container-margin-left)",
-			marginRight: "auto",
+			marginRight: "var(--container-margin-right)",
 			"> *": {
 				gridColumn: "1 / -1",
 			},
