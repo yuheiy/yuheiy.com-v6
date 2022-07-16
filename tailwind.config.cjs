@@ -113,6 +113,7 @@ const kerning = plugin(function ({ addUtilities }) {
 module.exports = {
 	content: ["./src/**/*.{astro,html,md,js,jsx,svelte,ts,tsx,vue}"],
 	theme: {
+		// https://w3c.github.io/jlreq/#id343
 		fontSize: {
 			xs: "0.75rem",
 			sm: "0.875rem",
@@ -120,13 +121,10 @@ module.exports = {
 			lg: "1.125rem",
 			xl: "1.25rem",
 			"2xl": "1.5rem",
-			"3xl": "1.875rem",
-			"4xl": "2.25rem",
-			"5xl": "3rem",
-			"6xl": "3.75rem",
-			"7xl": "4.5rem",
-			"8xl": "6rem",
-			"9xl": "8rem",
+			"3xl": "1.75rem",
+			"4xl": "2rem",
+			"5xl": "2.25rem",
+			"6xl": "2.5rem",
 		},
 		lineHeight: {
 			tight: "1.5",
