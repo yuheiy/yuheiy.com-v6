@@ -25,9 +25,9 @@
 }
 
 html {
+	@apply not-kerning;
 	hanging-punctuation: allow-end;
 	line-height: theme(lineHeight.normal);
-	font-kerning: none;
 	line-break: strict;
 	text-underline-offset: 0.125em;
 	overflow-wrap: break-word;
