@@ -1,7 +1,7 @@
 ---
 import { JSDOM } from "jsdom";
 import Layout from "../components/Layout.astro";
-import PageHeader from "../components/PageHeader.astro";
+import PageTitle from "../components/PageTitle.astro";
 
 export interface Props {
 	content: {
@@ -27,13 +27,13 @@ const description = frag.querySelector("p")?.textContent;
 	twitterCard={twitterCard}
 >
 	<article class="space-y-16">
-		<PageHeader Component="header" title={title}>
+		<PageTitle Component="header" title={title}>
 			<p class="text-sm text-on-background-muted">
 				<time datetime={published}>
 					{new Date(published).toLocaleDateString("ja-JP", { dateStyle: "long" })}
 				</time>
 			</p>
-		</PageHeader>
+		</PageTitle>
 
 		<div class="border-t"></div>
 

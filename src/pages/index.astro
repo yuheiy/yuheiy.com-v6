@@ -1,7 +1,7 @@
 ---
 import DetailsList from "../components/DetailsList.astro";
 import Layout from "../components/Layout.astro";
-import PageHeader from "../components/PageHeader.astro";
+import PageTitle from "../components/PageTitle.astro";
 
 const allPosts = await Astro.glob<{ title: string; published: string }>("./*.md");
 allPosts.sort((a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.frontmatter.published));
@@ -117,7 +117,7 @@ const projects = [
 
 <Layout description={description}>
 	<div class="space-y-16">
-		<PageHeader title="安田 祐平">
+		<PageTitle title="安田 祐平">
 			<div class="space-y-4 text-on-background-muted">
 				<p>{description}</p>
 				<p
@@ -125,7 +125,7 @@ const projects = [
 				>
 				</p>
 			</div>
-		</PageHeader>
+		</PageTitle>
 
 		<div class="border-t"></div>
 

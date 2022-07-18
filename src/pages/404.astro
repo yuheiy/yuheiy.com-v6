@@ -1,6 +1,6 @@
 ---
 import Layout from "../components/Layout.astro";
-import PageHeader from "../components/PageHeader.astro";
+import PageTitle from "../components/PageTitle.astro";
 
 const title = "ページが存在しません";
 
@@ -10,7 +10,7 @@ googleURL.searchParams.set("q", `site:${Astro.canonicalURL.hostname}`);
 
 <Layout title={title}>
 	<div class="space-y-16">
-		<PageHeader title={title} />
+		<PageTitle title={title} />
 
 		<div class="border-t"></div>
 

@@ -1,7 +1,7 @@
 ---
 import DetailsList from "../components/DetailsList.astro";
 import Layout from "../components/Layout.astro";
-import PageHeader from "../components/PageHeader.astro";
+import PageTitle from "../components/PageTitle.astro";
 
 const title = "記事";
 
@@ -11,7 +11,7 @@ allPosts.sort((a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.front
 
 <Layout title={title}>
 	<div class="space-y-16">
-		<PageHeader title={title} />
+		<PageTitle title={title} />
 
 		<div class="border-t"></div>
 
