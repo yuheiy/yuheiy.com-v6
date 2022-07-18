@@ -1,7 +1,8 @@
 const colors = require("tailwindcss/colors");
 const plugin = require("tailwindcss/plugin");
+const { parseColor } = require("tailwindcss/lib/util/color");
 
-const semanticColors = plugin.withOptions(
+const systemColors = plugin.withOptions(
 	function (options) {
 		options = {
 			DEFAULT: {},
@@ -16,7 +17,7 @@ const semanticColors = plugin.withOptions(
 					const result = {};
 
 					for (const [key, value] of Object.entries(colors)) {
-						result[`--color-${key}`] = value;
+						result[`--color-${key}`] = parseColor(value).color.join(" ");
 					}
 
 					return result;
@@ -58,7 +59,7 @@ const semanticColors = plugin.withOptions(
 
 		const result = {};
 		for (const key of keys) {
-			result[key] = `var(--color-${key})`;
+			result[key] = `rgb(var(--color-${key}) / <alpha-value>)`;
 		}
 
 		return {
@@ -143,7 +144,7 @@ module.exports = {
 		container: false,
 	},
 	plugins: [
-		semanticColors({
+		systemColors({
 			DEFAULT: {
 				background: colors.white,
 				"background-variant": colors.slate["100"],
