@@ -20,9 +20,12 @@ const {
 	twitterCard = "summary",
 } = Astro.props as Props;
 
-const ogImageURL = new URL((Astro.props as Props).ogImageURL || appleTouchIconImage.src, Astro.url);
+const ogImageURL = new URL(
+	(Astro.props as Props).ogImageURL || appleTouchIconImage.src,
+	Astro.site
+);
 
-let canonicalURL = Astro.url;
+let canonicalURL = new URL(Astro.url.pathname, Astro.site);
 if (Astro.url.pathname === "/404") {
 	canonicalURL = null;
 }
