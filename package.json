@@ -7,6 +7,7 @@
 		"format": "prettier . --write"
 	},
 	"devDependencies": {
+		"@astrojs/image": "^0.2.0",
 		"@astrojs/rss": "^0.2.2",
 		"@astrojs/sitemap": "^0.3.0",
 		"@astrojs/tailwind": "^0.2.5",

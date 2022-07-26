@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import image from "@astrojs/image";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 
@@ -11,6 +12,7 @@ export default defineConfig({
 		},
 	},
 	integrations: [
+		image(),
 		sitemap(),
 		tailwind({
 			config: {
