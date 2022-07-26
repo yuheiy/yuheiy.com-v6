@@ -12,11 +12,11 @@
 	}
 
 	h2::before {
-		@apply content-[""] my-[calc((1.5em-1em)/2)] border-l-[6px];
+		@apply my-[calc((1.5em-1em)/2)] border-l-[6px] content-[""];
 	}
 
 	h3 {
-		@apply text-lg leading-tight font-bold;
+		@apply text-lg font-bold leading-tight;
 	}
 
 	h3 + * {
@@ -24,7 +24,7 @@
 	}
 
 	hr {
-		@apply h-auto pl-[2em] border-0 text-on-background-muted;
+		@apply h-auto border-0 pl-[2em] text-on-background-muted;
 	}
 
 	hr::before {
@@ -40,7 +40,7 @@
 	}
 
 	:is(ol, ul) {
-		@apply pl-[2em] list-[revert];
+		@apply list-[revert] pl-[2em];
 	}
 
 	li {
