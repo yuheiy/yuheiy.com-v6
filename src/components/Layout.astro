@@ -1,7 +1,7 @@
 ---
 import "../styles/main.css";
 import { Image } from "@astrojs/image/components";
-import appleTouchImage from "../assets/apple-touch-icon.png";
+import appleTouchIconImage from "../assets/apple-touch-icon.png";
 
 export interface Props {
 	title?: string;
@@ -20,7 +20,7 @@ const {
 	twitterCard = "summary",
 } = Astro.props as Props;
 
-const ogImageURL = new URL((Astro.props as Props).ogImageURL || appleTouchImage.src, Astro.url);
+const ogImageURL = new URL((Astro.props as Props).ogImageURL || appleTouchIconImage.src, Astro.url);
 
 let canonicalURL = Astro.url;
 if (Astro.url.pathname === "/404") {
@@ -53,7 +53,7 @@ const EM_SPACE = "&#x2003;";
 
 		{canonicalURL && <link rel="canonical" href={canonicalURL} />}
 		<link rel="alternate" href="/posts-feed.xml" type="application/rss+xml" />
-		<link rel="apple-touch-icon" href={appleTouchImage.src} />
+		<link rel="apple-touch-icon" href={appleTouchIconImage.src} />
 	</head>
 
 	<body class="text-on-background bg-background">
@@ -61,7 +61,7 @@ const EM_SPACE = "&#x2003;";
 			<a class="flex items-center gap-x-3 w-fit" href={Astro.url.pathname !== "/" && "/"}>
 				<Image
 					class="w-7 border dark:border-0 rounded-full"
-					src={appleTouchImage}
+					src={appleTouchIconImage}
 					alt=""
 					loading="eager"
 				/>
