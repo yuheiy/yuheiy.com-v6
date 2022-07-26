@@ -2,54 +2,54 @@
 layout: "../layouts/Post.astro"
 title: 『Every Layout&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論』、素直さという選択 &#35;everylayout_ja
 published: "2021-10-11T09:20:00.000+09:00"
-ogImage: /assets/20211011-publication-of-everylayout/ogp.png
+ogImageURL: /assets/20211011-publication-of-everylayout/ogp.png
 twitterCard: summary_large_image
 ---
 
 <figure>
-<img src="/assets/20211011-publication-of-everylayout/cover.png" alt="" class="w-96 dark:border" />
+<img src="/assets/20211011-publication-of-everylayout/cover.png" alt="" class="w-96 dark:border">
 </figure>
 
 友人の[腹筋ローラーの力を信じろ](https://twitter.com/8845musign)さんと共に監訳を担当した書籍『[Every Layout&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論](https://www.hanmoto.com/bd/isbn/9784862465177)』が出版されます。現在、[Amazonで予約受付中](https://www.amazon.co.jp/dp/486246517X)です。当初の予定よりもかなり遅れてしまいましたが、内容はいまだ鮮やかなままに思えます。
 
 <figure>
-<img src="/assets/20211011-publication-of-everylayout/sample_01.png" alt="" class="border dark:border-0" />
+<img src="/assets/20211011-publication-of-everylayout/sample_01.png" alt="" class="border dark:border-0">
 </figure>
 
 <figure>
-<img src="/assets/20211011-publication-of-everylayout/sample_02.png" alt="" class="border dark:border-0" />
+<img src="/assets/20211011-publication-of-everylayout/sample_02.png" alt="" class="border dark:border-0">
 </figure>
 
 <figure>
-<img src="/assets/20211011-publication-of-everylayout/sample_03.png" alt="" class="border dark:border-0" />
+<img src="/assets/20211011-publication-of-everylayout/sample_03.png" alt="" class="border dark:border-0">
 </figure>
 
 <figure>
-<img src="/assets/20211011-publication-of-everylayout/sample_04.png" alt="" class="border dark:border-0" />
+<img src="/assets/20211011-publication-of-everylayout/sample_04.png" alt="" class="border dark:border-0">
 </figure>
 
 <figure>
-<img src="/assets/20211011-publication-of-everylayout/sample_05.png" alt="" class="border dark:border-0" />
+<img src="/assets/20211011-publication-of-everylayout/sample_05.png" alt="" class="border dark:border-0">
 </figure>
 
 <figure>
-<img src="/assets/20211011-publication-of-everylayout/sample_06.png" alt="" class="border dark:border-0" />
+<img src="/assets/20211011-publication-of-everylayout/sample_06.png" alt="" class="border dark:border-0">
 </figure>
 
 <figure>
-<img src="/assets/20211011-publication-of-everylayout/sample_07.png" alt="" class="border dark:border-0" />
+<img src="/assets/20211011-publication-of-everylayout/sample_07.png" alt="" class="border dark:border-0">
 </figure>
 
 <figure>
-<img src="/assets/20211011-publication-of-everylayout/sample_08.png" alt="" class="border dark:border-0" />
+<img src="/assets/20211011-publication-of-everylayout/sample_08.png" alt="" class="border dark:border-0">
 </figure>
 
 <figure>
-<img src="/assets/20211011-publication-of-everylayout/sample_09.png" alt="" class="border dark:border-0" />
+<img src="/assets/20211011-publication-of-everylayout/sample_09.png" alt="" class="border dark:border-0">
 </figure>
 
 <figure>
-<img src="/assets/20211011-publication-of-everylayout/sample_10.png" alt="" class="border dark:border-0" />
+<img src="/assets/20211011-publication-of-everylayout/sample_10.png" alt="" class="border dark:border-0">
 </figure>
 
 目次:

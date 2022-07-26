@@ -6,7 +6,7 @@ posts.sort((a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.frontmat
 
 export const get = () =>
 	rss({
-		title: "記事: Yuhei Yasuda",
+		title: "Yuhei Yasudaの記事",
 		description: "日記や技術情報など",
 		site: import.meta.env.SITE,
 		items: posts.map((post) => ({

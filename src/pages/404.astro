@@ -5,7 +5,7 @@ import PageTitle from "../components/PageTitle.astro";
 const title = "ページが存在しません";
 
 const googleURL = new URL("https://www.google.com/search");
-googleURL.searchParams.set("q", `site:${Astro.canonicalURL.hostname}`);
+googleURL.searchParams.set("q", `site:${Astro.site.origin}`);
 ---
 
 <Layout title={title}>
@@ -16,7 +16,7 @@ googleURL.searchParams.set("q", `site:${Astro.canonicalURL.hostname}`);
 
 		<div class="container prose">
 			<p
-				set:html={`<a href="${`https://web.archive.org/web/*/${Astro.canonicalURL.origin}/`}" data-internet-archive>インターネットアーカイブ</a>を参照するか、<a href=${googleURL}>サイト内を検索する</a>と見つかるかもしれません。`}
+				set:html={`<a href="${`https://web.archive.org/web/*/${Astro.site}`}" data-internet-archive>インターネットアーカイブ</a>を参照するか、<a href="${googleURL}">サイト内を検索する</a>と見つかるかもしれません。`}
 			>
 			</p>
 		</div>
