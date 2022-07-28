@@ -19,7 +19,7 @@ const Component = ordered ? "ol" : "ul";
 		<li class="space-y-[0.125rem]">
 			{item.meta && <p class="text-on-background-muted text-sm" set:html={item.meta} />}
 			<p>
-				<a href={item.url} set:html={item.title} />
+				<a href={item.url} set:html={item.title} rel="prefetch" />
 			</p>
 			{item.description && (
 				<p class="text-on-background-muted text-sm" set:html={item.description} />
