@@ -15,6 +15,7 @@
 		"@wordpress/browserslist-config": "^4.1.2",
 		"astro": "^1.0.0-rc.3",
 		"budoux": "^0.1.2",
+		"dayjs": "^1.11.4",
 		"happy-dom": "^6.0.4",
 		"jsdom": "^20.0.0",
 		"postcss-import": "^14.1.0",

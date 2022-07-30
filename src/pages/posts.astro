@@ -2,11 +2,14 @@
 import DetailsList from "../components/DetailsList.astro";
 import Layout from "../components/Layout.astro";
 import PageTitle from "../components/PageTitle.astro";
+import dayjs from "../lib/dayjs";
 
 const title = "記事";
 
 const allPosts = await Astro.glob<{ title: string; published: string }>("./*.md");
-allPosts.sort((a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.frontmatter.published));
+allPosts.sort(
+	(a, b) => dayjs(b.frontmatter.published).valueOf() - dayjs(a.frontmatter.published).valueOf()
+);
 ---
 
 <Layout title={title}>
@@ -20,8 +23,8 @@ allPosts.sort((a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.front
 				items={allPosts.map((post) => ({
 					title: post.frontmatter.title,
 					url: post.url,
-					meta: `<time datetime="${post.frontmatter.published}">
-						${new Date(post.frontmatter.published).toLocaleDateString("ja-JP", { dateStyle: "long" })}
+					meta: `<time datetime="${dayjs(post.frontmatter.published).toISOString()}">
+						${dayjs(post.frontmatter.published).format("LL")}
 					</time>`,
 				}))}
 				ordered={true}

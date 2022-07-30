@@ -1,6 +1,7 @@
 ---
 import Layout from "../components/Layout.astro";
 import PageTitle from "../components/PageTitle.astro";
+import dayjs from "../lib/dayjs";
 import { readFirstTextContent } from "../lib/read-first-text-content";
 
 export interface Props {
@@ -27,8 +28,8 @@ const description = readFirstTextContent((content as any).astro.html);
 	<article class="space-y-16">
 		<PageTitle Component="header" title={title}>
 			<p class="text-sm text-on-background-muted">
-				<time datetime={published}>
-					{new Date(published).toLocaleDateString("ja-JP", { dateStyle: "long" })}
+				<time datetime={dayjs(published).toISOString()}>
+					{dayjs(published).format("LL")}
 				</time>
 			</p>
 		</PageTitle>

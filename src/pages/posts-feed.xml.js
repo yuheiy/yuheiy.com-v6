@@ -1,8 +1,11 @@
 import rss from "@astrojs/rss";
+import dayjs from "../lib/dayjs";
 
 const postImportResult = import.meta.glob("./*.md", { eager: true });
 const posts = Object.values(postImportResult);
-posts.sort((a, b) => Date.parse(b.frontmatter.published) - Date.parse(a.frontmatter.published));
+posts.sort(
+	(a, b) => dayjs(b.frontmatter.published).valueOf() - dayjs(a.frontmatter.published).valueOf()
+);
 
 export const get = () =>
 	rss({
@@ -12,6 +15,6 @@ export const get = () =>
 		items: posts.map((post) => ({
 			link: post.url,
 			title: post.frontmatter.title,
-			pubDate: post.frontmatter.published,
+			pubDate: dayjs(post.frontmatter.published).toDate(),
 		})),
 	});

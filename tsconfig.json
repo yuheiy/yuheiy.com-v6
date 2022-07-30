@@ -1,16 +1,49 @@
 {
 	"compilerOptions": {
-		// Enable top-level await and other modern ESM features.
+		/* Visit https://aka.ms/tsconfig.json to read more about this file */
+
+		/* Language and Environment */
 		"target": "ESNext",
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+
+		/* Modules */
 		"module": "ESNext",
-		// Enable node-style module resolution, for things like npm package imports.
-		"moduleResolution": "node",
-		// Enable JSON imports.
+		"moduleResolution": "Node",
+		"types": ["vite/client", "@astrojs/image/client"],
 		"resolveJsonModule": true,
-		// Enable stricter transpilation for better output.
+
+		/* Emit */
+		"noEmit": true,
+
+		/* Interop Constraints */
 		"isolatedModules": true,
-		// Add type definitions for our Vite runtime.
-		"types": ["vite/client", "@astrojs/image/client"]
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+
+		/* Type Checking */
+		"strict": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictBindCallApply": true,
+		"strictPropertyInitialization": true,
+		"noImplicitThis": true,
+		"useUnknownInCatchVariables": true,
+		"alwaysStrict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"exactOptionalPropertyTypes": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"allowUnusedLabels": true,
+		"allowUnreachableCode": true,
+
+		/* Completeness */
+		"skipLibCheck": true
 	},
 	"include": ["src/**/*"]
 }
