@@ -116,7 +116,7 @@ CMSから出力されるHTMLを、コンテナの幅ごとに分割すること�
 これを応用すると、本文エリア内でも要素の幅が異なるような実装ができる。
 
 ```html
-<h1 class="container-lg"><!-- ... --></h1>
+<h1 class="container"><!-- ... --></h1>
 
 <div class="prose">
 	<h2><!-- ... --></h2>
@@ -131,25 +131,12 @@ CMSから出力されるHTMLを、コンテナの幅ごとに分割すること�
 ```
 
 ```css
-.container-lg,
-.container-md,
-.container-sm {
+.container {
 	--_container-margin: 1.25rem;
 	width: calc(100% - var(--_container-margin) * 2);
+	max-width: 75rem;
 	margin-right: auto;
 	margin-left: auto;
-}
-
-.container-lg {
-	max-width: 75rem;
-}
-
-.container-md {
-	max-width: 60rem;
-}
-
-.container-sm {
-	max-width: 45rem;
 }
 
 .prose > :not(.alignfull) {
