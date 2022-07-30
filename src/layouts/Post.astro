@@ -1,7 +1,7 @@
 ---
-import { JSDOM } from "jsdom";
 import Layout from "../components/Layout.astro";
 import PageTitle from "../components/PageTitle.astro";
+import { readFirstTextContent } from "../lib/read-first-text-content";
 
 export interface Props {
 	content: {
@@ -14,9 +14,7 @@ export interface Props {
 
 const { content } = Astro.props as Props;
 const { title, published, ogImageURL, twitterCard } = content;
-
-const frag = JSDOM.fragment((content as any).astro.html);
-const description = frag.querySelector("p")?.textContent;
+const description = readFirstTextContent((content as any).astro.html);
 ---
 
 <Layout
