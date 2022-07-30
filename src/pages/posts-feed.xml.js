@@ -4,7 +4,8 @@ import dayjs from "../lib/dayjs";
 const postImportResult = import.meta.glob("./*.md", { eager: true });
 const posts = Object.values(postImportResult);
 posts.sort(
-	(a, b) => dayjs(b.frontmatter.published).valueOf() - dayjs(a.frontmatter.published).valueOf()
+	(a, b) =>
+		dayjs(b.frontmatter.published).tz().valueOf() - dayjs(a.frontmatter.published).tz().valueOf()
 );
 
 export const get = () =>
@@ -15,6 +16,6 @@ export const get = () =>
 		items: posts.map((post) => ({
 			link: post.url,
 			title: post.frontmatter.title,
-			pubDate: dayjs(post.frontmatter.published).toDate(),
+			pubDate: dayjs(post.frontmatter.published).tz().toDate(),
 		})),
 	});

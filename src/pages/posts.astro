@@ -8,7 +8,8 @@ const title = "記事";
 
 const allPosts = await Astro.glob<{ title: string; published: string }>("./*.md");
 allPosts.sort(
-	(a, b) => dayjs(b.frontmatter.published).valueOf() - dayjs(a.frontmatter.published).valueOf()
+	(a, b) =>
+		dayjs(b.frontmatter.published).tz().valueOf() - dayjs(a.frontmatter.published).tz().valueOf()
 );
 ---
 
@@ -23,8 +24,8 @@ allPosts.sort(
 				items={allPosts.map((post) => ({
 					title: post.frontmatter.title,
 					url: post.url,
-					meta: `<time datetime="${dayjs(post.frontmatter.published).toISOString()}">
-						${dayjs(post.frontmatter.published).format("LL")}
+					meta: `<time datetime="${dayjs(post.frontmatter.published).tz().toISOString()}">
+						${dayjs(post.frontmatter.published).tz().format("LL")}
 					</time>`,
 				}))}
 				ordered={true}
