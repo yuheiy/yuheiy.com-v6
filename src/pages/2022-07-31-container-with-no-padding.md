@@ -134,7 +134,7 @@ CMSから出力されるHTMLを、コンテナの幅ごとに分割すること�
 .container {
 	--_container-margin: 1.25rem;
 	width: calc(100% - var(--_container-margin) * 2);
-	max-width: 75rem;
+	max-width: 60rem;
 	margin-right: auto;
 	margin-left: auto;
 }
