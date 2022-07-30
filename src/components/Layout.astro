@@ -27,7 +27,7 @@ const ogImageURL = new URL(
 	Astro.site
 );
 
-let canonicalURL = new URL(Astro.url.pathname, Astro.site);
+let canonicalURL: URL | null = new URL(Astro.url.pathname, Astro.site);
 if (is404) {
 	canonicalURL = null;
 }
@@ -65,7 +65,7 @@ const EM_SPACE = "&#x2003;";
 		<header class="container mb-8 pt-16 text-sm text-on-background-muted kerning">
 			<a
 				class="flex items-center gap-x-3 w-fit"
-				href={Astro.url.pathname !== "/" && "/"}
+				href={Astro.url.pathname !== "/" ? "/" : null}
 				rel="prefetch"
 			>
 				<Image
