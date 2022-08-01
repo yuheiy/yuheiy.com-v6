@@ -36,7 +36,7 @@
 	}
 
 	blockquote {
-		@apply ml-8 space-y-3;
+		@apply ml-[2em] space-y-3;
 	}
 
 	:is(ol, ul) {
