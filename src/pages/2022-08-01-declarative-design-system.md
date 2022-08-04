@@ -80,7 +80,7 @@ published: "2022-08-01T09:00:00.001+09:00"
 
 これはCSSで次のようにエンコードされます。
 
-```
+```css
 button:hover {
     background-color: hsl(
         var(--button-colour-hue),
