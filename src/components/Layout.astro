@@ -61,8 +61,8 @@ const EM_SPACE = "&#x2003;";
 		<link rel="apple-touch-icon" href={appleTouchIconImage.src} />
 	</head>
 
-	<body class="text-on-background bg-background">
-		<header class="container mb-8 pt-16 text-sm text-on-background-muted kerning">
+	<body class="text-dynamic bg-dynamic">
+		<header class="container mb-8 pt-16 text-sm text-dynamic-muted kerning">
 			<a
 				class="flex items-center gap-x-3 w-fit"
 				href={Astro.url.pathname !== "/" ? "/" : null}
@@ -82,7 +82,7 @@ const EM_SPACE = "&#x2003;";
 			<slot />
 		</main>
 
-		<footer class="sticky top-full mt-16 py-8 text-sm bg-background-variant">
+		<footer class="sticky top-full mt-16 py-8 text-sm bg-dynamic-variant">
 			<nav class="container space-y-4">
 				<p
 					set:html={`<a href="/" rel="prefetch">ホーム</a>${EM_SPACE}<a href="/posts" rel="prefetch">すべての記事</a>${EM_SPACE}<a href="/posts-feed.xml">RSS</a>`}

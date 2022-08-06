@@ -111,10 +111,10 @@ const projects = [
 <Layout description={description}>
 	<div class="space-y-16">
 		<PageTitle title="安田 祐平">
-			<div class="space-y-4 text-on-background-muted">
+			<div class="space-y-4 text-dynamic-muted">
 				<p>{description}</p>
 				<p
-					set:html={`監訳を担当した書籍『<a class="text-on-background" href="/20211011-publication-of-everylayout" rel="prefetch">Every Layout—モジュラーなレスポンシブデザインを実現するCSS設計論</a>』が<a class="text-on-background" href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a>。`}
+					set:html={`監訳を担当した書籍『<a class="text-dynamic" href="/20211011-publication-of-everylayout" rel="prefetch">Every Layout—モジュラーなレスポンシブデザインを実現するCSS設計論</a>』が<a class="text-dynamic" href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a>。`}
 				>
 				</p>
 			</div>
@@ -123,7 +123,7 @@ const projects = [
 		<div class="border-t"></div>
 
 		<section class="container">
-			<h2 class="mb-8 leading-tight font-bold text-on-background-muted">主な投稿</h2>
+			<h2 class="mb-8 leading-tight font-bold text-dynamic-muted">主な投稿</h2>
 
 			<DetailsList items={primaryPosts} />
 		</section>
@@ -131,7 +131,7 @@ const projects = [
 		<div class="border-t"></div>
 
 		<section class="container">
-			<h2 class="mb-8 leading-tight font-bold text-on-background-muted">プロジェクト</h2>
+			<h2 class="mb-8 leading-tight font-bold text-dynamic-muted">プロジェクト</h2>
 
 			<DetailsList items={projects} />
 		</section>
@@ -139,7 +139,7 @@ const projects = [
 		<div class="border-t"></div>
 
 		<section class="container">
-			<h2 class="mb-8 leading-tight font-bold text-on-background-muted">最新記事</h2>
+			<h2 class="mb-8 leading-tight font-bold text-dynamic-muted">最新記事</h2>
 
 			<DetailsList
 				items={allPosts

@@ -1,5 +1,5 @@
 :root {
-	--astro-code-color-text: theme(colors.on-background);
+	--astro-code-color-text: theme(textColor.dynamic.DEFAULT);
 	--astro-code-color-background: transparent;
 	--astro-code-token-constant: #0550ae;
 	--astro-code-token-string: #0a3069;
@@ -48,7 +48,7 @@ body {
 
 a:any-link {
 	text-decoration: underline;
-	text-decoration-color: theme(colors.underline);
+	text-decoration-color: theme(textDecorationColor.dynamic.DEFAULT);
 	text-decoration-thickness: 1px;
 }
 

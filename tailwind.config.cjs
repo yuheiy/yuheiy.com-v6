@@ -1,76 +1,71 @@
+const extend = require("just-extend");
+const set = require("just-safe-set");
 const colors = require("tailwindcss/colors");
 const plugin = require("tailwindcss/plugin");
 const { parseColor } = require("tailwindcss/lib/util/color");
 
-const systemColors = plugin.withOptions(
+const dynamicColors = plugin.withOptions(
 	function (options) {
-		options = {
-			DEFAULT: {},
-			light: {},
-			dark: {},
-			...options,
+		const styles = {
+			":root": {
+				...generateDeclarations(options.light),
+				"@media (prefers-color-scheme: dark)": {
+					...generateDeclarations(options.dark),
+				},
+			},
 		};
 
 		return function ({ addBase }) {
-			const [forDefault, forLight, forDark] = [options.DEFAULT, options.light, options.dark].map(
-				(colors) => {
-					const result = {};
-
-					for (const [key, value] of Object.entries(colors)) {
-						result[`--color-${key}`] = parseColor(value).color.join(" ");
-					}
-
-					return result;
-				}
-			);
-
-			const result = {
-				...forDefault,
-			};
-
-			for (const [type, colors] of [
-				["light", forLight],
-				["dark", forDark],
-			]) {
-				if (Object.keys(colors).length) {
-					result[`@media (prefers-color-scheme: ${type})`] = colors;
-				}
-			}
-
-			addBase({
-				":root": result,
-			});
+			addBase(styles);
 		};
 	},
 	function (options) {
-		options = {
-			DEFAULT: {},
-			light: {},
-			dark: {},
-			...options,
-		};
-
-		const keys = new Set();
-		for (const colors of [options.DEFAULT, options.light, options.dark]) {
-			for (const key of Object.keys(colors)) {
-				keys.add(key);
-			}
-		}
-
-		const result = {};
-		for (const key of keys) {
-			result[key] = `rgb(var(--color-${key}) / <alpha-value>)`;
-		}
-
 		return {
 			theme: {
-				extend: {
-					colors: result,
-				},
+				extend: generateTheme(extend(true, {}, options.light, options.dark)),
 			},
 		};
 	}
 );
+
+function generateDeclarations(settings) {
+	const declarations = {};
+	walk(settings, []);
+	return declarations;
+
+	function walk(object, path) {
+		const parsedColor = parseColor(object);
+		if (parsedColor) {
+			declarations[`--dynamic-color-${path.join("-")}`] = parsedColor.color.join(" ");
+			return;
+		}
+
+		for (const [key, value] of Object.entries(object)) {
+			walk(value, [...path, key]);
+		}
+	}
+}
+
+function generateTheme(settings) {
+	const theme = {};
+	walk(settings, []);
+	return theme;
+
+	function walk(object, path) {
+		if (typeof object === "string") {
+			set(
+				theme,
+				[path[0], "dynamic", ...path.slice(1)].join("."),
+				`rgb(var(--dynamic-color-${path.join("-")}) / <alpha-value>)`
+			);
+			return;
+		}
+
+		for (const [key, value] of Object.entries(object)) {
+			walk(value, [...path, key]);
+		}
+	}
+}
 
 const container = plugin(function ({ addBase, addComponents }) {
 	addBase({
@@ -132,34 +127,50 @@ module.exports = {
 			normal: "1.8",
 		},
 		extend: {
+			borderColor: {
+				DEFAULT: "rgb(var(--dynamic-color-borderColor-DEFAULT) / <alpha-value>)",
+			},
 			fontFamily: {
 				sans: ["sans-serif"],
 			},
-			borderColor: ({ theme }) => ({
-				DEFAULT: theme("colors.outline"),
-			}),
 		},
 	},
 	corePlugins: {
 		container: false,
 	},
 	plugins: [
-		systemColors({
-			DEFAULT: {
-				background: colors.white,
-				"background-variant": colors.slate["100"],
-				"on-background": colors.gray["800"],
-				"on-background-muted": colors.gray["500"],
-				underline: colors.gray["400"],
-				outline: colors.gray["200"],
+		dynamicColors({
+			light: {
+				backgroundColor: {
+					DEFAULT: colors.white,
+					variant: colors.slate["100"],
+				},
+				borderColor: {
+					DEFAULT: colors.gray["200"],
+				},
+				textColor: {
+					DEFAULT: colors.gray["800"],
+					muted: colors.gray["500"],
+				},
+				textDecorationColor: {
+					DEFAULT: colors.gray["400"],
+				},
 			},
 			dark: {
-				background: colors.neutral["900"],
-				"background-variant": colors.neutral["800"],
-				"on-background": colors.gray["50"],
-				"on-background-muted": colors.gray["400"],
-				underline: colors.gray["400"],
-				outline: colors.neutral["700"],
+				backgroundColor: {
+					DEFAULT: colors.neutral["900"],
+					variant: colors.neutral["800"],
+				},
+				borderColor: {
+					DEFAULT: colors.neutral["700"],
+				},
+				textColor: {
+					DEFAULT: colors.gray["50"],
+					muted: colors.gray["400"],
+				},
+				textDecorationColor: {
+					DEFAULT: colors.gray["400"],
+				},
 			},
 		}),
 		container,

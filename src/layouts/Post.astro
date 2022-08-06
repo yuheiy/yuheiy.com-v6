@@ -27,7 +27,7 @@ const description = readFirstTextContent((content as any).astro.html);
 >
 	<article class="space-y-16">
 		<PageTitle Component="header" title={title}>
-			<p class="text-sm text-on-background-muted">
+			<p class="text-sm text-dynamic-muted">
 				<time datetime={dayjs(published).tz().toISOString()}>
 					{dayjs(published).tz().format("LL")}
 				</time>
