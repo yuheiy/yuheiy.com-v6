@@ -36,7 +36,8 @@ function generateDeclarations(settings) {
 	function walk(object, path) {
 		const parsedColor = parseColor(object);
 		if (parsedColor) {
-			declarations[`--dynamic-color-${path.join("-")}`] = parsedColor.color.join(" ");
+			const variableName = `--dynamic-color-${path.join("-")}`;
+			declarations[variableName] = parsedColor.color.join(" ");
 			return;
 		}
 
@@ -53,10 +54,11 @@ function generateTheme(settings) {
 
 	function walk(object, path) {
 		if (typeof object === "string") {
+			const variableName = `--dynamic-color-${path.join("-")}`;
 			set(
 				theme,
-				[path[0], "dynamic", ...path.slice(1)].join("."),
-				`rgb(var(--dynamic-color-${path.join("-")}) / <alpha-value>)`
+				toSpliced(path, 1, 0, "dynamic").join("."),
+				`rgb(var(${variableName}) / <alpha-value>)`
 			);
 			return;
 		}
@@ -65,6 +67,13 @@ function generateTheme(settings) {
 			walk(value, [...path, key]);
 		}
 	}
+}
+
+// https://github.com/tc39/proposal-change-array-by-copy
+function toSpliced(array, start, deleteCount, ...values) {
+	array = Array.from(array);
+	array.splice(start, deleteCount, ...values);
+	return array;
 }
 
 const container = plugin(function ({ addBase, addComponents }) {
