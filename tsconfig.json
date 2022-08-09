@@ -9,7 +9,6 @@
 		/* Modules */
 		"module": "ESNext",
 		"moduleResolution": "Node",
-		"types": ["vite/client", "@astrojs/image/client"],
 		"resolveJsonModule": true,
 
 		/* Emit */
