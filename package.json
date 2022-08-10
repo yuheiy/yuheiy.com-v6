@@ -17,7 +17,6 @@
 		"budoux": "^0.2.0",
 		"dayjs": "^1.11.4",
 		"happy-dom": "^6.0.4",
-		"jsdom": "^20.0.0",
 		"just-extend": "^6.1.1",
 		"just-safe-set": "^4.1.1",
 		"postcss-import": "^14.1.0",
