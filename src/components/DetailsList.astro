@@ -15,13 +15,15 @@ const Component = ordered ? "ol" : "ul";
 ---
 
 <Component class="space-y-8">
-	{items.map((item) => (
-		<li class="space-y-[0.125rem]">
-			{item.meta && <p class="text-sm text-dynamic-muted" set:html={item.meta} />}
-			<p>
-				<a href={item.url} set:html={item.title} rel="prefetch" />
-			</p>
-			{item.description && <p class="text-sm text-dynamic-muted" set:html={item.description} />}
-		</li>
-	))}
+	{
+		items.map((item) => (
+			<li class="space-y-[0.125rem]">
+				{item.meta && <p class="text-sm text-dynamic-muted" set:html={item.meta} />}
+				<p>
+					<a href={item.url} set:html={item.title} rel="prefetch" />
+				</p>
+				{item.description && <p class="text-sm text-dynamic-muted" set:html={item.description} />}
+			</li>
+		))
+	}
 </Component>

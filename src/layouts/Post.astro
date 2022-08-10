@@ -26,9 +26,9 @@ const description = readFirstTextContent(compiledContent());
 <Layout
 	title={title}
 	description={description}
-	ogImageURL={ogImageURL}
+	ogImageURL={ogImageURL!}
 	ogType="article"
-	twitterCard={twitterCard}
+	twitterCard={twitterCard!}
 >
 	<article class="space-y-16">
 		<PageTitle Component="header" title={title}>

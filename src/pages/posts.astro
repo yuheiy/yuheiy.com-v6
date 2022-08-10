@@ -23,7 +23,7 @@ allPosts.sort(
 			<DetailsList
 				items={allPosts.map((post) => ({
 					title: post.frontmatter.title,
-					url: post.url,
+					url: post.url!,
 					meta: `<time datetime="${dayjs(post.frontmatter.published).tz().toISOString()}">
 						${dayjs(post.frontmatter.published).tz().format("LL")}
 					</time>`,
