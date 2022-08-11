@@ -42,8 +42,8 @@ publishDate: "2022-08-11T20:25:00.000+09:00"
 }
 
 .card__icon {
-	width: 1em;
-	height: 1em;
+	width: var(--icon-size);
+	height: var(--icon-size);
 	margin-left: calc(var(--icon-size) * -1);
 }
 ```
