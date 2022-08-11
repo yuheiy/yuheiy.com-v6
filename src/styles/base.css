@@ -59,6 +59,9 @@ em {
 
 iframe {
 	max-width: 100%;
+}
+
+:not(.cp_embed_wrapper) > iframe {
 	height: auto;
 }
 
