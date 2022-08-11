@@ -7,7 +7,8 @@ import dayjs from "../lib/dayjs";
 const allPosts = await Astro.glob<{ title: string; publishDate: string }>("./*.md");
 allPosts.sort(
 	(a, b) =>
-		dayjs(b.frontmatter.publishDate).tz().valueOf() - dayjs(a.frontmatter.publishDate).tz().valueOf()
+		dayjs(b.frontmatter.publishDate).tz().valueOf() -
+		dayjs(a.frontmatter.publishDate).tz().valueOf()
 );
 
 const description =
@@ -77,35 +78,47 @@ const projects = [
 	{
 		title: "wordpress-starter",
 		link: "https://github.com/yuheiy/wordpress-starter",
-		meta: '<time datetime="2020-08">2020年8月</time>&mdash;',
+		startDate: "2020-08",
 		description: "WordPressテーマ構築のための開発環境。",
 	},
 	{
 		title: "accrefs",
 		link: "https://accrefs.jp/",
-		meta: '<time datetime="2019-09">2019年9月</time>&mdash;',
+		startDate: "2019-09",
 		description:
 			"ウェブアクセシビリティの参考資料をまとめたサイト。日本語の資料を中心にリンク数は200を超える。サイトのデザインおよび実装に携わる。有志のメンバーにより制作・運営されている。",
 	},
 	{
 		title: "shifted",
 		link: "https://github.com/yuheiy/shifted",
-		meta: '<time datetime="2019-05">2019年5月</time>&mdash;',
+		startDate: "2019-05",
 		description: "静的サイト構築のための開発環境。",
 	},
 	{
 		title: "シフトブレイン／スタンダードデザインユニット",
 		link: "https://standard.shiftbrain.com/",
-		meta: '<time datetime="2018-10">2018年10月</time>&mdash;<time datetime="2020-06">2020年6月</time>',
+		startDate: "2018-10",
+		endDate: "2020-06",
 		description: "自社で所属していたチームのウェブサイト。",
 	},
 	{
 		title: "yuhei blog",
 		link: "https://yuheiy.hatenablog.com/",
-		meta: '<time datetime="2015-10">2015年10月</time>&mdash;<time datetime="2020-11">2020年11月</time>',
+		startDate: "2015-10",
+		endDate: "2020-11",
 		description: "過去に更新していた個人ブログ。",
 	},
-];
+].map(({ title, link, startDate, endDate, description }) => ({
+	title,
+	link,
+	meta: [
+		`<time datetime="${startDate}">${dayjs(startDate).tz().format("YYYY年M月")}</time>`,
+		endDate && `<time datetime="${endDate}">${dayjs(endDate).tz().format("YYYY年M月")}</time>`,
+	]
+		.filter(Boolean)
+		.join("&mdash;"),
+	description,
+}));
 ---
 
 <Layout description={description}>
