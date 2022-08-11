@@ -49,7 +49,7 @@ publishDate: "2022-08-11T20:25:00.000+09:00"
 ```
 
 <figure>
-<video controls style="width: calc(1560/2/16*1rem);">
+<video controls playsinline style="width: calc(1560/2/16*1rem);">
 <source src="/assets/2022-08-11-text-with-accompanying-icon/3.mp4">
 </video>
 </figure>
