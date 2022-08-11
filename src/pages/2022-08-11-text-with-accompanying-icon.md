@@ -38,7 +38,7 @@ publishDate: "2022-08-11T20:25:00.000+09:00"
 }
 
 .card__label {
-	margin-right: calc(var(--icon-size) + var(--icon-margin));
+	margin-right: calc(var(--icon-margin) + var(--icon-size));
 }
 
 .card__icon {
