@@ -52,8 +52,9 @@ publishDate: "2022-08-11T20:25:00.000+09:00"
 <video controls style="width: calc(1560/2/16*1rem);">
 <source src="/assets/2022-08-11-text-with-accompanying-icon/3.mp4">
 </video>
+</figure>
 
-まずテキスト要素の`margin-right`によって、アイコンとその間の余白を加えた分の空間が必ず確保されるようになる。そしてその空間を埋めるように、アイコン要素の位置を`margin-left`のネガティブ値で詰めることによって、テキストが改行されない限りはアイコンも改行されないという状態を作り出すことができる。
+まずテキスト要素の`margin-right`によって、アイコンとその間の余白を加えた分の空間が末尾に確保されるようになる。そしてその空間を埋めるように、アイコン要素の位置を`margin-left`のネガティブ値で移動させる。それによって、アイコンが必ずテキストの末尾に隣り合って配置されるようになる。
 
 <p class="codepen" data-height="300" data-slug-hash="gOedOyN" data-user="yuheiy" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
   <span>See the Pen <a href="https://codepen.io/yuheiy/pen/gOedOyN">
@@ -62,4 +63,4 @@ publishDate: "2022-08-11T20:25:00.000+09:00"
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-注意点としては、テキスト要素とアイコン要素の間にソース上でホワイトスペースが入らないようにすること。ホワイトスペースの分の幅ができると、アイコンのために確保した空間をはみ出してしまうため、改行方法を意図した通り制御できなくなる。
+注意点としては、テキスト要素とアイコン要素の間にソース上でホワイトスペースが入らないようにすることだ。ホワイトスペースの分の幅ができると、アイコンのために確保した空間をはみ出してしまうため、改行方法が正しく制御されなくなる。
