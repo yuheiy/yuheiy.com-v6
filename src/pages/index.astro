@@ -16,59 +16,59 @@ const description =
 const primaryPosts = [
 	{
 		title: "宣言的デザイン（翻訳）",
-		url: "/2022-08-01-declarative-design",
+		link: "/2022-08-01-declarative-design",
 		meta: "Yuhei Yasuda",
 	},
 	{
 		title: "CSS設計における、すべてがコンポーネントであるという誤謬",
-		url: "/2022-06-11-css-components",
+		link: "/2022-06-11-css-components",
 		meta: "Yuhei Yasuda",
 	},
 	{
 		title: "本文のタイポグラフィとCSS",
-		url: "https://paper.dropbox.com/doc/CSS--BiYi3PrpPiQ_4sOfqgvEMeAEAg-wPD007Sd9dSeEDLP78jri",
+		link: "https://paper.dropbox.com/doc/CSS--BiYi3PrpPiQ_4sOfqgvEMeAEAg-wPD007Sd9dSeEDLP78jri",
 		meta: "社内発表",
 	},
 	{
 		title: "『Every Layout』に到った背景と思想についての私の解釈",
-		url: "https://note.com/shiftbrain/n/n0a01726673e0",
+		link: "https://note.com/shiftbrain/n/n0a01726673e0",
 		meta: "SHIFTBRAIN note",
 	},
 	{
 		title: "「Every Layout」をめぐる座談会",
-		url: "https://www.codegrid.net/series/2021-talk-about-every-layout",
+		link: "https://www.codegrid.net/series/2021-talk-about-every-layout",
 		meta: "CodeGrid",
 	},
 	{
 		title:
 			"『Every Layout&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論』、素直さという選択 &#35;everylayout-ja",
-		url: "/20211011-publication-of-everylayout",
+		link: "/20211011-publication-of-everylayout",
 		meta: "Yuhei Yasuda",
 	},
 	{
 		title: "垂直方向のマージンにはmargin-topを優先的に使う理由",
-		url: "/20210127-prefer-margin-top",
+		link: "/20210127-prefer-margin-top",
 		meta: "Yuhei Yasuda",
 	},
 	{
 		title: "Tailwind CSSの設計思想を業務に活かす",
-		url: "https://www.codegrid.net/series/2020-tailwind-talk",
+		link: "https://www.codegrid.net/series/2020-tailwind-talk",
 		meta: "CodeGrid",
 	},
 	{
 		title:
 			"CSSのユーティリティクラスと「関心の分離」&mdash;&mdash;いかにしてユーティリティファーストにたどり着いたか（翻訳）",
-		url: "https://yuheiy.hatenablog.com/entry/2020/05/25/021342",
+		link: "https://yuheiy.hatenablog.com/entry/2020/05/25/021342",
 		meta: "yuhei blog",
 	},
 	{
 		title: "制作者のためのHTML",
-		url: "https://yuheiy.github.io/html-for-creators/",
+		link: "https://yuheiy.github.io/html-for-creators/",
 		meta: "<a href='https://ca11y.connpass.com/event/120003/'>CA11Y #1 〜アクセシビリティはじめて物語〜</a>",
 	},
 	{
 		title: "ページ内リンクの実装から考える、a要素のclickイベントとその振る舞い",
-		url: "https://standard.shiftbrain.com/blog/default-action-for-click-event-of-a-element",
+		link: "https://standard.shiftbrain.com/blog/default-action-for-click-event-of-a-element",
 		meta: "シフトブレイン／スタンダードデザインユニット",
 	},
 ];
@@ -76,32 +76,32 @@ const primaryPosts = [
 const projects = [
 	{
 		title: "wordpress-starter",
-		url: "https://github.com/yuheiy/wordpress-starter",
+		link: "https://github.com/yuheiy/wordpress-starter",
 		meta: '<time datetime="2020-08">2020年8月</time>&mdash;',
 		description: "WordPressテーマ構築のための開発環境。",
 	},
 	{
 		title: "accrefs",
-		url: "https://accrefs.jp/",
+		link: "https://accrefs.jp/",
 		meta: '<time datetime="2019-09">2019年9月</time>&mdash;',
 		description:
 			"ウェブアクセシビリティの参考資料をまとめたサイト。日本語の資料を中心にリンク数は200を超える。サイトのデザインおよび実装に携わる。有志のメンバーにより制作・運営されている。",
 	},
 	{
 		title: "shifted",
-		url: "https://github.com/yuheiy/shifted",
+		link: "https://github.com/yuheiy/shifted",
 		meta: '<time datetime="2019-05">2019年5月</time>&mdash;',
 		description: "静的サイト構築のための開発環境。",
 	},
 	{
 		title: "シフトブレイン／スタンダードデザインユニット",
-		url: "https://standard.shiftbrain.com/",
+		link: "https://standard.shiftbrain.com/",
 		meta: '<time datetime="2018-10">2018年10月</time>&mdash;<time datetime="2020-06">2020年6月</time>',
 		description: "自社で所属していたチームのウェブサイト。",
 	},
 	{
 		title: "yuhei blog",
-		url: "https://yuheiy.hatenablog.com/",
+		link: "https://yuheiy.hatenablog.com/",
 		meta: '<time datetime="2015-10">2015年10月</time>&mdash;<time datetime="2020-11">2020年11月</time>',
 		description: "過去に更新していた個人ブログ。",
 	},
@@ -145,7 +145,7 @@ const projects = [
 				items={allPosts
 					.map((post) => ({
 						title: post.frontmatter.title,
-						url: post.url!,
+						link: post.url!,
 						meta: `<time datetime="${dayjs(post.frontmatter.publishDate).tz().toISOString()}">
 							${dayjs(post.frontmatter.publishDate).tz().format("LL")}
 						</time>`,

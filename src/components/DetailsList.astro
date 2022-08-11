@@ -2,7 +2,7 @@
 export interface Props {
 	items: {
 		title: string;
-		url: string;
+		link: string;
 		meta?: string;
 		description?: string;
 	}[];
@@ -20,7 +20,7 @@ const Component = ordered ? "ol" : "ul";
 			<li class="space-y-[0.125rem]">
 				{item.meta && <p class="text-sm text-dynamic-muted" set:html={item.meta} />}
 				<p>
-					<a href={item.url} set:html={item.title} rel="prefetch" />
+					<a href={item.link} set:html={item.title} rel="prefetch" />
 				</p>
 				{item.description && <p class="text-sm text-dynamic-muted" set:html={item.description} />}
 			</li>
