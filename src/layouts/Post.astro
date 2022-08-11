@@ -2,25 +2,21 @@
 import Layout from "../components/Layout.astro";
 import PageTitle from "../components/PageTitle.astro";
 import dayjs from "../lib/dayjs";
-import { readFirstTextContent } from "../lib/read-first-text-content";
 
 // https://docs.astro.build/en/guides/markdown-content/#markdown-layout-props
 export interface Props {
 	content: {
 		title: string;
 		publishDate: string;
+		description?:string;
 		ogImageURL?: string;
 		twitterCard?: "summary" | "summary_large_image";
 	};
-	compiledContent: () => string;
 }
 
 const {
-	content: { title, publishDate, ogImageURL, twitterCard },
-	compiledContent,
+	content: { title, publishDate, description, ogImageURL, twitterCard },
 } = Astro.props as Props;
-
-const description = readFirstTextContent(compiledContent());
 ---
 
 <Layout

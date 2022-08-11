@@ -3,6 +3,8 @@ import image from "@astrojs/image";
 import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
+import { toString } from "mdast-util-to-string";
+import { select } from "unist-util-select";
 
 export default defineConfig({
 	site: "https://yuheiy.com",
@@ -11,6 +13,7 @@ export default defineConfig({
 		shikiConfig: {
 			theme: "css-variables",
 		},
+		remarkPlugins: [remarkInjectDescription],
 	},
 	integrations: [
 		image(),
@@ -23,3 +26,10 @@ export default defineConfig({
 		}),
 	],
 });
+
+function remarkInjectDescription() {
+	return (tree, { data }) => {
+		const firstParagraph = select("paragraph", tree);
+		data.astro.frontmatter.description = toString(firstParagraph);
+	};
+}
