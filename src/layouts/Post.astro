@@ -8,7 +8,7 @@ import { readFirstTextContent } from "../lib/read-first-text-content";
 export interface Props {
 	content: {
 		title: string;
-		published: string;
+		publishDate: string;
 		ogImageURL?: string;
 		twitterCard?: "summary" | "summary_large_image";
 	};
@@ -16,7 +16,7 @@ export interface Props {
 }
 
 const {
-	content: { title, published, ogImageURL, twitterCard },
+	content: { title, publishDate, ogImageURL, twitterCard },
 	compiledContent,
 } = Astro.props as Props;
 
@@ -33,8 +33,8 @@ const description = readFirstTextContent(compiledContent());
 	<article class="space-y-16">
 		<PageTitle Component="header" title={title}>
 			<p class="text-sm text-dynamic-muted">
-				<time datetime={dayjs(published).tz().toISOString()}>
-					{dayjs(published).tz().format("LL")}
+				<time datetime={dayjs(publishDate).tz().toISOString()}>
+					{dayjs(publishDate).tz().format("LL")}
 				</time>
 			</p>
 		</PageTitle>

@@ -4,10 +4,10 @@ import Layout from "../components/Layout.astro";
 import PageTitle from "../components/PageTitle.astro";
 import dayjs from "../lib/dayjs";
 
-const allPosts = await Astro.glob<{ title: string; published: string }>("./*.md");
+const allPosts = await Astro.glob<{ title: string; publishDate: string }>("./*.md");
 allPosts.sort(
 	(a, b) =>
-		dayjs(b.frontmatter.published).tz().valueOf() - dayjs(a.frontmatter.published).tz().valueOf()
+		dayjs(b.frontmatter.publishDate).tz().valueOf() - dayjs(a.frontmatter.publishDate).tz().valueOf()
 );
 
 const description =
@@ -146,8 +146,8 @@ const projects = [
 					.map((post) => ({
 						title: post.frontmatter.title,
 						url: post.url!,
-						meta: `<time datetime="${dayjs(post.frontmatter.published).tz().toISOString()}">
-							${dayjs(post.frontmatter.published).tz().format("LL")}
+						meta: `<time datetime="${dayjs(post.frontmatter.publishDate).tz().toISOString()}">
+							${dayjs(post.frontmatter.publishDate).tz().format("LL")}
 						</time>`,
 					}))
 					.slice(0, 3)}

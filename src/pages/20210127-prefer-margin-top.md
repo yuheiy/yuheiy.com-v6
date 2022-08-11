@@ -1,7 +1,7 @@
 ---
 layout: "../layouts/Post.astro"
 title: 垂直方向のマージンにはmargin-topを優先的に使う理由
-published: "2021-01-26T17:13:39.216Z"
+publishDate: "2021-01-26T17:13:39.216Z"
 ---
 
 `margin-bottom`ではなく`margin-top`を使う派である旨をツイートしたら理由を尋ねられたので、それに対する回答です。大きくは次の3つです。

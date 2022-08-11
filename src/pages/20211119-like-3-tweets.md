@@ -1,7 +1,7 @@
 ---
 layout: "../layouts/Post.astro"
 title: 3ツイするくらいの軽さでブログ書くタイプの人類になりたい
-published: "2021-11-19T21:30:00.000+09:00"
+publishDate: "2021-11-19T21:30:00.000+09:00"
 ---
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">3ツイするくらいの軽さでブログ書くタイプの人類になりたい</p>&mdash; 『Every Layout』予約受付中 / 全部入りHTML太郎 (@_yuheiy) <a href="https://twitter.com/_yuheiy/status/1461659317094924289?ref_src=twsrc%5Etfw">November 19, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

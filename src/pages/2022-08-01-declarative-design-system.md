@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/Post.astro
 title: 宣言的デザインシステム（翻訳）
-published: "2022-08-01T09:00:00.001+09:00"
+publishDate: "2022-08-01T09:00:00.001+09:00"
 ---
 
 この記事は、[Jeremy Keith](https://adactio.com/)氏による「[Declarative design systems](https://adactio.com/journal/19131)」の日本語訳です。掲載に当たって著者の許諾を得ています。
