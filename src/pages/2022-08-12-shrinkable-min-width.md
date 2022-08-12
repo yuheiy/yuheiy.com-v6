@@ -26,7 +26,7 @@ button {
 }
 ```
 
-このようにすると、`min-width`の値が`100%`を超えることを防げる。ちなみに、`max()`の代わりに`max-width: 100%`としても機能しない。
+このようにすると、`min-width`の値が`100%`を超えることを防げる。
 
 <figure>
 <p class="codepen" data-height="570" data-slug-hash="PoRdReV" data-user="yuheiy" style="height: 570px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
@@ -36,3 +36,5 @@ button {
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 </figure>
+
+ちなみに、`max()`の代わりに`max-width: 100%`としても機能しない。
