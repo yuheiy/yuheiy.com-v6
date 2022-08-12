@@ -18,7 +18,7 @@ button {
 <img src="/assets/2022-08-12-shrinkable-min-width/1.png" alt="" style="width: calc(712/2/16*1rem);">
 </figure>
 
-そこで、`min()`関数を使うと、ボタンの幅がコンテナの幅をはみ出さないようにできる。
+そこで、`max()`関数を使うと、ボタンの幅がコンテナの幅をはみ出さないようにできる。
 
 ```css
 button {
@@ -26,7 +26,7 @@ button {
 }
 ```
 
-このようにすると、`min-width`の値が`100%`を超えることを防げる。
+このようにすると、`min-width`の値が`100%`を超えることを防げる。ちなみに、`max()`の代わりに`max-width: 100%`としても機能しない。
 
 <figure>
 <p class="codepen" data-height="570" data-slug-hash="PoRdReV" data-user="yuheiy" style="height: 570px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
