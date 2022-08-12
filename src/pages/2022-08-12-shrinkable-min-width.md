@@ -12,13 +12,13 @@ button {
 }
 ```
 
-しかし、そのボタンを配置するコンテナの幅が、ボタン自体の`min-width`の値よりも狭くなってしまうこともある。すると、ボタンの幅がコンテナをはみ出してしまう。
+しかし、そのボタンを配置するコンテナの幅が、ボタン自体の`min-width`の値よりも狭くなってしまうこともある。すると、ボタンがコンテナをはみ出してしまう。
 
 <figure>
 <img src="/assets/2022-08-12-shrinkable-min-width/1.png" alt="" style="width: calc(712/2/16*1rem);">
 </figure>
 
-そこで、`max()`を使うと、ボタンの幅をコンテナに収められる。
+`max-width: 100%`を併用すれば、ボタンの幅をコンテナに収められるようにも思えるが、`min-width`の方が優先されてしまうので機能しない。そこで、`min-width`の値として`max()`を使う。
 
 ```css
 button {
@@ -36,5 +36,3 @@ button {
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 </figure>
-
-ちなみに、`max()`の代わりに`max-width: 100%`としても機能しない。
