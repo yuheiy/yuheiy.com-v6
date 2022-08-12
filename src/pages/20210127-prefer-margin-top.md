@@ -111,10 +111,14 @@ Stackレイアウトというのは[Every Layoutで紹介されているCSSの�
 
 また複数のStackレイアウトが横並びになった場合に、特定の要素の配置を下部に合わせる用法もある。
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Card Grid by Stack Layouts" src="https://codepen.io/yuheiy/embed/oNzKZOr?height=500&theme-id=light&default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href='https://codepen.io/yuheiy/pen/oNzKZOr'>Card Grid by Stack Layouts</a> by Yuhei Yasuda
-  (<a href='https://codepen.io/yuheiy'>@yuheiy</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+<figure>
+<p class="codepen" data-height="300" data-slug-hash="oNzKZOr" data-user="yuheiy" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/yuheiy/pen/oNzKZOr">
+  Card Grid by Stack Layouts</a> by Yuhei Yasuda (<a href="https://codepen.io/yuheiy">@yuheiy</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+</figure>
 
 末尾の要素の前に`margin-bottom: auto`を指定すると、要素の高さに関わらず次に来る要素が下部に揃うようになる。
 

@@ -61,10 +61,6 @@ iframe {
 	max-width: 100%;
 }
 
-:not(.cp_embed_wrapper) > iframe {
-	height: auto;
-}
-
 [id] {
 	scroll-margin-top: theme(spacing.4);
 }
