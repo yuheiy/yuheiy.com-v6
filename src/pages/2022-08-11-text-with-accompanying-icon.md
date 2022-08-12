@@ -63,7 +63,7 @@ publishDate: "2022-08-11T20:25:00.000+09:00"
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-注意点としては、テキスト要素とアイコン要素の間にソース上でホワイトスペースが入らないようにすることだ。ホワイトスペースの分の幅ができると、アイコンのために確保した空間をはみ出してしまうため、改行方法が正しく制御されなくなる。
+注意点としては、テキスト要素とアイコン要素の間にソースコード上でホワイトスペースが入らないようにすることだ。ホワイトスペースの分の幅ができると、アイコンのために確保した空間をはみ出してしまうため、改行方法が正しく制御されなくなる。
 
 ## 後日追記
 
@@ -76,3 +76,7 @@ publishDate: "2022-08-11T20:25:00.000+09:00"
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">パディング領域よりアイコンの大きさが小さいと、まれに右下のようにアイコンが飛び出すっぽかった（ラベルの最後の文字に依存しそう） <a href="https://t.co/eT03xm8Eq0">pic.twitter.com/eT03xm8Eq0</a></p>&mdash; ながしまきょう (@hail2u_) <a href="https://twitter.com/hail2u_/status/1557858922454974464?ref_src=twsrc%5Etfw">August 11, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 これは直し方がわからなかった……。
+
+---
+
+アイコンのために`svg`要素やあるいは擬似要素を使う代わりに、テキスト要素の`background-image`を使うとより安全だけど、その場合はアイコンの高さを`1em`より大きくすることができないという制約がある。
