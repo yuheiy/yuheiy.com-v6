@@ -26,7 +26,7 @@ button {
 }
 ```
 
-このようにすると、`min-width`の値が`100%`を超えるのを防ぐことができる。
+このようにすると、`min-width`の値が`100%`を超えることを防げる。
 
 <figure>
 <p class="codepen" data-height="570" data-slug-hash="PoRdReV" data-user="yuheiy" style="height: 570px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
