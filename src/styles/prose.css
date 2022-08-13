@@ -2,8 +2,7 @@
 	@apply space-y-6;
 
 	* + :is(h2, hr, pre, figure, iframe, .twitter-tweet-rendered),
-	:is(hr, pre, figure, iframe, :is(.twitter-tweet-rendered) + script)
-		+ * {
+	:is(hr, pre, figure, iframe, :is(.twitter-tweet-rendered) + script) + * {
 		@apply !mt-10;
 	}
 
