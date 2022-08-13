@@ -1,7 +1,5 @@
 ---
 import "../styles/main.css";
-import { Image } from "@astrojs/image/components";
-import appleTouchIconImage from "../assets/apple-touch-icon.png";
 
 export interface Props {
 	title?: string;
@@ -23,7 +21,7 @@ const {
 } = Astro.props as Props;
 
 const ogImageURL = new URL(
-	(Astro.props as Props).ogImageURL || appleTouchIconImage.src,
+	(Astro.props as Props).ogImageURL || "/apple-touch-icon.png",
 	Astro.site
 );
 
@@ -59,7 +57,8 @@ const EM_SPACE = "&#x2003;";
 
 		{canonicalURL && <link rel="canonical" href={canonicalURL} />}
 		<link rel="alternate" href="/posts-feed.xml" type="application/rss+xml" />
-		<link rel="apple-touch-icon" href={appleTouchIconImage.src} />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 	</head>
 
 	<body class="text-dynamic bg-dynamic">
@@ -69,11 +68,13 @@ const EM_SPACE = "&#x2003;";
 				href={Astro.url.pathname !== "/" ? "/" : null}
 				rel="prefetch"
 			>
-				<Image
+				<img
 					class="box-content w-7 border dark:border-0 rounded-full"
-					src={appleTouchIconImage}
+					src="/favicon.svg"
+					width="48"
+					height="48"
 					alt=""
-					loading={null}
+					decoding="async"
 				/>
 				{siteTitle}
 			</a>
