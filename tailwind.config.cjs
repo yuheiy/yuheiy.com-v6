@@ -136,6 +136,12 @@ module.exports = {
 			normal: "1.8",
 		},
 		extend: {
+			ringColor: {
+				DEFAULT: "rgb(var(--dynamic-color-ringColor-DEFAULT))",
+			},
+			ringOpacity: {
+				DEFAULT: 1,
+			},
 			borderColor: {
 				DEFAULT: "rgb(var(--dynamic-color-borderColor-DEFAULT) / <alpha-value>)",
 			},
@@ -157,6 +163,9 @@ module.exports = {
 				borderColor: {
 					DEFAULT: colors.gray["200"],
 				},
+				ringColor: {
+					DEFAULT: colors.gray["200"],
+				},
 				textColor: {
 					DEFAULT: colors.gray["800"],
 					muted: colors.gray["500"],
@@ -171,6 +180,9 @@ module.exports = {
 					variant: colors.neutral["800"],
 				},
 				borderColor: {
+					DEFAULT: colors.neutral["700"],
+				},
+				ringColor: {
 					DEFAULT: colors.neutral["700"],
 				},
 				textColor: {

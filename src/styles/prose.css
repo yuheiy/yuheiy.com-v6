@@ -69,6 +69,6 @@
 	}
 
 	img {
-		@apply bg-white;
+		@apply ring-1;
 	}
 }

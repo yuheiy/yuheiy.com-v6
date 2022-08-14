@@ -8,12 +8,12 @@ ogImageURL: /assets/2022-08-13-change-the-icon/after.png
 僕のプロフィール画像、通称ギザギザを新しく作り直した。SVG化したいなと長らく思っていたけど、そのまま機械的に変換するのもつまらないし、せっかくなのでとマイナーチェンジを施した。
 
 <figure>
-<img class="box-content border dark:border-0" src="/assets/2022-08-13-change-the-icon/before.png" alt="" style="width: 16rem;">
+<img src="/assets/2022-08-13-change-the-icon/before.png" alt="" style="width: 16rem;">
 <figcaption>これまでのプロフィール画像</figcaption>
 </figure>
 
 <figure>
-<img class="box-content border dark:border-0" src="/assets/2022-08-13-change-the-icon/after.png" alt="" style="width: 16rem;">
+<img src="/assets/2022-08-13-change-the-icon/after.png" alt="" style="width: 16rem;">
 <figcaption>新しいプロフィール画像</figcaption>
 </figure>
 
