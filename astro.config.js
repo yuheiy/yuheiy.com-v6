@@ -21,7 +21,7 @@ export default defineConfig({
 	},
 	integrations: [
 		prefetch({
-			selector: "a:any-link",
+			selector: "a:any-link:not([type='application/rss+xml'])",
 		}),
 		sitemap(),
 		tailwind({
