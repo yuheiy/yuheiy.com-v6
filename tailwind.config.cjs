@@ -57,7 +57,7 @@ function generateTheme(settings) {
 			const variableName = `--dynamic-${path.join("-")}`;
 			set(
 				theme,
-				toSpliced(path, 1, 0, "dynamic").join("."),
+				[path[0], "dynamic", ...path.slice(1)].join("."),
 				`rgb(var(${variableName}) / <alpha-value>)`
 			);
 			return;
@@ -67,13 +67,6 @@ function generateTheme(settings) {
 			walk(value, [...path, key]);
 		}
 	}
-}
-
-// https://github.com/tc39/proposal-change-array-by-copy
-function toSpliced(array, start, deleteCount, ...values) {
-	array = Array.from(array);
-	array.splice(start, deleteCount, ...values);
-	return array;
 }
 
 const container = plugin(function ({ addBase, addComponents }) {
