@@ -18,7 +18,7 @@ button {
 <img src="/assets/2022-08-12-shrinkable-min-width/1.png" alt="" style="width: calc(840/2/16*1rem);">
 </figure>
 
-`max-width: 100%`を併用すれば、ボタンの幅をコンテナに収められるようにも思えるが、`min-width`の方が優先されてしまうので機能しない。そこで、`min-width`の値として`max()`を使う。
+ボタンの幅をコンテナに収めるためには`max-width: 100%`が使えそうにも思えるが、`min-width`の方が優先されてしまうので機能しない。そこで、`min-width`の値として`max()`を使うようにする。
 
 ```css
 button {
