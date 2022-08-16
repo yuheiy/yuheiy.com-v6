@@ -20,9 +20,10 @@ const dynamicTheme = plugin.withOptions(
 		};
 	},
 	function (options) {
+		const settings = extend(true, {}, options.light, options.dark);
 		return {
 			theme: {
-				extend: generateTheme(extend(true, {}, options.light, options.dark)),
+				extend: generateTheme(settings),
 			},
 		};
 	}
