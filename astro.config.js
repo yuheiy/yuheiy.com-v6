@@ -20,7 +20,9 @@ export default defineConfig({
 		rehypePlugins: [rehypeAutoImageAttributes],
 	},
 	integrations: [
-		prefetch(),
+		prefetch({
+			selector: "a:any-link",
+		}),
 		sitemap(),
 		tailwind({
 			config: {
