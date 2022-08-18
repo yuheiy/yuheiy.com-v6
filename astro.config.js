@@ -47,7 +47,7 @@ function rehypeAutoImageAttributes() {
 			document.body.innerHTML = node.value;
 
 			for (const imgEl of Array.from(document.querySelectorAll("img"))) {
-				if (!imgEl.hasAttribute("width") || !imgEl.hasAttribute("height")) {
+				if (!(imgEl.hasAttribute("width") && imgEl.hasAttribute("height"))) {
 					const { width, height } = sizeOf(path.join("public", imgEl.src));
 					imgEl.width = width;
 					imgEl.height = height;
