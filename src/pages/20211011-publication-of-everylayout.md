@@ -7,7 +7,7 @@ twitterCard: summary_large_image
 ---
 
 <figure>
-<img src="/assets/20211011-publication-of-everylayout/cover.png" alt="" style="width: 24rem;">
+<img class="w-96" src="/assets/20211011-publication-of-everylayout/cover.png" alt="">
 </figure>
 
 友人の[腹筋ローラーの力を信じろ](https://twitter.com/8845musign)さんと共に監訳を担当した書籍『[Every Layout&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論](https://www.hanmoto.com/bd/isbn/9784862465177)』が出版されます。現在、[Amazonで予約受付中](https://www.amazon.co.jp/dp/486246517X)です。当初の予定よりもかなり遅れてしまいましたが、内容はいまだ鮮やかなままに思えます。
