@@ -4,7 +4,7 @@ const colors = require("tailwindcss/colors");
 const plugin = require("tailwindcss/plugin");
 const { parseColor } = require("tailwindcss/lib/util/color");
 
-const dynamicTheme = plugin.withOptions(
+const dynamicColors = plugin.withOptions(
 	function (options) {
 		const styles = {
 			":root": {
@@ -142,7 +142,7 @@ module.exports = {
 		container: false,
 	},
 	plugins: [
-		dynamicTheme({
+		dynamicColors({
 			light: {
 				backgroundColor: {
 					DEFAULT: colors.white,
