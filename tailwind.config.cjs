@@ -130,12 +130,6 @@ module.exports = {
 			normal: "1.8",
 		},
 		extend: {
-			ringColor: {
-				DEFAULT: "rgb(var(--dynamic-ringColor-DEFAULT))",
-			},
-			ringOpacity: {
-				DEFAULT: 1,
-			},
 			borderColor: {
 				DEFAULT: "rgb(var(--dynamic-borderColor-DEFAULT) / <alpha-value>)",
 			},

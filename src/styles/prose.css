@@ -69,6 +69,6 @@
 	}
 
 	img {
-		@apply ring-1;
+		@apply ring-1 ring-dynamic;
 	}
 }
