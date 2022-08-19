@@ -37,7 +37,7 @@ function generateDeclarations(settings) {
 	function walk(object, path) {
 		const parsedColor = parseColor(object);
 		if (parsedColor) {
-			const variableName = `--dynamic-${path.join("-")}`;
+			const variableName = `--dynamicColor-${path.join("-")}`;
 			declarations[variableName] = parsedColor.color.join(" ");
 			return;
 		}
@@ -55,7 +55,7 @@ function generateTheme(settings) {
 
 	function walk(object, path) {
 		if (typeof object === "string") {
-			const variableName = `--dynamic-${path.join("-")}`;
+			const variableName = `--dynamicColor-${path.join("-")}`;
 			set(
 				theme,
 				[path[0], "dynamic", ...path.slice(1)].join("."),
@@ -131,7 +131,7 @@ module.exports = {
 		},
 		extend: {
 			borderColor: {
-				DEFAULT: "rgb(var(--dynamic-borderColor-DEFAULT) / <alpha-value>)",
+				DEFAULT: "rgb(var(--dynamicColor-borderColor-DEFAULT) / <alpha-value>)",
 			},
 			fontFamily: {
 				sans: ["sans-serif"],
