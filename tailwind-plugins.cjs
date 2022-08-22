@@ -61,7 +61,7 @@ function generateDeclarations(settings) {
 	function walk(object, path) {
 		const parsedColor = parseColor(object);
 		if (parsedColor) {
-			const variableName = `--dynamicColor-${path.join("-")}`;
+			const variableName = `--dynamic-color-${path.join("-")}`;
 			declarations[variableName] = parsedColor.color.join(" ");
 			return;
 		}
@@ -79,7 +79,7 @@ function generateTheme(settings) {
 
 	function walk(object, path) {
 		if (typeof object === "string") {
-			const variableName = `--dynamicColor-${path.join("-")}`;
+			const variableName = `--dynamic-color-${path.join("-")}`;
 			set(
 				theme,
 				[path[0], "dynamic", ...path.slice(1)].join("."),

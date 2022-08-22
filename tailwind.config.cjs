@@ -6,7 +6,7 @@ module.exports = {
 	content: ["./src/**/*.{astro,html,md,js,jsx,svelte,ts,tsx,vue}"],
 	theme: {
 		fontSize: {
-		// https://w3c.github.io/jlreq/#id343
+			// https://w3c.github.io/jlreq/#id343
 			xs: "0.75rem",
 			sm: "0.875rem",
 			base: "1rem",
@@ -24,7 +24,7 @@ module.exports = {
 		},
 		extend: {
 			borderColor: {
-				DEFAULT: "rgb(var(--dynamicColor-borderColor-DEFAULT) / <alpha-value>)",
+				DEFAULT: "rgb(var(--dynamic-color-borderColor-DEFAULT) / <alpha-value>)",
 			},
 			fontFamily: {
 				sans: ["sans-serif"],
