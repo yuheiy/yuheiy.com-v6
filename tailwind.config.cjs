@@ -5,8 +5,8 @@ const { container, dynamicColors, kerning } = require("./tailwind-plugins.cjs");
 module.exports = {
 	content: ["./src/**/*.{astro,html,md,js,jsx,svelte,ts,tsx,vue}"],
 	theme: {
-		// https://w3c.github.io/jlreq/#id343
 		fontSize: {
+		// https://w3c.github.io/jlreq/#id343
 			xs: "0.75rem",
 			sm: "0.875rem",
 			base: "1rem",
