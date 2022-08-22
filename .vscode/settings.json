@@ -18,10 +18,6 @@
 	"emmet.includeLanguages": {
 		"tailwindcss": "css"
 	},
-	/* Extensions > Tailwind CSS IntelliSense */
-	"tailwindCSS.includeLanguages": {
-		"jade": "html"
-	},
 	"tailwindCSS.emmetCompletions": true,
 	/* Extensions > CSS Language Feature > TypeScript */
 	"typescript.tsdk": "node_modules/typescript/lib"

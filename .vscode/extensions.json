@@ -1,10 +1,8 @@
 {
 	"recommendations": [
 		"astro-build.astro-vscode",
-		"editorconfig.editorconfig",
-		"esbenp.prettier-vscode",
 		"bradlc.vscode-tailwindcss",
-		"adrianwilczynski.alpine-js-intellisense"
-	],
-	"unwantedRecommendations": []
+		"editorconfig.editorconfig",
+		"esbenp.prettier-vscode"
+	]
 }
