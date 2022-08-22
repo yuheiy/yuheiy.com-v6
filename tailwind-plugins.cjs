@@ -108,7 +108,7 @@ const kerning = plugin(function ({ addUtilities }) {
 });
 
 module.exports = {
-	dynamicColors,
 	container,
+	dynamicColors,
 	kerning,
 };

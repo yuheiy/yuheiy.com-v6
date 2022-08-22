@@ -1,5 +1,5 @@
 const colors = require("tailwindcss/colors");
-const { dynamicColors, container, kerning } = require("./tailwind-plugins.cjs");
+const { container, dynamicColors, kerning } = require("./tailwind-plugins.cjs");
 
 /** @type {import('tailwindcss/types').Config} */
 module.exports = {
