@@ -82,7 +82,7 @@ function generateTheme(settings) {
 			const variableName = `--dynamic-color-${path.join("-")}`;
 			set(
 				theme,
-				[path[0], "dynamic", ...path.slice(1)].join("."),
+				[path[0], "dynamic", ...path.slice(1)],
 				`rgb(var(${variableName}) / <alpha-value>)`
 			);
 			return;
