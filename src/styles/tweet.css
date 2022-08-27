@@ -1,8 +1,12 @@
 .tweet-card.tweet-card {
-	--tc-corner-radius: 12px;
-	--tc-padding: 0.75em 1em;
+	--tc-corner-radius: 0.75rem;
+	--tc-padding: 1rem;
 
-	@apply max-w-lg border-dynamic leading-tight shadow-none;
+	@apply max-w-lg space-y-4 border-dynamic shadow-none;
+}
+
+.tweet-card.tweet-card img {
+	@apply ring-0;
 }
 
 .tweet-header.tweet-header {
@@ -10,19 +14,19 @@
 }
 
 .tweet-profile.tweet-profile img {
-	@apply w-10;
+	@apply w-10 ring-1;
 }
 
 .tweet-author-name.tweet-author-name {
-	@apply w-fit text-sm;
+	@apply w-fit text-sm leading-tight;
 }
 
 .tweet-author-handle.tweet-author-handle {
-	@apply w-fit text-xs text-dynamic-muted kerning;
+	@apply w-fit text-xs leading-tight text-dynamic-muted kerning;
 }
 
 .tweet-link.tweet-link {
-	@apply rounded-lg bg-[#1DA1F2] px-3 py-1 text-sm text-white no-underline kerning;
+	@apply rounded-lg bg-[#1DA1F2] px-3 py-1 text-sm leading-tight text-white no-underline kerning;
 }
 
 .tweet-link.tweet-link::after {

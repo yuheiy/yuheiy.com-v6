@@ -97,7 +97,7 @@ function generateTheme(settings) {
 const kerning = plugin(function ({ addUtilities }) {
 	addUtilities({
 		".kerning": {
-			fontKerning: "auto",
+			fontKerning: "normal",
 			fontFeatureSettings: "'palt'",
 		},
 		".not-kerning": {
