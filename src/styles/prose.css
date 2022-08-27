@@ -1,8 +1,9 @@
 .prose {
 	@apply space-y-6;
 
-	> * + :is(h2, hr, pre, figure, .tweet-card, lite-youtube),
-	> :is(hr, pre, figure, .tweet-card, lite-youtube + script) + * {
+	> * + :is(h2, hr, pre, figure, .codepen, .cp_embed_wrapper, .tweet-card, lite-youtube),
+	> :is(hr, pre, figure, .codepen, .cp_embed_wrapper + script, .tweet-card, lite-youtube + script)
+		+ * {
 		@apply !mt-10;
 	}
 
