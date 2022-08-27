@@ -1,5 +1,6 @@
 import path from "node:path";
 import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
@@ -20,6 +21,7 @@ export default defineConfig({
 		rehypePlugins: [rehypeAutoImageAttributes],
 	},
 	integrations: [
+		mdx(),
 		prefetch({
 			selector: "a:any-link:not([type='application/rss+xml'])",
 		}),

@@ -7,7 +7,7 @@ publishDate: "2022-01-24T01:35:00.000+09:00"
 少し前に担当したウェブサイト制作の案件で、[Utopia](https://utopia.fyi/)というツールを使ってみた。Utopiaを使うと、ビューポートの幅に応じて流動的に変化するフォントサイズとスペーシングの値のセットを生成できる。
 
 <figure>
-<img src="/assets/2022-01-24-retrospective-on-utopia/fluid-type-scale-visualisation.png" alt="H1、H2、H3、H4、Pという要素の値が、320pxから1500pxというビューポート幅において流動的に増大する">
+<img src="/assets/2022-01-24-retrospective-on-utopia/fluid-type-scale-visualisation.png" alt="H1、H2、H3、H4、Pという要素の値が、320pxから1500pxというビューポート幅において流動的に増大する" />
 <figcaption>&mdash;&mdash;<a href="https://utopia.fyi/blog/designing-with-fluid-type-scales">Designing with fluid type scales | Utopia</a></figcaption>
 </figure>
 
@@ -18,7 +18,7 @@ publishDate: "2022-01-24T01:35:00.000+09:00"
 CSSにおいては、特定のステップ数をフォントサイズの値として設定しさえすれば、それだけで自動的にちょうどいいサイズが適用されるようになる。そういう実装にする。結果、ブレイクポイントごとにフォントサイズを設定し直す必要がなくなる。
 
 <figure>
-<img src="/assets/2022-01-24-retrospective-on-utopia/the-result.png" alt="320pxと1500pxにおけるタイプスケールの係数さえ設定すれば、中間に当たる1024pxなどの幅では自動的にサイズが算出される">
+<img src="/assets/2022-01-24-retrospective-on-utopia/the-result.png" alt="320pxと1500pxにおけるタイプスケールの係数さえ設定すれば、中間に当たる1024pxなどの幅では自動的にサイズが算出される" />
 <figcaption>&mdash;&mdash;<a href="https://utopia.fyi/blog/designing-with-fluid-type-scales">Designing with fluid type scales | Utopia</a></figcaption>
 </figure>
 
@@ -37,14 +37,14 @@ CSSにおいては、特定のステップ数をフォントサイズの値と�
 こういう具合でUtopiaに入力すると、次のように値が出力される。
 
 <figure>
-<img src="/assets/2022-01-24-retrospective-on-utopia/calculated-font-sizes.png" alt="スケールのステップが5、4、3、2、1、0、-1、-2と用意されており、ビューポート幅が320pxのときと1140pxのときのフォントサイズが並んでいる">
+<img src="/assets/2022-01-24-retrospective-on-utopia/calculated-font-sizes.png" alt="スケールのステップが5、4、3、2、1、0、-1、-2と用意されており、ビューポート幅が320pxのときと1140pxのときのフォントサイズが並んでいる" />
 <figcaption>&mdash;&mdash;<a href="https://utopia.fyi/type/calculator/">Fluid type scale calculator | Utopia</a></figcaption>
 </figure>
 
 フォントサイズだけでなく、似たロジックを使ってスペーシングの値のセットを生成する仕組みも備わっている。これらの値は、マージンや要素のサイズ設定などのために使用できる。
 
 <figure>
-<img src="/assets/2022-01-24-retrospective-on-utopia/individual-space-values.png" alt="3XS、2XS、XS、S、M、L、XL、2XL、3XLというステップごとに、最小値と最大値が並んでいる">
+<img src="/assets/2022-01-24-retrospective-on-utopia/individual-space-values.png" alt="3XS、2XS、XS、S、M、L、XL、2XL、3XLというステップごとに、最小値と最大値が並んでいる" />
 <figcaption>&mdash;&mdash;<a href="https://utopia.fyi/space/calculator/">Fluid Space Calculator | Utopia</a></figcaption>
 </figure>
 
@@ -73,7 +73,7 @@ CSSにおいては、特定のステップ数をフォントサイズの値と�
 加えて、モジュラースケールはやはり使い勝手がよくなかった。[「音楽、数学、タイポグラフィ」で指摘された](https://standard.shiftbrain.com/blog/music-math-typography)ように、モジュラースケールでは導出される値の間隔はまばらになるが、より使用頻度が高いのは本文のフォントサイズ周辺の値だ。本文を中心としたデザインであればあるほど、そこからの差異を表現するために必要なギャップは少しでよくなる。それなのに、ステップ同士の間隔が空きすぎているとその辺りの調整がやりづらいことになる。
 
 <figure>
-<img src="/assets/2022-01-24-retrospective-on-utopia/scales.png" alt="調和数列にもとづくスケールでは、導出されるフォントサイズは16px近辺に集中しているが、等比数列にもとづくスケールでは、比較的均等にばらけている">
+<img src="/assets/2022-01-24-retrospective-on-utopia/scales.png" alt="調和数列にもとづくスケールでは、導出されるフォントサイズは16px近辺に集中しているが、等比数列にもとづくスケールでは、比較的均等にばらけている" />
 <figcaption>&mdash;&mdash;<a href="https://standard.shiftbrain.com/blog/music-math-typography">音楽、数学、タイポグラフィ - シフトブレイン／スタンダードデザインユニット</a></figcaption>
 </figure>
 
@@ -86,14 +86,14 @@ CSSにおいては、特定のステップ数をフォントサイズの値と�
 たとえば「ヘッドライン」というパターンを作って、モバイルの幅では40px、デスクトップの幅では48pxというルールを定めておく。同様に、「ボディ」や「キャプション」なども追加した上で、テキストのスタイルは必ずこれらを参照して決定されるということにすればよい。
 
 <figure>
-<img src="/assets/2022-01-24-retrospective-on-utopia/adaptive-type-scale.png" alt="タイプスケールの値がデバイス間で自動的に変化するようになっている">
+<img src="/assets/2022-01-24-retrospective-on-utopia/adaptive-type-scale.png" alt="タイプスケールの値がデバイス間で自動的に変化するようになっている" />
 <figcaption>&mdash;&mdash;<a href="https://m3.material.io/styles/typography/overview">Typography – Material Design 3</a></figcaption>
 </figure>
 
 これらのパターンのなかに、行の高さやトラッキングなどもいっしょに含めておくと、さらにルールの一貫性を高めることができるし、開発も楽になる。いま担当している案件では、デザイナーがページの制作を進める傍らで、こうしたタイプスケールも定義してもらっている。
 
 <figure>
-<img src="/assets/2022-01-24-retrospective-on-utopia/type-scale.png" alt="H1、H2、Subtitle、Body、Captionのようなカテゴリごとに、Typeface、Weight、Size、Case、Letter spacingの値が設定されている">
+<img src="/assets/2022-01-24-retrospective-on-utopia/type-scale.png" alt="H1、H2、Subtitle、Body、Captionのようなカテゴリごとに、Typeface、Weight、Size、Case、Letter spacingの値が設定されている" />
 <figcaption>&mdash;&mdash;<a href="https://material.io/design/typography/the-type-system.html#type-scale">The type system - Material Design</a></figcaption>
 </figure>
 

@@ -1,7 +1,7 @@
 import rss from "@astrojs/rss";
 import dayjs from "../lib/dayjs";
 
-const postImportResult = import.meta.glob("./*.md", { eager: true });
+const postImportResult = import.meta.glob("./*.mdx", { eager: true });
 const posts = Object.values(postImportResult);
 posts.sort(
 	(a, b) =>

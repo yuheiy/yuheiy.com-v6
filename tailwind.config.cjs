@@ -3,7 +3,7 @@ const { container, dynamicColors, kerning } = require("./tailwind-plugins.cjs");
 
 /** @type {import('tailwindcss/types').Config} */
 module.exports = {
-	content: ["./src/**/*.{astro,html,md,js,jsx,svelte,ts,tsx,vue}"],
+	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 	theme: {
 		fontSize: {
 			// https://w3c.github.io/jlreq/#id343

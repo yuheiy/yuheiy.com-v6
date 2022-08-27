@@ -8,51 +8,51 @@ publishDate: "2022-08-01T09:00:00.001+09:00"
 
 ---
 
-<!-- When I wrote about the idea of [declarative design](https://adactio.com/journal/18982) it really resonated with a lot of people. -->
+{/* When I wrote about the idea of [declarative design](https://adactio.com/journal/18982) it really resonated with a lot of people. */}
 
 「[宣言的デザイン](https://adactio.com/journal/18982)」（[日本語訳](/2022-08-01-declarative-design)）という考え方について書いたことで、多くの人々から確かな共感が得られました。
 
-<!-- I think that there’s a general feeling of frustration with the imperative approach to designing and developing—attempting to specify everything exactly up front. It just doesn’t scale. As Jason put it, [the traditional web design process is fundamentally broken](https://cloudfour.com/thinks/traditional-web-design-process-is-fundamentally-broken/): -->
+{/* I think that there’s a general feeling of frustration with the imperative approach to designing and developing—attempting to specify everything exactly up front. It just doesn’t scale. As Jason put it, [the traditional web design process is fundamentally broken](https://cloudfour.com/thinks/traditional-web-design-process-is-fundamentally-broken/): */}
 
 一般的な感覚として、デザインや開発において命令的アプローチを取ると、つまり、あらゆることを精緻かつ直接的に指定しようとすると、歯痒い思いをするものなのだと思います。要するに、それはスケールしないのです。Jasonの言葉を借りれば、[従来のウェブデザインのプロセスは根本的に破綻している](https://cloudfour.com/thinks/traditional-web-design-process-is-fundamentally-broken/)ということです——
 
-<!-- > This is the worst of all worlds—a waterfall process creating dozens of artifacts, none of which accurately capture how the design will look and behave in the browser. -->
+{/* > This is the worst of all worlds—a waterfall process creating dozens of artifacts, none of which accurately capture how the design will look and behave in the browser. */}
 
 > これは最悪の事態です。ウォーターフォール型のプロセスによって何十もの成果物が作成されますが、デザインがブラウザでどのように見えて、どのように動作するのかについては、そのうちのどれも正確に捉えることができていないのです。
 
-<!-- In theory, design systems could help overcome this problem; spend a lot of time up front getting a component to be correct and then it can be deployed quickly in all sorts of situations. But the word “correct” is doing a lot of work there. -->
+{/* In theory, design systems could help overcome this problem; spend a lot of time up front getting a component to be correct and then it can be deployed quickly in all sorts of situations. But the word “correct” is doing a lot of work there. */}
 
 理論的には、この問題を打開するためにデザインシステムが役立つかもしれません。あらかじめ時間をかけてコンポーネントを正しいものにしておけば、あらゆる状況においてすばやく展開することができます。しかしこの場合、「正しい」という言葉には解釈の余地があります。
 
-<!-- If you’re approaching a design system with an imperative mindset then “correct” means “exact.” With this approach, precision is seen as valuable: precise spacing, precise numbers, precise pixels. -->
+{/* If you’re approaching a design system with an imperative mindset then “correct” means “exact.” With this approach, precision is seen as valuable: precise spacing, precise numbers, precise pixels. */}
 
 命令型の考え方でデザインシステムに取り組むと、「正しい」は「精緻」という意味になります。このアプローチでは、精緻なスペーシングに精緻な数値、精緻なピクセルなど、精緻であることに価値が置かれます。
 
-<!-- But if you’re approaching a design system with a declarative mindset, then “correct” means “resilient.” With this approach, flexibility is seen as valuable: flexible spacing, flexible ranges, flexible outputs. -->
+{/* But if you’re approaching a design system with a declarative mindset, then “correct” means “resilient.” With this approach, flexibility is seen as valuable: flexible spacing, flexible ranges, flexible outputs. */}
 
 宣言型の考え方でデザインシステムに取り組むと、「正しい」は「弾力的」であることを意味します。このアプローチでは、柔軟なスペーシングに柔軟なレンジ、柔軟な出力など、柔軟性に価値が置かれます。
 
-<!-- These are two fundamentally different design approaches and yet the results of both would be described as a design system. The term “design system” is tricky enough to define as it is. This is one more layer of potential misunderstanding: one person says “design system” and means a collection of very precise, controlled, and exact components; another person says “design system” and means a predefined set of boundary conditions that can be used to generate components. -->
+{/* These are two fundamentally different design approaches and yet the results of both would be described as a design system. The term “design system” is tricky enough to define as it is. This is one more layer of potential misunderstanding: one person says “design system” and means a collection of very precise, controlled, and exact components; another person says “design system” and means a predefined set of boundary conditions that can be used to generate components. */}
 
 これら二つは根本的に異なるデザインアプローチですが、いずれの成果もデザインシステムだと言い表されるでしょう。実際のところ、「デザインシステム」は定義することが難しい用語です。ある人が「デザインシステム」と言うと、非常に精緻に統制されたコンポーネントのコレクションを意味し、別の人が「デザインシステム」と言うと、コンポーネントを生成するためにあらかじめ用意された境界条件の集合を意味するのです。
 
-<!-- Personally, I think the word “system” is the important part of a design system. But all too often design systems are really _collections_ rather than systems: a collection of pre-generated components rather than a _system_ for generating components. -->
+{/* Personally, I think the word “system” is the important part of a design system. But all too often design systems are really _collections_ rather than systems: a collection of pre-generated components rather than a _system_ for generating components. */}
 
 個人的には、その「システム」という言葉こそがデザインシステムにとって重要な部分だと考えています。しかし多くの場合、デザインシステムはシステムというより*コレクション*です。コンポーネントを生成するための*システム*ではなく、あらかじめ生成されたコンポーネントのコレクションなのです。
 
-<!-- The systematic approach is at the heart of declarative design; setting up the rules and ratios in advance but leaving the detail of the final implementation to the browser at runtime. -->
+{/* The systematic approach is at the heart of declarative design; setting up the rules and ratios in advance but leaving the detail of the final implementation to the browser at runtime. */}
 
 宣言的デザインの核心は、システム的なアプローチです。事前にルールと比率を設定し、最終的な実装の詳細はブラウザの実行時に委ねます。
 
-<!-- Let me give an example of what I think is a declarative approach to a component. I’ll use the “hello world” of design system components—the humble button. -->
+{/* Let me give an example of what I think is a declarative approach to a component. I’ll use the “hello world” of design system components—the humble button. */}
 
 宣言的アプローチのコンポーネントとして、私が考える例を挙げてみましょう。デザインシステムのコンポーネントにおける「Hello World」とも言える、よくあるボタンを用いてみます。
 
-<!-- Two years ago I wrote about [programming CSS to perform Sass colour functions](https://adactio.com/journal/16960). I described how CSS features like custom properties and `calc()` can be used to recreate mixins like `darken()` and `lighten()`. -->
+{/* Two years ago I wrote about [programming CSS to perform Sass colour functions](https://adactio.com/journal/16960). I described how CSS features like custom properties and `calc()` can be used to recreate mixins like `darken()` and `lighten()`. */}
 
 二年前、[Sassの色関数を代替するためのCSSプログラミング](https://adactio.com/journal/16960)について書きました。カスタムプロパティや`calc()`といったCSSの機能を使って、`darken()`や`lighten()`のようなmixinを再現する方法について説明しました。
 
-<!-- I showed some CSS for declaring the different colour elements of a button using hue, saturation and lightness encoded as custom properties. [Here’s a CodePen](https://codepen.io/adactio/pen/xxwovRZ) with some examples of different buttons. -->
+{/* I showed some CSS for declaring the different colour elements of a button using hue, saturation and lightness encoded as custom properties. [Here’s a CodePen](https://codepen.io/adactio/pen/xxwovRZ) with some examples of different buttons. */}
 
 カスタムプロパティとしてエンコードされた色相、彩度、明度を使用して、異なる色のボタンを宣言するCSSをいくつか紹介しました。これが、[さまざまなボタンの例を含むCodePen](https://codepen.io/adactio/pen/xxwovRZ)です。
 
@@ -65,19 +65,19 @@ publishDate: "2022-08-01T09:00:00.001+09:00"
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 </figure>
 
-<!-- If these buttons were in an imperative design system, then the output would be the important part. The design system would supply the code needed to make those buttons exactly. If you need a different button, it would have to be added to the design system as a variation. -->
+{/* If these buttons were in an imperative design system, then the output would be the important part. The design system would supply the code needed to make those buttons exactly. If you need a different button, it would have to be added to the design system as a variation. */}
 
 もし、これらのボタンが命令的デザインシステムの中にあるとすれば、出力が重要になるでしょう。そのデザインシステムは、これらのボタンを精緻に作成するためのコードを提供するでしょう。別のボタンを使いたければ、それがバリエーションとしてデザインシステムに追加されなければならないでしょう。
 
-<!-- But in a declarative design system, the output isn’t as important as the underlying ruleset. In this case, there are rules like: -->
+{/* But in a declarative design system, the output isn’t as important as the underlying ruleset. In this case, there are rules like: */}
 
 しかし宣言的デザインシステムにおいては、出力は基礎となるルールセットほど重要ではありません。この場合には、次のようなルールがあります。
 
-<!-- > For the hover state of a button, the lightness of its background colour should dip by 5%. -->
+{/* > For the hover state of a button, the lightness of its background colour should dip by 5%. */}
 
 > ボタンのホバー状態では、背景色の明度を5%下げる。
 
-<!-- That ends up encoded in CSS like this: -->
+{/* That ends up encoded in CSS like this: */}
 
 これはCSSで次のようにエンコードされます。
 
@@ -91,38 +91,38 @@ button:hover {
 }
 ```
 
-<!-- In this kind of design system you can look at [some examples](https://codepen.io/adactio/pen/xxwovRZ) to see the results of this rule in action. But those outputs are illustrative. They’re not the final word. If you don’t see the exact button you want, that’s okay; you’ve got the information you need to generate what you need and still stay within the pre-defined rules about, say, the hover state of buttons. -->
+{/* In this kind of design system you can look at [some examples](https://codepen.io/adactio/pen/xxwovRZ) to see the results of this rule in action. But those outputs are illustrative. They’re not the final word. If you don’t see the exact button you want, that’s okay; you’ve got the information you need to generate what you need and still stay within the pre-defined rules about, say, the hover state of buttons. */}
 
 この種のデザインシステムでは、[いくつかの例](https://codepen.io/adactio/pen/xxwovRZ)を見ればルールの実行結果を確認することができます。しかしこれらの出力は、理解を助けるためのものです。これだけで終わりではありません。もし必要なボタンがなかったとしても、それを生成するために必要な情報は提供されていますし、そうすると、たとえばボタンのホバー状態などについても、あらかじめ定義されたルールの範囲内に収まります。
 
-<!-- This seems like a more scalable approach to me. It also seems more empowering. -->
+{/* This seems like a more scalable approach to me. It also seems more empowering. */}
 
 この方がよりスケールするように思えるのです。また、より強力なアプローチだと思います。
 
-<!-- One of the hardest parts of embedding a design system within an organisation is getting people to adopt it. In my experience, nobody likes adopting something that’s being delivered from on-high as a pre-made sets of components. It’s meant to be helpful: “here, use this pre-made components to save time not reinventing the wheel”, but it can come across as overly controlling: “we don’t trust you to exercise good judgement so stick to these pre-made components.” -->
+{/* One of the hardest parts of embedding a design system within an organisation is getting people to adopt it. In my experience, nobody likes adopting something that’s being delivered from on-high as a pre-made sets of components. It’s meant to be helpful: “here, use this pre-made components to save time not reinventing the wheel”, but it can come across as overly controlling: “we don’t trust you to exercise good judgement so stick to these pre-made components.” */}
 
 デザインシステムを組織に取り入れる上での困難の一つは、人々にそれを採用してもらうことです。私の経験では、上層部から提供される出来合いのコンポーネント群を採用したいと思う人はいません。「この既成のコンポーネントを使えば、車輪の再発明をする時間を節約できるので便利ですよ」ということなのですが、一方、過度に支配的に見えてしまうこともあります。「あなた方が適切な判断を下せるとは思えないので、あらかじめ用意されたコンポーネントを使いなさい」という風に。
 
-<!-- The declarative approach is less controlling: “here are pre-defined rules and guidelines to help you make components.” But this lack of precision comes at a cost. The people using the design system need to have the mindset—and the ability—to create the components they need from the systematic rules they’ve been provided. -->
+{/* The declarative approach is less controlling: “here are pre-defined rules and guidelines to help you make components.” But this lack of precision comes at a cost. The people using the design system need to have the mindset—and the ability—to create the components they need from the systematic rules they’ve been provided. */}
 
 宣言的アプローチは、あまり支配的ではありません。「これはコンポーネントの作成に役立つルールとガイドラインです」ということです。しかし代償として、精緻さに欠けます。そしてこのデザインシステムを利用するためには、提供された体系的なルールから必要なコンポーネントを作成するための考え方と技能を習得しなければなりません。
 
-<!-- My gut feeling is that the imperative mindset is a good match for most of today’s graphic design tools like Figma or Sketch. Those tools deal with precise numbers rather than ranges and rules. -->
+{/* My gut feeling is that the imperative mindset is a good match for most of today’s graphic design tools like Figma or Sketch. Those tools deal with precise numbers rather than ranges and rules. */}
 
 私の直観では、FigmaやSketchのようなグラフィックデザインツールには命令型の考え方がよく合うと思うのです。これらのツールは、レンジやルールではなく、精緻な数値を扱います。
 
-<!-- The declarative mindset, on the other hand, increasingly feels like a good match for CSS. The language has evolved to allow rules to be set up through custom properties, `calc()`, `clamp()`, `minmax()`, and so on. -->
+{/* The declarative mindset, on the other hand, increasingly feels like a good match for CSS. The language has evolved to allow rules to be set up through custom properties, `calc()`, `clamp()`, `minmax()`, and so on. */}
 
 一方で宣言型の考え方は、ますますCSSにぴったりだと感じるようになってきました。この言語は、カスタムプロパティ、`calc()`、`clamp()`、`minmax()`などを通してルールを設定できるように進化してきました。
 
-<!-- So, as always, there isn’t a right or wrong approach here. It all comes down to what’s most suitable for your organisation. -->
+{/* So, as always, there isn’t a right or wrong approach here. It all comes down to what’s most suitable for your organisation. */}
 
 したがって言うまでもなく、このアプローチに正しいも間違いもないのです。けっきょくのところ、なにがあなたの組織にとって最も適しているかということになります。
 
-<!-- If your designers and developers have an imperative mindset and Figma files are considered the source of truth, than they would be better served by an imperative design system. -->
+{/* If your designers and developers have an imperative mindset and Figma files are considered the source of truth, than they would be better served by an imperative design system. */}
 
 もしデザイナーや開発者が命令型の考え方を持っていて、FigmaファイルがSource of Truthと考えられているなら、命令的デザインシステムの方が適しているでしょう。
 
-<!-- But if you’re lucky enough to have a team of [design engineers](https://adactio.com/journal/17838) that think in terms of HTML and CSS, then a declarative design system will be a force multiplier. A bicycle for the design engineering mind. -->
+{/* But if you’re lucky enough to have a team of [design engineers](https://adactio.com/journal/17838) that think in terms of HTML and CSS, then a declarative design system will be a force multiplier. A bicycle for the design engineering mind. */}
 
 しかし幸運にも、HTMLとCSSの観点から考える[デザインエンジニア](https://adactio.com/journal/17838)のチームがあるとすれば、宣言的デザインシステムは力を発揮するでしょう。デザインエンジニアリングマインドのための自転車になります。
