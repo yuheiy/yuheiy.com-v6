@@ -12,7 +12,7 @@
 		"@astrojs/sitemap": "^1.0.0",
 		"@astrojs/tailwind": "^1.0.0",
 		"@wordpress/browserslist-config": "^5.0.0",
-		"astro": "^1.0.8",
+		"astro": "^1.1.1",
 		"budoux": "^0.2.0",
 		"dayjs": "^1.11.5",
 		"happy-dom": "^6.0.4",
