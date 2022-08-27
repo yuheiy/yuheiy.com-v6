@@ -4,10 +4,16 @@ title: テキストの行の末尾に付随するアイコンをアイコンだ�
 publishDate: "2022-08-11T20:25:00.000+09:00"
 ---
 
+import { Image } from '@astrojs/image/components';
+
 テキストの行の末尾にアイコンを付随させるというレイアウトがある。
 
 <figure>
-<img src="/assets/2022-08-11-text-with-accompanying-icon/1.png" alt="" style="width: calc(716/2/16*1rem);" />
+	<Image
+		src={import('../assets/2022-08-11-text-with-accompanying-icon/1.png')}
+		alt=""
+		style="width: calc(716/2/16*1rem);"
+	/>
 </figure>
 
 これは、インライン整形コンテキストにおいてテキストとアイコンを並べて配置することで実現できる。
@@ -19,7 +25,11 @@ publishDate: "2022-08-11T20:25:00.000+09:00"
 しかし、その空間の大きさやテキストの分量によっては、末尾のアイコンだけが改行してしまって不恰好に見えることがある。
 
 <figure>
-<img src="/assets/2022-08-11-text-with-accompanying-icon/2.png" alt="" style="width: calc(780/2/16*1rem);" />
+	<Image
+		src={import('../assets/2022-08-11-text-with-accompanying-icon/2.png')}
+		alt=""
+		style="width: calc(780/2/16*1rem);"
+	/>
 </figure>
 
 そうした場合には、テキスト要素のパディングとアイコン要素のネガティブマージンを組み合わせることで対処できる。次のようにすると、アイコンだけが単独で改行されることがなく、常にテキストを伴って改行されるようになる。
@@ -48,10 +58,12 @@ publishDate: "2022-08-11T20:25:00.000+09:00"
 }
 ```
 
+import _3Video from '../assets/2022-08-11-text-with-accompanying-icon/3.mp4';
+
 <figure>
-<video controls playsinline style="width: calc(1560/2/16*1rem);">
-<source src="/assets/2022-08-11-text-with-accompanying-icon/3.mp4" />
-</video>
+	<video controls playsinline style="width: calc(1560/2/16*1rem);">
+		<source src={_3Video} />
+	</video>
 </figure>
 
 まずテキスト要素の`padding-right`によって、アイコンとその間の余白を加えた分の空間が末尾に確保されるようになる。そしてその空間を埋めるように、アイコン要素の位置を`margin-left`のネガティブ値で移動させる。それによって、アイコンが必ずテキストの末尾に隣り合って配置されるようになる。

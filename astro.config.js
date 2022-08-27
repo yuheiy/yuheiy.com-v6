@@ -1,11 +1,9 @@
-import path from "node:path";
 import { defineConfig } from "astro/config";
+import image from "@astrojs/image";
 import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-import { Window } from "happy-dom";
-import sizeOf from "image-size";
 import { toString } from "mdast-util-to-string";
 import { select } from "unist-util-select";
 import { visit } from "unist-util-visit";
@@ -17,11 +15,17 @@ export default defineConfig({
 		shikiConfig: {
 			theme: "css-variables",
 		},
-		remarkPlugins: [remarkInjectDescription],
-		rehypePlugins: [rehypeAutoImageAttributes],
 	},
 	integrations: [
-		mdx(),
+		image(),
+		mdx({
+			remarkPlugins: {
+				extends: [remarkInjectDescription],
+			},
+			rehypePlugins: {
+				extends: [rehypeImageAttributesOverride],
+			},
+		}),
 		prefetch({
 			selector: "a:any-link:not([type='application/rss+xml'])",
 		}),
@@ -41,26 +45,27 @@ function remarkInjectDescription() {
 	};
 }
 
-function rehypeAutoImageAttributes() {
-	const { document } = new Window();
-
+function rehypeImageAttributesOverride() {
 	return (tree) => {
-		visit(tree, "raw", (node) => {
-			document.body.innerHTML = node.value;
+		visit(
+			tree,
+			{
+				type: "mdxJsxFlowElement",
+				name: "Image",
+			},
+			(node) => {
+				const isLoadingAttributeSet = Boolean(
+					node.attributes.find(({ name }) => name === "loading")
+				);
 
-			for (const imgEl of Array.from(document.querySelectorAll("img"))) {
-				if (!(imgEl.hasAttribute("width") && imgEl.hasAttribute("height"))) {
-					const { width, height } = sizeOf(path.join("public", imgEl.src));
-					imgEl.width = width;
-					imgEl.height = height;
-				}
-
-				if (!imgEl.hasAttribute("decoding")) {
-					imgEl.setAttribute("decoding", "async");
+				if (!isLoadingAttributeSet) {
+					node.attributes.push({
+						type: "mdxJsxAttribute",
+						name: "loading",
+						value: "eager",
+					});
 				}
 			}
-
-			node.value = document.body.innerHTML;
-		});
+		);
 	};
 }
