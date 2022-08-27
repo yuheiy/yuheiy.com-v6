@@ -4,9 +4,11 @@ title: Re&#58; &#35;deisui_html_radio &#35;52
 publishDate: "2022-06-15T13:24:00.000+09:00"
 ---
 
+import { YouTube } from 'astro-embed';
+
 これについて超絶走り書きで簡単に返すのでお許しください。
 
-<iframe class="aspect-video" width="560" height="315" src="https://www.youtube.com/embed/DxoANgf4Oto?start=449" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<YouTube id="https://youtu.be/DxoANgf4Oto" params="start=449" />
 
 僕が言いたかったのは、figmaで言うと、figma用のコンポーネント機能があるじゃないですか。デザインしていて普通コンポーネントだと考えるのはそれだと思うんですよ。たとえばあるページに、中央揃えになったボタンがあるとして、コンポーネントと言えるのはそのボタンそのものだけで、どうやって中央配置にするかということは蚊帳の外というか、コンポーネントとはまた別の観点になる。多くの場合、そこにはコンポーネントのように明文化されたルール、制約はなくて、なんでもありになる。遊びがあるという状態。けど、実質的に、セオリーからすると、だいたいこうレイアウトするよねっていう暗黙のルールがある。でもこれは必ずしも確かなものではなくて、ケースバイケースに判断を変えることが許されている。そういう意味で、偶然そうなっているだけでしかない、ということが言えると思います。そこで、css設計ではその遊びをどう解釈するかという問題がある。
 

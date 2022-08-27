@@ -36,6 +36,11 @@ export default defineConfig({
 			},
 		}),
 	],
+	vite: {
+		ssr: {
+			noExternal: ["@astro-community/astro-embed-twitter", "@astro-community/astro-embed-youtube"],
+		},
+	},
 });
 
 function remarkInjectDescription() {

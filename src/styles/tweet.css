@@ -1,0 +1,34 @@
+.tweet-card.tweet-card {
+	--tc-corner-radius: 12px;
+	--tc-padding: 0.75rem 1rem;
+
+	@apply max-w-lg border-dynamic leading-tight shadow-none;
+}
+
+.tweet-header.tweet-header {
+	@apply flex gap-0;
+}
+
+.tweet-profile.tweet-profile {
+	@apply pr-3;
+}
+
+.tweet-author.tweet-author {
+	@apply flex-1 text-sm;
+}
+
+.tweet-author-name.tweet-author-name {
+	@apply block;
+}
+
+.tweet-author-handle.tweet-author-handle {
+	@apply block text-dynamic-muted;
+}
+
+.tweet-footer.tweet-footer {
+	@apply text-sm;
+}
+
+.tweet-link.tweet-link {
+	@apply inline;
+}

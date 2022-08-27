@@ -3,6 +3,6 @@
 
 @import "tailwindcss/components";
 @import "prose";
-@import "twitter-tweet";
+@import "tweet";
 
 @import "tailwindcss/utilities";

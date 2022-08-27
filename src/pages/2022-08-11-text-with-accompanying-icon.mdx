@@ -5,6 +5,7 @@ publishDate: "2022-08-11T20:25:00.000+09:00"
 ---
 
 import { Image } from '@astrojs/image/components';
+import { Tweet } from 'astro-embed';
 
 テキストの行の末尾にアイコンを付随させるというレイアウトがある。
 
@@ -81,13 +82,16 @@ import _3Video from '../assets/2022-08-11-text-with-accompanying-icon/3.mp4';
 
 ## 後日追記
 
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Firefox でアイコンが .card--improved の padding を突き抜けちゃうのなんでだろう。<br/><br/>テキストの行の末尾に付随するアイコンをアイコンだけで改行させないようにするCSS <a href="https://t.co/29Y1SkJSDI">https://t.co/29Y1SkJSDI</a> <a href="https://t.co/CuRtPZLQ9t">pic.twitter.com/CuRtPZLQ9t</a></p>&mdash; トミー (@SaekiTominaga) <a href="https://twitter.com/SaekiTominaga/status/1557902385376563202?ref_src=twsrc%5Etfw">August 12, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<Tweet id="https://twitter.com/SaekiTominaga/status/1557902385376563202" />
 
 テキスト要素に`margin-right`を使っていたら、Firefoxでこのような問題が起こってしまった。代わりに、`padding-right`に差し替えると直った。理由はよくわからない……。
 
 ---
 
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">パディング領域よりアイコンの大きさが小さいと、まれに右下のようにアイコンが飛び出すっぽかった（ラベルの最後の文字に依存しそう） <a href="https://t.co/eT03xm8Eq0">pic.twitter.com/eT03xm8Eq0</a></p>&mdash; ながしまきょう (@hail2u_) <a href="https://twitter.com/hail2u_/status/1557858922454974464?ref_src=twsrc%5Etfw">August 11, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote>
+	<p lang="ja" dir="ltr">パディング領域よりアイコンの大きさが小さいと、まれに右下のようにアイコンが飛び出すっぽかった（ラベルの最後の文字に依存しそう） <a href="https://t.co/eT03xm8Eq0">pic.twitter.com/eT03xm8Eq0</a></p>
+	<p>&mdash; ながしまきょう (@hail2u_) <a href="https://twitter.com/hail2u_/status/1557858922454974464?ref_src=twsrc%5Etfw">August 11, 2022</a></p>
+</blockquote>
 
 これは直し方がわからなかった……。
 
