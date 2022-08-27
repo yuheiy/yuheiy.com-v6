@@ -1,34 +1,30 @@
 .tweet-card.tweet-card {
 	--tc-corner-radius: 12px;
-	--tc-padding: 0.75rem 1rem;
+	--tc-padding: 0.75em 1em;
 
 	@apply max-w-lg border-dynamic leading-tight shadow-none;
 }
 
 .tweet-header.tweet-header {
-	@apply flex gap-0;
+	@apply grid-cols-[auto_1fr];
 }
 
-.tweet-profile.tweet-profile {
-	@apply pr-3;
-}
-
-.tweet-author.tweet-author {
-	@apply flex-1 text-sm;
+.tweet-profile.tweet-profile img {
+	@apply w-10;
 }
 
 .tweet-author-name.tweet-author-name {
-	@apply block;
+	@apply w-fit text-sm;
 }
 
 .tweet-author-handle.tweet-author-handle {
-	@apply block text-dynamic-muted;
-}
-
-.tweet-footer.tweet-footer {
-	@apply text-sm;
+	@apply w-fit text-xs text-dynamic-muted kerning;
 }
 
 .tweet-link.tweet-link {
-	@apply inline;
+	@apply rounded-lg bg-[#1DA1F2] px-3 py-1 text-sm text-white no-underline kerning;
+}
+
+.tweet-link.tweet-link::after {
+	@apply content-none;
 }
