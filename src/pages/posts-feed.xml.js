@@ -15,7 +15,7 @@ export const get = () =>
 		description: "日記やウェブ開発について",
 		site: import.meta.env.SITE,
 		items: posts.map((post) => ({
-			link: post.url,
+			link: new URL(post.url, import.meta.env.SITE),
 			title: post.frontmatter.title,
 			pubDate: dayjs(post.frontmatter.publishDate).tz().toDate(),
 		})),
