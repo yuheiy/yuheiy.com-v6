@@ -25,7 +25,14 @@ const ogImageURL = new URL(
 	Astro.site
 );
 
-let canonicalURL: URL | null = new URL(Astro.url.pathname, Astro.site);
+// remove trailing slash in build time
+// https://github.com/withastro/astro/pull/4352
+let normalizedPathname = Astro.url.pathname;
+if (normalizedPathname !== "/") {
+	normalizedPathname = normalizedPathname.replace(/\/$/, "");
+}
+
+let canonicalURL: URL | null = new URL(normalizedPathname, Astro.site);
 if (is404) {
 	canonicalURL = null;
 }
