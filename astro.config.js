@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import image from "@astrojs/image";
 import mdx from "@astrojs/mdx";
-import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import { toString } from "mdast-util-to-string";
@@ -25,9 +24,6 @@ export default defineConfig({
 			rehypePlugins: {
 				extends: [rehypeImageAttributesOverride],
 			},
-		}),
-		prefetch({
-			selector: "a:any-link:not([type='application/rss+xml'])",
 		}),
 		sitemap(),
 		tailwind({
