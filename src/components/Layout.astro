@@ -43,13 +43,15 @@ const EM_SPACE = "&#x2003;";
 <html lang="ja">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, viewport-fit=cover" />
-		<meta name="color-scheme" content="light dark" />
-		<meta name="generator" content={Astro.generator} />
 
 		<title set:html={title}></title>
 
+		<meta name="color-scheme" content="light dark" />
 		{description && <meta name="description" content={description} />}
+		<meta name="generator" content={Astro.generator} />
+		<meta name="viewport" content="width=device-width, viewport-fit=cover" />
+		<meta name="twitter:card" content={twitterCard} />
+		<meta name="twitter:site" content="@_yuheiy" />
 
 		<meta property="og:title" content={title} />
 		<meta property="og:type" content={ogType} />
@@ -59,12 +61,9 @@ const EM_SPACE = "&#x2003;";
 		<meta property="og:site_name" content={siteTitle} />
 		<meta property="og:locale" content="ja_JP" />
 
-		<meta name="twitter:card" content={twitterCard} />
-		<meta name="twitter:site" content="@_yuheiy" />
-
-		{canonicalURL && <link rel="canonical" href={canonicalURL} />}
 		<link rel="alternate" href="/posts-feed.xml" type="application/rss+xml" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		{canonicalURL && <link rel="canonical" href={canonicalURL} />}
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 	</head>
 
