@@ -1,7 +1,7 @@
 const colors = require("tailwindcss/colors");
 const { container, dynamicColors, kerning } = require("./tailwind-plugins.cjs");
 
-/** @type {import('tailwindcss/types').Config} */
+/** @type {import("tailwindcss/types").Config} */
 module.exports = {
 	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 	theme: {
