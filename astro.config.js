@@ -18,12 +18,8 @@ export default defineConfig({
 	integrations: [
 		image(),
 		mdx({
-			remarkPlugins: {
-				extends: [remarkInjectDescription],
-			},
-			rehypePlugins: {
-				extends: [rehypeImageAttributesOverride],
-			},
+			remarkPlugins: [remarkInjectDescription],
+			rehypePlugins: [rehypeImageAttributesOverride],
 		}),
 		sitemap(),
 		tailwind({
