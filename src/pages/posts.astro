@@ -4,7 +4,7 @@ import Layout from "../components/Layout.astro";
 import PageTitle from "../components/PageTitle.astro";
 import dayjs from "../lib/dayjs";
 
-const title = "記事";
+const title = "ブログ";
 
 const allPosts = await Astro.glob<{ title: string; publishDate: string }>("./*.mdx");
 allPosts.sort(

@@ -11,7 +11,7 @@ posts.sort(
 
 export const get = () =>
 	rss({
-		title: "Yuhei Yasudaの記事",
+		title: "Yuhei Yasudaのブログ",
 		description: "日記やウェブ開発について",
 		site: import.meta.env.SITE,
 		items: posts.map((post) => ({
