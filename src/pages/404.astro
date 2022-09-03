@@ -5,7 +5,7 @@ import PageTitle from "../components/PageTitle.astro";
 const title = "ページが存在しません";
 
 const searchURL = new URL("https://www.google.com/search");
-searchURL.searchParams.set("q", `site:${Astro.site!.origin}`);
+searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 ---
 
 <Layout title={title} is404={true}>

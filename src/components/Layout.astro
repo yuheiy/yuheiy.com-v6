@@ -38,7 +38,7 @@ if (is404) {
 }
 
 const searchURL = new URL("https://www.google.com/search");
-searchURL.searchParams.set("q", `site:${Astro.site!.origin}`);
+searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 
 const EM_SPACE = "&#x2003;";
 ---
