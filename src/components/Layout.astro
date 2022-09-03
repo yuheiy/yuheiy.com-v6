@@ -37,6 +37,9 @@ if (is404) {
 	canonicalURL = null;
 }
 
+const searchURL = new URL("https://www.google.com/search");
+searchURL.searchParams.set("q", `site:${Astro.site!.origin}`);
+
 const EM_SPACE = "&#x2003;";
 ---
 
@@ -65,6 +68,7 @@ const EM_SPACE = "&#x2003;";
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		{canonicalURL && <link rel="canonical" href={canonicalURL} />}
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="search" href={searchURL} />
 	</head>
 
 	<body class="text-dynamic bg-dynamic">
