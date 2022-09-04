@@ -1,4 +1,5 @@
 ---
+import type { Dayjs } from "dayjs";
 import DetailsList from "../components/DetailsList.astro";
 import Layout from "../components/Layout.astro";
 import PageTitle from "../components/PageTitle.astro";
@@ -111,14 +112,15 @@ const projects = [
 ].map(({ title, link, startDate, endDate, description }) => ({
 	title,
 	link,
-	meta: [
-		`<time datetime="${startDate}">${dayjs(startDate).tz().format("YYYY年M月")}</time>`,
-		endDate && `<time datetime="${endDate}">${dayjs(endDate).tz().format("YYYY年M月")}</time>`,
-	]
+	meta: [getDateHtml(dayjs(startDate)), "&mdash;", endDate && getDateHtml(dayjs(endDate))]
 		.filter(Boolean)
-		.join("&mdash;"),
+		.join(""),
 	description,
 }));
+
+function getDateHtml(date: Dayjs) {
+	return `<time datetime="${date}">${dayjs(date).tz().format("YYYY年M月")}</time>`;
+}
 ---
 
 <Layout description={description}>
