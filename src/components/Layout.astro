@@ -36,8 +36,6 @@ if (is404) {
 
 const searchURL = new URL("https://www.google.com/search");
 searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
-
-const EM_SPACE = "&#x2003;";
 ---
 
 <html lang="ja">
@@ -92,13 +90,16 @@ const EM_SPACE = "&#x2003;";
 
 		<footer class="sticky top-full mt-16 py-8 text-sm bg-dynamic-variant">
 			<nav class="container space-y-4">
-				<p
-					set:html={`<a href="/">ホーム</a>${EM_SPACE}<a href="/posts">ブログ</a>${EM_SPACE}<a href="/posts-feed.xml" type="application/rss+xml">RSS</a>`}
-				>
+				<p>
+					<a href="/">ホーム</a>&#x2003;<a href="/posts">ブログ</a>&#x2003;<a
+						href="/posts-feed.xml"
+						type="application/rss+xml">RSS</a
+					>
 				</p>
-				<p
-					set:html={`<a href="https://twitter.com/_yuheiy">Twitter</a>${EM_SPACE}<a href="https://github.com/yuheiy">GitHub</a>${EM_SPACE}<a href="mailto:yuhei.yasuda1003@gmail.com">メール</a>`}
-				>
+				<p>
+					<a href="https://twitter.com/_yuheiy">Twitter</a>&#x2003;<a
+						href="https://github.com/yuheiy">GitHub</a
+					>&#x2003;<a href="mailto:yuhei.yasuda1003@gmail.com">メール</a>
 				</p>
 			</nav>
 		</footer>
