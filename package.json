@@ -29,7 +29,7 @@
 		"unist-util-visit": "^4.1.1"
 	},
 	"engines": {
-		"node": "16.*"
+		"node": "16"
 	},
 	"private": true
 }
