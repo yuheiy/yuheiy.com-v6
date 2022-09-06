@@ -39,7 +39,7 @@ module.exports = {
 		dynamicColors({
 			light: {
 				backgroundColor: {
-					DEFAULT: colors.white,
+					DEFAULT: colors.slate["50"],
 					variant: colors.slate["100"],
 				},
 				borderColor: {
@@ -58,21 +58,21 @@ module.exports = {
 			},
 			dark: {
 				backgroundColor: {
-					DEFAULT: colors.neutral["900"],
-					variant: colors.neutral["800"],
+					DEFAULT: colors.zinc["900"],
+					variant: colors.zinc["800"],
 				},
 				borderColor: {
-					DEFAULT: colors.neutral["700"],
+					DEFAULT: colors.zinc["700"],
 				},
 				ringColor: {
-					DEFAULT: colors.neutral["700"],
+					DEFAULT: colors.zinc["700"],
 				},
 				textColor: {
-					DEFAULT: colors.gray["50"],
-					muted: colors.gray["400"],
+					DEFAULT: colors.zinc["50"],
+					muted: colors.zinc["400"],
 				},
 				textDecorationColor: {
-					DEFAULT: colors.gray["400"],
+					DEFAULT: colors.zinc["400"],
 				},
 			},
 		}),
