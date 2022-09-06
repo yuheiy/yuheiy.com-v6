@@ -41,6 +41,7 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 <html lang="ja">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, viewport-fit=cover" />
 
 		<title set:html={title}></title>
 
@@ -50,7 +51,6 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 		<meta name="twitter:card" content={twitterCard} />
 		<meta name="twitter:site" content="@_yuheiy" />
 		<meta name="twitter:title" content={title} />
-		<meta name="viewport" content="width=device-width, viewport-fit=cover" />
 
 		<meta property="og:title" content={title} />
 		<meta property="og:type" content={ogType} />
