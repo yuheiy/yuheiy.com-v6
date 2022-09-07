@@ -114,7 +114,7 @@ const projects = [
 	link,
 	meta: [getDateHtml(dayjs(startDate)), "&mdash;", endDate && getDateHtml(dayjs(endDate))]
 		.filter(Boolean)
-		.join(""),
+		.join(" "),
 	description,
 }));
 
