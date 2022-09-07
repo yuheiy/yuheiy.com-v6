@@ -119,7 +119,7 @@ const projects = [
 }));
 
 function getDateHtml(date: Dayjs) {
-	return `<time datetime="${date}">${dayjs(date).tz().format("YYYY年M月")}</time>`;
+	return `<time datetime="${date}">${date.tz().format("YYYY年M月")}</time>`;
 }
 ---
 
