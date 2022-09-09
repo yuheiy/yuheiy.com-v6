@@ -39,7 +39,7 @@ module.exports = {
 		dynamicColors({
 			light: {
 				backgroundColor: {
-					DEFAULT: colors.slate["50"],
+					DEFAULT: colors.white,
 					variant: colors.slate["100"],
 				},
 				borderColor: {
