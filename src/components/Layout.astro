@@ -43,7 +43,7 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, viewport-fit=cover" />
 
-		<title set:html={title}></title>
+		<title set:html={title} />
 
 		<meta name="color-scheme" content="light dark" />
 		{description && <meta name="description" content={description} />}

@@ -17,7 +17,6 @@ const parser = loadDefaultJapaneseParser();
 		set:html={parser
 			.parse(title)
 			.join(`<wbr class="hidden [@container(inline-size>36rem)]:inline">`)}
-	>
-	</h1>
+	/>
 	<slot />
 </Component>

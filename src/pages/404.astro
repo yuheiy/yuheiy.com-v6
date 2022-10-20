@@ -17,8 +17,7 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 		<div class="container prose">
 			<p
 				set:html={`<a class="js-internet-archive" href="https://web.archive.org/web/*/${Astro.site}">インターネットアーカイブ</a>を参照するか、<a href="${searchURL}">サイト内を検索する</a>と見つかるかもしれません。`}
-			>
-			</p>
+			/>
 		</div>
 	</div>
 </Layout>
