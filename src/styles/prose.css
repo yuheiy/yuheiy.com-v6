@@ -26,11 +26,7 @@
 	}
 
 	hr {
-		@apply h-auto border-0 pl-[2em] text-dynamic-muted;
-	}
-
-	hr::before {
-		@apply content-["\2042\2003\2042\2003\2042"];
+		@apply max-w-[8em] border-t-4;
 	}
 
 	pre {
