@@ -35,6 +35,7 @@ module.exports = {
 		container: false,
 	},
 	plugins: [
+		require("@tailwindcss/container-queries"),
 		container,
 		dynamicColors({
 			light: {

@@ -11,12 +11,10 @@ const { Component = "div", title } = Astro.props as Props;
 const parser = loadDefaultJapaneseParser();
 ---
 
-<Component class="container space-y-8 [container-type:inline-size]">
+<Component class="container space-y-8 @container">
 	<h1
-		class="text-2xl leading-tight font-bold kerning [@container(inline-size>36rem)]:[word-break:keep-all]"
-		set:html={parser
-			.parse(title)
-			.join(`<wbr class="hidden [@container(inline-size>36rem)]:inline">`)}
+		class="text-2xl leading-tight font-bold kerning @xl:[word-break:keep-all]"
+		set:html={parser.parse(title).join(`<wbr class="hidden @xl:inline">`)}
 	/>
 	<slot />
 </Component>
