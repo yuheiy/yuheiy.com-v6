@@ -67,7 +67,7 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 		<link rel="search" href={searchURL} />
 	</head>
 
-	<body class="text-dynamic bg-dynamic">
+	<body>
 		<header class="container mb-8 pt-16 text-sm text-dynamic-muted kerning">
 			<p>
 				<a class="flex items-center gap-x-3 w-fit" href={Astro.url.pathname !== "/" ? "/" : null}>
