@@ -70,9 +70,9 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 	<body>
 		<header class="container mb-8 pt-16 text-sm text-dynamic-muted kerning">
 			<p>
-				<a class="flex items-center gap-x-3 w-fit" href={Astro.url.pathname !== "/" ? "/" : null}>
+				<a class="flex w-fit items-center gap-x-3" href={Astro.url.pathname !== "/" ? "/" : null}>
 					<img
-						class="w-7 ring-1 ring-dynamic rounded-full"
+						class="w-7 rounded-full ring-1 ring-dynamic"
 						src="/favicon.svg"
 						width="48"
 						height="48"
@@ -88,7 +88,7 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 			<slot />
 		</main>
 
-		<footer class="sticky top-full mt-16 py-8 text-sm bg-dynamic-variant">
+		<footer class="sticky top-full mt-16 bg-dynamic-variant py-8 text-sm">
 			<nav class="container space-y-4">
 				<p>
 					<a href="/">ホーム</a>&#x2003;<a href="/posts">ブログ</a>&#x2003;<a
