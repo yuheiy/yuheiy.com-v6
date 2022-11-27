@@ -42,7 +42,7 @@ publishDate: "2022-11-27T16:05:00.000+09:00"
 }
 ```
 
-最大幅の実装は個々の要素が担いつつ、外側の余白は親要素に持たせておく。ページいっぱいまでに広がる要素（alignfull）は例外として、ネガティブマージンで処理する。
+最大幅の実装は個々の要素が担いつつ、外側の余白は親要素に持たせておくようになっている。そして、ページいっぱいまでに広がる要素（alignfull）は例外として、ネガティブマージンで処理されている。
 
 参考として[Twenty Twenty-Twoの実装](https://github.com/WordPress/wordpress-develop/tree/trunk/src/wp-content/themes/twentytwentytwo)を調べてみると、[style.css](https://github.com/WordPress/wordpress-develop/blob/trunk/src/wp-content/themes/twentytwentytwo/style.css)に同様の記述があった。
 
