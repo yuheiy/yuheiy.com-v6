@@ -110,17 +110,16 @@ body > .is-root-container > .wp-block-template-part > .wp-block-cover,
 	padding-left: var(--spacing-outer);
 }
 
-.entry-content > :not(.alignfull) {
+.entry-content > :not(.alignwide, .alignfull) {
+	max-width: var(--content-size);
 	margin-right: auto;
 	margin-left: auto;
 }
 
-.entry-content > :not(.alignwide, .alignfull) {
-	max-width: var(--content-size);
-}
-
 .entry-content > .alignwide {
 	max-width: var(--wide-size);
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .entry-content > .alignfull {
