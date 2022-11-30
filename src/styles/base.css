@@ -38,13 +38,8 @@ html:focus-within {
 }
 
 body {
-	@apply bg-dynamic text-dynamic;
-}
-
-/* https://css-tricks.com/a-clever-sticky-footer-technique/ */
-html,
-body {
-	@apply h-full;
+	/* https://css-tricks.com/a-clever-sticky-footer-technique/ */
+	@apply min-h-[100dvh] bg-dynamic text-dynamic;
 }
 
 a:any-link {
