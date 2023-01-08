@@ -94,6 +94,7 @@ function generateTheme(settings) {
 	}
 }
 
+// https://bugs.chromium.org/p/chromium/issues/detail?id=1378462
 const kerning = plugin(function ({ addUtilities }) {
 	addUtilities({
 		".kerning": {
