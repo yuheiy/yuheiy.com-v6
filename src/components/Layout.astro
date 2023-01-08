@@ -38,7 +38,11 @@ const searchURL = new URL("https://www.google.com/search");
 searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 ---
 
-<html lang="ja">
+<html
+	{/* https://schepp.dev/posts/smooth-scrolling-and-page-search/ */}
+	class="break-words leading-normal underline-offset-[0.125em] not-kerning [hanging-punctuation:allow-end] [line-break:normal] focus-within:motion-reduce:scroll-smooth"
+	lang="ja"
+>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, viewport-fit=cover" />
@@ -67,7 +71,7 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 		<link rel="search" href={searchURL} />
 	</head>
 
-	<body>
+	<body class="min-h-[100dvh] bg-dynamic text-dynamic">
 		<header class="container mb-8 pt-16 text-sm text-dynamic-muted kerning">
 			<p>
 				<a class="flex w-fit items-center gap-x-3" href={Astro.url.pathname !== "/" ? "/" : null}>
@@ -88,7 +92,10 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 			<slot />
 		</main>
 
-		<footer class="sticky top-full mt-16 bg-dynamic-variant py-8 text-sm">
+		<footer
+			{/* https://css-tricks.com/a-clever-sticky-footer-technique/ */}
+			class="sticky top-full mt-16 bg-dynamic-variant py-8 text-sm"
+		>
 			<nav class="container space-y-4">
 				<p>
 					<a href="/">ホーム</a>&#x2003;<a href="/posts">ブログ</a>&#x2003;<a

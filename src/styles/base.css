@@ -24,24 +24,6 @@
 	}
 }
 
-html {
-	@apply break-words leading-normal underline-offset-[0.125em] not-kerning;
-	hanging-punctuation: allow-end;
-	line-break: normal;
-}
-
-/* https://schepp.dev/posts/smooth-scrolling-and-page-search/ */
-html:focus-within {
-	@media (prefers-reduced-motion: no-preference) {
-		@apply scroll-smooth;
-	}
-}
-
-body {
-	/* https://css-tricks.com/a-clever-sticky-footer-technique/ */
-	@apply min-h-[100dvh] bg-dynamic text-dynamic;
-}
-
 a:any-link {
 	@apply underline decoration-dynamic decoration-1;
 }
