@@ -10,11 +10,7 @@
 	}
 
 	h2 {
-		@apply flex gap-x-3 text-xl leading-tight kerning;
-	}
-
-	h2::before {
-		@apply my-[calc((1.5em-1em)/2)] border-l-[6px] content-[""];
+		@apply flex gap-x-3 text-xl font-bold leading-tight kerning;
 	}
 
 	h3 {
