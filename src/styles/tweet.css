@@ -1,8 +1,5 @@
 .tweet-card {
-	--tc-corner-radius: 0.75rem;
-	--tc-padding: 1rem;
-
-	@apply max-w-lg space-y-4 border-dynamic leading-tight shadow-none;
+	@apply max-w-lg space-y-4 border-dynamic leading-tight shadow-none [--tc-corner-radius:theme(spacing.3)] [--tc-padding:theme(spacing.4)];
 }
 
 .tweet-card img {
