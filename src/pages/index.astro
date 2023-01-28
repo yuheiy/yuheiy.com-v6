@@ -1,36 +1,18 @@
 ---
+import { CollectionEntry, getCollection, getEntryBySlug } from "astro:content";
 import type { Dayjs } from "dayjs";
 import DetailsList from "../components/DetailsList.astro";
 import Layout from "../components/Layout.astro";
 import PageTitle from "../components/PageTitle.astro";
 import dayjs from "../lib/dayjs";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
-const allPosts = await Astro.glob<{ title: string; publishDate: string }>("./*.mdx");
-allPosts.sort(
-	(a, b) =>
-		dayjs(b.frontmatter.publishDate).tz().valueOf() -
-		dayjs(a.frontmatter.publishDate).tz().valueOf()
-);
+const everylayoutEntry = await getEntryBySlug("blog", "20211011-publication-of-everylayout");
 
-const description =
-	"フロントエンドウェブ開発者。HTMLやWAI-ARIA、CSS設計、レスポンシブデザイン、Jamstack、シングルページアプリケーション、アクセシビリティ、インターフェースデザインが関心領域。業務では、運用を見据えたコーポレートサイトやメディアサイトなどの受託開発に携わる。";
-
-const primaryPosts = [
-	{
-		title: "マークアップのわかり方",
-		link: "/2022-11-03-how-to-understand-the-markup",
-		meta: "Yuhei Yasuda",
-	},
-	{
-		title: "宣言的デザイン（翻訳）",
-		link: "/2022-08-01-declarative-design",
-		meta: "Yuhei Yasuda",
-	},
-	{
-		title: "CSS設計における、すべてがコンポーネントであるという誤謬",
-		link: "/2022-06-11-css-components",
-		meta: "Yuhei Yasuda",
-	},
+const primaryEntries = [
+	toDetailsListItem(await getEntryBySlug("blog", "2022-11-03-how-to-understand-the-markup")),
+	toDetailsListItem(await getEntryBySlug("blog", "2022-08-01-declarative-design")),
+	toDetailsListItem(await getEntryBySlug("blog", "2022-06-11-css-components")),
 	{
 		title: "本文のタイポグラフィとCSS",
 		link: "https://paper.dropbox.com/doc/CSS--BiYi3PrpPiQ_4sOfqgvEMeAEAg-wPD007Sd9dSeEDLP78jri",
@@ -46,17 +28,8 @@ const primaryPosts = [
 		link: "https://www.codegrid.net/series/2021-talk-about-every-layout",
 		meta: "CodeGrid",
 	},
-	{
-		title:
-			"『Every Layout&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論』、素直さという選択 &#35;everylayout-ja",
-		link: "/20211011-publication-of-everylayout",
-		meta: "Yuhei Yasuda",
-	},
-	{
-		title: "垂直方向のマージンにはmargin-topを優先的に使う理由",
-		link: "/20210127-prefer-margin-top",
-		meta: "Yuhei Yasuda",
-	},
+	toDetailsListItem(await getEntryBySlug("blog", "20211011-publication-of-everylayout")),
+	toDetailsListItem(await getEntryBySlug("blog", "20210127-prefer-margin-top")),
 	{
 		title: "Tailwind CSSの設計思想を業務に活かす",
 		link: "https://www.codegrid.net/series/2020-tailwind-talk",
@@ -79,6 +52,14 @@ const primaryPosts = [
 		meta: "シフトブレイン／スタンダードデザインユニット",
 	},
 ];
+
+function toDetailsListItem(entry: CollectionEntry<"blog">) {
+	return {
+		title: entry.data.title,
+		link: `/${entry.slug}`,
+		meta: SITE_TITLE,
+	};
+}
 
 const projects = [
 	{
@@ -117,24 +98,32 @@ const projects = [
 ].map(({ title, link, startDate, endDate, description }) => ({
 	title,
 	link,
-	meta: [getDateHtml(dayjs(startDate)), "&mdash;", endDate && getDateHtml(dayjs(endDate))]
+	meta: [
+		getProjectDateHtml(dayjs(startDate)),
+		"&mdash;",
+		endDate && getProjectDateHtml(dayjs(endDate)),
+	]
 		.filter(Boolean)
 		.join(" "),
 	description,
 }));
 
-function getDateHtml(date: Dayjs) {
-	return `<time datetime="${date.tz().toISOString()}">${date.tz().format("YYYY年M月")}</time>`;
+function getProjectDateHtml(date: Dayjs) {
+	return `<time datetime="${date.tz().format("YYYY-MM")}">${date.tz().format("YYYY年M月")}</time>`;
 }
+
+const allBlogEntries = (await getCollection("blog")).sort(
+	(a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf()
+);
 ---
 
-<Layout description={description}>
+<Layout description={SITE_DESCRIPTION}>
 	<div class="space-y-16">
 		<PageTitle title="安田 祐平">
 			<div class="space-y-4 text-dynamic-muted [&_a:any-link]:text-dynamic">
-				<p>{description}</p>
+				<p>{SITE_DESCRIPTION}</p>
 				<p
-					set:html={`監訳を担当した書籍『<a href="/20211011-publication-of-everylayout">Every Layout—モジュラーなレスポンシブデザインを実現するCSS設計論</a>』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a>。`}
+					set:html={`監訳を担当した書籍『<a href="/${everylayoutEntry.slug}">Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a>』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a>。`}
 				/>
 			</div>
 		</PageTitle>
@@ -144,7 +133,7 @@ function getDateHtml(date: Dayjs) {
 		<section class="container">
 			<h2 class="mb-10 text-lg font-bold leading-tight text-dynamic-muted">主な投稿</h2>
 
-			<DetailsList items={primaryPosts} />
+			<DetailsList items={primaryEntries} />
 		</section>
 
 		<div class="border-t"></div>
@@ -161,12 +150,12 @@ function getDateHtml(date: Dayjs) {
 			<h2 class="mb-10 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
 
 			<DetailsList
-				items={allPosts.slice(0, 3).map((post) => ({
-					title: post.frontmatter.title,
-					link: post.url!,
-					meta: `<time datetime="${dayjs(post.frontmatter.publishDate).tz().toISOString()}">
-							${dayjs(post.frontmatter.publishDate).tz().format("LL")}
-						</time>`,
+				items={allBlogEntries.slice(0, 3).map((entry) => ({
+					title: entry.data.title,
+					link: `/${entry.slug}`,
+					meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
+						${dayjs(entry.data.publishDate).tz().format("LL")}
+					</time>`,
 				}))}
 				ordered={true}
 			/>

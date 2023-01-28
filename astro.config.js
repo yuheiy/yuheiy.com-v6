@@ -8,7 +8,7 @@ import { select } from "unist-util-select";
 import { visit } from "unist-util-visit";
 
 export default defineConfig({
-	site: "https://yuheiy.com",
+	site: "https://yuheiy.com/",
 	trailingSlash: "never",
 	build: {
 		format: "file",

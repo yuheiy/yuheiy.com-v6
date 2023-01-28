@@ -1,22 +1,22 @@
 import rss from "@astrojs/rss";
+import { getCollection } from "astro:content";
 import dayjs from "../lib/dayjs";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
-const postImportResult = import.meta.glob("./*.mdx", { eager: true });
-const posts = Object.values(postImportResult);
-posts.sort(
-	(a, b) =>
-		dayjs(b.frontmatter.publishDate).tz().valueOf() -
-		dayjs(a.frontmatter.publishDate).tz().valueOf()
-);
+export async function get(context) {
+	const allBlogEntries = (await getCollection("blog")).sort(
+		(a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf()
+	);
 
-export const get = () =>
-	rss({
-		title: "Yuhei Yasudaのブログ",
-		description: "日記やウェブ開発について",
-		site: import.meta.env.SITE,
-		items: posts.map((post) => ({
-			link: new URL(post.url, import.meta.env.SITE),
-			title: post.frontmatter.title,
-			pubDate: dayjs(post.frontmatter.publishDate).tz().toDate(),
+	return rss({
+		title: SITE_TITLE,
+		description: SITE_DESCRIPTION,
+		site: context.site,
+		items: allBlogEntries.map((entry) => ({
+			title: entry.data.title,
+			pubDate: entry.data.publishDate,
+			description: entry.data.description,
+			link: new URL(`/${entry.slug}`, import.meta.env.SITE).toString(),
 		})),
 	});
+}
