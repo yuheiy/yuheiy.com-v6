@@ -1,5 +1,6 @@
 ---
 import "../styles/main.css";
+import { SITE_TITLE } from "../consts";
 
 export interface Props {
 	title?: string;
@@ -10,10 +11,8 @@ export interface Props {
 	is404?: boolean;
 }
 
-const siteTitle = "Yuhei Yasuda";
-
 const {
-	title = siteTitle,
+	title = SITE_TITLE,
 	description,
 	ogType = "website",
 	twitterCard = "summary",
@@ -61,7 +60,7 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 		<meta property="og:image" content={ogImageURL} />
 		{canonicalURL && <meta property="og:url" content={canonicalURL} />}
 		{description && <meta property="og:description" content={description} />}
-		<meta property="og:site_name" content={siteTitle} />
+		<meta property="og:site_name" content={SITE_TITLE} />
 		<meta property="og:locale" content="ja_JP" />
 
 		<link rel="alternate" href="/posts-feed.xml" type="application/rss+xml" />
@@ -83,7 +82,7 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 						alt=""
 						decoding="async"
 					/>
-					{siteTitle}
+					{SITE_TITLE}
 				</a>
 			</p>
 		</header>
