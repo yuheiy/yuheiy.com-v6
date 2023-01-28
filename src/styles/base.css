@@ -24,7 +24,7 @@
 	}
 }
 
-a:any-link {
+a:where(:any-link) {
 	@apply underline decoration-dynamic decoration-1;
 }
 
