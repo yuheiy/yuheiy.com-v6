@@ -35,6 +35,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+        env:
+          SECRET_TWITTER_TOKEN: ${{ secrets.SECRET_TWITTER_TOKEN }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
