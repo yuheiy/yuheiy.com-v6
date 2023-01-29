@@ -18,11 +18,11 @@ const Component = ordered ? "ol" : "ul";
 	{
 		items.map((item) => (
 			<li class="space-y-[0.125rem]">
-				{item.meta && <p class="text-dynamic-muted text-sm" set:html={item.meta} />}
+				{item.meta && <p class="text-sm text-dynamic-muted" set:html={item.meta} />}
 				<p>
 					<a href={item.link} set:html={item.title} />
 				</p>
-				{item.description && <p class="text-dynamic-muted text-sm" set:html={item.description} />}
+				{item.description && <p class="text-sm text-dynamic-muted" set:html={item.description} />}
 			</li>
 		))
 	}
