@@ -23,11 +23,11 @@
 }
 
 :root .tweet-author-handle {
-	@apply w-fit text-xs text-dynamic-muted kerning;
+	@apply kerning-normal w-fit text-xs text-dynamic-muted;
 }
 
 :root .tweet-link {
-	@apply rounded-lg bg-[#1DA1F2] px-3 py-1 text-sm text-white no-underline kerning;
+	@apply kerning-normal rounded-lg bg-[#1DA1F2] px-3 py-1 text-sm text-white no-underline;
 }
 
 :root .tweet-link::after {

@@ -94,16 +94,20 @@ function generateTheme(settings) {
 	}
 }
 
-// https://bugs.chromium.org/p/chromium/issues/detail?id=1378462
+// https://github.com/w3c/csswg-drafts/issues/6723#issuecomment-1411487571
 const kerning = plugin(function ({ addUtilities }) {
 	addUtilities({
-		".kerning": {
-			fontKerning: "normal",
-			fontFeatureSettings: "'palt'",
-		},
-		".not-kerning": {
+		".kerning-none": {
 			fontKerning: "none",
 			fontFeatureSettings: "normal",
+		},
+		".kerning-normal": {
+			fontKerning: "normal",
+			fontFeatureSettings: "normal",
+		},
+		".kerning-all": {
+			fontKerning: "normal",
+			fontFeatureSettings: "'palt'",
 		},
 	});
 });

@@ -38,8 +38,9 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 ---
 
 <html
+	{/* https://bugs.chromium.org/p/chromium/issues/detail?id=1378462 */}
 	{/* https://schepp.dev/posts/smooth-scrolling-and-page-search/ */}
-	class="break-words leading-normal underline-offset-[0.125em] not-kerning [hanging-punctuation:allow-end] [line-break:normal] focus-within:motion-reduce:scroll-smooth"
+	class="break-words leading-normal underline-offset-[0.125em] kerning-none [hanging-punctuation:allow-end] [line-break:normal] focus-within:motion-reduce:scroll-smooth"
 	lang="ja"
 >
 	<head>
@@ -71,7 +72,7 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 	</head>
 
 	<body class="min-h-[100dvh] bg-dynamic text-dynamic">
-		<header class="container mb-8 pt-16 text-sm text-dynamic-muted kerning">
+		<header class="container mb-8 pt-16 text-sm text-dynamic-muted kerning-normal">
 			<p>
 				<a class="flex w-fit items-center gap-x-3" href={Astro.url.pathname !== "/" ? "/" : null}>
 					<img
