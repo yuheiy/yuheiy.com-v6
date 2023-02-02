@@ -10,155 +10,155 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 const everylayoutEntry = await getEntryBySlug("blog", "20211011-publication-of-everylayout");
 
 const primaryEntries = [
-	toDetailsListItem(await getEntryBySlug("blog", "2022-11-03-how-to-understand-the-markup")),
-	toDetailsListItem(await getEntryBySlug("blog", "2022-08-01-declarative-design")),
-	toDetailsListItem(await getEntryBySlug("blog", "2022-06-11-css-components")),
-	{
-		title: "本文のタイポグラフィとCSS",
-		link: "https://paper.dropbox.com/doc/CSS--BiYi3PrpPiQ_4sOfqgvEMeAEAg-wPD007Sd9dSeEDLP78jri",
-		meta: "社内発表",
-	},
-	{
-		title: "『Every Layout』に到った背景と思想についての私の解釈",
-		link: "https://note.com/shiftbrain/n/n0a01726673e0",
-		meta: "SHIFTBRAIN note",
-	},
-	{
-		title: "「Every Layout」をめぐる座談会",
-		link: "https://www.codegrid.net/series/2021-talk-about-every-layout",
-		meta: "CodeGrid",
-	},
-	toDetailsListItem(await getEntryBySlug("blog", "20211011-publication-of-everylayout")),
-	toDetailsListItem(await getEntryBySlug("blog", "20210127-prefer-margin-top")),
-	{
-		title: "Tailwind CSSの設計思想を業務に活かす",
-		link: "https://www.codegrid.net/series/2020-tailwind-talk",
-		meta: "CodeGrid",
-	},
-	{
-		title:
-			"CSSのユーティリティクラスと「関心の分離」&mdash;&mdash;いかにしてユーティリティファーストにたどり着いたか（翻訳）",
-		link: "https://yuheiy.hatenablog.com/entry/2020/05/25/021342",
-		meta: "yuhei blog",
-	},
-	{
-		title: "制作者のためのHTML",
-		link: "https://yuheiy.github.io/html-for-creators/",
-		meta: "<a href='https://ca11y.connpass.com/event/120003/'>CA11Y #1 〜アクセシビリティはじめて物語〜</a>",
-	},
-	{
-		title: "ページ内リンクの実装から考える、a要素のclickイベントとその振る舞い",
-		link: "https://standard.shiftbrain.com/blog/default-action-for-click-event-of-a-element",
-		meta: "シフトブレイン／スタンダードデザインユニット",
-	},
+  toDetailsListItem(await getEntryBySlug("blog", "2022-11-03-how-to-understand-the-markup")),
+  toDetailsListItem(await getEntryBySlug("blog", "2022-08-01-declarative-design")),
+  toDetailsListItem(await getEntryBySlug("blog", "2022-06-11-css-components")),
+  {
+    title: "本文のタイポグラフィとCSS",
+    link: "https://paper.dropbox.com/doc/CSS--BiYi3PrpPiQ_4sOfqgvEMeAEAg-wPD007Sd9dSeEDLP78jri",
+    meta: "社内発表",
+  },
+  {
+    title: "『Every Layout』に到った背景と思想についての私の解釈",
+    link: "https://note.com/shiftbrain/n/n0a01726673e0",
+    meta: "SHIFTBRAIN note",
+  },
+  {
+    title: "「Every Layout」をめぐる座談会",
+    link: "https://www.codegrid.net/series/2021-talk-about-every-layout",
+    meta: "CodeGrid",
+  },
+  toDetailsListItem(await getEntryBySlug("blog", "20211011-publication-of-everylayout")),
+  toDetailsListItem(await getEntryBySlug("blog", "20210127-prefer-margin-top")),
+  {
+    title: "Tailwind CSSの設計思想を業務に活かす",
+    link: "https://www.codegrid.net/series/2020-tailwind-talk",
+    meta: "CodeGrid",
+  },
+  {
+    title:
+      "CSSのユーティリティクラスと「関心の分離」&mdash;&mdash;いかにしてユーティリティファーストにたどり着いたか（翻訳）",
+    link: "https://yuheiy.hatenablog.com/entry/2020/05/25/021342",
+    meta: "yuhei blog",
+  },
+  {
+    title: "制作者のためのHTML",
+    link: "https://yuheiy.github.io/html-for-creators/",
+    meta: "<a href='https://ca11y.connpass.com/event/120003/'>CA11Y #1 〜アクセシビリティはじめて物語〜</a>",
+  },
+  {
+    title: "ページ内リンクの実装から考える、a要素のclickイベントとその振る舞い",
+    link: "https://standard.shiftbrain.com/blog/default-action-for-click-event-of-a-element",
+    meta: "シフトブレイン／スタンダードデザインユニット",
+  },
 ];
 
 function toDetailsListItem(entry: CollectionEntry<"blog">) {
-	return {
-		title: entry.data.title,
-		link: `/${entry.slug}`,
-		meta: SITE_TITLE,
-	};
+  return {
+    title: entry.data.title,
+    link: `/${entry.slug}`,
+    meta: SITE_TITLE,
+  };
 }
 
 const projects = [
-	{
-		title: "wordpress-starter",
-		link: "https://github.com/yuheiy/wordpress-starter",
-		startDate: "2020-08",
-		description: "WordPressテーマ構築のための開発環境。",
-	},
-	{
-		title: "accrefs",
-		link: "https://accrefs.jp/",
-		startDate: "2019-09",
-		description:
-			"ウェブアクセシビリティの参考資料をまとめたサイト。日本語の資料を中心にリンク数は200を超える。サイトのデザインおよび実装に携わる。有志のメンバーにより制作・運営されている。",
-	},
-	{
-		title: "shifted",
-		link: "https://github.com/yuheiy/shifted",
-		startDate: "2019-05",
-		description: "静的サイト構築のための開発環境。",
-	},
-	{
-		title: "シフトブレイン／スタンダードデザインユニット",
-		link: "https://standard.shiftbrain.com/",
-		startDate: "2018-10",
-		endDate: "2020-06",
-		description: "自社で所属していたチームのウェブサイト。",
-	},
-	{
-		title: "yuhei blog",
-		link: "https://yuheiy.hatenablog.com/",
-		startDate: "2015-10",
-		endDate: "2020-11",
-		description: "過去に更新していた個人ブログ。",
-	},
+  {
+    title: "wordpress-starter",
+    link: "https://github.com/yuheiy/wordpress-starter",
+    startDate: "2020-08",
+    description: "WordPressテーマ構築のための開発環境。",
+  },
+  {
+    title: "accrefs",
+    link: "https://accrefs.jp/",
+    startDate: "2019-09",
+    description:
+      "ウェブアクセシビリティの参考資料をまとめたサイト。日本語の資料を中心にリンク数は200を超える。サイトのデザインおよび実装に携わる。有志のメンバーにより制作・運営されている。",
+  },
+  {
+    title: "shifted",
+    link: "https://github.com/yuheiy/shifted",
+    startDate: "2019-05",
+    description: "静的サイト構築のための開発環境。",
+  },
+  {
+    title: "シフトブレイン／スタンダードデザインユニット",
+    link: "https://standard.shiftbrain.com/",
+    startDate: "2018-10",
+    endDate: "2020-06",
+    description: "自社で所属していたチームのウェブサイト。",
+  },
+  {
+    title: "yuhei blog",
+    link: "https://yuheiy.hatenablog.com/",
+    startDate: "2015-10",
+    endDate: "2020-11",
+    description: "過去に更新していた個人ブログ。",
+  },
 ].map(({ title, link, startDate, endDate, description }) => ({
-	title,
-	link,
-	meta: [
-		getProjectDateHtml(dayjs(startDate)),
-		"&mdash;",
-		endDate && getProjectDateHtml(dayjs(endDate)),
-	]
-		.filter(Boolean)
-		.join(" "),
-	description,
+  title,
+  link,
+  meta: [
+    getProjectDateHtml(dayjs(startDate)),
+    "&mdash;",
+    endDate && getProjectDateHtml(dayjs(endDate)),
+  ]
+    .filter(Boolean)
+    .join(" "),
+  description,
 }));
 
 function getProjectDateHtml(date: Dayjs) {
-	return `<time datetime="${date.tz().format("YYYY-MM")}">${date.tz().format("YYYY年M月")}</time>`;
+  return `<time datetime="${date.tz().format("YYYY-MM")}">${date.tz().format("YYYY年M月")}</time>`;
 }
 
 const allBlogEntries = (await getCollection("blog")).sort(
-	(a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf()
+  (a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf()
 );
 ---
 
 <Layout description={SITE_DESCRIPTION}>
-	<div class="space-y-16">
-		<PageTitle title="安田 祐平">
-			<div class="space-y-4 text-dynamic-muted [&_a:any-link]:text-dynamic">
-				<p>{SITE_DESCRIPTION}</p>
-				<p
-					set:html={`監訳を担当した書籍『<a href="/${everylayoutEntry.slug}">Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a>』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a>。`}
-				/>
-			</div>
-		</PageTitle>
+  <div class="space-y-16">
+    <PageTitle title="安田 祐平">
+      <div class="space-y-4 text-dynamic-muted [&_a:any-link]:text-dynamic">
+        <p>{SITE_DESCRIPTION}</p>
+        <p
+          set:html={`監訳を担当した書籍『<a href="/${everylayoutEntry.slug}">Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a>』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a>。`}
+        />
+      </div>
+    </PageTitle>
 
-		<div class="border-t"></div>
+    <div class="border-t"></div>
 
-		<section class="container">
-			<h2 class="mb-10 text-lg font-bold leading-tight text-dynamic-muted">主な投稿</h2>
+    <section class="container">
+      <h2 class="mb-10 text-lg font-bold leading-tight text-dynamic-muted">主な投稿</h2>
 
-			<DetailsList items={primaryEntries} />
-		</section>
+      <DetailsList items={primaryEntries} />
+    </section>
 
-		<div class="border-t"></div>
+    <div class="border-t"></div>
 
-		<section class="container">
-			<h2 class="mb-10 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
+    <section class="container">
+      <h2 class="mb-10 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
 
-			<DetailsList items={projects} />
-		</section>
+      <DetailsList items={projects} />
+    </section>
 
-		<div class="border-t"></div>
+    <div class="border-t"></div>
 
-		<section class="container">
-			<h2 class="mb-10 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
+    <section class="container">
+      <h2 class="mb-10 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
 
-			<DetailsList
-				items={allBlogEntries.slice(0, 3).map((entry) => ({
-					title: entry.data.title,
-					link: `/${entry.slug}`,
-					meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
+      <DetailsList
+        items={allBlogEntries.slice(0, 3).map((entry) => ({
+          title: entry.data.title,
+          link: `/${entry.slug}`,
+          meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
 						${dayjs(entry.data.publishDate).tz().format("LL")}
 					</time>`,
-				}))}
-				ordered={true}
-			/>
-		</section>
-	</div>
+        }))}
+        ordered={true}
+      />
+    </section>
+  </div>
 </Layout>

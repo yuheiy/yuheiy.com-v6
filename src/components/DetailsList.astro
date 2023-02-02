@@ -1,12 +1,12 @@
 ---
 export interface Props {
-	items: {
-		title: string;
-		link: string;
-		meta?: string;
-		description?: string;
-	}[];
-	ordered?: boolean;
+  items: {
+    title: string;
+    link: string;
+    meta?: string;
+    description?: string;
+  }[];
+  ordered?: boolean;
 }
 
 const { items, ordered = false } = Astro.props as Props;
@@ -15,15 +15,15 @@ const Component = ordered ? "ol" : "ul";
 ---
 
 <Component class="space-y-8">
-	{
-		items.map((item) => (
-			<li class="space-y-[0.125rem]">
-				{item.meta && <p class="text-sm text-dynamic-muted" set:html={item.meta} />}
-				<p>
-					<a href={item.link} set:html={item.title} />
-				</p>
-				{item.description && <p class="text-sm text-dynamic-muted" set:html={item.description} />}
-			</li>
-		))
-	}
+  {
+    items.map((item) => (
+      <li class="space-y-[0.125rem]">
+        {item.meta && <p class="text-sm text-dynamic-muted" set:html={item.meta} />}
+        <p>
+          <a href={item.link} set:html={item.title} />
+        </p>
+        {item.description && <p class="text-sm text-dynamic-muted" set:html={item.description} />}
+      </li>
+    ))
+  }
 </Component>

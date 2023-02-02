@@ -1,37 +1,37 @@
 :root {
-	--astro-code-color-text: theme(textColor.dynamic.DEFAULT);
-	--astro-code-color-background: transparent;
-	--astro-code-token-constant: #0550ae;
-	--astro-code-token-string: #0a3069;
-	--astro-code-token-comment: #6e7781;
-	--astro-code-token-keyword: #cf222e;
-	--astro-code-token-parameter: #24292f;
-	--astro-code-token-function: #8250df;
-	--astro-code-token-string-expression: #0a3069;
-	--astro-code-token-punctuation: #0a3069;
-	--astro-code-token-link: #0a3069;
+  --astro-code-color-text: theme(textColor.dynamic.DEFAULT);
+  --astro-code-color-background: transparent;
+  --astro-code-token-constant: #0550ae;
+  --astro-code-token-string: #0a3069;
+  --astro-code-token-comment: #6e7781;
+  --astro-code-token-keyword: #cf222e;
+  --astro-code-token-parameter: #24292f;
+  --astro-code-token-function: #8250df;
+  --astro-code-token-string-expression: #0a3069;
+  --astro-code-token-punctuation: #0a3069;
+  --astro-code-token-link: #0a3069;
 
-	@media (prefers-color-scheme: dark) {
-		--astro-code-token-constant: #79c0ff;
-		--astro-code-token-string: #a5d6ff;
-		--astro-code-token-comment: #8b949e;
-		--astro-code-token-keyword: #ff7b72;
-		--astro-code-token-parameter: #c9d1d9;
-		--astro-code-token-function: #d2a8ff;
-		--astro-code-token-string-expression: #a5d6ff;
-		--astro-code-token-punctuation: #a5d6ff;
-		--astro-code-token-link: #a5d6ff;
-	}
+  @media (prefers-color-scheme: dark) {
+    --astro-code-token-constant: #79c0ff;
+    --astro-code-token-string: #a5d6ff;
+    --astro-code-token-comment: #8b949e;
+    --astro-code-token-keyword: #ff7b72;
+    --astro-code-token-parameter: #c9d1d9;
+    --astro-code-token-function: #d2a8ff;
+    --astro-code-token-string-expression: #a5d6ff;
+    --astro-code-token-punctuation: #a5d6ff;
+    --astro-code-token-link: #a5d6ff;
+  }
 }
 
 a:where(:any-link) {
-	@apply underline decoration-dynamic decoration-1;
+  @apply underline decoration-dynamic decoration-1;
 }
 
 em {
-	@apply font-[bolder] not-italic;
+  @apply font-[bolder] not-italic;
 }
 
 [id] {
-	@apply scroll-mt-4;
+  @apply scroll-mt-4;
 }

@@ -9,21 +9,21 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 ---
 
 <Layout title={title} is404={true}>
-	<div class="space-y-16">
-		<PageTitle title={title} />
+  <div class="space-y-16">
+    <PageTitle title={title} />
 
-		<div class="border-t"></div>
+    <div class="border-t"></div>
 
-		<div class="prose container">
-			<p
-				set:html={`<a class="js-internet-archive" href="https://web.archive.org/web/*/${Astro.site}">インターネットアーカイブ</a>を参照するか、<a href="${searchURL}">サイト内を検索する</a>と見つかるかもしれません。`}
-			/>
-		</div>
-	</div>
+    <div class="prose container">
+      <p
+        set:html={`<a class="js-internet-archive" href="https://web.archive.org/web/*/${Astro.site}">インターネットアーカイブ</a>を参照するか、<a href="${searchURL}">サイト内を検索する</a>と見つかるかもしれません。`}
+      />
+    </div>
+  </div>
 </Layout>
 
 <script>
-	document.querySelector<HTMLAnchorElement>(
-		".js-internet-archive"
-	)!.href = `https://web.archive.org/web/*/${location.href}`;
+  document.querySelector<HTMLAnchorElement>(
+    ".js-internet-archive"
+  )!.href = `https://web.archive.org/web/*/${location.href}`;
 </script>

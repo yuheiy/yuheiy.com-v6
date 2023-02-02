@@ -1,5 +1,5 @@
 {
-	"printWidth": 100,
-	"order": "smacss",
-	"keepOverrides": false
+  "printWidth": 100,
+  "order": "smacss",
+  "keepOverrides": false
 }
