@@ -10,6 +10,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 const everylayoutEntry = await getEntryBySlug("blog", "20211011-publication-of-everylayout");
 
 const primaryEntries = [
+  toDetailsListItem(await getEntryBySlug("blog", "2023-02-06-tailwind-css-in-wdpress")),
   toDetailsListItem(await getEntryBySlug("blog", "2022-11-03-how-to-understand-the-markup")),
   toDetailsListItem(await getEntryBySlug("blog", "2022-08-01-declarative-design")),
   toDetailsListItem(await getEntryBySlug("blog", "2022-06-11-css-components")),
