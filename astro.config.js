@@ -35,8 +35,10 @@ export default defineConfig({
 
 function remarkInjectDescription() {
   return (tree, { data }) => {
-    const firstParagraph = select("paragraph", tree);
-    data.astro.frontmatter.description = toString(firstParagraph);
+    if (!data.astro.frontmatter.description) {
+      const firstParagraph = select("paragraph", tree);
+      data.astro.frontmatter.description = toString(firstParagraph);
+    }
   };
 }
 
