@@ -1,225 +1,225 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
 
-    <title>本文エリア内の要素をpaddingのないコンテナとして実装する</title>
+		<title>本文エリア内の要素をpaddingのないコンテナとして実装する</title>
 
-    <script src="https://cdn.tailwindcss.com/"></script>
+		<script src="https://cdn.tailwindcss.com/"></script>
 
-    <script>
-      const container = tailwind.plugin(function ({ matchComponents }) {
-        matchComponents(
-          {
-            container: (maxWidth) => ({
-              "--_container-margin": "max(5vw, 1.25rem)",
-              width: "calc(100% - var(--_container-margin) * 2)",
-              maxWidth,
-              marginInline: "auto",
-            }),
-          },
-          {
-            values: {
-              lg: "75rem",
-              md: "60rem",
-              sm: "45rem",
-            },
-          }
-        );
-      });
+		<script>
+			const container = tailwind.plugin(function ({ matchComponents }) {
+				matchComponents(
+					{
+						container: (maxWidth) => ({
+							"--_container-margin": "max(5vw, 1.25rem)",
+							width: "calc(100% - var(--_container-margin) * 2)",
+							maxWidth,
+							marginInline: "auto",
+						}),
+					},
+					{
+						values: {
+							lg: "75rem",
+							md: "60rem",
+							sm: "45rem",
+						},
+					}
+				);
+			});
 
-      tailwind.config = {
-        theme: {
-          fontFamily: {
-            sans: ["sans-serif"],
-          },
-          fontSize: {
-            xs: ["0.75rem", { lineHeight: "1.5" }],
-            sm: ["0.875rem", { lineHeight: "1.5" }],
-            base: ["1rem", { lineHeight: "1.75" }],
-            lg: ["1.125rem", { lineHeight: "1.75" }],
-            xl: ["1.25rem", { lineHeight: "1.75" }],
-            "2xl": ["1.5rem", { lineHeight: "1.5" }],
-            "3xl": ["1.75rem", { lineHeight: "1.5" }],
-            "4xl": ["2rem", { lineHeight: "1.5" }],
-            "5xl": ["2.25rem", { lineHeight: "1.5" }],
-            "6xl": ["2.5rem", { lineHeight: "1.5" }],
-          },
-        },
-        corePlugins: {
-          container: false,
-        },
-        plugins: [container],
-      };
-    </script>
+			tailwind.config = {
+				theme: {
+					fontFamily: {
+						sans: ["sans-serif"],
+					},
+					fontSize: {
+						xs: ["0.75rem", { lineHeight: "1.5" }],
+						sm: ["0.875rem", { lineHeight: "1.5" }],
+						base: ["1rem", { lineHeight: "1.75" }],
+						lg: ["1.125rem", { lineHeight: "1.75" }],
+						xl: ["1.25rem", { lineHeight: "1.75" }],
+						"2xl": ["1.5rem", { lineHeight: "1.5" }],
+						"3xl": ["1.75rem", { lineHeight: "1.5" }],
+						"4xl": ["2rem", { lineHeight: "1.5" }],
+						"5xl": ["2.25rem", { lineHeight: "1.5" }],
+						"6xl": ["2.5rem", { lineHeight: "1.5" }],
+					},
+				},
+				corePlugins: {
+					container: false,
+				},
+				plugins: [container],
+			};
+		</script>
 
-    <style type="text/tailwindcss">
-      @layer components {
-        .block-image {
-          @apply space-y-4;
-        }
+		<style type="text/tailwindcss">
+			@layer components {
+				.block-image {
+					@apply space-y-4;
+				}
 
-        .block-image:not(.alignwide, .alignfull) img {
-          @apply container-sm;
-        }
+				.block-image:not(.alignwide, .alignfull) img {
+					@apply container-sm;
+				}
 
-        .block-image.alignwide img {
-          @apply container-md;
-        }
+				.block-image.alignwide img {
+					@apply container-md;
+				}
 
-        .block-image.alignfull img {
-          @apply w-full;
-        }
+				.block-image.alignfull img {
+					@apply w-full;
+				}
 
-        .block-image figcaption {
-          @apply container-sm text-sm text-gray-600;
-        }
-      }
+				.block-image figcaption {
+					@apply container-sm text-sm text-gray-600;
+				}
+			}
 
-      @layer components {
-        .prose {
-          @apply text-base;
-        }
+			@layer components {
+				.prose {
+					@apply text-base;
+				}
 
-        .prose > * + * {
-          @apply mt-6;
-        }
+				.prose > * + * {
+					@apply mt-6;
+				}
 
-        .prose > * + h2 {
-          @apply mt-16;
-        }
+				.prose > * + h2 {
+					@apply mt-16;
+				}
 
-        .prose > :is(* + .block-image, .block-image + *) {
-          @apply mt-12;
-        }
+				.prose > :is(* + .block-image, .block-image + *) {
+					@apply mt-12;
+				}
 
-        .prose > :not(.block-image) {
-          @apply container-sm;
-        }
+				.prose > :not(.block-image) {
+					@apply container-sm;
+				}
 
-        .prose h2 {
-          @apply border-b pb-2 text-2xl font-bold;
-        }
+				.prose h2 {
+					@apply border-b pb-2 text-2xl font-bold;
+				}
 
-        .prose blockquote {
-          @apply border-l-4 pl-6 text-lg;
-        }
-      }
-    </style>
-  </head>
+				.prose blockquote {
+					@apply border-l-4 pl-6 text-lg;
+				}
+			}
+		</style>
+	</head>
 
-  <body class="bg-white text-base text-gray-900">
-    <header class="bg-inherit text-sm invert">
-      <nav class="container-lg">
-        <a class="block w-fit py-4" href="/2022-07-31-container-with-no-padding">
-          <span aria-hidden="true">←</span>
-          記事に戻る
-        </a>
-      </nav>
-    </header>
+	<body class="bg-white text-base text-gray-900">
+		<header class="bg-inherit text-sm invert">
+			<nav class="container-lg">
+				<a class="block w-fit py-4" href="/2022-07-31-container-with-no-padding">
+					<span aria-hidden="true">←</span>
+					記事に戻る
+				</a>
+			</nav>
+		</header>
 
-    <main>
-      <article>
-        <header class="border-b py-16">
-          <h1 class="container-md text-5xl font-bold">
-            本文エリア内の要素をpaddingのないコンテナとして実装する
-          </h1>
-        </header>
+		<main>
+			<article>
+				<header class="border-b py-16">
+					<h1 class="container-md text-5xl font-bold">
+						本文エリア内の要素をpaddingのないコンテナとして実装する
+					</h1>
+				</header>
 
-        <div class="prose pt-16 pb-20">
-          <p>
-            まあ、おかしな魚だわ、なんでしょうあれ睡そうに眼をこすっていたのです。この汽車は、そらの野原に、まっすぐに銀河の青光の中へ通っていました。すぐ前の席に、もうカムパネルラの形は見えず、ただ眼がしんしんと痛むのでした。
-          </p>
+				<div class="prose pt-16 pb-20">
+					<p>
+						まあ、おかしな魚だわ、なんでしょうあれ睡そうに眼をこすっていたのです。この汽車は、そらの野原に、まっすぐに銀河の青光の中へ通っていました。すぐ前の席に、もうカムパネルラの形は見えず、ただ眼がしんしんと痛むのでした。
+					</p>
 
-          <figure class="block-image alignwide">
-            <img
-              src="https://picsum.photos/1600/900?1"
-              width="1600"
-              height="900"
-              decoding="async"
-              alt=""
-            />
-            <figcaption>
-              ジョバンニのうしろに、もひとり、十二ばかりの眼のなかにあったのだ
-            </figcaption>
-          </figure>
+					<figure class="block-image alignwide">
+						<img
+							src="https://picsum.photos/1600/900?1"
+							width="1600"
+							height="900"
+							decoding="async"
+							alt=""
+						/>
+						<figcaption>
+							ジョバンニのうしろに、もひとり、十二ばかりの眼のなかにあったのだ
+						</figcaption>
+					</figure>
 
-          <p>
-            そしてもうそのかたちは天気輪の柱牧場のうしろはゆるい丘になって、いくつかのシグナルとてんてつ器の灯を綴ってはいました。おや、あの河原は月夜だろうかそっちを見ていました。そしてザネリを舟の方へ向けて、ではわたくしどもは失礼いたしますジョバンニは力強く言いました。
-          </p>
+					<p>
+						そしてもうそのかたちは天気輪の柱牧場のうしろはゆるい丘になって、いくつかのシグナルとてんてつ器の灯を綴ってはいました。おや、あの河原は月夜だろうかそっちを見ていました。そしてザネリを舟の方へ向けて、ではわたくしどもは失礼いたしますジョバンニは力強く言いました。
+					</p>
 
-          <h2>十字架は窓の正面に</h2>
+					<h2>十字架は窓の正面に</h2>
 
-          <p>
-            なんだろう青年も立ちあがりましたが、こんどもすぐに答えることができないのでした。青年はぞくっとして、さびしくなり風がいっぱいにひらけました。あの人どこへ行ったろうカムパネルラもぼんやりそう言ってしまうかしまわないうちに、ジョバンニ、お仕事がひどかったろう。
-          </p>
+					<p>
+						なんだろう青年も立ちあがりましたが、こんどもすぐに答えることができないのでした。青年はぞくっとして、さびしくなり風がいっぱいにひらけました。あの人どこへ行ったろうカムパネルラもぼんやりそう言ってしまうかしまわないうちに、ジョバンニ、お仕事がひどかったろう。
+					</p>
 
-          <figure class="block-image">
-            <img
-              src="https://picsum.photos/1600/900?2"
-              width="1600"
-              height="900"
-              decoding="async"
-              alt=""
-            />
-            <figcaption>
-              おまえはもうカムパネルラをさがしてから、年とった女の人が、どこかで、ふしぎな声がしました。ジョバンニはまっ赤になって燃えて、よるのやみを照らしているのでした
-            </figcaption>
-          </figure>
+					<figure class="block-image">
+						<img
+							src="https://picsum.photos/1600/900?2"
+							width="1600"
+							height="900"
+							decoding="async"
+							alt=""
+						/>
+						<figcaption>
+							おまえはもうカムパネルラをさがしてから、年とった女の人が、どこかで、ふしぎな声がしました。ジョバンニはまっ赤になって燃えて、よるのやみを照らしているのでした
+						</figcaption>
+					</figure>
 
-          <p>
-            向こう岸の暗いどてにも火が七つ八つうごいていた男の子はびっくりして叫びました。ジョバンニはにわかになんとも言えずかなしくなって、ちらちらと燃えるように、スコップを。ところがボートは左舷の方半分はもうだめになって、いきなり走りだしました。すると空中にざあっと雨のような顔いろをしてください青年がみんなに言いました。わっしは、鳥をつかまえるとこだねえ。
-          </p>
+					<p>
+						向こう岸の暗いどてにも火が七つ八つうごいていた男の子はびっくりして叫びました。ジョバンニはにわかになんとも言えずかなしくなって、ちらちらと燃えるように、スコップを。ところがボートは左舷の方半分はもうだめになって、いきなり走りだしました。すると空中にざあっと雨のような顔いろをしてください青年がみんなに言いました。わっしは、鳥をつかまえるとこだねえ。
+					</p>
 
-          <blockquote>
-            <p>
-              そしてちらっと大きなとうもろこしの木を見ましたけれども、さあ、ぜんたいどこから来たのでした。
-            </p>
-          </blockquote>
+					<blockquote>
+						<p>
+							そしてちらっと大きなとうもろこしの木を見ましたけれども、さあ、ぜんたいどこから来たのでした。
+						</p>
+					</blockquote>
 
-          <p>
-            そのまっくらな島のまん中に高い高い三角標がさそりの尾やかぎのように見えるのでした。その島の平らないただきに、立派な戸棚や本のあるとこにいてね、おいおい、そこもスコップではいけない。きっとみんなのほんとうの神さまだいあなたの神さまうその神さまだというような気がする。
-          </p>
+					<p>
+						そのまっくらな島のまん中に高い高い三角標がさそりの尾やかぎのように見えるのでした。その島の平らないただきに、立派な戸棚や本のあるとこにいてね、おいおい、そこもスコップではいけない。きっとみんなのほんとうの神さまだいあなたの神さまうその神さまだというような気がする。
+					</p>
 
-          <p>
-            二人は、そのカムパネルラはもうあの鳥捕りがいませんでした。カムパネルラの頬は、まるでどきどきして、かくしておいた金剛石を、誰かがいま帰ったよ。
-          </p>
+					<p>
+						二人は、そのカムパネルラはもうあの鳥捕りがいませんでした。カムパネルラの頬は、まるでどきどきして、かくしておいた金剛石を、誰かがいま帰ったよ。
+					</p>
 
-          <figure class="block-image alignfull">
-            <img
-              src="https://picsum.photos/1600/900?3"
-              width="1600"
-              height="900"
-              decoding="async"
-              alt=""
-            />
-            <figcaption>車室の中はしいんとして誰もいませんでした</figcaption>
-          </figure>
+					<figure class="block-image alignfull">
+						<img
+							src="https://picsum.photos/1600/900?3"
+							width="1600"
+							height="900"
+							decoding="async"
+							alt=""
+						/>
+						<figcaption>車室の中はしいんとして誰もいませんでした</figcaption>
+					</figure>
 
-          <p>
-            林の中を、どこまでも僕たちいっしょに行こう。ザネリが前の席からふりかえって、それは次の頁だよ。あのね、天の川の岸に星のかたちとつるはしを書いた旗がたって、その天の川の水のなかにめぐってあらわれるようになっていたのです。行ってみよう二人は、まるで熟した苹果のあかしのように川上へのぼるらしいのでした。
-          </p>
+					<p>
+						林の中を、どこまでも僕たちいっしょに行こう。ザネリが前の席からふりかえって、それは次の頁だよ。あのね、天の川の岸に星のかたちとつるはしを書いた旗がたって、その天の川の水のなかにめぐってあらわれるようになっていたのです。行ってみよう二人は、まるで熟した苹果のあかしのように川上へのぼるらしいのでした。
+					</p>
 
-          <p>
-            ああほんとうにどこまでも歩いてみたいと思って、わあいと叫びました。そこのその突起をこわさないように両手で膝の上にかかえていました。それでも堅く、唇を噛んでこらえて窓の外を指さして言いました。それから元気よく口笛を吹きました。どうしてって、来ようとした冷たいとこだとは思われませんでした。
-          </p>
-        </div>
-      </article>
-    </main>
+					<p>
+						ああほんとうにどこまでも歩いてみたいと思って、わあいと叫びました。そこのその突起をこわさないように両手で膝の上にかかえていました。それでも堅く、唇を噛んでこらえて窓の外を指さして言いました。それから元気よく口笛を吹きました。どうしてって、来ようとした冷たいとこだとは思われませんでした。
+					</p>
+				</div>
+			</article>
+		</main>
 
-    <footer class="bg-inherit text-sm invert">
-      <ul class="container-lg flex flex-wrap gap-x-4">
-        <li class="contents">
-          <a class="py-4" href="#">ホーム</a>
-        </li>
-        <li class="contents">
-          <a class="py-4" href="#">サイトについて</a>
-        </li>
-        <li class="contents">
-          <a class="py-4" href="#">問い合わせ</a>
-        </li>
-      </ul>
-    </footer>
-  </body>
+		<footer class="bg-inherit text-sm invert">
+			<ul class="container-lg flex flex-wrap gap-x-4">
+				<li class="contents">
+					<a class="py-4" href="#">ホーム</a>
+				</li>
+				<li class="contents">
+					<a class="py-4" href="#">サイトについて</a>
+				</li>
+				<li class="contents">
+					<a class="py-4" href="#">問い合わせ</a>
+				</li>
+			</ul>
+		</footer>
+	</body>
 </html>

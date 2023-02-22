@@ -1,35 +1,35 @@
 :root .tweet-card {
-  @apply max-w-lg space-y-4 border-dynamic leading-tight shadow-none [--tc-corner-radius:theme(spacing.3)] [--tc-padding:theme(spacing.4)];
+	@apply max-w-lg space-y-4 border-dynamic leading-tight shadow-none [--tc-corner-radius:theme(spacing.3)] [--tc-padding:theme(spacing.4)];
 }
 
 :root .tweet-card img {
-  @apply ring-0;
+	@apply ring-0;
 }
 
 :root .tweet-header {
-  @apply grid-cols-[auto_1fr];
+	@apply grid-cols-[auto_1fr];
 }
 
 :root .tweet-profile img {
-  @apply w-10 ring-1;
+	@apply w-10 ring-1;
 }
 
 :root .tweet-author-name {
-  @apply w-fit text-sm;
+	@apply w-fit text-sm;
 }
 
 :root [class^="tweet-media"] {
-  @apply aspect-auto;
+	@apply aspect-auto;
 }
 
 :root .tweet-author-handle {
-  @apply w-fit text-xs text-dynamic-muted kerning-normal;
+	@apply w-fit text-xs text-dynamic-muted kerning-normal;
 }
 
 :root .tweet-link {
-  @apply rounded-lg bg-[#1DA1F2] px-3 py-1 text-sm text-white no-underline kerning-normal;
+	@apply rounded-lg bg-[#1DA1F2] px-3 py-1 text-sm text-white no-underline kerning-normal;
 }
 
 :root .tweet-link::after {
-  @apply content-none;
+	@apply content-none;
 }

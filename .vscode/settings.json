@@ -1,24 +1,24 @@
 {
-  /* Text Editor */
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.wordWrap": "on", // https://github.com/tailwindlabs/prettier-plugin-tailwindcss/issues/33
-  /* Text Editor > Formatting */
-  "editor.formatOnSave": true,
-  /* Text Editor > Suggestions */
-  "editor.quickSuggestions": {
-    "strings": true
-  },
-  /* Text Editor > Files */
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
-  /* Extensions > CSS Language Feature > CSS */
-  "css.validate": false,
-  /* Extensions > Emmet */
-  "emmet.includeLanguages": {
-    "tailwindcss": "css"
-  },
-  "tailwindCSS.emmetCompletions": true,
-  /* Extensions > CSS Language Feature > TypeScript */
-  "typescript.tsdk": "node_modules/typescript/lib"
+	/* Text Editor */
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.wordWrap": "on", // https://github.com/tailwindlabs/prettier-plugin-tailwindcss/issues/33
+	/* Text Editor > Formatting */
+	"editor.formatOnSave": true,
+	/* Text Editor > Suggestions */
+	"editor.quickSuggestions": {
+		"strings": true
+	},
+	/* Text Editor > Files */
+	"files.associations": {
+		"*.css": "tailwindcss"
+	},
+	/* Extensions > CSS Language Feature > CSS */
+	"css.validate": false,
+	/* Extensions > Emmet */
+	"emmet.includeLanguages": {
+		"tailwindcss": "css"
+	},
+	"tailwindCSS.emmetCompletions": true,
+	/* Extensions > CSS Language Feature > TypeScript */
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

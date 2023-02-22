@@ -1,69 +1,69 @@
 .prose {
-  > * + * {
-    @apply mt-[var(--prose-spacing,theme(spacing.6))];
-  }
+	> * + * {
+		@apply mt-[var(--prose-spacing,theme(spacing.6))];
+	}
 
-  * + :is(h2, hr, pre, figure, .codepen, .cp_embed_wrapper, .tweet-card, lite-youtube),
-  :is(hr, pre, figure, .codepen, .cp_embed_wrapper + script, .tweet-card, lite-youtube + script)
-    + * {
-    @apply [--prose-spacing:theme(spacing.10)];
-  }
+	* + :is(h2, hr, pre, figure, .codepen, .cp_embed_wrapper, .tweet-card, lite-youtube),
+	:is(hr, pre, figure, .codepen, .cp_embed_wrapper + script, .tweet-card, lite-youtube + script)
+		+ * {
+		@apply [--prose-spacing:theme(spacing.10)];
+	}
 
-  h2 {
-    @apply flex gap-x-3 text-xl font-bold leading-tight kerning-all;
-  }
+	h2 {
+		@apply flex gap-x-3 text-xl font-bold leading-tight kerning-all;
+	}
 
-  h3 {
-    @apply text-lg font-bold leading-tight;
-  }
+	h3 {
+		@apply text-lg font-bold leading-tight;
+	}
 
-  h3 + * {
-    @apply [--prose-spacing:theme(spacing.2)];
-  }
+	h3 + * {
+		@apply [--prose-spacing:theme(spacing.2)];
+	}
 
-  hr {
-    @apply max-w-[8em] border-t-4;
-  }
+	hr {
+		@apply max-w-[8em] border-t-4;
+	}
 
-  pre {
-    @apply -ml-[var(--container-margin-left)] -mr-[var(--container-margin-right)] pl-[var(--container-margin-left)] pr-[var(--container-margin-right)] text-sm leading-tight;
-  }
+	pre {
+		@apply -ml-[var(--container-margin-left)] -mr-[var(--container-margin-right)] pl-[var(--container-margin-left)] pr-[var(--container-margin-right)] text-sm leading-tight;
+	}
 
-  blockquote:not([class]) {
-    @apply ml-[2em] space-y-3;
-  }
+	blockquote:not([class]) {
+		@apply ml-[2em] space-y-3;
+	}
 
-  :is(ol, ul) {
-    @apply list-[revert] pl-[2em];
-  }
+	:is(ol, ul) {
+		@apply list-[revert] pl-[2em];
+	}
 
-  li {
-    @apply mt-1;
-  }
+	li {
+		@apply mt-1;
+	}
 
-  > :is(ol, ul) > li:first-child {
-    @apply mt-0;
-  }
+	> :is(ol, ul) > li:first-child {
+		@apply mt-0;
+	}
 
-  figure {
-    @apply space-y-3;
-  }
+	figure {
+		@apply space-y-3;
+	}
 
-  figcaption {
-    @apply text-sm;
-  }
+	figcaption {
+		@apply text-sm;
+	}
 
-  code::before,
-  code::after {
-    @apply content-["`"];
-  }
+	code::before,
+	code::after {
+		@apply content-["`"];
+	}
 
-  pre > code::before,
-  pre > code::after {
-    @apply content-none;
-  }
+	pre > code::before,
+	pre > code::after {
+		@apply content-none;
+	}
 
-  img {
-    @apply ring-1 ring-dynamic;
-  }
+	img {
+		@apply ring-1 ring-dynamic;
+	}
 }

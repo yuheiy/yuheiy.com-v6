@@ -8,27 +8,27 @@ import dayjs from "../lib/dayjs";
 const pageTitle = "ブログ";
 
 const allBlogEntries = (await getCollection("blog")).sort(
-  (a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf()
+	(a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf()
 );
 ---
 
 <Layout title={pageTitle}>
-  <div class="space-y-16">
-    <PageTitle title={pageTitle} />
+	<div class="space-y-16">
+		<PageTitle title={pageTitle} />
 
-    <div class="border-t"></div>
+		<div class="border-t"></div>
 
-    <div class="container">
-      <DetailsList
-        items={allBlogEntries.map((entry) => ({
-          title: entry.data.title,
-          link: `/${entry.slug}`,
-          meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
+		<div class="container">
+			<DetailsList
+				items={allBlogEntries.map((entry) => ({
+					title: entry.data.title,
+					link: `/${entry.slug}`,
+					meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
 						${dayjs(entry.data.publishDate).tz().format("LL")}
 					</time>`,
-        }))}
-        ordered={true}
-      />
-    </div>
-  </div>
+				}))}
+				ordered={true}
+			/>
+		</div>
+	</div>
 </Layout>
