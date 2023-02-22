@@ -11,4 +11,4 @@ dayjs.extend(timezone);
 dayjs.locale("ja");
 dayjs.tz.setDefault("Asia/Tokyo");
 
-export default dayjs;
+export { default } from "dayjs";
