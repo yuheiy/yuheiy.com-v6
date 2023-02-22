@@ -51,9 +51,7 @@ function rehypeImageAttributesOverride() {
         name: "Image",
       },
       (node) => {
-        const isLoadingAttributeSet = Boolean(
-          node.attributes.find(({ name }) => name === "loading")
-        );
+        const isLoadingAttributeSet = node.attributes.some(({ name }) => name === "loading");
 
         if (!isLoadingAttributeSet) {
           node.attributes.push({
