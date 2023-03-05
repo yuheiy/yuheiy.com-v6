@@ -13,7 +13,7 @@ const parser = loadDefaultJapaneseParser();
 
 <Component class="container space-y-8 @container">
 	<h1
-		class="text-2xl font-bold leading-tight kerning-all @sm:[word-break:keep-all]"
+		class="text-2xl font-bold leading-tight kerning-all [text-wrap:balance] @sm:[word-break:keep-all]"
 		set:html={parser.parse(title).join(`<wbr class="hidden @sm:inline">`)}
 	/>
 	<slot />
