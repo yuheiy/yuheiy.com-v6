@@ -32,9 +32,6 @@ let canonicalURL: URL | null = new URL(normalizedPathname, Astro.site);
 if (is404) {
 	canonicalURL = null;
 }
-
-const searchURL = new URL("https://www.google.com/search");
-searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 ---
 
 <html
@@ -68,7 +65,6 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		{canonicalURL && <link rel="canonical" href={canonicalURL} />}
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-		<link rel="search" href={searchURL} />
 	</head>
 
 	<body class="min-h-[100dvh] bg-dynamic text-dynamic">
