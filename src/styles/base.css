@@ -35,3 +35,7 @@ em {
 [id] {
 	@apply scroll-mt-4;
 }
+
+:focus {
+	@apply scroll-my-4;
+}
