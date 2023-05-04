@@ -12,12 +12,12 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, remarkPluginFrontmatter } = await entry.render();
 ---
 
 <Layout
 	title={entry.data.title}
-	description={entry.data.description}
+	description={remarkPluginFrontmatter.description}
 	ogImageURL={entry.data.ogImageURL!}
 	ogType="article"
 	twitterCard={entry.data.twitterCard!}
