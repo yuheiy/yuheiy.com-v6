@@ -4,7 +4,8 @@
 		"dev": "astro dev",
 		"build": "tsc && astro build",
 		"preview": "astro preview",
-		"format": "prettier --write ."
+		"lint": "prettier --check . && xo",
+		"fix": "prettier --write . && xo --fix"
 	},
 	"devDependencies": {
 		"@astrojs/image": "0.16.7",
@@ -27,10 +28,34 @@
 		"prettier-plugin-tailwindcss": "0.2.8",
 		"tailwindcss": "3.3.2",
 		"unist-util-select": "4.0.3",
-		"unist-util-visit": "4.1.2"
+		"unist-util-visit": "4.1.2",
+		"xo": "0.54.2"
 	},
 	"engines": {
 		"node": "18"
 	},
-	"private": true
+	"private": true,
+	"xo": {
+		"prettier": true,
+		"rules": {
+			"import/order": [
+				"error",
+				{
+					"groups": [
+						"builtin",
+						"external",
+						"parent",
+						"sibling",
+						"index"
+					],
+					"newlines-between": "never",
+					"alphabetize": {
+						"order": "asc"
+					},
+					"warnOnUnassignedImports": true
+				}
+			],
+			"import/no-anonymous-default-export": "off"
+		}
+	}
 }
