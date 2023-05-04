@@ -1,8 +1,9 @@
-import { defineConfig } from "astro/config";
 import image from "@astrojs/image";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
+// eslint-disable-next-line n/file-extension-in-import
+import { defineConfig } from "astro/config";
 import { toString } from "mdast-util-to-string";
 import { select } from "unist-util-select";
 import { visit } from "unist-util-visit";
@@ -60,7 +61,7 @@ function rehypeImageAttributesOverride() {
 						value: "eager",
 					});
 				}
-			}
+			},
 		);
 	};
 }

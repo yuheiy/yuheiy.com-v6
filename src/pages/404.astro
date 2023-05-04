@@ -24,6 +24,6 @@ searchURL.searchParams.set("q", `site:${Astro.site!.host}`);
 
 <script>
 	document.querySelector<HTMLAnchorElement>(
-		".js-internet-archive"
+		".js-internet-archive",
 	)!.href = `https://web.archive.org/web/*/${location.href}`;
 </script>

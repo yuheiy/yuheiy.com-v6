@@ -5,7 +5,7 @@ import DetailsList from "../components/DetailsList.astro";
 import Layout from "../components/Layout.astro";
 import PageTitle from "../components/PageTitle.astro";
 import dayjs from "../lib/dayjs";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { siteDescription, siteTitle } from "../consts";
 
 const everylayoutEntry = await getEntryBySlug("blog", "20211011-publication-of-everylayout");
 
@@ -58,7 +58,7 @@ function toDetailsListItem(entry: CollectionEntry<"blog">) {
 	return {
 		title: entry.data.title,
 		link: `/${entry.slug}`,
-		meta: SITE_TITLE,
+		meta: siteTitle,
 	};
 }
 
@@ -114,15 +114,15 @@ function getProjectDateHtml(date: Dayjs) {
 }
 
 const blogEntries = (await getCollection("blog")).sort(
-	(a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf()
+	(a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf(),
 );
 ---
 
-<Layout description={SITE_DESCRIPTION}>
+<Layout description={siteDescription}>
 	<div class="space-y-16">
 		<PageTitle title="安田 祐平">
 			<div class="space-y-4 text-dynamic-muted [&_a:any-link]:text-dynamic">
-				<p>{SITE_DESCRIPTION}</p>
+				<p>{siteDescription}</p>
 				<p
 					set:html={`監訳を担当した書籍『<a href="/${everylayoutEntry.slug}">Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a>』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a>。`}
 				/>

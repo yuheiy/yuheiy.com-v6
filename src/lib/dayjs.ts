@@ -1,8 +1,9 @@
-import "dayjs/locale/ja";
 import dayjs from "dayjs";
+// eslint-disable-next-line import/no-unassigned-import
+import "dayjs/locale/ja";
 import localizedFormat from "dayjs/plugin/localizedFormat";
-import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 
 dayjs.extend(localizedFormat);
 dayjs.extend(utc);
