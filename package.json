@@ -2,7 +2,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "astro dev",
-		"build": "tsc && astro build",
+		"build": "astro build",
 		"preview": "astro preview",
 		"lint": "organize-imports-cli --list-different tsconfig.json && prettier --check . && xo",
 		"fix": "organize-imports-cli tsconfig.json && prettier --write . && xo --fix",
