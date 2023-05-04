@@ -61,7 +61,7 @@ export default {
 			dark: {
 				backgroundColor: {
 					DEFAULT: colors.zinc["900"],
-					variant: colors.zinc["800"],
+					variant: colors.zinc["950"],
 				},
 				borderColor: {
 					DEFAULT: colors.zinc["700"],
