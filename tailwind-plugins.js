@@ -1,9 +1,9 @@
-const extend = require("just-extend");
-const set = require("just-safe-set");
-const plugin = require("tailwindcss/plugin");
-const { parseColor } = require("tailwindcss/lib/util/color");
+import extend from "just-extend";
+import set from "just-safe-set";
+import plugin from "tailwindcss/plugin.js";
+import Color from "tailwindcss/lib/util/color.js";
 
-const container = plugin(function ({ addBase, addComponents }) {
+export const container = plugin(function ({ addBase, addComponents }) {
 	addBase({
 		":root": {
 			"--container-width": "46rem",
@@ -28,7 +28,7 @@ const container = plugin(function ({ addBase, addComponents }) {
 	});
 });
 
-const dynamicColors = plugin.withOptions(
+export const dynamicColors = plugin.withOptions(
 	function (options) {
 		const styles = {
 			":root": {
@@ -59,7 +59,7 @@ function generateDeclarations(settings) {
 	return declarations;
 
 	function walk(object, path) {
-		const parsedColor = parseColor(object);
+		const parsedColor = Color.parseColor(object);
 		if (parsedColor) {
 			const variableName = `--dynamic-color-${path.join("-")}`;
 			declarations[variableName] = parsedColor.color.join(" ");
@@ -95,7 +95,7 @@ function generateTheme(settings) {
 }
 
 // https://github.com/w3c/csswg-drafts/issues/6723#issuecomment-1411487571
-const kerning = plugin(function ({ addUtilities }) {
+export const kerning = plugin(function ({ addUtilities }) {
 	addUtilities({
 		".kerning-none": {
 			fontKerning: "none",
@@ -111,9 +111,3 @@ const kerning = plugin(function ({ addUtilities }) {
 		},
 	});
 });
-
-module.exports = {
-	container,
-	dynamicColors,
-	kerning,
-};
