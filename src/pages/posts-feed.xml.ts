@@ -12,11 +12,18 @@ export async function get(context: any) {
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
 		site: context.site,
-		items: blogEntries.map((entry) => ({
-			title: entry.data.title,
-			pubDate: entry.data.publishDate as any,
-			description: (entry.data as any).description,
-			link: new URL(`/${entry.slug}`, import.meta.env.SITE).toString(),
-		})),
+
+		items: await Promise.all(
+			blogEntries.map(async (entry) => {
+				const { remarkPluginFrontmatter } = await entry.render();
+				return {
+					link: `/${entry.slug}`,
+					title: entry.data.title,
+					pubDate: dayjs(entry.data.publishDate).tz().toDate(),
+					description: remarkPluginFrontmatter.description,
+				};
+			})
+		),
+		trailingSlash: false,
 	});
 }
