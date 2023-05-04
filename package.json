@@ -5,7 +5,8 @@
 		"build": "tsc && astro build",
 		"preview": "astro preview",
 		"lint": "organize-imports-cli --list-different tsconfig.json && prettier --check . && xo",
-		"fix": "organize-imports-cli tsconfig.json && prettier --write . && xo --fix"
+		"fix": "organize-imports-cli tsconfig.json && prettier --write . && xo --fix",
+		"postinstall": "patch-package"
 	},
 	"devDependencies": {
 		"@astrojs/image": "0.16.7",
@@ -23,6 +24,7 @@
 		"just-safe-set": "4.2.1",
 		"mdast-util-to-string": "3.2.0",
 		"organize-imports-cli": "0.10.0",
+		"patch-package": "7.0.0",
 		"postcss-import": "15.1.0",
 		"prettier": "2.8.8",
 		"prettier-plugin-astro": "0.8.0",
