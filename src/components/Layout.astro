@@ -1,6 +1,8 @@
 ---
-import "../styles/main.css";
+import { Image } from "@astrojs/image/components";
 import { SITE_TITLE } from "../consts";
+import faviconImage from "../favicon.svg";
+import "../styles/main.css";
 
 export interface Props {
 	title?: string;
@@ -64,21 +66,14 @@ if (is404) {
 		<link rel="alternate" href="/posts-feed.xml" type="application/rss+xml" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		{canonicalURL && <link rel="canonical" href={canonicalURL} />}
-		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="icon" href={faviconImage.src} type="image/svg+xml" />
 	</head>
 
 	<body class="min-h-[100dvh] bg-dynamic text-dynamic">
 		<header class="container mb-8 pt-16 text-sm text-dynamic-muted kerning-normal">
 			<p>
 				<a class="flex w-fit items-center gap-x-3" href={Astro.url.pathname !== "/" ? "/" : null}>
-					<img
-						class="w-7 rounded-full ring-1 ring-dynamic"
-						src="/favicon.svg"
-						width="48"
-						height="48"
-						alt=""
-						decoding="async"
-					/>
+					<Image class="w-7 rounded-full ring-1 ring-dynamic" src={faviconImage} alt="" />
 					{SITE_TITLE}
 				</a>
 			</p>
