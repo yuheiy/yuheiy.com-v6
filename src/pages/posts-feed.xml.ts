@@ -4,16 +4,15 @@ import dayjs from "../lib/dayjs.js";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
 export async function get(context: any) {
-	const allBlogEntries = await getCollection("blog");
-	allBlogEntries.sort(
+	const blogEntries = await getCollection("blog");
+	blogEntries.sort(
 		(a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf()
 	);
-
 	return rss({
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
 		site: context.site,
-		items: allBlogEntries.map((entry) => ({
+		items: blogEntries.map((entry) => ({
 			title: entry.data.title,
 			pubDate: entry.data.publishDate as any,
 			description: (entry.data as any).description,

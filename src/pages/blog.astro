@@ -5,22 +5,22 @@ import Layout from "../components/Layout.astro";
 import PageTitle from "../components/PageTitle.astro";
 import dayjs from "../lib/dayjs";
 
-const pageTitle = "ブログ";
+const title = "ブログ";
 
-const allBlogEntries = (await getCollection("blog")).sort(
+const blogEntries = (await getCollection("blog")).sort(
 	(a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf()
 );
 ---
 
-<Layout title={pageTitle}>
+<Layout title={title}>
 	<div class="space-y-16">
-		<PageTitle title={pageTitle} />
+		<PageTitle title={title} />
 
 		<div class="border-t"></div>
 
 		<div class="container">
 			<DetailsList
-				items={allBlogEntries.map((entry) => ({
+				items={blogEntries.map((entry) => ({
 					title: entry.data.title,
 					link: `/${entry.slug}`,
 					meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">

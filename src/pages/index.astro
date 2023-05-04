@@ -113,7 +113,7 @@ function getProjectDateHtml(date: Dayjs) {
 	return `<time datetime="${date.tz().format("YYYY-MM")}">${date.tz().format("YYYY年M月")}</time>`;
 }
 
-const allBlogEntries = (await getCollection("blog")).sort(
+const blogEntries = (await getCollection("blog")).sort(
 	(a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf()
 );
 ---
@@ -151,7 +151,7 @@ const allBlogEntries = (await getCollection("blog")).sort(
 			<h2 class="mb-10 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
 
 			<DetailsList
-				items={allBlogEntries.slice(0, 3).map((entry) => ({
+				items={blogEntries.slice(0, 3).map((entry) => ({
 					title: entry.data.title,
 					link: `/${entry.slug}`,
 					meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
