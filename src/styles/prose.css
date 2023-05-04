@@ -1,6 +1,6 @@
 .prose {
 	> * + * {
-		@apply mt-[var(--prose-spacing,theme(spacing.6))];
+		@apply mt-[--prose-spacing,theme(spacing.6)];
 	}
 
 	* + :is(h2, hr, pre, figure, .codepen, .cp_embed_wrapper, .tweet-card, lite-youtube),
@@ -26,7 +26,7 @@
 	}
 
 	pre {
-		@apply -ml-[var(--container-margin-left)] -mr-[var(--container-margin-right)] pl-[var(--container-margin-left)] pr-[var(--container-margin-right)] text-sm leading-tight;
+		@apply -ml-[--container-margin-left] -mr-[--container-margin-right] pl-[--container-margin-left] pr-[--container-margin-right] text-sm leading-tight;
 	}
 
 	blockquote:not([class]) {
