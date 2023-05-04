@@ -1,7 +1,7 @@
 import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
 import { getCollection } from "astro:content";
-import { siteTitle, siteDescription } from "../consts.js";
+import { siteDescription, siteTitle } from "../consts.js";
 import dayjs from "../lib/dayjs.js";
 
 export async function get(context: APIContext) {

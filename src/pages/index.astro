@@ -4,8 +4,8 @@ import type { Dayjs } from "dayjs";
 import DetailsList from "../components/DetailsList.astro";
 import Layout from "../components/Layout.astro";
 import PageTitle from "../components/PageTitle.astro";
-import dayjs from "../lib/dayjs";
 import { siteDescription, siteTitle } from "../consts";
+import dayjs from "../lib/dayjs.js";
 
 const everylayoutEntry = await getEntryBySlug("blog", "20211011-publication-of-everylayout");
 
