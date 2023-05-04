@@ -1,9 +1,9 @@
-import extend from "just-extend";
-import set from "just-safe-set";
-import plugin from "tailwindcss/plugin.js";
-import Color from "tailwindcss/lib/util/color.js";
+const extend = require("just-extend");
+const set = require("just-safe-set");
+const { parseColor } = require("tailwindcss/lib/util/color");
+const plugin = require("tailwindcss/plugin");
 
-export const container = plugin(function ({ addBase, addComponents }) {
+const container = plugin(function ({ addBase, addComponents }) {
 	addBase({
 		":root": {
 			"--container-width": "46rem",
@@ -28,7 +28,7 @@ export const container = plugin(function ({ addBase, addComponents }) {
 	});
 });
 
-export const dynamicColors = plugin.withOptions(
+const dynamicColors = plugin.withOptions(
 	function (options) {
 		const styles = {
 			":root": {
@@ -50,7 +50,7 @@ export const dynamicColors = plugin.withOptions(
 				extend: generateTheme(settings),
 			},
 		};
-	}
+	},
 );
 
 function generateDeclarations(settings) {
@@ -59,7 +59,7 @@ function generateDeclarations(settings) {
 	return declarations;
 
 	function walk(object, path) {
-		const parsedColor = Color.parseColor(object);
+		const parsedColor = parseColor(object);
 		if (parsedColor) {
 			const variableName = `--dynamic-color-${path.join("-")}`;
 			declarations[variableName] = parsedColor.color.join(" ");
@@ -83,7 +83,7 @@ function generateTheme(settings) {
 			set(
 				theme,
 				[path[0], "dynamic", ...path.slice(1)],
-				`rgb(var(${variableName}) / <alpha-value>)`
+				`rgb(var(${variableName}) / <alpha-value>)`,
 			);
 			return;
 		}
@@ -95,7 +95,7 @@ function generateTheme(settings) {
 }
 
 // https://github.com/w3c/csswg-drafts/issues/6723#issuecomment-1411487571
-export const kerning = plugin(function ({ addUtilities }) {
+const kerning = plugin(function ({ addUtilities }) {
 	addUtilities({
 		".kerning-none": {
 			fontKerning: "none",
@@ -111,3 +111,9 @@ export const kerning = plugin(function ({ addUtilities }) {
 		},
 	});
 });
+
+module.exports = {
+	container,
+	dynamicColors,
+	kerning,
+};

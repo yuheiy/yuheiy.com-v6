@@ -1,9 +1,8 @@
-import containerQueries from '@tailwindcss/container-queries'
-import colors from "tailwindcss/colors.js"
-import { container, dynamicColors, kerning } from "./tailwind-plugins.js";
+const colors = require("tailwindcss/colors");
+const { container, dynamicColors, kerning } = require("./tailwind-plugins.cjs");
 
-/** @type {import('tailwindcss').Config} */
-export default {
+/** @type {import("tailwindcss").Config} */
+module.exports = {
 	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 	theme: {
 		fontSize: {
@@ -36,7 +35,7 @@ export default {
 		container: false,
 	},
 	plugins: [
-		containerQueries,
+		require("@tailwindcss/container-queries"),
 		container,
 		dynamicColors({
 			light: {
@@ -61,7 +60,7 @@ export default {
 			dark: {
 				backgroundColor: {
 					DEFAULT: colors.zinc["900"],
-					variant: colors.zinc["950"],
+					variant: colors.zinc["800"],
 				},
 				borderColor: {
 					DEFAULT: colors.zinc["700"],
@@ -80,4 +79,4 @@ export default {
 		}),
 		kerning,
 	],
-}
+};
