@@ -4,8 +4,8 @@
 		"dev": "astro dev",
 		"build": "astro check && tsc && astro build",
 		"preview": "astro preview",
-		"lint": "organize-imports-cli --list-different tsconfig.json && prettier --check . && xo",
-		"fix": "organize-imports-cli tsconfig.json && prettier --write . && xo --fix",
+		"lint": "prettier --check . && xo",
+		"fix": "prettier --write . && xo --fix",
 		"postinstall": "patch-package"
 	},
 	"devDependencies": {
@@ -23,7 +23,6 @@
 		"just-extend": "6.2.0",
 		"just-safe-set": "4.2.1",
 		"mdast-util-to-string": "3.2.0",
-		"organize-imports-cli": "0.10.0",
 		"patch-package": "7.0.0",
 		"postcss-import": "15.1.0",
 		"prettier": "2.8.8",
