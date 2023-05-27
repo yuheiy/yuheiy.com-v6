@@ -1,20 +1,21 @@
 ---
 import { loadDefaultJapaneseParser } from "budoux";
+import { HTMLTag, Polymorphic } from "astro/types";
 
-export interface Props {
-	Component?: keyof HTMLElementTagNameMap;
+type Props<Tag extends HTMLTag> = Polymorphic<{
+	as: Tag;
 	title: string;
-}
+}>;
 
-const { Component = "div", title } = Astro.props as Props;
+const { as: Tag = "div", title } = Astro.props;
 
 const parser = loadDefaultJapaneseParser();
 ---
 
-<Component class="container space-y-8 @container">
+<Tag class="container space-y-8 @container">
 	<h1
 		class="text-2xl font-bold leading-tight kerning-all [text-wrap:balance] @sm:[word-break:keep-all]"
 		set:html={parser.parse(title).join(`<wbr class="hidden @sm:inline">`)}
 	/>
 	<slot />
-</Component>
+</Tag>
