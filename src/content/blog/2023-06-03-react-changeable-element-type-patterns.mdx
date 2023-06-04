@@ -650,6 +650,25 @@ render(
 
 [Base UI](https://mui.com/base/getting-started/overview/)では、[コンポーネントの内部の構造まで上書きすることができる`slots` propおよび`slotProps` propが提供されている](https://mui.com/base/guides/overriding-component-structure/)。
 
+<figure>
+```jsx
+<Select slots={{ listbox: 'ol' }} defaultValue="First option">
+  <Option value="First option">First option</Option>
+  <Option value="Second option">Second option</Option>
+</Select>
+```
+
+<figcaption>[Overriding component structure - Base UI](https://mui.com/base/guides/overriding-component-structure/#the-slots-prop)</figcaption>
+</figure>
+
+<figure>
+```jsx
+<Badge slotProps={{ badge: { className: 'my-badge' } }} />
+```
+
+<figcaption>[Overriding component structure - Base UI](https://mui.com/base/guides/overriding-component-structure/#the-slotprops-prop)</figcaption>
+</figure>
+
 `as` propではルートのコンポーネントしか変更できなかったのに対して、Base UIの`slots` propでは、そのコンポーネントの内部のサブコンポーネントまで変更することができる。`slotProps` propを使えば、ルートおよびサブコンポーネントのpropsを変更できる。
 
 `asChild` propやAriakitの`render` propをベースとした設計では、提供するコンポーネントは細かく分割する必要があり、それらを組み合わせて使うことがユーザー側の責務になる。一方、Base UIの`slots` propおよび`slotProps` propを前提とすると、提供するコンポーネント自体を細分化する必要はなくなるため、ユーザーが組み合わせて使う負荷は軽減される。
