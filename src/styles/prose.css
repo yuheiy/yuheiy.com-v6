@@ -10,7 +10,7 @@
 	}
 
 	h2 {
-		@apply flex gap-x-3 text-xl font-bold leading-tight kerning-all;
+		@apply text-xl font-bold leading-tight kerning-all;
 	}
 
 	h3 {
@@ -65,5 +65,9 @@
 
 	img {
 		@apply ring-1 ring-dynamic;
+	}
+
+	details {
+		@apply space-y-3;
 	}
 }
