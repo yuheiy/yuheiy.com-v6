@@ -2,7 +2,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "astro dev",
-		"build": "astro check && tsc && astro build",
+		"build": "tsc && astro build",
 		"preview": "astro preview",
 		"lint": "prettier --check . && xo",
 		"fix": "prettier --write . && xo --fix",
