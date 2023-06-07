@@ -3,7 +3,7 @@
 		@apply mt-[--prose-spacing,theme(spacing.6)];
 	}
 
-	* + :is(h2, hr, pre, figure, .codepen, .cp_embed_wrapper, .tweet-card, lite-youtube),
+	* + :is(h2, h3, hr, pre, figure, .codepen, .cp_embed_wrapper, .tweet-card, lite-youtube),
 	:is(hr, pre, figure, .codepen, .cp_embed_wrapper + script, .tweet-card, lite-youtube + script)
 		+ * {
 		@apply [--prose-spacing:theme(spacing.10)];
@@ -15,10 +15,6 @@
 
 	h3 {
 		@apply text-lg font-bold leading-tight;
-	}
-
-	h3 + * {
-		@apply [--prose-spacing:theme(spacing.4)];
 	}
 
 	hr {
