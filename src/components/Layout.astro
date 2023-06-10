@@ -1,5 +1,4 @@
 ---
-import { Image } from "@astrojs/image/components";
 import { siteTitle } from "../consts";
 import faviconImage from "../favicon.svg";
 import "../styles/main.css";
@@ -73,7 +72,13 @@ if (is404) {
 		<header class="container mb-8 pt-16 text-sm text-dynamic-muted kerning-normal">
 			<p>
 				<a class="flex w-fit items-center gap-x-3" href={Astro.url.pathname !== "/" ? "/" : null}>
-					<Image class="w-7 rounded-full ring-1 ring-dynamic" src={faviconImage} alt="" />
+					<img
+						class="w-7 rounded-full ring-1 ring-dynamic"
+						src={faviconImage.src}
+						width={faviconImage.width}
+						height={faviconImage.height}
+						alt=""
+					/>
 					{siteTitle}
 				</a>
 			</p>

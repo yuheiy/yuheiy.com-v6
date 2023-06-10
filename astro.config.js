@@ -1,4 +1,3 @@
-import image from "@astrojs/image";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
@@ -9,6 +8,9 @@ import { select } from "unist-util-select";
 import { visit } from "unist-util-visit";
 
 export default defineConfig({
+	experimental: {
+		assets: true,
+	},
 	site: "https://yuheiy.com/",
 	trailingSlash: "never",
 	build: {
@@ -20,7 +22,6 @@ export default defineConfig({
 		},
 	},
 	integrations: [
-		image(),
 		mdx({
 			remarkPlugins: [remarkInjectDescription],
 			rehypePlugins: [rehypeImageAttributesOverride],

@@ -3,14 +3,16 @@ title: テキストの行の末尾に付随するアイコンをアイコンだ�
 publishDate: "2022-08-11T20:25:00.000+09:00"
 ---
 
-import { Image } from '@astrojs/image/components';
+import { Image } from "astro:assets";
 import { Tweet } from 'astro-embed';
 
 テキストの行の末尾にアイコンを付随させるというレイアウトがある。
 
+import _1Image from './assets/2022-08-11-text-with-accompanying-icon/1.png'
+
 <figure>
 	<Image
-		src={import('./assets/2022-08-11-text-with-accompanying-icon/1.png')}
+		src={_1Image}
 		alt=""
 		style="width: calc(716/2/16*1rem);"
 	/>
@@ -24,9 +26,11 @@ import { Tweet } from 'astro-embed';
 
 しかし、その空間の大きさやテキストの分量によっては、末尾のアイコンだけが改行してしまって不恰好に見えることがある。
 
+import _2Image from './assets/2022-08-11-text-with-accompanying-icon/2.png'
+
 <figure>
 	<Image
-		src={import('./assets/2022-08-11-text-with-accompanying-icon/2.png')}
+		src={_2Image}
 		alt=""
 		style="width: calc(780/2/16*1rem);"
 	/>

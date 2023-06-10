@@ -3,7 +3,7 @@ title: ボタンの最低幅を設定しつつ、かつコンテナが縮小し�
 publishDate: "2022-08-12T15:40:00.000+09:00"
 ---
 
-import { Image } from '@astrojs/image/components';
+import { Image } from "astro:assets";
 
 ボタンのラベルが短い場合でも、ボタン自体には最低限ある程度の幅を持たせたいという場合がある。そんなときには、ボタン自体に`min-width`を指定して最低幅を設定する。
 
@@ -15,9 +15,11 @@ button {
 
 しかし、そのボタンを配置するコンテナの幅が、ボタン自体の`min-width`の値よりも狭くなってしまうこともある。すると、ボタンがコンテナをはみ出してしまう。
 
+import _1Image from './assets/2022-08-12-shrinkable-min-width/1.png'
+
 <figure>
 	<Image
-		src={import("./assets/2022-08-12-shrinkable-min-width/1.png")}
+		src={_1Image}
 		alt=""
 		style="width: calc(840/2/16*1rem);"
 	/>

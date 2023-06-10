@@ -5,7 +5,6 @@ ogImageURL: /assets/2023-02-06-tailwind-css-in-wdpress/ogp.png
 twitterCard: summary_large_image
 ---
 
-import { Image } from '@astrojs/image/components';
 import { Tweet } from 'astro-embed';
 
 2023年2月24日発売の「[WEB+DB PRESS Vol.133](https://gihyo.jp/magazine/wdpress/archive/2023/vol133)」に特集「Tailwind CSS実践入門&mdash;&mdash;まず作ってから、あとで共通化する」を寄稿しました。
@@ -46,12 +45,7 @@ Tailwind CSSについて語るには、いくつもの論点があります。�
 これを使って、頭の中にある考えを一つ一つアウトプットしました。
 
 <figure>
-	<Image
-		class="shadow-none"
-		src={import("./assets/2023-02-06-tailwind-css-in-wdpress/heptabase.png")}
-		alt="小さく表示されたカードが情報の関連性ごとに近接して配置されている。カード同士が線で繋がれたりもしている"
-		title="Heptabaseのスクリーンショット"
-	/>
+	![小さく表示されたカードが情報の関連性ごとに近接して配置されている。カード同士が線で繋がれたりもしている](./assets/2023-02-06-tailwind-css-in-wdpress/heptabase.png "Heptabaseのスクリーンショット")
 </figure>
 
 思考の断片をこのように可視化することで、自分の考えの全貌が少しずつ見えてきました。頭の中から一度に取り出せる情報はごく限られていますが、少しずつ外部化していくことによって、全体のつながりが明らかになってきました。

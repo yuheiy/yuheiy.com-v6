@@ -5,26 +5,18 @@ ogImageURL: /assets/2022-11-03-how-to-understand-the-markup/ogp.png
 twitterCard: summary_large_image
 ---
 
-import { Image } from '@astrojs/image/components';
-
 この記事は、2022年10月28日に開催された[DIST.37「マークアップな夜」](https://dist.connpass.com/event/261960/)での発表「マークアップのわかり方」をもとにしたものです。当日は話せなかった内容も大幅に追加しています。
 
 ---
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/001.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/001.png)
 </figure>
 
 現代における「マークアップ」とはどのような行為なのか。いかにそれと向き合っていけばいいのか。そういったことについて考えてみます。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/002.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/002.png)
 </figure>
 
 マークアップの議論においては、「マークアップには正解がない」という意見が決まって出ます。正解がないと言うならば、たいていなんであってもそうです。たとえばCSSやJavaScriptの書き方には「正解」があるのかと考えてみると、必ずしもそうではありません。
@@ -32,19 +24,13 @@ import { Image } from '@astrojs/image/components';
 しかし、ことさらマークアップにおいてこれがよく言われる理由としては、妥当性を判断する基準がわからない、ということでしょう。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/003.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/003.png)
 </figure>
 
 というのも、CSSなら望む通りの見た目になればとりあえずOKだし、JavaScriptでも意図した通りの振る舞いをすればまあいいだろう、という判断ができます。けれどHTMLでは、`div`を使おうが`button`を使おうが、何が変わるのかがその場でわからなくてどうしようもないのかもしれません。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/004.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/004.png)
 	<figcaption>[Showing results for https://dist.connpass.com/event/261960/ - Nu Html Checker](https://validator.w3.org/nu/?doc=https%3A%2F%2Fdist.connpass.com%2Fevent%2F261960%2F)</figcaption>
 </figure>
 
@@ -55,10 +41,7 @@ HTMLにはチェッカーがありますから、もし構文エラーをして�
 一方でマークアップにおいては、非常に文脈的な解釈が必要になる場面があります。HTMLの性質からして、定義の幅を狭く固定するということがなされていないので、状況に応じてその場その場の個別解を導き出すことが重要になります。したがって、個々人の考えをもって正解を決めるしかないのです。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/005.jpg")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/005.jpg)
 </figure>
 
 一つ例を挙げます。私の家の近所にはインドカレー屋がありますが、その周りにはいくつか立て看板のようなものがあります。そこで、店自体をウェブサイトとして、看板はウェブページとして捉えてみると、マークアップにおいてはどのように考えて判断できるでしょうか。
@@ -66,10 +49,7 @@ HTMLにはチェッカーがありますから、もし構文エラーをして�
 最初にマークアップすべきは、看板右上にあるこの店のロゴです。明らかにこれがサイトのシンボルだと思います。ウェブサイトで言うところのヘッダーなので`header`としつつ、その中に入るロゴは画像なので`img`です。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/006.jpg")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/006.jpg)
 </figure>
 
 ```html
@@ -85,10 +65,7 @@ HTMLにはチェッカーがありますから、もし構文エラーをして�
 続いて看板の左上には、大きな文字で「Take Out Menu」「お弁当メニュー」とあります。ここからはページ固有の要素と言えるでしょう。外側は`main`で囲いつつ、「Take Out Menu」は`h1`にします。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/007.jpg")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/007.jpg)
 </figure>
 
 ```html
@@ -107,10 +84,7 @@ HTMLにはチェッカーがありますから、もし構文エラーをして�
 それらに続いて「インド料理のお弁当」という見出しがあり、お弁当の種類がカード状に並んでいます。カードが六つあるので、これらを`ul`でまとめてしまうのがよさそうに見えます。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/008.jpg")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/008.jpg)
 </figure>
 
 ```html
@@ -130,10 +104,7 @@ HTMLにはチェッカーがありますから、もし構文エラーをして�
 ところが最後の六つ目のカードを見ると、これだけ少し違った内容になっています。それ以外のカードは、「カレーライス弁当」「インド弁当」「ナン付きカレーライス弁当」という風になっているのに、六つ目のカードだけ、「ナンお持ち帰り」「ライス・麺の大盛り」とあります。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/009.jpg")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/009.jpg)
 </figure>
 
 これらは情報の種類としては別物なので、別の項目に分けて扱いたいところです。同じ項目としてまとめられていると、弁当が六種類あるように勘違いしてしまうからです。
@@ -203,10 +174,7 @@ HTMLでは、それぞれの要素などをどう使うのかは一応定義さ�
 関連するところとして、以前、HTMLの語彙を使って情報構造を考えるという発表をしたことがあります。そちらもご覧ください。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/010.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/010.png)
 	<figcaption>[制作者のためのHTML](https://yuheiy.github.io/html-for-creators/)</figcaption>
 </figure>
 
@@ -215,10 +183,7 @@ HTMLでは、それぞれの要素などをどう使うのかは一応定義さ�
 最近では、HTML仕様をわかりやすく正確に解説した書籍『HTML解体新書』がありますので、まずはこちらを読んでいただくのがおすすめです。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/011.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/011.png)
 	<figcaption>[HTML解体新書 | ボーンデジタル](https://www.borndigital.co.jp/book/25999.html)</figcaption>
 </figure>
 
@@ -227,10 +192,7 @@ HTMLでは、それぞれの要素などをどう使うのかは一応定義さ�
 ブラウザでHTML文書を表示すると、それがDOMツリーに変換された上でページが描画されます。その際同時に、DOMツリーをもとにしてアクセシビリティツリーと呼ばれる構造が生成されています。スクリーンリーダーのユーザーは、OSを経由してアクセシビリティツリーにアクセスすることによってページを利用しています。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/012.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/012.png)
 	<figcaption>[Accessibility Object Model | aom](https://wicg.github.io/aom/explainer.html)</figcaption>
 </figure>
 
@@ -239,20 +201,14 @@ HTMLでは、それぞれの要素などをどう使うのかは一応定義さ�
 WAI-ARIAの基本的なところを理解した後には、WAI-ARIAのデザインパターンに目を通してみるとよいでしょう。W3C Web Accessibility Initiativeというグループによって、WAI-ARIAを使って一般的なUIコンポーネントを実装するためのパターンが公開されています。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/013.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/013.png)
 	<figcaption>[Patterns | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/)</figcaption>
 </figure>
 
 そして、ブラウザ・OS・スクリーンリーダーでのサポート状況、ユーザーにとっての使い勝手について。環境によって、HTMLの機能が実装されていたりされていなかったりすることがありますが、これはWAI-ARIAにおいても同じです。仕様としては存在していても、ブラウザに実装されていないから実質使えない、ということがあります。そういったことを調べられるツールとして、Can I use...のWAI-ARIA版のようなものがあります。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/014.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/014.png)
 	<figcaption>[Accessibility Support](https://a11ysupport.io/)</figcaption>
 </figure>
 
@@ -263,30 +219,21 @@ WAI-ARIAの基本的なところを理解した後には、WAI-ARIAのデザイ�
 そこで、実際に支援技術を利用する障害者がどのようにウェブページを利用しているかを紹介する動画が総務省から公開されています。まずはこれを見ていただくのがよいでしょう。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/015.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/015.png)
 	<figcaption>[総務省｜情報バリアフリー環境の整備｜障害者のウェブページ利用方法の紹介ビデオ](https://www.soumu.go.jp/menu_news/s-news/2005/051215_1_wmv.html)</figcaption>
 </figure>
 
 加えて、実際のユーザーの利用状況についての調査結果なども公開されています。こうしたものにも目を通しておくと参考にできることがあります。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/016.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/016.png)
 	<figcaption>[第2回支援技術利用状況調査報告書 | 日本視覚障害者ICTネットワーク](https://jbict.net/survey/at-survey-02)</figcaption>
 </figure>
 
 さて次に、CSSやJavaScriptなど周辺技術との兼ね合い、連携のしやすさです。HTMLの構造によっては、CSSが書きにくくなったり、JavaScriptでの操作が難しくなったりすることがあります。あるいは、CMSの機能やWYSIWYGからの出力、テンプレートエンジンやコンポーネントシステムの性質を踏まえて、それに適した実装方法を検討することもあるはずです。そうした考慮もマークアップの一環です。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/017.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/017.png)
 	<figcaption>[Introducing WordPress 6.0 - YouTube](https://www.youtube.com/watch?v=oe452WcY7fA)</figcaption>
 </figure>
 
@@ -297,10 +244,7 @@ WAI-ARIAの基本的なところを理解した後には、WAI-ARIAのデザイ�
 『インクルーシブHTML+CSS & JavaScript』では、いわゆるボタンリンクの実装方法について紹介されています。いわく、ボタンリンクと本当の`button`は、同じ見た目にせずにそれぞれ別々にしてしまおう、という話です。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/018.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/018.png)
 	<figcaption>[電子書籍版インクルーシブHTML+CSS & JavaScript | ボーンデジタル](https://www.borndigital.co.jp/book/6610.html)</figcaption>
 </figure>
 
@@ -311,10 +255,7 @@ WAI-ARIAの基本的なところを理解した後には、WAI-ARIAのデザイ�
 これまで話してきたのは、マークアップの複雑さについてです。考慮すべき要素がいくつもあるがゆえに、それらをうまく調整する手腕が問われるという話でした。一方、そのような「小難しいこと」を考えずに、ごく素朴な感覚をもってマークアップができるものの例として、利用規約のマークアップが挙げられます。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/019.png")}
-		alt=""
-	/>
+	![](./assets/2022-11-03-how-to-understand-the-markup/019.png)
 	<figcaption>[利用規約 - connpass](https://connpass.com/term/)</figcaption>
 </figure>
 
@@ -379,10 +320,7 @@ HTMLでは、情報を表現するために使える語彙があらかじめ決�
 『SGML入門』では、教科書の前付けページの構成例が紹介されています。教科書の前付けページに含まれるデータを分析して、ツリーダイアグラムとして構造を定義したものです。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/020.jpg")}
-		alt="典型的な教科書の前付けページの構成がツリーダイアグラムとして表現されている"
-	/>
+	![典型的な教科書の前付けページの構成がツリーダイアグラムとして表現されている](./assets/2022-11-03-how-to-understand-the-markup/020.jpg)
 	<figcaption>Martin Bryan『SGML入門』（福島誠訳）</figcaption>
 </figure>
 
@@ -458,10 +396,7 @@ HTMLでは、情報を表現するために使える語彙があらかじめ決�
 もう少し親しみやすい例としては、『SGML実践ガイド』では、料理のレシピをマークアップするための要素の例も紹介されていました。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/021.jpg")}
-		alt="料理のレシピについて文書分析する例として、最終的に紙に印刷されるレシピをサンプルにしつつ、レシピで使う要素を例示している。<head1>、<p1>、<p2>、<p3>、<p4>、<pr>、<pl>、<it>"
-	/>
+	![料理のレシピについて文書分析する例として、最終的に紙に印刷されるレシピをサンプルにしつつ、レシピで使う要素を例示している。\<head1>、\<p1>、\<p2>、\<p3>、\<p4>、\<pr>、\<pl>、\<it>](./assets/2022-11-03-how-to-understand-the-markup/021.jpg)
 	<figcaption>B.トラビス, D.ウォルト『SGML実践ガイド』（学研, スリーエーシステムズSGML事業室 訳）</figcaption>
 </figure>
 
@@ -549,8 +484,5 @@ HTMLのマークアップは保守的な営みです。問題が起こらない�
 変化は必然ですが、同時に、人は過去に依存して生きています。過去の選択が今を作っています。覆すことはできません。これを理解し、受け入れて、今を成り立たせていくことこそが、マークアップの意義であると思います。
 
 <figure>
-	<Image
-		src={import("./assets/2022-11-03-how-to-understand-the-markup/022.png")}
-		alt="</html>"
-	/>
+	![\</html>](./assets/2022-11-03-how-to-understand-the-markup/022.png)
 </figure>

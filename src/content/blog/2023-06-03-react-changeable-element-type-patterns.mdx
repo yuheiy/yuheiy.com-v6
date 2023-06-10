@@ -3,7 +3,6 @@ title: ReactコンポーネントでレンダリングされるHTML要素の種�
 publishDate: "2023-06-04T12:35:00.000+09:00"
 ---
 
-import { Image } from '@astrojs/image/components';
 import { Tweet } from 'astro-embed';
 
 ReactのUIコンポーネントライブラリを使っていると、あるコンポーネントによってレンダリングされるHTML要素の種類を変更したくなる場面がある。たとえば、通常は`button`要素としてレンダリングされる`Button`コンポーネントを使うときに、代わりに`a`要素を使ってレンダリングしたいというケース。
@@ -43,11 +42,7 @@ render(
 一つは、TypeScriptのエラーメッセージが複雑になってしまうこと。たとえば、Reactの要素に間違ったpropが渡されたとき、通常の`a`要素と、`as` propとしてa要素が指定されたコンポーネントを比較すると、明らかに後者の方がユーザーにとって理解しづらい。
 
 <figure>
-	<Image
-		class="shadow-none"
-		src={import("./assets/2023-06-03-react-changeable-element-type-patterns/as-prop-error.png")}
-		alt=""
-	/>
+	![](./assets/2023-06-03-react-changeable-element-type-patterns/as-prop-error.png)
 </figure>
 
 次に、TypeScriptのパフォーマンスを悪化させること。`as` propの型定義においては、高度な型推論や条件型、ジェネリクスを多用することになり、コンパイルするための負荷が高まってしまう。
