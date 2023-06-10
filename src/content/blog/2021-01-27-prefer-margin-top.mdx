@@ -4,19 +4,17 @@ title: 垂直方向のマージンにはmargin-topを優先的に使う理由
 publishDate: "2021-01-26T17:13:39.216Z"
 ---
 
-import { Tweet } from 'astro-embed';
-
 `margin-bottom`ではなく`margin-top`を使う派である旨をツイートしたら理由を尋ねられたので、それに対する回答です。大きくは次の3つです。
 
 1. 末尾の要素の存在が任意である場合が多いため
 2. Stackレイアウトとの取り合わせやすさのため
 3. 隣接セレクターを使った場合分けができるようにするため
 
-<Tweet id="https://twitter.com/_yuheiy/status/1348988615620128769" />
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">CSS、基本コンポーネントの上にマージン取る派と、下にマージン取る派がいると思うですけど、自分は今までずっと下で。というのは、その方が直感的だと感じるからなんですけど、見出しの下って結構縮めるよね？それを上マージンでやると結構頭こんがらがらない？って思うんだけどどうなんだろう</p>&mdash; Takeshi Takatsudo (@Takazudo) <a href="https://twitter.com/Takazudo/status/1348988615620128769?ref_src=twsrc%5Etfw">January 12, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-<Tweet id="https://twitter.com/_yuheiy/status/1348990956989661184" />
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">上です</p>&mdash; 全部入りHTML太郎 (@_yuheiy) <a href="https://twitter.com/_yuheiy/status/1348990956989661184?ref_src=twsrc%5Etfw">January 12, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-<Tweet id="https://twitter.com/_yuheiy/status/1349155640841695233" />
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">なぜですか?</p>&mdash; u (@uknmr) <a href="https://twitter.com/uknmr/status/1349155640841695233?ref_src=twsrc%5Etfw">January 13, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 ## 1. 末尾の要素の存在が任意である場合が多いため
 

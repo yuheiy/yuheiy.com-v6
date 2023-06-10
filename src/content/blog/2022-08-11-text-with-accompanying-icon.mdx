@@ -4,7 +4,6 @@ publishDate: "2022-08-11T20:25:00.000+09:00"
 ---
 
 import { Image } from "astro:assets";
-import { Tweet } from 'astro-embed';
 
 テキストの行の末尾にアイコンを付随させるというレイアウトがある。
 
@@ -83,7 +82,7 @@ import _3Video from './assets/2022-08-11-text-with-accompanying-icon/3.mp4';
 
 ## 後日追記
 
-<Tweet id="https://twitter.com/SaekiTominaga/status/1557902385376563202" />
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Firefox でアイコンが .card--improved の padding を突き抜けちゃうのなんでだろう。<br/><br/>テキストの行の末尾に付随するアイコンをアイコンだけで改行させないようにするCSS <a href="https://t.co/29Y1SkJSDI">https://t.co/29Y1SkJSDI</a> <a href="https://t.co/CuRtPZLQ9t">pic.twitter.com/CuRtPZLQ9t</a></p>&mdash; トミー (@SaekiTominaga) <a href="https://twitter.com/SaekiTominaga/status/1557902385376563202?ref_src=twsrc%5Etfw">August 12, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 テキスト要素に`margin-right`を使っていたら、Firefoxでこのような問題が起こってしまった。代わりに、`padding-right`に差し替えると直った。理由はよくわからない……。
 

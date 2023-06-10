@@ -3,8 +3,6 @@ title: ReactコンポーネントでレンダリングされるHTML要素の種�
 publishDate: "2023-06-04T12:35:00.000+09:00"
 ---
 
-import { Tweet } from 'astro-embed';
-
 ReactのUIコンポーネントライブラリを使っていると、あるコンポーネントによってレンダリングされるHTML要素の種類を変更したくなる場面がある。たとえば、通常は`button`要素としてレンダリングされる`Button`コンポーネントを使うときに、代わりに`a`要素を使ってレンダリングしたいというケース。
 
 ## `as` prop
@@ -37,7 +35,7 @@ render(
 
 しかし、それ以外にもいくつかの問題がある。かつて`as` propを採用していた[Radix UI](https://www.radix-ui.com/)では、これらの問題を解決するために、`as` propが廃止されて新たに`asChild` propが採用されている。これらの機能を実装した[Jenna Smith](https://github.com/jjenzz)氏によると、いくつかの観点から見て、`as` propは過度な複雑性をもたらすと言う。
 
-<Tweet id="https://twitter.com/jjenzz/status/1423766700885954562" />
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I&#39;ve been thinking a lot about the `as` prop for polymorphism lately and wondering why we all went down the road of runtime TypeScript polymorphism. It introduces so many unnecessary complexities, bloats error messages and kills TS perf... 🧵</p>&mdash; jenna (@jjenzz) <a href="https://twitter.com/jjenzz/status/1423766700885954562?ref_src=twsrc%5Etfw">August 6, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 一つは、TypeScriptのエラーメッセージが複雑になってしまうこと。たとえば、Reactの要素に間違ったpropが渡されたとき、通常の`a`要素と、`as` propとしてa要素が指定されたコンポーネントを比較すると、明らかに後者の方がユーザーにとって理解しづらい。
 

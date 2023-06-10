@@ -1,10 +1,18 @@
 .prose {
 	> * + * {
-		@apply mt-[--prose-spacing,theme(spacing.6)];
+		@apply !mb-0 !mt-[--prose-spacing,theme(spacing.6)];
 	}
 
-	* + :is(h2, h3, hr, pre, figure, .codepen, .cp_embed_wrapper, .tweet-card, lite-youtube),
-	:is(hr, pre, figure, .codepen, .cp_embed_wrapper + script, .tweet-card, lite-youtube + script)
+	* + :is(h2, h3, hr, pre, figure, .codepen, .cp_embed_wrapper, .twitter-text, lite-youtube),
+	:is(
+			hr,
+			pre,
+			figure,
+			.codepen,
+			.cp_embed_wrapper + script,
+			.twitter-tweet + script,
+			lite-youtube + script
+		)
 		+ * {
 		@apply [--prose-spacing:theme(spacing.10)];
 	}
