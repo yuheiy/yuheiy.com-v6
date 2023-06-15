@@ -24,7 +24,7 @@ module.exports = {
 		},
 		extend: {
 			borderColor: {
-				DEFAULT: "rgb(var(--dynamic-color-borderColor-DEFAULT) / <alpha-value>)",
+				DEFAULT: "rgb(var(--dc-borderColor-DEFAULT) / <alpha-value>)",
 			},
 			fontFamily: {
 				sans: ["sans-serif"],
