@@ -1,11 +1,15 @@
 .prose {
 	@apply [margin-trim:block];
 
-	> * + * {
-		@apply !mb-0 !mt-[--prose-spacing,theme(spacing.6)];
+	> * {
+		@apply !my-0;
 	}
 
-	> * + :is(h2, h3, hr, pre, figure, .codepen, .cp_embed_wrapper, .twitter-text, lite-youtube),
+	> * + * {
+		@apply !mt-[--prose-spacing,theme(spacing.6)];
+	}
+
+	> * + :is(h2, h3, hr, pre, figure, .codepen, .cp_embed_wrapper, .twitter-tweet, lite-youtube),
 	> :is(
 			hr,
 			pre,
@@ -35,12 +39,16 @@
 		@apply -ml-[--container-margin-left] -mr-[--container-margin-right] pl-[--container-margin-left] pr-[--container-margin-right] text-sm leading-tight;
 	}
 
-	blockquote:not([class]) {
+	blockquote {
 		@apply ml-[2em] space-y-3;
 	}
 
 	:is(ol, ul) {
 		@apply list-[revert] pl-[2em];
+	}
+
+	> :is(ol, ul) {
+		@apply [margin-trim:block];
 	}
 
 	li {
