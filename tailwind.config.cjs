@@ -41,7 +41,7 @@ module.exports = {
 			light: {
 				backgroundColor: {
 					DEFAULT: colors.white,
-					variant: colors.slate["100"],
+					subtle: colors.slate["100"],
 				},
 				borderColor: {
 					DEFAULT: colors.gray["200"],
@@ -60,7 +60,7 @@ module.exports = {
 			dark: {
 				backgroundColor: {
 					DEFAULT: colors.zinc["900"],
-					variant: colors.zinc["800"],
+					subtle: colors.zinc["800"],
 				},
 				borderColor: {
 					DEFAULT: colors.zinc["700"],
