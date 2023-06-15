@@ -5,8 +5,8 @@
 		@apply !mb-0 !mt-[--prose-spacing,theme(spacing.6)];
 	}
 
-	* + :is(h2, h3, hr, pre, figure, .codepen, .cp_embed_wrapper, .twitter-text, lite-youtube),
-	:is(
+	> * + :is(h2, h3, hr, pre, figure, .codepen, .cp_embed_wrapper, .twitter-text, lite-youtube),
+	> :is(
 			hr,
 			pre,
 			figure,
