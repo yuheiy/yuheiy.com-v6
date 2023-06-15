@@ -1,4 +1,6 @@
 .prose {
+	@apply [margin-trim:block];
+
 	> * + * {
 		@apply !mb-0 !mt-[--prose-spacing,theme(spacing.6)];
 	}
@@ -43,10 +45,6 @@
 
 	li {
 		@apply mt-1;
-	}
-
-	> :is(ol, ul) > li:first-child {
-		@apply mt-0;
 	}
 
 	figure {
