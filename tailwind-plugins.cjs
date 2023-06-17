@@ -7,9 +7,12 @@ const container = plugin(function ({ addBase, addComponents }) {
 	addBase({
 		":root": {
 			"--container-width": "46rem",
-			"--_container-margin": "clamp(1rem, max((100% - var(--container-width)) / 2, 5vw), 6rem)",
-			"--container-margin-left": "calc(env(safe-area-inset-left) + var(--_container-margin))",
-			"--container-margin-right": "calc(env(safe-area-inset-right) + var(--_container-margin))",
+			"--container-margin-without-safe-area":
+				"clamp(1rem, max((100% - var(--container-width)) / 2, 5vw), 6rem)",
+			"--container-margin-left":
+				"calc(env(safe-area-inset-left) + var(--container-margin-without-safe-area))",
+			"--container-margin-right":
+				"calc(env(safe-area-inset-right) + var(--container-margin-without-safe-area))",
 		},
 	});
 
