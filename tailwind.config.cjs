@@ -41,7 +41,7 @@ module.exports = {
 			light: {
 				backgroundColor: {
 					DEFAULT: colors.white,
-					subtle: colors.slate["100"],
+					tint: colors.slate["100"],
 				},
 				borderColor: {
 					DEFAULT: colors.gray["200"],
