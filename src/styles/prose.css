@@ -9,75 +9,88 @@
 		@apply !mt-[--prose-spacing,theme(spacing.6)];
 	}
 
-	> * + :is(h2, h3, hr, pre, figure, .codepen, .cp_embed_wrapper, .twitter-tweet, lite-youtube),
-	> :is(
-			hr,
-			pre,
-			figure,
-			.codepen,
-			.cp_embed_wrapper + script,
-			.twitter-tweet + script,
-			lite-youtube + script
-		)
-		+ * {
+	> :where(
+			*
+				+ :is(
+					h2,
+					h3,
+					hr,
+					pre,
+					figure,
+					.codepen,
+					.cp_embed_wrapper,
+					astro-embed-tweet,
+					lite-youtube
+				),
+			:is(
+					hr,
+					pre,
+					figure,
+					.codepen,
+					.cp_embed_wrapper + script,
+					astro-embed-tweet,
+					lite-youtube + script
+				)
+				+ *
+		) {
 		@apply [--prose-spacing:theme(spacing.10)];
 	}
 
-	h2 {
+	:where(h2) {
 		@apply text-2xl font-bold leading-tight kerning-all;
 	}
 
-	h3 {
+	:where(h3) {
 		@apply text-lg font-bold leading-tight;
 	}
 
-	hr {
+	:where(hr) {
 		@apply max-w-[8em] border-t-4;
 	}
 
-	pre {
+	:where(pre) {
 		@apply -ml-[--container-margin-left] -mr-[--container-margin-right] pl-[--container-margin-left] pr-[--container-margin-right] text-sm leading-tight;
 	}
 
-	blockquote {
+	:where(blockquote) {
 		@apply ml-[2em] space-y-3;
 	}
 
-	:is(ol, ul) {
+	:where(ol, ul) {
 		@apply list-[revert] pl-[2em];
 	}
 
-	> :is(ol, ul) {
+	> :where(ol, ul) {
 		@apply [margin-trim:block];
 	}
 
-	li {
+	:where(li) {
 		@apply mt-1;
 	}
 
-	figure {
+	:where(figure) {
 		@apply space-y-3;
 	}
 
-	figcaption {
+	:where(figcaption) {
 		@apply text-sm;
 	}
 
-	code::before,
-	code::after {
+	:where(code::before),
+	:where(code::after) {
 		@apply content-["`"];
 	}
 
-	pre > code::before,
-	pre > code::after {
+	:where(pre > code::before),
+	:where(pre > code::after) {
 		@apply content-none;
 	}
 
-	img {
+	:where(img) {
 		@apply ring-1 ring-dynamic;
 	}
 
-	details {
+	:where(details) {
 		@apply space-y-3;
 	}
 }

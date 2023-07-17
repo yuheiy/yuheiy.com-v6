@@ -1,35 +1,15 @@
-:root .tweet-card {
-	@apply max-w-lg space-y-4 border-dynamic leading-tight shadow-none [--tc-corner-radius:theme(spacing.3)] [--tc-padding:theme(spacing.4)];
+astro-embed-tweet {
+	@apply block ring-1 ring-[#1DA1F2] rounded-md;
 }
 
-:root .tweet-card img {
-	@apply ring-0;
+astro-embed-tweet::before {
+	@apply block px-5 py-1 content-['Twitter'] text-xs leading-[normal] text-white font-bold bg-[#1DA1F2] rounded-t-md;
 }
 
-:root .tweet-header {
-	@apply grid-cols-[auto_1fr];
+:root .twitter-tweet:not(.twitter-tweet-rendered) {
+	@apply ml-0 px-5 py-4 text-sm text-dynamic-muted border-0;
 }
 
-:root .tweet-profile img {
-	@apply w-10 ring-1;
-}
-
-:root .tweet-author-name {
-	@apply w-fit text-sm;
-}
-
-:root [class^="tweet-media"] {
-	@apply aspect-auto;
-}
-
-:root .tweet-author-handle {
-	@apply w-fit text-xs text-dynamic-muted kerning-normal;
-}
-
-:root .tweet-link {
-	@apply rounded-lg bg-[#1DA1F2] px-3 py-1 text-sm text-white no-underline kerning-normal;
-}
-
-:root .tweet-link::after {
-	@apply content-none;
+.twitter-tweet:not(.twitter-tweet-rendered) p {
+	@apply mb-3 text-base text-dynamic;
 }
