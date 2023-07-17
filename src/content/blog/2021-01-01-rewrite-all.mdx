@@ -71,9 +71,9 @@ html {
 ```css
 html {
 	--text-base: 1rem;
-	--text-sm: calc(7 / (7 + 1) * var(--text-base));  /* 0.875rem */
-	--text-lg: calc(7 / (7 - 1) * var(--text-base));  /* 1.166rem */
-	--text-xl: calc(7 / (7 - 2) * var(--text-base));  /* 1.4rem */
+	--text-sm: calc(7 / (7 + 1) * var(--text-base)); /* 0.875rem */
+	--text-lg: calc(7 / (7 - 1) * var(--text-base)); /* 1.166rem */
+	--text-xl: calc(7 / (7 - 2) * var(--text-base)); /* 1.4rem */
 	--text-2xl: calc(7 / (7 - 4) * var(--text-base)); /* 2.333rem */
 }
 ```
@@ -81,9 +81,9 @@ html {
 ```css
 html {
 	--text-base: 1rem;
-	--text-sm: calc(6 / (6 + 1) * var(--text-base));  /* 0.857rem */
-	--text-lg: calc(6 / (6 - 1) * var(--text-base));  /* 1.2rem */
-	--text-xl: calc(6 / (6 - 2) * var(--text-base));  /* 1.5rem */
+	--text-sm: calc(6 / (6 + 1) * var(--text-base)); /* 0.857rem */
+	--text-lg: calc(6 / (6 - 1) * var(--text-base)); /* 1.2rem */
+	--text-xl: calc(6 / (6 - 2) * var(--text-base)); /* 1.5rem */
 	--text-2xl: calc(6 / (6 - 4) * var(--text-base)); /* 3rem */
 }
 ```
@@ -91,17 +91,17 @@ html {
 余白のサイズもこれにもとづいたものに設定している。外から見えるところとしてはそんなところ。後は裏側の、僕にしかわからないような変更点がいろいろ。
 
 - テンプレートエンジンをLiquidからHandlebarsに置き換えた
-	- [Romeのウェブサイト](https://rome.tools/)はEleventy製なんだけど、Liquidが採用されているのを見て、Nunjucksより機能が絞れてて良さそうと思ったけど、いろいろ中途半端だった。気の迷いだった
+  - [Romeのウェブサイト](https://rome.tools/)はEleventy製なんだけど、Liquidが採用されているのを見て、Nunjucksより機能が絞れてて良さそうと思ったけど、いろいろ中途半端だった。気の迷いだった
 - Handlebarsを使うためのフィルターやデータフロー周りの調整
 - YAMLファイルをタブインデントを使って書いてパース時に変換していたけど、4スペースに変えた
-	- これもRomeのパクり。普通で良い
+  - これもRomeのパクり。普通で良い
 - シンタックスハイライトを実装した
 - 投稿の`description`は本文の最初の段落と同じ内容だったけど、同マークダウンファイルのFront Matterにコピペして設定していたので、自動的に本文から読み取るようにした
 - 投稿の並びをファイル名順にしていたけど、`published`フィールドにもとづいて並べるようにした
 - フィードの生成をプラグインのサンプルとして示されているテンプレート（Nunjucks）そのままでやっていたので、一貫性のためにHandlebarsで書き直した
 - データファイルにいろいろ重複したデータがあったので一元化した
-	- おもにフィードのテンプレートでサボってたせい
-	- [Hail2uの`metadata.json`](https://github.com/hail2u/hail2u.net/blob/8e0df3431ec2ff8859a79cb337c208aa8d4b649d/src/metadata.json)を参考にした
+  - おもにフィードのテンプレートでサボってたせい
+  - [Hail2uの`metadata.json`](https://github.com/hail2u/hail2u.net/blob/8e0df3431ec2ff8859a79cb337c208aa8d4b649d/src/metadata.json)を参考にした
 - いくつかのテンプレートで同ファイル内にFront Matterを書いていたけどマークダウンファイル以外では全部外部ファイルに書くようにした
 - 投稿ファイルを変更してGitHubにプッシュしたらGitHub Actionsで自動的に変更日時が書き換えられるようにしていたけど複雑なので廃止
 - Netlify CMSを使えるようにした
@@ -109,13 +109,13 @@ html {
 - フッターの「編集履歴」リンクを投稿の詳細ページ以外では出さないようにした
 - リンク一覧のコンポーネントを`<article>`と見出しでマークアップしていたけど、単に`<ol>`/`<ul>`と`<li>`にタイトルは`<p>`にした
 - アイコンの冗長なIDをシンプルにした
-	- `icon-chevron-right` → `icon-chevron`
-	- `icon-arrow-back` → `icon-back`
+  - `icon-chevron-right` → `icon-chevron`
+  - `icon-arrow-back` → `icon-back`
 - CSSファイルをインライン化していたけど外部ファイル化した
 - 余白の名前を`space-sm`とか`space-lg`みたいにしてたけど連番に変えた
 - [Cluster](https://every-layout.dev/layouts/cluster/)パターンの`margin`の設定が面倒なのでやめて、Flexboxに`gap`を使うようにした
-	- Safariには3月のリリースまで実装されないけど時は早く過ぎるのでオッケーにした
-	- 余白はClusterのモディファイア的に実装していたが、これによって`gap`用の汎用的なユーティリティクラスに分けられるようになった
+  - Safariには3月のリリースまで実装されないけど時は早く過ぎるのでオッケーにした
+  - 余白はClusterのモディファイア的に実装していたが、これによって`gap`用の汎用的なユーティリティクラスに分けられるようになった
 
 まだいろいろある気がするけどとりあえずこんなところ。これらのことがかなりうまいやり方で達成できた。そこに満足感がある。
 

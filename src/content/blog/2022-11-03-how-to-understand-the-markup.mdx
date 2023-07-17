@@ -9,29 +9,26 @@ twitterCard: summary_large_image
 
 ---
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/001.png)
-</figure>
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/001.png)</figure>
 
 現代における「マークアップ」とはどのような行為なのか。いかにそれと向き合っていけばいいのか。そういったことについて考えてみます。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/002.png)
-</figure>
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/002.png)</figure>
 
 マークアップの議論においては、「マークアップには正解がない」という意見が決まって出ます。正解がないと言うならば、たいていなんであってもそうです。たとえばCSSやJavaScriptの書き方には「正解」があるのかと考えてみると、必ずしもそうではありません。
 
 しかし、ことさらマークアップにおいてこれがよく言われる理由としては、妥当性を判断する基準がわからない、ということでしょう。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/003.png)
-</figure>
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/003.png)</figure>
 
 というのも、CSSなら望む通りの見た目になればとりあえずOKだし、JavaScriptでも意図した通りの振る舞いをすればまあいいだろう、という判断ができます。けれどHTMLでは、`div`を使おうが`button`を使おうが、何が変わるのかがその場でわからなくてどうしようもないのかもしれません。
 
 <figure>
 	![](./assets/2022-11-03-how-to-understand-the-markup/004.png)
-	<figcaption>[Showing results for https://dist.connpass.com/event/261960/ - Nu Html Checker](https://validator.w3.org/nu/?doc=https%3A%2F%2Fdist.connpass.com%2Fevent%2F261960%2F)</figcaption>
+	<figcaption>
+		[Showing results for https://dist.connpass.com/event/261960/ - Nu Html
+		Checker](https://validator.w3.org/nu/?doc=https%3A%2F%2Fdist.connpass.com%2Fevent%2F261960%2F)
+	</figcaption>
 </figure>
 
 HTMLにはチェッカーがありますから、もし構文エラーをしていたり、変な属性を使っていたりすれば、チェッカーから発される警告によってそのことに気づけるようになっています。それでも、すべての間違いをチェッカーで指摘できるわけではありません。
@@ -40,21 +37,17 @@ HTMLにはチェッカーがありますから、もし構文エラーをして�
 
 一方でマークアップにおいては、非常に文脈的な解釈が必要になる場面があります。HTMLの性質からして、定義の幅を狭く固定するということがなされていないので、状況に応じてその場その場の個別解を導き出すことが重要になります。したがって、個々人の考えをもって正解を決めるしかないのです。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/005.jpg)
-</figure>
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/005.jpg)</figure>
 
 一つ例を挙げます。私の家の近所にはインドカレー屋がありますが、その周りにはいくつか立て看板のようなものがあります。そこで、店自体をウェブサイトとして、看板はウェブページとして捉えてみると、マークアップにおいてはどのように考えて判断できるでしょうか。
 
 最初にマークアップすべきは、看板右上にあるこの店のロゴです。明らかにこれがサイトのシンボルだと思います。ウェブサイトで言うところのヘッダーなので`header`としつつ、その中に入るロゴは画像なので`img`です。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/006.jpg)
-</figure>
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/006.jpg)</figure>
 
 ```html
 <header>
-	<p><img src="logo.svg" alt="インド料理 ハティ"></p>
+	<p><img src="logo.svg" alt="インド料理 ハティ" /></p>
 </header>
 ```
 
@@ -64,9 +57,7 @@ HTMLにはチェッカーがありますから、もし構文エラーをして�
 
 続いて看板の左上には、大きな文字で「Take Out Menu」「お弁当メニュー」とあります。ここからはページ固有の要素と言えるでしょう。外側は`main`で囲いつつ、「Take Out Menu」は`h1`にします。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/007.jpg)
-</figure>
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/007.jpg)</figure>
 
 ```html
 <main>
@@ -83,14 +74,12 @@ HTMLにはチェッカーがありますから、もし構文エラーをして�
 
 それらに続いて「インド料理のお弁当」という見出しがあり、お弁当の種類がカード状に並んでいます。カードが六つあるので、これらを`ul`でまとめてしまうのがよさそうに見えます。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/008.jpg)
-</figure>
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/008.jpg)</figure>
 
 ```html
 <li>
 	<p>A カレーライス弁当</p>
-	<p><img src="indian-lunchbox-a.jpg" alt="..."></p>
+	<p><img src="indian-lunchbox-a.jpg" alt="..." /></p>
 	<p><del>¥ 480</del> <ins>¥ 500</ins></p>
 	<p>A 弁当 <span lang="en">A Lunch Box</span></p>
 	<p>カレー1種・ライス<del>・ナン</del></p>
@@ -103,9 +92,7 @@ HTMLにはチェッカーがありますから、もし構文エラーをして�
 
 ところが最後の六つ目のカードを見ると、これだけ少し違った内容になっています。それ以外のカードは、「カレーライス弁当」「インド弁当」「ナン付きカレーライス弁当」という風になっているのに、六つ目のカードだけ、「ナンお持ち帰り」「ライス・麺の大盛り」とあります。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/009.jpg)
-</figure>
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/009.jpg)</figure>
 
 これらは情報の種類としては別物なので、別の項目に分けて扱いたいところです。同じ項目としてまとめられていると、弁当が六種類あるように勘違いしてしまうからです。
 
@@ -116,7 +103,7 @@ HTMLにはチェッカーがありますから、もし構文エラーをして�
 	<li>...</li>
 </ul>
 
-<p><img src="indian-other.jpg" alt="..."></p>
+<p><img src="indian-other.jpg" alt="..." /></p>
 
 <ul>
 	<li>
@@ -137,7 +124,7 @@ HTMLにはチェッカーがありますから、もし構文エラーをして�
 	</ul>
 
 	<div>
-		<p><img src="indian-other.jpg" alt="..."></p>
+		<p><img src="indian-other.jpg" alt="..." /></p>
 		<ul>
 			<li>
 				<p>ナンお持帰り</p>
@@ -184,7 +171,9 @@ HTMLでは、それぞれの要素などをどう使うのかは一応定義さ�
 
 <figure>
 	![](./assets/2022-11-03-how-to-understand-the-markup/011.png)
-	<figcaption>[HTML解体新書 | ボーンデジタル](https://www.borndigital.co.jp/book/25999.html)</figcaption>
+	<figcaption>
+		[HTML解体新書 | ボーンデジタル](https://www.borndigital.co.jp/book/25999.html)
+	</figcaption>
 </figure>
 
 続いて、WAI-ARIAのセマンティクスです。WAI-ARIAはHTMLと連携した仕様であり、スクリーンリーダーなどの支援技術に対して適切な情報伝達ができるようにすることを目的としています。
@@ -193,7 +182,9 @@ HTMLでは、それぞれの要素などをどう使うのかは一応定義さ�
 
 <figure>
 	![](./assets/2022-11-03-how-to-understand-the-markup/012.png)
-	<figcaption>[Accessibility Object Model | aom](https://wicg.github.io/aom/explainer.html)</figcaption>
+	<figcaption>
+		[Accessibility Object Model | aom](https://wicg.github.io/aom/explainer.html)
+	</figcaption>
 </figure>
 
 アクセシビリティツリーは、基本的にはWAI-ARIA仕様に則って生成されます。そのため、WAI-ARIAについてもよく理解しておくことが大切です。『HTML解体新書』では、WAI-ARIAについても解説されています。
@@ -220,21 +211,28 @@ WAI-ARIAの基本的なところを理解した後には、WAI-ARIAのデザイ�
 
 <figure>
 	![](./assets/2022-11-03-how-to-understand-the-markup/015.png)
-	<figcaption>[総務省｜情報バリアフリー環境の整備｜障害者のウェブページ利用方法の紹介ビデオ](https://www.soumu.go.jp/menu_news/s-news/2005/051215_1_wmv.html)</figcaption>
+	<figcaption>
+		[総務省｜情報バリアフリー環境の整備｜障害者のウェブページ利用方法の紹介ビデオ](https://www.soumu.go.jp/menu_news/s-news/2005/051215_1_wmv.html)
+	</figcaption>
 </figure>
 
 加えて、実際のユーザーの利用状況についての調査結果なども公開されています。こうしたものにも目を通しておくと参考にできることがあります。
 
 <figure>
 	![](./assets/2022-11-03-how-to-understand-the-markup/016.png)
-	<figcaption>[第2回支援技術利用状況調査報告書 | 日本視覚障害者ICTネットワーク](https://jbict.net/survey/at-survey-02)</figcaption>
+	<figcaption>
+		[第2回支援技術利用状況調査報告書 |
+		日本視覚障害者ICTネットワーク](https://jbict.net/survey/at-survey-02)
+	</figcaption>
 </figure>
 
 さて次に、CSSやJavaScriptなど周辺技術との兼ね合い、連携のしやすさです。HTMLの構造によっては、CSSが書きにくくなったり、JavaScriptでの操作が難しくなったりすることがあります。あるいは、CMSの機能やWYSIWYGからの出力、テンプレートエンジンやコンポーネントシステムの性質を踏まえて、それに適した実装方法を検討することもあるはずです。そうした考慮もマークアップの一環です。
 
 <figure>
 	![](./assets/2022-11-03-how-to-understand-the-markup/017.png)
-	<figcaption>[Introducing WordPress 6.0 - YouTube](https://www.youtube.com/watch?v=oe452WcY7fA)</figcaption>
+	<figcaption>
+		[Introducing WordPress 6.0 - YouTube](https://www.youtube.com/watch?v=oe452WcY7fA)
+	</figcaption>
 </figure>
 
 最後に、ソースコードの運用性です。たとえば、よかれと思って複雑な仕様を実装してしまった結果、メンテナンスできないほど厄介な状態になってしまうことは珍しくありません。また似たようなところでは、無理のある運用ルールを設定して誰にも守られなくなるということもあるでしょう。そうした問題を防ぐためには、ちょうどいい塩梅を探りながら開発を進めていかなければなりません。
@@ -245,7 +243,10 @@ WAI-ARIAの基本的なところを理解した後には、WAI-ARIAのデザイ�
 
 <figure>
 	![](./assets/2022-11-03-how-to-understand-the-markup/018.png)
-	<figcaption>[電子書籍版インクルーシブHTML+CSS & JavaScript | ボーンデジタル](https://www.borndigital.co.jp/book/6610.html)</figcaption>
+	<figcaption>
+		[電子書籍版インクルーシブHTML+CSS & JavaScript |
+		ボーンデジタル](https://www.borndigital.co.jp/book/6610.html)
+	</figcaption>
 </figure>
 
 `a`と`button`は、どちらも押せるという意味では同じですが、細かく見ていくと微妙に振る舞いが異なります。にもかかわらず、それらを同じ見た目にして同じコンポーネントであるように扱ってしまうのはやや乱暴です。機能的に異なるものを同じように扱うことで、制作者自身が混乱してしまうこともあります。
@@ -441,35 +442,35 @@ two kinds of eggs.
 内容タグの例としては次のようなものがあります。
 
 - Techinical Manual
-	- `<part>`: Part Number
-	- `<mod>`: Model
-	- `<chkl>`: Checklist
-	- `<cau>`: Caution
+  - `<part>`: Part Number
+  - `<mod>`: Model
+  - `<chkl>`: Checklist
+  - `<cau>`: Caution
 - Computer Manuals
-	- `<command>`: Command
-	- `<opt>`: Option
-	- `<parm>`: Parameter
-	- `<key>`: Keystroke
+  - `<command>`: Command
+  - `<opt>`: Option
+  - `<parm>`: Parameter
+  - `<key>`: Keystroke
 - Training Manual
-	- `<les>`: Lesson
-	- `<obj>`: Objectives
-	- `<ex>:` Exercise
-	- `<def>`: Definition
+  - `<les>`: Lesson
+  - `<obj>`: Objectives
+  - `<ex>:` Exercise
+  - `<def>`: Definition
 - General
-	- `<fw>`: Foreign Word
-	- `<name>`: Name
-	- `<gl>`: Glossary Word
-	- `<xref>`: Cross Reference
+  - `<fw>`: Foreign Word
+  - `<name>`: Name
+  - `<gl>`: Glossary Word
+  - `<xref>`: Cross Reference
 - Periodicals
-	- `<au>`: Author
-	- `<hl>`: Headline
-	- `<en>`: End Note
-	- `<blurb>`: Blurb
+  - `<au>`: Author
+  - `<hl>`: Headline
+  - `<en>`: End Note
+  - `<blurb>`: Blurb
 - Legal
-	- `<case>`: Case Cite
-	- `<reg>`: Reg Cite
-	- `<code>`: Code Cite
-	- `<squib>`: Squib
+  - `<case>`: Case Cite
+  - `<reg>`: Reg Cite
+  - `<code>`: Code Cite
+  - `<squib>`: Squib
 
 これら3つの観点をバランスよく組み合わせて定義するのが理想的であるそうです。
 

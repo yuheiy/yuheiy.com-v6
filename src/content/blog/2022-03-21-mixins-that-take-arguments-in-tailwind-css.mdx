@@ -34,15 +34,15 @@ Tailwind CSSによってデフォルトで提供されているクラス群は�
 プラグインはユーザー側でも簡単に作成できるようになっている。`tailwind.config.js`に次のようなコードを書いていくだけだ。
 
 ```javascript
-const plugin = require('tailwindcss/plugin')
+const plugin = require("tailwindcss/plugin");
 
 module.exports = {
 	plugins: [
-		plugin(function({ addUtilities, addComponents, e, prefix, config }) {
+		plugin(function ({ addUtilities, addComponents, e, prefix, config }) {
 			// Add your custom styles here
 		}),
-	]
-}
+	],
+};
 ```
 
 上記のコード例は公式ドキュメントからの引用。[APIについても公式ドキュメントで解説されている](https://tailwindcss.com/docs/plugins)ので、適宜参照されたし。
@@ -50,9 +50,7 @@ module.exports = {
 これを使って、冒頭で例示したMixinのようなものを実装してみる。次のようなクラス名を記述することで意図した機能が実現できるようにする。
 
 ```html
-<div class="fluid-text-[24px,32px]">
-	...
-</div>
+<div class="fluid-text-[24px,32px]">...</div>
 ```
 
 プラグインのAPIにある`matchUtilities`関数を使うと、特定のクラス名の後ろ側に付与された値に応じてユーティリティクラスを生成する仕組みができる。
@@ -83,7 +81,7 @@ const fluidText = plugin(function ({ matchUtilities }) {
 
 ```css
 .fluid-text-\[24px\2c 32px\] {
-  font-size: clamp(1.5rem, 1.25vw + 1rem, 2rem);
+	font-size: clamp(1.5rem, 1.25vw + 1rem, 2rem);
 }
 ```
 
@@ -122,9 +120,7 @@ const fluidText = plugin(function ({ matchUtilities }) {
 
 module.exports = {
 	// ...
-	plugins: [
-		fluidText,
-	],
+	plugins: [fluidText],
 };
 ```
 

@@ -154,8 +154,8 @@ CSSファイル内の`url()`関数からもファイルを参照するために�
 // `src/assets/components/header.scss`
 
 .header {
-  background-image: url("./header/background.png");
-   // -> `/assets/components/header/background.[contenthash].png`
+	background-image: url("./header/background.png");
+	// -> `/assets/components/header/background.[contenthash].png`
 }
 ```
 
@@ -173,56 +173,56 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 
 module.exports = {
-  context: path.join(__dirname, "src", "assets"),
-  entry: "./main.js",
-  output: {
-    path: path.join(__dirname, "dist", "assets"),
-    filename: "[name].[contenthash:8].js",
-    chunkFilename: "[name].chunk.[contenthash:8].js",
-    publicPath: "/assets/",
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(scss|css)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          {
-            loader: "sass-loader",
-            options: {
-              implementation: sass,
-              sassOptions: {
-                fiber: Fiber,
-              },
-            },
-          },
-        ],
-      },
-      {
-        exclude: [/\.(js|mjs)$/, /\.json$/, /\.(scss|css)$/],
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[path][name].[contenthash:8].[ext]",
-            },
-          },
-        ],
-      },
-    ],
-  },
-  optimization: {
-    minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
-  },
-  plugins: [
-    new ManifestPlugin({
-      fileName: path.join(__dirname, "dist", "webpack-manifest.json"),
-    }),
-    new MiniCssExtractPlugin({
-      filename: "[name].[contenthash:8].css",
-    }),
-  ].filter(Boolean),
+	context: path.join(__dirname, "src", "assets"),
+	entry: "./main.js",
+	output: {
+		path: path.join(__dirname, "dist", "assets"),
+		filename: "[name].[contenthash:8].js",
+		chunkFilename: "[name].chunk.[contenthash:8].js",
+		publicPath: "/assets/",
+	},
+	module: {
+		rules: [
+			{
+				test: /\.(scss|css)$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					"css-loader",
+					{
+						loader: "sass-loader",
+						options: {
+							implementation: sass,
+							sassOptions: {
+								fiber: Fiber,
+							},
+						},
+					},
+				],
+			},
+			{
+				exclude: [/\.(js|mjs)$/, /\.json$/, /\.(scss|css)$/],
+				use: [
+					{
+						loader: "file-loader",
+						options: {
+							name: "[path][name].[contenthash:8].[ext]",
+						},
+					},
+				],
+			},
+		],
+	},
+	optimization: {
+		minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
+	},
+	plugins: [
+		new ManifestPlugin({
+			fileName: path.join(__dirname, "dist", "webpack-manifest.json"),
+		}),
+		new MiniCssExtractPlugin({
+			filename: "[name].[contenthash:8].css",
+		}),
+	].filter(Boolean),
 };
 ```
 
@@ -233,15 +233,15 @@ module.exports = {
 importAll(require.context("./components", false, /\.scss$/));
 
 function importAll(context) {
-  context.keys().forEach(context);
+	context.keys().forEach(context);
 }
 
 // webpackのモジュールからは読み込まれていないファイルもビルドに含めることで、
 // `assets`ディレクトリに配置したあらゆるファイルを`webpack-manifest.json`経由で参照できるようにする
 require.context(
-  ".",
-  true,
-  /\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$/
+	".",
+	true,
+	/\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$/,
 );
 ```
 
@@ -255,10 +255,10 @@ Jestを利用している場合、JavaScriptファイルから画像ファイル
 
 ```javascript
 module.exports = {
-  moduleNameMapper: {
-    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-      "<rootDir>/src/assets/test/__mocks__/fileMock.js",
-  },
+	moduleNameMapper: {
+		"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+			"<rootDir>/src/assets/test/__mocks__/fileMock.js",
+	},
 };
 ```
 

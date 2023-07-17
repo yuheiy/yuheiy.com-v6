@@ -10,11 +10,35 @@ publishDate: "2021-01-26T17:13:39.216Z"
 2. Stackレイアウトとの取り合わせやすさのため
 3. 隣接セレクターを使った場合分けができるようにするため
 
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">CSS、基本コンポーネントの上にマージン取る派と、下にマージン取る派がいると思うですけど、自分は今までずっと下で。というのは、その方が直感的だと感じるからなんですけど、見出しの下って結構縮めるよね？それを上マージンでやると結構頭こんがらがらない？って思うんだけどどうなんだろう</p>&mdash; Takeshi Takatsudo (@Takazudo) <a href="https://twitter.com/Takazudo/status/1348988615620128769?ref_src=twsrc%5Etfw">January 12, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet">
+	<p lang="ja" dir="ltr">
+		CSS、基本コンポーネントの上にマージン取る派と、下にマージン取る派がいると思うですけど、自分は今までずっと下で。というのは、その方が直感的だと感じるからなんですけど、見出しの下って結構縮めるよね？それを上マージンでやると結構頭こんがらがらない？って思うんだけどどうなんだろう
+	</p>
+	&mdash; Takeshi Takatsudo (@Takazudo){" "}
+	<a href="https://twitter.com/Takazudo/status/1348988615620128769?ref_src=twsrc%5Etfw">
+		January 12, 2021
+	</a>
+</blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">上です</p>&mdash; 全部入りHTML太郎 (@_yuheiy) <a href="https://twitter.com/_yuheiy/status/1348990956989661184?ref_src=twsrc%5Etfw">January 12, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet">
+	<p lang="ja" dir="ltr">
+		上です
+	</p>
+	&mdash; 全部入りHTML太郎 (@_yuheiy){" "}
+	<a href="https://twitter.com/_yuheiy/status/1348990956989661184?ref_src=twsrc%5Etfw">
+		January 12, 2021
+	</a>
+</blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">なぜですか?</p>&mdash; u (@uknmr) <a href="https://twitter.com/uknmr/status/1349155640841695233?ref_src=twsrc%5Etfw">January 13, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet">
+	<p lang="ja" dir="ltr">
+		なぜですか?
+	</p>
+	&mdash; u (@uknmr){" "}
+	<a href="https://twitter.com/uknmr/status/1349155640841695233?ref_src=twsrc%5Etfw">
+		January 13, 2021
+	</a>
+</blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 ## 1. 末尾の要素の存在が任意である場合が多いため
 
@@ -26,7 +50,7 @@ publishDate: "2021-01-26T17:13:39.216Z"
 <h1>{{title}}</h1>
 
 {{#if description}}
-<p class="mt-3">{{description}}</p>
+	<p class="mt-3">{{description}}</p>
 {{/if}}
 ```
 
@@ -38,7 +62,7 @@ publishDate: "2021-01-26T17:13:39.216Z"
 	<p class="mt-2">{{description}}</p>
 
 	{{#if link}}
-	<p class="mt-3"><a href="{{link}}">さらに詳しく</a></p>
+		<p class="mt-3"><a href="{{link}}">さらに詳しく</a></p>
 	{{/if}}
 </div>
 ```
@@ -51,11 +75,11 @@ publishDate: "2021-01-26T17:13:39.216Z"
 	<p class="mt-2">{{description}}</p>
 
 	{{#if tags}}
-	<ul class="mt-3">
-		{{#each tag in tags}}
-		<li>{{this}}</li>
-		{{/each}}
-	</ul>
+		<ul class="mt-3">
+			{{#each tag in tags}}
+				<li>{{this}}</li>
+			{{/each}}
+		</ul>
 	{{/if}}
 </div>
 ```
@@ -80,8 +104,8 @@ publishDate: "2021-01-26T17:13:39.216Z"
 
 ```handlebars
 {{#if subtitle}}
-<p>{{subtitle}}</p>
-<div class="mt-2"></div>
+	<p>{{subtitle}}</p>
+	<div class="mt-2"></div>
 {{/if}}
 
 <h1>{{title}}</h1>
@@ -113,10 +137,18 @@ Stackレイアウトというのは[Every Layoutで紹介されているCSSの�
 
 また複数のStackレイアウトが横並びになった場合に、特定の要素の配置を下部に合わせる用法もある。
 
-<p class="codepen" data-height="300" data-slug-hash="oNzKZOr" data-user="yuheiy" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/yuheiy/pen/oNzKZOr">
-  Card Grid by Stack Layouts</a> by Yuhei Yasuda (<a href="https://codepen.io/yuheiy">@yuheiy</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
+<p
+	class="codepen"
+	data-height="300"
+	data-slug-hash="oNzKZOr"
+	data-user="yuheiy"
+	style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;"
+>
+	<span>
+		See the Pen <a href="https://codepen.io/yuheiy/pen/oNzKZOr">Card Grid by Stack Layouts</a> by
+		Yuhei Yasuda (<a href="https://codepen.io/yuheiy">@yuheiy</a>) on{" "}
+		<a href="https://codepen.io">CodePen</a>.
+	</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
