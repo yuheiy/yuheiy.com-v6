@@ -1,15 +1,15 @@
-astro-embed-tweet {
-	@apply block ring-1 ring-[#1DA1F2] rounded-md;
+:root astro-embed-tweet {
+	@apply block bg-white text-gray-500 text-sm rounded-md;
 }
 
-astro-embed-tweet::before {
-	@apply block px-5 py-1 content-['Twitter'] text-xs leading-[normal] text-white font-bold bg-[#1DA1F2] rounded-t-md;
+:root astro-embed-tweet::before {
+	@apply block px-[calc(1.25rem+1px)] py-1 content-['Twitter'] text-xs leading-[normal] text-white font-bold bg-[#1DA1F2] rounded-t-[inherit];
 }
 
 :root .twitter-tweet:not(.twitter-tweet-rendered) {
-	@apply ml-0 px-5 py-4 text-sm text-dynamic-muted border-0;
+	@apply ml-0 px-5 py-4 rounded-b-[inherit] border border-t-0 border-dynamic dark:border-transparent;
 }
 
-.twitter-tweet:not(.twitter-tweet-rendered) p {
-	@apply mb-3 text-base text-dynamic;
+:root .twitter-tweet:not(.twitter-tweet-rendered) p {
+	@apply mb-3 text-base text-gray-800;
 }
