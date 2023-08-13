@@ -119,7 +119,7 @@ module.exports = {
 	"scripts": {
 		"dev": "concurrently --raw \"npm:dev:*\"",
 		"dev:astro": "astro dev",
-		"dev:reload-tailwind": "chokidar \"src/styles/{base,components,utilities}.*.css\" -c \"touch tailwind.config.cjs\" -d 0 --silent"
+		"dev:css": "chokidar \"src/styles/{base,components,utilities}.*.css\" -c \"touch tailwind.config.cjs\" -d 0 --silent"
 	}
 	// ...
 }
