@@ -144,7 +144,7 @@ const blogEntries = (await getCollection("blog")).sort(
 		<div class="border-t"></div>
 
 		<section class="container">
-			<h2 class="mb-10 text-lg font-bold leading-tight text-dynamic-muted">主な投稿</h2>
+			<h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">主な投稿</h2>
 
 			<DetailsList items={primaryEntries} />
 		</section>
@@ -152,7 +152,7 @@ const blogEntries = (await getCollection("blog")).sort(
 		<div class="border-t"></div>
 
 		<section class="container">
-			<h2 class="mb-10 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
+			<h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
 
 			<DetailsList items={projects} />
 		</section>
@@ -160,7 +160,7 @@ const blogEntries = (await getCollection("blog")).sort(
 		<div class="border-t"></div>
 
 		<section class="container">
-			<h2 class="mb-10 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
+			<h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
 
 			<DetailsList
 				items={blogEntries.slice(0, 3).map((entry) => ({
