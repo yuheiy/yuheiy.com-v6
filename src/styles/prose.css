@@ -76,14 +76,20 @@
 		@apply text-sm;
 	}
 
-	:where(code::before),
-	:where(code::after) {
-		@apply content-["`"];
+	:where(code) {
+		quotes: "`" "`";
 	}
 
-	:where(pre > code::before),
-	:where(pre > code::after) {
-		@apply content-none;
+	:where(pre > code) {
+		quotes: none;
+	}
+
+	code::before {
+		content: open-quote;
+	}
+
+	code::after {
+		content: close-quote;
 	}
 
 	:where(img) {
