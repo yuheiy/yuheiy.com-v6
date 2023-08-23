@@ -1,86 +1,64 @@
 .prose {
 	@apply [margin-trim:block];
 
-	> * {
-		@apply !my-0;
-	}
-
 	> * + * {
-		@apply !mt-[--prose-spacing,theme(spacing.6)];
+		@apply mt-[--prose-spacing,theme(spacing.6)];
 	}
 
-	> :where(
-			*
-				+ :is(
-					h2,
-					h3,
-					hr,
-					pre,
-					figure,
-					.codepen,
-					.cp_embed_wrapper,
-					astro-embed-tweet,
-					lite-youtube
-				),
-			:is(
-					hr,
-					pre,
-					figure,
-					.codepen,
-					.cp_embed_wrapper + script,
-					astro-embed-tweet,
-					lite-youtube + script
-				)
-				+ *
-		) {
-		@apply [--prose-spacing:theme(spacing.10)];
+	> * + :is(h2, h3, hr),
+	> hr + * {
+		@apply [--prose-spacing:theme(spacing.12)];
 	}
 
-	:where(h2) {
+	h2 {
 		@apply text-2xl font-bold leading-tight kerning-all;
 	}
 
-	:where(h3) {
+	h3 {
 		@apply text-lg font-bold leading-tight;
 	}
 
-	:where(hr) {
+	hr {
 		@apply max-w-[8em] border-t-4;
 	}
 
-	:where(pre) {
-		@apply -ml-[--container-margin-left] -mr-[--container-margin-right] pl-[--container-margin-left] pr-[--container-margin-right] text-sm leading-tight;
+	pre {
+		@apply -ml-[--container-margin-left] -mr-[--container-margin-right] pl-[--container-margin-left] pr-[--container-margin-right] py-2 text-sm leading-tight;
 	}
 
-	:where(blockquote) {
-		@apply ml-[2em] space-y-3;
+	blockquote:not([class]) {
+		@apply relative pl-[2em] space-y-3;
 	}
 
-	:where(ol, ul) {
-		@apply list-[revert] pl-[2em];
+	blockquote:not([class])::before {
+		@apply content-[''] absolute inset-y-[calc((theme(lineHeight.normal)-1)*1rem/2)] left-0 border-l-2;
 	}
 
-	> :where(ol, ul) {
-		@apply [margin-trim:block];
+	:is(ol, ul) {
+		@apply list-[revert] pl-[2em] [margin-trim:block];
 	}
 
-	:where(li) {
+	:is(ol, ul) :is(ol, ul) {
+		@apply [margin-trim:none];
+	}
+
+	li {
 		@apply mt-1;
 	}
 
-	:where(figure) {
-		@apply space-y-3;
+	figure {
+		@apply space-y-3 py-2;
 	}
 
-	:where(figcaption) {
+	figcaption {
 		@apply text-sm;
 	}
 
-	:where(code) {
+	code {
 		quotes: "`" "`";
 	}
 
-	:where(pre > code) {
+	pre > code {
 		quotes: none;
 	}
 
@@ -92,11 +70,31 @@
 		content: close-quote;
 	}
 
-	:where(img) {
+	img {
 		@apply ring-1 ring-dynamic;
 	}
 
-	:where(details) {
+	details {
 		@apply space-y-3;
+	}
+
+	astro-embed-tweet {
+		@apply block py-2 bg-white text-gray-500 text-sm rounded-md;
+	}
+
+	astro-embed-tweet::before {
+		@apply block px-[calc(theme(spacing.5)+1px)] py-1 content-['Twitter'] text-xs leading-[normal] text-white font-bold bg-[#1DA1F2] rounded-t-[inherit];
+	}
+
+	astro-embed-tweet .twitter-tweet {
+		@apply ml-0 px-5 py-4 rounded-b-[inherit] border border-t-0 border-dynamic dark:border-transparent;
+	}
+
+	astro-embed-tweet .twitter-tweet p {
+		@apply mb-3 text-base text-gray-800;
+	}
+
+	.cp_embed_wrapper {
+		@apply py-2;
 	}
 }
