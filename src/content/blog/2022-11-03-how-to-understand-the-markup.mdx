@@ -23,13 +23,8 @@ twitterCard: summary_large_image
 
 というのも、CSSなら望む通りの見た目になればとりあえずOKだし、JavaScriptでも意図した通りの振る舞いをすればまあいいだろう、という判断ができます。けれどHTMLでは、`div`を使おうが`button`を使おうが、何が変わるのかがその場でわからなくてどうしようもないのかもしれません。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/004.png)
-	<figcaption>
-		[Showing results for https://dist.connpass.com/event/261960/ - Nu Html
-		Checker](https://validator.w3.org/nu/?doc=https%3A%2F%2Fdist.connpass.com%2Fevent%2F261960%2F)
-	</figcaption>
-</figure>
+{/* prettier-ignore */}
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/004.png)<figcaption>[Showing results for https://dist.connpass.com/event/261960/ - Nu Html Checker](https://validator.w3.org/nu/?doc=https%3A%2F%2Fdist.connpass.com%2Fevent%2F261960%2F)</figcaption></figure>
 
 HTMLにはチェッカーがありますから、もし構文エラーをしていたり、変な属性を使っていたりすれば、チェッカーから発される警告によってそのことに気づけるようになっています。それでも、すべての間違いをチェッカーで指摘できるわけではありません。
 
@@ -160,48 +155,34 @@ HTMLでは、それぞれの要素などをどう使うのかは一応定義さ�
 
 関連するところとして、以前、HTMLの語彙を使って情報構造を考えるという発表をしたことがあります。そちらもご覧ください。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/010.png)
-	<figcaption>[制作者のためのHTML](https://yuheiy.github.io/html-for-creators/)</figcaption>
-</figure>
+{/* prettier-ignore */}
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/010.png)<figcaption>[制作者のためのHTML](https://yuheiy.github.io/html-for-creators/)</figcaption></figure>
 
 次に、HTMLのセマンティクスです。つまり、HTML仕様をよく理解した上でマークアップできているか、ということです。非常に基本的ではあるものの、簡単ではありません。仕様を素直に読み解くことは誰にでもできることではありません。
 
 最近では、HTML仕様をわかりやすく正確に解説した書籍『HTML解体新書』がありますので、まずはこちらを読んでいただくのがおすすめです。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/011.png)
-	<figcaption>
-		[HTML解体新書 | ボーンデジタル](https://www.borndigital.co.jp/book/25999.html)
-	</figcaption>
-</figure>
+{/* prettier-ignore */}
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/011.png)<figcaption>[HTML解体新書 | ボーンデジタル](https://www.borndigital.co.jp/book/25999.html)</figcaption></figure>
 
 続いて、WAI-ARIAのセマンティクスです。WAI-ARIAはHTMLと連携した仕様であり、スクリーンリーダーなどの支援技術に対して適切な情報伝達ができるようにすることを目的としています。
 
 ブラウザでHTML文書を表示すると、それがDOMツリーに変換された上でページが描画されます。その際同時に、DOMツリーをもとにしてアクセシビリティツリーと呼ばれる構造が生成されています。スクリーンリーダーのユーザーは、OSを経由してアクセシビリティツリーにアクセスすることによってページを利用しています。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/012.png)
-	<figcaption>
-		[Accessibility Object Model | aom](https://wicg.github.io/aom/explainer.html)
-	</figcaption>
-</figure>
+{/* prettier-ignore */}
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/012.png)<figcaption>[Accessibility Object Model | aom](https://wicg.github.io/aom/explainer.html)</figcaption></figure>
 
 アクセシビリティツリーは、基本的にはWAI-ARIA仕様に則って生成されます。そのため、WAI-ARIAについてもよく理解しておくことが大切です。『HTML解体新書』では、WAI-ARIAについても解説されています。
 
 WAI-ARIAの基本的なところを理解した後には、WAI-ARIAのデザインパターンに目を通してみるとよいでしょう。W3C Web Accessibility Initiativeというグループによって、WAI-ARIAを使って一般的なUIコンポーネントを実装するためのパターンが公開されています。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/013.png)
-	<figcaption>[Patterns | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/)</figcaption>
-</figure>
+{/* prettier-ignore */}
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/013.png)<figcaption>[Patterns | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/)</figcaption></figure>
 
 そして、ブラウザ・OS・スクリーンリーダーでのサポート状況、ユーザーにとっての使い勝手について。環境によって、HTMLの機能が実装されていたりされていなかったりすることがありますが、これはWAI-ARIAにおいても同じです。仕様としては存在していても、ブラウザに実装されていないから実質使えない、ということがあります。そういったことを調べられるツールとして、Can I use...のWAI-ARIA版のようなものがあります。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/014.png)
-	<figcaption>[Accessibility Support](https://a11ysupport.io/)</figcaption>
-</figure>
+{/* prettier-ignore */}
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/014.png)<figcaption>[Accessibility Support](https://a11ysupport.io/)</figcaption></figure>
 
 これによって実装状況を確認した後には、実際にその環境を使って検証するようにしてください。自分でもスクリーンリーダーを使ってみることが大切です。
 
@@ -209,31 +190,18 @@ WAI-ARIAの基本的なところを理解した後には、WAI-ARIAのデザイ�
 
 そこで、実際に支援技術を利用する障害者がどのようにウェブページを利用しているかを紹介する動画が総務省から公開されています。まずはこれを見ていただくのがよいでしょう。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/015.png)
-	<figcaption>
-		[総務省｜情報バリアフリー環境の整備｜障害者のウェブページ利用方法の紹介ビデオ](https://www.soumu.go.jp/menu_news/s-news/2005/051215_1_wmv.html)
-	</figcaption>
-</figure>
+{/* prettier-ignore */}
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/015.png)<figcaption>[総務省｜情報バリアフリー環境の整備｜障害者のウェブページ利用方法の紹介ビデオ](https://www.soumu.go.jp/menu_news/s-news/2005/051215_1_wmv.html)</figcaption></figure>
 
 加えて、実際のユーザーの利用状況についての調査結果なども公開されています。こうしたものにも目を通しておくと参考にできることがあります。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/016.png)
-	<figcaption>
-		[第2回支援技術利用状況調査報告書 |
-		日本視覚障害者ICTネットワーク](https://jbict.net/survey/at-survey-02)
-	</figcaption>
-</figure>
+{/* prettier-ignore */}
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/016.png)<figcaption>[第2回支援技術利用状況調査報告書 | 日本視覚障害者ICTネットワーク](https://jbict.net/survey/at-survey-02)</figcaption></figure>
 
 さて次に、CSSやJavaScriptなど周辺技術との兼ね合い、連携のしやすさです。HTMLの構造によっては、CSSが書きにくくなったり、JavaScriptでの操作が難しくなったりすることがあります。あるいは、CMSの機能やWYSIWYGからの出力、テンプレートエンジンやコンポーネントシステムの性質を踏まえて、それに適した実装方法を検討することもあるはずです。そうした考慮もマークアップの一環です。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/017.png)
-	<figcaption>
-		[Introducing WordPress 6.0 - YouTube](https://www.youtube.com/watch?v=oe452WcY7fA)
-	</figcaption>
-</figure>
+{/* prettier-ignore */}
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/017.png)<figcaption>[Introducing WordPress 6.0 - YouTube](https://www.youtube.com/watch?v=oe452WcY7fA)</figcaption></figure>
 
 最後に、ソースコードの運用性です。たとえば、よかれと思って複雑な仕様を実装してしまった結果、メンテナンスできないほど厄介な状態になってしまうことは珍しくありません。また似たようなところでは、無理のある運用ルールを設定して誰にも守られなくなるということもあるでしょう。そうした問題を防ぐためには、ちょうどいい塩梅を探りながら開発を進めていかなければなりません。
 
@@ -241,13 +209,8 @@ WAI-ARIAの基本的なところを理解した後には、WAI-ARIAのデザイ�
 
 『インクルーシブHTML+CSS & JavaScript』では、いわゆるボタンリンクの実装方法について紹介されています。いわく、ボタンリンクと本当の`button`は、同じ見た目にせずにそれぞれ別々にしてしまおう、という話です。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/018.png)
-	<figcaption>
-		[電子書籍版インクルーシブHTML+CSS & JavaScript |
-		ボーンデジタル](https://www.borndigital.co.jp/book/6610.html)
-	</figcaption>
-</figure>
+{/* prettier-ignore */}
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/018.png)<figcaption>[電子書籍版インクルーシブHTML+CSS & JavaScript | ボーンデジタル](https://www.borndigital.co.jp/book/6610.html)</figcaption></figure>
 
 `a`と`button`は、どちらも押せるという意味では同じですが、細かく見ていくと微妙に振る舞いが異なります。にもかかわらず、それらを同じ見た目にして同じコンポーネントであるように扱ってしまうのはやや乱暴です。機能的に異なるものを同じように扱うことで、制作者自身が混乱してしまうこともあります。
 
@@ -255,10 +218,8 @@ WAI-ARIAの基本的なところを理解した後には、WAI-ARIAのデザイ�
 
 これまで話してきたのは、マークアップの複雑さについてです。考慮すべき要素がいくつもあるがゆえに、それらをうまく調整する手腕が問われるという話でした。一方、そのような「小難しいこと」を考えずに、ごく素朴な感覚をもってマークアップができるものの例として、利用規約のマークアップが挙げられます。
 
-<figure>
-	![](./assets/2022-11-03-how-to-understand-the-markup/019.png)
-	<figcaption>[利用規約 - connpass](https://connpass.com/term/)</figcaption>
-</figure>
+{/* prettier-ignore */}
+<figure>![](./assets/2022-11-03-how-to-understand-the-markup/019.png)<figcaption>[利用規約 - connpass](https://connpass.com/term/)</figcaption></figure>
 
 利用規約は、極めてシンプルなウェブページの代表です。これは言ってしまえば、「誰も読まないページ」でもあります。だからこそ、HTMLという形式に対して素直で作りやすく、ごく普通の形を保ち続けられるのだとも言えます。
 
@@ -320,10 +281,8 @@ HTMLでは、情報を表現するために使える語彙があらかじめ決�
 
 『SGML入門』では、教科書の前付けページの構成例が紹介されています。教科書の前付けページに含まれるデータを分析して、ツリーダイアグラムとして構造を定義したものです。
 
-<figure>
-	![典型的な教科書の前付けページの構成がツリーダイアグラムとして表現されている](./assets/2022-11-03-how-to-understand-the-markup/020.jpg)
-	<figcaption>Martin Bryan『SGML入門』（福島誠訳）</figcaption>
-</figure>
+{/* prettier-ignore */}
+<figure>![典型的な教科書の前付けページの構成がツリーダイアグラムとして表現されている](./assets/2022-11-03-how-to-understand-the-markup/020.jpg)<figcaption>Martin Bryan『SGML入門』（福島誠訳）</figcaption></figure>
 
 <figure>
 - 教科書
@@ -396,10 +355,8 @@ HTMLでは、情報を表現するために使える語彙があらかじめ決�
 
 もう少し親しみやすい例としては、『SGML実践ガイド』では、料理のレシピをマークアップするための要素の例も紹介されていました。
 
-<figure>
-	![料理のレシピについて文書分析する例として、最終的に紙に印刷されるレシピをサンプルにしつつ、レシピで使う要素を例示している。\<head1>、\<p1>、\<p2>、\<p3>、\<p4>、\<pr>、\<pl>、\<it>](./assets/2022-11-03-how-to-understand-the-markup/021.jpg)
-	<figcaption>B.トラビス, D.ウォルト『SGML実践ガイド』（学研, スリーエーシステムズSGML事業室 訳）</figcaption>
-</figure>
+{/* prettier-ignore */}
+<figure>![料理のレシピについて文書分析する例として、最終的に紙に印刷されるレシピをサンプルにしつつ、レシピで使う要素を例示している。\<head1>、\<p1>、\<p2>、\<p3>、\<p4>、\<pr>、\<pl>、\<it>](./assets/2022-11-03-how-to-understand-the-markup/021.jpg)<figcaption>B.トラビス, D.ウォルト『SGML実践ガイド』（学研, スリーエーシステムズSGML事業室 訳）</figcaption></figure>
 
 『SGML実践ガイド』によれば、SGMLの文書を定義するに当たっては、次の3つの基本的な観点があります。
 

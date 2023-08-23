@@ -88,9 +88,7 @@ export default () => (
 );
 ````
 
-<figcaption>
-[Composition – Radix UI](https://www.radix-ui.com/docs/primitives/guides/composition)
-</figcaption>
+<figcaption>[Composition – Radix UI](https://www.radix-ui.com/docs/primitives/guides/composition)</figcaption>
 </figure>
 
 レンダリングする要素を変更する対象のコンポーネントに対して、`as` propの代わりに`asChild` propを付与する。その`children` propとして任意のノードを指定する。
@@ -123,16 +121,14 @@ export default () => {
 			</Tooltip.Root>
 
     		<Dialog.Portal>...</Dialog.Portal>
-    	</Dialog.Root>
-    );
+    </Dialog.Root>
 
+);
 };
 
 ````
 
-<figcaption>
-[Composition – Radix UI](https://www.radix-ui.com/docs/primitives/guides/composition#composing-multiple-primitives)
-</figcaption>
+<figcaption>[Composition – Radix UI](https://www.radix-ui.com/docs/primitives/guides/composition#composing-multiple-primitives)</figcaption>
 </figure>
 
 ### 自前のコンポーネントに`asChild` propを組み込む
@@ -150,9 +146,7 @@ function Button({ asChild, ...props }) {
 }
 ````
 
-<figcaption>
-[Slot – Radix UI](https://www.radix-ui.com/docs/primitives/utilities/slot)
-</figcaption>
+<figcaption>[Slot – Radix UI](https://www.radix-ui.com/docs/primitives/utilities/slot)</figcaption>
 </figure>
 
 TypeScriptを使用しつつ、`forwardRef`を適用する場合は、次のように記述する。
@@ -569,9 +563,7 @@ describe("mixed", () => {
 <Combobox render={<textarea rows={5} />} />
 ```
 
-<figcaption>
-[Composition - Ariakit](https://ariakit.org/guide/composition#changing-the-html-element)
-</figcaption>
+<figcaption>[Composition - Ariakit](https://ariakit.org/guide/composition#changing-the-html-element)</figcaption>
 </figure>
 
 興味深いのは、その`render` propに渡された要素に対して、内部的に管理されたpropsなどが暗黙的に渡される仕組みになっていること。たとえばあるコンポーネントに対して、`render` propと`children` propを同時に指定すると、`render` propに指定した要素に対してその`children` propが渡される仕組みになっている。
@@ -581,9 +573,7 @@ describe("mixed", () => {
 <Tab render={<Link href="/new" />}>New</Tab>
 ```
 
-<figcaption>
-[Composition - Ariakit](https://ariakit.org/guide/composition#composing-with-custom-components)
-</figcaption>
+<figcaption>[Composition - Ariakit](https://ariakit.org/guide/composition#composing-with-custom-components)</figcaption>
 </figure>
 
 これは次のような結果になる。
