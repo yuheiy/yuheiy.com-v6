@@ -79,15 +79,15 @@
 	}
 
 	astro-embed-tweet {
-		@apply block py-2 bg-white text-gray-500 text-sm rounded-md;
+		@apply block py-2;
 	}
 
 	astro-embed-tweet::before {
-		@apply block px-[calc(theme(spacing.5)+1px)] py-1 content-['Twitter'] text-xs leading-[normal] text-white font-bold bg-[#1DA1F2] rounded-t-[inherit];
+		@apply block px-[calc(theme(spacing.5)+1px)] py-1 content-['Twitter'] text-xs leading-[normal] text-white font-bold bg-[#1DA1F2] rounded-t-md;
 	}
 
 	astro-embed-tweet .twitter-tweet {
-		@apply ml-0 px-5 py-4 rounded-b-[inherit] border border-t-0 border-dynamic dark:border-transparent;
+		@apply px-5 py-4 bg-white rounded-b-md border border-t-0 border-dynamic dark:border-transparent text-gray-500 text-sm;
 	}
 
 	astro-embed-tweet .twitter-tweet p {
