@@ -80,7 +80,6 @@ CSSにおいては、特定のステップ数をフォントサイズの値と�
 これらのパターンのなかに、行の高さやトラッキングなどもいっしょに含めておくと、さらにルールの一貫性を高めることができるし、開発も楽になる。いま担当している案件では、デザイナーがページの制作を進める傍らで、こうしたタイプスケールも定義してもらっている。
 
 {/* prettier-ignore */}
-<figure>![H1、H2、Subtitle、Body、Captionのようなカテゴリごとに、Typeface、Weight、Size、Case、Letter
-	spacingの値が設定されている](./assets/2022-01-24-retrospective-on-utopia/type-scale.png)<figcaption>&mdash;&mdash;<a href="https://material.io/design/typography/the-type-system.html#type-scale">The type system - Material Design</a></figcaption></figure>
+<figure>![H1、H2、Subtitle、Body、Captionのようなカテゴリごとに、Typeface、Weight、Size、Case、Letter spacingの値が設定されている](./assets/2022-01-24-retrospective-on-utopia/type-scale.png)<figcaption>&mdash;&mdash;<a href="https://material.io/design/typography/the-type-system.html#type-scale">The type system - Material Design</a></figcaption></figure>
 
 さらに、タイプスケールやスペーシングだけでなく、そのほかのいろいろな値（デザイントークン）を一元管理できればなおよい。そこで、[Figma Tokens](https://jansix.at/resources/figma-tokens)というプラグインを導入することにした。これを使えば、テキストやスペーシングに限らず、カラーパレットやボーダー、不透明度などもトークンとして管理できるようになる。Figma Tokensにトークンを設定すると、それらに対応するボタンが出現して、クリックするとレイヤーに適用できるという仕組みになっている。トークンの設定はJSONで入出力できるので、[Tailwind CSSのデフォルト値をJSON化](https://gist.github.com/yuheiy/e1fc01fc0a4816924d1959221fdba46c)し、デザイナーと共有している。
