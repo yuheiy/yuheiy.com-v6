@@ -17,7 +17,6 @@
 		"@wordpress/browserslist-config": "5.20.0",
 		"astro": "2.8.3",
 		"astro-embed": "0.5.0",
-		"budoux": "0.5.2",
 		"dayjs": "1.11.9",
 		"just-extend": "6.2.0",
 		"just-safe-set": "4.2.1",
