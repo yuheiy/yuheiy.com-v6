@@ -1,13 +1,15 @@
-import rss from "@astrojs/rss";
-import type { APIContext } from "astro";
-import { getCollection } from "astro:content";
-import { siteDescription, siteTitle } from "../consts.js";
-import dayjs from "../lib/dayjs.js";
+import rss from '@astrojs/rss';
+import type { APIContext } from 'astro';
+import { getCollection } from 'astro:content';
+import { siteDescription, siteTitle } from '../consts.js';
+import dayjs from '../lib/dayjs.js';
 
 export async function get(context: APIContext) {
-	const blogEntries = await getCollection("blog");
+	const blogEntries = await getCollection('blog');
 	blogEntries.sort(
-		(a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf(),
+		(a, b) =>
+			dayjs(b.data.publishDate).tz().valueOf() -
+			dayjs(a.data.publishDate).tz().valueOf(),
 	);
 	return rss({
 		title: siteTitle,

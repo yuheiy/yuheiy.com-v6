@@ -45,6 +45,7 @@ render(
 
 一つは、TypeScriptのエラーメッセージが複雑になってしまうこと。たとえば、Reactの要素に間違ったpropが渡されたとき、通常の`a`要素と、`as` propとしてa要素が指定されたコンポーネントを比較すると、明らかに後者の方がユーザーにとって理解しづらい。
 
+{/* prettier-ignore */}
 <figure>![](./assets/2023-06-03-react-changeable-element-type-patterns/as-prop-error.png)</figure>
 
 次に、TypeScriptのパフォーマンスを悪化させること。`as` propの型定義においては、高度な型推論や条件型、ジェネリクスを多用することになり、コンパイルするための負荷が高まってしまう。
@@ -152,12 +153,13 @@ TypeScriptを使用しつつ、`forwardRef`を適用する場合は、次のよ�
 ```tsx
 import { type ComponentPropsWithRef, forwardRef } from "react";
 
-const Button = forwardRef<unknown, ComponentPropsWithRef<"button"> & { asChild?: boolean }>(
-	({ asChild, ...props }, forwardedRef) => {
-		const Comp: any = asChild ? Slot : "button";
-		return <Comp {...props} ref={forwardedRef} />;
-	},
-);
+const Button = forwardRef<
+	unknown,
+	ComponentPropsWithRef<"button"> & { asChild?: boolean }
+>(({ asChild, ...props }, forwardedRef) => {
+	const Comp: any = asChild ? Slot : "button";
+	return <Comp {...props} ref={forwardedRef} />;
+});
 
 Button.displayName = "Button";
 ```
@@ -170,7 +172,9 @@ import type * as Radix from "@radix-ui/react-primitive";
 import { forwardRef } from "react";
 
 type ButtonElement = React.ElementRef<typeof Primitive.button>;
-type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<typeof Primitive.button>;
+type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<
+	typeof Primitive.button
+>;
 interface ButtonProps extends PrimitiveButtonProps {}
 
 const Button = forwardRef<ButtonElement, ButtonProps>((props, forwardedRef) => (
@@ -192,7 +196,9 @@ import type * as Radix from "@radix-ui/react-primitive";
 import { forwardRef } from "react";
 
 type ButtonElement = React.ElementRef<typeof Primitive.button>;
-type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<typeof Primitive.button>;
+type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<
+	typeof Primitive.button
+>;
 interface ButtonProps extends PrimitiveButtonProps {}
 
 const Button = forwardRef<ButtonElement, ButtonProps>((props, forwardedRef) => (
@@ -262,7 +268,9 @@ import type * as Radix from "@radix-ui/react-primitive";
 import { forwardRef } from "react";
 
 type ButtonElement = React.ElementRef<typeof Primitive.button>;
-type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<typeof Primitive.button>;
+type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<
+	typeof Primitive.button
+>;
 interface ButtonProps extends PrimitiveButtonProps {}
 
 const Button = forwardRef<ButtonElement, ButtonProps>((props, forwardedRef) => (
@@ -312,7 +320,9 @@ import { forwardRef } from "react";
 import { mergeRefs } from "react-merge-refs";
 
 type ButtonElement = React.ElementRef<typeof Primitive.button>;
-type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<typeof Primitive.button>;
+type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<
+	typeof Primitive.button
+>;
 interface ButtonProps extends PrimitiveButtonProps {}
 
 const Button = forwardRef<ButtonElement, ButtonProps>((props, forwardedRef) => {
@@ -345,7 +355,10 @@ Button.displayName = "Button";
 ```jsx
 function Button({ as: Component = "button", children, ...props }) {
 	return (
-		<Component {...props} className={["Button", props.className].filter(Boolean).join(" ")}>
+		<Component
+			{...props}
+			className={["Button", props.className].filter(Boolean).join(" ")}
+		>
 			<span className="ButtonLabel">{children}</span>
 		</Component>
 	);
@@ -368,12 +381,16 @@ import {
 } from "react";
 
 type ButtonElement = ElementRef<typeof Primitive.button>;
-type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<typeof Primitive.button>;
+type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<
+	typeof Primitive.button
+>;
 interface ButtonProps extends PrimitiveButtonProps {}
 
 export const Button = forwardRef<ButtonElement, ButtonProps>(
 	({ children, ...props }, forwardedRef) => {
-		const wrapChildren = (children: ReactNode) => <span className="ButtonLabel">{children}</span>;
+		const wrapChildren = (children: ReactNode) => (
+			<span className="ButtonLabel">{children}</span>
+		);
 
 		return (
 			<Primitive.button
@@ -583,7 +600,13 @@ describe("mixed", () => {
 先ほどの`asChild` propにおいては、コンポーネントの内側に別の要素が入れ子になっている場合の表現の難しさが問題になった。しかし、このAriakitの`render` propのアイデアを借用すれば、比較的直感的なインターフェースとシンプルな実装を実現することもできる。
 
 ```tsx
-import { ComponentProps, ReactElement, ReactNode, cloneElement, forwardRef } from "react";
+import {
+	ComponentProps,
+	ReactElement,
+	ReactNode,
+	cloneElement,
+	forwardRef,
+} from "react";
 
 type ButtonProps = { render?: ReactElement } & ComponentProps<"button">;
 

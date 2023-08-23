@@ -13,7 +13,8 @@ Sassでは、引数の値に応じて宣言をクラスに注入できるMixin�
 // https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/
 @function fluid-size($min-size, $max-size, $min-width: 640, $max-width: 1280) {
 	$v: (100 * ($max-size - $min-size)) / ($max-width - $min-width);
-	$r: ($min-width * $max-size - $max-width * $min-size) / ($min-width - $max-width);
+	$r: ($min-width * $max-size - $max-width * $min-size) / ($min-width -
+				$max-width);
 
 	@return clamp(#{rem($min-size)}, #{$v * 1vw} + #{rem($r)}, #{rem($max-size)});
 }

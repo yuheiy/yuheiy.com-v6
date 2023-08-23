@@ -1,24 +1,24 @@
-import mdx from "@astrojs/mdx";
-import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
 // eslint-disable-next-line n/file-extension-in-import
-import { defineConfig } from "astro/config";
-import { toString } from "mdast-util-to-string";
-import { select } from "unist-util-select";
-import { visit } from "unist-util-visit";
+import { defineConfig } from 'astro/config';
+import { toString } from 'mdast-util-to-string';
+import { select } from 'unist-util-select';
+import { visit } from 'unist-util-visit';
 
 export default defineConfig({
 	experimental: {
 		assets: true,
 	},
-	site: "https://yuheiy.com/",
-	trailingSlash: "never",
+	site: 'https://yuheiy.com/',
+	trailingSlash: 'never',
 	build: {
-		format: "file",
+		format: 'file',
 	},
 	markdown: {
 		shikiConfig: {
-			theme: "css-variables",
+			theme: 'css-variables',
 		},
 	},
 	integrations: [
@@ -36,7 +36,7 @@ export default defineConfig({
 function remarkInjectDescription() {
 	return (tree, { data }) => {
 		if (!data.astro.frontmatter.description) {
-			const firstParagraph = select("paragraph", tree);
+			const firstParagraph = select('paragraph', tree);
 			data.astro.frontmatter.description = toString(firstParagraph);
 		}
 	};
@@ -47,17 +47,19 @@ function rehypeImageAttributesOverride() {
 		visit(
 			tree,
 			{
-				type: "mdxJsxFlowElement",
-				name: "Image",
+				type: 'mdxJsxFlowElement',
+				name: 'Image',
 			},
 			(node) => {
-				const isLoadingAttributeSet = node.attributes.some(({ name }) => name === "loading");
+				const isLoadingAttributeSet = node.attributes.some(
+					({ name }) => name === 'loading',
+				);
 
 				if (!isLoadingAttributeSet) {
 					node.attributes.push({
-						type: "mdxJsxAttribute",
-						name: "loading",
-						value: "eager",
+						type: 'mdxJsxAttribute',
+						name: 'loading',
+						value: 'eager',
 					});
 				}
 			},

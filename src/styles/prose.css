@@ -9,8 +9,13 @@
 		@apply !mt-[--prose-spacing,theme(spacing.6)];
 	}
 
-	> :where(* + :is(figure, pre, astro-embed-tweet, .codepen, .cp_embed_wrapper)),
-	> :where(:is(figure, pre, astro-embed-tweet, .codepen, .cp_embed_wrapper + script) + *) {
+	> :where(
+			* + :is(figure, pre, astro-embed-tweet, .codepen, .cp_embed_wrapper)
+		),
+	> :where(
+			:is(figure, pre, astro-embed-tweet, .codepen, .cp_embed_wrapper + script)
+				+ *
+		) {
 		@apply [--lh:calc(theme(lineHeight.normal)*1rem)] [--half-leading:calc((var(--lh)-1rem)/2)] [--prose-spacing:calc(theme(spacing.6)+var(--half-leading))];
 	}
 

@@ -232,7 +232,12 @@ function App() {
 `<State>`の実装は次の通り。
 
 ```tsx
-import type { Dispatch, DispatchWithoutAction, ReactNode, SetStateAction } from "react";
+import type {
+	Dispatch,
+	DispatchWithoutAction,
+	ReactNode,
+	SetStateAction,
+} from "react";
 import { useCallback, useState } from "react";
 
 /**
@@ -291,9 +296,8 @@ export function State<S>({
 		</Popover>
 	</DialogTrigger>
 	```
-	<figcaption>
-		[Popover – React Aria](https://react-spectrum.adobe.com/react-aria/Popover.html)
-	</figcaption>
+	{/* prettier-ignore */}
+	<figcaption>[Popover – React Aria](https://react-spectrum.adobe.com/react-aria/Popover.html)</figcaption>
 </figure>
 
 こうした仕組みによって、多くの場面には対応できるが、これでは解決できないようなケースではStateコンポーネントを採用するとよいだろう。

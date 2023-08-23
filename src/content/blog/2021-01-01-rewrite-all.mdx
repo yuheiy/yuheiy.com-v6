@@ -59,10 +59,18 @@ html {
 ```css
 html {
 	--text-base: 1rem;
-	--text-sm: calc(var(--scale-factor) / (var(--scale-factor) + 1) * var(--text-base));
-	--text-lg: calc(var(--scale-factor) / (var(--scale-factor) - 1) * var(--text-base));
-	--text-xl: calc(var(--scale-factor) / (var(--scale-factor) - 2) * var(--text-base));
-	--text-2xl: calc(var(--scale-factor) / (var(--scale-factor) - 4) * var(--text-base));
+	--text-sm: calc(
+		var(--scale-factor) / (var(--scale-factor) + 1) * var(--text-base)
+	);
+	--text-lg: calc(
+		var(--scale-factor) / (var(--scale-factor) - 1) * var(--text-base)
+	);
+	--text-xl: calc(
+		var(--scale-factor) / (var(--scale-factor) - 2) * var(--text-base)
+	);
+	--text-2xl: calc(
+		var(--scale-factor) / (var(--scale-factor) - 4) * var(--text-base)
+	);
 }
 ```
 
