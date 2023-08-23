@@ -1,8 +1,17 @@
 .prose {
 	@apply [margin-trim:block];
 
+	> * {
+		@apply !my-0;
+	}
+
 	> * + * {
-		@apply mt-[--prose-spacing,theme(spacing.6)];
+		@apply !mt-[--prose-spacing,theme(spacing.6)];
+	}
+
+	> * + :is(figure, pre, astro-embed-tweet, .codepen, .cp_embed_wrapper),
+	> :is(figure, pre, astro-embed-tweet, .codepen, .cp_embed_wrapper + script) + * {
+		@apply [--lh:calc(theme(lineHeight.normal)*1rem)] [--half-leading:calc((var(--lh)-1rem)/2)] [--prose-spacing:calc(theme(spacing.6)+var(--half-leading))];
 	}
 
 	> * + :is(h2, h3, hr),
@@ -23,15 +32,15 @@
 	}
 
 	pre {
-		@apply -ml-[--container-margin-left] -mr-[--container-margin-right] pl-[--container-margin-left] pr-[--container-margin-right] py-2 text-sm leading-tight;
+		@apply -ml-[--container-margin-left] -mr-[--container-margin-right] pl-[--container-margin-left] pr-[--container-margin-right] text-sm leading-tight;
 	}
 
-	blockquote:not([class]) {
-		@apply relative pl-[2em] space-y-3;
+	blockquote:not(.twitter-tweet) {
+		@apply relative pl-[2em] space-y-5;
 	}
 
-	blockquote:not([class])::before {
-		@apply content-[''] absolute inset-y-[calc((theme(lineHeight.normal)-1)*1rem/2)] left-0 border-l-2;
+	blockquote:not(.twitter-tweet)::before {
+		@apply [--lh:calc(theme(lineHeight.normal)*1rem)] [--half-leading:calc((var(--lh)-1rem)/2)] content-[''] absolute inset-y-[--half-leading] left-0 border-l-2;
 	}
 
 	:is(ol, ul) {
@@ -47,13 +56,14 @@
 	}
 
 	figure {
-		@apply space-y-3 py-2;
+		@apply space-y-3;
 	}
 
 	figcaption {
 		@apply text-sm;
 	}
 
+	/* https://bugs.webkit.org/show_bug.cgi?id=260425 */
 	code {
 		quotes: "`" "`";
 	}
@@ -76,25 +86,5 @@
 
 	details {
 		@apply space-y-3;
-	}
-
-	astro-embed-tweet {
-		@apply block py-2;
-	}
-
-	astro-embed-tweet::before {
-		@apply block px-[calc(theme(spacing.5)+1px)] py-1 content-['Twitter'] text-xs leading-[normal] text-white font-bold bg-[#1DA1F2] rounded-t-md;
-	}
-
-	astro-embed-tweet .twitter-tweet {
-		@apply px-5 py-4 bg-white rounded-b-md border border-t-0 border-dynamic dark:border-transparent text-gray-500 text-sm;
-	}
-
-	astro-embed-tweet .twitter-tweet p {
-		@apply mb-3 text-base text-gray-800;
-	}
-
-	.cp_embed_wrapper {
-		@apply py-2;
 	}
 }
