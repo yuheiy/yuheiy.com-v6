@@ -16,7 +16,7 @@
 			:is(figure, pre, astro-embed-tweet, .codepen, .cp_embed_wrapper + script)
 				+ *
 		) {
-		@apply [--lh:calc(theme(lineHeight.normal)*1rem)] [--half-leading:calc((var(--lh)-1rem)/2)] [--prose-spacing:calc(theme(spacing.6)+var(--half-leading))];
+		@apply [--prose-spacing:theme(spacing.8)];
 	}
 
 	> :where(* + :is(h2, h3, hr)),
