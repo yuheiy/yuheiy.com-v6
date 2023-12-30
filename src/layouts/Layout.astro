@@ -27,12 +27,14 @@ const {
 } = Astro.props;
 
 const is404 = 'is404' in Astro.props && Astro.props.is404;
-const canonicalURL = is404 ? null : (() => {
-  // remove trailing slash in build time
-  // https://github.com/withastro/astro/pull/4352
-  const normalizedPathname = Astro.url.pathname.replace(/\.html$/, '');
-  return new URL(normalizedPathname, Astro.site)
-})()
+const canonicalURL = is404
+  ? null
+  : (() => {
+      // remove trailing slash in build time
+      // https://github.com/withastro/astro/pull/4352
+      const normalizedPathname = Astro.url.pathname.replace(/\.html$/, '');
+      return new URL(normalizedPathname, Astro.site);
+    })();
 
 const resolvedOgImage = new URL(ogImage, Astro.site);
 ---
