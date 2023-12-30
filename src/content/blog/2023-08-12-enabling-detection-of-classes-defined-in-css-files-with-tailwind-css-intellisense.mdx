@@ -1,6 +1,6 @@
 ---
 title: CSSファイルに記述されたクラスをTailwind CSS IntelliSenseで検出できるようにする
-publishDate: "2023-08-12T19:55:00.000+09:00"
+publishDate: '2023-08-12T19:55:00.000+09:00'
 ---
 
 VS Codeの拡張機能である[Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)を使用する際には、通常、CSSファイルに記述されたクラスは補完されない。というのも、Tailwind CSS IntelliSenseでは、Tailwind CSSの設定ファイル（`tailwind.config.js`）を基にしてCSSを算出しており、設定ファイルを介さずに実装されたCSSは無視されるからだ。
@@ -10,22 +10,22 @@ VS Codeの拡張機能である[Tailwind CSS IntelliSense](https://marketplace.v
 これに対する解決策は、[Tailwindプラグイン](https://tailwindcss.com/docs/plugins)としてCSSを実装することだ。たとえば次のようにすることで、IntelliSenseから`card`クラスを検出できるようになる。
 
 ```js
-const plugin = require("tailwindcss/plugin");
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
-	// ...
-	plugins: [
-		plugin(({ addBase, addComponents, addUtilities, theme }) => {
-			addComponents({
-				".card": {
-					backgroundColor: theme("colors.white"),
-					borderRadius: theme("borderRadius.lg"),
-					padding: theme("spacing.6"),
-					boxShadow: theme("boxShadow.xl"),
-				},
-			});
-		}),
-	],
+  // ...
+  plugins: [
+    plugin(({ addBase, addComponents, addUtilities, theme }) => {
+      addComponents({
+        '.card': {
+          backgroundColor: theme('colors.white'),
+          borderRadius: theme('borderRadius.lg'),
+          padding: theme('spacing.6'),
+          boxShadow: theme('boxShadow.xl'),
+        },
+      });
+    }),
+  ],
 };
 ```
 
@@ -34,19 +34,19 @@ module.exports = {
 そこで、代わりに次のような実装をすることで、普通のCSSとして記述されたファイルをプラグインとして読み込むことができる。
 
 ```js
-const fs = require("fs");
-const postcss = require("postcss");
-const plugin = require("tailwindcss/plugin");
+const fs = require('fs');
+const postcss = require('postcss');
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
-	// ...
-	plugins: [
-		plugin(({ addComponents }) => {
-			const content = fs.readFileSync("src/styles/card.css", "utf8");
-			const styles = postcss.parse(content);
-			addComponents(styles.nodes);
-		}),
-	],
+  // ...
+  plugins: [
+    plugin(({ addComponents }) => {
+      const content = fs.readFileSync('src/styles/card.css', 'utf8');
+      const styles = postcss.parse(content);
+      addComponents(styles.nodes);
+    }),
+  ],
 };
 ```
 
@@ -54,10 +54,10 @@ module.exports = {
 
 ```css
 .card {
-	background-color: theme(colors.white);
-	border-radius: theme(borderRadius.lg);
-	padding: theme(spacing.6);
-	box-shadow: theme(boxShadow.xl);
+  box-shadow: theme(boxShadow.xl);
+  border-radius: theme(borderRadius.lg);
+  background-color: theme(colors.white);
+  padding: theme(spacing.6);
 }
 ```
 
@@ -83,30 +83,30 @@ module.exports = {
  * - Files named `src/styles/utilities.{name}.css` are added to the utilities layer.
  */
 const cssFiles = plugin(({ addBase, addComponents, addUtilities }) => {
-	const dirname = path.join(__dirname, "src/styles");
-	const files = fs.readdirSync(dirname);
+  const dirname = path.join(__dirname, 'src/styles');
+  const files = fs.readdirSync(dirname);
 
-	for (const file of files) {
-		const matched = /^(base|components|utilities)\..+\.css$/.exec(file);
+  for (const file of files) {
+    const matched = /^(base|components|utilities)\..+\.css$/.exec(file);
 
-		if (matched) {
-			const layer = matched[1];
-			const addStyles = {
-				base: addBase,
-				components: addComponents,
-				utilities: addUtilities,
-			}[layer];
-			const content = fs.readFileSync(path.join(dirname, file), "utf8");
-			const styles = postcss.parse(content);
+    if (matched) {
+      const layer = matched[1];
+      const addStyles = {
+        base: addBase,
+        components: addComponents,
+        utilities: addUtilities,
+      }[layer];
+      const content = fs.readFileSync(path.join(dirname, file), 'utf8');
+      const styles = postcss.parse(content);
 
-			addStyles(styles.nodes);
-		}
-	}
+      addStyles(styles.nodes);
+    }
+  }
 });
 
 module.exports = {
-	// ...
-	plugins: [cssFiles],
+  // ...
+  plugins: [cssFiles],
 };
 ```
 
@@ -116,11 +116,11 @@ module.exports = {
 
 ```json
 {
-	"scripts": {
-		"dev": "concurrently --raw \"npm:dev:*\"",
-		"dev:astro": "astro dev",
-		"dev:css": "chokidar \"src/styles/{base,components,utilities}.*.css\" -c \"touch tailwind.config.cjs\" -d 0 --silent"
-	}
-	// ...
+  "scripts": {
+    "dev": "concurrently --raw \"npm:dev:*\"",
+    "dev:astro": "astro dev",
+    "dev:css": "chokidar \"src/styles/{base,components,utilities}.*.css\" -c \"touch tailwind.config.cjs\" -d 0 --silent"
+  }
+  // ...
 }
 ```

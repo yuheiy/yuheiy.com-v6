@@ -1,18 +1,18 @@
 ---
-import type { HTMLTag, Polymorphic } from "astro/types";
+import type { HTMLTag, Polymorphic } from 'astro/types';
 
 type Props<Tag extends HTMLTag> = Polymorphic<{
-	as: Tag;
-	title: string;
+  as: Tag;
+  title: string;
 }>;
 
-const { as: Tag = "div", title } = Astro.props;
+const { as: Tag = 'div', title } = Astro.props;
 ---
 
-<Tag class="container space-y-8">
-	<h1
-		class="text-2xl font-bold leading-tight kerning-all [text-wrap:pretty] [word-break:auto-phrase]"
-		set:html={title}
-	/>
-	<slot />
+<Tag class="wrapper space-y-8">
+  <h1
+    class="text-2xl font-bold leading-tight kerning-all [text-wrap:pretty] [word-break:auto-phrase]"
+    set:html={title}
+  />
+  <slot />
 </Tag>

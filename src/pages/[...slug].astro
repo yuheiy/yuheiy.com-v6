@@ -1,14 +1,14 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "../components/Layout.astro";
-import PageTitle from "../components/PageTitle.astro";
-import dayjs from "../lib/dayjs";
+import { getCollection } from 'astro:content';
+import PageTitle from '../components/PageTitle.astro';
+import Layout from '../layouts/Layout.astro';
+import dayjs from '../lib/dayjs';
 
 export async function getStaticPaths() {
-	return (await getCollection("blog")).map((entry) => ({
-		params: { slug: entry.slug },
-		props: { entry },
-	}));
+  return (await getCollection('blog')).map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
 }
 
 const { entry } = Astro.props;
@@ -16,25 +16,25 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
 ---
 
 <Layout
-	title={entry.data.title}
-	description={remarkPluginFrontmatter.description}
-	ogImageURL={entry.data.ogImageURL!}
-	ogType="article"
-	twitterCard={entry.data.twitterCard!}
+  title={entry.data.title}
+  description={remarkPluginFrontmatter.description}
+  ogImage={entry.data.ogImage?.src}
+  ogType="article"
+  twitterCard={entry.data.twitterCard}
 >
-	<article class="space-y-16">
-		<PageTitle as="header" title={entry.data.title}>
-			<p class="text-sm text-dynamic-muted">
-				<time datetime={dayjs(entry.data.publishDate).tz().toISOString()}>
-					{dayjs(entry.data.publishDate).tz().format("LL")}
-				</time>
-			</p>
-		</PageTitle>
+  <article class="space-y-16">
+    <PageTitle as="header" title={entry.data.title}>
+      <p class="text-sm text-dynamic-muted">
+        <time datetime={dayjs(entry.data.publishDate).tz().toISOString()}>
+          {dayjs(entry.data.publishDate).tz().format('LL')}
+        </time>
+      </p>
+    </PageTitle>
 
-		<div class="border-t"></div>
+    <div class="border-t"></div>
 
-		<div class="prose container">
-			<Content />
-		</div>
-	</article>
+    <div class="prose wrapper">
+      <Content />
+    </div>
+  </article>
 </Layout>

@@ -1,0 +1,16 @@
+a:where(:any-link) {
+  text-decoration: underline theme(textDecorationColor.dynamic.DEFAULT) 1px;
+}
+
+em {
+  font-style: normal;
+  font-weight: bolder;
+}
+
+[id] {
+  scroll-margin-block-start: theme(spacing.4);
+}
+
+:focus {
+  scroll-margin-block: theme(spacing.4);
+}

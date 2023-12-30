@@ -1,0 +1,12 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 1rem);
+  justify-content: center;
+  margin-inline-start: var(--wrapper-margin-right);
+  margin-inline-end: var(--wrapper-margin-left);
+  max-inline-size: var(--wrapper-inline-size);
+
+  > :where(*) {
+    grid-column: 1 / -1;
+  }
+}

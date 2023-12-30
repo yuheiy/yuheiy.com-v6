@@ -1,31 +1,28 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
-import { siteDescription, siteTitle } from '../consts.js';
-import dayjs from '../lib/dayjs.js';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import dayjs from '../lib/dayjs';
 
-export async function get(context: APIContext) {
-	const blogEntries = await getCollection('blog');
-	blogEntries.sort(
-		(a, b) =>
-			dayjs(b.data.publishDate).tz().valueOf() -
-			dayjs(a.data.publishDate).tz().valueOf(),
-	);
-	return rss({
-		title: siteTitle,
-		description: siteDescription,
-		site: context.site!.toString(),
-		items: await Promise.all(
-			blogEntries.map(async (entry) => {
-				const { remarkPluginFrontmatter } = await entry.render();
-				return {
-					link: `/${entry.slug}`,
-					title: entry.data.title,
-					pubDate: dayjs(entry.data.publishDate).tz().toDate(),
-					description: remarkPluginFrontmatter.description as string,
-				};
-			}),
-		),
-		trailingSlash: false,
-	});
+export async function GET(context: APIContext) {
+  const blogEntries = (await getCollection('blog')).toSorted(
+    (a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf(),
+  );
+  return rss({
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    site: context.site!.toString(),
+    items: await Promise.all(
+      blogEntries.map(async (entry) => {
+        const { remarkPluginFrontmatter } = await entry.render();
+        return {
+          link: `/${entry.slug}`,
+          title: entry.data.title,
+          pubDate: dayjs(entry.data.publishDate).tz().toDate(),
+          description: remarkPluginFrontmatter.description,
+        };
+      }),
+    ),
+    trailingSlash: false,
+  });
 }

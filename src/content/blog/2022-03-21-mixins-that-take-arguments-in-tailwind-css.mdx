@@ -1,30 +1,29 @@
 ---
 title: Tailwind CSSで引数のあるMixinのような仕組みを作る方法
-publishDate: "2022-03-21T17:35:00.000+09:00"
+publishDate: '2022-03-21T17:35:00.000+09:00'
 ---
 
 Sassでは、引数の値に応じて宣言をクラスに注入できるMixinの機能がある。たとえば次のようにすれば、フォントサイズがビューポートの幅に応じて流動的に変化するように実装できる。
 
 ```scss
 @function rem($px) {
-	@return ($px / 16 * 1rem);
+  @return ($px / 16 * 1rem);
 }
 
 // https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/
 @function fluid-size($min-size, $max-size, $min-width: 640, $max-width: 1280) {
-	$v: (100 * ($max-size - $min-size)) / ($max-width - $min-width);
-	$r: ($min-width * $max-size - $max-width * $min-size) / ($min-width -
-				$max-width);
+  $v: (100 * ($max-size - $min-size)) / ($max-width - $min-width);
+  $r: ($min-width * $max-size - $max-width * $min-size) / ($min-width - $max-width);
 
-	@return clamp(#{rem($min-size)}, #{$v * 1vw} + #{rem($r)}, #{rem($max-size)});
+  @return clamp(#{rem($min-size)}, #{$v * 1vw} + #{rem($r)}, #{rem($max-size)});
 }
 
 @mixin fluid-text($min-size, $max-size, $min-width, $max-width) {
-	font-size: fluid-size($min-size, $max-size, $min-width, $max-width);
+  font-size: fluid-size($min-size, $max-size, $min-width, $max-width);
 }
 
 h1 {
-	@include fluid-text(32, 64);
+  @include fluid-text(32, 64);
 }
 ```
 
@@ -35,14 +34,14 @@ Tailwind CSSによってデフォルトで提供されているクラス群は�
 プラグインはユーザー側でも簡単に作成できるようになっている。`tailwind.config.js`に次のようなコードを書いていくだけだ。
 
 ```javascript
-const plugin = require("tailwindcss/plugin");
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
-	plugins: [
-		plugin(function ({ addUtilities, addComponents, e, prefix, config }) {
-			// Add your custom styles here
-		}),
-	],
+  plugins: [
+    plugin(function ({ addUtilities, addComponents, e, prefix, config }) {
+      // Add your custom styles here
+    }),
+  ],
 };
 ```
 
@@ -58,21 +57,21 @@ module.exports = {
 
 ```javascript
 const fluidText = plugin(function ({ matchUtilities }) {
-	matchUtilities({
-		"fluid-text": (value) => {
-			const [minSize, maxSize] = value.split(",").map((v) => {
-				const matched = /^(\d+)px$/.exec(v);
-				if (!matched) {
-					throw new Error(`"${v}" is not a valid value`);
-				}
-				return Number(matched[1]);
-			});
+  matchUtilities({
+    'fluid-text': (value) => {
+      const [minSize, maxSize] = value.split(',').map((v) => {
+        const matched = /^(\d+)px$/.exec(v);
+        if (!matched) {
+          throw new Error(`"${v}" is not a valid value`);
+        }
+        return Number(matched[1]);
+      });
 
-			return {
-				"font-size": getFluidSize(minSize, maxSize),
-			};
-		},
-	});
+      return {
+        'font-size': getFluidSize(minSize, maxSize),
+      };
+    },
+  });
 });
 ```
 
@@ -82,46 +81,46 @@ const fluidText = plugin(function ({ matchUtilities }) {
 
 ```css
 .fluid-text-\[24px\2c 32px\] {
-	font-size: clamp(1.5rem, 1.25vw + 1rem, 2rem);
+  font-size: clamp(1.5rem, 1.25vw + 1rem, 2rem);
 }
 ```
 
 `tailwind.config.js`の全体のコードは次のようになる。
 
 ```javascript
-const plugin = require("tailwindcss/plugin");
+const plugin = require('tailwindcss/plugin');
 
 const rem = (px) => `${px / 16}rem`;
 
 // https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/
 const getFluidSize = (minSize, maxSize, minWidth = 640, maxWidth = 1280) => {
-	const v = (100 * (maxSize - minSize)) / (maxWidth - minWidth);
-	const r = (minWidth * maxSize - maxWidth * minSize) / (minWidth - maxWidth);
+  const v = (100 * (maxSize - minSize)) / (maxWidth - minWidth);
+  const r = (minWidth * maxSize - maxWidth * minSize) / (minWidth - maxWidth);
 
-	return `clamp(${rem(minSize)}, ${v}vw + ${rem(r)}, ${rem(maxSize)})`;
+  return `clamp(${rem(minSize)}, ${v}vw + ${rem(r)}, ${rem(maxSize)})`;
 };
 
 const fluidText = plugin(function ({ matchUtilities }) {
-	matchUtilities({
-		"fluid-text": (value) => {
-			const [minSize, maxSize] = value.split(",").map((v) => {
-				const matched = /^(\d+)px$/.exec(v);
-				if (!matched) {
-					throw new Error(`"${v}" is not a valid value`);
-				}
-				return Number(matched[1]);
-			});
+  matchUtilities({
+    'fluid-text': (value) => {
+      const [minSize, maxSize] = value.split(',').map((v) => {
+        const matched = /^(\d+)px$/.exec(v);
+        if (!matched) {
+          throw new Error(`"${v}" is not a valid value`);
+        }
+        return Number(matched[1]);
+      });
 
-			return {
-				"font-size": getFluidSize(minSize, maxSize),
-			};
-		},
-	});
+      return {
+        'font-size': getFluidSize(minSize, maxSize),
+      };
+    },
+  });
 });
 
 module.exports = {
-	// ...
-	plugins: [fluidText],
+  // ...
+  plugins: [fluidText],
 };
 ```
 

@@ -1,6 +1,4 @@
 {
-	"extends": "astro/tsconfigs/strictest",
-	"compilerOptions": {
-		"allowJs": true
-	}
+  "extends": "astro/tsconfigs/strictest",
+  "exclude": ["dist"] // https://github.com/withastro/language-tools/issues/643#issuecomment-1699486909
 }

@@ -1,0 +1,117 @@
+.prose {
+  @apply [margin-trim:block];
+
+  > * {
+    margin-block: 0 !important;
+  }
+
+  > * + * {
+    margin-block-start: var(--prose-spacing, theme(spacing.6)) !important;
+  }
+
+  > :where(* + :is(figure, pre, astro-embed-tweet, .codepen, .cp_embed_wrapper)),
+  > :where(:is(figure, pre, astro-embed-tweet, .codepen, .cp_embed_wrapper + script) + *) {
+    --prose-spacing: theme(spacing.8);
+  }
+
+  > :where(* + :is(h2, h3, hr)),
+  > :where(hr + *) {
+    --prose-spacing: theme(spacing.12);
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: theme(fontSize.2xl);
+    line-height: theme(lineHeight.tight);
+    font-kerning: normal;
+    font-feature-settings: 'palt';
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: theme(fontSize.lg);
+    line-height: theme(lineHeight.tight);
+  }
+
+  hr {
+    border-block-start-width: theme(borderWidth.4);
+    inline-size: 8em;
+  }
+
+  pre {
+    margin-inline-start: calc(var(--wrapper-margin-left) * -1);
+    margin-inline-end: calc(var(--wrapper-margin-right) * -1);
+    padding-inline-start: var(--wrapper-margin-left);
+    padding-inline-end: var(--wrapper-margin-right);
+    font-size: theme(fontSize.sm);
+    line-height: theme(lineHeight.tight);
+  }
+
+  blockquote:not(.twitter-tweet) {
+    position: relative;
+    padding-inline-start: 2em;
+
+    > * + * {
+      margin-top: theme(spacing.5);
+    }
+  }
+
+  blockquote:not(.twitter-tweet)::before {
+    position: absolute;
+    inset-block: calc((1lh - 1em) / 2);
+    inset-inline-start: 0;
+    border-inline-start-width: theme(borderWidth.2);
+    content: '';
+  }
+
+  :is(ol, ul) {
+    padding-inline-start: 2em;
+    list-style-type: revert;
+    margin-trim: block;
+  }
+
+  :is(ol, ul) :is(ol, ul) {
+    margin-trim: none;
+  }
+
+  li {
+    margin-block-start: theme(spacing.1);
+  }
+
+  figure {
+    > * + * {
+      margin-block-start: theme(spacing.3);
+    }
+  }
+
+  figcaption {
+    font-size: theme(fontSize.sm);
+  }
+
+  /* https://bugs.webkit.org/show_bug.cgi?id=260425 */
+  code {
+    quotes: '`' '`';
+  }
+
+  pre > code {
+    quotes: none;
+  }
+
+  code::before {
+    content: open-quote;
+  }
+
+  code::after {
+    content: close-quote;
+  }
+
+  img {
+    border: 1px solid theme(borderColor.dynamic.DEFAULT);
+  }
+
+  details {
+    > * + * {
+      margin-block-start: theme(spacing.3);
+    }
+  }
+}

@@ -1,8 +1,0 @@
-@import "tailwindcss/base";
-@import "base";
-
-@import "tailwindcss/components";
-@import "astro-embed-tweet";
-@import "prose";
-
-@import "tailwindcss/utilities";

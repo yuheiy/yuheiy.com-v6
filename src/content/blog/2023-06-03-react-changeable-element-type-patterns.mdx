@@ -1,9 +1,9 @@
 ---
 title: ReactコンポーネントでレンダリングされるHTML要素の種類を変更可能にするためのパターン
-publishDate: "2023-06-04T12:35:00.000+09:00"
+publishDate: '2023-06-04T12:35:00.000+09:00'
 ---
 
-import { Tweet } from "astro-embed";
+import { Tweet } from 'astro-embed';
 
 ReactのUIコンポーネントライブラリを使っていると、あるコンポーネントによってレンダリングされるHTML要素の種類を変更したくなる場面がある。たとえば、通常は`button`要素としてレンダリングされる`Button`コンポーネントを使うときに、代わりに`a`要素を使ってレンダリングしたいというケース。
 
@@ -12,19 +12,19 @@ ReactのUIコンポーネントライブラリを使っていると、あるコ�
 そのような場合、一般的には、Buttonコンポーネントに`as` propを実装して対処することが多い。
 
 ```jsx
-function Button({ as: Component = "button", ...props }) {
-	return <Component {...props} />;
+function Button({ as: Component = 'button', ...props }) {
+  return <Component {...props} />;
 }
 
 render(
-	<>
-		<Button type="button">
-			I’m a <code>button</code> element
-		</Button>
-		<Button as="a" href="/">
-			I’m an <code>a</code> element
-		</Button>
-	</>,
+  <>
+    <Button type="button">
+      I’m a <code>button</code> element
+    </Button>
+    <Button as="a" href="/">
+      I’m an <code>a</code> element
+    </Button>
+  </>,
 );
 ```
 
@@ -32,7 +32,7 @@ render(
 
 このコードだけを見ればごくごく簡単に実現できる機能のように思えるが、TypeScriptとして正しく型付けをしようしたり、[`forwardRef`](https://react.dev/reference/react/forwardRef)を適用したりしていると、そこそこ複雑な実装になってしまう。
 
-具体的な実装方法については、[詳しく解説している記事](https://blog.logrocket.com/build-strongly-typed-polymorphic-components-react-typescript/ "Build strongly typed polymorphic components with React and TypeScript")があったのでそちらに譲る。
+具体的な実装方法については、[詳しく解説している記事](https://blog.logrocket.com/build-strongly-typed-polymorphic-components-react-typescript/ 'Build strongly typed polymorphic components with React and TypeScript')があったのでそちらに譲る。
 
 ただ、単にその仕組みの実装が複雑になるだけであれば、パッケージ化しておいたものを参照して使えばよい。実際にそれに当たるnpmモジュールもいくつかある。
 
@@ -151,37 +151,34 @@ function Button({ asChild, ...props }) {
 TypeScriptを使用しつつ、`forwardRef`を適用する場合は、次のように記述する。
 
 ```tsx
-import { type ComponentPropsWithRef, forwardRef } from "react";
+import { type ComponentPropsWithRef, forwardRef } from 'react';
 
-const Button = forwardRef<
-	unknown,
-	ComponentPropsWithRef<"button"> & { asChild?: boolean }
->(({ asChild, ...props }, forwardedRef) => {
-	const Comp: any = asChild ? Slot : "button";
-	return <Comp {...props} ref={forwardedRef} />;
-});
+const Button = forwardRef<unknown, ComponentPropsWithRef<'button'> & { asChild?: boolean }>(
+  ({ asChild, ...props }, forwardedRef) => {
+    const Comp: any = asChild ? Slot : 'button';
+    return <Comp {...props} ref={forwardedRef} />;
+  },
+);
 
-Button.displayName = "Button";
+Button.displayName = 'Button';
 ```
 
 ただし、こうなってくると定型コードとしてはやや煩雑である。そこで代わりに、Radix UIの内部で使用されている[`@radix-ui/react-primitive`](https://github.com/radix-ui/primitives/tree/main/packages/react/primitive)パッケージを使うことで多少マシになる。
 
 ```tsx
-import { Primitive } from "@radix-ui/react-primitive";
-import type * as Radix from "@radix-ui/react-primitive";
-import { forwardRef } from "react";
+import { Primitive } from '@radix-ui/react-primitive';
+import type * as Radix from '@radix-ui/react-primitive';
+import { forwardRef } from 'react';
 
 type ButtonElement = React.ElementRef<typeof Primitive.button>;
-type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<
-	typeof Primitive.button
->;
+type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<typeof Primitive.button>;
 interface ButtonProps extends PrimitiveButtonProps {}
 
 const Button = forwardRef<ButtonElement, ButtonProps>((props, forwardedRef) => (
-	<Primitive.button {...props} ref={forwardedRef} />
+  <Primitive.button {...props} ref={forwardedRef} />
 ));
 
-Button.displayName = "Button";
+Button.displayName = 'Button';
 ```
 
 このパッケージの使用方法はドキュメント化されていないので、[Radix UIのソースコードの中で実際に使用されている様子](https://github.com/radix-ui/primitives/tree/1d57ea78007733facfa2ac7fc0cd919a545b39f6/packages/react)を参考にして実装する必要がある。
@@ -191,41 +188,39 @@ Button.displayName = "Button";
 `Slot`コンポーネント（および`Primitive.*`コンポーネント）のpropsは、その子のpropsとマージされる仕組みになっている。たとえば、次のようにコンポーネントを使用するとする。
 
 ```tsx
-import { Primitive } from "@radix-ui/react-primitive";
-import type * as Radix from "@radix-ui/react-primitive";
-import { forwardRef } from "react";
+import { Primitive } from '@radix-ui/react-primitive';
+import type * as Radix from '@radix-ui/react-primitive';
+import { forwardRef } from 'react';
 
 type ButtonElement = React.ElementRef<typeof Primitive.button>;
-type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<
-	typeof Primitive.button
->;
+type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<typeof Primitive.button>;
 interface ButtonProps extends PrimitiveButtonProps {}
 
 const Button = forwardRef<ButtonElement, ButtonProps>((props, forwardedRef) => (
-	<Primitive.button
-		{...props}
-		ref={forwardedRef}
-		className="Button"
-		style={{ backgroundColor: "gray" }}
-		data-test="original"
-		onClick={(_event) => console.log("original event")}
-	/>
+  <Primitive.button
+    {...props}
+    ref={forwardedRef}
+    className="Button"
+    style={{ backgroundColor: 'gray' }}
+    data-test="original"
+    onClick={(_event) => console.log('original event')}
+  />
 ));
 
-Button.displayName = "Button";
+Button.displayName = 'Button';
 
 render(
-	<Button asChild>
-		<a
-			href="/"
-			className="child"
-			style={{ border: "1px solid" }}
-			data-test="child"
-			onClick={(_event) => console.log("child event")}
-		>
-			Hello
-		</a>
-	</Button>,
+  <Button asChild>
+    <a
+      href="/"
+      className="child"
+      style={{ border: '1px solid' }}
+      data-test="child"
+      onClick={(_event) => console.log('child event')}
+    >
+      Hello
+    </a>
+  </Button>,
 );
 ```
 
@@ -233,19 +228,19 @@ render(
 
 ```tsx
 <a
-	href="/"
-	data-test="child"
-	class="Button child"
-	style={{
-		backgroundColor: "gray",
-		border: "1px solid",
-	}}
-	onClick={(...args) => {
-		childProps.onClick(...args);
-		slotProps.onClick(...args);
-	}}
+  href="/"
+  data-test="child"
+  class="Button child"
+  style={{
+    backgroundColor: 'gray',
+    border: '1px solid',
+  }}
+  onClick={(...args) => {
+    childProps.onClick(...args);
+    slotProps.onClick(...args);
+  }}
 >
-	Hello
+  Hello
 </a>
 ```
 
@@ -263,38 +258,36 @@ render(
 注意すべきは、`Button`コンポーネントのpropsについては、ユーザー側でマージする実装を行わなければならないということ。もし次のように、`Button`コンポーネントのpropsのマージを考慮しない実装になっていると、`Button`コンポーネントにpropsを指定した際に期待に反する挙動をする。
 
 ```tsx
-import { Primitive } from "@radix-ui/react-primitive";
-import type * as Radix from "@radix-ui/react-primitive";
-import { forwardRef } from "react";
+import { Primitive } from '@radix-ui/react-primitive';
+import type * as Radix from '@radix-ui/react-primitive';
+import { forwardRef } from 'react';
 
 type ButtonElement = React.ElementRef<typeof Primitive.button>;
-type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<
-	typeof Primitive.button
->;
+type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<typeof Primitive.button>;
 interface ButtonProps extends PrimitiveButtonProps {}
 
 const Button = forwardRef<ButtonElement, ButtonProps>((props, forwardedRef) => (
-	<Primitive.button
-		{...props}
-		ref={forwardedRef}
-		className="Button"
-		style={{ backgroundColor: "gray" }}
-		data-test="original"
-		onClick={(_event) => console.log("original event")}
-	/>
+  <Primitive.button
+    {...props}
+    ref={forwardedRef}
+    className="Button"
+    style={{ backgroundColor: 'gray' }}
+    data-test="original"
+    onClick={(_event) => console.log('original event')}
+  />
 ));
 
-Button.displayName = "Button";
+Button.displayName = 'Button';
 
 render(
-	<Button
-		className="child"
-		style={{ border: "1px solid" }}
-		data-test="child"
-		onClick={(_event) => console.log("child event")}
-	>
-		Hello
-	</Button>,
+  <Button
+    className="child"
+    style={{ border: '1px solid' }}
+    data-test="child"
+    onClick={(_event) => console.log('child event')}
+  >
+    Hello
+  </Button>,
 );
 ```
 
@@ -314,38 +307,36 @@ render(
 これでは、期待通り上書きできるものと、期待に反して上書きできないものが、propの種類によってまちまちになってしまう。期待通りのインターフェースを実現するには、`Slot`コンポーネントにpropsが渡される前に、それらの値をマージしておかなければならない。たとえば、次のような実装になる。
 
 ```tsx
-import { Primitive } from "@radix-ui/react-primitive";
-import type * as Radix from "@radix-ui/react-primitive";
-import { forwardRef } from "react";
-import { mergeRefs } from "react-merge-refs";
+import { Primitive } from '@radix-ui/react-primitive';
+import type * as Radix from '@radix-ui/react-primitive';
+import { forwardRef } from 'react';
+import { mergeRefs } from 'react-merge-refs';
 
 type ButtonElement = React.ElementRef<typeof Primitive.button>;
-type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<
-	typeof Primitive.button
->;
+type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<typeof Primitive.button>;
 interface ButtonProps extends PrimitiveButtonProps {}
 
 const Button = forwardRef<ButtonElement, ButtonProps>((props, forwardedRef) => {
-	const internalRef = useRef(null);
-	return (
-		<Primitive.button
-			{...props}
-			ref={mergeRefs([internalRef, forwardedRef])}
-			className={["Button", props.classname].filter(Boolean).join(" ")}
-			style={{
-				backgroundColor: "gray",
-				...props.style,
-			}}
-			data-test={(props as any)["data-test"] || "original"}
-			onClick={() => {
-				props.onClick?.(event);
-				console.log("original event");
-			}}
-		/>
-	);
+  const internalRef = useRef(null);
+  return (
+    <Primitive.button
+      {...props}
+      ref={mergeRefs([internalRef, forwardedRef])}
+      className={['Button', props.classname].filter(Boolean).join(' ')}
+      style={{
+        backgroundColor: 'gray',
+        ...props.style,
+      }}
+      data-test={(props as any)['data-test'] || 'original'}
+      onClick={() => {
+        props.onClick?.(event);
+        console.log('original event');
+      }}
+    />
+  );
 });
 
-Button.displayName = "Button";
+Button.displayName = 'Button';
 ```
 
 ### コンポーネントの中の子を規定する場合
@@ -353,62 +344,55 @@ Button.displayName = "Button";
 場合によっては、`Button`コンポーネントの実装として、ルートのコンポーネントの内側に別のコンポーネントを入れ子にしたいこともあるだろう。`as` propを使えば、次のように実装することができる。
 
 ```jsx
-function Button({ as: Component = "button", children, ...props }) {
-	return (
-		<Component
-			{...props}
-			className={["Button", props.className].filter(Boolean).join(" ")}
-		>
-			<span className="ButtonLabel">{children}</span>
-		</Component>
-	);
+function Button({ as: Component = 'button', children, ...props }) {
+  return (
+    <Component {...props} className={['Button', props.className].filter(Boolean).join(' ')}>
+      <span className="ButtonLabel">{children}</span>
+    </Component>
+  );
 }
 ```
 
 しかし、`asChild` propで同等のことを実現しようとすると、かなり複雑な実装が必要になる。たとえば次のようになる。
 
 ```tsx
-import { Primitive } from "@radix-ui/react-primitive";
-import type * as Radix from "@radix-ui/react-primitive";
+import { Primitive } from '@radix-ui/react-primitive';
+import type * as Radix from '@radix-ui/react-primitive';
 import {
-	Children,
-	ElementRef,
-	ReactElement,
-	ReactNode,
-	cloneElement,
-	forwardRef,
-	isValidElement,
-} from "react";
+  Children,
+  ElementRef,
+  ReactElement,
+  ReactNode,
+  cloneElement,
+  forwardRef,
+  isValidElement,
+} from 'react';
 
 type ButtonElement = ElementRef<typeof Primitive.button>;
-type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<
-	typeof Primitive.button
->;
+type PrimitiveButtonProps = Radix.ComponentPropsWithoutRef<typeof Primitive.button>;
 interface ButtonProps extends PrimitiveButtonProps {}
 
 export const Button = forwardRef<ButtonElement, ButtonProps>(
-	({ children, ...props }, forwardedRef) => {
-		const wrapChildren = (children: ReactNode) => (
-			<span className="ButtonLabel">{children}</span>
-		);
+  ({ children, ...props }, forwardedRef) => {
+    const wrapChildren = (children: ReactNode) => <span className="ButtonLabel">{children}</span>;
 
-		return (
-			<Primitive.button
-				{...props}
-				ref={forwardedRef}
-				className={["Button", props.className].filter(Boolean).join(" ")}
-			>
-				{props.asChild
-					? isValidElement(children)
-						? cloneElement(Children.only(children as ReactElement), {
-								ref: forwardedRef,
-								children: wrapChildren(children.props.children),
-						  })
-						: children
-					: wrapChildren(children)}
-			</Primitive.button>
-		);
-	},
+    return (
+      <Primitive.button
+        {...props}
+        ref={forwardedRef}
+        className={['Button', props.className].filter(Boolean).join(' ')}
+      >
+        {props.asChild
+          ? isValidElement(children)
+            ? cloneElement(Children.only(children as ReactElement), {
+                ref: forwardedRef,
+                children: wrapChildren(children.props.children),
+              })
+            : children
+          : wrapChildren(children)}
+      </Primitive.button>
+    );
+  },
 );
 ```
 
@@ -416,14 +400,14 @@ export const Button = forwardRef<ButtonElement, ButtonProps>(
 <summary>`Button`コンポーネントのテストケース</summary>
 
 ```tsx
-import { describe, expect, it } from "vitest";
-import renderer from "react-test-renderer";
-import { Button } from "./button";
+import { describe, expect, it } from 'vitest';
+import renderer from 'react-test-renderer';
+import { Button } from './button';
 
-describe("empty", () => {
-	it("default", async () => {
-		const tree = renderer.create(<Button></Button>).toJSON();
-		expect(tree).toMatchInlineSnapshot(`
+describe('empty', () => {
+  it('default', async () => {
+    const tree = renderer.create(<Button></Button>).toJSON();
+    expect(tree).toMatchInlineSnapshot(`
       <button
         className="Button"
       >
@@ -432,17 +416,17 @@ describe("empty", () => {
         />
       </button>
     `);
-	});
-	it("asChild", async () => {
-		const tree = renderer.create(<Button asChild></Button>).toJSON();
-		expect(tree).toMatchInlineSnapshot("null");
-	});
+  });
+  it('asChild', async () => {
+    const tree = renderer.create(<Button asChild></Button>).toJSON();
+    expect(tree).toMatchInlineSnapshot('null');
+  });
 });
 
-describe("string", () => {
-	it("default", async () => {
-		const tree = renderer.create(<Button>string</Button>).toJSON();
-		expect(tree).toMatchInlineSnapshot(`
+describe('string', () => {
+  it('default', async () => {
+    const tree = renderer.create(<Button>string</Button>).toJSON();
+    expect(tree).toMatchInlineSnapshot(`
       <button
         className="Button"
       >
@@ -453,23 +437,23 @@ describe("string", () => {
         </span>
       </button>
     `);
-	});
-	it("asChild", async () => {
-		const tree = renderer.create(<Button asChild>string</Button>).toJSON();
-		expect(tree).toMatchInlineSnapshot("null");
-	});
+  });
+  it('asChild', async () => {
+    const tree = renderer.create(<Button asChild>string</Button>).toJSON();
+    expect(tree).toMatchInlineSnapshot('null');
+  });
 });
 
-describe("single element", () => {
-	it("default", async () => {
-		const tree = renderer
-			.create(
-				<Button>
-					<a href="/">single</a>
-				</Button>,
-			)
-			.toJSON();
-		expect(tree).toMatchInlineSnapshot(`
+describe('single element', () => {
+  it('default', async () => {
+    const tree = renderer
+      .create(
+        <Button>
+          <a href="/">single</a>
+        </Button>,
+      )
+      .toJSON();
+    expect(tree).toMatchInlineSnapshot(`
       <button
         className="Button"
       >
@@ -484,16 +468,16 @@ describe("single element", () => {
         </span>
       </button>
     `);
-	});
-	it("asChild", async () => {
-		const tree = renderer
-			.create(
-				<Button asChild>
-					<a href="/">single</a>
-				</Button>,
-			)
-			.toJSON();
-		expect(tree).toMatchInlineSnapshot(`
+  });
+  it('asChild', async () => {
+    const tree = renderer
+      .create(
+        <Button asChild>
+          <a href="/">single</a>
+        </Button>,
+      )
+      .toJSON();
+    expect(tree).toMatchInlineSnapshot(`
       <a
         className="Button"
         href="/"
@@ -505,19 +489,19 @@ describe("single element", () => {
         </span>
       </a>
     `);
-	});
+  });
 });
 
-describe("mixed", () => {
-	it("default", async () => {
-		const tree = renderer
-			.create(
-				<Button>
-					<span>multi</span>-<a href="/">ple</a>
-				</Button>,
-			)
-			.toJSON();
-		expect(tree).toMatchInlineSnapshot(`
+describe('mixed', () => {
+  it('default', async () => {
+    const tree = renderer
+      .create(
+        <Button>
+          <span>multi</span>-<a href="/">ple</a>
+        </Button>,
+      )
+      .toJSON();
+    expect(tree).toMatchInlineSnapshot(`
       <button
         className="Button"
       >
@@ -536,16 +520,16 @@ describe("mixed", () => {
         </span>
       </button>
     `);
-	});
-	it("asChild", async () => {
-		expect(() =>
-			renderer.create(
-				<Button asChild>
-					<span>multi</span>-<a href="/">ple</a>
-				</Button>,
-			),
-		).toThrowError();
-	});
+  });
+  it('asChild', async () => {
+    expect(() =>
+      renderer.create(
+        <Button asChild>
+          <span>multi</span>-<a href="/">ple</a>
+        </Button>,
+      ),
+    ).toThrowError();
+  });
 });
 ```
 
@@ -600,43 +584,37 @@ describe("mixed", () => {
 先ほどの`asChild` propにおいては、コンポーネントの内側に別の要素が入れ子になっている場合の表現の難しさが問題になった。しかし、このAriakitの`render` propのアイデアを借用すれば、比較的直感的なインターフェースとシンプルな実装を実現することもできる。
 
 ```tsx
-import {
-	ComponentProps,
-	ReactElement,
-	ReactNode,
-	cloneElement,
-	forwardRef,
-} from "react";
+import { ComponentProps, ReactElement, ReactNode, cloneElement, forwardRef } from 'react';
 
-type ButtonProps = { render?: ReactElement } & ComponentProps<"button">;
+type ButtonProps = { render?: ReactElement } & ComponentProps<'button'>;
 
 const Button = forwardRef<HTMLElement, ButtonProps>(
-	({ render, children, ...props }, forwardedRef) => {
-		const createElement = (props: any, children: ReactNode) => {
-			return render ? (
-				cloneElement(render, props, children)
-			) : (
-				<button {...props}>{children}</button>
-			);
-		};
+  ({ render, children, ...props }, forwardedRef) => {
+    const createElement = (props: any, children: ReactNode) => {
+      return render ? (
+        cloneElement(render, props, children)
+      ) : (
+        <button {...props}>{children}</button>
+      );
+    };
 
-		return createElement(
-			{
-				...props,
-				ref: forwardedRef,
-				className: ["Button", props.className].filter(Boolean).join(" "),
-			},
-			<span className="ButtonLabel">{render?.props.children || children}</span>,
-		);
-	},
+    return createElement(
+      {
+        ...props,
+        ref: forwardedRef,
+        className: ['Button', props.className].filter(Boolean).join(' '),
+      },
+      <span className="ButtonLabel">{render?.props.children || children}</span>,
+    );
+  },
 );
 
 render(
-	<>
-		<Button>Hello</Button>
-		<Button render={<a href="/" />}>Hello</Button>
-		<Button render={<a href="/">Hello</a>} />
-	</>,
+  <>
+    <Button>Hello</Button>
+    <Button render={<a href="/" />}>Hello</Button>
+    <Button render={<a href="/">Hello</a>} />
+  </>,
 );
 ```
 

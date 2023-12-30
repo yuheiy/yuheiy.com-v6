@@ -1,0 +1,112 @@
+---
+import appleTouchIconImage from '../assets/apple-touch-icon.png';
+import faviconImage from '../assets/favicon.svg';
+import { SITE_LANG, SITE_REGION, SITE_TITLE, SITE_TWITTER_ID } from '../consts';
+
+interface SharedProps {
+  description?: string | undefined;
+  ogType?: 'website' | 'article' | undefined;
+  ogImage?: string | undefined;
+  twitterCard?: 'summary' | 'summary_large_image' | undefined;
+}
+
+type GeneralProps = SharedProps & {
+  title: string;
+  is404?: boolean | undefined;
+};
+
+type HomeProps = SharedProps;
+
+type Props = GeneralProps | HomeProps;
+
+const {
+  description,
+  ogType = 'website',
+  ogImage = appleTouchIconImage.src,
+  twitterCard = 'summary',
+} = Astro.props;
+
+const is404 = 'is404' in Astro.props && Astro.props.is404;
+const canonicalURL = is404 ? null : (() => {
+  // remove trailing slash in build time
+  // https://github.com/withastro/astro/pull/4352
+  const normalizedPathname = Astro.url.pathname.replace(/\.html$/, '');
+  return new URL(normalizedPathname, Astro.site)
+})()
+
+const resolvedOgImage = new URL(ogImage, Astro.site);
+---
+
+<!--
+  https://bugs.chromium.org/p/chromium/issues/detail?id=1378462
+  https://schepp.dev/posts/smooth-scrolling-and-page-search/
+-->
+<html
+  class="break-words leading-normal underline-offset-[0.125em] kerning-none [hanging-punctuation:allow-end] [line-break:normal] focus-within:motion-reduce:scroll-smooth"
+  lang={SITE_LANG}
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, viewport-fit=cover" />
+
+    <title set:html={'title' in Astro.props ? Astro.props.title : SITE_TITLE} />
+
+    <meta name="color-scheme" content="light dark" />
+    {description && <meta name="description" content={description} />}
+    <meta name="generator" content={Astro.generator} />
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:site" content={`@${SITE_TWITTER_ID}`} />
+    <meta name="twitter:title" content={'title' in Astro.props ? Astro.props.title : SITE_TITLE} />
+
+    <meta property="og:title" content={'title' in Astro.props ? Astro.props.title : SITE_TITLE} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:image" content={resolvedOgImage} />
+    {canonicalURL && <meta property="og:url" content={canonicalURL} />}
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:site_name" content={SITE_TITLE} />
+    <meta property="og:locale" content={`${SITE_LANG}_${SITE_REGION}`} />
+
+    <link rel="alternate" href="/posts-feed.xml" type="application/rss+xml" />
+    <link rel="apple-touch-icon" href={appleTouchIconImage.src} />
+    {canonicalURL && <link rel="canonical" href={canonicalURL} />}
+    <link rel="icon" href={faviconImage.src} type="image/svg+xml" />
+  </head>
+
+  <body class="min-h-svh bg-dynamic text-dynamic">
+    <header class="wrapper mb-8 pt-16 text-sm text-dynamic-muted kerning-normal">
+      <p>
+        <a class="flex w-fit items-center gap-x-3" href={Astro.url.pathname !== '/' ? '/' : null}>
+          <img
+            class="w-7 rounded-full ring-1 ring-dynamic"
+            src={faviconImage.src}
+            width={faviconImage.width}
+            height={faviconImage.height}
+            alt=""
+          />
+          {SITE_TITLE}
+        </a>
+      </p>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    {/* https://css-tricks.com/a-clever-sticky-footer-technique/ */}
+    <footer class="sticky top-full mt-16 bg-dynamic-subtle py-8 text-sm">
+      <nav class="wrapper space-y-4">
+        <p>
+          <a href="/">ホーム</a>&#x2003;<a href="/blog">ブログ</a>&#x2003;<a
+            href="/posts-feed.xml"
+            type="application/rss+xml">RSS</a
+          >
+        </p>
+        <p>
+          <a href="https://twitter.com/_yuheiy">Twitter</a>&#x2003;<a
+            href="https://github.com/yuheiy">GitHub</a
+          >&#x2003;<a href="mailto:yuhei.yasuda1003@gmail.com">メール</a>
+        </p>
+      </nav>
+    </footer>
+  </body>
+</html>

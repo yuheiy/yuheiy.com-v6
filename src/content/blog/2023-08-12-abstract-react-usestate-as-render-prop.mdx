@@ -1,34 +1,34 @@
 ---
 title: ReactのuseStateをrender propとして抽象化して、コンポーネントを分割せずにコードのまとまりをよくする
-publishDate: "2023-08-12T01:30:00.000+09:00"
+publishDate: '2023-08-12T01:30:00.000+09:00'
 ---
 
 Reactの`useState`を使用する際、stateのスコープが必要以上に大きくなってしまうことがある。たとえば次の例のように、コンポーネントの中のごく限られた部分でしか使わないstateが、コンポーネントのどこからでも参照できてしまう。
 
 ```tsx
 function App() {
-	const [isFirstOpen, setFirstOpen] = useState(false);
-	const [isSecondOpen, setSecondOpen] = useState(false);
-	const [isThirdOpen, setThirdOpen] = useState(false);
+  const [isFirstOpen, setFirstOpen] = useState(false);
+  const [isSecondOpen, setSecondOpen] = useState(false);
+  const [isThirdOpen, setThirdOpen] = useState(false);
 
-	return (
-		<>
-			<Button onClick={() => setFirstOpen(true)}>First</Button>
-			<Popover isOpen={isFirstOpen} onOpenChange={setFirstOpen}>
-				...
-			</Popover>
+  return (
+    <>
+      <Button onClick={() => setFirstOpen(true)}>First</Button>
+      <Popover isOpen={isFirstOpen} onOpenChange={setFirstOpen}>
+        ...
+      </Popover>
 
-			<Button onClick={() => setSecondOpen(true)}>Second</Button>
-			<Popover isOpen={isSecondOpen} onOpenChange={setSecondOpen}>
-				...
-			</Popover>
+      <Button onClick={() => setSecondOpen(true)}>Second</Button>
+      <Popover isOpen={isSecondOpen} onOpenChange={setSecondOpen}>
+        ...
+      </Popover>
 
-			<Button onClick={() => setThirdOpen(true)}>Third</Button>
-			<Popover isOpen={isThirdOpen} onOpenChange={setThirdOpen}>
-				...
-			</Popover>
-		</>
-	);
+      <Button onClick={() => setThirdOpen(true)}>Third</Button>
+      <Popover isOpen={isThirdOpen} onOpenChange={setThirdOpen}>
+        ...
+      </Popover>
+    </>
+  );
 }
 ```
 
@@ -36,52 +36,52 @@ function App() {
 
 ```tsx
 function App() {
-	return (
-		<>
-			<First />
-			<Second />
-			<Third />
-		</>
-	);
+  return (
+    <>
+      <First />
+      <Second />
+      <Third />
+    </>
+  );
 }
 
 function First() {
-	const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
-	return (
-		<>
-			<Button onClick={() => setOpen(true)}>First</Button>
-			<Popover isOpen={isOpen} onOpenChange={setOpen}>
-				...
-			</Popover>
-		</>
-	);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>First</Button>
+      <Popover isOpen={isOpen} onOpenChange={setOpen}>
+        ...
+      </Popover>
+    </>
+  );
 }
 
 function Second() {
-	const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
-	return (
-		<>
-			<Button onClick={() => setOpen(true)}>Second</Button>
-			<Popover isOpen={isOpen} onOpenChange={setOpen}>
-				...
-			</Popover>
-		</>
-	);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Second</Button>
+      <Popover isOpen={isOpen} onOpenChange={setOpen}>
+        ...
+      </Popover>
+    </>
+  );
 }
 
 function Third() {
-	const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
-	return (
-		<>
-			<Button onClick={() => setOpen(true)}>Third</Button>
-			<Popover isOpen={isOpen} onOpenChange={setOpen}>
-				...
-			</Popover>
-		</>
-	);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Third</Button>
+      <Popover isOpen={isOpen} onOpenChange={setOpen}>
+        ...
+      </Popover>
+    </>
+  );
 }
 ```
 
@@ -91,45 +91,45 @@ function Third() {
 
 ```tsx
 function App() {
-	return (
-		<>
-			{(() => {
-				const [isOpen, setOpen] = useState(false);
-				return (
-					<>
-						<Button onClick={() => setOpen(true)}>First</Button>
-						<Popover isOpen={isOpen} onOpenChange={setOpen}>
-							...
-						</Popover>
-					</>
-				);
-			})()}
+  return (
+    <>
+      {(() => {
+        const [isOpen, setOpen] = useState(false);
+        return (
+          <>
+            <Button onClick={() => setOpen(true)}>First</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        );
+      })()}
 
-			{(() => {
-				const [isOpen, setOpen] = useState(false);
-				return (
-					<>
-						<Button onClick={() => setOpen(true)}>Second</Button>
-						<Popover isOpen={isOpen} onOpenChange={setOpen}>
-							...
-						</Popover>
-					</>
-				);
-			})()}
+      {(() => {
+        const [isOpen, setOpen] = useState(false);
+        return (
+          <>
+            <Button onClick={() => setOpen(true)}>Second</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        );
+      })()}
 
-			{(() => {
-				const [isOpen, setOpen] = useState(false);
-				return (
-					<>
-						<Button onClick={() => setOpen(true)}>Third</Button>
-						<Popover isOpen={isOpen} onOpenChange={setOpen}>
-							...
-						</Popover>
-					</>
-				);
-			})()}
-		</>
-	);
+      {(() => {
+        const [isOpen, setOpen] = useState(false);
+        return (
+          <>
+            <Button onClick={() => setOpen(true)}>Third</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        );
+      })()}
+    </>
+  );
 }
 ```
 
@@ -137,46 +137,46 @@ function App() {
 
 ```tsx
 function App({ isThirdVisible }: { isThirdVisible: boolean }) {
-	return (
-		<>
-			{(() => {
-				const [isOpen, setOpen] = useState(false);
-				return (
-					<>
-						<Button onClick={() => setOpen(true)}>First</Button>
-						<Popover isOpen={isOpen} onOpenChange={setOpen}>
-							...
-						</Popover>
-					</>
-				);
-			})()}
+  return (
+    <>
+      {(() => {
+        const [isOpen, setOpen] = useState(false);
+        return (
+          <>
+            <Button onClick={() => setOpen(true)}>First</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        );
+      })()}
 
-			{(() => {
-				const [isOpen, setOpen] = useState(false);
-				return (
-					<>
-						<Button onClick={() => setOpen(true)}>Second</Button>
-						<Popover isOpen={isOpen} onOpenChange={setOpen}>
-							...
-						</Popover>
-					</>
-				);
-			})()}
+      {(() => {
+        const [isOpen, setOpen] = useState(false);
+        return (
+          <>
+            <Button onClick={() => setOpen(true)}>Second</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        );
+      })()}
 
-			{isThirdVisible &&
-				(() => {
-					const [isOpen, setOpen] = useState(false);
-					return (
-						<>
-							<Button onClick={() => setOpen(true)}>Third</Button>
-							<Popover isOpen={isOpen} onOpenChange={setOpen}>
-								...
-							</Popover>
-						</>
-					);
-				})()}
-		</>
-	);
+      {isThirdVisible &&
+        (() => {
+          const [isOpen, setOpen] = useState(false);
+          return (
+            <>
+              <Button onClick={() => setOpen(true)}>Third</Button>
+              <Popover isOpen={isOpen} onOpenChange={setOpen}>
+                ...
+              </Popover>
+            </>
+          );
+        })()}
+    </>
+  );
 }
 ```
 
@@ -187,58 +187,53 @@ function App({ isThirdVisible }: { isThirdVisible: boolean }) {
 そこで、`useState`の使用を抽象化する汎用的なコンポーネントを作成するとする。これを用いることで、stateのスコープを制限しつつも、ノードの記述はインライン化できるようになる。
 
 ```tsx
-import { State } from "./State";
+import { State } from './State';
 
 function App() {
-	return (
-		<>
-			<State initial={false}>
-				{({ state: isOpen, setState: setOpen }) => (
-					<>
-						<Button onClick={() => setOpen(true)}>First</Button>
-						<Popover isOpen={isOpen} onOpenChange={setOpen}>
-							...
-						</Popover>
-					</>
-				)}
-			</State>
+  return (
+    <>
+      <State initial={false}>
+        {({ state: isOpen, setState: setOpen }) => (
+          <>
+            <Button onClick={() => setOpen(true)}>First</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        )}
+      </State>
 
-			<State initial={false}>
-				{({ state: isOpen, setState: setOpen }) => (
-					<>
-						<Button onClick={() => setOpen(true)}>Second</Button>
-						<Popover isOpen={isOpen} onOpenChange={setOpen}>
-							...
-						</Popover>
-					</>
-				)}
-			</State>
+      <State initial={false}>
+        {({ state: isOpen, setState: setOpen }) => (
+          <>
+            <Button onClick={() => setOpen(true)}>Second</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        )}
+      </State>
 
-			<State initial={false}>
-				{({ state: isOpen, setState: setOpen }) => (
-					<>
-						<Button onClick={() => setOpen(true)}>Third</Button>
-						<Popover isOpen={isOpen} onOpenChange={setOpen}>
-							...
-						</Popover>
-					</>
-				)}
-			</State>
-		</>
-	);
+      <State initial={false}>
+        {({ state: isOpen, setState: setOpen }) => (
+          <>
+            <Button onClick={() => setOpen(true)}>Third</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        )}
+      </State>
+    </>
+  );
 }
 ```
 
 `<State>`の実装は次の通り。
 
 ```tsx
-import type {
-	Dispatch,
-	DispatchWithoutAction,
-	ReactNode,
-	SetStateAction,
-} from "react";
-import { useCallback, useState } from "react";
+import type { Dispatch, DispatchWithoutAction, ReactNode, SetStateAction } from 'react';
+import { useCallback, useState } from 'react';
 
 /**
  * The implement a hooks version of React PowerPlug’s `<State>`.
@@ -255,24 +250,24 @@ import { useCallback, useState } from "react";
  * </State>
  */
 export function State<S>({
-	initial: initialState,
-	children,
+  initial: initialState,
+  children,
 }: {
-	initial: S | (() => S);
-	children: (props: {
-		state: S;
-		setState: Dispatch<SetStateAction<S>>;
-		resetState: DispatchWithoutAction;
-	}) => ReactNode;
+  initial: S | (() => S);
+  children: (props: {
+    state: S;
+    setState: Dispatch<SetStateAction<S>>;
+    resetState: DispatchWithoutAction;
+  }) => ReactNode;
 }) {
-	const [state, setState] = useState(initialState);
-	const resetState = useCallback(() => setState(initialState), [initialState]);
+  const [state, setState] = useState(initialState);
+  const resetState = useCallback(() => setState(initialState), [initialState]);
 
-	return children({
-		state,
-		setState,
-		resetState,
-	});
+  return children({
+    state,
+    setState,
+    resetState,
+  });
 }
 ```
 
@@ -283,21 +278,21 @@ export function State<S>({
 もっとも、昨今の気の利いたUIライブラリであれば、こうした冗長なコードを省略できる仕組みもある。たとえば、[Headless UI](https://headlessui.com/)の系譜にある[React Aria Components](https://react-spectrum.adobe.com/react-aria/react-aria-components.html)では、次のようにコンポーネントを構成するだけで、状態管理やイベントの登録が暗黙的に行われるようになっている。
 
 <figure>
-	```tsx
-	<DialogTrigger>
-		<Button>Open popover</Button>
-		<Popover>
-			<OverlayArrow>
-				<svg width={12} height={12}>
-					<path d="M0 0,L6 6,L12 0" />
-				</svg>
-			</OverlayArrow>
-			<Dialog>This is a popover.</Dialog>
-		</Popover>
-	</DialogTrigger>
-	```
-	{/* prettier-ignore */}
-	<figcaption>[Popover – React Aria](https://react-spectrum.adobe.com/react-aria/Popover.html)</figcaption>
+  ```tsx
+  <DialogTrigger>
+    <Button>Open popover</Button>
+    <Popover>
+      <OverlayArrow>
+        <svg width={12} height={12}>
+          <path d="M0 0,L6 6,L12 0" />
+        </svg>
+      </OverlayArrow>
+      <Dialog>This is a popover.</Dialog>
+    </Popover>
+  </DialogTrigger>
+  ```
+  {/* prettier-ignore */}
+  <figcaption>[Popover – React Aria](https://react-spectrum.adobe.com/react-aria/Popover.html)</figcaption>
 </figure>
 
 こうした仕組みによって、多くの場面には対応できるが、これでは解決できないようなケースではStateコンポーネントを採用するとよいだろう。

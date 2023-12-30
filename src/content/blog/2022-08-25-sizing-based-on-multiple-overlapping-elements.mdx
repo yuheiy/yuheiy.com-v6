@@ -1,14 +1,14 @@
 ---
 title: 複数の要素を重ね合わせつつ、その中で最も大きい要素に合わせて親要素のサイズを設定するCSS
-publishDate: "2022-08-25T23:00:00.000+09:00"
+publishDate: '2022-08-25T23:00:00.000+09:00'
 ---
 
 複数の要素を重ね合わせるためには、従来、`position: absolute`を使うことが多かった。親要素に`position: relative`を、その子要素に`position: absolute`を設定するというもの。
 
 ```html
 <div style="position: relative;">
-	<div style="position: absolute;"><!-- ... --></div>
-	<div style="position: absolute;"><!-- ... --></div>
+  <div style="position: absolute;"><!-- ... --></div>
+  <div style="position: absolute;"><!-- ... --></div>
 </div>
 ```
 
@@ -16,8 +16,8 @@ publishDate: "2022-08-25T23:00:00.000+09:00"
 
 ```html
 <div style="position: relative; height: 421px;">
-	<div style="position: absolute;"><!-- ... --></div>
-	<div style="position: absolute;"><!-- ... --></div>
+  <div style="position: absolute;"><!-- ... --></div>
+  <div style="position: absolute;"><!-- ... --></div>
 </div>
 ```
 
@@ -25,19 +25,19 @@ publishDate: "2022-08-25T23:00:00.000+09:00"
 
 ```html
 <div class="wrapper">
-	<div><!-- ... --></div>
-	<div><!-- ... --></div>
+  <div><!-- ... --></div>
+  <div><!-- ... --></div>
 </div>
 ```
 
 ```css
 .wrapper {
-	display: grid;
+  display: grid;
 }
 
 .wrapper > * {
-	grid-column: 1 / -1;
-	grid-row: 1 / -1;
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
 }
 ```
 

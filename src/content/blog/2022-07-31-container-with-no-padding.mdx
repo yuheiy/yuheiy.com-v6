@@ -1,6 +1,6 @@
 ---
 title: 本文エリア内の要素をpaddingのないコンテナとして実装する
-publishDate: "2022-07-31T01:30:00.000+09:00"
+publishDate: '2022-07-31T01:30:00.000+09:00'
 ---
 
 **後日追記**: このやり方の改良版をブログ「[ブロックエディタ用のCSSを参考にした、よりよいコンテナの実装](/2022-11-27-better-container)」として書いた。
@@ -11,12 +11,12 @@ CSSにおいて、コンテナと呼ばれるパターンがある。たとえ�
 
 ```css
 .container {
-	box-sizing: content-box;
-	max-width: 60rem;
-	margin-right: auto;
-	margin-left: auto;
-	padding-right: 1.25rem;
-	padding-left: 1.25rem;
+  box-sizing: content-box;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+  max-width: 60rem;
 }
 ```
 
@@ -26,9 +26,9 @@ CSSにおいて、コンテナと呼ばれるパターンがある。たとえ�
 
 ```html
 <div class="container">
-	<h2><!-- ... --></h2>
-	<p><!-- ... --></p>
-	<p><!-- ... --></p>
+  <h2><!-- ... --></h2>
+  <p><!-- ... --></p>
+  <p><!-- ... --></p>
 </div>
 ```
 
@@ -36,16 +36,16 @@ CSSにおいて、コンテナと呼ばれるパターンがある。たとえ�
 
 ```html
 <div class="container">
-	<h2><!-- ... --></h2>
-	<p><!-- ... --></p>
-	<p><!-- ... --></p>
+  <h2><!-- ... --></h2>
+  <p><!-- ... --></p>
+  <p><!-- ... --></p>
 </div>
 
 <figure class="wider-than-container"><!-- ... --></figure>
 
 <div class="container">
-	<p><!-- ... --></p>
-	<p><!-- ... --></p>
+  <p><!-- ... --></p>
+  <p><!-- ... --></p>
 </div>
 ```
 
@@ -57,12 +57,12 @@ CSSにおいて、コンテナと呼ばれるパターンがある。たとえ�
 
 ```html
 <div class="container">
-	<h2><!-- ... --></h2>
-	<p><!-- ... --></p>
-	<p><!-- ... --></p>
-	<figure class="wider-than-container"><!-- ... --></figure>
-	<p><!-- ... --></p>
-	<p><!-- ... --></p>
+  <h2><!-- ... --></h2>
+  <p><!-- ... --></p>
+  <p><!-- ... --></p>
+  <figure class="wider-than-container"><!-- ... --></figure>
+  <p><!-- ... --></p>
+  <p><!-- ... --></p>
 </div>
 ```
 
@@ -72,27 +72,27 @@ CMSから出力されるHTMLを、コンテナの幅ごとに分割すること�
 
 ```html
 <div class="prose">
-	<h2><!-- ... --></h2>
-	<p><!-- ... --></p>
-	<p><!-- ... --></p>
-	<figure class="wider-than-container"><!-- ... --></figure>
-	<p><!-- ... --></p>
-	<p><!-- ... --></p>
+  <h2><!-- ... --></h2>
+  <p><!-- ... --></p>
+  <p><!-- ... --></p>
+  <figure class="wider-than-container"><!-- ... --></figure>
+  <p><!-- ... --></p>
+  <p><!-- ... --></p>
 </div>
 ```
 
 ```css
 .prose > * {
-	box-sizing: content-box;
-	max-width: 60rem;
-	margin-right: auto;
-	margin-left: auto;
-	padding-right: 1.25rem;
-	padding-left: 1.25rem;
+  box-sizing: content-box;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+  max-width: 60rem;
 }
 
 .prose > .wider-than-container {
-	max-width: 75rem;
+  max-width: 75rem;
 }
 ```
 
@@ -108,11 +108,11 @@ CMSから出力されるHTMLを、コンテナの幅ごとに分割すること�
 
 ```css
 .container {
-	--_container-margin: 1.25rem;
-	width: calc(100% - var(--_container-margin) * 2);
-	max-width: 60rem;
-	margin-right: auto;
-	margin-left: auto;
+  --_container-margin: 1.25rem;
+  margin-right: auto;
+  margin-left: auto;
+  width: calc(100% - var(--_container-margin) * 2);
+  max-width: 60rem;
 }
 ```
 
@@ -122,36 +122,36 @@ CMSから出力されるHTMLを、コンテナの幅ごとに分割すること�
 <h1 class="container"><!-- ... --></h1>
 
 <div class="prose">
-	<h2><!-- ... --></h2>
-	<p><!-- ... --></p>
-	<figure><!-- ... --></figure>
-	<p><!-- ... --></p>
-	<figure class="alignwide"><!-- ... --></figure>
-	<p><!-- ... --></p>
-	<figure class="alignfull"><!-- ... --></figure>
-	<p><!-- ... --></p>
+  <h2><!-- ... --></h2>
+  <p><!-- ... --></p>
+  <figure><!-- ... --></figure>
+  <p><!-- ... --></p>
+  <figure class="alignwide"><!-- ... --></figure>
+  <p><!-- ... --></p>
+  <figure class="alignfull"><!-- ... --></figure>
+  <p><!-- ... --></p>
 </div>
 ```
 
 ```css
 .container {
-	--_container-margin: 1.25rem;
-	width: calc(100% - var(--_container-margin) * 2);
-	max-width: 60rem;
-	margin-right: auto;
-	margin-left: auto;
+  --_container-margin: 1.25rem;
+  margin-right: auto;
+  margin-left: auto;
+  width: calc(100% - var(--_container-margin) * 2);
+  max-width: 60rem;
 }
 
 .prose > :not(.alignfull) {
-	--_container-margin: 1.25rem;
-	width: calc(100% - var(--_container-margin) * 2);
-	max-width: 45rem;
-	margin-right: auto;
-	margin-left: auto;
+  --_container-margin: 1.25rem;
+  margin-right: auto;
+  margin-left: auto;
+  width: calc(100% - var(--_container-margin) * 2);
+  max-width: 45rem;
 }
 
 .prose > .alignwide {
-	max-width: 60rem;
+  max-width: 60rem;
 }
 ```
 

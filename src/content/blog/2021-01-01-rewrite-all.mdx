@@ -1,7 +1,7 @@
 ---
 slug: 20210101-rewrite-all
 title: ぜんぶかきなおす
-publishDate: "2021-01-01T02:56:21.828Z"
+publishDate: '2021-01-01T02:56:21.828Z'
 ---
 
 丸2日くらいかけて、このサイトのHTML/CSSやサイト生成の仕組みを[全部書き直した](https://github.com/yuheiy/yuheiy.com-v5/commit/99b31c35ba936257fa5b14b61bb4a6356b427e6a)。わかりやすい変化としては、以前のバージョンではフォントサイズとか余白とかがビューポートのサイズに関わらずつねに一定だったところが、今のバージョンではビューポート幅にもとづいたファクターに応じてすべてのフォントサイズが変化するようになっている。
@@ -10,45 +10,45 @@ publishDate: "2021-01-01T02:56:21.828Z"
 
 ```css
 html {
-	--scale-factor: 7;
+  --scale-factor: 7;
 }
 
 @media (min-width: 331.2px) {
-	html {
-		--scale-factor: 6.99;
-	}
+  html {
+    --scale-factor: 6.99;
+  }
 }
 
 @media (min-width: 342.4px) {
-	html {
-		--scale-factor: 6.98;
-	}
+  html {
+    --scale-factor: 6.98;
+  }
 }
 
 @media (min-width: 353.6px) {
-	html {
-		--scale-factor: 6.97;
-	}
+  html {
+    --scale-factor: 6.97;
+  }
 }
 
 /* 同様に続く */
 
 @media (min-width: 1417.6px) {
-	html {
-		--scale-factor: 6.02;
-	}
+  html {
+    --scale-factor: 6.02;
+  }
 }
 
 @media (min-width: 1428.8px) {
-	html {
-		--scale-factor: 6.01;
-	}
+  html {
+    --scale-factor: 6.01;
+  }
 }
 
 @media (min-width: 1440px) {
-	html {
-		--scale-factor: 6;
-	}
+  html {
+    --scale-factor: 6;
+  }
 }
 ```
 
@@ -58,19 +58,11 @@ html {
 
 ```css
 html {
-	--text-base: 1rem;
-	--text-sm: calc(
-		var(--scale-factor) / (var(--scale-factor) + 1) * var(--text-base)
-	);
-	--text-lg: calc(
-		var(--scale-factor) / (var(--scale-factor) - 1) * var(--text-base)
-	);
-	--text-xl: calc(
-		var(--scale-factor) / (var(--scale-factor) - 2) * var(--text-base)
-	);
-	--text-2xl: calc(
-		var(--scale-factor) / (var(--scale-factor) - 4) * var(--text-base)
-	);
+  --text-base: 1rem;
+  --text-sm: calc(var(--scale-factor) / (var(--scale-factor) + 1) * var(--text-base));
+  --text-lg: calc(var(--scale-factor) / (var(--scale-factor) - 1) * var(--text-base));
+  --text-xl: calc(var(--scale-factor) / (var(--scale-factor) - 2) * var(--text-base));
+  --text-2xl: calc(var(--scale-factor) / (var(--scale-factor) - 4) * var(--text-base));
 }
 ```
 
@@ -78,21 +70,21 @@ html {
 
 ```css
 html {
-	--text-base: 1rem;
-	--text-sm: calc(7 / (7 + 1) * var(--text-base)); /* 0.875rem */
-	--text-lg: calc(7 / (7 - 1) * var(--text-base)); /* 1.166rem */
-	--text-xl: calc(7 / (7 - 2) * var(--text-base)); /* 1.4rem */
-	--text-2xl: calc(7 / (7 - 4) * var(--text-base)); /* 2.333rem */
+  --text-base: 1rem;
+  --text-sm: calc(7 / (7 + 1) * var(--text-base)); /* 0.875rem */
+  --text-lg: calc(7 / (7 - 1) * var(--text-base)); /* 1.166rem */
+  --text-xl: calc(7 / (7 - 2) * var(--text-base)); /* 1.4rem */
+  --text-2xl: calc(7 / (7 - 4) * var(--text-base)); /* 2.333rem */
 }
 ```
 
 ```css
 html {
-	--text-base: 1rem;
-	--text-sm: calc(6 / (6 + 1) * var(--text-base)); /* 0.857rem */
-	--text-lg: calc(6 / (6 - 1) * var(--text-base)); /* 1.2rem */
-	--text-xl: calc(6 / (6 - 2) * var(--text-base)); /* 1.5rem */
-	--text-2xl: calc(6 / (6 - 4) * var(--text-base)); /* 3rem */
+  --text-base: 1rem;
+  --text-sm: calc(6 / (6 + 1) * var(--text-base)); /* 0.857rem */
+  --text-lg: calc(6 / (6 - 1) * var(--text-base)); /* 1.2rem */
+  --text-xl: calc(6 / (6 - 2) * var(--text-base)); /* 1.5rem */
+  --text-2xl: calc(6 / (6 - 4) * var(--text-base)); /* 3rem */
 }
 ```
 

@@ -1,44 +1,52 @@
 {
-	"type": "module",
-	"scripts": {
-		"dev": "astro dev",
-		"build": "astro build",
-		"preview": "astro preview",
-		"lint": "prettier --check . && xo",
-		"lint:fix": "prettier --write . && xo --fix",
-		"postinstall": "patch-package"
-	},
-	"devDependencies": {
-		"@astrojs/mdx": "0.19.7",
-		"@astrojs/rss": "2.4.3",
-		"@astrojs/sitemap": "1.4.0",
-		"@astrojs/tailwind": "4.0.0",
-		"@tailwindcss/container-queries": "0.1.1",
-		"@wordpress/browserslist-config": "5.20.0",
-		"astro": "2.8.3",
-		"astro-embed": "0.5.0",
-		"dayjs": "1.11.9",
-		"just-extend": "6.2.0",
-		"just-safe-set": "4.2.1",
-		"mdast-util-to-string": "4.0.0",
-		"patch-package": "7.0.2",
-		"postcss-import": "15.1.0",
-		"prettier": "3.0.0",
-		"prettier-plugin-astro": "0.11.0",
-		"prettier-plugin-tailwindcss": "0.4.1",
-		"tailwindcss": "3.3.3",
-		"unist-util-select": "5.0.0",
-		"unist-util-visit": "5.0.0",
-		"xo": "0.55.0"
-	},
-	"engines": {
-		"node": "18"
-	},
-	"private": true,
-	"xo": {
-		"prettier": true,
-		"rules": {
-			"import/no-anonymous-default-export": "off"
-		}
-	}
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently --raw \"npm:dev:*\"",
+    "dev:astro": "astro dev",
+    "dev:css": "chokidar \"src/styles/**/*.css\" --command \"touch tailwind.config.cjs\" --debounce 0 --silent",
+    "build": "astro check && tsc && astro build",
+    "preview": "astro preview",
+    "lint": "concurrently --raw \"npm:lint:*\"",
+    "lint:prettier": "prettier . --check",
+    "lint:eslint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "fix": "npm run fix:prettier && npm run fix:eslint",
+    "fix:prettier": "npm run lint:prettier -- --write",
+    "fix:eslint": "npm run lint:eslint -- --fix"
+  },
+  "dependencies": {
+    "@astrojs/check": "0.3.4",
+    "@astrojs/mdx": "2.0.3",
+    "@astrojs/rss": "4.0.1",
+    "@astrojs/sitemap": "3.0.4",
+    "@astrojs/tailwind": "5.1.0",
+    "@tailwindcss/container-queries": "0.1.1",
+    "@typescript-eslint/eslint-plugin": "6.16.0",
+    "@typescript-eslint/parser": "6.16.0",
+    "astro": "4.0.8",
+    "astro-embed": "0.6.1",
+    "dayjs": "1.11.10",
+    "just-extend": "6.2.0",
+    "just-safe-set": "4.2.1",
+    "mdast-util-to-string": "4.0.0",
+    "chokidar-cli": "3.0.0",
+    "concurrently": "8.2.2",
+    "eslint": "8.56.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-import-resolver-typescript": "3.6.1",
+    "eslint-plugin-astro": "0.31.0",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-tailwindcss": "3.13.1",
+    "prettier": "3.1.1",
+    "prettier-plugin-astro": "0.12.3",
+    "prettier-plugin-css-order": "2.0.1",
+    "prettier-plugin-tailwindcss": "0.5.10",
+    "unist-util-select": "5.1.0",
+    "unist-util-visit": "5.0.0"
+  },
+  "engines": {
+    "node": "20",
+    "npm": "10"
+  },
+  "packageManager": "npm@10.2.5",
+  "private": true
 }

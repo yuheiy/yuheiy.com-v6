@@ -1,31 +1,31 @@
 ---
 title: ボタンの最低幅を設定しつつ、かつコンテナが縮小してもはみ出さないようにするCSS
-publishDate: "2022-08-12T15:40:00.000+09:00"
+publishDate: '2022-08-12T15:40:00.000+09:00'
 ---
 
-import { Image } from "astro:assets";
+import { Image } from 'astro:assets';
 
 ボタンのラベルが短い場合でも、ボタン自体には最低限ある程度の幅を持たせたいという場合がある。そんなときには、ボタン自体に`min-width`を指定して最低幅を設定する。
 
 ```css
 button {
-	min-width: 10em;
+  min-width: 10em;
 }
 ```
 
 しかし、そのボタンを配置するコンテナの幅が、ボタン自体の`min-width`の値よりも狭くなってしまうこともある。すると、ボタンがコンテナをはみ出してしまう。
 
-import _1Image from "./assets/2022-08-12-shrinkable-min-width/1.png";
+import _1Image from './assets/2022-08-12-shrinkable-min-width/1.png';
 
 <figure>
-	<Image src={_1Image} alt="" style="width: calc(840/2/16*1rem);" />
+  <Image src={_1Image} alt="" style="width: calc(840/2/16*1rem);" />
 </figure>
 
 ボタンの幅をコンテナに収めるためには`max-width: 100%`が使えそうにも思えるが、`min-width`の方が優先されてしまうので機能しない。そこで、`min-width`の値として`max()`を使うようにする。
 
 ```css
 button {
-	min-width: max(10em, 100%);
+  min-width: max(10em, 100%);
 }
 ```
 
