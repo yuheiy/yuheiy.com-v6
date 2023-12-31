@@ -32,15 +32,7 @@ button {
 
 デフォルトのフォーカスリングを適用するための方法はブラウザによって異なるため、この方法では、それぞれに対応するために`outline`プロパティを二重に宣言する。
 
-まずChromeでは、次の条件に一致するときにデフォルトのフォーカスリングが描画される。
-
-- `outline-style`として`auto`が指定されている
-- `outline-width`として0より大きい`<length>`が指定されている
-- `outline-color`として`-webkit-focus-ring-color`が指定されている
-
-`-webkit-focus-ring-color`はブラウザ独自の仕様であり、標準化されていない。`outline-color`の値を指定しなければ、`currentcolor`がフォーカスリングの色として適用されることになる。
-
-一方でFirefox/Safariでは、次の条件に一致するときにデフォルトのフォーカスリングが描画される。
+まずFirefox/Safariでは、次の条件に一致するときにデフォルトのフォーカスリングが描画される。
 
 - `outline-style`として`auto`が指定されている
 - `outline-width`として0より大きい`<length>`が指定されている
@@ -48,6 +40,14 @@ button {
 `outline-style`の値が`auto`の場合、`outline-color`の値は無視される。
 
 Firefoxにおいては、`accent-color`が指定されている場合、その値がフォーカスリングの色として適用される。
+
+一方Chromeでは、次の条件に一致するときにデフォルトのフォーカスリングが描画される。
+
+- `outline-style`として`auto`が指定されている
+- `outline-width`として0より大きい`<length>`が指定されている
+- `outline-color`として`-webkit-focus-ring-color`が指定されている
+
+`-webkit-focus-ring-color`はブラウザ独自の仕様であり、標準化されていない。`outline-color`の値を指定しなければ、`currentcolor`がフォーカスリングの色として適用されることになる。
 
 ## 参考文献
 
