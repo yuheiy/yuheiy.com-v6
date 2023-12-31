@@ -9,8 +9,8 @@
     margin-block-start: var(--prose-spacing, theme(spacing.6)) !important;
   }
 
-  > :where(* + :is(figure, pre, astro-embed-tweet, .codepen, .cp_embed_wrapper)),
-  > :where(:is(figure, pre, astro-embed-tweet, .codepen, .cp_embed_wrapper + script) + *) {
+  > :where(* + :is(pre, figure, table, astro-embed-tweet, .codepen, .cp_embed_wrapper)),
+  > :where(:is(pre, figure, table, astro-embed-tweet, .codepen, .cp_embed_wrapper + script) + *) {
     --prose-spacing: theme(spacing.8);
   }
 
@@ -108,6 +108,31 @@
 
   img {
     border: 1px solid theme(borderColor.dynamic.DEFAULT);
+  }
+
+  table {
+    display: block;
+    border-spacing: 0;
+    max-inline-size: 100%;
+    overflow-x: auto;
+  }
+
+  td {
+    vertical-align: top;
+    border-block-end-width: thin;
+    border-block-end-style: solid;
+    padding: theme(spacing.1) theme(spacing.3);
+    white-space: pre;
+  }
+
+  th {
+    vertical-align: top;
+    border-block-end-width: thin;
+    border-block-end-style: solid;
+    background-color: theme(backgroundColor.dynamic.subtle);
+    padding: theme(spacing.1) theme(spacing.3);
+    text-align: inherit;
+    white-space: pre;
   }
 
   details {
