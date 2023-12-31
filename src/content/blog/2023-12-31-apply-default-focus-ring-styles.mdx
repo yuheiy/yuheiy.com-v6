@@ -25,14 +25,14 @@ button {
 
 ```css
 .card:focus-within {
-  outline: auto; /* for Firefox */
-  outline: auto -webkit-focus-ring-color; /* for Chrome, Safari */
+  outline: auto; /* for Firefox, Safari */
+  outline: auto -webkit-focus-ring-color; /* for Chrome */
 }
 ```
 
 デフォルトのフォーカスリングを適用するための方法はブラウザによって異なるため、この方法では、それぞれに対応するために`outline`プロパティを二重に宣言する。
 
-まずChrome/Safariでは、次の条件に一致するときにデフォルトのフォーカスリングが描画される。
+まずChromeでは、次の条件に一致するときにデフォルトのフォーカスリングが描画される。
 
 - `outline-style`として`auto`が指定されている
 - `outline-width`として0より大きい`<length>`が指定されている
@@ -40,12 +40,14 @@ button {
 
 `-webkit-focus-ring-color`はブラウザ独自の仕様であり、標準化されていない。`outline-color`の値を指定しなければ、`currentcolor`がフォーカスリングの色として適用されることになる。
 
-一方でFirefoxでは、次の条件に一致するときにデフォルトのフォーカスリングが描画される。
+一方でFirefox/Safariでは、次の条件に一致するときにデフォルトのフォーカスリングが描画される。
 
 - `outline-style`として`auto`が指定されている
 - `outline-width`として0より大きい`<length>`が指定されている
 
-`outline-style`の値が`auto`の場合、`outline-color`の値は無視される。もし`accent-color`が指定されていれば、その値がフォーカスリングの色として適用される。
+`outline-style`の値が`auto`の場合、`outline-color`の値は無視される。
+
+Firefoxにおいては、`accent-color`が指定されている場合、その値がフォーカスリングの色として適用される。
 
 ## 参考文献
 
