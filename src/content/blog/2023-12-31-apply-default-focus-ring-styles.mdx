@@ -1,0 +1,54 @@
+---
+title: ブラウザデフォルトのフォーカスリングを明示的に適用する方法
+publishDate: '2023-12-31T11:00:00.000+09:00'
+---
+
+特定の要素に対して、ブラウザデフォルトのフォーカスリングが描画されるように明示的に設定したいことがある。たとえばスタイリングの都合により、一度取り除いたフォーカスリングをふたたび適用したいとき。
+
+フォーカスリングのスタイルは、ブラウザの種別や状況によってまちまちであるため、CSSでそれらしいものをエミュレートするのが難しい。そのため、同じものを呼び出せるような特別なやり方を採用できると望ましい。
+
+一つの方法として、`outline: revert`を適用すればデフォルトの挙動を復元できる。
+
+```css
+* {
+  outline: 0;
+}
+
+button {
+  outline: revert;
+}
+```
+
+しかし場合によっては、通常はフォーカスリングが描画されない要素に対して、ブラウザのデフォルトと同じフォーカスリングが描画されるようにしたい、ということもあるだろう。この場合、`outline: revert`ではフォーカスリングを適用できない。
+
+代わりに、次のように指定することでフォーカスリングを描画させられる。
+
+```css
+.card:focus-within {
+  outline: auto; /* for Firefox */
+  outline: auto -webkit-focus-ring-color; /* for Chrome, Safari */
+}
+```
+
+デフォルトのフォーカスリングを適用するための方法はブラウザによって異なるため、この方法では、それぞれに対応するために`outline`プロパティを二重に宣言する。
+
+まずChrome/Safariでは、次の条件に一致するときにデフォルトのフォーカスリングが描画される。
+
+- `outline-style`として`auto`が指定されている
+- `outline-width`として0より大きい`<length>`が指定されている
+- `outline-color`として`-webkit-focus-ring-color`が指定されている
+
+`-webkit-focus-ring-color`はブラウザ独自の仕様であり、標準化されていない。
+
+一方でFirefoxでは、次の条件に一致するときにデフォルトのフォーカスリングが描画される。
+
+- `outline-style`として`auto`が指定されている
+- `outline-width`として0より大きい`<length>`が指定されている
+
+`outline-style`の値が`auto`の場合、`outline-color`の値は無視される。もし`accent-color`が指定されていれば、その値がフォーカスリングの色として適用される。
+
+## 参考文献
+
+- [[css-ui] Tweaking outline-style: auto colors. · Issue #7761 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/issues/7761)
+- [[css-ui] Should we drop 'outline-color: invert' · Issue #9199 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/issues/9199)
+- [[css-ui-4] influence of outline-width on auto style outlines · Issue #9201 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/issues/9201)
