@@ -6,7 +6,7 @@ module.exports = {
     'plugin:@typescript-eslint/stylistic',
     'plugin:import/recommended',
     'plugin:import/typescript',
-    'plugin:astro/recommended',
+    'plugin:astro/jsx-a11y-recommended',
     'plugin:tailwindcss/recommended',
     'prettier', // make sure to put this line last
   ],
@@ -48,14 +48,6 @@ module.exports = {
       },
       rules: {
         '@typescript-eslint/no-var-requires': 'off',
-      },
-    },
-    {
-      files: ['*.astro'],
-      parser: 'astro-eslint-parser',
-      parserOptions: {
-        parser: '@typescript-eslint/parser',
-        extraFileExtensions: ['.astro'],
       },
     },
   ],
