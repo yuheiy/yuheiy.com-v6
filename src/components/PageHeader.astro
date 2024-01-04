@@ -27,7 +27,11 @@ const Components = isHome
   <Components.Nav>
     <p class="wrapper pt-16 text-sm text-dynamic-muted kerning-normal">
       {/* eslint-disable-next-line astro/jsx-a11y/anchor-is-valid */}
-      <a class="flex w-fit items-center gap-x-3" href={isHome ? null : '/'}>
+      <a
+        class="flex w-fit items-center gap-x-3"
+        href={isHome ? null : '/'}
+        title={isHome ? null : 'ホームに戻る'}
+      >
         <Image
           class="w-7 rounded-full ring-1 ring-dynamic"
           src={faviconImage}
