@@ -8,7 +8,7 @@ const searchURL = new URL('https://www.google.com/search');
 searchURL.searchParams.set('q', `site:${Astro.site!.host}`);
 ---
 
-<Layout type="notFound" title={title}>
+<Layout is404 title={title}>
   <PageHeader title={title} slot="header" />
 
   <div class="prose wrapper">

@@ -4,6 +4,8 @@ import faviconImage from '../assets/favicon.svg';
 import { SITE_LANG, SITE_REGION, SITE_TITLE, SITE_TWITTER_ID } from '../consts';
 
 interface SharedProps {
+  isHome?: false | undefined;
+  is404?: false | undefined;
   title: string;
   description?: string | undefined;
   ogType?: 'website' | 'article' | undefined;
@@ -11,37 +13,37 @@ interface SharedProps {
   twitterCard?: 'summary' | 'summary_large_image' | undefined;
 }
 
-type GeneralProps = SharedProps & {
-  type?: 'general' | undefined;
+type GeneralProps = SharedProps;
+
+type HomeProps = Omit<SharedProps, 'isHome' | 'title'> & {
+  isHome: true;
 };
 
-type HomeProps = Omit<SharedProps, 'title'> & {
-  type: 'home';
-};
-
-type NotFoundProps = SharedProps & {
-  type: 'notFound';
+type NotFoundProps = Omit<SharedProps, 'is404'> & {
+  is404: true;
 };
 
 type Props = GeneralProps | HomeProps | NotFoundProps;
 
-const isHome = Astro.props.type === 'home';
-const isNotFound = Astro.props.type === 'notFound';
+const {
+  isHome,
+  is404,
+  description,
+  ogType = 'website',
+  ogImage = appleTouchIconImage.src,
+  twitterCard = 'summary',
+} = Astro.props;
 
 const title = isHome ? SITE_TITLE : Astro.props.title;
-const description = Astro.props.description;
-const ogType = Astro.props.ogType ?? 'website';
-const ogImage = new URL(Astro.props.ogImage ?? appleTouchIconImage.src, Astro.site);
-const twitterCard = Astro.props.twitterCard ?? 'summary';
+const resolvedOgImage = new URL(ogImage, Astro.site);
 
-const canonicalURL = isNotFound
-  ? null
-  : (() => {
-      // remove trailing slash in build time
-      // https://github.com/withastro/astro/pull/4352
-      const normalizedPathname = Astro.url.pathname.replace(/\.html$/, '');
-      return new URL(normalizedPathname, Astro.site);
-    })();
+let canonicalURL: URL | null = null;
+if (!is404) {
+  // remove trailing slash in build time
+  // https://github.com/withastro/astro/pull/4352
+  const normalizedPathname = Astro.url.pathname.replace(/\.html$/, '');
+  canonicalURL = new URL(normalizedPathname, Astro.site);
+}
 ---
 
 <!--
@@ -67,7 +69,7 @@ const canonicalURL = isNotFound
 
     <meta property="og:title" content={title} />
     <meta property="og:type" content={ogType} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={resolvedOgImage} />
     {canonicalURL && <meta property="og:url" content={canonicalURL} />}
     {description && <meta property="og:description" content={description} />}
     <meta property="og:site_name" content={SITE_TITLE} />
