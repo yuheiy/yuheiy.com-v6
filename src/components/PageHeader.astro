@@ -10,22 +10,12 @@ interface Props {
 
 const { title, isHome } = Astro.props;
 
-const Components = isHome
-  ? ({
-      Root: 'header',
-      Nav: Fragment,
-      Header: 'div',
-    } as const)
-  : ({
-      Root: Fragment,
-      Nav: 'nav',
-      Header: 'header',
-    } as const);
+const Nav = isHome ? Fragment : 'nav';
 ---
 
-<Components.Root>
-  <Components.Nav>
-    <p class="wrapper pt-16 text-sm text-dynamic-muted kerning-normal">
+<header class="wrapper space-y-8 pt-16">
+  <Nav>
+    <p class="text-sm text-dynamic-muted kerning-normal">
       {/* eslint-disable-next-line astro/jsx-a11y/anchor-is-valid */}
       <a
         class="flex w-fit items-center gap-x-3"
@@ -41,13 +31,12 @@ const Components = isHome
         {SITE_TITLE}
       </a>
     </p>
-  </Components.Nav>
+  </Nav>
 
-  <Components.Header class="wrapper mt-8 space-y-8">
-    <h1
-      class="text-2xl font-bold leading-tight kerning-all [text-wrap:pretty] [word-break:auto-phrase]"
-      set:html={title}
-    />
-    <slot />
-  </Components.Header>
-</Components.Root>
+  <h1
+    class="text-2xl font-bold leading-tight kerning-all [text-wrap:pretty] [word-break:auto-phrase]"
+    set:html={title}
+  />
+
+  <slot />
+</header>
