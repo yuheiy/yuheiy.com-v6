@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import DetailsList from '../components/DetailsList.astro';
-import PageTitle from '../components/PageTitle.astro';
+import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 import dayjs from '../lib/dayjs';
 
@@ -13,22 +13,18 @@ const blogEntries = (await getCollection('blog')).toSorted(
 ---
 
 <Layout title={title}>
-  <div class="space-y-16">
-    <PageTitle title={title} />
+  <Header title={title} slot="header" />
 
-    <div class="border-t"></div>
-
-    <div class="wrapper">
-      <DetailsList
-        items={blogEntries.map((entry) => ({
-          title: entry.data.title,
-          link: `/${entry.slug}`,
-          meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
-						${dayjs(entry.data.publishDate).tz().format('LL')}
-					</time>`,
-        }))}
-        ordered={true}
-      />
-    </div>
+  <div class="wrapper">
+    <DetailsList
+      items={blogEntries.map((entry) => ({
+        title: entry.data.title,
+        link: `/${entry.slug}`,
+        meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
+          ${dayjs(entry.data.publishDate).tz().format('LL')}
+        </time>`,
+      }))}
+      ordered={true}
+    />
   </div>
 </Layout>

@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection, getEntry } from 'astro:content';
 import type { Dayjs } from 'dayjs';
 import DetailsList from '../components/DetailsList.astro';
-import PageTitle from '../components/PageTitle.astro';
+import Header from '../components/Header.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import Layout from '../layouts/Layout.astro';
 import dayjs from '../lib/dayjs';
@@ -133,48 +133,44 @@ const blogEntries = (await getCollection('blog')).toSorted(
 );
 ---
 
-<Layout description={SITE_DESCRIPTION}>
-  <div class="space-y-16">
-    <PageTitle title="安田 祐平">
-      <div class="space-y-4 text-dynamic-muted [&_a:any-link]:text-dynamic">
-        <p>{SITE_DESCRIPTION}</p>
-        <p
-          set:html={`監訳を担当した書籍『<a href="/${everylayoutEntry.slug}">Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a>』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a>。`}
-        />
-      </div>
-    </PageTitle>
-
-    <div class="border-t"></div>
-
-    <section class="wrapper">
-      <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">主な投稿</h2>
-
-      <DetailsList items={primaryEntries} />
-    </section>
-
-    <div class="border-t"></div>
-
-    <section class="wrapper">
-      <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
-
-      <DetailsList items={projects} />
-    </section>
-
-    <div class="border-t"></div>
-
-    <section class="wrapper">
-      <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
-
-      <DetailsList
-        items={blogEntries.slice(0, 3).map((entry) => ({
-          title: entry.data.title,
-          link: `/${entry.slug}`,
-          meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
-						${dayjs(entry.data.publishDate).tz().format('LL')}
-					</time>`,
-        }))}
-        ordered={true}
+<Layout type="home" description={SITE_DESCRIPTION}>
+  <Header title="安田 祐平" isHome slot="header">
+    <div class="space-y-4 text-dynamic-muted [&_a:any-link]:text-dynamic">
+      <p>{SITE_DESCRIPTION}</p>
+      <p
+        set:html={`監訳を担当した書籍『<a href="/${everylayoutEntry.slug}">Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a>』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a>。`}
       />
-    </section>
-  </div>
+    </div>
+  </Header>
+
+  <section class="wrapper">
+    <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">主な投稿</h2>
+
+    <DetailsList items={primaryEntries} />
+  </section>
+
+  <div class="my-16 border-t"></div>
+
+  <section class="wrapper">
+    <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
+
+    <DetailsList items={projects} />
+  </section>
+
+  <div class="my-16 border-t"></div>
+
+  <section class="wrapper">
+    <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
+
+    <DetailsList
+      items={blogEntries.slice(0, 3).map((entry) => ({
+        title: entry.data.title,
+        link: `/${entry.slug}`,
+        meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
+          ${dayjs(entry.data.publishDate).tz().format('LL')}
+        </time>`,
+      }))}
+      ordered={true}
+    />
+  </section>
 </Layout>

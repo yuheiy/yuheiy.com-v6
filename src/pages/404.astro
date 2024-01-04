@@ -1,5 +1,5 @@
 ---
-import PageTitle from '../components/PageTitle.astro';
+import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 
 const title = 'ページが存在しません';
@@ -8,17 +8,13 @@ const searchURL = new URL('https://www.google.com/search');
 searchURL.searchParams.set('q', `site:${Astro.site!.host}`);
 ---
 
-<Layout title={title} is404={true}>
-  <div class="space-y-16">
-    <PageTitle title={title} />
+<Layout type="notFound" title={title}>
+  <Header title={title} slot="header" />
 
-    <div class="border-t"></div>
-
-    <div class="prose wrapper">
-      <p
-        set:html={`<a data-internet-archive-link href="https://web.archive.org/web/*/${Astro.site}">インターネットアーカイブ</a>を参照するか、<a href="${searchURL}">サイト内を検索する</a>と、お探しのページが見つかるかもしれません。`}
-      />
-    </div>
+  <div class="prose wrapper">
+    <p
+      set:html={`<a data-internet-archive-link href="https://web.archive.org/web/*/${Astro.site}">インターネットアーカイブ</a>を参照するか、<a href="${searchURL}">サイト内を検索する</a>と、お探しのページが見つかるかもしれません。`}
+    />
   </div>
 </Layout>
 

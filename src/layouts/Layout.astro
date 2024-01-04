@@ -4,6 +4,7 @@ import faviconImage from '../assets/favicon.svg';
 import { SITE_LANG, SITE_REGION, SITE_TITLE, SITE_TWITTER_ID } from '../consts';
 
 interface SharedProps {
+  title: string;
   description?: string | undefined;
   ogType?: 'website' | 'article' | undefined;
   ogImage?: string | undefined;
@@ -11,23 +12,29 @@ interface SharedProps {
 }
 
 type GeneralProps = SharedProps & {
-  title: string;
-  is404?: boolean | undefined;
+  type?: 'general' | undefined;
 };
 
-type HomeProps = SharedProps;
+type HomeProps = Omit<SharedProps, 'title'> & {
+  type: 'home';
+};
 
-type Props = GeneralProps | HomeProps;
+type NotFoundProps = SharedProps & {
+  type: 'notFound';
+};
 
-const {
-  description,
-  ogType = 'website',
-  ogImage = appleTouchIconImage.src,
-  twitterCard = 'summary',
-} = Astro.props;
+type Props = GeneralProps | HomeProps | NotFoundProps;
 
-const is404 = 'is404' in Astro.props && Astro.props.is404;
-const canonicalURL = is404
+const isHome = Astro.props.type === 'home';
+const isNotFound = Astro.props.type === 'notFound';
+
+const title = isHome ? SITE_TITLE : Astro.props.title;
+const description = Astro.props.description;
+const ogType = Astro.props.ogType ?? 'website';
+const ogImage = new URL(Astro.props.ogImage ?? appleTouchIconImage.src, Astro.site);
+const twitterCard = Astro.props.twitterCard ?? 'summary';
+
+const canonicalURL = isNotFound
   ? null
   : (() => {
       // remove trailing slash in build time
@@ -35,8 +42,6 @@ const canonicalURL = is404
       const normalizedPathname = Astro.url.pathname.replace(/\.html$/, '');
       return new URL(normalizedPathname, Astro.site);
     })();
-
-const resolvedOgImage = new URL(ogImage, Astro.site);
 ---
 
 <!--
@@ -51,18 +56,18 @@ const resolvedOgImage = new URL(ogImage, Astro.site);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, viewport-fit=cover" />
 
-    <title set:html={'title' in Astro.props ? Astro.props.title : SITE_TITLE} />
+    <title set:html={title} />
 
     <meta name="color-scheme" content="light dark" />
     {description && <meta name="description" content={description} />}
     <meta name="generator" content={Astro.generator} />
     <meta name="twitter:card" content={twitterCard} />
     <meta name="twitter:site" content={`@${SITE_TWITTER_ID}`} />
-    <meta name="twitter:title" content={'title' in Astro.props ? Astro.props.title : SITE_TITLE} />
+    <meta name="twitter:title" content={title} />
 
-    <meta property="og:title" content={'title' in Astro.props ? Astro.props.title : SITE_TITLE} />
+    <meta property="og:title" content={title} />
     <meta property="og:type" content={ogType} />
-    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:image" content={ogImage} />
     {canonicalURL && <meta property="og:url" content={canonicalURL} />}
     {description && <meta property="og:description" content={description} />}
     <meta property="og:site_name" content={SITE_TITLE} />
@@ -75,20 +80,9 @@ const resolvedOgImage = new URL(ogImage, Astro.site);
   </head>
 
   <body class="min-h-svh bg-dynamic text-dynamic">
-    <header class="wrapper mb-8 pt-16 text-sm text-dynamic-muted kerning-normal">
-      <p>
-        <a class="flex w-fit items-center gap-x-3" href={Astro.url.pathname !== '/' ? '/' : null}>
-          <img
-            class="w-7 rounded-full ring-1 ring-dynamic"
-            src={faviconImage.src}
-            width={faviconImage.width}
-            height={faviconImage.height}
-            alt=""
-          />
-          {SITE_TITLE}
-        </a>
-      </p>
-    </header>
+    <slot name="header" />
+
+    <div class="my-16 border-t"></div>
 
     <main>
       <slot />
