@@ -137,9 +137,12 @@ const blogEntries = (await getCollection('blog')).toSorted(
   <Header title="安田 祐平" isHome slot="header">
     <div class="space-y-4 text-dynamic-muted [&_a:any-link]:text-dynamic">
       <p>{SITE_DESCRIPTION}</p>
-      <p
-        set:html={`監訳を担当した書籍『<a href="/${everylayoutEntry.slug}">Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a>』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a>。`}
-      />
+      <p>
+        監訳を担当した書籍『<a href={`/${everylayoutEntry.slug}`}
+          >Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a
+        >』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a
+        >。
+      </p>
     </div>
   </Header>
 
