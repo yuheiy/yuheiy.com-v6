@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Header from '../components/Header.astro';
+import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 import dayjs from '../lib/dayjs';
 
@@ -22,13 +22,13 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
   ogType="article"
   twitterCard={entry.data.twitterCard}
 >
-  <Header title={entry.data.title} slot="header">
+  <PageHeader title={entry.data.title} slot="header">
     <p class="text-sm text-dynamic-muted">
       <time datetime={dayjs(entry.data.publishDate).tz().toISOString()}>
         {dayjs(entry.data.publishDate).tz().format('LL')}
       </time>
     </p>
-  </Header>
+  </PageHeader>
 
   <div class="prose wrapper">
     <Content />

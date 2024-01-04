@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection, getEntry } from 'astro:content';
 import type { Dayjs } from 'dayjs';
 import DetailsList from '../components/DetailsList.astro';
-import Header from '../components/Header.astro';
+import PageHeader from '../components/PageHeader.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import Layout from '../layouts/Layout.astro';
 import dayjs from '../lib/dayjs';
@@ -134,7 +134,7 @@ const blogEntries = (await getCollection('blog')).toSorted(
 ---
 
 <Layout type="home" description={SITE_DESCRIPTION}>
-  <Header title="安田 祐平" isHome slot="header">
+  <PageHeader title="安田 祐平" isHome slot="header">
     <div class="space-y-4 text-dynamic-muted [&_a:any-link]:text-dynamic">
       <p>{SITE_DESCRIPTION}</p>
       <p>
@@ -144,7 +144,7 @@ const blogEntries = (await getCollection('blog')).toSorted(
         >。
       </p>
     </div>
-  </Header>
+  </PageHeader>
 
   <section class="wrapper">
     <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">主な投稿</h2>

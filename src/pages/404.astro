@@ -1,5 +1,5 @@
 ---
-import Header from '../components/Header.astro';
+import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 
 const title = 'ページが存在しません';
@@ -9,7 +9,7 @@ searchURL.searchParams.set('q', `site:${Astro.site!.host}`);
 ---
 
 <Layout type="notFound" title={title}>
-  <Header title={title} slot="header" />
+  <PageHeader title={title} slot="header" />
 
   <div class="prose wrapper">
     <p>
