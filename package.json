@@ -27,7 +27,6 @@
     "astro-embed": "0.6.1",
     "chokidar-cli": "3.0.0",
     "concurrently": "8.2.2",
-    "dayjs": "1.11.10",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-import-resolver-typescript": "3.6.1",

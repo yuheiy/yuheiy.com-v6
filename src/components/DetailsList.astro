@@ -1,11 +1,13 @@
 ---
+export interface DetailsListItem {
+  title: string;
+  link: string;
+  meta?: string | undefined;
+  description?: string | undefined;
+}
+
 interface Props {
-  items: {
-    title: string;
-    link: string;
-    meta?: string | undefined;
-    description?: string | undefined;
-  }[];
+  items: DetailsListItem[];
   ordered?: boolean | undefined;
 }
 

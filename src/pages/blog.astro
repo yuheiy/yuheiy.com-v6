@@ -3,12 +3,12 @@ import { getCollection } from 'astro:content';
 import DetailsList from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
-import dayjs from '../lib/dayjs';
+import { renderDateHtml } from '../lib/date-time-formatter';
 
 const title = 'ブログ';
 
 const blogEntries = (await getCollection('blog')).toSorted(
-  (a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf(),
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
@@ -20,9 +20,7 @@ const blogEntries = (await getCollection('blog')).toSorted(
       items={blogEntries.map((entry) => ({
         title: entry.data.title,
         link: `/${entry.slug}`,
-        meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
-          ${dayjs(entry.data.publishDate).tz().format('LL')}
-        </time>`,
+        meta: renderDateHtml(entry.data.pubDate),
       }))}
       ordered={true}
     />

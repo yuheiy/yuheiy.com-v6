@@ -1,12 +1,12 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, getEntry } from 'astro:content';
-import type { Dayjs } from 'dayjs';
 import DetailsList from '../components/DetailsList.astro';
+import type { DetailsListItem } from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import Layout from '../layouts/Layout.astro';
-import dayjs from '../lib/dayjs';
+import { renderDateHtml, renderProjectDateRangeHtml } from '../lib/date-time-formatter';
 
 const everylayoutEntry = await getEntry('blog', '20211011-publication-of-everylayout');
 
@@ -16,10 +16,10 @@ const primaryEntries = [
     link: 'https://gihyo.jp/list/group/Tailwind-CSS%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80-%EF%BD%9E%E3%81%BE%E3%81%9A%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%8B%E3%82%89-%E3%81%82%E3%81%A8%E3%81%A7%E5%85%B1%E9%80%9A%E5%8C%96%E3%81%99%E3%82%8B',
     meta: 'gihyo.jp',
   },
-  toDetailsListItem(await getEntry('blog', '2023-02-06-tailwind-css-in-wdpress')),
-  toDetailsListItem(await getEntry('blog', '2022-11-03-how-to-understand-the-markup')),
-  toDetailsListItem(await getEntry('blog', '2022-08-01-declarative-design')),
-  toDetailsListItem(await getEntry('blog', '2022-06-11-css-components')),
+  toPrimaryItem(await getEntry('blog', '2023-02-06-tailwind-css-in-wdpress')),
+  toPrimaryItem(await getEntry('blog', '2022-11-03-how-to-understand-the-markup')),
+  toPrimaryItem(await getEntry('blog', '2022-08-01-declarative-design')),
+  toPrimaryItem(await getEntry('blog', '2022-06-11-css-components')),
   {
     title: '本文のタイポグラフィとCSS',
     link: 'https://paper.dropbox.com/doc/CSS--BiYi3PrpPiQ_4sOfqgvEMeAEAg-wPD007Sd9dSeEDLP78jri',
@@ -35,8 +35,8 @@ const primaryEntries = [
     link: 'https://www.codegrid.net/series/2021-talk-about-every-layout',
     meta: 'CodeGrid',
   },
-  toDetailsListItem(await getEntry('blog', '20211011-publication-of-everylayout')),
-  toDetailsListItem(await getEntry('blog', '20210127-prefer-margin-top')),
+  toPrimaryItem(everylayoutEntry),
+  toPrimaryItem(await getEntry('blog', '20210127-prefer-margin-top')),
   {
     title: 'Tailwind CSSの設計思想を業務に活かす',
     link: 'https://www.codegrid.net/series/2020-tailwind-talk',
@@ -58,9 +58,9 @@ const primaryEntries = [
     link: 'https://standard.shiftbrain.com/blog/default-action-for-click-event-of-a-element',
     meta: 'シフトブレイン／スタンダードデザインユニット',
   },
-];
+] satisfies DetailsListItem[];
 
-function toDetailsListItem(entry: CollectionEntry<'blog'>) {
+function toPrimaryItem(entry: CollectionEntry<'blog'>): DetailsListItem {
   return {
     title: entry.data.title,
     link: `/${entry.slug}`,
@@ -72,64 +72,45 @@ const projects = [
   {
     title: 'sdenv',
     link: 'https://github.com/yuheiy/sdenv',
-    startDate: '2023-07',
+    meta: renderProjectDateRangeHtml('2023-07'),
     description:
       'ウェブサイト構築のためのベストプラクティスに基づいて構成された、Astro、Tailwind CSS、Alpine.jsを中心とした開発環境。',
   },
   {
     title: 'wordpress-starter',
     link: 'https://github.com/yuheiy/wordpress-starter',
-    startDate: '2020-08',
-    endDate: '2022-10',
+    meta: renderProjectDateRangeHtml('2020-08', '2022-10'),
     description: 'WordPressテーマ構築のための開発環境。',
   },
   {
     title: 'accrefs',
     link: 'https://accrefs.jp/',
-    startDate: '2019-09',
+    meta: renderProjectDateRangeHtml('2019-09'),
     description:
       'ウェブアクセシビリティの参考資料をまとめたサイト。日本語の資料を中心にリンク数は200を超える。サイトのデザインおよび実装に携わる。有志のメンバーにより制作・運営されている。',
   },
   {
     title: 'shifted',
     link: 'https://github.com/yuheiy/shifted',
-    startDate: '2019-05',
-    endDate: '2023-07',
+    meta: renderProjectDateRangeHtml('2019-05', '2023-07'),
     description: '静的サイト構築のための開発環境。',
   },
   {
     title: 'シフトブレイン／スタンダードデザインユニット',
     link: 'https://standard.shiftbrain.com/',
-    startDate: '2018-10',
-    endDate: '2020-06',
+    meta: renderProjectDateRangeHtml('2018-10', '2020-06'),
     description: '自社で所属していたチームのウェブサイト。',
   },
   {
     title: 'yuhei blog',
     link: 'https://yuheiy.hatenablog.com/',
-    startDate: '2015-10',
-    endDate: '2020-11',
+    meta: renderProjectDateRangeHtml('2015-10', '2020-11'),
     description: '過去に更新していた個人ブログ。',
   },
-].map(({ title, link, startDate, endDate, description }) => ({
-  title,
-  link,
-  meta: [
-    getProjectDateHtml(dayjs(startDate)),
-    '&mdash;',
-    endDate && getProjectDateHtml(dayjs(endDate)),
-  ]
-    .filter(Boolean)
-    .join(' '),
-  description,
-}));
-
-function getProjectDateHtml(date: Dayjs) {
-  return `<time datetime="${date.tz().format('YYYY-MM')}">${date.tz().format('YYYY年M月')}</time>`;
-}
+] satisfies DetailsListItem[];
 
 const blogEntries = (await getCollection('blog')).toSorted(
-  (a, b) => dayjs(b.data.publishDate).tz().valueOf() - dayjs(a.data.publishDate).tz().valueOf(),
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
@@ -170,9 +151,7 @@ const blogEntries = (await getCollection('blog')).toSorted(
         items={blogEntries.slice(0, 3).map((entry) => ({
           title: entry.data.title,
           link: `/${entry.slug}`,
-          meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
-            ${dayjs(entry.data.publishDate).tz().format('LL')}
-          </time>`,
+          meta: renderDateHtml(entry.data.pubDate),
         }))}
         ordered={true}
       />
