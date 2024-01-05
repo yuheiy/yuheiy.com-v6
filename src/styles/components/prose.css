@@ -1,5 +1,5 @@
 .prose {
-  @apply [margin-trim:block];
+  margin-trim: block;
 
   > * {
     margin-block: 0 !important;
