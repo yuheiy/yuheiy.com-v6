@@ -22,7 +22,7 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
   ogType="article"
   twitterCard={entry.data.twitterCard}
 >
-  <PageHeader title={entry.data.title} slot="header">
+  <PageHeader title={entry.data.title}>
     <p class="text-sm text-dynamic-muted">
       <time datetime={dayjs(entry.data.publishDate).tz().toISOString()}>
         {dayjs(entry.data.publishDate).tz().format('LL')}
