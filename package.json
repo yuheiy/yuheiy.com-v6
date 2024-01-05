@@ -22,7 +22,7 @@
     "@tailwindcss/container-queries": "0.1.1",
     "@typescript-eslint/eslint-plugin": "6.17.0",
     "@typescript-eslint/parser": "6.17.0",
-    "astro": "4.0.9",
+    "astro": "4.1.0",
     "astro-embed": "0.6.1",
     "chokidar-cli": "3.0.0",
     "concurrently": "8.2.2",
