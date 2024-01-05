@@ -11,7 +11,8 @@
     "lint:eslint": "eslint . --max-warnings 0",
     "fix": "npm run fix:prettier && npm run fix:eslint",
     "fix:prettier": "npm run lint:prettier -- --write",
-    "fix:eslint": "npm run lint:eslint -- --fix"
+    "fix:eslint": "npm run lint:eslint -- --fix",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@astrojs/check": "0.3.4",
@@ -37,6 +38,7 @@
     "just-extend": "6.2.0",
     "just-safe-set": "4.2.1",
     "mdast-util-to-string": "4.0.0",
+    "patch-package": "8.0.0",
     "prettier": "3.1.1",
     "prettier-plugin-astro": "0.12.3",
     "prettier-plugin-css-order": "2.0.1",

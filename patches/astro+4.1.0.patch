@@ -1,0 +1,13 @@
+diff --git a/node_modules/astro/dist/assets/services/service.js b/node_modules/astro/dist/assets/services/service.js
+index 91dad7d..c35a0b4 100644
+--- a/node_modules/astro/dist/assets/services/service.js
++++ b/node_modules/astro/dist/assets/services/service.js
+@@ -87,7 +87,7 @@ const baseService = {
+       ...attributes,
+       width: targetWidth,
+       height: targetHeight,
+-      loading: attributes.loading ?? "lazy",
++      loading: attributes.loading,
+       decoding: attributes.decoding ?? "async"
+     };
+   },

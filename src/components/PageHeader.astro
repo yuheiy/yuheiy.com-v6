@@ -24,12 +24,7 @@ const Title = isHome ? 'p' : 'h1';
         href={isHome ? null : '/'}
         title={isHome ? null : 'ホームに戻る'}
       >
-        <Image
-          class="w-7 rounded-full ring-1 ring-dynamic"
-          src={faviconImage}
-          alt=""
-          loading="eager"
-        />
+        <Image class="w-7 rounded-full ring-1 ring-dynamic" src={faviconImage} alt="" />
         {SITE_TITLE}
       </a>
     </Logo>
