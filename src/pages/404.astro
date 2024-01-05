@@ -11,14 +11,14 @@ searchURL.searchParams.set('q', `site:${Astro.site!.host}`);
 <Layout is404 title={title}>
   <PageHeader title={title} slot="header" />
 
-  <div class="prose wrapper">
+  <main class="prose wrapper">
     <p>
       <a data-internet-archive-link href={`https://web.archive.org/web/*/${Astro.site}`}
         >インターネットアーカイブ</a
       >を参照するか、<a href={searchURL}>サイト内を検索する</a
       >と、お探しのページが見つかるかもしれません。
     </p>
-  </div>
+  </main>
 </Layout>
 
 <script>

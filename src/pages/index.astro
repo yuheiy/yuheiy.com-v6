@@ -146,34 +146,36 @@ const blogEntries = (await getCollection('blog')).toSorted(
     </div>
   </PageHeader>
 
-  <section class="wrapper">
-    <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">主な投稿</h2>
+  <main>
+    <section class="wrapper">
+      <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">主な投稿</h2>
 
-    <DetailsList items={primaryEntries} />
-  </section>
+      <DetailsList items={primaryEntries} />
+    </section>
 
-  <div class="my-16 border-t"></div>
+    <div class="my-16 border-t"></div>
 
-  <section class="wrapper">
-    <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
+    <section class="wrapper">
+      <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
 
-    <DetailsList items={projects} />
-  </section>
+      <DetailsList items={projects} />
+    </section>
 
-  <div class="my-16 border-t"></div>
+    <div class="my-16 border-t"></div>
 
-  <section class="wrapper">
-    <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
+    <section class="wrapper">
+      <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
 
-    <DetailsList
-      items={blogEntries.slice(0, 3).map((entry) => ({
-        title: entry.data.title,
-        link: `/${entry.slug}`,
-        meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
-          ${dayjs(entry.data.publishDate).tz().format('LL')}
-        </time>`,
-      }))}
-      ordered={true}
-    />
-  </section>
+      <DetailsList
+        items={blogEntries.slice(0, 3).map((entry) => ({
+          title: entry.data.title,
+          link: `/${entry.slug}`,
+          meta: `<time datetime="${dayjs(entry.data.publishDate).tz().toISOString()}">
+            ${dayjs(entry.data.publishDate).tz().format('LL')}
+          </time>`,
+        }))}
+        ordered={true}
+      />
+    </section>
+  </main>
 </Layout>

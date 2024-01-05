@@ -15,7 +15,7 @@ const blogEntries = (await getCollection('blog')).toSorted(
 <Layout title={title}>
   <PageHeader title={title} slot="header" />
 
-  <div class="wrapper">
+  <main class="wrapper">
     <DetailsList
       items={blogEntries.map((entry) => ({
         title: entry.data.title,
@@ -26,5 +26,5 @@ const blogEntries = (await getCollection('blog')).toSorted(
       }))}
       ordered={true}
     />
-  </div>
+  </main>
 </Layout>
