@@ -5,9 +5,8 @@ import { defineConfig } from 'astro/config';
 import { toString } from 'mdast-util-to-string';
 import type { Pluggable } from 'unified';
 import { select } from 'unist-util-select';
-import { visit } from 'unist-util-visit';
 
-const remarkInjectDescription = (() => {
+const remarkInjectDescription: Pluggable = () => {
   return (tree, { data }) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (!(data.astro as any).frontmatter.description) {
@@ -16,33 +15,7 @@ const remarkInjectDescription = (() => {
       (data.astro as any).frontmatter.description = toString(firstParagraph);
     }
   };
-}) satisfies Pluggable;
-
-const rehypeImageAttributesOverride = (() => {
-  return (tree) => {
-    visit(
-      tree,
-      {
-        type: 'mdxJsxFlowElement',
-        name: 'Image',
-      },
-      (node) => {
-        const isLoadingAttributeSet = node.attributes.some(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (attribute: any) => attribute.name === 'loading',
-        );
-
-        if (!isLoadingAttributeSet) {
-          node.attributes.push({
-            type: 'mdxJsxAttribute',
-            name: 'loading',
-            value: 'eager',
-          });
-        }
-      },
-    );
-  };
-}) satisfies Pluggable;
+};
 
 // https://astro.build/config
 export default defineConfig({
@@ -60,7 +33,6 @@ export default defineConfig({
   integrations: [
     mdx({
       remarkPlugins: [remarkInjectDescription],
-      rehypePlugins: [rehypeImageAttributesOverride],
     }),
     sitemap(),
     tailwind(),
