@@ -1,6 +1,7 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
+import invariant from 'tiny-invariant';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 export async function GET(context: APIContext) {
@@ -8,10 +9,12 @@ export async function GET(context: APIContext) {
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
   );
 
+  invariant(context.site);
+
   return rss({
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    site: context.site!.toString(),
+    site: context.site,
     items: await Promise.all(
       blogEntries.map(async (entry) => {
         const { remarkPluginFrontmatter } = await entry.render();
