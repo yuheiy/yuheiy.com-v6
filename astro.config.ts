@@ -8,9 +8,8 @@ import { select } from 'unist-util-select';
 
 const remarkInjectDescription: Pluggable = () => {
   return (tree, { data }) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if (!(data.astro as any).frontmatter.description) {
-      const firstParagraph = select('paragraph', tree);
+    const firstParagraph = select('paragraph', tree);
+    if (firstParagraph) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (data.astro as any).frontmatter.description = toString(firstParagraph);
     }
