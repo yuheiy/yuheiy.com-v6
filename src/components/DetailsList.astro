@@ -8,15 +8,12 @@ export interface DetailsListItem {
 
 interface Props {
   items: DetailsListItem[];
-  ordered?: boolean | undefined;
 }
 
-const { items, ordered = false } = Astro.props;
-
-const Component = ordered ? 'ol' : 'ul';
+const { items } = Astro.props;
 ---
 
-<Component class="space-y-10">
+<ol class="space-y-10">
   {
     items.map((item) => (
       <li class="space-y-[0.125rem]">
@@ -28,4 +25,4 @@ const Component = ordered ? 'ol' : 'ul';
       </li>
     ))
   }
-</Component>
+</ol>

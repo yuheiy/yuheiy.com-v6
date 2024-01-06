@@ -153,7 +153,6 @@ const blogEntries = (await getCollection('blog')).toSorted(
           link: `/${entry.slug}`,
           meta: renderDateHtml(entry.data.pubDate),
         }))}
-        ordered={true}
       />
     </section>
   </main>
