@@ -10,7 +10,7 @@ import { renderDateHtml, renderProjectDateRangeHtml } from '../lib/date-time-for
 
 const everylayoutEntry = await getEntry('blog', '20211011-publication-of-everylayout');
 
-const primaryEntries = [
+const primaryItems = [
   {
     title: 'Tailwind CSS実践入門 ～まず作ってから、あとで共通化する',
     link: 'https://gihyo.jp/list/group/Tailwind-CSS%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80-%EF%BD%9E%E3%81%BE%E3%81%9A%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%8B%E3%82%89-%E3%81%82%E3%81%A8%E3%81%A7%E5%85%B1%E9%80%9A%E5%8C%96%E3%81%99%E3%82%8B',
@@ -68,7 +68,7 @@ function toPrimaryItem(entry: CollectionEntry<'blog'>): DetailsListItem {
   };
 }
 
-const projects = [
+const projectItems = [
   {
     title: 'sdenv',
     link: 'https://github.com/yuheiy/sdenv',
@@ -131,7 +131,7 @@ const blogEntries = (await getCollection('blog')).toSorted(
     <section class="wrapper">
       <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">主な投稿</h2>
 
-      <DetailsList items={primaryEntries} />
+      <DetailsList items={primaryItems} />
     </section>
 
     <div class="my-16 border-t"></div>
@@ -139,7 +139,7 @@ const blogEntries = (await getCollection('blog')).toSorted(
     <section class="wrapper">
       <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
 
-      <DetailsList items={projects} />
+      <DetailsList items={projectItems} />
     </section>
 
     <div class="my-16 border-t"></div>
