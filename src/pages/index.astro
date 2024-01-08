@@ -129,7 +129,11 @@ const blogEntries = (await getCollection('blog')).toSorted(
 
   <main>
     <section class="wrapper">
-      <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">主な投稿</h2>
+      <h2
+        class="mb-12 text-lg font-bold leading-tight text-dynamic-muted [hanging-punctuation:none]"
+      >
+        主な投稿
+      </h2>
 
       <DetailsList items={primaryItems} />
     </section>
@@ -137,7 +141,11 @@ const blogEntries = (await getCollection('blog')).toSorted(
     <div class="my-16 border-t"></div>
 
     <section class="wrapper">
-      <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
+      <h2
+        class="mb-12 text-lg font-bold leading-tight text-dynamic-muted [hanging-punctuation:none]"
+      >
+        プロジェクト
+      </h2>
 
       <DetailsList items={projectItems} />
     </section>
@@ -145,7 +153,11 @@ const blogEntries = (await getCollection('blog')).toSorted(
     <div class="my-16 border-t"></div>
 
     <section class="wrapper">
-      <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
+      <h2
+        class="mb-12 text-lg font-bold leading-tight text-dynamic-muted [hanging-punctuation:none]"
+      >
+        最近のブログ
+      </h2>
 
       <DetailsList
         items={blogEntries.slice(0, 3).map((entry) => ({

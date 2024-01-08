@@ -20,15 +20,18 @@
   }
 
   h2 {
+    hanging-punctuation: none;
     font-weight: bold;
     font-size: theme(fontSize.2xl);
     line-height: theme(lineHeight.tight);
     font-kerning: normal;
     font-feature-settings: 'palt';
     word-break: auto-phrase;
+    text-wrap: pretty;
   }
 
   h3 {
+    hanging-punctuation: none;
     font-weight: bold;
     font-size: theme(fontSize.lg);
     line-height: theme(lineHeight.tight);
