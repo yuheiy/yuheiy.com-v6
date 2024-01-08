@@ -58,15 +58,15 @@ Firefoxにおいては、`accent-color`が指定されている場合、その�
 
 これらの二重の宣言はブラウザで次のように動作する。
 
-|         | `outline: auto`                  | `outline: auto -webkit-focus-ring-color` |
-| ------- | -------------------------------- | ---------------------------------------- |
-| Chrome  | ❌（`currentcolor`で描画される） | ✅（カスケードによって優先される）       |
-| Firefox | ✅                               | ❌（パースエラーのため無視される）       |
-| Safari  | ✅                               | ✅（カスケードによって優先される）       |
+|         | `outline: auto`                      | `outline: auto -webkit-focus-ring-color` |
+| ------- | ------------------------------------ | ---------------------------------------- |
+| Chrome  | ❌（`currentcolor`で描画される）     | ✅（カスケードによって優先される）       |
+| Firefox | ✅                                   | ❌（パースエラーとなり無視される）       |
+| Safari  | ✅（カスケードによって打ち消される） | ✅（カスケードによって優先される）       |
 
 デフォルトのスタイルを適用するためには、Chromeでは`outline: auto -webkit-focus-ring-color`を使用する必要がある。このやり方の場合、カスケードによって前者の`outline: auto`は打ち消されて、後者の宣言が優先される。
 
-Firefoxでは`outline: auto`を使用する必要がある。後者の`outline: auto -webkit-focus-ring-color`はパースエラーになって無視されて、前者の宣言が適用される。
+Firefoxでは`outline: auto`を使用する必要がある。後者の`outline: auto -webkit-focus-ring-color`はパースエラーとなり無視されて、前者の宣言が適用される。
 
 Safariではそのどちらの宣言を使用してもデフォルトのスタイルが適用される。標準仕様を採用するという意味では、前者の`outline: auto`を使用するのが好ましいが、このやり方では、カスケードによって後者の`outline: auto -webkit-focus-ring-color`が優先されることになる。
 
