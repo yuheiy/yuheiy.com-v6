@@ -36,4 +36,9 @@ export default defineConfig({
     sitemap(),
     tailwind(),
   ],
+  vite: {
+    define: {
+      'import.meta.vitest': 'undefined',
+    },
+  },
 });
