@@ -6,7 +6,7 @@ import type { DetailsListItem } from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import Layout from '../layouts/Layout.astro';
-import { renderDateHtml, renderProjectDateRangeHtml } from '../lib/date-time-formatter';
+import { renderDateToHtml, renderYearMonthRangeToHtml } from '../lib/render-date';
 
 const everylayoutEntry = await getEntry('blog', '20211011-publication-of-everylayout');
 
@@ -72,39 +72,39 @@ const projectItems = [
   {
     title: 'sdenv',
     link: 'https://github.com/yuheiy/sdenv',
-    meta: renderProjectDateRangeHtml('2023-07'),
+    meta: renderYearMonthRangeToHtml({ year: 2023, month: 7 }),
     description:
       'ウェブサイト構築のためのベストプラクティスに基づいて構成された、Astro、Tailwind CSS、Alpine.jsを中心とした開発環境。',
   },
   {
     title: 'wordpress-starter',
     link: 'https://github.com/yuheiy/wordpress-starter',
-    meta: renderProjectDateRangeHtml('2020-08', '2022-10'),
+    meta: renderYearMonthRangeToHtml({ year: 2020, month: 8 }, { year: 2022, month: 10 }),
     description: 'WordPressテーマ構築のための開発環境。',
   },
   {
     title: 'accrefs',
     link: 'https://accrefs.jp/',
-    meta: renderProjectDateRangeHtml('2019-09'),
+    meta: renderYearMonthRangeToHtml({ year: 2019, month: 9 }),
     description:
       'ウェブアクセシビリティの参考資料をまとめたサイト。日本語の資料を中心にリンク数は200を超える。サイトのデザインおよび実装に携わる。有志のメンバーにより制作・運営されている。',
   },
   {
     title: 'shifted',
     link: 'https://github.com/yuheiy/shifted',
-    meta: renderProjectDateRangeHtml('2019-05', '2023-07'),
+    meta: renderYearMonthRangeToHtml({ year: 2019, month: 5 }, { year: 2023, month: 7 }),
     description: '静的サイト構築のための開発環境。',
   },
   {
     title: 'シフトブレイン／スタンダードデザインユニット',
     link: 'https://standard.shiftbrain.com/',
-    meta: renderProjectDateRangeHtml('2018-10', '2020-06'),
+    meta: renderYearMonthRangeToHtml({ year: 2018, month: 10 }, { year: 2020, month: 6 }),
     description: '自社で所属していたチームのウェブサイト。',
   },
   {
     title: 'yuhei blog',
     link: 'https://yuheiy.hatenablog.com/',
-    meta: renderProjectDateRangeHtml('2015-10', '2020-11'),
+    meta: renderYearMonthRangeToHtml({ year: 2015, month: 10 }, { year: 2020, month: 11 }),
     description: '過去に更新していた個人ブログ。',
   },
 ] satisfies DetailsListItem[];
@@ -163,7 +163,7 @@ const blogEntries = (await getCollection('blog')).toSorted(
         items={blogEntries.slice(0, 3).map((entry) => ({
           title: entry.data.title,
           link: `/${entry.slug}`,
-          meta: renderDateHtml(entry.data.pubDate),
+          meta: renderDateToHtml(entry.data.pubDate),
         }))}
       />
     </section>
