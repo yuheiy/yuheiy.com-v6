@@ -7,7 +7,11 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
 });
 
 export function renderDateToHtml(date: Date) {
-  return `<time datetime="${date.toISOString()}">${dateFormatter.format(date)}</time>`;
+  let html = '';
+  html += `<time datetime="${date.toISOString()}">`;
+  html += dateFormatter.format(date);
+  html += `</time>`;
+  return html;
 }
 
 if (import.meta.vitest) {
@@ -24,20 +28,28 @@ interface YearMonth {
   month: number;
 }
 
-function convertYearMonthToDate({ year, month }: YearMonth) {
-  return new Date(Date.UTC(year, month - 1));
-}
-
 const yearMonthFormatter = new Intl.DateTimeFormat(locale, {
   year: 'numeric',
   month: 'long',
 });
 
+export function renderYearMonthRangeToHtml(startYearMonth: YearMonth, endYearMonth?: YearMonth) {
+  const startHtml = renderYearMonthToHtml(startYearMonth);
+  const parts = [startHtml, '&mdash;'];
+  if (endYearMonth) {
+    const endHtml = renderYearMonthToHtml(endYearMonth);
+    parts.push(endHtml);
+  }
+  return parts.join(' ');
+}
+
 function renderYearMonthToHtml(yearMonth: YearMonth) {
   const date = convertYearMonthToDate(yearMonth);
-  return `<time datetime="${date.toISOString().slice(0, 7)}">${yearMonthFormatter.format(
-    date,
-  )}</time>`;
+  let html = '';
+  html += `<time datetime="${date.toISOString().slice(0, 7)}">`;
+  html += yearMonthFormatter.format(date);
+  html += `</time>`;
+  return html;
 }
 
 if (import.meta.vitest) {
@@ -49,10 +61,6 @@ if (import.meta.vitest) {
   });
 }
 
-export function renderYearMonthRangeToHtml(startYearMonth: YearMonth, endYearMonth?: YearMonth) {
-  const parts = [renderYearMonthToHtml(startYearMonth), '&mdash;'];
-  if (endYearMonth) {
-    parts.push(renderYearMonthToHtml(endYearMonth));
-  }
-  return parts.join(' ');
+function convertYearMonthToDate({ year, month }: YearMonth) {
+  return new Date(Date.UTC(year, month - 1));
 }
