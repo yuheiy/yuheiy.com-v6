@@ -6,7 +6,8 @@ import type { DetailsListItem } from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import Layout from '../layouts/Layout.astro';
-import { renderDateToHtml, renderYearMonthRangeToHtml } from '../lib/render-date';
+import { renderDateToHtml } from '../lib/render-date-to-html';
+import { renderYearMonthRangeToHtml } from '../lib/render-year-month-range-to-html';
 
 const everylayoutEntry = await getEntry('blog', '20211011-publication-of-everylayout');
 
