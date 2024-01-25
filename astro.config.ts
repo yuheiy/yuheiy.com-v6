@@ -4,13 +4,13 @@ import tailwind from '@astrojs/tailwind';
 import { defineConfig } from 'astro/config';
 import { toString } from 'mdast-util-to-string';
 import type { Pluggable } from 'unified';
-import { select } from 'unist-util-select';
+import { select, type Node } from 'unist-util-select';
 
 const remarkInjectDescription: Pluggable = () => {
   return (tree, { data }) => {
-    const firstParagraph = select('paragraph', tree);
+    const firstParagraph = select('paragraph', tree as Node);
     if (firstParagraph) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
       (data.astro as any).frontmatter.description = toString(firstParagraph);
     }
   };

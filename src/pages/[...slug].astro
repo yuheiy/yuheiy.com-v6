@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 import { renderDateToHtml } from '../lib/render-date-to-html';
+import invariant from '../lib/tiny-invariant';
 
 export async function getStaticPaths() {
   return (await getCollection('blog')).map((entry) => ({
@@ -11,8 +12,11 @@ export async function getStaticPaths() {
   }));
 }
 
+type Props = Awaited<ReturnType<typeof getStaticPaths>>[number]['props'];
+
 const { entry } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await entry.render();
+invariant(typeof remarkPluginFrontmatter.description === 'string');
 ---
 
 <Layout
