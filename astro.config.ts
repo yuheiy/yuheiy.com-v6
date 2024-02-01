@@ -19,16 +19,7 @@ const remarkInjectDescription: Pluggable = () => {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://yuheiy.com',
-  compressHTML: false,
   trailingSlash: 'never',
-  build: {
-    format: 'preserve',
-  },
-  markdown: {
-    shikiConfig: {
-      theme: 'css-variables',
-    },
-  },
   integrations: [
     mdx({
       remarkPlugins: [remarkInjectDescription],
@@ -36,9 +27,18 @@ export default defineConfig({
     sitemap(),
     tailwind({ nesting: true }),
   ],
+  compressHTML: false,
   vite: {
     define: {
       'import.meta.vitest': 'undefined',
+    },
+  },
+  build: {
+    format: 'preserve',
+  },
+  markdown: {
+    shikiConfig: {
+      theme: 'css-variables',
     },
   },
 });
