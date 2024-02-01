@@ -20,10 +20,14 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   rules: {
+    '@typescript-eslint/consistent-type-exports': 'error',
     '@typescript-eslint/consistent-type-imports': 'error',
     '@typescript-eslint/no-import-type-side-effects': 'error',
+
     // TypeScript already catches unused variables
     '@typescript-eslint/no-unused-vars': 'off',
+
+    'import/no-named-as-default': 'off',
     'import/no-unresolved': [
       'error',
       {
@@ -40,6 +44,7 @@ module.exports = {
         },
       },
     ],
+
     // use prettier-plugin-tailwindcss for class sorting
     'tailwindcss/classnames-order': 'off',
   },

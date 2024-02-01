@@ -22,7 +22,7 @@ export default defineConfig({
   compressHTML: false,
   trailingSlash: 'never',
   build: {
-    format: 'file',
+    format: 'preserve',
   },
   markdown: {
     shikiConfig: {
@@ -34,7 +34,7 @@ export default defineConfig({
       remarkPlugins: [remarkInjectDescription],
     }),
     sitemap(),
-    tailwind(),
+    tailwind({ nesting: true }),
   ],
   vite: {
     define: {
