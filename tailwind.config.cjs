@@ -39,31 +39,6 @@ const cssFiles = plugin(({ addBase, addComponents, addUtilities }) => {
 });
 
 const dynamicColors = (() => {
-  return plugin.withOptions(
-    function (options) {
-      const styles = {
-        ':root': {
-          ...generateDeclarations(options.light),
-          '@media (prefers-color-scheme: dark)': {
-            ...generateDeclarations(options.dark),
-          },
-        },
-      };
-
-      return function ({ addBase }) {
-        addBase(styles);
-      };
-    },
-    function (options) {
-      const settings = extend(true, {}, options.light, options.dark);
-      return {
-        theme: {
-          extend: generateTheme(settings),
-        },
-      };
-    },
-  );
-
   function generateDeclarations(settings) {
     const declarations = {};
     walk(settings, []);
@@ -104,6 +79,31 @@ const dynamicColors = (() => {
       }
     }
   }
+
+  return plugin.withOptions(
+    function (options) {
+      const styles = {
+        ':root': {
+          ...generateDeclarations(options.light),
+          '@media (prefers-color-scheme: dark)': {
+            ...generateDeclarations(options.dark),
+          },
+        },
+      };
+
+      return function ({ addBase }) {
+        addBase(styles);
+      };
+    },
+    function (options) {
+      const settings = extend(true, {}, options.light, options.dark);
+      return {
+        theme: {
+          extend: generateTheme(settings),
+        },
+      };
+    },
+  );
 })();
 
 /** @type {import('tailwindcss').Config} */

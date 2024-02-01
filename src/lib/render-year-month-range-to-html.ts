@@ -5,22 +5,16 @@ interface YearMonth {
   month: number;
 }
 
+function convertYearMonthToDate({ year, month }: YearMonth) {
+  return new Date(Date.UTC(year, month - 1));
+}
+
 const locale = `${SITE_LANG}-${SITE_REGION}`;
 
 const yearMonthFormatter = new Intl.DateTimeFormat(locale, {
   year: 'numeric',
   month: 'long',
 });
-
-export function renderYearMonthRangeToHtml(startYearMonth: YearMonth, endYearMonth?: YearMonth) {
-  const startHtml = renderYearMonthToHtml(startYearMonth);
-  const parts = [startHtml, '&mdash;'];
-  if (endYearMonth) {
-    const endHtml = renderYearMonthToHtml(endYearMonth);
-    parts.push(endHtml);
-  }
-  return parts.join(' ');
-}
 
 function renderYearMonthToHtml(yearMonth: YearMonth) {
   const date = convertYearMonthToDate(yearMonth);
@@ -40,6 +34,12 @@ if (import.meta.vitest) {
   });
 }
 
-function convertYearMonthToDate({ year, month }: YearMonth) {
-  return new Date(Date.UTC(year, month - 1));
+export function renderYearMonthRangeToHtml(startYearMonth: YearMonth, endYearMonth?: YearMonth) {
+  const startHtml = renderYearMonthToHtml(startYearMonth);
+  const parts = [startHtml, '&mdash;'];
+  if (endYearMonth) {
+    const endHtml = renderYearMonthToHtml(endYearMonth);
+    parts.push(endHtml);
+  }
+  return parts.join(' ');
 }
