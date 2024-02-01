@@ -16,7 +16,11 @@ type Props = Awaited<ReturnType<typeof getStaticPaths>>[number]['props'];
 
 const { entry } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await entry.render();
-invariant(typeof remarkPluginFrontmatter.description === 'string');
+
+invariant(
+  typeof remarkPluginFrontmatter.description === 'string' ||
+    typeof remarkPluginFrontmatter.description === 'undefined',
+);
 ---
 
 <Layout

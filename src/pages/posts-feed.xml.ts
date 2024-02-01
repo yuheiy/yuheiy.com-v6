@@ -18,7 +18,12 @@ export async function GET(context: APIContext) {
     items: await Promise.all(
       blogEntries.map(async (entry) => {
         const { remarkPluginFrontmatter } = await entry.render();
-        invariant(typeof remarkPluginFrontmatter.description === 'string');
+
+        invariant(
+          typeof remarkPluginFrontmatter.description === 'string' ||
+            typeof remarkPluginFrontmatter.description === 'undefined',
+        );
+
         return {
           link: `/${entry.slug}`,
           title: entry.data.title,
