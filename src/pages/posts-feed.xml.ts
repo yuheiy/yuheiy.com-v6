@@ -5,9 +5,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import invariant from '../lib/tiny-invariant';
 
 export async function GET(context: APIContext) {
-  const blogEntries = (await getCollection('blog')).toSorted(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-  );
+  const blogEntries = (await getCollection('blog'))
+    .toSorted((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+    .toReversed();
 
   invariant(context.site);
 
