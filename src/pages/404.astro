@@ -1,12 +1,12 @@
 ---
+import { invariant } from 'outvariant';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
-import invariant from '../lib/tiny-invariant';
 
 const title = 'ページが存在しません';
 
 const searchURL = new URL('https://www.google.com/search');
-invariant(Astro.site);
+invariant(Astro.site, 'Invariant failed');
 searchURL.searchParams.set('q', `site:${Astro.site.host}`);
 ---
 

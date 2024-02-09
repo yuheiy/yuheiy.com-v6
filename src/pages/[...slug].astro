@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
+import { invariant } from 'outvariant';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 import { renderDateToHtml } from '../lib/render-date-to-html';
-import invariant from '../lib/tiny-invariant';
 
 export async function getStaticPaths() {
   return (await getCollection('blog')).map((entry) => ({
@@ -20,6 +20,7 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
 invariant(
   typeof remarkPluginFrontmatter.description === 'string' ||
     typeof remarkPluginFrontmatter.description === 'undefined',
+  'Invariant failed',
 );
 ---
 

@@ -38,6 +38,7 @@
     "just-extend": "6.2.0",
     "just-safe-set": "4.2.1",
     "mdast-util-to-string": "4.0.0",
+    "outvariant": "1.4.2",
     "patch-package": "8.0.0",
     "prettier": "3.2.4",
     "prettier-plugin-astro": "0.13.0",
