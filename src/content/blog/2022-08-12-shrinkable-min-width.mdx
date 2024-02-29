@@ -21,11 +21,11 @@ import _1Image from './assets/2022-08-12-shrinkable-min-width/1.png';
   <Image src={_1Image} alt="" style="width: calc(840/2/16*1rem);" />
 </figure>
 
-ボタンの幅をコンテナに収めるためには`max-width: 100%`が使えそうにも思えるが、`min-width`の方が優先されてしまうので機能しない。そこで、`min-width`の値として`max()`を使うようにする。
+ボタンの幅をコンテナに収めるためには`max-width: 100%`が使えそうにも思えるが、`min-width`の方が優先されてしまうので機能しない。そこで、`min-width`の値として`min()`を使うようにする。
 
 ```css
 button {
-  min-width: max(10em, 100%);
+  min-width: min(10em, 100%);
 }
 ```
 
@@ -43,3 +43,7 @@ button {
 		<a href="https://codepen.io/yuheiy">@yuheiy</a>) on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+---
+
+**後日追記:** `min()`とすべきところを誤って`max()`と表記してしまっていたことを[ご指摘いただいた](https://twitter.com/yuito_miki/status/1763156712079700377)ため、内容を修正した。
