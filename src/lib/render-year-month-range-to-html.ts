@@ -36,7 +36,7 @@ if (import.meta.vitest) {
 
 export function renderYearMonthRangeToHtml(startYearMonth: YearMonth, endYearMonth?: YearMonth) {
   const startHtml = renderYearMonthToHtml(startYearMonth);
-  const parts = [startHtml, '&mdash;'];
+  const parts = [startHtml, '&ndash;'];
   if (endYearMonth) {
     const endHtml = renderYearMonthToHtml(endYearMonth);
     parts.push(endHtml);
