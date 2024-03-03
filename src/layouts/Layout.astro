@@ -75,7 +75,7 @@ if (!is404) {
     <meta property="og:site_name" content={SITE_TITLE} />
     <meta property="og:locale" content={`${SITE_LANG}_${SITE_REGION}`} />
 
-    <link rel="alternate" href="/posts-feed.xml" type="application/rss+xml" />
+    <link rel="alternate" href="/feed" type="application/rss+xml" />
     <link rel="apple-touch-icon" href={appleTouchIconImage.src} />
     {canonicalURL && <link rel="canonical" href={canonicalURL} />}
     <link rel="icon" href={faviconImage.src} type="image/svg+xml" />
@@ -93,7 +93,7 @@ if (!is404) {
       <div class="wrapper space-y-4">
         <p>
           <a href="/">ホーム</a>&#x2003;<a href="/blog">ブログ</a>&#x2003;<a
-            href="/posts-feed.xml"
+            href="/feed"
             type="application/rss+xml">RSS</a
           >
         </p>
