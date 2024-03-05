@@ -1,0 +1,45 @@
+---
+title: Object.fromEntriesを活用してArray#reduceを代替する
+pubDate: 2024-03-16T06:05:00.000+09:00
+---
+
+JavaScriptにおいて、ある配列をもとにして別のオブジェクトを作成する場合には[`Array#reduce`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)を使用することが多い。
+
+```javascript
+import assert from 'node:assert';
+
+const input = ['foo', 'bar', 'baz'];
+
+const result = input.reduce((accumulator, currentValue) => {
+  accumulator[currentValue] = capitalize(currentValue);
+  return accumulator;
+}, {});
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+assert.deepStrictEqual(result, { foo: 'Foo', bar: 'Bar', baz: 'Baz' });
+```
+
+しかし例のように、単にキーと値の組み合わせにマッピングするだけなら、あえて`Array#reduce`を使うまでもない。代わりに[`Object.fromEntries`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries)を使えば、記述するコードをもっとシンプルにできる。
+
+```javascript
+import assert from 'node:assert';
+
+const input = ['foo', 'bar', 'baz'];
+
+const result = Object.fromEntries(input.map((value) => [value, capitalize(value)]));
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+assert.deepStrictEqual(result, { foo: 'Foo', bar: 'Bar', baz: 'Baz' });
+```
+
+まず配列を「キーと値のペアからなる配列」に変換してから、それを`Object.fromEntries`に渡すことでオブジェクト化できる。
+
+`Object.fromEntries`は[`Object.entries`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/entries)の対になるメソッドであり、「キーと値のペアからなる配列」をオブジェクトに変換する。`Object.entries`はその逆に、オブジェクトを「キーと値のペアからなる配列」に変換する。
+
+ついでに、TypeScriptでは`Array#reduce`を使うと型の取り扱いがやや煩雑になるが、`Object.fromEntries()`を使った記述ではそのような問題が起こらない。
