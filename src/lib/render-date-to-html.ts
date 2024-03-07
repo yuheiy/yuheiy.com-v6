@@ -4,6 +4,7 @@ const locale = `${SITE_LANG}-${SITE_REGION}`;
 
 const dateFormatter = new Intl.DateTimeFormat(locale, {
   dateStyle: 'long',
+  timeZone: 'Asia/Tokyo',
 });
 
 export function renderDateToHtml(date: Date) {

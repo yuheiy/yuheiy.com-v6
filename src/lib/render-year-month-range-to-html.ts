@@ -14,6 +14,7 @@ const locale = `${SITE_LANG}-${SITE_REGION}`;
 const yearMonthFormatter = new Intl.DateTimeFormat(locale, {
   year: 'numeric',
   month: 'long',
+  timeZone: 'Asia/Tokyo',
 });
 
 function renderYearMonthToHtml(yearMonth: YearMonth) {
