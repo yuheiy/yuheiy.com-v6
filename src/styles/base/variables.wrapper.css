@@ -1,14 +1,12 @@
 :root {
   --wrapper-inline-size: 46rem;
-  --wrapper-margin-min: 1.25rem;
-  --wrapper-margin-max: 6rem;
-  --wrapper-margin-without-safe-area: clamp(
-    var(--wrapper-margin-min),
+  --_wrapper-margin-without-safe-area: clamp(
+    1.25rem,
     max((100cqi - var(--wrapper-inline-size)) / 2, 5vw),
-    var(--wrapper-margin-max)
+    6rem
   );
-  --wrapper-margin-left: calc(var(--wrapper-margin-without-safe-area) + env(safe-area-inset-left));
+  --wrapper-margin-left: calc(var(--_wrapper-margin-without-safe-area) + env(safe-area-inset-left));
   --wrapper-margin-right: calc(
-    var(--wrapper-margin-without-safe-area) + env(safe-area-inset-right)
+    var(--_wrapper-margin-without-safe-area) + env(safe-area-inset-right)
   );
 }
