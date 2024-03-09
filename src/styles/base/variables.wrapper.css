@@ -1,6 +1,6 @@
 :root {
   --wrapper-inline-size: 46rem;
-  --wrapper-margin-min: 1rem;
+  --wrapper-margin-min: 1.25rem;
   --wrapper-margin-max: 6rem;
   --wrapper-margin-without-safe-area: clamp(
     var(--wrapper-margin-min),
