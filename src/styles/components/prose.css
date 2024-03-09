@@ -50,17 +50,9 @@
     font-size: theme(fontSize.sm);
     line-height: theme(lineHeight.tight);
 
-    /* 6rem + 46rem + 6rem + 1rem */
-    @media (59rem <= width) {
-      margin-inline-start: calc(env(safe-area-inset-left) + var(--wrapper-margin-max) * -1);
-      margin-inline-end: calc(
-        (
-            (100vw - 1rem) -
-              (var(--wrapper-inline-size) + env(safe-area-inset-right) + var(--wrapper-margin-max))
-          ) * -1
-      );
-      padding-inline-start: calc(env(safe-area-inset-left) + var(--wrapper-margin-max));
-      padding-inline-end: calc(env(safe-area-inset-right) + var(--wrapper-margin-max));
+    /* 6rem + 46rem + 6rem */
+    @container root (width > 58rem) {
+      margin-inline-end: calc((100cqi - 100% - var(--wrapper-margin-left)) * -1);
     }
   }
 

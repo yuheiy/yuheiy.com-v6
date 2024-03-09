@@ -4,7 +4,7 @@
   --wrapper-margin-max: 6rem;
   --wrapper-margin-without-safe-area: clamp(
     var(--wrapper-margin-min),
-    max((100% - var(--wrapper-inline-size)) / 2, 5vw),
+    max((100cqi - var(--wrapper-inline-size)) / 2, 5vw),
     var(--wrapper-margin-max)
   );
   --wrapper-margin-left: calc(var(--wrapper-margin-without-safe-area) + env(safe-area-inset-left));
