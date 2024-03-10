@@ -1,7 +1,7 @@
 :root {
   --wrapper-inline-size: 46rem;
   --_wrapper-margin-without-safe-area: clamp(
-    1.25rem,
+    1rem,
     max((100cqi - var(--wrapper-inline-size)) / 2, 5vw),
     6rem
   );
