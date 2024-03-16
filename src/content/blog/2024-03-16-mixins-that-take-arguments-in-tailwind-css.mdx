@@ -1,0 +1,265 @@
+---
+title: Tailwind CSSで引数のあるMixinのような仕組みを作る方法（改）
+pubDate: 2024-03-16T19:10:00.000+09:00
+---
+
+以前、「[Tailwind CSSで引数のあるMixinのような仕組みを作る方法](2022-03-21-mixins-that-take-arguments-in-tailwind-css)」というブログを書いた。しかしその後、調査を重ねていくうちに、以前書いたのとは別のアプローチの方が望ましいと考えるようになったため、改めて書き直すことにした。
+
+またこのブログの内容は、「[『Tailwind CSS実践入門』出版記念イベント](https://pixiv.connpass.com/event/310073/)」で行った僕のLTを基にしたものでもある。
+
+---
+
+Tailwind CSSを使っていると、Sassで言うところのmixinのような仕組みが欲しくなることがたまにある。たとえば次のように、三角形を描画するための定型表現を形式化したいとき。
+
+```scss
+// https://qiita.com/degudegu2510/items/09f34d4b218c9df6bb57
+@mixin triangle($size) {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  width: $size;
+  height: calc(#{$size} / 2 * tan(60deg));
+}
+
+.triangle {
+  @include triangle(100px);
+  background-color: rebeccapurple;
+}
+```
+
+似たようなことを実現するためのやり方はいくつかあるが、今回はこれをTailwind CSSプラグインとして実装してみる。
+
+## 1値の引数を取る仕組み
+
+まず引数を取る仕組みを作るには、プラグインの`matchUtilities`関数を使う。ほかにも`matchComponents`関数や`matchVariant`関数というのもあるが、今回はユーティリティなのでこれが順当である。次のようにして使う。
+
+```js
+const plugin = require('tailwindcss/plugin');
+
+module.exports = {
+  theme: {
+    tabSize: {
+      1: '1',
+      2: '2',
+      4: '4',
+      8: '8',
+    },
+  },
+  plugins: [
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          tab: (value) => ({
+            tabSize: value,
+          }),
+        },
+        { values: theme('tabSize') },
+      );
+    }),
+  ],
+};
+```
+
+例のように実装すると、次のようなクラスが使えるようになる。
+
+```html
+<!-- テーマを参照する例: -->
+<div class="tab-4">
+  <!-- ... -->
+</div>
+
+<!-- arbitrary valuesを使う例: -->
+<div class="tab-[13]">
+  <!-- ... -->
+</div>
+```
+
+```css
+.tab-4 {
+  tab-size: 4;
+}
+
+.tab-\[13\] {
+  tab-size: 13;
+}
+```
+
+これを見ればわかる通り、`matchUtilities`関数のコールバック関数が返すオブジェクトがそのままCSSとして出力されるという仕組みになっている。なのでたとえば、`value`を元にして動的に宣言を組み立てることもできる。
+
+```js
+matchComponents({
+  'auto-grid': (value) => ({
+    display: 'grid',
+    'grid-template-columns': `repeat(auto-fill, minmax(min(${value}, 100%), 1fr))`,
+  }),
+});
+```
+
+ただし、このやり方では引数を一つしか受け取ることができない。そのため、複数の引数に応じた処理をしたい場合には使いづらい。
+
+## 2値の引数を取る仕組み
+
+そこで参考として、Tailwindのコアプラグインの実装を調べてみる。[fontSizeプラグイン](https://tailwindcss.com/docs/font-size)では、次のようにして2値を引数として指定できる。
+
+```html
+<p class="text-base/6 ...">So I started to walk into the water...</p>
+<p class="text-base/7 ...">So I started to walk into the water...</p>
+<p class="text-base/loose ...">So I started to walk into the water...</p>
+```
+
+`base`が`font-size`、`6`/`7`/`loose`が`line-height`である。この実装は次のようになっている。
+
+[`tailwindcss/src/corePlugins.js#L2100-L2120`](https://github.com/tailwindlabs/tailwindcss/blob/master/src/corePlugins.js#L2100-L2120):
+
+```js
+text: (value, { modifier }) => {
+  let [fontSize, options] = Array.isArray(value) ? value : [value]
+
+  if (modifier) {
+    return {
+      'font-size': fontSize,
+      'line-height': modifier,
+    }
+  }
+
+  let { lineHeight, letterSpacing, fontWeight } = isPlainObject(options)
+    ? options
+    : { lineHeight: options }
+
+  return {
+    'font-size': fontSize,
+    ...(lineHeight === undefined ? {} : { 'line-height': lineHeight }),
+    ...(letterSpacing === undefined ? {} : { 'letter-spacing': letterSpacing }),
+    ...(fontWeight === undefined ? {} : { 'font-weight': fontWeight }),
+  }
+},
+```
+
+注目すべきは、関数の第二引数から`modifier`という値を受け取っていること。クラス名のなかのスラッシュの後ろ側の値がこれに対応している。2値を取るプラグインはこれと同じ要領で実現できる。ただそれでも、3値以上の引数が必要になる場合に対応できない。
+
+## 0値以上の引数を取る仕組み
+
+そうした場合、カスタムプロパティを活用すると、3値以上（正確に言えば0値以上）の引数を取ることができる。たとえば、Tailwindでは`transform`プロパティに関するクラスを次のように併せて記述できる。
+
+```html
+<div class="translate-x-4 skew-y-3 scale-75">
+  <!-- ... -->
+</div>
+```
+
+この場合、対応するCSSは次のように生成される。
+
+{/* prettier-ignore */}
+```css
+.translate-x-4, .skew-y-3, .scale-75 {
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate))
+    skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.translate-x-4 {
+  --tw-translate-y: 1rem;
+}
+
+.skew-y-3 {
+  --tw-skew-y: 0.75rem;
+}
+
+.scale-75 {
+  --tw-scale-x: 0.75;
+  --tw-scale-y: 0.75;
+}
+```
+
+通常、`transform`プロパティに複数の座標変換関数を適用するには、マルチクラスの設計では実現しづらい（もっとも昨今では、それぞれに独立したプロパティが利用できるため、必ずしも`transform`プロパティを使用する必要はないが、それは別の話）。しかしTailwindでは、このように値を部分的に挿入できるようにすることで、マルチクラスによって引数のような仕組みを実現している。
+
+同じような仕組みを実装するには、[`transform`プロパティに関するプラグイン](https://github.com/tailwindlabs/tailwindcss/blob/v3.4.1/src/corePlugins.js#L910-L991)や、同様の手法を採用している[`gradientColorStops`プラグイン](https://github.com/tailwindlabs/tailwindcss/blob/v3.4.1/src/corePlugins.js#L1835-L1933)のソースコードを参考にしていただければできるはずだ。
+
+しかし前述の2つの例と異なるのが、この手法では、複数の引数をJavaScript側で同時に受け取って加工するような処理ができないということ。「2値の引数を取る仕組み」では、`value`と`modifier`をJavaScript側で同時に受け取って処理することができたが、この手法では、JavaScript側で値を一つずつ受け取った上で、CSSの中で値の合成が行われることになる。そのため、複数の値の組み合わせに基づいた計算などを行うには、CSS組み込みの機能として表現できる範囲のことしかできない。
+
+たとえば、コミュニティによるプラグインの[tailwindcss-text-scale](https://github.com/matiasngf/tailwindcss-text-scale)では、カスタムプロパティとして2つの数値を受け取った上で、それをCSSの`calc`関数を用いて計算するという実装方法が採用されている。
+
+[`tailwindcss-text-scale/src/index.ts#L58-L87`](https://github.com/matiasngf/tailwindcss-text-scale/blob/63254a98dba6bfe1c5247fbfabca4049bce028a0/src/index.ts#L58-L87):
+
+```js
+addBase({
+  ':root': {
+    [`--${varsPrefix}-screen-max`]: maxScreen.toString(),
+    [`--${varsPrefix}-screen-min`]: minScreen.toString(),
+  },
+  [screenMatcher]: {
+    [`--${varsPrefix}-offset`]: `calc(100vw - var(--${varsPrefix}-screen-min) * 1px)`,
+    [`--${varsPrefix}-screen-difference`]: `calc(
+      var(--${varsPrefix}-screen-max) - var(--${varsPrefix}-screen-min)
+    )`,
+    /* *16 because clamp-percentage is in px and fontSize is in rem */
+    [`--${varsPrefix}-percentage`]: `calc(
+      var(--${varsPrefix}-offset) / var(--${varsPrefix}-screen-difference) * 16
+    )`,
+  },
+  [fontScaleMatcher]: {
+    [`--${varsPrefix}-min-rem`]: `calc(var(--${varsPrefix}-min) * 1rem)`,
+    [`--${varsPrefix}-max-rem`]: `calc(var(--${varsPrefix}-max) * 1rem)`,
+    [`--${varsPrefix}-current-rem`]: `calc(
+      var(--${varsPrefix}-percentage) * (var(--${varsPrefix}-max) -
+      var(--${varsPrefix}-min)) +
+      var(--${varsPrefix}-min-rem)
+    )`,
+    'font-size': clamp
+      ? `clamp(
+      var(--${varsPrefix}-min-rem),
+      var(--${varsPrefix}-current-rem),
+      var(--${varsPrefix}-max-rem)
+    )`
+      : `var(--${varsPrefix}-current-rem)`,
+  },
+});
+```
+
+[`tailwindcss-text-scale/src/index.ts#L92-L122`](https://github.com/matiasngf/tailwindcss-text-scale/blob/63254a98dba6bfe1c5247fbfabca4049bce028a0/src/index.ts#L92-L122):
+
+```js
+matchUtilities(
+  {
+    [`${textScalePrefix}`]: (value, { modifier }) => {
+      if (modifier === null) return {};
+      const clampedUnitMin = unitToRem(value);
+      const clampedUnitMax = unitToRem(modifier);
+
+      return {
+        [`--${varsPrefix}-min`]: clampedUnitMin,
+        [`--${varsPrefix}-max`]: clampedUnitMax,
+      };
+    },
+  },
+  {
+    values: fontSizes,
+    modifiers: fontSizes,
+  },
+);
+
+matchUtilities(
+  {
+    [`${screenScalePrefix}`]: (value, { modifier }) => {
+      if (modifier === null) return {};
+      const clampedUnitMin = parseScreenSize(value);
+      const clampedUnitMax = parseScreenSize(modifier);
+
+      return {
+        [`--${varsPrefix}-screen-min`]: clampedUnitMin,
+        [`--${varsPrefix}-screen-max`]: clampedUnitMax,
+      };
+    },
+  },
+  {
+    values: screens,
+    modifiers: screens,
+  },
+);
+```
