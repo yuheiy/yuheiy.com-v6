@@ -1,0 +1,174 @@
+---
+title: Tailwind CSSにおけるHTMLのコンポーネント化とCSSのコンポーネント化
+pubDate: 2024-03-18T10:35:00.000+09:00
+---
+
+Tailwind CSSにおいて、スタイルの組み合わせを抽象化したいと考えたとき、対処としてはいくつかの方法が考えられる。
+
+もっとも一般的なのは、コンポーネントやパーシャルとして、クラス属性値とHTMLをセットで抽出する方法。
+
+<figure>
+```vue
+<template>
+  <div>
+    <img class="rounded" :src="img" :alt="imgAlt" />
+    <div class="mt-2">
+      <div>
+        <div class="text-xs font-bold uppercase tracking-wider text-slate-600">{{ eyebrow }}</div>
+        <div class="leading-snug font-bold text-slate-700">
+          <a :href="url" class="hover:underline">{{ title }}</a>
+        </div>
+        <div class="mt-2 text-sm text-slate-600">{{ pricing }}</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['img', 'imgAlt', 'eyebrow', 'title', 'pricing', 'url'],
+};
+</script>
+
+````
+
+<figcaption>
+  &mdash; [Extracting components and
+  partials](https://tailwindcss.com/docs/reusing-styles#extracting-components-and-partials)
+</figcaption>
+</figure>
+
+これによってスタイルに関するコードが一元化されるため、新たにCSSを記述せずとも共通化の役割を果たせる。
+
+---
+
+次に、クラスの文字列だけを変数化することで再利用可能にする方法。[shadcn/ui](https://ui.shadcn.com/)では、コンポーネントに適用するクラスの文字列をexportして提供することで、ユーザーがスタイルだけを独立して利用できるようにしている。コンポーネント固有のマークアップやロジックに縛られないことが特徴である。
+
+[`shadcn-ui/ui/templates/next-template/components/ui/button.tsx`](https://github.com/shadcn-ui/ui/blob/shadcn-ui%400.8.0/templates/next-template/components/ui/button.tsx):
+
+```tsx
+const buttonVariants = cva(
+  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive:
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline:
+          "border border-input hover:bg-accent hover:text-accent-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "underline-offset-4 hover:underline text-primary",
+      },
+      size: {
+        default: "h-10 py-2 px-4",
+        sm: "h-9 px-3 rounded-md",
+        lg: "h-11 px-8 rounded-md",
+        icon: "h-10 w-10",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+
+// （中略）
+
+export { Button, buttonVariants }
+````
+
+この方法では、クラスを構成するためのライブラリとして[clsx](https://github.com/lukeed/clsx)や[Class Variance Authority](https://cva.style/docs)、[Tailwind Variants](https://www.tailwind-variants.org/)が用いられる。また、それらに応じた[専用の正規表現をエディタに設定する](https://github.com/paolotiu/tailwind-intellisense-regex-list)ことで、Tailwindのインテリセンスを機能させることができる。
+
+---
+
+もう一つが、自分でCSSを書くという方法。
+
+```html
+<!-- Before extracting a custom class -->
+<button
+  class="rounded-full bg-violet-500 px-5 py-2 font-semibold text-white shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75"
+>
+  Save changes
+</button>
+
+<!-- After extracting a custom class -->
+<button class="btn-primary">Save changes</button>
+```
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn-primary {
+    @apply rounded-full bg-violet-500 px-5 py-2 font-semibold text-white shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75;
+  }
+}
+```
+
+ある意味、これがもっともTailwindらしくないやり方ではあるが、有効になる場面もある。
+
+また似たアプローチとしては、普通にCSSを記述するのではなく、CSSを生成するためのプラグインを作成するという方法もある。これについては以前の僕のブログ「[Tailwind CSSで引数のあるMixinのような仕組みを作る方法（改）](/2024-03-16-mixins-that-take-arguments-in-tailwind-css)」で紹介した。
+
+## HTMLのコンポーネント化とCSSのコンポーネント化
+
+それでは、これらのうちどれを採用すべきか。判断するには、**そのスタイルはマークアップから独立して存在し得るか否か**という観点が重要になる。Tailwindにおいては、HTMLにおけるコンポーネントとCSSにおけるコンポーネントという概念は区別して考えられるからである。
+
+従来のBEM的なアプローチを思い返せば、CSSのためのクラスとHTMLは一対一の関係になっているのが基本だった。
+
+<figure>
+```html
+<div class="author-bio">
+  <img class="author-bio__image" src="https://cdn-images-1.medium.com/max/1600/0*o3c1g40EXj65Fq9k." alt="">
+  <div class="author-bio__content">
+    <h2 class="author-bio__name">Adam Wathan</h2>
+    <p class="author-bio__body">
+      Adam is a rad dude who likes TDD, Active Record, and garlic bread with cheese. He also hosts a decent podcast and has never had a really great haircut.
+    </p>
+  </div>
+</div>
+```
+
+<figcaption>&mdash; [CSS Utility Classes and "Separation of Concerns"](https://adamwathan.me/css-utility-classes-and-separation-of-concerns/)</figcaption>
+</figure>
+
+CSSはこうした決まったHTMLのために記述されるものであって、そこからは独立して存在できないことが意図されている。その場合は1つ目の方法を採用するのが妥当だ。これはHTMLまでまとめてパターン化するものなので、便宜上「HTMLのコンポーネント化」と呼ぶこととする。一般に、ほとんどの場面ではこの選択になるだろう。
+
+一方「CSSのコンポーネント化」と言えるのが、スタイルの組み合わせを一つのクラスとして束ねてしまう3つ目の方法である。これはTailwindにおいては基本的に推奨されないが、しかしTailwind自身が提供しているクラスの中にはこれに該当するものがある。それが[`container`クラス](https://tailwindcss.com/docs/container)である。
+
+Tailwindには、[ITCSSから着想を得て取り入れられたレイヤーの概念がある](https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer)。現代的な仕様で言うところの[Cascade Layers](https://drafts.csswg.org/css-cascade-5/#layering)に近いものである。
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Tailwindから提供されるすべてのクラスは、このbase / components / utilitiesのいずれかのレイヤーに分類されている。ほとんどのクラスはutilitiesレイヤーだが、唯一[`container`クラス](https://tailwindcss.com/docs/container)だけがcomponentsレイヤーに属している。
+
+このcomponentsレイヤーは、スタイルのパターンをクラスとして抽出したものであり、後ろのutilitiesレイヤーのクラスから上書きされることが想定されている。このレイヤリングの考え方はITCSSから影響を受けたものであるが、構成をそのまま継承しているわけではなく、微妙なアレンジが施されている。ITCSSの各レイヤーをTailwindのそれと照合してみると、次のようになる。
+
+| ITCSS          | Tailwind CSS     |
+| -------------- | ---------------- |
+| generic        | base             |
+| elements       | base             |
+| objects        | **components**   |
+| **components** | HTMLテンプレート |
+| utilities      | utilities        |
+
+ここで重要なのが、componentsレイヤーとして指し示される対象が変化していることである。
+
+ITCSSにおけるcomponentsレイヤーとは、特定の役割のために構築された、直接それとわかるようなはっきりとした形を持ったパーツ&mdash;&mdash;普通に言われるところの「コンポーネント」&mdash;&mdash;のことを指している。しかしTailwindにおいては、それはCSSのクラスではなく、HTMLのテンプレートとして表現されることがセオリーだ。つまり、「HTMLをコンポーネント化」したものがそれと対応する。
+
+問題は、Tailwindにおけるcomponentsレイヤーと対応する、ITCSSのobjectsレイヤーとは何かということだ。これはOOCSSの原則である「構造と表層の分離（[Separate structure and skin](https://github.com/stubbornella/oocss/wiki#separate-structure-and-skin)）」から影響されたものであり、ITCSSにおいてはそれは、装飾のない抽象的なパターンだとされている。具体例としては、OOCSSで言うところの[mediaオブジェクト](https://www.stubbornella.org/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/)や、グリッドシステムのカラム、そしてTailwindの`container`クラスのようなもの。実装としては、[inuitcssのobjectsディレクトリ](https://github.com/inuitcss/inuitcss/tree/develop/objects)や、[Every Layoutのレイアウトプリミティブ](https://every-layout.dev/layouts/)なども参考にできるだろう。
+
+この両者の重要な差異は、前者はHTMLの構造を規定するが、後者は必ずしもそうではないという点である。たとえば、ボタンというUI要素は前者に含まれる。それは`button`要素や`a`要素として描画されることが意図されており、何にでもあてがえるわけではない。しかし後者は、自身がどのようなHTMLに対して適用されるかという関心を持たない。理論上、どのような場面で適用されても問題がないように構築する（もっとも、「objectsレイヤーに含まれるコンポーネント」が入れ子構造に依存する可能性はあるが、それはレイアウト上の理由でしかない）。
+
+つまりTailwindにおいて、HTMLをコンポーネント化するかCSSをコンポーネント化するかという判断をするときには、それはITCSSのobjectsレイヤーとcomponentsレイヤーのどちらに含まれるかを基準するとよい。
+
+最後に、前半で紹介した2つ目の方法は、HTMLのコンポーネント化とCSSのコンポーネント化のどちらでもないような、間に位置するアプローチである。しかし実際にそれを用いるのは、大抵の場合、特定の用途のためのスタイルを抽出するとき、つまりITCSSで言うcomponentsのようなものを作るときだろう。実装の柔軟性のために、それをHTMLから独立した状態で扱えるようにしつつも、やはり実際のところどのような要素に適用されるかは決まっている。そのような場合に採用するのが適切だろう。
