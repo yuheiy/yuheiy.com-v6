@@ -35,7 +35,9 @@ invariant(
     <p class="text-sm text-dynamic-muted" set:html={renderDateToHtml(entry.data.pubDate)} />
   </PageHeader>
 
-  <main class="prose wrapper">
-    <Content />
+  <main class="wrapper">
+    <div class="prose">
+      <Content />
+    </div>
   </main>
 </Layout>

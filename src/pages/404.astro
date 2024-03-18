@@ -13,13 +13,15 @@ searchURL.searchParams.set('q', `site:${Astro.site.host}`);
 <Layout is404 title={title}>
   <PageHeader title={title} />
 
-  <main class="prose wrapper">
-    <p>
-      <a data-internet-archive-link href={`https://web.archive.org/web/*/${Astro.site.href}`}
-        >インターネットアーカイブ</a
-      >を参照するか、<a href={searchURL}>サイト内を検索する</a
-      >と、お探しのページが見つかるかもしれません。
-    </p>
+  <main class="wrapper">
+    <div class="prose">
+      <p>
+        <a data-internet-archive-link href={`https://web.archive.org/web/*/${Astro.site.href}`}
+          >インターネットアーカイブ</a
+        >を参照するか、<a href={searchURL}>サイト内を検索する</a
+        >と、お探しのページが見つかるかもしれません。
+      </p>
+    </div>
   </main>
 </Layout>
 
