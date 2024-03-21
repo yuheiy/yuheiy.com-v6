@@ -185,8 +185,11 @@ componentsレイヤーがutilitiesレイヤーと異なるのは、後ろのレ�
 
 ただし実は、表に示したように、ITCSSとTailwind CSSのレイヤーが明確に一対一の関係にマッピングできるわけではない。ITCSSのcomponentsレイヤーとTailwind CSSのcomponentsレイヤーは、一部役割が被るところがある。たとえば、公式プラグインにある`prose`クラスや`form-*`クラスはITCSSで言えばcomponentsに近いが、HTMLテンプレートではなくTailwindのcomponentsレイヤーで実装されている。前述の表をより正確に表すとすれば次のようになるだろう。
 
-<figure role="none">
-  <div class="grid w-fit grid-cols-2 grid-rows-7 *:border-b *:px-3 *:py-1" role="group">
+<figure role="none" class="overflow-x-auto">
+  <div
+    class="grid w-fit grid-cols-[repeat(2,auto)] grid-rows-7 whitespace-pre *:flex *:items-center *:border-b *:px-3 *:py-1"
+    role="group"
+  >
     <div class="bg-dynamic-subtle font-bold">ITCSS</div>
     <div class="border-l bg-dynamic-subtle font-bold">Tailwind CSS</div>
     <div>generic</div>
@@ -194,8 +197,8 @@ componentsレイヤーがutilitiesレイヤーと異なるのは、後ろのレ�
     <div>elements</div>
     <div class="border-l">base</div>
     <div>objects</div>
-    <div class="row-span-2 flex items-center border-l">**components**</div>
-    <div class="row-span-2 flex items-center">**components**</div>
+    <div class="row-span-2 border-l">**components**</div>
+    <div class="row-span-2">**components**</div>
     <div class="border-l">HTMLテンプレート</div>
     <div>utilities</div>
     <div class="border-l">utilities</div>
