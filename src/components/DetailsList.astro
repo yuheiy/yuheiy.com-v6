@@ -24,7 +24,10 @@ const { items, clampDescription } = Astro.props;
         </p>
         {item.description && (
           <p
-            class:list={['mt-2 text-sm text-dynamic-muted', clampDescription && 'line-clamp-3']}
+            class:list={[
+              'mt-[0.375rem] text-sm text-dynamic-muted',
+              clampDescription && 'line-clamp-3',
+            ]}
             set:html={item.description}
           />
         )}
