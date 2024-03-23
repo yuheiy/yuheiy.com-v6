@@ -3,6 +3,7 @@ import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
 import { invariant } from 'outvariant';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getBlogDescription } from '../lib/get-blog-description';
 
 export async function GET(context: APIContext) {
   const blogEntries = (await getCollection('blog'))
@@ -17,19 +18,12 @@ export async function GET(context: APIContext) {
     site: context.site,
     items: await Promise.all(
       blogEntries.map(async (entry) => {
-        const { remarkPluginFrontmatter } = await entry.render();
-
-        invariant(
-          typeof remarkPluginFrontmatter.description === 'string' ||
-            typeof remarkPluginFrontmatter.description === 'undefined',
-          'Invariant failed',
-        );
-
+        const description = await getBlogDescription(entry);
         return {
           link: `/${entry.slug}`,
           title: entry.data.title,
           pubDate: entry.data.pubDate,
-          description: remarkPluginFrontmatter.description,
+          description,
         };
       }),
     ),

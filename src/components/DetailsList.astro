@@ -8,20 +8,26 @@ export interface DetailsListItem {
 
 interface Props {
   items: DetailsListItem[];
+  clampDescription?: boolean | undefined;
 }
 
-const { items } = Astro.props;
+const { items, clampDescription } = Astro.props;
 ---
 
-<ol class="space-y-10">
+<ol class="space-y-12">
   {
     items.map((item) => (
-      <li class="space-y-[0.125rem]">
-        {item.meta && <p class="text-sm text-dynamic-muted" set:html={item.meta} />}
+      <li>
+        {item.meta && <p class="mb-1 text-sm text-dynamic-muted" set:html={item.meta} />}
         <p>
           <a href={item.link} set:html={item.title} />
         </p>
-        {item.description && <p class="text-sm text-dynamic-muted" set:html={item.description} />}
+        {item.description && (
+          <p
+            class:list={['mt-2 text-sm text-dynamic-muted', clampDescription && 'line-clamp-3']}
+            set:html={item.description}
+          />
+        )}
       </li>
     ))
   }

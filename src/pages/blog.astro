@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import DetailsList from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
+import { getBlogDescription } from '../lib/get-blog-description';
 import { renderDateToHtml } from '../lib/render-date-to-html';
 
 const title = 'ブログ';
@@ -10,18 +11,24 @@ const title = 'ブログ';
 const blogEntries = (await getCollection('blog'))
   .toSorted((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
   .toReversed();
+
+const allBlogItems = await Promise.all(
+  blogEntries.map(async (entry) => {
+    const description = await getBlogDescription(entry);
+    return {
+      title: entry.data.title,
+      link: `/${entry.slug}`,
+      meta: renderDateToHtml(entry.data.pubDate),
+      description,
+    };
+  }),
+);
 ---
 
 <Layout title={title}>
   <PageHeader title={title} />
 
   <main class="wrapper">
-    <DetailsList
-      items={blogEntries.map((entry) => ({
-        title: entry.data.title,
-        link: `/${entry.slug}`,
-        meta: renderDateToHtml(entry.data.pubDate),
-      }))}
-    />
+    <DetailsList items={allBlogItems} clampDescription />
   </main>
 </Layout>
