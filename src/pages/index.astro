@@ -149,7 +149,7 @@ const latestBlogItems = await Promise.all(
         主な投稿
       </h2>
 
-      <DetailsList items={primaryItems} />
+      <DetailsList headingLevel={3} items={primaryItems} />
     </section>
 
     <div class="my-16 border-t"></div>
@@ -161,7 +161,7 @@ const latestBlogItems = await Promise.all(
         プロジェクト
       </h2>
 
-      <DetailsList items={projectItems} />
+      <DetailsList headingLevel={3} items={projectItems} />
     </section>
 
     <div class="my-16 border-t"></div>
@@ -173,7 +173,7 @@ const latestBlogItems = await Promise.all(
         最近のブログ
       </h2>
 
-      <DetailsList items={latestBlogItems} clampDescription />
+      <DetailsList headingLevel={3} items={latestBlogItems} clampDescription />
     </section>
   </main>
 </Layout>

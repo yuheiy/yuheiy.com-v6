@@ -29,6 +29,6 @@ const allBlogItems = await Promise.all(
   <PageHeader title={title} />
 
   <main class="wrapper">
-    <DetailsList items={allBlogItems} clampDescription />
+    <DetailsList headingLevel={2} items={allBlogItems} clampDescription />
   </main>
 </Layout>

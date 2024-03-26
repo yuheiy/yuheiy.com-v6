@@ -7,21 +7,24 @@ export interface DetailsListItem {
 }
 
 interface Props {
+  headingLevel: 2 | 3;
   items: DetailsListItem[];
   clampDescription?: boolean | undefined;
 }
 
-const { items, clampDescription } = Astro.props;
+const { headingLevel, items, clampDescription } = Astro.props;
+
+const Heading = `h${headingLevel}`;
 ---
 
-<ol class="space-y-12">
+<div class="space-y-12">
   {
     items.map((item) => (
-      <li>
+      <article>
         {item.meta && <p class="mb-1 text-sm text-dynamic-muted" set:html={item.meta} />}
-        <p>
+        <Heading>
           <a href={item.link} set:html={item.title} />
-        </p>
+        </Heading>
         {item.description && (
           <p
             class:list={[
@@ -31,7 +34,7 @@ const { items, clampDescription } = Astro.props;
             set:html={item.description}
           />
         )}
-      </li>
+      </article>
     ))
   }
-</ol>
+</div>
