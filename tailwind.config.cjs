@@ -64,7 +64,10 @@ module.exports = {
         dynamic: {
           DEFAULT: `light-dark(${colors.white}, ${colors.zinc['900']})`,
           inset: `light-dark(${colors.slate['100']}, ${colors.zinc['800']})`,
-          muted: `light-dark(color-mix(in srgb, ${colors.white}, ${colors.slate['100']}), color-mix(in srgb, ${colors.zinc['800']} 25%, ${colors.zinc['900']}))`,
+          muted: `light-dark(${[
+            `color-mix(in srgb, ${colors.white}, ${colors.slate['100']})`,
+            `color-mix(in srgb, ${colors.zinc['800']} 25%, ${colors.zinc['900']})`,
+          ].join(', ')})`,
         },
       },
       borderColor: {
