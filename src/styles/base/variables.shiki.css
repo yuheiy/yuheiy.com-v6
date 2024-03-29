@@ -1,6 +1,6 @@
 :root {
   --astro-code-color-text: theme(textColor.dynamic.DEFAULT);
-  --astro-code-color-background: theme(backgroundColor.dynamic.subtle);
+  --astro-code-color-background: theme(backgroundColor.dynamic.muted);
   --astro-code-token-constant: #0550ae;
   --astro-code-token-string: #0a3069;
   --astro-code-token-comment: #6e7781;
