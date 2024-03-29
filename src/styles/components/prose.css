@@ -47,6 +47,7 @@
     margin-inline-end: calc(var(--wrapper-margin-right) * -1);
     padding-inline-start: var(--wrapper-margin-left);
     padding-inline-end: var(--wrapper-margin-right);
+    padding-block: theme(spacing.4);
     font-size: theme(fontSize.sm);
     line-height: theme(lineHeight.tight);
 
