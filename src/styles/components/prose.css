@@ -115,7 +115,7 @@
   }
 
   img {
-    border: 1px solid theme(borderColor.dynamic.DEFAULT);
+    border: 1px solid theme(borderColor.DEFAULT);
   }
 
   table {
