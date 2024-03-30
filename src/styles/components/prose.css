@@ -98,21 +98,16 @@
     font-size: theme(fontSize.sm);
   }
 
+  /* The `quotes` property does not work correctly in Safari */
   /* https://bugs.webkit.org/show_bug.cgi?id=260425 */
-  code {
-    quotes: '`' '`';
-  }
-
-  pre > code {
-    quotes: none;
-  }
-
-  code::before {
-    content: open-quote;
-  }
-
+  code::before,
   code::after {
-    content: close-quote;
+    content: '`';
+  }
+
+  pre > code::before,
+  pre > code::after {
+    content: normal;
   }
 
   img {
