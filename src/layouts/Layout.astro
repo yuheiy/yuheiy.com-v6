@@ -3,7 +3,7 @@ import appleTouchIconImage from '../assets/apple-touch-icon.png';
 import faviconImage from '../assets/favicon.svg';
 import { SITE_LANG, SITE_REGION, SITE_TITLE, SITE_TWITTER_ID } from '../consts';
 
-interface SharedProps {
+interface BaseProps {
   isHome?: false | undefined;
   is404?: false | undefined;
   title: string;
@@ -13,21 +13,22 @@ interface SharedProps {
   twitterCard?: 'summary' | 'summary_large_image' | undefined;
 }
 
-type GeneralProps = SharedProps;
+type GeneralProps = BaseProps;
 
-type HomeProps = Omit<SharedProps, 'isHome' | 'title'> & {
+type HomeProps = Omit<BaseProps, 'isHome' | 'title'> & {
   isHome: true;
 };
 
-type NotFoundProps = Omit<SharedProps, 'is404'> & {
+type NotFoundProps = Omit<BaseProps, 'is404'> & {
   is404: true;
 };
 
 type Props = GeneralProps | HomeProps | NotFoundProps;
 
+const isHome = Astro.props.isHome === true;
+const is404 = Astro.props.is404 === true;
+
 const {
-  isHome,
-  is404,
   description,
   ogType = 'website',
   ogImage = appleTouchIconImage.src,
@@ -81,11 +82,13 @@ if (!is404) {
     <link rel="icon" href={faviconImage.src} type="image/svg+xml" />
   </head>
 
-  <!--
-    use `100svh` instead of `100dvh`
-    https://piccalil.li/blog/a-more-modern-css-reset/#:~:text=I%20like%20a,to%20change%20it!
-  -->
   <body class="min-h-svh bg-dynamic text-dynamic">
+    {
+      /**
+       * use `100svh` instead of `100dvh`
+       * https://piccalil.li/blog/a-more-modern-css-reset/#:~:text=I%20like%20a,to%20change%20it!
+       */
+    }
     <slot />
 
     {/* https://css-tricks.com/a-clever-sticky-footer-technique/ */}
