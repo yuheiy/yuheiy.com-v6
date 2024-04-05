@@ -9,10 +9,12 @@ import { Image } from 'astro:assets';
 
 テキストの行の末尾にアイコンを付随させるというレイアウトがある。
 
-import _1Image from './assets/2022-08-11-text-with-accompanying-icon/1.png';
-
 <figure>
-  <Image src={_1Image} alt="" style="width: calc(716/2/16*1rem);" />
+  <Image
+    src={import('./assets/2022-08-11-text-with-accompanying-icon/1.png')}
+    alt=""
+    style="width: calc(716/2/16*1rem);"
+  />
 </figure>
 
 これは、インライン整形コンテキストにおいてテキストとアイコンを並べて配置することで実現できる。
@@ -25,10 +27,12 @@ import _1Image from './assets/2022-08-11-text-with-accompanying-icon/1.png';
 
 しかし、その空間の大きさやテキストの分量によっては、末尾のアイコンだけが改行してしまって不恰好に見えることがある。
 
-import _2Image from './assets/2022-08-11-text-with-accompanying-icon/2.png';
-
 <figure>
-  <Image src={_2Image} alt="" style="width: calc(780/2/16*1rem);" />
+  <Image
+    src={import('./assets/2022-08-11-text-with-accompanying-icon/2.png')}
+    alt=""
+    style="width: calc(780/2/16*1rem);"
+  />
 </figure>
 
 そうした場合には、テキスト要素のパディングとアイコン要素のネガティブマージンを組み合わせることで対処できる。次のようにすると、アイコンだけが単独で改行されることがなく、常にテキストを伴って改行されるようになる。
