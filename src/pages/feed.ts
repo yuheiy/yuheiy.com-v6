@@ -3,14 +3,14 @@ import { getBlogDescription } from '../lib/get-blog-description';
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
-import { invariant } from 'outvariant';
+import invariant from 'tiny-invariant';
 
 export async function GET(context: APIContext) {
   const blogEntries = (await getCollection('blog'))
     .toSorted((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
     .toReversed();
 
-  invariant(context.site, 'Invariant failed');
+  invariant(context.site);
 
   return rss({
     title: SITE_TITLE,
