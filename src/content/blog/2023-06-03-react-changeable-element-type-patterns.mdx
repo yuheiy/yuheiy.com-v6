@@ -399,9 +399,9 @@ export const Button = forwardRef<ButtonElement, ButtonProps>(
 <summary>`Button`コンポーネントのテストケース</summary>
 
 ```tsx
-import { describe, expect, it } from 'vitest';
-import renderer from 'react-test-renderer';
 import { Button } from './button';
+import renderer from 'react-test-renderer';
+import { describe, expect, it } from 'vitest';
 
 describe('empty', () => {
   it('default', async () => {

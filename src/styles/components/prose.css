@@ -26,8 +26,8 @@
     line-height: theme(lineHeight.tight);
     font-kerning: normal;
     font-feature-settings: 'palt';
-    word-break: auto-phrase;
     text-wrap: pretty;
+    word-break: auto-phrase;
   }
 
   h3 {
