@@ -1,12 +1,24 @@
 .wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 1rem);
-  justify-content: center;
-  margin-inline-start: var(--wrapper-margin-right);
-  margin-inline-end: var(--wrapper-margin-left);
-  max-inline-size: var(--wrapper-inline-size);
+  --wrapper-column: 46rem;
+  --wrapper-padding-without-safe-area: clamp(
+    1rem,
+    max((100cqi - var(--wrapper-column)) / 2, 5cqi),
+    7.5cqi
+  );
+  --wrapper-padding-left: calc(
+    var(--wrapper-padding-without-safe-area) + env(safe-area-inset-left)
+  );
+  --wrapper-padding-right: calc(
+    var(--wrapper-padding-without-safe-area) + env(safe-area-inset-right)
+  );
+
+  box-sizing: content-box;
+  padding-inline-start: var(--wrapper-padding-left);
+  padding-inline-end: var(--wrapper-padding-right);
+  max-inline-size: var(--wrapper-column);
 
   > :where(*) {
-    grid-column: 1 / -1;
+    margin-inline: auto;
+    inline-size: round(down, 100%, 1rem);
   }
 }
