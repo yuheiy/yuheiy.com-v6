@@ -5,11 +5,11 @@
     max((100cqi - var(--wrapper-column)) / 2, 5cqi),
     7.5cqi
   );
-  --wrapper-padding-left: calc(
-    var(--wrapper-padding-without-safe-area) + env(safe-area-inset-left)
-  );
   --wrapper-padding-right: calc(
     var(--wrapper-padding-without-safe-area) + env(safe-area-inset-right)
+  );
+  --wrapper-padding-left: calc(
+    var(--wrapper-padding-without-safe-area) + env(safe-area-inset-left)
   );
 
   box-sizing: content-box;
