@@ -31,15 +31,14 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: dist/
 
   deploy:
     name: Deploy
     permissions:
-      contents: read
       pages: write
       id-token: write
     needs: build
@@ -50,4 +49,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
