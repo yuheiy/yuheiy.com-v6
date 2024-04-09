@@ -13,8 +13,8 @@
   );
 
   box-sizing: content-box;
-  padding-inline-start: var(--wrapper-padding-left);
-  padding-inline-end: var(--wrapper-padding-right);
+  padding-right: var(--wrapper-padding-right);
+  padding-left: var(--wrapper-padding-left);
   max-inline-size: var(--wrapper-column);
 
   > :where(*) {
