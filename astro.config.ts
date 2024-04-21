@@ -37,7 +37,10 @@ export default defineConfig({
   },
   markdown: {
     shikiConfig: {
-      theme: 'css-variables',
+      themes: {
+        light: 'github-light-default',
+        dark: 'github-dark-default',
+      },
     },
   },
 });

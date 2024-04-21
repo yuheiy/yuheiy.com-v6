@@ -38,6 +38,7 @@ const cssFiles = plugin(({ addBase, addComponents, addUtilities }) => {
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  safelist: ['astro-code'],
   theme: {
     fontSize: {
       // https://w3c.github.io/jlreq/#id343
