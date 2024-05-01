@@ -20,9 +20,7 @@ export default defineConfig({
   site: 'https://yuheiy.com',
   trailingSlash: 'never',
   integrations: [
-    mdx({
-      remarkPlugins: [remarkInjectDescription],
-    }),
+    mdx({ remarkPlugins: [remarkInjectDescription] }),
     sitemap(),
     tailwind({ nesting: true }),
   ],
