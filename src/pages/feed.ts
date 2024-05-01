@@ -1,9 +1,9 @@
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import { getBlogDescription } from '../lib/get-blog-description';
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
 import invariant from 'tiny-invariant';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getBlogDescription } from '../lib/get-blog-description';
 
 export async function GET(context: APIContext) {
   const blogEntries = (await getCollection('blog'))
