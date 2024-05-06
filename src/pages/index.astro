@@ -1,10 +1,10 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, getEntry } from 'astro:content';
-import DetailsList from '../components/DetailsList.astro';
 import type { DetailsListItem } from '../components/DetailsList.astro';
+import DetailsList from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import Layout from '../layouts/Layout.astro';
 import { getBlogDescription } from '../lib/get-blog-description';
 import { renderDateToHtml } from '../lib/render-date-to-html';
@@ -111,21 +111,22 @@ const projectItems = [
   },
 ] satisfies DetailsListItem[];
 
-const blogEntries = (await getCollection('blog'))
-  .toSorted((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
-  .toReversed();
-
-const latestBlogItems = await Promise.all(
-  blogEntries.slice(0, 3).map(async (entry) => {
-    const description = await getBlogDescription(entry);
-    return {
-      title: entry.data.title,
-      link: `/${entry.slug}`,
-      meta: renderDateToHtml(entry.data.pubDate),
-      description,
-    };
-  }),
-);
+const latestBlogItems = await getCollection('blog')
+  .then((entries) =>
+    entries
+      .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+      .slice(0, 3)
+      .map(async (entry) => {
+        const description = await getBlogDescription(entry);
+        return {
+          title: entry.data.title,
+          link: `/${entry.slug}`,
+          meta: renderDateToHtml(entry.data.pubDate),
+          description,
+        };
+      }),
+  )
+  .then((promises) => Promise.all(promises));
 ---
 
 <Layout isHome description={SITE_DESCRIPTION}>

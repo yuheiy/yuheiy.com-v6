@@ -6,10 +6,12 @@ import { getBlogDescription } from '../lib/get-blog-description';
 import { renderDateToHtml } from '../lib/render-date-to-html';
 
 export async function getStaticPaths() {
-  return (await getCollection('blog')).map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+  return getCollection('blog').then((entries) =>
+    entries.map((entry) => ({
+      params: { slug: entry.slug },
+      props: { entry },
+    })),
+  );
 }
 
 type Props = Awaited<ReturnType<typeof getStaticPaths>>[number]['props'];

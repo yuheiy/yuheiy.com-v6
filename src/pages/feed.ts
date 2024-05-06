@@ -6,27 +6,29 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getBlogDescription } from '../lib/get-blog-description';
 
 export async function GET(context: APIContext) {
-  const blogEntries = (await getCollection('blog'))
-    .toSorted((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
-    .toReversed();
-
   invariant(context.site);
+
+  const items = await getCollection('blog')
+    .then((entries) =>
+      entries
+        .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+        .map(async (entry) => {
+          const description = await getBlogDescription(entry);
+          return {
+            link: `/${entry.slug}`,
+            title: entry.data.title,
+            pubDate: entry.data.pubDate,
+            description,
+          };
+        }),
+    )
+    .then((promises) => Promise.all(promises));
 
   return rss({
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     site: context.site,
-    items: await Promise.all(
-      blogEntries.map(async (entry) => {
-        const description = await getBlogDescription(entry);
-        return {
-          link: `/${entry.slug}`,
-          title: entry.data.title,
-          pubDate: entry.data.pubDate,
-          description,
-        };
-      }),
-    ),
+    items,
     trailingSlash: false,
   });
 }
