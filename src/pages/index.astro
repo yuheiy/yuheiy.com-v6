@@ -4,7 +4,7 @@ import { getCollection, getEntry } from 'astro:content';
 import type { DetailsListItem } from '../components/DetailsList.astro';
 import DetailsList from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { siteDescription, siteTitle } from '../consts';
 import Layout from '../layouts/Layout.astro';
 import { getBlogDescription } from '../lib/get-blog-description';
 import { renderDateToHtml } from '../lib/render-date-to-html';
@@ -129,10 +129,10 @@ const latestBlogItems = await getCollection('blog')
   .then((promises) => Promise.all(promises));
 ---
 
-<Layout isHome description={SITE_DESCRIPTION}>
+<Layout isHome description={siteDescription}>
   <PageHeader isHome title="安田 祐平">
     <div class="space-y-4 text-dynamic-muted [&_a:any-link]:text-dynamic">
-      <p>{SITE_DESCRIPTION}</p>
+      <p>{siteDescription}</p>
       <p>
         監訳を担当した書籍『<a href={`/${everylayoutEntry.slug}`}
           >Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a

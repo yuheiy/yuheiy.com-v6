@@ -1,4 +1,4 @@
-import { SITE_LANG, SITE_REGION } from '../consts';
+import { siteLang, siteRegion } from '../consts';
 
 interface YearMonth {
   year: number;
@@ -9,7 +9,7 @@ function convertYearMonthToDate({ year, month }: YearMonth) {
   return new Date(Date.UTC(year, month - 1));
 }
 
-const locale = `${SITE_LANG}-${SITE_REGION}`;
+const locale = `${siteLang}-${siteRegion}`;
 
 const yearMonthFormatter = new Intl.DateTimeFormat(locale, {
   year: 'numeric',

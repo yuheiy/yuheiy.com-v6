@@ -1,7 +1,7 @@
 ---
 import appleTouchIconImage from '../assets/apple-touch-icon.png';
 import faviconImage from '../assets/favicon.svg';
-import { SITE_LANG, SITE_REGION, SITE_TITLE, SITE_TWITTER_ID } from '../consts';
+import { siteLang, siteRegion, siteTitle, siteTwitterId } from '../consts';
 
 interface BaseProps {
   isHome?: false | undefined;
@@ -35,7 +35,7 @@ const {
   twitterCard = 'summary',
 } = Astro.props;
 
-const title = isHome ? SITE_TITLE : Astro.props.title;
+const title = isHome ? siteTitle : Astro.props.title;
 const resolvedOgImage = new URL(ogImage, Astro.site);
 
 let canonicalURL: URL | null = null;
@@ -53,7 +53,7 @@ if (!is404) {
 -->
 <html
   class="leading-normal underline-offset-[0.125em] @container/root kerning-none [hanging-punctuation:allow-end] [line-break:normal] [overflow-wrap:anywhere] [text-spacing-trim:trim-start] focus-within:motion-safe:scroll-smooth"
-  lang={SITE_LANG}
+  lang={siteLang}
 >
   <head>
     {
@@ -72,7 +72,7 @@ if (!is404) {
     {description && <meta name="description" content={description} />}
     <meta name="generator" content={Astro.generator} />
     <meta name="twitter:card" content={twitterCard} />
-    <meta name="twitter:site" content={`@${SITE_TWITTER_ID}`} />
+    <meta name="twitter:site" content={`@${siteTwitterId}`} />
     <meta name="twitter:title" content={title} />
 
     <meta property="og:title" content={title} />
@@ -80,8 +80,8 @@ if (!is404) {
     <meta property="og:image" content={resolvedOgImage} />
     {canonicalURL && <meta property="og:url" content={canonicalURL} />}
     {description && <meta property="og:description" content={description} />}
-    <meta property="og:site_name" content={SITE_TITLE} />
-    <meta property="og:locale" content={`${SITE_LANG}_${SITE_REGION}`} />
+    <meta property="og:site_name" content={siteTitle} />
+    <meta property="og:locale" content={`${siteLang}_${siteRegion}`} />
 
     <link rel="alternate" href="/feed" type="application/rss+xml" />
     <link rel="apple-touch-icon" href={appleTouchIconImage.src} />

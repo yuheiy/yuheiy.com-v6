@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { SITE_TITLE } from '../consts';
+import { siteTitle } from '../consts';
 
 interface Props {
   title: string;
@@ -28,7 +28,7 @@ const Title = isHome ? 'p' : 'h1';
           src={import('../assets/favicon.svg')}
           alt=""
         />
-        {SITE_TITLE}
+        {siteTitle}
       </a>
     </Logo>
   </Nav>
