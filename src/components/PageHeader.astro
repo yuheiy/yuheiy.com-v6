@@ -7,7 +7,9 @@ interface Props {
   isHome?: boolean | undefined;
 }
 
-const { title, isHome } = Astro.props;
+const isHome = Astro.props.isHome === true;
+
+const { title } = Astro.props;
 
 const Nav = isHome ? Fragment : 'nav';
 const Logo = isHome ? 'h1' : 'p';

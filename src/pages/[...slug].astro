@@ -14,8 +14,6 @@ export async function getStaticPaths() {
   );
 }
 
-type Props = Awaited<ReturnType<typeof getStaticPaths>>[number]['props'];
-
 const { entry } = Astro.props;
 const description = await getBlogDescription(entry);
 const { Content } = await entry.render();

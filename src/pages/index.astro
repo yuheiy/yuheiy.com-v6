@@ -10,6 +10,14 @@ import { getBlogDescription } from '../lib/get-blog-description';
 import { renderDateToHtml } from '../lib/render-date-to-html';
 import { renderYearMonthRangeToHtml } from '../lib/render-year-month-range-to-html';
 
+function toPrimaryItem(entry: CollectionEntry<'blog'>): DetailsListItem {
+  return {
+    title: entry.data.title,
+    link: `/${entry.slug}`,
+    meta: siteTitle,
+  };
+}
+
 const everylayoutEntry = await getEntry('blog', '20211011-publication-of-everylayout');
 
 const primaryItems = [
@@ -61,14 +69,6 @@ const primaryItems = [
     meta: 'シフトブレイン／スタンダードデザインユニット',
   },
 ] satisfies DetailsListItem[];
-
-function toPrimaryItem(entry: CollectionEntry<'blog'>): DetailsListItem {
-  return {
-    title: entry.data.title,
-    link: `/${entry.slug}`,
-    meta: SITE_TITLE,
-  };
-}
 
 const projectItems = [
   {
