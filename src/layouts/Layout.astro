@@ -38,13 +38,15 @@ const {
 const title = isHome ? siteTitle : Astro.props.title;
 const resolvedOgImage = new URL(ogImage, Astro.site);
 
-let canonicalURL: URL | null = null;
-if (!is404) {
+const canonicalURL = (() => {
+  if (is404) {
+    return null;
+  }
   // remove trailing slash in build time
   // https://github.com/withastro/astro/pull/4352
   const normalizedPathname = Astro.url.pathname.replace(/\.html$/, '');
-  canonicalURL = new URL(normalizedPathname, Astro.site);
-}
+  return new URL(normalizedPathname, Astro.site);
+})();
 ---
 
 <!--
