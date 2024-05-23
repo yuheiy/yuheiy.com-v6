@@ -41,7 +41,7 @@ render(
 
 しかし、それ以外にもいくつかの問題がある。かつて`as` propを採用していた[Radix UI](https://www.radix-ui.com/)では、これらの問題を解決するために、`as` propが廃止されて新たに`asChild` propが採用されている。これらの機能を実装した[Jenna Smith](https://github.com/jjenzz)氏によると、いくつかの観点から見て、`as` propは過度な複雑性をもたらすと言う。
 
-<Tweet id="https://twitter.com/jjenzz/status/1423766700885954562" />
+<Tweet id="https://x.com/jjenzz/status/1423766700885954562" />
 
 一つは、TypeScriptのエラーメッセージが複雑になってしまうこと。たとえば、Reactの要素に間違ったpropが渡されたとき、通常の`a`要素と、`as` propとしてa要素が指定されたコンポーネントを比較すると、明らかに後者の方がユーザーにとって理解しづらい。
 
