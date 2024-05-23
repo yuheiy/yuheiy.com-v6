@@ -6,12 +6,11 @@ import { getBlogDescription } from '../lib/get-blog-description';
 import { renderDateToHtml } from '../lib/render-date-to-html';
 
 export async function getStaticPaths() {
-  return getCollection('blog').then((entries) =>
-    entries.map((entry) => ({
-      params: { slug: entry.slug },
-      props: { entry },
-    })),
-  );
+  const entries = await getCollection('blog');
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
 }
 
 const { entry } = Astro.props;

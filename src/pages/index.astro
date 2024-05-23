@@ -111,22 +111,21 @@ const projectItems = [
   },
 ] satisfies DetailsListItem[];
 
-const latestBlogItems = await getCollection('blog')
-  .then((entries) =>
-    entries
-      .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-      .slice(0, 3)
-      .map(async (entry) => {
-        const description = await getBlogDescription(entry);
-        return {
-          title: entry.data.title,
-          link: `/${entry.slug}`,
-          meta: renderDateToHtml(entry.data.pubDate),
-          description,
-        };
-      }),
-  )
-  .then((promises) => Promise.all(promises));
+const entries = await getCollection('blog');
+const latestBlogItems = await Promise.all(
+  entries
+    .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 3)
+    .map(async (entry) => {
+      const description = await getBlogDescription(entry);
+      return {
+        title: entry.data.title,
+        link: `/${entry.slug}`,
+        meta: renderDateToHtml(entry.data.pubDate),
+        description,
+      };
+    }),
+);
 ---
 
 <Layout isHome description={siteDescription}>

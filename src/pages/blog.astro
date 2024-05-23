@@ -8,21 +8,20 @@ import { renderDateToHtml } from '../lib/render-date-to-html';
 
 const title = 'ブログ';
 
-const items = await getCollection('blog')
-  .then((entries) =>
-    entries
-      .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-      .map(async (entry) => {
-        const description = await getBlogDescription(entry);
-        return {
-          title: entry.data.title,
-          link: `/${entry.slug}`,
-          meta: renderDateToHtml(entry.data.pubDate),
-          description,
-        };
-      }),
-  )
-  .then((promises) => Promise.all(promises));
+const entries = await getCollection('blog');
+const items = await Promise.all(
+  entries
+    .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .map(async (entry) => {
+      const description = await getBlogDescription(entry);
+      return {
+        title: entry.data.title,
+        link: `/${entry.slug}`,
+        meta: renderDateToHtml(entry.data.pubDate),
+        description,
+      };
+    }),
+);
 ---
 
 <Layout title={title}>
