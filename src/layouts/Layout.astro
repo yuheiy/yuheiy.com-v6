@@ -1,7 +1,7 @@
 ---
 import appleTouchIconImage from '../assets/apple-touch-icon.png';
 import faviconImage from '../assets/favicon.svg';
-import { siteLang, siteRegion, siteTitle, siteTwitterId } from '../consts';
+import { siteEmail, siteLang, siteRegion, siteTitle, siteTwitterId } from '../consts';
 
 interface BaseProps {
   isHome?: false | undefined;
@@ -87,6 +87,7 @@ const canonicalURL = (() => {
 
     <link rel="alternate" href="/feed" type="application/rss+xml" />
     <link rel="apple-touch-icon" href={appleTouchIconImage.src} />
+    <link rel="author" href={`mailto:${siteEmail}`} />
     {canonicalURL && <link rel="canonical" href={canonicalURL} />}
     <link rel="icon" href={faviconImage.src} type="image/svg+xml" />
   </head>
@@ -104,15 +105,13 @@ const canonicalURL = (() => {
     <footer class="sticky top-full mt-16 bg-dynamic-inset py-8 text-sm">
       <div class="wrapper space-y-4">
         <p>
-          <a href="/">ホーム</a>&#x2003;<a href="/blog">ブログ</a>&#x2003;<a
-            href="/feed"
-            type="application/rss+xml">RSS</a
+          <a href="/">ホーム</a>&#x2003;<a href="/blog">ブログ</a>&#x2003;<a href="/feed">RSS</a
           >&#x2003;/&#x2003;<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
         </p>
         <p>
           <a href="https://x.com/_yuheiy">Twitter</a>&#x2003;<a href="https://github.com/yuheiy"
             >GitHub</a
-          >&#x2003;<a href="mailto:yuhei.yasuda1003@gmail.com">メール</a>
+          >&#x2003;<a href={`mailto:${siteEmail}`}>メール</a>
         </p>
       </div>
     </footer>
