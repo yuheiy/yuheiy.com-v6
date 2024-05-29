@@ -1,7 +1,7 @@
 ---
 import appleTouchIconImage from '../assets/apple-touch-icon.png';
 import faviconImage from '../assets/favicon.svg';
-import { siteEmail, siteLang, siteRegion, siteTitle, siteTwitterId } from '../consts';
+import { siteEmail, siteGithubId, siteLang, siteRegion, siteTitle, siteTwitterId } from '../consts';
 
 interface BaseProps {
   isHome?: false | undefined;
@@ -109,8 +109,8 @@ const canonicalURL = (() => {
           >&#x2003;/&#x2003;<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
         </p>
         <p>
-          <a href="https://x.com/_yuheiy">Twitter</a>&#x2003;<a href="https://github.com/yuheiy"
-            >GitHub</a
+          <a href={`https://x.com/${siteTwitterId}`}>Twitter</a>&#x2003;<a
+            href={`https://github.com/${siteGithubId}`}>GitHub</a
           >&#x2003;<a href={`mailto:${siteEmail}`}>メール</a>
         </p>
       </div>
