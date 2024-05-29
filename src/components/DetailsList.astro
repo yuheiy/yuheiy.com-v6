@@ -21,10 +21,12 @@ const Heading = `h${headingLevel}`;
   {
     items.map((item) => (
       <article>
-        {item.meta && <p class="mb-1 text-sm text-dynamic-muted" set:html={item.meta} />}
-        <Heading>
-          <a href={item.link} set:html={item.title} />
-        </Heading>
+        <header>
+          {item.meta && <p class="mb-1 text-sm text-dynamic-muted" set:html={item.meta} />}
+          <Heading>
+            <a href={item.link} set:html={item.title} />
+          </Heading>
+        </header>
         {item.description && (
           <p
             class:list={[
