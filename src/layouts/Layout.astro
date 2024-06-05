@@ -85,7 +85,7 @@ const canonicalURL = (() => {
     <meta property="og:site_name" content={siteTitle} />
     <meta property="og:locale" content={`${siteLang}_${siteRegion}`} />
 
-    <link rel="alternate" href="/feed" type="application/rss+xml" />
+    <link rel="alternate" href="/rss.xml" type="application/rss+xml" />
     <link rel="apple-touch-icon" href={appleTouchIconImage.src} />
     <link rel="author" href={`mailto:${siteEmail}`} />
     {canonicalURL && <link rel="canonical" href={canonicalURL} />}
@@ -105,7 +105,7 @@ const canonicalURL = (() => {
     <footer class="sticky top-full mt-16 bg-dynamic-inset py-8 text-sm">
       <div class="wrapper space-y-4">
         <p>
-          <a href="/">ホーム</a>&#x2003;<a href="/blog">ブログ</a>&#x2003;<a href="/feed">RSS</a
+          <a href="/">ホーム</a>&#x2003;<a href="/blog">ブログ</a>&#x2003;<a href="/rss.xml">RSS</a
           >&#x2003;/&#x2003;<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
         </p>
         <p>
