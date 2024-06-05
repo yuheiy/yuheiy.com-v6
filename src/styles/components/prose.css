@@ -19,22 +19,22 @@
     --prose-spacing: theme(spacing.12);
   }
 
-  h2 {
+  :is(h2, h3) {
     hanging-punctuation: none;
     font-weight: bold;
-    font-size: theme(fontSize.2xl);
     line-height: theme(lineHeight.tight);
-    font-kerning: normal;
-    font-feature-settings: 'palt';
     text-wrap: pretty;
     word-break: auto-phrase;
   }
 
+  h2 {
+    font-size: theme(fontSize.2xl);
+    font-kerning: normal;
+    font-feature-settings: 'palt';
+  }
+
   h3 {
-    hanging-punctuation: none;
-    font-weight: bold;
     font-size: theme(fontSize.lg);
-    line-height: theme(lineHeight.tight);
   }
 
   hr {
