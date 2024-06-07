@@ -18,20 +18,19 @@ export async function GET(context: APIContext) {
   const items = await Promise.all(
     entries
       .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-      .map(async (entry) => {
-        const description = await getBlogDescription(entry);
-        const { Content } = await entry.render();
-        const content = await container.renderToString(Content);
-        return {
-          link: `/${entry.slug}`,
-          title: entry.data.title,
-          pubDate: entry.data.pubDate,
-          description,
-          content: sanitizeHtml(content, {
+      .map(async (entry) => ({
+        link: `/${entry.slug}`,
+        title: entry.data.title,
+        pubDate: entry.data.pubDate,
+        description: await getBlogDescription(entry),
+        content: await (async () => {
+          const { Content } = await entry.render();
+          const content = await container.renderToString(Content);
+          return sanitizeHtml(content, {
             allowedTags: [...sanitizeHtml.defaults.allowedTags, 'img'],
-          }),
-        };
-      }),
+          });
+        })(),
+      })),
   );
 
   return rss({
