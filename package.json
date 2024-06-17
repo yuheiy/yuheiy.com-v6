@@ -29,7 +29,7 @@
     "astro-embed": "0.7.2",
     "chokidar-cli": "3.0.0",
     "concurrently": "8.2.2",
-    "eslint": "8.57.0",
+    "eslint": "9.5.0",
     "eslint-plugin-astro": "1.2.2",
     "eslint-plugin-jsx-a11y": "6.8.0",
     "eslint-plugin-tailwindcss": "3.17.3",
