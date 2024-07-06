@@ -1,0 +1,141 @@
+---
+title: '不可視状態からフェードインする要素を即座にフォーカスする方法'
+pubDate: 2024-07-06T19:30:00.000+09:00
+---
+
+CSSの`display: none`や`visibility: hidden`によって不可視状態になっている要素を、表示状態に切り替えてから即座にフォーカスしたいということがある。たとえば、初期状態では非表示になっている検索ボックスを、ユーザーのインタラクションに応じて表示するような場合。そうしたときには、通常、スタイルを切り替えてすぐに`focus`メソッドを呼び出すだけで良い。
+
+```html
+<input type="search" />
+```
+
+```css
+input[type='search'] {
+  display: none;
+
+  &.open {
+    display: revert;
+  }
+}
+```
+
+```js
+const searchBoxElement = document.querySelector('input[type="search"]');
+
+function open() {
+  searchBoxElement.classList.add('open');
+  searchBoxElement.focus();
+}
+
+function close() {
+  searchBoxElement.classList.remove('open');
+}
+```
+
+しかし、表示する際にフェードインなどのアニメーションを伴わせたいこともある。これをCSSの`transition`プロパティを使って実現するのであれば、`opacity`プロパティと`visibility`プロパティを併用するのが手頃だ。`visibility`プロパティはアニメーション可能（[discrete](https://www.w3.org/TR/web-animations/#discrete)）であるため、`transition`プロパティによって操作できる。
+
+```css
+input[type='search'] {
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    visibility 300ms,
+    opacity 300ms;
+
+  &.open {
+    visibility: revert;
+    opacity: revert;
+  }
+}
+```
+
+```js
+const searchBoxElement = document.querySelector('input[type="search"]');
+
+function open() {
+  searchBoxElement.classList.add('open');
+  searchBoxElement.focus();
+}
+
+function close() {
+  searchBoxElement.classList.remove('open');
+}
+```
+
+ただし、これではフォーカスさせることができない。なぜならこの場合、スタイルを書き換えた直後にはまだ不可視状態（`visibility: hidden`）のままだからだ。フォーカスさせるには、アニメーションが開始して`visibility: visible`の状態になるまで待機しなければならない。その対処として多くの場合、`requestAnimationFrame`メソッドが使用されがちである。
+
+```js
+function open() {
+  searchBoxElement.classList.remove('open');
+
+  requestAnimationFrame(() => {
+    searchBoxElement.focus();
+  });
+}
+```
+
+しかしこれは必ずしもうまくいくわけではない。`requestAnimationFrame`メソッドが呼び出される時点ですでにアニメーションが開始しているかどうかは保証されていないからだ。そこで苦肉の策として、`requestAnimationFrame`メソッドを二重にすることで成功率を上げるというやり方もあるが、やはり確実ではない。
+
+```js
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    searchBoxElement.focus();
+  });
+});
+```
+
+ここで重要なのは、アニメーションの開始タイミングに合わせて処理をすることである。そのためには、`transitionstart`イベントを使用するのが適切だ。
+
+```js
+function open() {
+  searchBoxElement.classList.remove('open');
+
+  searchBoxElement.addEventListener(
+    'transitionstart',
+    () => {
+      searchBoxElement.focus();
+    },
+    { once: true },
+  );
+}
+```
+
+`visibility`プロパティを`visible`に書き換えると、アニメーションの開始タイミングで`visible`に切り替わる（[Animation of visibility](https://drafts.csswg.org/web-animations-1/#animating-visibility)）。そのため、トランジションの開始をフックにすればうまくいく。
+
+さらには、`transition-behavior`プロパティと`@starting-style`を活用すればより簡単に実現できそうだ。`visibility`プロパティをアニメーションさせるのと違って、`display`プロパティに`allow-discrete`を適用すると、表示の際にはトランジションの開始を待たずに切り替わるらしい。この性質を利用すれば、`focus`メソッドは単に同期的に呼び出すだけでよい。
+
+```css
+input[type='search'] {
+  display: none;
+  opacity: 0;
+  transition:
+    opacity 300ms,
+    display 300ms allow-discrete;
+
+  &.open {
+    @starting-style {
+      opacity: 0;
+    }
+    display: revert;
+    opacity: revert;
+  }
+}
+```
+
+```js
+const searchBoxElement = document.querySelector('input[type="search"]');
+
+function open() {
+  searchBoxElement.classList.add('open');
+  searchBoxElement.focus();
+}
+
+function close() {
+  searchBoxElement.classList.remove('open');
+}
+```
+
+## 参考文献
+
+- [スムーズな開始と終了のアニメーションを実現する 4 つの新しい CSS 機能  |  Blog  |  Chrome for Developers](https://developer.chrome.com/blog/entry-exit-animations?hl=ja)
+- [Using @starting-style and transition-behavior for enter and exit stage effects](https://nerdy.dev/using-starting-style-and-transition-behavior-for-enter-and-exit-stage-effects)
