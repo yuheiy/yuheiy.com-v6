@@ -116,15 +116,12 @@ const latestBlogItems = await Promise.all(
   entries
     .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .slice(0, 3)
-    .map(async (entry) => {
-      const description = await getBlogDescription(entry);
-      return {
-        title: entry.data.title,
-        link: `/${entry.slug}`,
-        meta: renderDateToHtml(entry.data.pubDate),
-        description,
-      };
-    }),
+    .map(async (entry) => ({
+      title: entry.data.title,
+      link: `/${entry.slug}`,
+      meta: renderDateToHtml(entry.data.pubDate),
+      description: await getBlogDescription(entry),
+    })),
 );
 ---
 
