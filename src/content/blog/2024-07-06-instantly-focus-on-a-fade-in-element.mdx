@@ -62,7 +62,7 @@ function close() {
 }
 ```
 
-ただし、これではフォーカスさせることができない。なぜならこの場合、スタイルを書き換えた直後にはまだ不可視状態（`visibility: hidden`）のままだからだ。フォーカスさせるには、アニメーションが開始して`visibility: visible`の状態になるまで待機しなければならない。その対処として多くの場合、`requestAnimationFrame`メソッドが使用されがちである。
+ただし、このような実装ではフォーカスさせることができずに失敗してしまう。なぜなら、スタイルを書き換えた直後にはまだ不可視状態（`visibility: hidden`）のままだからだ。フォーカスさせるには、アニメーションが開始して`visibility: visible`の状態になるまで待機しなければならない。その対処として多くの場合、`requestAnimationFrame`メソッドが使用されがちである。
 
 ```js
 function open() {
@@ -100,7 +100,7 @@ function open() {
 }
 ```
 
-`visibility`プロパティを`visible`に書き換えると、アニメーションの開始タイミングで`visible`に切り替わる（[Animation of visibility](https://drafts.csswg.org/web-animations-1/#animating-visibility)）。そのため、トランジションの開始をフックにすればうまくいく。
+`visibility`プロパティを`visible`に書き換えると、アニメーションの開始タイミングですぐに`visible`に切り替わる（[Animation of visibility](https://drafts.csswg.org/web-animations-1/#animating-visibility)）。そのため、トランジションの開始をフックにすればうまくいく。
 
 さらには、`transition-behavior`プロパティと`@starting-style`を活用すればより簡単に実現できそうだ。`visibility`プロパティをアニメーションさせるのと違って、`display`プロパティに`allow-discrete`を適用すると、表示の際にはトランジションの開始を待たずに切り替わるらしい。この性質を利用すれば、`focus`メソッドは単に同期的に呼び出すだけでよい。
 
