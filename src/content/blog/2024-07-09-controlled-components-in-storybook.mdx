@@ -138,7 +138,7 @@ metadata（`meta`）として指定された値はstoryに継承されるため�
 
 これによって、controlledなコンポーネントを操作可能なstoryをを作成できる。ただしこの実装では、Storybookのcontrolsからargsの値を制御できなくなってしまう。
 
-import withoutUseArgsVideo from './assets/2024-07-08-controlled-component-in-storybook/without-useargs.mp4';
+import withoutUseArgsVideo from './assets/2024-07-09-controlled-components-in-storybook/without-useargs.mp4';
 
 <figure>
   <video controls playsinline>
@@ -215,7 +215,7 @@ const meta = {
 
 `onChange` propの呼び出しタイミングでargsの`onChange`メソッドと`updateArgs`フックが同時に呼び出されるようにする。それにより、argsの値を制御可能にしつつ、メソッドの呼び出しのたびにログが表示されるようにできる。
 
-import withUseArgsVideo from './assets/2024-07-08-controlled-component-in-storybook/with-useargs.mp4';
+import withUseArgsVideo from './assets/2024-07-09-controlled-components-in-storybook/with-useargs.mp4';
 
 <figure>
   <video controls playsinline>
@@ -276,7 +276,7 @@ export const SelectedByDefault = {
 
 最後に、argTypesから`isSelected`の`control`を`false`にする。`useArgs`フックを使用しないとcontrolからの制御はできないので、control自体を非表示にしてしまう。
 
-<figure>![](./assets/2024-07-08-controlled-component-in-storybook/hide-control.png)</figure>
+<figure>![](./assets/2024-07-09-controlled-components-in-storybook/hide-control.png)</figure>
 
 ## controlledとuncontrolledの両方に対応したコンポーネントを作成する
 
