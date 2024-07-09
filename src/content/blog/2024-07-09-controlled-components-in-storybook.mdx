@@ -166,9 +166,12 @@ const meta = {
   render: function Render(args) {
     const [{ isSelected }, updateArgs] = useArgs();
 
-    const handleChange: ToggleButtonProps['onChange'] = (isSelected) => {
-      updateArgs({ isSelected });
-    };
+    const handleChange = useCallback<ToggleButtonProps['onChange']>(
+      (isSelected) => {
+        updateArgs({ isSelected });
+      },
+      [updateArgs],
+    );
 
     return <ToggleButton {...args} isSelected={isSelected} onChange={handleChange} />;
   },
@@ -299,7 +302,9 @@ export function ToggleButton({ children, ...props }: ToggleButtonProps) {
     props.onChange,
   );
 
-  const handleClick = useCallback(() => setSelected(!isSelected), [isSelected, setSelected]);
+  const handleClick = useCallback(() => {
+    setSelected(!isSelected);
+  }, [isSelected, setSelected]);
 
   return (
     <button type="button" className="toggle-button" aria-pressed={isSelected} onClick={handleClick}>
