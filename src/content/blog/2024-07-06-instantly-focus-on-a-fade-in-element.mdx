@@ -3,7 +3,7 @@ title: '不可視状態からフェードインする要素を即座にフォー
 pubDate: 2024-07-06T19:30:00.000+09:00
 ---
 
-CSSの`display: none`や`visibility: hidden`によって不可視状態になっている要素を、表示状態に切り替えてから即座にフォーカスしたいということがある。たとえば、初期状態では非表示になっている検索ボックスを、ユーザーのインタラクションに応じて表示するような場合。そうしたときには、通常、スタイルを切り替えてすぐに`focus`メソッドを呼び出すだけで良い。
+CSSの`display: none`や`visibility: hidden`によって不可視状態になっている要素を、表示して即座にフォーカスしたいということがある。たとえば、初期状態では非表示になっている検索ボックスを、ユーザーのインタラクションに応じて表示するような場合。そうしたとき、通常では、スタイルを切り替えてすぐに`focus`メソッドを呼び出すだけで良い。
 
 ```html
 <input type="search" />
@@ -32,7 +32,7 @@ function close() {
 }
 ```
 
-しかし、表示する際にフェードインなどのアニメーションを伴わせたいこともある。これをCSSの`transition`プロパティを使って実現するのであれば、`opacity`プロパティと`visibility`プロパティを併用するのが手頃だ。`visibility`プロパティはアニメーション可能（[discrete](https://www.w3.org/TR/web-animations/#discrete)）であるため、`transition`プロパティによって操作できる。
+しかし場合によっては、表示する際にフェードインなどのアニメーションを伴わせたいこともある。これを簡単に実現するには、CSSの`transition`プロパティを使いつつ、`opacity`プロパティと`visibility`プロパティを操作するとよい。`visibility`プロパティはアニメーション可能（[discrete](https://www.w3.org/TR/web-animations/#discrete)）であるため、`transition`プロパティで制御することができる。
 
 ```css
 input[type='search'] {
@@ -62,7 +62,7 @@ function close() {
 }
 ```
 
-ただし、このような実装ではフォーカスさせることができずに失敗してしまう。なぜなら、スタイルを書き換えた直後にはまだ不可視状態（`visibility: hidden`）のままだからだ。フォーカスさせるには、アニメーションが開始して`visibility: visible`の状態になるまで待機しなければならない。その対処として多くの場合、`requestAnimationFrame`メソッドが使用されがちである。
+ただし、このような実装ではフォーカスができずに失敗してしまう。なぜなら、スタイルを書き換えた直後にはまだ不可視状態（`visibility: hidden`）のままだからだ。フォーカスさせるには、アニメーションが開始して`visibility: visible`の状態になるまで待機しなければならない。そのために対処として、`requestAnimationFrame`メソッドが使用されがちである。
 
 ```js
 function open() {
@@ -74,7 +74,7 @@ function open() {
 }
 ```
 
-しかしこれは必ずしもうまくいくわけではない。`requestAnimationFrame`メソッドが呼び出される時点ですでにアニメーションが開始しているかどうかは保証されていないからだ。そこで苦肉の策として、`requestAnimationFrame`メソッドを二重にすることで成功率を上げるというやり方もあるが、やはり確実ではない。
+残念ながら、これは必ずしもうまくいくわけではない。`requestAnimationFrame`メソッドが呼び出される時点ですでにアニメーションが開始しているかどうかは保証されていないからだ。そこで苦肉の策として、`requestAnimationFrame`メソッドを二重に入れ子にすることで成功率を上げるというやり方もあるが、やはり確実ではない。
 
 ```js
 requestAnimationFrame(() => {
