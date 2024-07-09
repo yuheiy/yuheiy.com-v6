@@ -1,0 +1,6 @@
+---
+title: 'Tailwind CSSの設計思想を業務に活かす'
+pubDate: 2020-07-09
+link: 'https://www.codegrid.net/series/2020-tailwind-talk'
+channel: 'CodeGrid'
+---

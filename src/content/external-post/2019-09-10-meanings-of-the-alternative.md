@@ -1,0 +1,6 @@
+---
+title: '「代替」の意味を探して'
+pubDate: 2019-09-10
+link: 'https://yuheiy.github.io/meanings-of-the-alternative/'
+channel: '社内発表'
+---

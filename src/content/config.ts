@@ -12,4 +12,20 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { blog };
+const externalPost = defineCollection({
+  type: 'content',
+  // Type-check frontmatter using a schema
+  schema: () =>
+    z.object({
+      title: z.string(),
+      pubDate: z.date(),
+      link: z.string().url(),
+      channel: z.string(),
+      description: z.string().optional(),
+    }),
+});
+
+export const collections = {
+  blog,
+  externalPost,
+};

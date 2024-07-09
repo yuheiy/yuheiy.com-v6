@@ -10,64 +10,49 @@ import { getBlogDescription } from '../lib/get-blog-description';
 import { renderDateToHtml } from '../lib/render-date-to-html';
 import { renderYearMonthRangeToHtml } from '../lib/render-year-month-range-to-html';
 
-function toPrimaryItem(entry: CollectionEntry<'blog'>): DetailsListItem {
-  return {
-    title: entry.data.title,
-    link: `/${entry.slug}`,
-    meta: siteTitle,
-  };
+function toPrimaryItem(entry: CollectionEntry<'blog' | 'external-post'>): DetailsListItem {
+  switch (entry.collection) {
+    case 'blog':
+      return {
+        title: entry.data.title,
+        link: `/${entry.slug}`,
+        meta: siteTitle,
+      };
+
+    case 'external-post':
+      return {
+        title: entry.data.title,
+        link: entry.data.link,
+        meta: entry.data.channel,
+      };
+
+    default:
+      throw new TypeError('Unexpected value. Should have been never.');
+  }
 }
 
-const everylayoutEntry = await getEntry('blog', '20211011-publication-of-everylayout');
-
 const primaryItems = [
-  {
-    title: 'Tailwind CSS実践入門 ～まず作ってから、あとで共通化する',
-    link: 'https://gihyo.jp/list/group/Tailwind-CSS%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80-%EF%BD%9E%E3%81%BE%E3%81%9A%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%8B%E3%82%89-%E3%81%82%E3%81%A8%E3%81%A7%E5%85%B1%E9%80%9A%E5%8C%96%E3%81%99%E3%82%8B',
-    meta: 'gihyo.jp',
-  },
+  toPrimaryItem(await getEntry('external-post', '2023-07-24-gihyojp-tailwindcss')),
   toPrimaryItem(await getEntry('blog', '2023-02-06-tailwind-css-in-wdpress')),
   toPrimaryItem(await getEntry('blog', '2022-11-03-how-to-understand-the-markup')),
   toPrimaryItem(await getEntry('blog', '2022-08-01-declarative-design')),
   toPrimaryItem(await getEntry('blog', '2022-06-11-css-components')),
-  {
-    title: '本文のタイポグラフィとCSS',
-    link: 'https://paper.dropbox.com/doc/CSS-wPD007Sd9dSeEDLP78jri',
-    meta: '社内発表',
-  },
-  {
-    title: '『Every Layout』に到った背景と思想についての私の解釈',
-    link: 'https://note.com/shiftbrain/n/n0a01726673e0',
-    meta: 'SHIFTBRAIN note',
-  },
-  {
-    title: '「Every Layout」をめぐる座談会',
-    link: 'https://www.codegrid.net/series/2021-talk-about-every-layout',
-    meta: 'CodeGrid',
-  },
-  toPrimaryItem(everylayoutEntry),
+  toPrimaryItem(await getEntry('external-post', '2022-05-27-body-typography')),
+  toPrimaryItem(await getEntry('external-post', '2021-12-27-shiftbrain-everylayout')),
+  toPrimaryItem(await getEntry('external-post', '2021-12-16-codegrid-everylayout')),
+  toPrimaryItem(await getEntry('blog', '20211011-publication-of-everylayout')),
   toPrimaryItem(await getEntry('blog', '20210127-prefer-margin-top')),
-  {
-    title: 'Tailwind CSSの設計思想を業務に活かす',
-    link: 'https://www.codegrid.net/series/2020-tailwind-talk',
-    meta: 'CodeGrid',
-  },
+  toPrimaryItem(await getEntry('external-post', '2020-07-09-codegrid-tailwindcss')),
   {
     title:
       'CSSのユーティリティクラスと「関心の分離」&mdash;&mdash;いかにしてユーティリティファーストにたどり着いたか（翻訳）',
     link: 'https://yuheiy.hatenablog.com/entry/2020/05/25/021342',
     meta: 'yuhei blog',
   },
-  {
-    title: '制作者のためのHTML',
-    link: 'https://yuheiy.github.io/html-for-creators/',
-    meta: "<a href='https://ca11y.connpass.com/event/120003/'>CA11Y #1 〜アクセシビリティはじめて物語〜</a>",
-  },
-  {
-    title: 'ページ内リンクの実装から考える、a要素のclickイベントとその振る舞い',
-    link: 'https://standard.shiftbrain.com/blog/default-action-for-click-event-of-a-element',
-    meta: 'シフトブレイン／スタンダードデザインユニット',
-  },
+  toPrimaryItem(await getEntry('external-post', '2019-03-08-html-for-creators')),
+  toPrimaryItem(
+    await getEntry('external-post', '2018-10-26-shiftbrain-in-page-links-and-click-event'),
+  ),
 ] satisfies DetailsListItem[];
 
 const projectItems = [
@@ -122,6 +107,8 @@ const latestBlogItems = await Promise.all(
       description: await getBlogDescription(entry),
     })),
 );
+
+const everylayoutEntry = await getEntry('blog', '20211011-publication-of-everylayout');
 ---
 
 <Layout isHome description={siteDescription}>

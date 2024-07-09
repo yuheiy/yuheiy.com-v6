@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import DetailsList from '../components/DetailsList.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Layout from '../layouts/Layout.astro';
+import { renderDateToHtml } from '../lib/render-date-to-html';
+
+const title = '外部サイトの投稿';
+
+const items = await Promise.all(
+  (await getCollection('external-post'))
+    .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .map(async (entry) => ({
+      title: entry.data.title,
+      link: entry.data.link,
+      meta: `${renderDateToHtml(entry.data.pubDate)} · ${entry.data.channel}`,
+      description: entry.data.description,
+    })),
+);
+---
+
+<Layout title={title}>
+  <PageHeader title={title} />
+
+  <main class="wrapper">
+    <DetailsList headingLevel={2} items={items} clampDescription />
+  </main>
+</Layout>

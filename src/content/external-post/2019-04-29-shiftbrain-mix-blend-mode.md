@@ -1,0 +1,6 @@
+---
+title: 'mix-blend-modeとスタックコンテキスト'
+pubDate: 2019-04-29
+link: 'https://standard.shiftbrain.com/blog/mix-blend-mode-and-stacking-context'
+channel: 'シフトブレイン／スタンダードデザインユニット'
+---

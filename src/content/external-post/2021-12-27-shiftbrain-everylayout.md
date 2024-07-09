@@ -1,0 +1,6 @@
+---
+title: '『Every Layout』に到った背景と思想についての私の解釈'
+pubDate: 2021-12-27
+link: 'https://note.com/shiftbrain/n/n0a01726673e0'
+channel: 'SHIFTBRAIN note'
+---

@@ -1,0 +1,6 @@
+---
+title: 'レイアウトプリミティブ'
+pubDate: 2019-12-16
+link: 'https://standard.shiftbrain.com/blog/layout-primitives'
+channel: DIST
+---

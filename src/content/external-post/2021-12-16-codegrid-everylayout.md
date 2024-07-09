@@ -1,0 +1,6 @@
+---
+title: '「Every Layout」をめぐる座談会'
+pubDate: 2021-12-16
+link: 'https://www.codegrid.net/series/2021-talk-about-every-layout'
+channel: 'CodeGrid'
+---

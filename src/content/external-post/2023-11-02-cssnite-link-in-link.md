@@ -1,0 +1,6 @@
+---
+title: '「リンクの中にあるリンク」「ボタンの中にあるボタン」を正しく実装する'
+pubDate: 2023-11-02
+link: 'https://cssnite.doorkeeper.jp/events/163736'
+channel: 'CSS Nite'
+---

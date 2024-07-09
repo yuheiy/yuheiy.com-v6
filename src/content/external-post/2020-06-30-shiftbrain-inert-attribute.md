@@ -1,0 +1,6 @@
+---
+title: 'UIにおける見えるけど利用できない非活性な領域の実装とinert属性について'
+pubDate: 2020-06-30
+link: 'https://standard.shiftbrain.com/blog/unavailable-inert-regions-and-inert-attribute'
+channel: 'シフトブレイン／スタンダードデザインユニット'
+---

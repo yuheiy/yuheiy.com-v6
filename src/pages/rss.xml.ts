@@ -14,10 +14,9 @@ export async function GET(context: APIContext) {
 
   const renderers = await loadRenderers([getContainerRenderer()]);
   const container = await AstroContainer.create({ renderers });
-  const items = await Promise.all(
-    (await getCollection('blog'))
-      .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-      .map(async (entry) => ({
+  const items = (
+    await Promise.all([
+      ...(await getCollection('blog')).map(async (entry) => ({
         link: `/${entry.slug}`,
         title: entry.data.title,
         pubDate: entry.data.pubDate,
@@ -30,7 +29,13 @@ export async function GET(context: APIContext) {
           });
         })(),
       })),
-  );
+      ...(await getCollection('external-post')).map((entry) => ({
+        link: entry.data.link,
+        title: entry.data.title,
+        pubDate: entry.data.pubDate,
+      })),
+    ])
+  ).toSorted((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
   return rss({
     title: siteTitle,
