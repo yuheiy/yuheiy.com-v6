@@ -8,9 +8,8 @@ import { renderDateToHtml } from '../lib/render-date-to-html';
 
 const title = 'ブログ';
 
-const entries = await getCollection('blog');
 const items = await Promise.all(
-  entries
+  (await getCollection('blog'))
     .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .map(async (entry) => {
       const description = await getBlogDescription(entry);

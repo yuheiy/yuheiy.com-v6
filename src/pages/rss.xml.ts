@@ -14,9 +14,8 @@ export async function GET(context: APIContext) {
 
   const renderers = await loadRenderers([getContainerRenderer()]);
   const container = await AstroContainer.create({ renderers });
-  const entries = await getCollection('blog');
   const items = await Promise.all(
-    entries
+    (await getCollection('blog'))
       .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
       .map(async (entry) => ({
         link: `/${entry.slug}`,

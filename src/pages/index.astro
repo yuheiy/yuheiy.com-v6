@@ -111,9 +111,8 @@ const projectItems = [
   },
 ] satisfies DetailsListItem[];
 
-const entries = await getCollection('blog');
 const latestBlogItems = await Promise.all(
-  entries
+  (await getCollection('blog'))
     .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .slice(0, 3)
     .map(async (entry) => ({
