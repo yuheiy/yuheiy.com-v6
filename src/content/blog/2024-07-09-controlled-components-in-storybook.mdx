@@ -14,7 +14,7 @@ import { MouseEvent, ReactNode } from 'react';
 
 export interface ButtonProps {
   children?: ReactNode | undefined;
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: ((event: MouseEvent<HTMLButtonElement>) => void) | undefined;
 }
 
 export function Button({ children, onClick }: ButtonProps) {
@@ -65,6 +65,8 @@ function Primary() {
 
 一方、[controlledなコンポーネント](https://ja.react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components)のstoryを作成する場合、そのコンポーネントの状態を外部から制御するための実装が必要になる。たとえば次のように。
 
+`ToggleButton.tsx`:
+
 ```tsx
 import { ReactNode, useCallback } from 'react';
 
@@ -87,8 +89,11 @@ export function ToggleButton({ isSelected, children, onChange }: ToggleButtonPro
 }
 ```
 
+`ToggleButton.stories.tsx`:
+
 ```tsx
 import { useState } from 'react';
+import { ToggleButton } from './ToggleButton';
 
 function Primary() {
   const [isSelected, setSelected] = useState(false);
@@ -104,6 +109,8 @@ function Primary() {
 ## `render`メソッドの実装
 
 これをstoryとして表現するには、`component`プロパティにコンポーネントを指定するだけでは不十分である。そこでこの描画方法をカスタマイズするために、`render`メソッドを併せて実装する必要がある。
+
+`ToggleButton.stories.tsx`:
 
 ```tsx
 import type { Meta, StoryObj } from '@storybook/react';
@@ -150,6 +157,8 @@ import withoutUseArgsVideo from './assets/2024-07-09-controlled-components-in-st
 
 そのようなケースに対応すべく、argsの値を操作する[`useArgs`フック](https://storybook.js.org/docs/writing-stories/args#setting-args-from-within-a-story)がStorybookによって提供されている。これを利用することで次のような実装ができる。
 
+`ToggleButton.stories.tsx`:
+
 ```tsx
 import { useArgs } from '@storybook/preview-api';
 import type { Meta, StoryObj } from '@storybook/react';
@@ -181,6 +190,8 @@ const meta = {
 残る問題は、argsに設定されている`onChange`が呼び出されていないことである。`onChange`に渡されている[`fn()`はメソッドをモックするための機能](https://storybook.js.org/docs/essentials/actions#via-storybooktest-fn-spy-function)であり、[Jestにあるモック関数](https://jestjs.io/ja/docs/mock-functions)に似たものだ。これを用いることで、呼び出しのたびにStorybookのActionsパネルにログを表示したり、interaction testsにて呼び出し回数を調べたりできる。storyをより有用なものにするには、これが機能している方が良いだろう。
 
 そんなわけで、このモックの呼び出しを有効にするには、次のように実装する。
+
+`ToggleButton.stories.tsx`:
 
 ```tsx
 import { useArgs } from '@storybook/preview-api';
@@ -228,6 +239,8 @@ import withUseArgsVideo from './assets/2024-07-09-controlled-components-in-story
 しかし、`useArgs`フックには、[同一ページ内の複数箇所で呼び出されると正しく機能しないという不具合がある](https://github.com/storybookjs/storybook/issues/25380)。したがって、[Autodocs](https://storybook.js.org/docs/writing-docs/autodocs)によって生成されるドキュメントページなどではコンポーネントが操作不能になってしまうため、都合が悪い。
 
 そのため、`useArgs`フックを使わないパターンの実装も紹介しておく。次のようになる。
+
+`ToggleButton.stories.tsx`:
 
 ```tsx
 import type { Meta, StoryObj } from '@storybook/react';
@@ -284,6 +297,8 @@ export const SelectedByDefault = {
 
 [React Spectrum](https://react-spectrum.adobe.com/)で利用されている[@react-stately/utils](https://github.com/adobe/react-spectrum/tree/%40react-stately/utils%403.10.1/packages/%40react-stately/utils)では、そのための`useControlledState`フックが提供されており、次のような実装ができる。
 
+`ToggleButton.tsx`:
+
 ```tsx
 import { ReactNode, useCallback } from 'react';
 import { useControlledState } from '@react-stately/utils';
@@ -292,7 +307,7 @@ export interface ToggleButtonProps {
   isSelected?: boolean;
   defaultSelected?: boolean;
   children?: ReactNode | undefined;
-  onChange?: (isSelected: boolean) => void;
+  onChange?: ((isSelected: boolean) => void) | undefined;
 }
 
 export function ToggleButton({ children, ...props }: ToggleButtonProps) {
