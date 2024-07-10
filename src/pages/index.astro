@@ -27,7 +27,7 @@ function toPrimaryItem(entry: CollectionEntry<'blog' | 'external-post'>): Detail
       };
 
     default:
-      throw new TypeError('Unexpected value. Should have been never.');
+      throw new TypeError(entry satisfies never);
   }
 }
 

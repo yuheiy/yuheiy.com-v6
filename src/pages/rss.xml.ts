@@ -14,28 +14,39 @@ export async function GET(context: APIContext) {
 
   const renderers = await loadRenderers([getContainerRenderer()]);
   const container = await AstroContainer.create({ renderers });
-  const items = (
-    await Promise.all([
-      ...(await getCollection('blog')).map(async (entry) => ({
-        link: `/${entry.slug}`,
-        title: entry.data.title,
-        pubDate: entry.data.pubDate,
-        description: await getBlogDescription(entry),
-        content: await (async () => {
-          const { Content } = await entry.render();
-          const content = await container.renderToString(Content);
-          return sanitizeHtml(content, {
-            allowedTags: [...sanitizeHtml.defaults.allowedTags, 'img'],
-          });
-        })(),
-      })),
-      ...(await getCollection('external-post')).map((entry) => ({
-        link: entry.data.link,
-        title: entry.data.title,
-        pubDate: entry.data.pubDate,
-      })),
-    ])
-  ).toSorted((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+  const items = await Promise.all(
+    [...(await getCollection('blog')), ...(await getCollection('external-post'))]
+      .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+      .map(async (entry) => {
+        switch (entry.collection) {
+          case 'blog':
+            return {
+              link: `/${entry.slug}`,
+              title: entry.data.title,
+              pubDate: entry.data.pubDate,
+              description: await getBlogDescription(entry),
+              content: await (async () => {
+                const { Content } = await entry.render();
+                const content = await container.renderToString(Content);
+                return sanitizeHtml(content, {
+                  allowedTags: [...sanitizeHtml.defaults.allowedTags, 'img'],
+                });
+              })(),
+            };
+
+          case 'external-post':
+            return {
+              link: entry.data.link,
+              title: entry.data.title,
+              pubDate: entry.data.pubDate,
+            };
+
+          default:
+            throw new TypeError(entry satisfies never);
+        }
+      }),
+  );
 
   return rss({
     title: siteTitle,
