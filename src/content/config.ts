@@ -27,5 +27,5 @@ const externalPost = defineCollection({
 
 export const collections = {
   blog,
-  externalPost,
+  'external-post': externalPost,
 };
