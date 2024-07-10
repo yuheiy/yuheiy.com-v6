@@ -13,7 +13,7 @@ const blog = defineCollection({
 });
 
 const externalPost = defineCollection({
-  type: 'content',
+  type: 'data',
   // Type-check frontmatter using a schema
   schema: () =>
     z.object({
