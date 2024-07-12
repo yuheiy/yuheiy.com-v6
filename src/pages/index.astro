@@ -7,15 +7,18 @@ import PageHeader from '../components/PageHeader.astro';
 import { siteDescription, siteTitle } from '../consts';
 import Layout from '../layouts/Layout.astro';
 import { getBlogDescription } from '../lib/get-blog-description';
+import { getBlogUrl } from '../lib/get-blog-url';
 import { renderDateToHtml } from '../lib/render-date-to-html';
 import { renderYearMonthRangeToHtml } from '../lib/render-year-month-range-to-html';
+
+const everylayoutUrl = getBlogUrl(await getEntry('blog', '20211011-publication-of-everylayout'));
 
 function toPrimaryItem(entry: CollectionEntry<'blog' | 'external-post'>): DetailsListItem {
   switch (entry.collection) {
     case 'blog':
       return {
         title: entry.data.title,
-        link: `/${entry.slug}`,
+        link: getBlogUrl(entry),
         meta: siteTitle,
       };
 
@@ -115,13 +118,11 @@ const latestBlogItems = await Promise.all(
     .slice(0, 3)
     .map(async (entry) => ({
       title: entry.data.title,
-      link: `/${entry.slug}`,
+      link: getBlogUrl(entry),
       meta: renderDateToHtml(entry.data.pubDate),
       description: await getBlogDescription(entry),
     })),
 );
-
-const everylayoutEntry = await getEntry('blog', '20211011-publication-of-everylayout');
 ---
 
 <Layout isHome description={siteDescription}>
@@ -129,7 +130,7 @@ const everylayoutEntry = await getEntry('blog', '20211011-publication-of-everyla
     <div class="space-y-4 text-dynamic-muted [&_a:any-link]:text-dynamic">
       <p>{siteDescription}</p>
       <p>
-        監訳を担当した書籍『<a href={`/${everylayoutEntry.slug}`}
+        監訳を担当した書籍『<a href={everylayoutUrl}
           >Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a
         >』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a
         >。

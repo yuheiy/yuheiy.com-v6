@@ -8,6 +8,7 @@ import sanitizeHtml from 'sanitize-html';
 import invariant from 'tiny-invariant';
 import { siteDescription, siteTitle } from '../consts';
 import { getBlogDescription } from '../lib/get-blog-description';
+import { getBlogUrl } from '../lib/get-blog-url';
 
 export async function GET(context: APIContext) {
   invariant(context.site);
@@ -22,7 +23,7 @@ export async function GET(context: APIContext) {
         switch (entry.collection) {
           case 'blog':
             return {
-              link: `/${entry.slug}`,
+              link: getBlogUrl(entry),
               title: entry.data.title,
               pubDate: entry.data.pubDate,
               description: await getBlogDescription(entry),

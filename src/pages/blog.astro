@@ -4,6 +4,7 @@ import DetailsList from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 import { getBlogDescription } from '../lib/get-blog-description';
+import { getBlogUrl } from '../lib/get-blog-url';
 import { renderDateToHtml } from '../lib/render-date-to-html';
 
 const title = 'ブログ';
@@ -15,7 +16,7 @@ const items = await Promise.all(
       const description = await getBlogDescription(entry);
       return {
         title: entry.data.title,
-        link: `/${entry.slug}`,
+        link: getBlogUrl(entry),
         meta: renderDateToHtml(entry.data.pubDate),
         description,
       };
