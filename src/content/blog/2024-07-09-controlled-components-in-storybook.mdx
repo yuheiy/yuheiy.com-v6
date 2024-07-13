@@ -304,8 +304,8 @@ import { ReactNode, useCallback } from 'react';
 import { useControlledState } from '@react-stately/utils';
 
 export interface ToggleButtonProps {
-  isSelected?: boolean;
-  defaultSelected?: boolean;
+  isSelected?: boolean | undefined;
+  defaultSelected?: boolean | undefined;
   children?: ReactNode | undefined;
   onChange?: ((isSelected: boolean) => void) | undefined;
 }
