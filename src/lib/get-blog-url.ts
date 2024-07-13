@@ -1,5 +1,5 @@
-import type { CollectionEntry } from "astro:content";
+import type { CollectionEntry } from 'astro:content';
 
 export function getBlogUrl(entry: CollectionEntry<'blog'>) {
-  return `/${entry.slug}`
+  return `/${entry.slug}`;
 }
