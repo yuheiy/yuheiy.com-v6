@@ -12,15 +12,12 @@ const title = 'ブログ';
 const items = await Promise.all(
   (await getCollection('blog'))
     .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-    .map(async (entry) => {
-      const description = await getBlogDescription(entry);
-      return {
-        title: entry.data.title,
-        link: getBlogUrl(entry),
-        meta: renderDateToHtml(entry.data.pubDate),
-        description,
-      };
-    }),
+    .map(async (entry) => ({
+      title: entry.data.title,
+      link: getBlogUrl(entry),
+      meta: renderDateToHtml(entry.data.pubDate),
+      description: await getBlogDescription(entry),
+    })),
 );
 ---
 

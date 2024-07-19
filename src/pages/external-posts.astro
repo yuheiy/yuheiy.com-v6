@@ -8,16 +8,14 @@ import { renderDateToHtml } from '../lib/render-date-to-html';
 const title = '外部サイトの投稿';
 const description = '外部サイトに寄稿した記事、登壇したイベントやスライド、出版物など。';
 
-const items = await Promise.all(
-  (await getCollection('external-post'))
-    .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-    .map(async (entry) => ({
-      title: entry.data.title,
-      link: entry.data.link,
-      meta: `${renderDateToHtml(entry.data.pubDate)} · ${entry.data.channel}`,
-      description: entry.data.description,
-    })),
-);
+const items = (await getCollection('external-post'))
+  .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .map((entry) => ({
+    title: entry.data.title,
+    link: entry.data.link,
+    meta: `${renderDateToHtml(entry.data.pubDate)} · ${entry.data.channel}`,
+    description: entry.data.description,
+  }));
 ---
 
 <Layout title={title} description={description}>

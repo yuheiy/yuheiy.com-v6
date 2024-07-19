@@ -6,8 +6,7 @@ import { getBlogDescription } from '../lib/get-blog-description';
 import { renderDateToHtml } from '../lib/render-date-to-html';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('blog');
-  return entries.map((entry) => ({
+  return (await getCollection('blog')).map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));

@@ -13,8 +13,9 @@ import { getBlogUrl } from '../lib/get-blog-url';
 export async function GET(context: APIContext) {
   invariant(context.site);
 
-  const renderers = await loadRenderers([getContainerRenderer()]);
-  const container = await AstroContainer.create({ renderers });
+  const container = await AstroContainer.create({
+    renderers: await loadRenderers([getContainerRenderer()]),
+  });
 
   const items = await Promise.all(
     [...(await getCollection('blog')), ...(await getCollection('external-post'))]
