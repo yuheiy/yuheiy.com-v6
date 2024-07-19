@@ -10,6 +10,7 @@ const remarkInjectDescription: Pluggable = () => {
   return (tree, { data }) => {
     const firstParagraph = select('paragraph', tree as Node);
     if (firstParagraph) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (data.astro as any).frontmatter.description = toString(firstParagraph);
     }
   };
