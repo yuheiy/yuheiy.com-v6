@@ -19,11 +19,11 @@ CSSの`text-wrap`プロパティを使うと、テキストの行の折り返し
 
 しかし正確に言えば、すべての行の長さが必ずしもまったく同じになるわけではない。文字の適切な折り返し位置を考慮した上で、おおよそ同じくらいの長さになるように分配される、というのが正しい。その際、一つの英単語の途中で行が分割されるようなことは通常起こらない。これは、英語では単語の区切りに空白文字を挟んで記述されるが（[わかち書き](https://ja.wikipedia.org/wiki/%E3%82%8F%E3%81%8B%E3%81%A1%E6%9B%B8%E3%81%8D)）、それが改行位置を決めるためのヒントとなるからである。
 
-だが日本語の場合は都合が違う。改行できる位置に空白文字が挟まることがないため、文節や単語の途中でも関係なく改行が行われる仕様になっている。したがって、日本語にそのまま`text-wrap`プロパティを適用しても、英語の例と同じように好ましい結果にはならない。
+だが日本語の場合は都合が違う。改行できる位置に空白文字が挟まることがないため、文節や単語の途中でも関係なく改行される仕様になっている。したがって、日本語にそのまま`text-wrap`プロパティを適用しても、英語の例と同じように好ましい結果にはならない。
 
 ## 文節区切りでの改行の実現
 
-日本語においても適切な位置で改行がなされるようにするための手法はいくつかあるが、最も有望なのは`word-break: auto-phrase`を使うことであろう。これによって文節区切りの改行ができる。
+日本語においても適切な位置で改行がなされるようにするための手法はいくつかあるが、最も有望なのは`word-break: auto-phrase`を使うことであろう。これによって文節区切りの改行が実現できる。
 
 ```html
 <html lang="ja">
@@ -46,7 +46,7 @@ CSSの`text-wrap`プロパティを使うと、テキストの行の折り返し
   </figcaption>
 </figure>
 
-改行位置を手動で調整するやり方もあるが、この例ではそれが自動的に行えるという点が先進的だ。現状、[このプロパティのサポート状況は十分ではない](https://caniuse.com/mdn-css_properties_word-break_auto-phrase)ため、必要に応じて[BudouX](https://developers-jp.googleblog.com/2023/09/budoux-adobe.html)の使用なども検討すると良いだろう。
+改行位置を手動で調整するやり方もあるが、この手法ではそれが自動的に行えるという点が先進的だ。現状、[このプロパティのサポート状況は十分ではない](https://caniuse.com/mdn-css_properties_word-break_auto-phrase)ため、必要に応じて[BudouX](https://developers-jp.googleblog.com/2023/09/budoux-adobe.html)の使用なども検討すると良いだろう。
 
 ## `balance`と`pretty`の使い分け
 
@@ -64,7 +64,7 @@ CSSの`text-wrap`プロパティを使うと、テキストの行の折り返し
   </figcaption>
 </figure>
 
-欧文組版においては、最後の行に一つの単語だけが配置された状態を[widows and orphans](https://fonts.google.com/knowledge/glossary/widows_orphans)と呼び、テキストが読みにくくするとして避けられている。`pretty`はこの問題を解決するためのものである。
+欧文組版においては、最後の行に一つだけ配置された単語を[widows and orphans](https://fonts.google.com/knowledge/glossary/widows_orphans)と呼び、これがあるとテキストが読みになるとして避けられている。`pretty`はこの問題を解決するためのものである。
 
 しかし、`pretty`は欧文の本文に適用するためのものであるようにしばしば紹介されるが、見出しなどでも有効に活用できる。見出しのレイアウトにおいては、中央揃えなら`balance`だが、行頭揃えなら`pretty`の方が見栄えがよくなるという個人的な経験則がある。なぜなら行頭揃えの見出しに`balance`を適用してしまうと、行の幅がその周辺のコンテンツよりもやけに狭く見えたり、行末方向にできた余白が不自然に大きく見えてしまったりしがちだ。これは日本語や英語に限らない一般的な現象である。
 
@@ -80,37 +80,31 @@ import _4Video from './assets/2024-07-22-text-wrap-in-japanese/4.mp4';
   </figcaption>
 </figure>
 
-代わりに`pretty`を適用することで、行の幅は自然なままで、折り返しが不自然になることは防ぐことができる。
+代わりに`pretty`を適用することで、行の幅は自然なままにしつつ、折り返しが不自然になることは防ぐことができる。
 
 ## 日本語における適用方法
 
-widows and orphansは欧文固有の問題であり、日本語では事情が異なる。日本語の本文は[ベタ組み](https://github.com/fontplus/web-typography-glossary/blob/master/terms/betagumi.md)にすることが原則であり、単語や文節に応じた折り返し位置の調整は行わないからだ。したがって同じ理由で、本文に`balance`を適用することもないはずだ。
+widows and orphansは欧文固有の問題であり、日本語では事情が異なる。日本語の本文は[ベタ組み](https://github.com/fontplus/web-typography-glossary/blob/master/terms/betagumi.md)にすることが原則であり、単語や文節に応じた折り返し位置の調整は行わないからである。したがって同じ理由で、本文に`balance`を適用することもないはずだ。
 
 そのため`text-wrap`プロパティの使いどころは、本文を除く見出し部分などが主となる。方針によっては、リードやキャプションなどを含むこともあるだろう。
 
-ここまで説明してきて、適用方法がやや複雑になってきたので、フローチャートを用いて整理してみる。もっとも英語の場合は比較的シンプルである。
+ここまでの説明を経てルールがやや複雑になってきたので、フローチャートを用いて整理してみる。もっとも英語の場合は比較的シンプルである。
 
-<figure>
-  ![](./assets/2024-07-22-text-wrap-in-japanese/5.png)
-  <figcaption>欧文のフローチャート</figcaption>
-</figure>
+<figure>![](./assets/2024-07-22-text-wrap-in-japanese/5.png "欧文のフローチャート")</figure>
 
 行頭揃えの見出しには`text-wrap: pretty`、中央揃えの見出しには`text-wrap: balance`。本文は常に`text-wrap: pretty`。
 
 日本語の場合、見出しと本文でテキストの組み方が異なるほか、リードやキャプションをどのように組むかも方針によるため、やや複雑になる。
 
-<figure>
-  ![](./assets/2024-07-22-text-wrap-in-japanese/6.png)
-  <figcaption>和文のフローチャート</figcaption>
-</figure>
+<figure>![](./assets/2024-07-22-text-wrap-in-japanese/6.png "和文のフローチャート")</figure>
 
 行頭揃えの見出しには`text-wrap: pretty`、中央揃えの見出しには`text-wrap: balance`。「本文 or 注」には`text-wrap`プロパティは使用しない。「リード or キャプション」は、見出し組にするのなら見出しと同じ、本文組にするのなら本文と同じ。
 
 また、見出し組では文節改行かつ[プロポーショナル](https://github.com/fontplus/web-typography-glossary/blob/master/terms/proportional-metrics.md)詰め、本文組ではベタ組みにするのが一般的であるため、フローチャートでは次のように整理できる。
 
 <figure>
-  ![](./assets/2024-07-22-text-wrap-in-japanese/7.png)
-  <figcaption>欧文と和文のフローチャートに加えて、それぞれの方針を示したもの</figcaption>
+  ![](./assets/2024-07-22-text-wrap-in-japanese/7.png
+  "欧文と和文のフローチャートに加えて、それぞれの方針を示したもの")
 </figure>
 
 欧文は常に文節改行かつプロポーショナル詰めになる。和文の場合は、見出し組の場合は文節改行かつプロポーショナル詰めだが、本文組ではベタ組みになる。
