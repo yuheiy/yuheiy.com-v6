@@ -145,11 +145,14 @@ metadata（`meta`）として指定された値はstoryに継承されるため�
 
 これによって、controlledなコンポーネントを操作可能なstoryをを作成できる。ただしこの実装では、Storybookのcontrolsからargsの値を制御できなくなってしまう。
 
-import withoutUseArgsVideo from './assets/2024-07-09-controlled-components-in-storybook/without-useargs.mp4';
-
 <figure>
   <video controls playsinline>
-    <source src={withoutUseArgsVideo} />
+    <source
+      src={
+        (await import('./assets/2024-07-09-controlled-components-in-storybook/without-useargs.mp4'))
+          .default
+      }
+    />
   </video>
 </figure>
 

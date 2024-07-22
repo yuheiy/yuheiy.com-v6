@@ -4,7 +4,6 @@ pubDate: 2022-08-11T20:25:00.000+09:00
 ---
 
 import { Tweet } from 'astro-embed';
-
 import { Image } from 'astro:assets';
 
 テキストの行の末尾にアイコンを付随させるというレイアウトがある。
@@ -62,11 +61,9 @@ import { Image } from 'astro:assets';
 }
 ```
 
-import _3Video from './assets/2022-08-11-text-with-accompanying-icon/3.mp4';
-
 <figure>
   <video controls playsinline style="width: calc(1560/2/16*1rem);">
-    <source src={_3Video} />
+    <source src={(await import('./assets/2022-08-11-text-with-accompanying-icon/3.mp4')).default} />
   </video>
 </figure>
 
