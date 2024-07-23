@@ -82,6 +82,8 @@ CSSの`text-wrap`プロパティを使うと、テキストの行の折り返し
 
 代わりに`pretty`を適用することで、行の幅は自然なままにしつつ、折り返しが不自然になることは回避できる。
 
+ただし、[`pretty`のサポート状況も十分ではない](https://caniuse.com/mdn-css_properties_text-wrap_pretty)ため、プログレッシブエンハンスメントとして採用するのがよいだろう。
+
 ## 日本語における適用方法
 
 widows and orphansは欧文固有の問題であり、日本語では事情が異なる。日本語の本文は[ベタ組み](https://github.com/fontplus/web-typography-glossary/blob/master/terms/betagumi.md)にすることが原則であり、単語や文節に応じた折り返し位置の調整は行わないからである。したがって同じ理由で、本文に`balance`を適用することもないはずだ。
