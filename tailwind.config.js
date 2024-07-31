@@ -1,9 +1,13 @@
-/* eslint-disable */
-const fs = require('node:fs');
-const path = require('node:path');
-const postcss = require('postcss');
-const colors = require('tailwindcss/colors');
-const plugin = require('tailwindcss/plugin');
+import containerQueries from '@tailwindcss/container-queries';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import postcss from 'postcss';
+import colors from 'tailwindcss/colors';
+import plugin from 'tailwindcss/plugin';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * Loads CSS files through Tailwind’s plugin system to enable IntelliSense support.
@@ -13,7 +17,7 @@ const plugin = require('tailwindcss/plugin');
  */
 const cssFiles = plugin(({ addBase, addComponents, addUtilities }) => {
   const layers = ['base', 'components', 'utilities'];
-  const stylesDir = path.join(__dirname, 'src/styles');
+  const stylesDirectoryPath = path.join(__dirname, 'src/styles');
   const addStylesMap = {
     base: addBase,
     components: addComponents,
@@ -21,13 +25,13 @@ const cssFiles = plugin(({ addBase, addComponents, addUtilities }) => {
   };
 
   for (const layer of layers) {
-    const layerDir = path.join(stylesDir, layer);
-    const files = fs.readdirSync(layerDir);
+    const layerDirectoryPath = path.join(stylesDirectoryPath, layer);
+    const fileNames = fs.readdirSync(layerDirectoryPath);
     const addStyles = addStylesMap[layer];
 
-    for (const file of files) {
-      if (path.extname(file) === '.css') {
-        const filePath = path.join(layerDir, file);
+    for (const fileName of fileNames) {
+      if (path.extname(fileName) === '.css') {
+        const filePath = path.join(layerDirectoryPath, fileName);
         const content = fs.readFileSync(filePath, 'utf8');
         const styles = postcss.parse(content);
         addStyles(styles.nodes);
@@ -37,7 +41,7 @@ const cssFiles = plugin(({ addBase, addComponents, addUtilities }) => {
 });
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   safelist: ['astro-code'],
   theme: {
@@ -93,5 +97,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/container-queries'), cssFiles],
+  plugins: [containerQueries, cssFiles],
 };
