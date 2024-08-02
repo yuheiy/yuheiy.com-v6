@@ -13,6 +13,7 @@ interface BaseProps {
   twitterCard?: 'summary' | 'summary_large_image' | undefined;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface GeneralProps extends BaseProps {}
 
 interface HomeProps extends Omit<BaseProps, 'isHome' | 'title'> {
