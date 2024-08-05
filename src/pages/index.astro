@@ -35,17 +35,16 @@ function toPrimaryItem(entry: CollectionEntry<'blog' | 'external-post'>): Detail
 }
 
 const primaryItems = [
+  toPrimaryItem(await getEntry('external-post', '2024-08-05-analyze-internal-ui-library-usage')),
+  toPrimaryItem(await getEntry('blog', '2024-07-22-text-wrap-in-japanese')),
   toPrimaryItem(await getEntry('external-post', '2023-07-24-gihyojp-tailwindcss')),
-  toPrimaryItem(await getEntry('blog', '2023-02-06-tailwind-css-in-wdpress')),
   toPrimaryItem(await getEntry('blog', '2022-11-03-how-to-understand-the-markup')),
   toPrimaryItem(await getEntry('blog', '2022-08-01-declarative-design')),
   toPrimaryItem(await getEntry('blog', '2022-06-11-css-components')),
   toPrimaryItem(await getEntry('external-post', '2022-05-27-body-typography')),
   toPrimaryItem(await getEntry('external-post', '2021-12-27-shiftbrain-everylayout')),
-  toPrimaryItem(await getEntry('external-post', '2021-12-16-codegrid-everylayout')),
   toPrimaryItem(await getEntry('blog', '20211011-publication-of-everylayout')),
   toPrimaryItem(await getEntry('blog', '20210127-prefer-margin-top')),
-  toPrimaryItem(await getEntry('external-post', '2020-07-09-codegrid-tailwindcss')),
   {
     title:
       'CSSのユーティリティクラスと「関心の分離」&mdash;&mdash;いかにしてユーティリティファーストにたどり着いたか（翻訳）',
