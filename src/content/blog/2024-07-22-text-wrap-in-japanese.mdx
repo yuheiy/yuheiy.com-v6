@@ -90,7 +90,7 @@ widows and orphansは欧文固有の問題であり、日本語では事情が�
 
 そのため`text-wrap`プロパティの使いどころは、本文を除く見出し部分などが主となる。方針によっては、リードやキャプションなどを含むこともあるだろう。
 
-ここまでの説明を経てルールがやや複雑になってきたので、フローチャートを用いて整理してみる。もっとも英語の場合は比較的シンプルである。
+ここまでの説明を経てルールがやや複雑になってきたので、フローチャートを用いて整理してみる。英語の場合、行揃えの方向によって使い方が異なる。
 
 <figure>
   ![](./assets/2024-07-22-text-wrap-in-japanese/flowchart-latin.png "欧文のフローチャート")
@@ -98,44 +98,41 @@ widows and orphansは欧文固有の問題であり、日本語では事情が�
 
 行頭揃えの見出しには`text-wrap: pretty`、中央揃えの見出しには`text-wrap: balance`。本文は常に`text-wrap: pretty`。
 
-日本語の場合、見出しと本文でテキストの組み方が異なるほか、リードやキャプションをどのように組むかも方針によるため、やや複雑になる。
+日本語の場合、見出しか本文かによってテキストの組み方が異なる。
 
 <figure>
   ![](./assets/2024-07-22-text-wrap-in-japanese/flowchart-japanese.png "和文のフローチャート")
 </figure>
 
-行頭揃えの見出しには`text-wrap: pretty`、中央揃えの見出しには`text-wrap: balance`。「本文 or 注」には`text-wrap`プロパティは使用しない。「リード or キャプション」は、見出し組にするのなら見出しと同じ、本文組にするのなら本文と同じ。
+行頭揃えの見出しには`text-wrap: pretty`、中央揃えの見出しには`text-wrap: balance`。本文には`text-wrap`プロパティは使用しない。これに当てはまらないリードやキャプションなどについては、方針に応じていずれかの組み方に合わせる。
 
-また、見出し組では文節改行かつ[プロポーショナル](https://github.com/fontplus/web-typography-glossary/blob/master/terms/proportional-metrics.md)詰め、本文組ではベタ組みにするのが一般的であるため、フローチャートでは次のように整理できる。
+また、見出しは文節改行かつ[プロポーショナル](https://github.com/fontplus/web-typography-glossary/blob/master/terms/proportional-metrics.md)詰め、本文はベタ組みにするのが一般的であるため、フローチャートでは次のように整理できる。
 
 <figure>
   ![](./assets/2024-07-22-text-wrap-in-japanese/flowchart-overall.png
   "欧文と和文のフローチャートに加えて、それぞれの方針を示したもの")
 </figure>
 
-欧文は常にプロポーショナル詰めになる。和文の場合は、見出し組の場合は文節改行かつプロポーショナル詰めだが、本文組ではベタ組みになる。
+欧文は常にプロポーショナル詰めになる。和文の場合は、見出しの場合は文節改行かつプロポーショナル詰めだが、本文ではベタ組みになる。
 
 ここまで述べてきた方針は、次のようなCSSとして表現できる。
 
 ```css
 .heading {
-  &:lang(en) {
-    font-kerning: normal;
-  }
+  font-kerning: normal;
 
   &:lang(ja) {
-    font-kerning: normal;
     font-feature-settings: 'palt';
     word-break: auto-phrase;
   }
 }
 
-.heading.left {
+.heading.align-left {
   text-align: left;
   text-wrap: pretty;
 }
 
-.heading.center {
+.heading.align-center {
   text-align: center;
   text-wrap: balance;
 }
