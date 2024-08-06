@@ -23,13 +23,13 @@ const Heading = `h${headingLevel}`;
       <article>
         <header>
           {item.meta && <p class="mb-1 text-sm text-dynamic-muted" set:html={item.meta} />}
-          <Heading>
+          <Heading class:list="pb-0.5">
             <a href={item.link} set:html={item.title} />
           </Heading>
         </header>
         {item.description && (
           <p
-            class:list={['mt-1.5 text-sm text-dynamic-muted', clampDescription && 'line-clamp-3']}
+            class:list={['mt-1 text-sm text-dynamic-muted', clampDescription && 'line-clamp-3']}
             set:html={item.description}
           />
         )}
