@@ -59,7 +59,7 @@
 
   blockquote:not(.twitter-tweet) {
     position: relative;
-    padding-inline-start: 2em;
+    padding-inline-start: 2ic;
 
     > * + * {
       margin-top: theme(spacing.5);
@@ -75,7 +75,7 @@
   }
 
   :is(ol, ul) {
-    padding-inline-start: 2em;
+    padding-inline-start: 2ic;
     list-style-type: revert;
     margin-trim: block;
   }
