@@ -18,7 +18,7 @@ export async function GET(context: APIContext) {
   });
 
   const items = await Promise.all(
-    [...(await getCollection('blog')), ...(await getCollection('external-post'))]
+    [...(await getCollection('blog')), ...(await getCollection('contributions'))]
       .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
       .map(async (entry) => {
         switch (entry.collection) {
@@ -37,7 +37,7 @@ export async function GET(context: APIContext) {
               })(),
             };
 
-          case 'external-post':
+          case 'contributions':
             return {
               link: entry.data.link,
               title: entry.data.title,

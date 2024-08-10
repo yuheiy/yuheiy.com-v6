@@ -8,7 +8,7 @@ import { renderDateToHtml } from '../lib/render-date-to-html';
 const title = '外部サイトの投稿';
 const description = '外部サイトに寄稿した記事、登壇したイベントやスライド、出版物など。';
 
-const items = (await getCollection('external-post'))
+const items = (await getCollection('contributions'))
   .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .map((entry) => ({
     title: entry.data.title,
