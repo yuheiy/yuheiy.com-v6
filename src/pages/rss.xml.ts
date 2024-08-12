@@ -17,38 +17,28 @@ export async function GET(context: APIContext) {
     renderers: await loadRenderers([getContainerRenderer()]),
   });
 
-  const items = await Promise.all(
-    [...(await getCollection('blog')), ...(await getCollection('contributions'))]
-      .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-      .map(async (entry) => {
-        switch (entry.collection) {
-          case 'blog':
-            return {
-              link: getBlogUrl(entry),
-              title: entry.data.title,
-              pubDate: entry.data.pubDate,
-              description: await getBlogDescription(entry),
-              content: await (async () => {
-                const { Content } = await entry.render();
-                const content = await container.renderToString(Content);
-                return sanitizeHtml(content, {
-                  allowedTags: [...sanitizeHtml.defaults.allowedTags, 'img'],
-                });
-              })(),
-            };
-
-          case 'contributions':
-            return {
-              link: entry.data.link,
-              title: entry.data.title,
-              pubDate: entry.data.pubDate,
-            };
-
-          default:
-            throw new TypeError(entry satisfies never);
-        }
-      }),
-  );
+  const items = (
+    await Promise.all([
+      ...(await getCollection('blog')).map(async (entry) => ({
+        link: getBlogUrl(entry),
+        title: entry.data.title,
+        pubDate: entry.data.pubDate,
+        description: await getBlogDescription(entry),
+        content: await (async () => {
+          const { Content } = await entry.render();
+          const content = await container.renderToString(Content);
+          return sanitizeHtml(content, {
+            allowedTags: [...sanitizeHtml.defaults.allowedTags, 'img'],
+          });
+        })(),
+      })),
+      ...(await getCollection('contributions')).map((entry) => ({
+        link: entry.data.link,
+        title: entry.data.title,
+        pubDate: entry.data.pubDate,
+      })),
+    ])
+  ).toSorted((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
   return rss({
     title: siteTitle,
