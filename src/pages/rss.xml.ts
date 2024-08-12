@@ -7,8 +7,7 @@ import { getCollection } from 'astro:content';
 import sanitizeHtml from 'sanitize-html';
 import invariant from 'tiny-invariant';
 import { siteDescription, siteTitle } from '../consts';
-import { getBlogDescription } from '../lib/get-blog-description';
-import { getBlogUrl } from '../lib/get-blog-url';
+import { getBlogDescription, getBlogUrl } from '../lib/blog';
 
 export async function GET(context: APIContext) {
   invariant(context.site);

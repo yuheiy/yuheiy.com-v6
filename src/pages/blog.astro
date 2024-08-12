@@ -3,9 +3,8 @@ import { getCollection } from 'astro:content';
 import DetailsList from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
-import { getBlogDescription } from '../lib/get-blog-description';
-import { getBlogUrl } from '../lib/get-blog-url';
-import { renderDateToHtml } from '../lib/render-date-to-html';
+import { getBlogDescription, getBlogUrl } from '../lib/blog';
+import { renderDateToHtml } from '../lib/time-renderers';
 
 const title = 'ブログ';
 

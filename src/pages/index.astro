@@ -6,10 +6,8 @@ import DetailsList from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { siteDescription, siteTitle } from '../consts';
 import Layout from '../layouts/Layout.astro';
-import { getBlogDescription } from '../lib/get-blog-description';
-import { getBlogUrl } from '../lib/get-blog-url';
-import { renderDateToHtml } from '../lib/render-date-to-html';
-import { renderYearMonthRangeToHtml } from '../lib/render-year-month-range-to-html';
+import { getBlogDescription, getBlogUrl } from '../lib/blog';
+import { renderDateToHtml, renderYearMonthRangeToHtml } from '../lib/time-renderers';
 
 const everylayoutUrl = getBlogUrl(await getEntry('blog', '20211011-publication-of-everylayout'));
 

@@ -2,8 +2,8 @@
 import { getCollection } from 'astro:content';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
-import { getBlogDescription } from '../lib/get-blog-description';
-import { renderDateToHtml } from '../lib/render-date-to-html';
+import { getBlogDescription } from '../lib/blog';
+import { renderDateToHtml } from '../lib/time-renderers';
 
 export async function getStaticPaths() {
   return (await getCollection('blog')).map((entry) => ({
