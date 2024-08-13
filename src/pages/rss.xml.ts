@@ -6,7 +6,7 @@ import { loadRenderers } from 'astro:container';
 import { getCollection } from 'astro:content';
 import sanitizeHtml from 'sanitize-html';
 import invariant from 'tiny-invariant';
-import { siteDescription, siteTitle } from '../consts';
+import { siteTitle } from '../consts';
 import { getBlogDescription, getBlogUrl } from '../lib/blog';
 
 export async function GET(context: APIContext) {
@@ -41,7 +41,8 @@ export async function GET(context: APIContext) {
 
   return rss({
     title: siteTitle,
-    description: siteDescription,
+    description:
+      'ウェブデザインやウェブフロントエンドなどについての雑記、外部サイトに寄稿した記事、登壇したイベントやその資料、出版物など。',
     site: context.site,
     items,
     trailingSlash: false,
