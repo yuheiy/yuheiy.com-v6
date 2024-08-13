@@ -7,6 +7,7 @@ import { getBlogDescription, getBlogUrl } from '../lib/blog';
 import { renderDateToHtml } from '../lib/time-renderers';
 
 const title = 'ブログ';
+const description = 'ウェブデザインやウェブフロントエンドなどについての雑記。';
 
 const items = await Promise.all(
   (await getCollection('blog'))
@@ -20,8 +21,12 @@ const items = await Promise.all(
 );
 ---
 
-<Layout title={title}>
-  <PageHeader title={title} />
+<Layout title={title} description={description}>
+  <PageHeader title={title}>
+    <p class="text-sm text-dynamic-muted">
+      {description}
+    </p>
+  </PageHeader>
 
   <main class="wrapper">
     <DetailsList headingLevel={2} items={items} clampDescription />
