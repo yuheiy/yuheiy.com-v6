@@ -11,7 +11,7 @@ astro-embed-tweet::before {
   border-start-end-radius: theme(borderRadius.md);
   background-color: var(--color-twitter);
   padding: theme(spacing.1) theme(spacing.5);
-  content: 'Twitter';
+  content: 'X (Twitter)';
   color: white;
   font-weight: bold;
   font-size: theme(fontSize.xs);
