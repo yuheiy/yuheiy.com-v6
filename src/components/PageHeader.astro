@@ -20,11 +20,7 @@ const Title = isHome ? 'p' : 'h1';
   <Nav>
     <Logo class="text-sm text-dynamic-muted kerning-normal">
       {/* eslint-disable-next-line astro/jsx-a11y/anchor-is-valid */}
-      <a
-        class="flex w-fit items-center gap-x-3"
-        href={isHome ? null : '/'}
-        title={isHome ? null : 'ホームに戻る'}
-      >
+      <a class="flex w-fit items-center gap-x-3" href={isHome ? null : '/'}>
         <Image
           class="w-7 rounded-full ring-1 ring-dynamic"
           src={import('../assets/favicon.svg')}
