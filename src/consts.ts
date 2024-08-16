@@ -1,4 +1,4 @@
-export const siteTitle = 'Yuhei Yasuda';
+export const siteTitle = 'yuheiy';
 export const siteLang = 'ja';
 export const siteRegion = 'JP';
 export const siteEmail = 'yuhei.yasuda1003@gmail.com';
