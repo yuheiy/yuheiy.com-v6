@@ -59,6 +59,7 @@ export default {
       '6xl': '2.5rem',
     },
     lineHeight: {
+      none: '1',
       tight: '1.5',
       normal: '1.8',
     },
