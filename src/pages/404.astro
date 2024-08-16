@@ -3,7 +3,7 @@ import invariant from 'tiny-invariant';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 
-const title = 'ページが存在しません';
+const title = 'ページが見つかりません';
 
 const searchURL = new URL('https://www.google.com/search');
 invariant(Astro.site);
@@ -16,8 +16,9 @@ searchURL.searchParams.set('q', `site:${Astro.site.host}`);
   <main class="wrapper">
     <div class="prose">
       <p>
-        <a data-internet-archive-link href={`https://web.archive.org/web/*/${Astro.site.href}`}
-          >インターネットアーカイブ</a
+        ページが削除されたか、URLが間違っています。<a
+          data-internet-archive-link
+          href={`https://web.archive.org/web/*/${Astro.site.href}`}>インターネットアーカイブ</a
         >を参照するか、<a href={searchURL}>サイト内を検索する</a
         >と、お探しのページが見つかるかもしれません。
       </p>
