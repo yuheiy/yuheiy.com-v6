@@ -18,9 +18,9 @@ const Title = isHome ? 'p' : 'h1';
 
 <header class="wrapper space-y-8 pt-16">
   <Nav>
-    <Logo class="leading-none text-dynamic-muted kerning-normal">
+    <Logo class="text-sm leading-none text-dynamic-muted kerning-normal">
       {/* eslint-disable-next-line astro/jsx-a11y/anchor-is-valid */}
-      <a class="flex w-fit items-center gap-x-3" href={isHome ? null : '/'}>
+      <a class="flex w-fit items-center gap-x-3.5" href={isHome ? null : '/'}>
         <Image
           class="w-7 rounded-full ring-1 ring-dynamic"
           src={import('../assets/favicon.svg')}
