@@ -24,7 +24,7 @@
     "@astrojs/mdx": "3.1.7",
     "@astrojs/rss": "4.0.7",
     "@astrojs/sitemap": "3.1.6",
-    "@astrojs/tailwind": "5.1.1",
+    "@astrojs/tailwind": "5.1.2",
     "@tailwindcss/container-queries": "0.1.1",
     "astro": "4.15.9",
     "astro-embed": "0.7.2",
