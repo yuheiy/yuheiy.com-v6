@@ -24,7 +24,7 @@ function toPrimaryItem(entry: CollectionEntry<'blog' | 'contributions'>): Detail
       return {
         title: entry.data.title,
         link: entry.data.link,
-        meta: entry.data.channel,
+        meta: entry.data.channelDetail ?? entry.data.channel,
       };
 
     default:

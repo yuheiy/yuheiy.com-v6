@@ -21,6 +21,7 @@ const contributions = defineCollection({
       pubDate: z.date(),
       link: z.string().url(),
       channel: z.string(),
+      channelDetail: z.string().optional(),
       description: z.string().optional(),
     }),
 });

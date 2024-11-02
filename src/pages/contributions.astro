@@ -13,7 +13,10 @@ const items = (await getCollection('contributions'))
   .map((entry) => ({
     title: entry.data.title,
     link: entry.data.link,
-    meta: `${renderDateToHtml(entry.data.pubDate)} · ${entry.data.channel}`,
+    meta: [
+      renderDateToHtml(entry.data.pubDate),
+      `${entry.data.channel}${entry.data.channelDetail ? `（${entry.data.channelDetail}）` : ''}`,
+    ].join(' · '),
     description: entry.data.description,
   }));
 ---
