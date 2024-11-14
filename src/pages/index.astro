@@ -33,6 +33,12 @@ function toPrimaryItem(entry: CollectionEntry<'blog' | 'contributions'>): Detail
 }
 
 const primaryItems = [
+  toPrimaryItem(
+    await getEntry(
+      'contributions',
+      '2024-11-14-build-original-system-to-distribute-constants-files-instead-of-using-npm-packages',
+    ),
+  ),
   toPrimaryItem(await getEntry('contributions', '2024-08-05-analyze-internal-ui-library-usage')),
   toPrimaryItem(await getEntry('blog', '2024-07-22-text-wrap-in-japanese')),
   toPrimaryItem(await getEntry('contributions', '2023-07-24-gihyojp-tailwindcss')),

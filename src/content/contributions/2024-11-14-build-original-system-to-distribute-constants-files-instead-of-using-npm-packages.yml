@@ -1,0 +1,5 @@
+title: 'npmパッケージの代わりに独自の仕組みを構築して定数ファイルを配布する運用に切り替えた経緯と移行プロセス'
+pubDate: 2024-11-14
+link: 'https://tech.plaid.co.jp/build-original-system-to-distribute-constants-files-instead-of-using-npm-packages'
+channel: 'ウェブ'
+channelDetail: 'PLAID Engineer Blog'
