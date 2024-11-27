@@ -70,7 +70,7 @@
     position: absolute;
     inset-block: calc((1lh - 1em) / 2);
     inset-inline-start: 0;
-    border-inline-start-width: theme(borderWidth.2);
+    border-inline-start-width: theme(borderWidth.4);
     content: '';
   }
 
