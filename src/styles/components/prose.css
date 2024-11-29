@@ -23,14 +23,13 @@
     hanging-punctuation: none;
     font-weight: bold;
     line-height: theme(lineHeight.tight);
+    font-feature-settings: 'halt';
     text-wrap: pretty;
     word-break: auto-phrase;
   }
 
   h2 {
     font-size: theme(fontSize.2xl);
-    font-kerning: normal;
-    font-feature-settings: 'palt';
   }
 
   h3 {
