@@ -23,7 +23,6 @@
     hanging-punctuation: none;
     font-weight: bold;
     line-height: theme(lineHeight.tight);
-    font-feature-settings: 'halt';
     text-wrap: pretty;
     word-break: auto-phrase;
   }
