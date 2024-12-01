@@ -33,6 +33,7 @@ function toPrimaryItem(entry: CollectionEntry<'blog' | 'contributions'>): Detail
 }
 
 const primaryItems = [
+  toPrimaryItem(await getEntry('blog', '2024-12-01-i-am-not-a-visual-thinker')),
   toPrimaryItem(
     await getEntry(
       'contributions',
