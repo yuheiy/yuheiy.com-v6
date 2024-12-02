@@ -74,7 +74,6 @@ const canonicalURL = (() => {
     <meta name="color-scheme" content="light dark" />
     {description && <meta name="description" content={description} />}
     <meta name="generator" content={Astro.generator} />
-    <meta name="Hatena::Bookmark" content="nocomment" />
     <meta name="twitter:card" content={twitterCard} />
     <meta name="twitter:site" content={`@${siteTwitterId}`} />
     <meta name="twitter:title" content={title} />
@@ -90,6 +89,7 @@ const canonicalURL = (() => {
     <link rel="alternate" href="/rss.xml" type="application/rss+xml" />
     <link rel="apple-touch-icon" href={appleTouchIconImage.src} />
     <link rel="author" href={`mailto:${siteEmail}`} />
+    <link rel="author" href="https://www.hatena.ne.jp/yuheiy/" />
     {canonicalURL && <link rel="canonical" href={canonicalURL} />}
     <link rel="icon" href={faviconImage.src} type="image/svg+xml" />
   </head>
