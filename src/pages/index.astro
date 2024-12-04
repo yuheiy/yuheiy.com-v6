@@ -107,7 +107,9 @@ const latestBlogItems = await Promise.all(
 
 <Layout isHome description={siteDescription}>
   <PageHeader isHome title="安田 祐平">
-    <div class="space-y-4 text-dynamic-muted [&_a:any-link]:text-dynamic">
+    <div
+      class="space-y-4 text-dynamic-muted [hanging-punctuation:allow-end] [&_a:any-link]:text-dynamic"
+    >
       <p>{siteDescription}</p>
       <p>
         監訳を担当した書籍『<a href={everylayoutUrl}

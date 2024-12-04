@@ -1,5 +1,6 @@
 .prose {
   margin-trim: block;
+  hanging-punctuation: allow-end;
 
   > * {
     margin-block: 0 !important;
