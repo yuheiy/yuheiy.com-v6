@@ -9,7 +9,7 @@ import Layout from '../layouts/Layout.astro';
 import { getBlogDescription, getBlogUrl } from '../lib/blog';
 import { renderDateToHtml, renderYearMonthRangeToHtml } from '../lib/time-renderers';
 
-const everylayoutUrl = getBlogUrl(await getEntry('blog', '20211011-publication-of-everylayout'));
+const everylayoutUrl = getBlogUrl(await getEntry('blog', '20211011-publication-of-everylayout')!);
 
 function toPrimaryItem(entry: CollectionEntry<'blog' | 'contributions'>): DetailsListItem {
   switch (entry.collection) {
@@ -33,33 +33,33 @@ function toPrimaryItem(entry: CollectionEntry<'blog' | 'contributions'>): Detail
 }
 
 const primaryItems = [
-  toPrimaryItem(await getEntry('blog', '2024-12-01-i-am-not-a-visual-thinker')),
+  toPrimaryItem(await getEntry('blog', '2024-12-01-i-am-not-a-visual-thinker')!),
   toPrimaryItem(
     await getEntry(
       'contributions',
       '2024-11-14-build-original-system-to-distribute-constants-files-instead-of-using-npm-packages',
-    ),
+    )!,
   ),
-  toPrimaryItem(await getEntry('contributions', '2024-08-05-analyze-internal-ui-library-usage')),
-  toPrimaryItem(await getEntry('blog', '2024-07-22-text-wrap-in-japanese')),
-  toPrimaryItem(await getEntry('contributions', '2023-07-24-gihyojp-tailwindcss')),
-  toPrimaryItem(await getEntry('blog', '2022-11-03-how-to-understand-the-markup')),
-  toPrimaryItem(await getEntry('blog', '2022-08-14-same-width-buttons')),
-  toPrimaryItem(await getEntry('blog', '2022-08-01-declarative-design')),
-  toPrimaryItem(await getEntry('blog', '2022-06-11-css-components')),
-  toPrimaryItem(await getEntry('contributions', '2022-05-27-body-typography')),
-  toPrimaryItem(await getEntry('contributions', '2021-12-27-shiftbrain-everylayout')),
-  toPrimaryItem(await getEntry('blog', '20211011-publication-of-everylayout')),
-  toPrimaryItem(await getEntry('blog', '20210127-prefer-margin-top')),
+  toPrimaryItem(await getEntry('contributions', '2024-08-05-analyze-internal-ui-library-usage')!),
+  toPrimaryItem(await getEntry('blog', '2024-07-22-text-wrap-in-japanese')!),
+  toPrimaryItem(await getEntry('contributions', '2023-07-24-gihyojp-tailwindcss')!),
+  toPrimaryItem(await getEntry('blog', '2022-11-03-how-to-understand-the-markup')!),
+  toPrimaryItem(await getEntry('blog', '2022-08-14-same-width-buttons')!),
+  toPrimaryItem(await getEntry('blog', '2022-08-01-declarative-design')!),
+  toPrimaryItem(await getEntry('blog', '2022-06-11-css-components')!),
+  toPrimaryItem(await getEntry('contributions', '2022-05-27-body-typography')!),
+  toPrimaryItem(await getEntry('contributions', '2021-12-27-shiftbrain-everylayout')!),
+  toPrimaryItem(await getEntry('blog', '20211011-publication-of-everylayout')!),
+  toPrimaryItem(await getEntry('blog', '20210127-prefer-margin-top')!),
   {
     title:
       'CSSのユーティリティクラスと「関心の分離」&mdash;&mdash;いかにしてユーティリティファーストにたどり着いたか（翻訳）',
     link: 'https://yuheiy.hatenablog.com/entry/2020/05/25/021342',
     meta: 'yuhei blog',
   },
-  toPrimaryItem(await getEntry('contributions', '2019-03-08-html-for-creators')),
+  toPrimaryItem(await getEntry('contributions', '2019-03-08-html-for-creators')!),
   toPrimaryItem(
-    await getEntry('contributions', '2018-10-26-shiftbrain-in-page-links-and-click-event'),
+    await getEntry('contributions', '2018-10-26-shiftbrain-in-page-links-and-click-event')!,
   ),
 ] satisfies DetailsListItem[];
 
