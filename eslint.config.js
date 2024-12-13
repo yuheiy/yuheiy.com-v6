@@ -2,6 +2,7 @@ import js from '@eslint/js';
 import astro from 'eslint-plugin-astro';
 import tailwindcss from 'eslint-plugin-tailwindcss';
 import ts from 'typescript-eslint';
+import tailwindConfig from './tailwind.config.js';
 
 /** @type {import('eslint').Linter.Config} */
 export default [
@@ -25,6 +26,11 @@ export default [
 
   ...tailwindcss.configs['flat/recommended'],
   {
+    settings: {
+      tailwindcss: {
+        config: tailwindConfig,
+      },
+    },
     rules: {
       // use prettier-plugin-tailwindcss for class sorting
       'tailwindcss/classnames-order': 'off',

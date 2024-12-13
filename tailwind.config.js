@@ -3,8 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import postcss from 'postcss';
-import colors from 'tailwindcss/colors';
-import plugin from 'tailwindcss/plugin';
+import colors from 'tailwindcss/colors.js';
+import plugin from 'tailwindcss/plugin.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
