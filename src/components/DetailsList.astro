@@ -17,12 +17,12 @@ const { headingLevel, items, clampDescription } = Astro.props;
 const Heading = `h${headingLevel}`;
 ---
 
-<div class="space-y-12">
+<div class="space-y-10">
   {
     items.map((item) => (
       <article>
         <header>
-          {item.meta && <p class="mb-1 text-sm text-dynamic-muted" set:html={item.meta} />}
+          {item.meta && <p class="mb-1 text-xs text-dynamic-muted" set:html={item.meta} />}
           <Heading class:list="pb-1">
             <a href={item.link} set:html={item.title} />
           </Heading>

@@ -107,38 +107,29 @@ const latestBlogItems = await Promise.all(
 
 <Layout isHome description={siteDescription}>
   <PageHeader isHome title="安田 祐平">
-    <div
-      class="space-y-4 text-dynamic-muted [hanging-punctuation:allow-end] [&_a:any-link]:text-dynamic"
-    >
-      <p>{siteDescription}</p>
-      <p>
-        監訳を担当した書籍『<a href={everylayoutUrl}
-          >Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a
-        >』が<a href="https://www.hanmoto.com/bd/isbn/9784862465177">オンライン書店などで発売中</a
-        >。
-      </p>
-    </div>
+    <p>{siteDescription}</p>
+    <p>
+      監訳を担当した書籍『<a href={everylayoutUrl}
+        >Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a
+      >』が<a href="https://www.amazon.co.jp/dp/486246517X">Amazonなどで発売中</a>。
+    </p>
   </PageHeader>
 
-  <main>
-    <section class="wrapper">
-      <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">主な投稿</h2>
+  <main class="wrapper space-y-24">
+    <section>
+      <h2 class="mb-8 text-lg font-bold leading-tight text-dynamic-muted">おもな投稿</h2>
 
       <DetailsList headingLevel={3} items={primaryItems} />
     </section>
 
-    <div class="my-16 border-t"></div>
-
-    <section class="wrapper">
-      <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
+    <section>
+      <h2 class="mb-8 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
 
       <DetailsList headingLevel={3} items={projectItems} />
     </section>
 
-    <div class="my-16 border-t"></div>
-
-    <section class="wrapper">
-      <h2 class="mb-12 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
+    <section>
+      <h2 class="mb-8 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
 
       <DetailsList headingLevel={3} items={latestBlogItems} clampDescription />
     </section>

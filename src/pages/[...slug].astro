@@ -24,9 +24,7 @@ const { Content } = await entry.render();
   ogType="article"
   twitterCard={entry.data.twitterCard}
 >
-  <PageHeader title={entry.data.title}>
-    <p class="text-sm text-dynamic-muted" set:html={renderDateToHtml(entry.data.pubDate)} />
-  </PageHeader>
+  <PageHeader title={entry.data.title} meta={renderDateToHtml(entry.data.pubDate)} />
 
   <main class="wrapper">
     <div class="prose">

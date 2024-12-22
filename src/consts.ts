@@ -5,4 +5,4 @@ export const siteEmail = 'yuhei.yasuda1003@gmail.com';
 export const siteTwitterId = '_yuheiy';
 export const siteGithubId = 'yuheiy';
 export const siteDescription =
-  'フロントエンドウェブ開発者。HTMLやWAI-ARIA、CSS設計、レスポンシブデザイン、Jamstack、シングルページアプリケーション、アクセシビリティ、インターフェースデザインが関心領域。';
+  'フロントエンドウェブ開発者。HTML/WAI-ARIA、CSS、JavaScript/TypeScript、ウェブサイトおよびアプリケーション開発、アクセシビリティ、インターフェースデザイン、デザインシステム、DevOpsなどが得意分野。';

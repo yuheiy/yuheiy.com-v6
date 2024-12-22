@@ -1,5 +1,5 @@
 .wrapper {
-  --wrapper-column: 46rem;
+  --wrapper-column: 42rem;
   --wrapper-padding-without-safe-area: clamp(
     1rem,
     max((100cqi - var(--wrapper-column)) / 2, 5cqi),

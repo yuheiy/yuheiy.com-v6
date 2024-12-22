@@ -55,7 +55,7 @@ const canonicalURL = (() => {
   https://schepp.dev/posts/smooth-scrolling-and-page-search/
 -->
 <html
-  class="bg-dynamic leading-normal text-dynamic underline-offset-[0.3ic] @container/root kerning-none [line-break:normal] [overflow-wrap:anywhere] [text-spacing-trim:trim-start] motion-safe:focus-within:scroll-smooth"
+  class="bg-dynamic text-[112.5%] leading-normal text-dynamic underline-offset-[0.3ic] @container/root kerning-none [line-break:normal] [overflow-wrap:anywhere] [text-spacing-trim:trim-start] motion-safe:focus-within:scroll-smooth"
   lang={siteLang}
 >
   <head>
@@ -104,8 +104,8 @@ const canonicalURL = (() => {
     <slot />
 
     {/* https://css-tricks.com/a-clever-sticky-footer-technique/ */}
-    <footer class="sticky top-full mt-16 bg-dynamic-inset pb-9 pt-8 text-sm">
-      <div class="wrapper space-y-4">
+    <footer class="sticky top-full mt-16 bg-dynamic-inset py-7 text-xs">
+      <div class="wrapper space-y-3 pb-1">
         <p>
           <a href="/">ホーム</a>&#x2003;<a href="/blog">ブログ</a>&#x2003;<a href="/contributions"
             >外部サイトの投稿</a
@@ -113,7 +113,7 @@ const canonicalURL = (() => {
         </p>
         <p>
           <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>&#x2003;/&#x2003;<a
-            href={`https://x.com/${siteTwitterId}`}>X (Twitter)</a
+            href={`https://x.com/${siteTwitterId}`}>X</a
           >&#x2003;<a href={`https://github.com/${siteGithubId}`}>GitHub</a>&#x2003;<a
             href={`mailto:${siteEmail}`}>メール</a
           >
