@@ -3,7 +3,7 @@
   --wrapper-padding-without-safe-area: clamp(
     1rem,
     max((100cqi - var(--wrapper-column)) / 2, 5cqi),
-    7.5cqi
+    10cqi
   );
   --wrapper-padding-right: calc(
     var(--wrapper-padding-without-safe-area) + env(safe-area-inset-right)
