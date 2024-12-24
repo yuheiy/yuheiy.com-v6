@@ -19,7 +19,7 @@ const Title = isHome ? 'p' : 'h1';
 
 <header class="wrapper pb-24">
   <Nav>
-    <Logo class="pt-6 text-sm leading-none text-dynamic-muted kerning-normal">
+    <Logo class="pt-8 text-sm leading-none text-dynamic-muted kerning-normal">
       {/* eslint-disable-next-line astro/jsx-a11y/anchor-is-valid */}
       <a class="flex w-fit items-center gap-x-3.5" href={isHome ? null : '/'}>
         <Image
@@ -36,7 +36,7 @@ const Title = isHome ? 'p' : 'h1';
     {
       meta && (
         <p
-          class="row-start-1 row-end-2 mb-2 mt-6 self-end text-xs text-dynamic-muted"
+          class="row-start-1 row-end-2 mb-1 mt-6 self-end text-xs text-dynamic-muted"
           set:html={meta}
         />
       )

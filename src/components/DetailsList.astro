@@ -23,7 +23,7 @@ const Heading = `h${headingLevel}`;
       <article>
         <header>
           {item.meta && <p class="mb-1 text-xs text-dynamic-muted" set:html={item.meta} />}
-          <Heading class:list="pb-1">
+          <Heading class:list="pb-1 [word-break:auto-phrase]">
             <a href={item.link} set:html={item.title} />
           </Heading>
         </header>
