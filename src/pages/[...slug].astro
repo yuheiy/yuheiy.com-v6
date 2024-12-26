@@ -26,9 +26,7 @@ const { Content } = await entry.render();
 >
   <PageHeader title={entry.data.title} meta={renderDateToHtml(entry.data.pubDate)} />
 
-  <main class="wrapper">
-    <div class="prose">
-      <Content />
-    </div>
+  <main class="prose">
+    <Content />
   </main>
 </Layout>

@@ -17,7 +17,7 @@ const Logo = isHome ? 'h1' : 'p';
 const Title = isHome ? 'p' : 'h1';
 ---
 
-<header class="wrapper pb-24">
+<header>
   <Nav>
     <Logo class="pt-8 text-sm leading-none text-dynamic-muted kerning-normal">
       {/* eslint-disable-next-line astro/jsx-a11y/anchor-is-valid */}
@@ -32,31 +32,25 @@ const Title = isHome ? 'p' : 'h1';
     </Logo>
   </Nav>
 
-  <div class="grid grid-rows-[minmax(theme(spacing.24),auto)_auto]">
-    {
-      meta && (
-        <p
-          class="row-start-1 row-end-2 mb-1.5 mt-6 self-end text-xs text-dynamic-muted"
-          set:html={meta}
-        />
-      )
-    }
+  <div class="mb-24 mt-8 grid grid-rows-[minmax(theme(spacing.16),auto),auto,auto]">
+    {meta && <p class="row-start-1 mb-1.5 self-end text-xs text-dynamic-muted" set:html={meta} />}
+
     <Title
-      class="row-start-2 row-end-3 text-pretty text-2xl font-bold leading-tight [font-feature-settings:'halt'] [word-break:auto-phrase]"
+      class="row-start-2 text-pretty text-2xl font-bold leading-tight [font-feature-settings:'halt'] [word-break:auto-phrase]"
       set:html={title}
     />
-  </div>
 
-  {
-    Astro.slots.has('default') && (
-      <div
-        class:list={[
-          'mt-4 space-y-3 pb-4 text-dynamic-muted [hanging-punctuation:allow-end]',
-          '[&_a:any-link]:text-dynamic',
-        ]}
-      >
-        <slot />
-      </div>
-    )
-  }
+    {
+      Astro.slots.has('default') && (
+        <div
+          class:list={[
+            'row-start-3 mt-4 space-y-3 pb-4 text-dynamic-muted [hanging-punctuation:allow-end]',
+            '[&_a:any-link]:text-dynamic',
+          ]}
+        >
+          <slot />
+        </div>
+      )
+    }
+  </div>
 </header>

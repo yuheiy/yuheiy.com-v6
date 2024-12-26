@@ -1,0 +1,10 @@
+:root {
+  --body-column: 42rem;
+  --body-padding-without-safe-area: clamp(
+    1rem,
+    max((100cqi - var(--body-column)) / 2, 5cqi),
+    10cqi
+  );
+  --body-padding-right: calc(var(--body-padding-without-safe-area) + env(safe-area-inset-right));
+  --body-padding-left: calc(var(--body-padding-without-safe-area) + env(safe-area-inset-left));
+}
