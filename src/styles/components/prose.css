@@ -7,17 +7,14 @@
   }
 
   > * + * {
-    margin-block-start: var(--prose-spacing, theme(spacing.6)) !important;
+    margin-block-start: var(--prose-spacing, theme(spacing.8)) !important;
   }
 
-  > :where(* + :is(pre, figure, table, astro-embed-tweet, .codepen, .cp_embed_wrapper)),
-  > :where(:is(pre, figure, table, astro-embed-tweet, .codepen, .cp_embed_wrapper + script) + *) {
-    --prose-spacing: theme(spacing.8);
-  }
-
-  > :where(* + :is(h2, h3, hr)),
-  > :where(hr + *) {
-    --prose-spacing: theme(spacing.12);
+  > :where(* + :is(hr, pre, figure, table, astro-embed-tweet, .codepen, .cp_embed_wrapper)),
+  > :where(
+      :is(hr, pre, figure, table, astro-embed-tweet, .codepen, .cp_embed_wrapper + script) + *
+    ) {
+    --prose-spacing: calc(theme(spacing.8) + (1rlh - 1rem) / 2);
   }
 
   :is(h2, h3) {
@@ -29,11 +26,17 @@
   }
 
   h2 {
+    --prose-spacing: theme(spacing.16);
     font-size: theme(fontSize.2xl);
   }
 
   h3 {
+    --prose-spacing: theme(spacing.12);
     font-size: theme(fontSize.lg);
+  }
+
+  :is(h2, h3) + p {
+    --prose-spacing: theme(spacing.4);
   }
 
   hr {
@@ -47,8 +50,9 @@
     font-size: theme(fontSize.sm);
     line-height: theme(lineHeight.tight);
 
-    /* Apply when the container reaches `inline-size: 46rem`. */
-    @container root (inline-size > 51.125rem) {
+    /* Apply when the container reaches `inline-size: 42rem`. */
+    /* 42rem / (100% - 2 * 5%) */
+    @container root (inline-size > 46.666rem) {
       margin-right: calc((100cqi - var(--body-padding-left) - 100%) * -1);
       margin-left: calc(var(--body-padding-left) * -1);
       padding-right: var(--body-padding-right);
