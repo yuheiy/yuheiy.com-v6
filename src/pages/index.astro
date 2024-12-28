@@ -6,17 +6,18 @@ import DetailsList from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { siteDescription, siteTitle } from '../consts';
 import Layout from '../layouts/Layout.astro';
-import { getBlogDescription, getBlogUrl } from '../lib/blog';
+import { getBlogDescription } from '../lib/blog';
+import { blogPath } from '../paths';
 import { renderDateToHtml, renderYearMonthRangeToHtml } from '../lib/time-renderers';
 
-const everylayoutUrl = getBlogUrl(await getEntry('blog', '20211011-publication-of-everylayout')!);
+const everylayoutUrl = blogPath(await getEntry('blog', '20211011-publication-of-everylayout')!);
 
 function toPrimaryItem(entry: CollectionEntry<'blog' | 'contributions'>): DetailsListItem {
   switch (entry.collection) {
     case 'blog':
       return {
         title: entry.data.title,
-        link: getBlogUrl(entry),
+        link: blogPath(entry),
         meta: siteTitle,
       };
 
@@ -98,7 +99,7 @@ const latestBlogItems: DetailsListItem[] = await Promise.all(
     .slice(0, 3)
     .map(async (entry) => ({
       title: entry.data.title,
-      link: getBlogUrl(entry),
+      link: blogPath(entry),
       meta: renderDateToHtml(entry.data.pubDate),
       description: await getBlogDescription(entry),
     })),

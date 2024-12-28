@@ -3,7 +3,8 @@ import { getCollection } from 'astro:content';
 import DetailsList, { type DetailsListItem } from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
-import { getBlogDescription, getBlogUrl } from '../lib/blog';
+import { getBlogDescription } from '../lib/blog';
+import { blogPath } from '../paths';
 import { renderDateToHtml } from '../lib/time-renderers';
 
 const title = 'ブログ';
@@ -14,7 +15,7 @@ const items: DetailsListItem[] = await Promise.all(
     .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .map(async (entry) => ({
       title: entry.data.title,
-      link: getBlogUrl(entry),
+      link: blogPath(entry),
       meta: renderDateToHtml(entry.data.pubDate),
       description: await getBlogDescription(entry),
     })),
