@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import DetailsList from '../components/DetailsList.astro';
+import DetailsList, { type DetailsListItem } from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 import { renderDateToHtml } from '../lib/time-renderers';
@@ -8,7 +8,7 @@ import { renderDateToHtml } from '../lib/time-renderers';
 const title = '外部サイトの投稿';
 const description = '外部サイトに寄稿した記事、登壇したイベントやその資料、出版物など。';
 
-const items = (await getCollection('contributions'))
+const items: DetailsListItem[] = (await getCollection('contributions'))
   .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .map((entry) => ({
     title: entry.data.title,

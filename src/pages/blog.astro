@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import DetailsList from '../components/DetailsList.astro';
+import DetailsList, { type DetailsListItem } from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 import { getBlogDescription, getBlogUrl } from '../lib/blog';
@@ -9,7 +9,7 @@ import { renderDateToHtml } from '../lib/time-renderers';
 const title = 'ブログ';
 const description = 'ウェブデザインやウェブフロントエンドなどについての雑記。';
 
-const items = await Promise.all(
+const items: DetailsListItem[] = await Promise.all(
   (await getCollection('blog'))
     .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .map(async (entry) => ({

@@ -1,5 +1,5 @@
 import { getContainerRenderer } from '@astrojs/mdx';
-import rss from '@astrojs/rss';
+import rss, { type RSSFeedItem } from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { loadRenderers } from 'astro:container';
@@ -16,7 +16,7 @@ export async function GET(context: APIContext) {
     renderers: await loadRenderers([getContainerRenderer()]),
   });
 
-  const items = (
+  const items: RSSFeedItem[] = (
     await Promise.all([
       ...(await getCollection('blog')).map(async (entry) => ({
         link: getBlogUrl(entry),
