@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
+import DateTime from '../components/DateTime.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 import { getBlogDescription } from '../lib/blog';
-import { renderDateToHtml } from '../lib/time-renderers';
 
 export async function getStaticPaths() {
   return (await getCollection('blog')).map((entry) => ({
@@ -24,7 +24,9 @@ const { Content } = await entry.render();
   ogType="article"
   twitterCard={entry.data.twitterCard}
 >
-  <PageHeader title={entry.data.title} meta={renderDateToHtml(entry.data.pubDate)} />
+  <PageHeader title={entry.data.title}>
+    <DateTime date={entry.data.pubDate} slot="meta" />
+  </PageHeader>
 
   <main class="prose">
     <Content />

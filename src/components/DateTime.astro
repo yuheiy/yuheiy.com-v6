@@ -1,0 +1,18 @@
+---
+import { siteLang, siteRegion } from '../consts';
+
+interface Props {
+  date: Date;
+}
+
+const { date } = Astro.props;
+
+const dateFormatter = new Intl.DateTimeFormat(`${siteLang}-${siteRegion}`, {
+  dateStyle: 'long',
+  timeZone: 'Asia/Tokyo',
+});
+
+const formattedDate = dateFormatter.format(date);
+---
+
+<time datetime={date.toISOString()}>{formattedDate}</time>
