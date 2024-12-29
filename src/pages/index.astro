@@ -142,21 +142,21 @@ const latestBlogItems: DetailsListItem[] = await Promise.all(
     </p>
   </PageHeader>
 
-  <main class="space-y-24">
+  <main>
     <section>
-      <h2 class="mb-8 text-lg font-bold leading-tight text-dynamic-muted">おもな投稿</h2>
+      <h2 class="mb-8 mt-24 text-lg font-bold leading-tight text-dynamic-muted">おもな投稿</h2>
 
       <DetailsList headingLevel={3} items={primaryItems} />
     </section>
 
     <section>
-      <h2 class="mb-8 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
+      <h2 class="mb-8 mt-24 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
 
       <DetailsList headingLevel={3} items={projectItems} />
     </section>
 
     <section>
-      <h2 class="mb-8 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
+      <h2 class="mb-8 mt-24 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
 
       <DetailsList headingLevel={3} items={latestBlogItems} clampDescription />
     </section>
