@@ -1,24 +1,33 @@
 ---
+import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { getCollection } from 'astro:content';
+import DateTime from '../components/DateTime.astro';
 import DetailsList, { type DetailsListItem } from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
-import { renderDateToHtml } from '../lib/time-renderers';
 
 const title = '外部サイトの投稿';
 const description = '外部サイトに寄稿した記事、登壇したイベントやその資料、出版物など。';
 
-const items: DetailsListItem[] = (await getCollection('contributions'))
-  .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .map((entry) => ({
-    title: entry.data.title,
-    link: entry.data.link,
-    meta: [
-      renderDateToHtml(entry.data.pubDate),
-      `${entry.data.channel}${entry.data.channelDetail ? `（${entry.data.channelDetail}）` : ''}`,
-    ].join(' · '),
-    description: entry.data.description,
-  }));
+const container = await AstroContainer.create();
+
+const items: DetailsListItem[] = await Promise.all(
+  (await getCollection('contributions'))
+    .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .map(async (entry) => ({
+      title: entry.data.title,
+      link: entry.data.link,
+      meta: [
+        await container.renderToString(DateTime, {
+          props: {
+            date: entry.data.pubDate,
+          },
+        }),
+        `${entry.data.channel}${entry.data.channelDetail ? `（${entry.data.channelDetail}）` : ''}`,
+      ].join(' · '),
+      description: entry.data.description,
+    })),
+);
 ---
 
 <Layout title={title} description={description}>

@@ -1,0 +1,40 @@
+---
+import { siteLang, siteRegion } from '../consts';
+
+interface YearMonth {
+  year: number;
+  month: number;
+}
+
+interface Props {
+  start: YearMonth;
+  end?: YearMonth | undefined;
+}
+
+const { start, end } = Astro.props;
+
+function convertYearMonthToDate({ year, month }: YearMonth) {
+  return new Date(Date.UTC(year, month - 1));
+}
+
+const yearMonthFormatter = new Intl.DateTimeFormat(`${siteLang}-${siteRegion}`, {
+  year: 'numeric',
+  month: 'long',
+  timeZone: 'Asia/Tokyo',
+});
+
+const startDate = convertYearMonthToDate(start);
+const formattedStartDate = yearMonthFormatter.format(startDate);
+
+const endDate = end && convertYearMonthToDate(end);
+const formattedEndDate = endDate && yearMonthFormatter.format(endDate);
+---
+
+<time datetime={startDate.toISOString().slice(0, 7)}>{formattedStartDate}</time>{
+  endDate && (
+    <Fragment>
+      &ndash;
+      <time datetime={endDate.toISOString().slice(0, 7)}>{formattedEndDate}</time>
+    </Fragment>
+  )
+}

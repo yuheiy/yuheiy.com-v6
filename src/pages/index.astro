@@ -1,14 +1,16 @@
 ---
+import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, getEntry } from 'astro:content';
+import DateTime from '../components/DateTime.astro';
 import type { DetailsListItem } from '../components/DetailsList.astro';
 import DetailsList from '../components/DetailsList.astro';
 import PageHeader from '../components/PageHeader.astro';
+import YearMonthRange from '../components/YearMonthRange.astro';
 import { siteDescription, siteTitle } from '../consts';
 import Layout from '../layouts/Layout.astro';
 import { getBlogDescription } from '../lib/blog';
 import { blogPath } from '../paths';
-import { renderDateToHtml, renderYearMonthRangeToHtml } from '../lib/time-renderers';
 
 const everylayoutUrl = blogPath(await getEntry('blog', '20211011-publication-of-everylayout')!);
 
@@ -64,31 +66,51 @@ const primaryItems: DetailsListItem[] = [
   ),
 ];
 
+const container = await AstroContainer.create();
+
 const projectItems: DetailsListItem[] = [
   {
     title: 'sdenv',
     link: 'https://github.com/yuheiy/sdenv',
-    meta: renderYearMonthRangeToHtml({ year: 2023, month: 7 }),
+    meta: await container.renderToString(YearMonthRange, {
+      props: {
+        start: { year: 2023, month: 7 },
+      },
+    }),
     description:
       'ウェブサイト（not ウェブアプリケーション）のためのフロントエンド開発スターターキット。',
   },
   {
     title: 'accrefs',
     link: 'https://accrefs.jp/',
-    meta: renderYearMonthRangeToHtml({ year: 2019, month: 9 }),
+    meta: await container.renderToString(YearMonthRange, {
+      props: {
+        start: { year: 2019, month: 9 },
+      },
+    }),
     description:
       'ウェブアクセシビリティの参考資料をまとめたサイト。日本語の資料を中心にリンク数は200を超える。サイトのデザインおよび実装に携わる。有志のメンバーにより制作・運営されている。',
   },
   {
     title: 'シフトブレイン／スタンダードデザインユニット',
     link: 'https://standard.shiftbrain.com/',
-    meta: renderYearMonthRangeToHtml({ year: 2018, month: 10 }, { year: 2020, month: 6 }),
+    meta: await container.renderToString(YearMonthRange, {
+      props: {
+        start: { year: 2018, month: 10 },
+        end: { year: 2020, month: 6 },
+      },
+    }),
     description: '自社で所属していたチームのウェブサイト。',
   },
   {
     title: 'yuhei blog',
     link: 'https://yuheiy.hatenablog.com/',
-    meta: renderYearMonthRangeToHtml({ year: 2015, month: 10 }, { year: 2020, month: 11 }),
+    meta: await container.renderToString(YearMonthRange, {
+      props: {
+        start: { year: 2015, month: 10 },
+        end: { year: 2020, month: 11 },
+      },
+    }),
     description: '過去に更新していた個人ブログ。',
   },
 ];
@@ -100,7 +122,11 @@ const latestBlogItems: DetailsListItem[] = await Promise.all(
     .map(async (entry) => ({
       title: entry.data.title,
       link: blogPath(entry),
-      meta: renderDateToHtml(entry.data.pubDate),
+      meta: await container.renderToString(DateTime, {
+        props: {
+          date: entry.data.pubDate,
+        },
+      }),
       description: await getBlogDescription(entry),
     })),
 );
