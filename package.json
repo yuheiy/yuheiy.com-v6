@@ -17,8 +17,7 @@
     "lint:eslint": "eslint --max-warnings 0",
     "lint:prettier": "prettier . --check",
     "lint:types": "tsc -b",
-    "preview": "astro preview",
-    "test": "vitest"
+    "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/mdx": "4.0.2",
@@ -49,15 +48,9 @@
     "prettier-plugin-css-order": "2.1.2",
     "prettier-plugin-organize-imports": "4.1.0",
     "prettier-plugin-tailwindcss": "0.6.9",
-    "typescript-eslint": "8.18.0",
-    "vitest": "2.1.8"
+    "typescript-eslint": "8.18.0"
   },
   "engines": {
     "node": "22"
-  },
-  "overrides": {
-    "vitest": {
-      "vite": "6"
-    }
   }
 }

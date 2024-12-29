@@ -26,11 +26,6 @@ export default defineConfig({
     tailwind({ nesting: true }),
   ],
   compressHTML: false,
-  vite: {
-    define: {
-      'import.meta.vitest': 'undefined',
-    },
-  },
   build: {
     format: 'preserve',
   },
