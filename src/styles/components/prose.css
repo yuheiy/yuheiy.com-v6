@@ -1,58 +1,53 @@
 .prose {
-  margin-trim: block;
-  hanging-punctuation: allow-end;
-
-  > * {
-    margin-block: 0 !important;
-  }
-
-  > * + * {
-    margin-block-start: var(--prose-spacing, theme(spacing.8)) !important;
-  }
-
-  > :where(* + :is(hr, pre, figure, table, astro-embed-tweet, .codepen, .cp_embed_wrapper)),
-  > :where(
-      :is(hr, pre, figure, table, astro-embed-tweet, .codepen, .cp_embed_wrapper + script) + *
-    ) {
-    --prose-spacing: calc(theme(spacing.8) + (1rlh - 1rem) / 2);
-  }
-
-  :is(h2, h3) {
-    hanging-punctuation: none;
+  h2 {
+    margin-block-start: theme(spacing.16);
     font-weight: bold;
+    font-size: theme(fontSize.2xl);
     line-height: theme(lineHeight.tight);
     text-wrap: pretty;
     word-break: auto-phrase;
   }
 
-  h2 {
-    --prose-spacing: theme(spacing.16);
-    font-size: theme(fontSize.2xl);
+  h3 {
+    margin-block-start: theme(spacing.12);
+    font-weight: bold;
+    font-size: theme(fontSize.lg);
+    line-height: theme(lineHeight.tight);
+    text-wrap: pretty;
+    word-break: auto-phrase;
   }
 
-  h3 {
-    --prose-spacing: theme(spacing.12);
-    font-size: theme(fontSize.lg);
+  p {
+    margin-block-start: theme(spacing.8);
+    hanging-punctuation: allow-end;
   }
 
   :is(h2, h3) + p {
-    --prose-spacing: theme(spacing.4);
+    margin-block-start: theme(spacing.4);
+  }
+
+  /* Remove the unnecessary paragraph elements rendered by MDX. */
+  figure > p:has(> img),
+  figcaption > p {
+    display: contents;
   }
 
   hr {
+    margin-block: theme(spacing.rect);
     border-block-start-width: theme(borderWidth.4);
-    inline-size: 8em;
+    inline-size: theme(spacing.32);
   }
 
   pre {
     margin-inline: calc((100cqi - 100%) / 2 * -1);
+    margin-block: theme(spacing.rect);
     padding: theme(spacing.5) calc((100cqi - 100%) / 2);
     font-size: theme(fontSize.sm);
     line-height: theme(lineHeight.tight);
 
     /* Apply when the container reaches `inline-size: 42rem`. */
-    /* 42rem / (100% - 2 * 5%) */
-    @container root (inline-size > 46.666rem) {
+    /* container size = 42rem / (100% - 2 * 5%) */
+    @container root (inline-size >= 46.666rem) {
       margin-right: calc((100cqi - var(--body-padding-left) - 100%) * -1);
       margin-left: calc(var(--body-padding-left) * -1);
       padding-right: var(--body-padding-right);
@@ -60,31 +55,28 @@
     }
   }
 
+  figure pre {
+    margin-block-end: 0;
+  }
+
   blockquote:not(.twitter-tweet) {
     position: relative;
-    padding-inline-start: 2ic;
-
-    > * + * {
-      margin-top: theme(spacing.5);
-    }
+    margin-block-start: theme(spacing.8);
+    padding-inline-start: 2rem;
   }
 
   blockquote:not(.twitter-tweet)::before {
     position: absolute;
-    inset-block: calc((1lh - 1em) / 2);
+    inset-block: calc((1rlh - 1rem) / 2);
     inset-inline-start: 0;
     border-inline-start-width: theme(borderWidth.4);
     content: '';
   }
 
   :is(ol, ul) {
-    padding-inline-start: 2ic;
+    margin-block-start: theme(spacing.8);
+    padding-inline-start: 2rem;
     list-style-type: revert;
-    margin-trim: block;
-  }
-
-  :is(ol, ul) :is(ol, ul) {
-    margin-trim: none;
   }
 
   li {
@@ -92,12 +84,11 @@
   }
 
   figure {
-    > * + * {
-      margin-block-start: theme(spacing.3);
-    }
+    margin-block: theme(spacing.rect);
   }
 
   figcaption {
+    margin-block-start: theme(spacing.3);
     font-size: theme(fontSize.sm);
   }
 
@@ -119,6 +110,7 @@
 
   table {
     display: block;
+    margin-block: theme(spacing.rect);
     border-spacing: 0;
     max-inline-size: 100%;
     overflow-x: auto;
@@ -143,8 +135,10 @@
   }
 
   details {
-    > * + * {
-      margin-block-start: theme(spacing.3);
-    }
+    margin-block-start: theme(spacing.8);
+  }
+
+  :is(astro-embed-tweet, lite-youtube, .codepen, .cp_embed_wrapper) {
+    margin-block: theme(spacing.rect);
   }
 }

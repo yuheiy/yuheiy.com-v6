@@ -98,6 +98,7 @@ export default {
         72: '9rlh',
         80: '10rlh',
         96: '12rlh',
+        rect: 'calc(1rlh + (1rlh - 1rem) / 2)',
       },
       fontFamily: {
         sans: ['sans-serif'],
