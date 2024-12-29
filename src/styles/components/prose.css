@@ -80,6 +80,10 @@
     list-style-type: revert;
   }
 
+  :is(ol, ul) :is(ol, ul) {
+    margin-block-start: 0;
+  }
+
   li {
     margin-block-start: theme(spacing.1);
   }
