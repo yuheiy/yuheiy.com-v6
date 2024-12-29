@@ -1,4 +1,6 @@
 ---
+import type { HTMLTag, Polymorphic } from 'astro/types';
+
 export interface DetailsListItem {
   title: string;
   link: string;
@@ -6,18 +8,19 @@ export interface DetailsListItem {
   description?: string | undefined;
 }
 
-interface Props {
+type Props<Tag extends HTMLTag = HTMLTag> = Polymorphic<{
+  as: Tag;
   headingLevel: 2 | 3;
   items: DetailsListItem[];
   clampDescription?: boolean | undefined;
-}
+}>;
 
-const { headingLevel, items, clampDescription } = Astro.props;
+const { as: Tag = 'div', headingLevel, items, clampDescription } = Astro.props;
 
 const Heading = `h${headingLevel}`;
 ---
 
-<div class="space-y-12">
+<Tag class="space-y-12">
   {
     items.map((item) => (
       <article>
@@ -39,4 +42,4 @@ const Heading = `h${headingLevel}`;
       </article>
     ))
   }
-</div>
+</Tag>
