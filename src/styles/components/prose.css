@@ -111,7 +111,7 @@
   }
 
   img {
-    border: 1px solid theme(borderColor.DEFAULT);
+    border: theme(borderWidth.DEFAULT) solid theme(borderColor.DEFAULT);
   }
 
   table {
@@ -124,7 +124,7 @@
 
   td {
     vertical-align: top;
-    border-block-end-width: thin;
+    border-block-end-width: theme(borderWidth.DEFAULT);
     border-block-end-style: solid;
     padding: theme(spacing.1) theme(spacing.3);
     white-space: pre;
@@ -132,7 +132,7 @@
 
   th {
     vertical-align: top;
-    border-block-end-width: thin;
+    border-block-end-width: theme(borderWidth.DEFAULT);
     border-block-end-style: solid;
     background-color: theme(backgroundColor.dynamic.inset);
     padding: theme(spacing.1) theme(spacing.3);

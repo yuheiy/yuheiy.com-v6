@@ -6,7 +6,7 @@ astro-embed-tweet::before {
   --color-twitter: #1da1f2;
   display: block;
   border-color: var(--color-twitter);
-  border-inline-width: 1px;
+  border-inline-width: theme(borderWidth.DEFAULT);
   border-start-start-radius: theme(borderRadius.md);
   border-start-end-radius: theme(borderRadius.md);
   background-color: var(--color-twitter);
@@ -22,9 +22,9 @@ astro-embed-tweet [class~='twitter-tweet']:not(.twitter-tweet-rendered) {
   border-color: light-dark(theme(borderColor.DEFAULT), transparent);
   border-bottom-right-radius: theme(borderRadius.md);
   border-bottom-left-radius: theme(borderRadius.md);
-  border-inline-start-width: 1px;
-  border-inline-end-width: 1px;
-  border-block-end-width: 1px;
+  border-inline-start-width: theme(borderWidth.DEFAULT);
+  border-inline-end-width: theme(borderWidth.DEFAULT);
+  border-block-end-width: theme(borderWidth.DEFAULT);
   background-color: white;
   padding: theme(spacing.4) theme(spacing.5);
   color: theme(colors.gray.500);
