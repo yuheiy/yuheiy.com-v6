@@ -12,7 +12,7 @@ import Layout from '../layouts/Layout.astro';
 import { getBlogDescription } from '../lib/blog';
 import { blogPath } from '../paths';
 
-const everylayoutUrl = blogPath(await getEntry('blog', '20211011-publication-of-everylayout')!);
+const everylayoutEntry = await getEntry('blog', '20211011-publication-of-everylayout');
 
 function toPrimaryItem(entry: CollectionEntry<'blog' | 'contributions'>): DetailsListItem {
   switch (entry.collection) {
@@ -52,7 +52,7 @@ const primaryItems: DetailsListItem[] = [
   toPrimaryItem(await getEntry('blog', '2022-06-11-css-components')!),
   toPrimaryItem(await getEntry('contributions', '2022-05-27-body-typography')!),
   toPrimaryItem(await getEntry('contributions', '2021-12-27-shiftbrain-everylayout')!),
-  toPrimaryItem(await getEntry('blog', '20211011-publication-of-everylayout')!),
+  toPrimaryItem(everylayoutEntry!),
   toPrimaryItem(await getEntry('blog', '20210127-prefer-margin-top')!),
   {
     title:
@@ -68,52 +68,51 @@ const primaryItems: DetailsListItem[] = [
 
 const container = await AstroContainer.create();
 
-const projectItems: DetailsListItem[] = [
-  {
-    title: 'sdenv',
-    link: 'https://github.com/yuheiy/sdenv',
-    meta: await container.renderToString(YearMonthRange, {
-      props: {
+const projectItems: DetailsListItem[] = await Promise.all(
+  [
+    {
+      title: 'sdenv',
+      link: 'https://github.com/yuheiy/sdenv',
+      yearMonthRange: {
         start: { year: 2023, month: 7 },
       },
-    }),
-    description:
-      'ウェブサイト（not ウェブアプリケーション）のためのフロントエンド開発スターターキット。',
-  },
-  {
-    title: 'accrefs',
-    link: 'https://accrefs.jp/',
-    meta: await container.renderToString(YearMonthRange, {
-      props: {
+      description:
+        'ウェブサイト（not ウェブアプリケーション）のためのフロントエンド開発スターターキット。',
+    },
+    {
+      title: 'accrefs',
+      link: 'https://accrefs.jp/',
+      yearMonthRange: {
         start: { year: 2019, month: 9 },
       },
-    }),
-    description:
-      'ウェブアクセシビリティの参考資料をまとめたサイト。日本語の資料を中心にリンク数は200を超える。サイトのデザインおよび実装に携わる。有志のメンバーにより制作・運営されている。',
-  },
-  {
-    title: 'シフトブレイン／スタンダードデザインユニット',
-    link: 'https://standard.shiftbrain.com/',
-    meta: await container.renderToString(YearMonthRange, {
-      props: {
+      description:
+        'ウェブアクセシビリティの参考資料をまとめたサイト。日本語の資料を中心にリンク数は200を超える。サイトのデザインおよび実装に携わる。有志のメンバーにより制作・運営されている。',
+    },
+    {
+      title: 'シフトブレイン／スタンダードデザインユニット',
+      link: 'https://standard.shiftbrain.com/',
+      yearMonthRange: {
         start: { year: 2018, month: 10 },
         end: { year: 2020, month: 6 },
       },
-    }),
-    description: '自社で所属していたチームのウェブサイト。',
-  },
-  {
-    title: 'yuhei blog',
-    link: 'https://yuheiy.hatenablog.com/',
-    meta: await container.renderToString(YearMonthRange, {
-      props: {
+      description: '自社で所属していたチームのウェブサイト。',
+    },
+    {
+      title: 'yuhei blog',
+      link: 'https://yuheiy.hatenablog.com/',
+      yearMonthRange: {
         start: { year: 2015, month: 10 },
         end: { year: 2020, month: 11 },
       },
+      description: '過去に更新していた個人ブログ。',
+    },
+  ].map(async ({ yearMonthRange, ...item }) => ({
+    ...item,
+    meta: await container.renderToString(YearMonthRange, {
+      props: yearMonthRange,
     }),
-    description: '過去に更新していた個人ブログ。',
-  },
-];
+  })),
+);
 
 const latestBlogItems: DetailsListItem[] = await Promise.all(
   (await getCollection('blog'))
@@ -136,7 +135,7 @@ const latestBlogItems: DetailsListItem[] = await Promise.all(
   <PageHeader isHome title="安田 祐平">
     <p>{siteDescription}</p>
     <p>
-      監訳を担当した書籍『<a href={everylayoutUrl}
+      監訳を担当した書籍『<a href={blogPath(everylayoutEntry!)}
         >Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a
       >』が<a href="https://www.amazon.co.jp/dp/486246517X">Amazonなどで発売中</a>。
     </p>
