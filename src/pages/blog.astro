@@ -36,5 +36,7 @@ const items: DetailsListItem[] = await Promise.all(
     </p>
   </PageHeader>
 
-  <DetailsList as="main" headingLevel={2} items={items} clampDescription />
+  <main>
+    <DetailsList headingLevel={2} items={items} clampDescription />
+  </main>
 </Layout>

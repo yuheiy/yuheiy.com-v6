@@ -1,45 +1,40 @@
 ---
-import type { HTMLTag, Polymorphic } from 'astro/types';
-
 export interface DetailsListItem {
   title: string;
   link: string;
-  meta?: string | undefined;
+  meta: string;
   description?: string | undefined;
 }
 
-type Props<Tag extends HTMLTag = HTMLTag> = Polymorphic<{
-  as: Tag;
+interface Props {
   headingLevel: 2 | 3;
   items: DetailsListItem[];
   clampDescription?: boolean | undefined;
-}>;
+}
 
-const { as: Tag = 'div', headingLevel, items, clampDescription } = Astro.props;
+const { headingLevel, items, clampDescription } = Astro.props;
 
 const Heading = `h${headingLevel}`;
 ---
 
-<Tag class="space-y-12">
-  {
-    items.map((item) => (
-      <article>
-        <header>
-          {item.meta && <p class="mb-1 text-xs text-dynamic-muted" set:html={item.meta} />}
-          <Heading class:list="pb-1 [word-break:auto-phrase]">
-            <a href={item.link} set:html={item.title} />
-          </Heading>
-        </header>
-        {item.description && (
-          <p
-            class:list={[
-              'mt-1 text-sm text-dynamic-muted [hanging-punctuation:allow-end]',
-              clampDescription && 'line-clamp-5 overflow-y-clip overflow-x-visible',
-            ]}
-            set:html={item.description}
-          />
-        )}
-      </article>
-    ))
-  }
-</Tag>
+{
+  items.map((item) => (
+    <article class="mt-8 [&+&]:mt-12">
+      <header>
+        <p class="text-xs text-dynamic-muted" set:html={item.meta} />
+        <Heading class:list="mt-1 pb-1 [word-break:auto-phrase]">
+          <a href={item.link} set:html={item.title} />
+        </Heading>
+      </header>
+      {item.description && (
+        <p
+          class:list={[
+            'mt-1 text-sm text-dynamic-muted [hanging-punctuation:allow-end]',
+            clampDescription && 'line-clamp-5 overflow-y-clip overflow-x-visible',
+          ]}
+          set:html={item.description}
+        />
+      )}
+    </article>
+  ))
+}
