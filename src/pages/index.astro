@@ -3,8 +3,8 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, getEntry } from 'astro:content';
 import DateTime from '../components/DateTime.astro';
-import type { DetailsListItem } from '../components/DetailsList.astro';
-import DetailsList from '../components/DetailsList.astro';
+import type { TeaserListItem } from '../components/TeaserList.astro';
+import TeaserList from '../components/TeaserList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import YearMonthRange from '../components/YearMonthRange.astro';
 import { siteDescription, siteTitle } from '../consts';
@@ -14,7 +14,7 @@ import { blogPath } from '../paths';
 
 const everylayoutEntry = await getEntry('blog', '20211011-publication-of-everylayout');
 
-function toPrimaryItem(entry: CollectionEntry<'blog' | 'contributions'>): DetailsListItem {
+function toPrimaryItem(entry: CollectionEntry<'blog' | 'contributions'>): TeaserListItem {
   switch (entry.collection) {
     case 'blog':
       return {
@@ -35,7 +35,7 @@ function toPrimaryItem(entry: CollectionEntry<'blog' | 'contributions'>): Detail
   }
 }
 
-const primaryItems: DetailsListItem[] = [
+const primaryItems: TeaserListItem[] = [
   toPrimaryItem(await getEntry('blog', '2024-12-01-i-am-not-a-visual-thinker')!),
   toPrimaryItem(
     await getEntry(
@@ -68,7 +68,7 @@ const primaryItems: DetailsListItem[] = [
 
 const container = await AstroContainer.create();
 
-const projectItems: DetailsListItem[] = await Promise.all(
+const projectItems: TeaserListItem[] = await Promise.all(
   [
     {
       title: 'sdenv',
@@ -114,7 +114,7 @@ const projectItems: DetailsListItem[] = await Promise.all(
   })),
 );
 
-const latestBlogItems: DetailsListItem[] = await Promise.all(
+const latestBlogItems: TeaserListItem[] = await Promise.all(
   (await getCollection('blog'))
     .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .slice(0, 3)
@@ -145,19 +145,19 @@ const latestBlogItems: DetailsListItem[] = await Promise.all(
     <section>
       <h2 class="mt-24 text-lg font-bold leading-tight text-dynamic-muted">おもな投稿</h2>
 
-      <DetailsList headingLevel={3} items={primaryItems} />
+      <TeaserList headingLevel={3} items={primaryItems} />
     </section>
 
     <section>
       <h2 class="mt-24 text-lg font-bold leading-tight text-dynamic-muted">プロジェクト</h2>
 
-      <DetailsList headingLevel={3} items={projectItems} />
+      <TeaserList headingLevel={3} items={projectItems} />
     </section>
 
     <section>
       <h2 class="mt-24 text-lg font-bold leading-tight text-dynamic-muted">最近のブログ</h2>
 
-      <DetailsList headingLevel={3} items={latestBlogItems} clampDescription />
+      <TeaserList headingLevel={3} items={latestBlogItems} clampDescription />
     </section>
   </main>
 </Layout>

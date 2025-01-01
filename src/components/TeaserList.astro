@@ -1,5 +1,5 @@
 ---
-export interface DetailsListItem {
+export interface TeaserListItem {
   title: string;
   link: string;
   meta: string;
@@ -8,7 +8,7 @@ export interface DetailsListItem {
 
 interface Props {
   headingLevel: 2 | 3;
-  items: DetailsListItem[];
+  items: TeaserListItem[];
   clampDescription?: boolean | undefined;
 }
 

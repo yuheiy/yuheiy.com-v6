@@ -2,7 +2,7 @@
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { getCollection } from 'astro:content';
 import DateTime from '../components/DateTime.astro';
-import DetailsList, { type DetailsListItem } from '../components/DetailsList.astro';
+import TeaserList, { type TeaserListItem } from '../components/TeaserList.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 
@@ -11,7 +11,7 @@ const description = '外部サイトに寄稿した記事、登壇したイベ�
 
 const container = await AstroContainer.create();
 
-const items: DetailsListItem[] = await Promise.all(
+const items: TeaserListItem[] = await Promise.all(
   (await getCollection('contributions'))
     .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .map(async (entry) => ({
@@ -38,6 +38,6 @@ const items: DetailsListItem[] = await Promise.all(
   </PageHeader>
 
   <main>
-    <DetailsList headingLevel={2} items={items} clampDescription />
+    <TeaserList headingLevel={2} items={items} clampDescription />
   </main>
 </Layout>
