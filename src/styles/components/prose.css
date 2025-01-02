@@ -2,7 +2,7 @@
   h2 {
     margin-block-start: theme(spacing.16);
     font-weight: bold;
-    font-size: theme(fontSize.2xl);
+    font-size: theme(fontSize.xl);
     line-height: theme(lineHeight.tight);
     text-wrap: pretty;
     word-break: auto-phrase;

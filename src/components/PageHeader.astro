@@ -34,7 +34,7 @@ const Title = isHome ? 'p' : 'h1';
   <div class="mb-28 mt-8 grid grid-rows-[minmax(theme(spacing.20),auto),auto,auto]">
     {
       Astro.slots.has('meta') && (
-        <p class="row-start-1 mb-1.5 self-end text-xs text-dynamic-muted">
+        <p class="row-start-1 mb-1 self-end text-xs text-dynamic-muted">
           <slot name="meta" />
         </p>
       )
