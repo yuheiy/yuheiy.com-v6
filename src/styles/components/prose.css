@@ -147,4 +147,16 @@
   :is(astro-embed-tweet, lite-youtube, .codepen, .cp_embed_wrapper) {
     margin-block: theme(spacing.rect);
   }
+
+  :is(
+      hr,
+      pre,
+      figure,
+      table,
+      astro-embed-tweet,
+      :is(lite-youtube, .codepen, .cp_embed_wrapper) + script
+    )
+    + :is(hr, pre, figure, table, astro-embed-tweet, lite-youtube, .codepen, .cp_embed_wrapper) {
+    margin-block-start: theme(spacing.rect2);
+  }
 }
