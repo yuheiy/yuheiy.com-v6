@@ -1,6 +1,6 @@
 .astro-code,
 .astro-code span {
-  background-color: theme(backgroundColor.dynamic.muted) !important;
+  background-color: theme(backgroundColor.dynamic.inset) !important;
 
   /* https://shiki.style/guide/dual-themes#query-based-dark-mode */
   @media (prefers-color-scheme: dark) {
