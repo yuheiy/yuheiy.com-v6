@@ -3,6 +3,8 @@ title: '「段落と段落の間」と「段落と画像の間」の余白を均
 pubDate: 2025-01-03T23:40:00.000+09:00
 ---
 
+import CodePen from '../../components/CodePen.astro';
+
 垂直方向に複数の段落と画像が並ぶとき、間隔を均一にしたければ、それぞれ同じ大きさの`margin`プロパティを適用するだろう。
 
 ```html
@@ -28,13 +30,7 @@ figure {
 }
 ```
 
-{/* prettier-ignore */}
-<p class="codepen" data-height="900" data-slug-hash="zxOPZop" data-pen-title="Untitled" data-user="yuheiy" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/yuheiy/pen/zxOPZop">
-  Untitled</a> by Yuhei Yasuda (<a href="https://codepen.io/yuheiy">@yuheiy</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://public.codepenassets.com/embed/index.js"></script>
+<CodePen user="yuheiy" slug="zxOPZop" height={900} />
 
 しかし実際には、このようにすると段落と画像の間隔がやや詰まって見える。段落同士の間隔に比べて、段落と画像の間隔が少し狭く感じる。
 

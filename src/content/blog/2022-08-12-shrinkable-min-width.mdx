@@ -4,6 +4,7 @@ pubDate: 2022-08-12T15:40:00.000+09:00
 ---
 
 import { Image } from 'astro:assets';
+import CodePen from '../../components/CodePen.astro';
 
 ボタンのラベルが短い場合でも、ボタン自体には最低限ある程度の幅を持たせたいという場合がある。そんなときには、ボタン自体に`min-width`を指定して最低幅を設定する。
 
@@ -33,18 +34,7 @@ button {
 
 このようにすると、`min-width`の値が`100%`を超えることを防げる。
 
-{/* prettier-ignore */}
-<p
-	class="codepen"
-	data-height="570"
-	data-slug-hash="PoRdReV"
-	data-user="yuheiy"
-	style="height: 570px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;"
->
-	<span>See the Pen <a href="https://codepen.io/yuheiy/pen/PoRdReV">Untitled</a> by Yuhei Yasuda (
-		<a href="https://codepen.io/yuheiy">@yuheiy</a>) on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+<CodePen user="yuheiy" slug="PoRdReV" height={570} />
 
 ---
 
