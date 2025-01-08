@@ -27,7 +27,7 @@
   }
 
   :is(h2, h3) + p {
-    margin-block-start: theme(spacing.4);
+    margin-block-start: theme(spacing.2);
   }
 
   /* Remove the unnecessary paragraph elements rendered by MDX. */
@@ -84,6 +84,10 @@
     list-style-type: revert;
   }
 
+  :is(h2, h3) + :is(ol, ul) {
+    margin-block-start: theme(spacing.2);
+  }
+
   :is(ol, ul) :is(ol, ul) {
     margin-block-start: 0;
   }
@@ -97,7 +101,7 @@
   }
 
   figcaption {
-    margin-block-start: theme(spacing.4);
+    margin-block-start: theme(spacing.3);
     hanging-punctuation: allow-end;
     font-size: theme(fontSize.sm);
   }
