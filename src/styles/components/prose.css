@@ -27,7 +27,7 @@
   }
 
   :is(h2, h3) + p {
-    margin-block-start: theme(spacing.2);
+    margin-block-start: theme(spacing.4);
   }
 
   /* Remove the unnecessary paragraph elements rendered by MDX. */
@@ -85,7 +85,7 @@
   }
 
   :is(h2, h3) + :is(ol, ul) {
-    margin-block-start: theme(spacing.2);
+    margin-block-start: theme(spacing.4);
   }
 
   :is(ol, ul) :is(ol, ul) {
