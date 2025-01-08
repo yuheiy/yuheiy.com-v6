@@ -4,6 +4,8 @@
     font-weight: bold;
     font-size: theme(fontSize.xl);
     line-height: theme(lineHeight.tight);
+    font-kerning: normal;
+    font-feature-settings: 'palt';
     text-wrap: pretty;
     word-break: auto-phrase;
   }
@@ -13,6 +15,8 @@
     font-weight: bold;
     font-size: theme(fontSize.lg);
     line-height: theme(lineHeight.tight);
+    font-kerning: normal;
+    font-feature-settings: 'palt';
     text-wrap: pretty;
     word-break: auto-phrase;
   }
