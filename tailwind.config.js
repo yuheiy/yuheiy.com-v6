@@ -56,7 +56,7 @@ export default {
     lineHeight: {
       none: '1',
       tight: '1.5',
-      normal: '1.8',
+      normal: '1.875',
     },
     extend: {
       spacing: {
