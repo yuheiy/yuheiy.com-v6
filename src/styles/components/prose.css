@@ -97,7 +97,7 @@
   }
 
   figcaption {
-    margin-block-start: theme(spacing.3);
+    margin-block-start: theme(spacing.4);
     hanging-punctuation: allow-end;
     font-size: theme(fontSize.sm);
   }
