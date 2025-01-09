@@ -18,7 +18,7 @@ const Heading = `h${headingLevel}`;
 
 {
   items.map((item) => (
-    <article class="mb-12 mt-8">
+    <article class="[&+&]:mt-12">
       <header>
         <p class="text-xs text-dynamic-muted" set:html={item.meta} />
         <Heading class:list="mt-1 pb-1 [word-break:auto-phrase]">
