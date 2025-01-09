@@ -9,10 +9,9 @@ export interface TeaserListItem {
 interface Props {
   headingLevel: 2 | 3;
   items: TeaserListItem[];
-  clampDescription?: boolean | undefined;
 }
 
-const { headingLevel, items, clampDescription } = Astro.props;
+const { headingLevel, items } = Astro.props;
 
 const Heading = `h${headingLevel}`;
 ---
@@ -28,10 +27,7 @@ const Heading = `h${headingLevel}`;
       </header>
       {item.description && (
         <p
-          class:list={[
-            'mt-1 text-sm text-dynamic-muted [hanging-punctuation:allow-end]',
-            clampDescription && 'line-clamp-5 overflow-y-clip overflow-x-visible',
-          ]}
+          class="mt-1 line-clamp-5 overflow-y-clip overflow-x-visible text-sm text-dynamic-muted [hanging-punctuation:allow-end]"
           set:html={item.description}
         />
       )}
