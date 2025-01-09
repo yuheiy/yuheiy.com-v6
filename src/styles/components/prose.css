@@ -152,7 +152,7 @@
     margin-block-start: theme(spacing.8);
   }
 
-  :is(astro-embed-tweet, lite-youtube, .codepen, .cp_embed_wrapper) {
+  :is(astro-embed-tweet, baseline-status, lite-youtube, .codepen, .cp_embed_wrapper) {
     margin-block: theme(spacing.rect);
   }
 
@@ -162,12 +162,24 @@
       figure,
       table,
       astro-embed-tweet,
+      baseline-status,
+      baseline-status + script,
       lite-youtube,
       lite-youtube + script,
       .codepen + script,
       .cp_embed_wrapper + script
     )
-    + :is(hr, pre, figure, table, astro-embed-tweet, lite-youtube, .codepen, .cp_embed_wrapper) {
+    + :is(
+      hr,
+      pre,
+      figure,
+      table,
+      astro-embed-tweet,
+      baseline-status,
+      lite-youtube,
+      .codepen,
+      .cp_embed_wrapper
+    ) {
     margin-block-start: theme(spacing.rect2);
   }
 }

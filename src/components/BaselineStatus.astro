@@ -1,0 +1,12 @@
+---
+interface Props {
+  featureId: string;
+}
+
+const { featureId } = Astro.props;
+---
+
+<baseline-status class="border bg-dynamic-inset leading-tight" {featureId} lang="en"
+></baseline-status>
+
+<script src="../../node_modules/baseline-status/baseline-status.min.js"></script>
