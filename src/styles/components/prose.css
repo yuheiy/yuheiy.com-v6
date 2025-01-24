@@ -21,6 +21,10 @@
     word-break: auto-phrase;
   }
 
+  h2 + h3 {
+    margin-block-start: theme(spacing.4);
+  }
+
   p {
     margin-block-start: theme(spacing.8);
     hanging-punctuation: allow-end;
