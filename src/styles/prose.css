@@ -50,8 +50,7 @@
     margin-inline: calc((100cqi - 100%) / 2 * -1);
     margin-block: var(--spacing-rect);
     padding: --spacing(5) calc((100cqi - 100%) / 2);
-    font-size: var(--text-sm);
-    line-height: var(--leading-tight);
+    line-height: var(--leading-latin-normal);
 
     /* Apply when the container reaches `inline-size: 42rem`. */
     /* container size = 42rem / (100% - 2 * 5%) */
