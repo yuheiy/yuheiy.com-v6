@@ -1,6 +1,6 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 import { toString } from 'mdast-util-to-string';
 import type { Pluggable } from 'unified';
@@ -20,12 +20,11 @@ const remarkInjectDescription: Pluggable = () => {
 export default defineConfig({
   site: 'https://yuheiy.com',
   trailingSlash: 'never',
-  integrations: [
-    mdx({ remarkPlugins: [remarkInjectDescription] }),
-    sitemap(),
-    tailwind({ nesting: true }),
-  ],
+  integrations: [mdx({ remarkPlugins: [remarkInjectDescription] }), sitemap()],
   compressHTML: false,
+  vite: {
+    plugins: [tailwindcss()],
+  },
   build: {
     format: 'preserve',
   },

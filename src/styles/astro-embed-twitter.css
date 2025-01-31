@@ -1,0 +1,35 @@
+astro-embed-tweet {
+  display: block;
+}
+
+astro-embed-tweet::before {
+  --color-twitter: #1da1f2;
+  display: block;
+  border-inline: 1px solid var(--color-twitter);
+  border-start-start-radius: var(--radius-md);
+  border-start-end-radius: var(--radius-md);
+  background-color: var(--color-twitter);
+  padding: --spacing(1) --spacing(5);
+  content: 'X (Twitter)';
+  color: white;
+  font-weight: bold;
+  font-size: var(--text-xs);
+  line-height: normal;
+}
+
+astro-embed-tweet .twitter-tweet:not(.twitter-tweet-rendered) {
+  border-bottom-right-radius: var(--radius-md);
+  border-bottom-left-radius: var(--radius-md);
+  border-inline: 1px solid light-dark(var(--border-color-dynamic), transparent);
+  border-block-end: 1px solid light-dark(var(--border-color-dynamic), transparent);
+  background-color: white;
+  padding: --spacing(4) --spacing(5);
+  color: var(--color-gray-500);
+  font-size: var(--text-sm);
+}
+
+astro-embed-tweet .twitter-tweet:not(.twitter-tweet-rendered) p {
+  margin-block-end: --spacing(3);
+  color: var(--color-gray-800);
+  font-size: var(--text-base);
+}

@@ -1,9 +1,9 @@
 .prose {
   h2 {
-    margin-block-start: theme(spacing.16);
+    margin-block-start: --spacing(16);
     font-weight: bold;
-    font-size: theme(fontSize.xl);
-    line-height: theme(lineHeight.tight);
+    font-size: var(--text-xl);
+    line-height: var(--leading-tight);
     font-kerning: normal;
     font-feature-settings: 'palt';
     text-wrap: pretty;
@@ -11,10 +11,10 @@
   }
 
   h3 {
-    margin-block-start: theme(spacing.12);
+    margin-block-start: --spacing(12);
     font-weight: bold;
-    font-size: theme(fontSize.lg);
-    line-height: theme(lineHeight.tight);
+    font-size: var(--text-lg);
+    line-height: var(--leading-tight);
     font-kerning: normal;
     font-feature-settings: 'palt';
     text-wrap: pretty;
@@ -22,16 +22,16 @@
   }
 
   h2 + h3 {
-    margin-block-start: theme(spacing.4);
+    margin-block-start: --spacing(4);
   }
 
   p {
-    margin-block-start: theme(spacing.8);
+    margin-block-start: --spacing(8);
     hanging-punctuation: allow-end;
   }
 
   :is(h2, h3) + p {
-    margin-block-start: theme(spacing.4);
+    margin-block-start: --spacing(4);
   }
 
   /* Remove the unnecessary paragraph elements rendered by MDX. */
@@ -41,17 +41,17 @@
   }
 
   hr {
-    margin-block: theme(spacing.rect);
-    border-block-start-width: theme(borderWidth.4);
-    inline-size: theme(spacing.32);
+    margin-block: var(--spacing-rect);
+    border-block-start: 4px solid var(--border-color-dynamic);
+    inline-size: --spacing(32);
   }
 
   pre {
     margin-inline: calc((100cqi - 100%) / 2 * -1);
-    margin-block: theme(spacing.rect);
-    padding: theme(spacing.5) calc((100cqi - 100%) / 2);
-    font-size: theme(fontSize.sm);
-    line-height: theme(lineHeight.tight);
+    margin-block: var(--spacing-rect);
+    padding: --spacing(5) calc((100cqi - 100%) / 2);
+    font-size: var(--text-sm);
+    line-height: var(--leading-tight);
 
     /* Apply when the container reaches `inline-size: 42rem`. */
     /* container size = 42rem / (100% - 2 * 5%) */
@@ -69,7 +69,7 @@
 
   blockquote:not(.twitter-tweet) {
     position: relative;
-    margin-block-start: theme(spacing.8);
+    margin-block-start: --spacing(8);
     padding-inline-start: 2rem;
   }
 
@@ -77,19 +77,19 @@
     position: absolute;
     inset-block: calc((1rlh - 1rem) / 2);
     inset-inline-start: 0;
-    border-inline-start-width: theme(borderWidth.4);
+    border-inline-start: 4px solid var(--border-color-dynamic);
     content: '';
   }
 
   :is(ol, ul) {
-    margin-block-start: theme(spacing.8);
+    margin-block-start: --spacing(8);
     padding-inline-start: 2rem;
     hanging-punctuation: allow-end;
     list-style-type: revert;
   }
 
   :is(h2, h3) + :is(ol, ul) {
-    margin-block-start: theme(spacing.4);
+    margin-block-start: --spacing(4);
   }
 
   :is(ol, ul) :is(ol, ul) {
@@ -97,17 +97,17 @@
   }
 
   li {
-    margin-block-start: theme(spacing.1);
+    margin-block-start: --spacing(1);
   }
 
   figure {
-    margin-block: theme(spacing.rect);
+    margin-block: var(--spacing-rect);
   }
 
   figcaption {
-    margin-block-start: theme(spacing.3);
+    margin-block-start: --spacing(3);
     hanging-punctuation: allow-end;
-    font-size: theme(fontSize.sm);
+    font-size: var(--text-sm);
   }
 
   /* The `quotes` property does not work correctly in Safari */
@@ -123,12 +123,12 @@
   }
 
   img {
-    border: theme(borderWidth.DEFAULT) solid theme(borderColor.DEFAULT);
+    border: 1px solid var(--border-color-dynamic);
   }
 
   table {
     display: block;
-    margin-block: theme(spacing.rect);
+    margin-block: var(--spacing-rect);
     border-spacing: 0;
     max-inline-size: 100%;
     overflow-x: auto;
@@ -136,28 +136,26 @@
 
   td {
     vertical-align: top;
-    border-block-end-width: theme(borderWidth.DEFAULT);
-    border-block-end-style: solid;
-    padding: theme(spacing.1) theme(spacing.3);
+    border-block-end: 1px solid var(--border-color-dynamic);
+    padding: --spacing(1) --spacing(3);
     white-space: pre;
   }
 
   th {
     vertical-align: top;
-    border-block-end-width: theme(borderWidth.DEFAULT);
-    border-block-end-style: solid;
-    background-color: theme(backgroundColor.dynamic.inset);
-    padding: theme(spacing.1) theme(spacing.3);
+    border-block-end: 1px solid var(--border-color-dynamic);
+    background-color: var(--background-color-dynamic-inset);
+    padding: --spacing(1) --spacing(3);
     text-align: inherit;
     white-space: pre;
   }
 
   details {
-    margin-block-start: theme(spacing.8);
+    margin-block-start: --spacing(8);
   }
 
   :is(astro-embed-tweet, baseline-status, lite-youtube, .codepen, .cp_embed_wrapper) {
-    margin-block: theme(spacing.rect);
+    margin-block: var(--spacing-rect);
   }
 
   :is(
@@ -184,6 +182,6 @@
       .codepen,
       .cp_embed_wrapper
     ) {
-    margin-block-start: theme(spacing.rect2);
+    margin-block-start: var(--spacing-rect2);
   }
 }

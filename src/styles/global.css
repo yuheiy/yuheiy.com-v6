@@ -1,0 +1,80 @@
+@import 'tailwindcss';
+
+/* components */
+@import './prose.css' layer(components);
+
+/* utilities */
+@import './kerning.css';
+
+/* outsiders */
+@import './astro-code.css';
+@import './astro-embed-twitter.css';
+
+@theme {
+  --font-sans: sans-serif;
+  --font-serif: serif;
+  --font-mono: monospace, monospace;
+
+  --border-color-dynamic: light-dark(var(--color-gray-200), var(--color-zinc-700));
+
+  --background-color-dynamic: light-dark(var(--color-white), var(--color-zinc-900));
+  --background-color-dynamic-inset: light-dark(
+    color-mix(in srgb, var(--color-white), var(--color-slate-100)),
+    color-mix(in srgb, var(--color-zinc-800), var(--color-zinc-900))
+  );
+
+  --text-decoration-color-dynamic: light-dark(var(--color-gray-400), var(--color-zinc-400));
+
+  --text-color-dynamic: light-dark(var(--color-gray-800), var(--color-zinc-50));
+  --text-color-dynamic-muted: light-dark(var(--color-gray-500), var(--color-zinc-400));
+
+  --ring-color-dynamic: var(--border-color-dynamic);
+
+  --spacing: 0.125rlh;
+  --spacing-rect: calc(1rlh + (1rlh - 1rem) / 2);
+  --spacing-rect2: calc(1rlh + (1rlh - 1rem));
+
+  --text-*: initial;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.625rem;
+
+  --leading-*: initial;
+  --leading-tight: 1.5;
+  --leading-normal: 1.875;
+}
+
+@layer base {
+  :root {
+    --body-column: 42rem;
+    --body-padding-without-safe-area: clamp(
+      1rem,
+      max((100cqi - var(--body-column)) / 2, 5cqi),
+      10cqi
+    );
+    --body-padding-right: calc(var(--body-padding-without-safe-area) + env(safe-area-inset-right));
+    --body-padding-left: calc(var(--body-padding-without-safe-area) + env(safe-area-inset-left));
+  }
+
+  a:where(:any-link) {
+    text-decoration: underline;
+    text-decoration-color: var(--text-decoration-color-dynamic);
+    text-decoration-thickness: 1px;
+  }
+
+  em {
+    font-style: normal;
+    font-weight: bolder;
+  }
+
+  [id] {
+    scroll-margin-block-start: --spacing(4);
+  }
+
+  :focus {
+    scroll-margin-block: --spacing(4);
+  }
+}

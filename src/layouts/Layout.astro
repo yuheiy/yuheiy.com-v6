@@ -11,6 +11,7 @@ import {
   siteTitle,
   siteTwitterId,
 } from '../consts';
+import '../styles/global.css';
 
 interface BaseProps {
   isHome?: false | undefined;
@@ -64,7 +65,7 @@ const canonicalURL = (() => {
   https://schepp.dev/posts/smooth-scrolling-and-page-search/
 -->
 <html
-  class="bg-dynamic text-[106.25%] leading-normal text-dynamic underline-offset-[0.3em] @container/root kerning-none [line-break:normal] [overflow-wrap:anywhere] [text-spacing-trim:trim-start] motion-safe:focus-within:scroll-smooth"
+  class="@container/root bg-dynamic text-[106.25%] leading-normal [overflow-wrap:anywhere] text-dynamic underline-offset-[0.3em] [line-break:normal] [text-spacing-trim:trim-start] kerning-none motion-safe:focus-within:scroll-smooth"
   lang={siteLang}
 >
   <head>
@@ -105,14 +106,14 @@ const canonicalURL = (() => {
 
   <body
     class:list={[
-      'mb-12 mt-8 box-content max-w-[--body-column] pl-[--body-padding-left] pr-[--body-padding-right]',
+      'mt-8 mb-12 box-content max-w-(--body-column) pr-(--body-padding-right) pl-(--body-padding-left)',
       '*:mx-auto *:w-[round(down,100%,1rem)]',
     ]}
   >
     <slot />
 
     <footer class="space-y-3 pb-1 text-xs text-dynamic-muted">
-      <hr class="mb-8 mt-32 w-8 border-t-2" />
+      <hr class="mt-32 mb-8 w-8 border-t-2 border-t-dynamic" />
       <p>
         <a href="/">ホーム</a>&#x2003;<a href="/blog">ブログ</a>&#x2003;<a href="/contributions"
           >外部サイトの投稿</a
