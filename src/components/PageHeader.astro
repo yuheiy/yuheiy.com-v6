@@ -18,7 +18,7 @@ const Title = isHome ? 'p' : 'h1';
 
 <header>
   <Nav>
-    <Logo class="text-sm leading-none text-dynamic-muted kerning-normal">
+    <Logo class="text-sm/none text-dynamic-muted kerning-normal">
       {/* eslint-disable-next-line astro/jsx-a11y/anchor-is-valid */}
       <a class="flex w-fit items-center gap-x-3.5" href={isHome ? null : '/'}>
         <Image
@@ -41,7 +41,7 @@ const Title = isHome ? 'p' : 'h1';
     }
 
     <Title
-      class="row-start-2 text-2xl leading-tight font-bold text-pretty [word-break:auto-phrase] kerning-all"
+      class="row-start-2 text-2xl/tight font-bold text-pretty [word-break:auto-phrase] kerning-all"
     >
       {isHome ? <em set:html={title} /> : <Fragment set:html={title} />}
     </Title>
