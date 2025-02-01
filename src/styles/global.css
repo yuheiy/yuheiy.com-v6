@@ -74,8 +74,4 @@
   [id] {
     scroll-margin-block-start: --spacing(4);
   }
-
-  :focus {
-    scroll-margin-block: --spacing(4);
-  }
 }
