@@ -19,8 +19,8 @@
 
   --background-color-dynamic: light-dark(var(--color-white), var(--color-zinc-900));
   --background-color-dynamic-inset: light-dark(
-    color-mix(in srgb, var(--color-white), var(--color-slate-100)),
-    color-mix(in srgb, var(--color-zinc-800), var(--color-zinc-900))
+    color-mix(in oklch, var(--color-white), var(--color-slate-100)),
+    color-mix(in oklch, var(--color-zinc-800), var(--color-zinc-900))
   );
 
   --text-decoration-color-dynamic: light-dark(var(--color-gray-400), var(--color-zinc-400));
