@@ -1,0 +1,346 @@
+---
+title: '日本語のウェブサイトのためのCSSと文字組みについてのまとめ'
+pubDate: 2025-01-04T23:40:00.000+09:00
+---
+
+import BaselineStatus from '../../components/BaselineStatus.astro';
+
+昨今の CSS の進歩にともなって、より良い日本語の文字組みを実現するための機能が徐々に増えてきている。一方、個々の機能についての解説はあれど、実際のウェブサイトに適用するための考え方や実践的な方法についてはあまり整理されてきていないように思う。
+
+とはいえ、テキストに関する CSS の機能の数は膨大で、すべてを網羅するには無理がある。そこでこの記事では、このサイトで採用している機能を中心に、多くの場面で使えそうなものだけに絞って紹介することにする。一般的なウェブサイトであればこれらの情報だけで事足りるはずだ。
+
+また、ブラウザでの実装状況が十分でない機能も扱うため、[\<baseline-status> web component](https://github.com/web-platform-dx/baseline-status)を使って[Baseline](https://web-platform-dx.github.io/web-features/)のステータスも掲載することにした。
+
+## 目次
+
+- [ベタ組みとプロポーショナル組み](#ベタ組みとプロポーショナル組み)
+- [文字サイズに基づいたカラム幅](#文字サイズに基づいたカラム幅)
+- [両端揃えにはしない](#両端揃えにはしない)
+- [改行規則の正規化](#改行規則の正規化)
+- [はみ出しを防ぐ折り返し設定](#はみ出しを防ぐ折り返し設定)
+- [行頭の始め格好類の空きの除去](#行頭の始め格好類の空きの除去)
+- [行末の句読点のぶら下げ](#行末の句読点のぶら下げ)
+- [文節区切りの改行](#文節区切りの改行)
+- [折り返しのバランスの制御](#折り返しのバランスの制御)
+- [下線との距離の調整](#下線との距離の調整)
+- [テキスト種別の適用例](#テキスト種別の適用例)
+
+## ベタ組みとプロポーショナル組み
+
+web において日本語の組み方には、大きくベタ組みとプロポーショナル組みの 2 つがある
+
+日本語の組み方には、ベタ組みと詰め組みの 2 通りがある。
+
+- ベタ組み: 字間を空けたり詰めたりせずに文字を配置すること
+- 詰め組み: ベタ組みよりも字間を詰めて配置すること
+
+<figure>
+  ![](https://raw.githubusercontent.com/fontplus/web-typography-glossary/refs/heads/master/images/betagumi.png)
+  <figcaption>
+    [Webタイポグラフィの基礎知識と実践](https://github.com/fontplus/web-typography-glossary/blob/master/terms/betagumi.md)
+  </figcaption>
+</figure>
+
+基本的に、本文はベタ組みが最も読みやすいとされている。一方、大きな文字サイズの見出しなどは、ベタ組みでは空白部分が目立ってバランスを欠いて見えることがあるので、詰め組みにした方がよい場面もある。
+
+CSS では、デフォルトでベタ組みとほぼ同等の状態になる。しかし、`font-kerning`プロパティの初期値（`auto`）の解釈がブラウザによって異なるため、カーニングが有効になっていることがある。記事執筆時点では、Blink 系のブラウザにおいては`auto`が`normal`に、それ以外では`none`と解釈されるようだ。
+
+<figure>
+  ![](https://files.speakerdeck.com/presentations/ddaee4fdb1574a8896229fa41a5d0914/slide_3.jpg?16577064)
+  <figcaption>
+    [より良いタイポグラフィのための知られざるCSS - Speaker
+    Deck](https://speakerdeck.com/terkel/yoriliang-itaipogurahuifalsetamefalsezhi-rarezarucss?slide=4)
+  </figcaption>
+</figure>
+
+カーニングが有効になるとベタ組みではなくなってしまうので、ベタ組みにするには、次のようにして明示的に無効化する必要がある。
+
+```css
+html {
+  font-kerning: none;
+}
+```
+
+ただし、カーニングを無効化すべきなのは CJK にかぎった話で、それ以外の多くの言語においては有効化されているべきである。しかしこの実装では、言語にかかわらず一律無効化してしまう。`:lang()`擬似クラスなどを用いて適用範囲を制限することもできるが、それでも、日本語のテキストの中に含まれる英語を除外するようなことはできない。つまりこの実装は、日本語を優先するかそれ以外を優先するかのトレードオフの関係にある。Blink の実装が変更されないかぎりはこのジレンマがつきまとうことになる。（このブラウザの問題については[X の Ln-north 氏のポスト](https://x.com/Ln_north/status/1579717733826322432)が詳しい。）
+
+詰め組みにするには、カーニングとプロポーショナルメトリクスを有効化する。OpenType フィーチャーにおいては、カーニング（`kern`）とプロポーショナルメトリクス（`palt`）が別々に制御できるようになっているが、[フォントはこれらを併せて使うことを想定して設計されている](https://togetter.com/li/1083953)。`font-kerning`プロパティの初期値は`auto`であるため、確実にカーニングを有効にするために`normal`を指定するとよい。
+
+```css
+h1 {
+  font-kerning: normal;
+  font-feature-settings: 'palt';
+}
+```
+
+昨今の日本語のウェブサイトにおいては、すべての文字を詰め組みにしているものがたまにある。
+
+```css
+html {
+  font-feature-settings: 'palt';
+}
+```
+
+しかしこれは、読みやすさという観点では好ましくないことが多い。どちらかと言えば、読みやすさよりも全体としての美観を重視した設計と言える。
+
+基本としては、すべてを詰め組みにすることは避けて、ベタ組みにする箇所と詰め組みにする箇所を使い分けるべきだ。ガイドラインを示すとすれば、デフォルトはベタ組みで、文字サイズが大きくなる見出しやリードの字間が気になれば個別に詰め組みにするのが良いだろう。
+
+TODO: スマホのように狭い画面だと空白が気になる傾向にある
+
+<BaselineStatus featureId="font-kerning" />
+<BaselineStatus featureId="font-feature-settings" />
+
+### 参考資料
+
+- [ベタ組とツメ組。日本語の文字の並べ方を押さえよう｜モリサワ　 note 編集部](https://note.morisawa.co.jp/n/n9b07908be089)
+- [日本語組版処理の要件（日本語版） § 2.1.3 漢字及び仮名の配置の原則](https://www.w3.org/TR/jlreq/#principles_of_arrangement_of_kanji_and_kana_characters)
+- [ベタ組み（Web タイポグラフィの基礎知識と実践）](https://github.com/fontplus/web-typography-glossary/blob/master/terms/betagumi.md)
+- [カーニング（Web タイポグラフィの基礎知識と実践）](https://github.com/fontplus/web-typography-glossary/blob/master/terms/kerning.md)
+- [より良いタイポグラフィのための知られざる CSS](https://speakerdeck.com/terkel/yoriliang-itaipogurahuifalsetamefalsezhi-rarezarucss)
+- [CSS での OpenType 機能の構文](https://helpx.adobe.com/jp/fonts/using/open-type-syntax.html)
+- [【真夜中の OpenType フィーチャー講座】プロポーショナルメトリクスと自動カーニング](https://togetter.com/li/1083953)
+
+## 文字サイズに基づいたカラム幅
+
+日本語の本文を囲うコンテナの幅は文字サイズに基づいたものにすると良い。その理由については[terkel.jp](https://terkel.jp/)の解説を引用しよう。
+
+{/_ prettier-ignore _/}
+
+<figure>
+  >
+  日本語の組版ではコラム幅を文字サイズの整数倍にするのが基本だ。そうすれば全角等幅の活字を字間なく並べたとき、コラム幅と行長がぴったり合い、行末の位置が揃うことになる。ただしプロポーショナル文字（ラテン・アルファベットやアラビア数字など）や行頭行末の禁則の影響で行長にばらつきが出るので、その場合は調整が必要になる。
+  > >
+  このコラム幅についての原則はウェブでも同様だと僕は考えている。ブラウザーではInDesignとは違って行ごとの緻密な調整はできないが、それでもやはり、コラム幅はなるべく文字サイズの整数倍にするのがよいと思う。そうしておけば、行長のばらつきが起こったとしても、その変化は「短くなる」方向でしか発生しない。コラムの右端を見たとき（横組みの場合）、おおむね縦に揃っているがときおりくぼんだ箇所が発生する、という格好になるわけだ。一方コラム幅が文字サイズの整数倍になっていないと、行長が意図した幅より長くも短くもなるので、行末が不揃いになりやすい。
+  <figcaption>
+    [コラム幅を文字サイズの整数倍にする](https://terkel.jp/archives/2021/05/em-based-grid/)
+  </figcaption>
+</figure>
+
+もちろんこれは、本文をベタ組みにすることを前提としたものだ。
+
+具体的な実装としては、たとえば次のようにしてインライン方向のサイズを`em`単位を用いて指定する。
+
+```css
+.container {
+  max-inline-size: 40em;
+}
+```
+
+ただしこの実装では、コンテナが`40em`未満に縮んだときに半端な大きさになって整数倍ではなくなってしまう。そこで、CSS の[`round()`関数](https://developer.mozilla.org/en-US/docs/Web/CSS/round)を使用することで、コンテナを常に`1em`の倍数にすることができる。
+
+```css
+.container {
+  inline-size: round(down, 100%, 1em);
+  max-inline-size: 40em;
+}
+```
+
+（TODO: リサイズする動画を貼る https://codepen.io/yuheiy/pen/mybpaVz ）
+
+実際に利用する際には、これらに併せて`padding`プロパティを適用したり中央揃えにしたりすることが多いだろう。そうしたよくある要件も組み合わせると、次のような実装になる。
+
+```css
+.container {
+  --padding: 1rem;
+  box-sizing: content-box;
+  margin-inline: auto;
+  padding-inline: var(--padding);
+  inline-size: round(down, 100% - 2 * var(--padding), 1rem);
+  max-inline-size: 40rem;
+}
+```
+
+<BaselineStatus featureId="round-mod-rem" />
+
+### 参考資料
+
+- [日本語組版処理の要件（日本語版） § 2.4.1 基本版面の設計手順](https://www.w3.org/TR/jlreq/#procedure_for_defining_the_kihonhanmen)
+- [コラム幅を文字サイズの整数倍にする](https://terkel.jp/archives/2021/05/em-based-grid/)
+
+## 両端揃えにはしない
+
+TODO: ベタ組みにしても行末が揃わないことがある。ということについて書く
+
+`text-align: justify`を指定すると、行の両端を揃えられる。基本的には両端が揃っている方が整って見えるし、日本語組版のルールとしても両端を揃えるのが普通なので、ウェブサイトでもしばしば採用されている。
+
+しかし日本語のウェブサイトにおいては、この指定によって無様な結果になることが少なくない。日本語だけの段落ではほとんど問題にならないが、長い英単語などが含まれる和欧混植の段落では、行の調整処理のために字間が過度に開きすぎてしまうことがある。
+
+（TODO: サンプルを用意する。この記事に text-align:justify を適用した結果を貼る）
+
+本来、日本語組版においては、行長を合わせるために[複雑な規則に基づいた調整](https://www.w3.org/TR/jlreq/#reduction_and_addition_of_intercharacter_space)が行われるが、CSS においては単に字間を広げることしかできない。そのため、文字の組み合わせによってはうまく機能しないということが起きてしまう。
+
+長い英単語が含まれる場合の処理として、ハイフネーションを使って折り返すというやり方はある。しかし、ハイフネーションを実現する`hyphens`プロパティは`lang=ja`では機能しないため、やはり日本語のウェブサイトでは使えない。
+
+そういったわけで、両端揃えにおける問題を回避するために、基本的には両端揃えにしないということが現状の最善策かと思われる。ただし、挿入されるテキストの内容が想定できる場合にかぎっては、両端揃えにしても問題ないだろう。
+
+### 参考資料
+
+- [日本語組版処理の要件（日本語版） § 3.8 行の調整処理](https://www.w3.org/TR/jlreq/#line_adjustment)
+- [CSS による両端揃えの問題点とその解決へ向けて](https://hail2u.net/blog/css-jutification-problem-and-solving-some.html)
+- [word-break: break-all](https://hail2u.net/blog/webdesign/word-break-break-all.html)
+- [禁則（Web タイポグラフィの基礎知識と実践）](https://github.com/fontplus/web-typography-glossary/blob/master/terms/line-breaking-rules.md)
+
+## 改行規則の正規化
+
+```css
+html {
+  line-break: normal;
+}
+```
+
+![](https://files.speakerdeck.com/presentations/ddaee4fdb1574a8896229fa41a5d0914/slide_15.jpg?16577076)
+
+https://speakerdeck.com/terkel/yoriliang-itaipogurahuifalsetamefalsezhi-rarezarucss?slide=16
+
+- デフォルト値は auto
+  - 多くのブラウザでは normal と解釈される
+  - firefox だと strict 相当になる
+- 正規化のために、auto 以外の値を適用する
+- strict にすると行末がスカスカになりがちなので一般的には勧めない
+  - https://ics.media/entry/240411/
+- word-break は初期値のままにしておく
+
+<BaselineStatus featureId="line-break" />
+
+### 参考資料
+
+- [line-break - CSS: カスケーディングスタイルシート | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/line-break)
+- [禁則（Web タイポグラフィの基礎知識と実践）](https://github.com/fontplus/web-typography-glossary/blob/master/terms/line-breaking-rules.md)
+
+## はみ出しを防ぐ折り返し設定
+
+```css
+html {
+  overflow-wrap: anywhere;
+}
+```
+
+- 日本語の話かどうか微妙だけど一応入れておく
+- https://wiki.csswg.org/ideas/mistakes
+
+<BaselineStatus featureId="overflow-wrap" />
+
+## 行頭の始め格好類の空きの除去
+
+```css
+html {
+  text-spacing-trim: trim-start;
+}
+```
+
+- https://www.w3.org/TR/jlreq/#character_positioning_based_on_kihonhanmen_design
+- https://developer.chrome.com/blog/css-i18n-features?hl=ja#cjk_punctuation_kerning_text-spacing-trim
+- https://www.w3.org/TR/jlreq/#positioning_of_opening_brackets_at_line_head
+  - 元々括弧類の字幅は半角であったのであるから，何も空き量を入れなければ Figure 71 の ① の方法となる．これに対し，② の方法は，行頭の括弧類の字幅について空き量を含めて全角とする処理方法である．JIS X 4051 では，① の方法を採用している（ただし，オプションで ② の方法も選択できる）．③ の方法は，小説などで会話が多い場合，改行行頭の括弧の字下げを全角アキ又は全角半（全角の 1.5 倍）アキとすると下がり過ぎになることから考えられた方法である（これが一般書にも採用されるようになっている）．講談社，新潮社，文藝春秋，中央公論新社，筑摩書房など文芸関係の出版社では，③ の方法が採用されている．岩波書店やその他の出版社では ① の方法を採用している．以前の岩波書店の縦組では ② の方法であり，この方法を採用している例はかなりあった．しかし，今日では ② の方法を採用している例は少なくなった．
+
+<BaselineStatus featureId="text-spacing-trim" />
+
+### 参考資料
+
+- [CSS に 4 つの新しい国際化機能を導入  |  Blog  |  Chrome for Developers](https://developer.chrome.com/blog/css-i18n-features?hl=ja)
+- [Chrome で text-spacing-trim プロパティがサポートされたぞ！！](https://zenn.dev/inaniwaudon/articles/3ff8761773178c)
+
+## 行末の句読点のぶら下げ
+
+```css
+p {
+  hanging-punctuation: allow-end;
+}
+```
+
+- https://www.w3.org/TR/jlreq/#reduction_and_addition_of_intercharacter_space
+
+<BaselineStatus featureId="hanging-punctuation" />
+
+### 参考資料
+
+- [ぶら下げ（Web タイポグラフィの基礎知識と実践）](https://github.com/fontplus/web-typography-glossary/blob/master/terms/hanging-punctuation.md)
+- [hanging-punctuation - CSS: カスケーディングスタイルシート | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/hanging-punctuation)
+
+## 文節区切りの改行
+
+```css
+h1 {
+  word-break: auto-phrase;
+}
+```
+
+- 見出しやタイトルのように、パッと見で認識されるものは、誤解を防ぐために文節改行にする。
+- そうじゃない、じっくり読まれるものは、成り行きで改行する。全部文節改行にするとガタガタになるし、余計なスペースだらけになる
+- タイトルのように拾い読みされるもの、パッと見で認識されるものは chunk。半端な位置で区切られていると誤解が生じるため。
+- 中央揃えにするときも使うと良い
+- そうじゃないものはベタ。意識を集中して読まれることを意図しているようなもの。
+
+<BaselineStatus featureId="word-break-auto-phrase" />
+
+### 参考資料
+
+- [日本語における text-wrap プロパティの運用](/2024-07-22-text-wrap-in-japanese)
+- [CSS に 4 つの新しい国際化機能を導入  |  Blog  |  Chrome for Developers](https://developer.chrome.com/blog/css-i18n-features?hl=ja)
+
+## 折り返しのバランスの制御
+
+```css
+h1 {
+  text-wrap: pretty;
+  word-break: auto-phrase;
+}
+```
+
+<BaselineStatus featureId="text-wrap-pretty" />
+
+### 参考資料
+
+- [日本語における text-wrap プロパティの運用](/2024-07-22-text-wrap-in-japanese)
+- [Balancing Text In CSS](https://ishadeed.com/article/balancing-text-css/)
+
+## 下線との距離の調整
+
+```css
+html {
+  text-underline-offset: 0.3em;
+}
+```
+
+<BaselineStatus featureId="text-underline-position" />
+
+### 参考資料
+
+- [より良いタイポグラフィのための知られざる CSS](https://speakerdeck.com/terkel/yoriliang-itaipogurahuifalsetamefalsezhi-rarezarucss)
+- https://medium.com/@hiwelo/improving-text-readability-for-dyslexic-users-with-skip-ink-underlines-bf52a2f3426b
+- https://uxdesign.cc/improving-hyperlink-accessibility-and-readability-7f14ba4cb6c2
+
+## テキスト種別の適用例
+
+### 全体
+
+```css
+html {
+  line-break: normal;
+  overflow-wrap: anywhere;
+  text-spacing-trim: trim-start;
+  text-underline-offset: 0.3em;
+}
+```
+
+### 見出し類
+
+```css
+h1 {
+  text-wrap: pretty;
+  word-break: auto-phrase;
+}
+```
+
+### 本文
+
+```css
+p {
+  hanging-punctuation: allow-end;
+}
+
+.wrapper {
+}
+
+.kerning- {
+}
+```
