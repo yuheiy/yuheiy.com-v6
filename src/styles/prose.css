@@ -3,7 +3,7 @@
     margin-block-start: --spacing(16);
     font-weight: bold;
     font-size: var(--text-xl);
-    line-height: var(--leading-tight);
+    line-height: var(--leading-japanese-tight);
     font-kerning: normal;
     font-feature-settings: 'palt';
     text-wrap: pretty;
@@ -14,7 +14,7 @@
     margin-block-start: --spacing(12);
     font-weight: bold;
     font-size: var(--text-lg);
-    line-height: var(--leading-tight);
+    line-height: var(--leading-japanese-tight);
     font-kerning: normal;
     font-feature-settings: 'palt';
     text-wrap: pretty;

@@ -43,8 +43,8 @@
   --text-2xl: 1.625rem;
 
   --leading-*: initial;
-  --leading-tight: 1.5;
-  --leading-normal: 1.875;
+  --leading-japanese-tight: 1.5;
+  --leading-japanese-normal: 1.875;
   --leading-latin-normal: 1.5;
 }
 
