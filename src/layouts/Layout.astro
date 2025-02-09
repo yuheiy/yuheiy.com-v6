@@ -47,7 +47,7 @@ const {
 } = Astro.props;
 
 const title = isHome ? siteTitle : Astro.props.title;
-const resolvedOgImage = new URL(ogImage, Astro.site);
+const resolvedOgImage = new URL(ogImage, Astro.url);
 ---
 
 <!--
