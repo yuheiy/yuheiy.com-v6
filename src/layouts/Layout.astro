@@ -65,7 +65,10 @@ const canonicalURL = (() => {
   https://schepp.dev/posts/smooth-scrolling-and-page-search/
 -->
 <html
-  class="@container/root bg-dynamic text-[106.25%]/japanese-normal [overflow-wrap:anywhere] text-dynamic underline-offset-[0.3em] [line-break:normal] [text-spacing-trim:trim-start] kerning-none motion-safe:focus-within:scroll-smooth"
+  class:list={[
+    '@container/root bg-dynamic text-[106.25%]/japanese-normal [overflow-wrap:anywhere] text-dynamic underline-offset-[0.3em] scheme-light-dark [line-break:normal] [text-spacing-trim:trim-start] kerning-none',
+    'motion-safe:focus-within:scroll-smooth',
+  ]}
   lang={siteLang}
 >
   <head>
@@ -81,7 +84,6 @@ const canonicalURL = (() => {
 
     <title set:html={title} />
 
-    <meta name="color-scheme" content="light dark" />
     {description && <meta name="description" content={description} />}
     <meta name="generator" content={Astro.generator} />
     <meta name="twitter:card" content={twitterCard} />
