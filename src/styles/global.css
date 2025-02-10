@@ -50,9 +50,9 @@
 
 @layer base {
   :root {
-    --body-column: 42rem;
+    --body-column: 42ric;
     --body-padding-without-safe-area: clamp(
-      1rem,
+      1ric,
       max((100cqi - var(--body-column)) / 2, 5cqi),
       10cqi
     );
