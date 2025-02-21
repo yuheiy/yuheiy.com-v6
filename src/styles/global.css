@@ -31,8 +31,8 @@
   --ring-color-dynamic: var(--border-color-dynamic);
 
   --spacing: 0.125rlh;
-  --spacing-rect: calc(1rlh + (1rlh - 1rem) / 2);
-  --spacing-rect2: calc(1rlh + (1rlh - 1rem));
+  --spacing-rect: calc(1rlh + (1rlh - 1ric) / 2);
+  --spacing-rect2: calc(1rlh + (1rlh - 1ric));
 
   --text-*: initial;
   --text-xs: 0.75rem;
