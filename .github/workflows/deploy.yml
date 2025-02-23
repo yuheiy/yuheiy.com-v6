@@ -18,19 +18,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: package.json
-          cache: npm
+          # https://github.com/actions/setup-node/pull/1149
+          node-version: 22.14.0
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm ci
-        env:
-          NODE_ENV: production
+        run: pnpm install --prod
 
       - name: Build
-        run: npm run build
+        run: pnpm run build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -44,17 +46,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: package.json
-          cache: npm
+          # https://github.com/actions/setup-node/pull/1149
+          node-version: 22.14.0
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Lint
-        run: npm run lint
+        run: pnpm run lint
 
   deploy:
     name: Deploy
