@@ -60,6 +60,11 @@
     --body-padding-left: calc(var(--body-padding-without-safe-area) + env(safe-area-inset-left));
   }
 
+  pre {
+    /* https://hail2u.net/blog/text-spacing-trim-property-and-pre-element.html */
+    text-spacing-trim: space-all;
+  }
+
   a:where(:any-link) {
     text-decoration: underline;
     text-decoration-color: var(--text-decoration-color-dynamic);
