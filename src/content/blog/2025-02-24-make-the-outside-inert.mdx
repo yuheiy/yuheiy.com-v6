@@ -11,7 +11,7 @@ pubDate: 2025-02-24T04:50:00.000+09:00
 
 という状態を指している。
 
-この要件を満たすには、`dialog`要素を`.showModal()`で呼び出して使うのがよい。それだけで外側の要素は自動的に不活性化される。しかし実装上の制約などにより、`dialog`要素を使えないこともあるだろう。そうした場合は、不活性化の処理を独自に実装しなければならない。
+この要件を満たすには、`dialog`要素を`.showModal()`で呼び出して使うとよい。それだけで外側の要素は自動的に不活性化される。しかし実装上の制約などにより、`dialog`要素を使えないこともあるだろう。そうした場合は、不活性化の処理を独自に実装することになる。
 
 要素を不活性化するには`inert`属性を使う。要素に`inert`属性が適用されると、その子孫まで不活性状態が継承される。
 
@@ -90,20 +90,8 @@ pubDate: 2025-02-24T04:50:00.000+09:00
 これを実現するには、次のような処理を実装する。
 
 ```javascript
-function crawlSiblingsUp(el, callback) {
-  if (el.isSameNode(document.body) || !el.parentNode) return;
-
-  for (const sibling of el.parentNode.children) {
-    if (sibling.isSameNode(el)) {
-      crawlSiblingsUp(el.parentNode, callback);
-    } else {
-      callback(sibling);
-    }
-  }
-}
-
 function setInert(el) {
-  let undos = [];
+  const undos = [];
 
   crawlSiblingsUp(el, (sibling) => {
     if (!sibling.inert) {
@@ -120,6 +108,22 @@ function setInert(el) {
   };
 }
 
+function crawlSiblingsUp(el, callback) {
+  if (el.isSameNode(document.body) || !el.parentNode) return;
+
+  for (const sibling of el.parentNode.children) {
+    if (sibling.isSameNode(el)) {
+      crawlSiblingsUp(el.parentNode, callback);
+    } else {
+      callback(sibling);
+    }
+  }
+}
+```
+
+これを次のように使用する。
+
+```javascript
 const dialogEl = document.querySelector('[role="dialog"]');
 let undoInert;
 
@@ -134,14 +138,14 @@ function closeDialog() {
 
 モーダルダイアログを開くタイミングで`setInert`関数を実行する。これにより、モーダルダイアログを除くすべての要素の上端に`inert`属性が適用される。閉じるタイミングでその戻り値を実行することで、開くときに適用した`inert`属性はすべて取り除かれる。なおこの実装は、[Alpine.jsのFocusプラグイン](https://alpinejs.dev/plugins/focus)を参考にしたものである。
 
-モーダルダイアログを実装する際にはそれ以外にも考慮すべき点がある。ここでは解説しないので、詳しくは[ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/)を参照のこと。
+モーダルダイアログを実装する際にはそれ以外にも考慮すべき点がある。ここでは取り上げないので、詳しくは[ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/)を参照のこと。
 
 ---
 
-`inert`属性を使う以外のやり方としては、特定の要素の中だけにフォーカスを閉じ込めるフォーカス・トラップというテクニックがある。ただし、フォーカス・トラップではドキュメントの外側にフォーカスを移せなくなるので、通常のタブ・ナビゲーションのようにブラウザのアドレスバーなどにフォーカスする操作ができなくなってしまう問題がある。これについては次の資料でも言及されている。
+`inert`属性を使う以外のやり方としては、特定の要素の中だけにフォーカスを閉じ込めるフォーカス・トラップというテクニックがある。ただし、フォーカス・トラップではドキュメントの外側にフォーカスを移せなくなるので、通常のタブ・ナビゲーションのようにブラウザのアドレスバーなどにフォーカスする操作ができなくなってしまうことが問題である。これについては次の資料でも言及されている。
 
 - [Allow modal dialogs to trap focus, avoiding tabbing to the URL bar · Issue #8339 · whatwg/html](https://github.com/whatwg/html/issues/8339)
 - [The current state of modal dialog accessibility - TPGi](https://www.tpgi.com/the-current-state-of-modal-dialog-accessibility/)
 - [Having an open dialog (archival post) | scottohara.me](https://www.scottohara.me/blog/2019/03/05/open-dialog.html)
 
-そして、フォーカス・トラップを採用するにしても、モーダルダイアログの外側の要素に`aria-hidden`属性を適用する処理は依然必要になることがある。WAI-ARIA 1.1で導入された`aria-modal`属性をサポートする支援技術では、`aria-modal="true"`が指定された要素より外側は、不活性状態として読み上げ対象から除外される。しかし`aria-modal`属性をサポートしない支援技術では、そのままでは外側の要素も通常通り操作できてしまうため、明示的に`aria-hidden="true"`を適用しなければならない。これについては、[ARIA Authoring Practices Guideの“Notes on aria-modal and aria-hidden”で解説されている](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/#:~:text=Notes%20on%20aria%2Dmodal%20and%20aria%2Dhidden)。
+また、フォーカス・トラップを採用するにしても、モーダルダイアログの外側の要素に`aria-hidden`属性を適用する処理は依然必要になることがある。WAI-ARIA 1.1で導入された`aria-modal`属性をサポートする支援技術では、`aria-modal="true"`が指定された要素より外側は、不活性状態として読み上げ対象から除外される。しかし`aria-modal`属性をサポートしない支援技術では、そのままでは外側の要素も通常通り操作できてしまうため、明示的に`aria-hidden="true"`を適用しなければならない。これについては、[ARIA Authoring Practices Guideの“Notes on aria-modal and aria-hidden”](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/#:~:text=Notes%20on%20aria%2Dmodal%20and%20aria%2Dhidden)で解説されている。
