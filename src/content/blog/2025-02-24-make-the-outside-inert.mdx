@@ -1,0 +1,151 @@
+---
+title: '特定の要素の外側すべてをinertにする'
+pubDate: 2025-02-24T04:50:00.000+09:00
+---
+
+モーダルダイアログを実装する場合は、その外側を不活性化する必要がある。ここで言う不活性とは、
+
+- 要素にクリックやタッチなどで作用（interact）しても反応しない
+- フォーカスできない
+- 支援技術での読み上げ対象からも除外されている
+
+という状態を指している。
+
+この要件を満たすには、`dialog`要素を`.showModal()`で呼び出して使うとよい。それだけで外側の要素は自動的に不活性化される。しかし実装上の制約などにより、`dialog`要素を使えないこともあるだろう。そうした場合は、不活性化の処理を独自に実装することになる。
+
+要素を不活性化するには`inert`属性を使う。要素に`inert`属性が適用されると、その子孫まで不活性状態が継承される。
+
+<figure>
+```html
+<div>
+  <label for="button1">Button 1</label>
+  <button id="button1">I am not inert</button>
+</div>
+
+<div inert>
+  <label for="button2">Button 2</label>
+  <button id="button2">I am inert</button>
+</div>
+```
+
+<figcaption>
+  [HTMLElement: inert property - Web APIs |
+  MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/inert#html)
+</figcaption>
+</figure>
+
+そのため、モーダルダイアログ以外のすべての要素が一つの要素の中に囲われていれば、`inert`属性を一箇所に適用するだけで済む。
+
+```html
+<div inert>
+  <h1>Outside the dialog</h1>
+
+  <label for="button">Button</label>
+  <button id="button">I am inert</button>
+</div>
+
+<div role="dialog" aria-labelledby="dialog_label" aria-modal="true">
+  <!-- ... -->
+</div>
+```
+
+とはいえ、いつもこのような構造を実現できるとはかぎらない。場合によっては、モーダルダイアログが別の要素の中に入れ子になった、もっと複雑な文書構造になることもあるだろう。
+
+```html
+<h1><!-- ... --></h1>
+
+<label for="button">Button</label>
+<button id="button">I am not inert</button>
+
+<section>
+  <h2><!-- ... --></h2>
+
+  <p>... <a href="https://example.com/">awesome link</a> ...</p>
+
+  <div role="dialog" aria-labelledby="dialog_label" aria-modal="true">
+    <!-- ... -->
+  </div>
+</section>
+```
+
+このような場合、モーダルダイアログを除いた上端にあたる要素すべてに`inert`属性を適用しなければならない。
+
+```html
+<h1 inert><!-- ... --></h1>
+
+<label inert for="button">Button</label>
+<button inert id="button">I am not inert</button>
+
+<section>
+  <h2 inert><!-- ... --></h2>
+
+  <p inert>... <a href="https://example.com/">awesome link</a> ...</p>
+
+  <div role="dialog" aria-labelledby="dialog_label" aria-modal="true">
+    <!-- ... -->
+  </div>
+</section>
+```
+
+これを実現するには、次のような処理を実装する。
+
+```javascript
+function setInert(el) {
+  const undos = [];
+
+  crawlSiblingsUp(el, (sibling) => {
+    if (!sibling.inert) {
+      sibling.inert = true;
+
+      undos.push(() => {
+        sibling.inert = false;
+      });
+    }
+  });
+
+  return () => {
+    while (undos.length) undos.pop()();
+  };
+}
+
+function crawlSiblingsUp(el, callback) {
+  if (el.isSameNode(document.body) || !el.parentNode) return;
+
+  for (const sibling of el.parentNode.children) {
+    if (sibling.isSameNode(el)) {
+      crawlSiblingsUp(el.parentNode, callback);
+    } else {
+      callback(sibling);
+    }
+  }
+}
+```
+
+これを次のように使用する。
+
+```javascript
+const dialogEl = document.querySelector('[role="dialog"]');
+let undoInert;
+
+function openDialog() {
+  undoInert = setInert(dialogEl);
+}
+
+function closeDialog() {
+  undoInert();
+}
+```
+
+モーダルダイアログを開くタイミングで`setInert`関数を実行する。これにより、モーダルダイアログを除くすべての要素の上端に`inert`属性が適用される。閉じるタイミングでその戻り値を実行することで、開くときに適用した`inert`属性はすべて取り除かれる。なおこの実装は、[Alpine.jsのFocusプラグイン](https://alpinejs.dev/plugins/focus)を参考にしたものである。
+
+モーダルダイアログを実装する際にはそれ以外にも考慮すべき点がある。ここでは取り上げないので、詳しくは[ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/)を参照のこと。
+
+---
+
+`inert`属性を使う以外のやり方としては、特定の要素の中だけにフォーカスを閉じ込めるフォーカス・トラップというテクニックがある。ただし、フォーカス・トラップではドキュメントの外側にフォーカスを移せなくなるので、通常のタブ・ナビゲーションのようにブラウザのアドレスバーなどにフォーカスする操作ができなくなってしまうことが問題である。これについては次の資料でも言及されている。
+
+- [Allow modal dialogs to trap focus, avoiding tabbing to the URL bar · Issue #8339 · whatwg/html](https://github.com/whatwg/html/issues/8339)
+- [The current state of modal dialog accessibility - TPGi](https://www.tpgi.com/the-current-state-of-modal-dialog-accessibility/)
+- [Having an open dialog (archival post) | scottohara.me](https://www.scottohara.me/blog/2019/03/05/open-dialog.html)
+
+また、フォーカス・トラップを採用するにしても、モーダルダイアログの外側の要素に`aria-hidden`属性を適用する処理は依然必要になることがある。WAI-ARIA 1.1で導入された`aria-modal`属性をサポートする支援技術では、`aria-modal="true"`が指定された要素より外側は、不活性状態として読み上げ対象から除外される（[`aria-modal`属性のサポート状況](https://a11ysupport.io/tech/aria/aria-modal_attribute)）。しかし`aria-modal`属性をサポートしない支援技術では、そのままでは外側の要素も通常通り操作できてしまうため、明示的に`aria-hidden="true"`を適用しなければならない。これについては、[ARIA Authoring Practices Guideの“Notes on aria-modal and aria-hidden”](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/#:~:text=Notes%20on%20aria%2Dmodal%20and%20aria%2Dhidden)で解説されている。

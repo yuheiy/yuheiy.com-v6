@@ -1,7 +1,7 @@
-diff --git a/node_modules/astro/dist/assets/services/service.js b/node_modules/astro/dist/assets/services/service.js
-index c048754..f4d4869 100644
---- a/node_modules/astro/dist/assets/services/service.js
-+++ b/node_modules/astro/dist/assets/services/service.js
+diff --git a/dist/assets/services/service.js b/dist/assets/services/service.js
+index c0487549ac684ec6a844f0a339563627a8f2e77a..f4d48696e953f81572595b19878a6f257a18ea66 100644
+--- a/dist/assets/services/service.js
++++ b/dist/assets/services/service.js
 @@ -107,8 +107,8 @@ const baseService = {
        ...attributes,
        width: targetWidth,

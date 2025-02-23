@@ -7,4 +7,4 @@ export const siteBlueskyId = 'yuheiy.com';
 export const siteGithubId = 'yuheiy';
 export const siteHatenaId = 'yuheiy';
 export const siteDescription =
-  'フロントエンドウェブ開発者。HTML/WAI-ARIA、CSS、JavaScript/TypeScript、ウェブサイトおよびアプリケーション開発、アクセシビリティ、インターフェースデザイン、デザインシステム、DevOpsなどが得意分野。';
+  'フロントエンドウェブ開発者。HTML/WAI-ARIA、CSS、JavaScript/TypeScript、ウェブサイトおよびウェブアプリケーション開発、アクセシビリティ、インターフェースデザイン、デザインシステム、DevOpsなどが専門分野。';

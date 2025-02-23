@@ -3,7 +3,7 @@
     margin-block-start: --spacing(16);
     font-weight: bold;
     font-size: var(--text-xl);
-    line-height: var(--leading-tight);
+    line-height: var(--leading-japanese-tight);
     font-kerning: normal;
     font-feature-settings: 'palt';
     text-wrap: pretty;
@@ -14,7 +14,7 @@
     margin-block-start: --spacing(12);
     font-weight: bold;
     font-size: var(--text-lg);
-    line-height: var(--leading-tight);
+    line-height: var(--leading-japanese-tight);
     font-kerning: normal;
     font-feature-settings: 'palt';
     text-wrap: pretty;
@@ -52,9 +52,9 @@
     padding: --spacing(5) calc((100cqi - 100%) / 2);
     line-height: var(--leading-latin-normal);
 
-    /* Apply when the container reaches `inline-size: 42rem`. */
-    /* container size = 42rem / (100% - 2 * 5%) */
-    @container root (inline-size >= 46.666rem) {
+    /* Apply when the container reaches `inline-size: 42ric`. */
+    /* container size = 42ric / (100% - 2 * 5%) */
+    @container root (inline-size >= 46.666ric) {
       margin-right: calc((100cqi - var(--body-padding-left) - 100%) * -1);
       margin-left: calc(var(--body-padding-left) * -1);
       padding-right: var(--body-padding-right);
@@ -69,7 +69,7 @@
   blockquote:not(.twitter-tweet) {
     position: relative;
     margin-block-start: --spacing(8);
-    padding-inline-start: 2rem;
+    padding-inline-start: 2ric;
   }
 
   blockquote:not(.twitter-tweet)::before {
@@ -82,7 +82,7 @@
 
   :is(ol, ul) {
     margin-block-start: --spacing(8);
-    padding-inline-start: 2rem;
+    padding-inline-start: 2ric;
     hanging-punctuation: allow-end;
     list-style-type: revert;
   }

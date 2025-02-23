@@ -31,8 +31,8 @@
   --ring-color-dynamic: var(--border-color-dynamic);
 
   --spacing: 0.125rlh;
-  --spacing-rect: calc(1rlh + (1rlh - 1rem) / 2);
-  --spacing-rect2: calc(1rlh + (1rlh - 1rem));
+  --spacing-rect: calc(1rlh + (1rlh - 1ric) / 2);
+  --spacing-rect2: calc(1rlh + (1rlh - 1ric));
 
   --text-*: initial;
   --text-xs: 0.75rem;
@@ -43,21 +43,26 @@
   --text-2xl: 1.625rem;
 
   --leading-*: initial;
-  --leading-tight: 1.5;
-  --leading-normal: 1.875;
+  --leading-japanese-tight: 1.5;
+  --leading-japanese-normal: 1.875;
   --leading-latin-normal: 1.5;
 }
 
 @layer base {
   :root {
-    --body-column: 42rem;
+    --body-column: 42ric;
     --body-padding-without-safe-area: clamp(
-      1rem,
+      1ric,
       max((100cqi - var(--body-column)) / 2, 5cqi),
       10cqi
     );
     --body-padding-right: calc(var(--body-padding-without-safe-area) + env(safe-area-inset-right));
     --body-padding-left: calc(var(--body-padding-without-safe-area) + env(safe-area-inset-left));
+  }
+
+  pre {
+    /* https://hail2u.net/blog/text-spacing-trim-property-and-pre-element.html */
+    text-spacing-trim: space-all;
   }
 
   a:where(:any-link) {
