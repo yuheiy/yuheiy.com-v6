@@ -103,21 +103,20 @@ TODO: スマホのように狭い画面だと空白が気になる傾向にあ�
 
 日本語の本文を囲うコンテナの幅は文字サイズに基づいたものにすると良い。その理由については[terkel.jp](https://terkel.jp/)の解説を引用しよう。
 
-{/_ prettier-ignore _/}
-
+{/* prettier-ignore */}
 <figure>
+  > 日本語の組版ではコラム幅を文字サイズの整数倍にするのが基本だ。そうすれば全角等幅の活字を字間なく並べたとき、コラム幅と行長がぴったり合い、行末の位置が揃うことになる。ただしプロポーショナル文字（ラテン・アルファベットやアラビア数字など）や行頭行末の禁則の影響で行長にばらつきが出るので、その場合は調整が必要になる。
   >
-  日本語の組版ではコラム幅を文字サイズの整数倍にするのが基本だ。そうすれば全角等幅の活字を字間なく並べたとき、コラム幅と行長がぴったり合い、行末の位置が揃うことになる。ただしプロポーショナル文字（ラテン・アルファベットやアラビア数字など）や行頭行末の禁則の影響で行長にばらつきが出るので、その場合は調整が必要になる。
-  > >
-  このコラム幅についての原則はウェブでも同様だと僕は考えている。ブラウザーではInDesignとは違って行ごとの緻密な調整はできないが、それでもやはり、コラム幅はなるべく文字サイズの整数倍にするのがよいと思う。そうしておけば、行長のばらつきが起こったとしても、その変化は「短くなる」方向でしか発生しない。コラムの右端を見たとき（横組みの場合）、おおむね縦に揃っているがときおりくぼんだ箇所が発生する、という格好になるわけだ。一方コラム幅が文字サイズの整数倍になっていないと、行長が意図した幅より長くも短くもなるので、行末が不揃いになりやすい。
-  <figcaption>
-    [コラム幅を文字サイズの整数倍にする](https://terkel.jp/archives/2021/05/em-based-grid/)
-  </figcaption>
+  > このコラム幅についての原則はウェブでも同様だと僕は考えている。ブラウザーではInDesignとは違って行ごとの緻密な調整はできないが、それでもやはり、コラム幅はなるべく文字サイズの整数倍にするのがよいと思う。そうしておけば、行長のばらつきが起こったとしても、その変化は「短くなる」方向でしか発生しない。コラムの右端を見たとき（横組みの場合）、おおむね縦に揃っているがときおりくぼんだ箇所が発生する、という格好になるわけだ。一方コラム幅が文字サイズの整数倍になっていないと、行長が意図した幅より長くも短くもなるので、行末が不揃いになりやすい。
+
+  <figcaption>[コラム幅を文字サイズの整数倍にする](https://terkel.jp/archives/2021/05/em-based-grid/)</figcaption>
 </figure>
 
 もちろんこれは、本文をベタ組みにすることを前提としたものだ。
 
 具体的な実装としては、たとえば次のようにしてインライン方向のサイズを`em`単位を用いて指定する。
+
+（TODO: ic unit or ch unit）
 
 ```css
 .container {
@@ -174,6 +173,8 @@ TODO: ベタ組みにしても行末が揃わないことがある。という�
 
 ### 参考資料
 
+https://uit.stanford.edu/accessibility/concepts/typography#justifyText
+
 - [日本語組版処理の要件（日本語版） § 3.8 行の調整処理](https://www.w3.org/TR/jlreq/#line_adjustment)
 - [CSS による両端揃えの問題点とその解決へ向けて](https://hail2u.net/blog/css-jutification-problem-and-solving-some.html)
 - [word-break: break-all](https://hail2u.net/blog/webdesign/word-break-break-all.html)
@@ -227,6 +228,13 @@ html {
 }
 ```
 
+```css
+pre {
+  text-spacing-trim: space-all;
+}
+```
+
+- https://hail2u.net/blog/text-spacing-trim-property-and-pre-element.html
 - https://www.w3.org/TR/jlreq/#character_positioning_based_on_kihonhanmen_design
 - https://developer.chrome.com/blog/css-i18n-features?hl=ja#cjk_punctuation_kerning_text-spacing-trim
 - https://www.w3.org/TR/jlreq/#positioning_of_opening_brackets_at_line_head
