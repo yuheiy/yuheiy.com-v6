@@ -21,7 +21,7 @@ const Heading = `h${headingLevel}`;
     <article class="[&+&]:mt-12">
       <header>
         <p class="text-xs text-dynamic-muted" set:html={item.meta} />
-        <Heading class:list="mt-0.75 pb-0.75 [word-break:auto-phrase]">
+        <Heading class:list="mt-0.75 pb-[0.25em] [word-break:auto-phrase]">
           <a href={item.link} set:html={item.title} />
         </Heading>
       </header>

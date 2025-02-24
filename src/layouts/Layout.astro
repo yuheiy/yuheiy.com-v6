@@ -104,14 +104,14 @@ const resolvedOgImage = new URL(ogImage, Astro.url);
   >
     <slot />
 
-    <footer class="space-y-3 pb-1 text-xs text-dynamic-muted">
+    <footer class="space-y-2 text-xs text-dynamic-muted">
       <hr class="mt-32 mb-8 w-8 border-t-2 border-t-dynamic" />
-      <p>
+      <p class="pb-[0.25em]">
         <a href="/">ホーム</a>&#x2003;<a href="/blog">ブログ</a>&#x2003;<a href="/contributions"
           >外部サイトの投稿</a
         >&#x2003;<a href="/rss.xml">RSS</a>
       </p>
-      <p>
+      <p class="pb-[0.25em]">
         <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>&#x2003;/&#x2003;<a
           href={`https://x.com/${siteTwitterId}`}>X</a
         >&#x2003;<a href={`https://bsky.app/profile/${siteBlueskyId}`}>Bluesky</a>&#x2003;<a
