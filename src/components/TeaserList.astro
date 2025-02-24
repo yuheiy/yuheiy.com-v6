@@ -21,13 +21,13 @@ const Heading = `h${headingLevel}`;
     <article class="[&+&]:mt-12">
       <header>
         <p class="text-xs text-dynamic-muted" set:html={item.meta} />
-        <Heading class:list="mt-1 pb-1 [word-break:auto-phrase]">
+        <Heading class:list="mt-0.75 pb-0.75 [word-break:auto-phrase]">
           <a href={item.link} set:html={item.title} />
         </Heading>
       </header>
       {item.description && (
         <p
-          class="mt-1 line-clamp-5 overflow-x-visible overflow-y-clip text-sm text-dynamic-muted [hanging-punctuation:allow-end]"
+          class="mt-0.75 line-clamp-5 overflow-x-visible overflow-y-clip text-sm text-dynamic-muted [hanging-punctuation:allow-end]"
           set:html={item.description}
         />
       )}
