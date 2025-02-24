@@ -11,14 +11,16 @@ const isHome = Astro.props.isHome === true;
 
 const { title } = Astro.props;
 
-const Root = isHome ? 'header' : Fragment;
+const Root = isHome ? 'header' : 'div';
 const Nav = isHome ? Fragment : 'nav';
 const Logo = isHome ? 'h1' : 'p';
-const Body = isHome ? 'div' : 'header';
+const Body = isHome ? Fragment : 'header';
 const Title = isHome ? 'p' : 'h1';
 ---
 
-<Root>
+<Root
+  class="mb-28 grid grid-rows-[auto_--spacing(8)_[body-start_meta]_minmax(--spacing(20),auto)_[title]_auto_[description]_auto_[body-end]]"
+>
   <Nav>
     <Logo class="text-sm/none text-dynamic-muted kerning-normal">
       {/* eslint-disable-next-line astro/jsx-a11y/anchor-is-valid */}
@@ -33,17 +35,17 @@ const Title = isHome ? 'p' : 'h1';
     </Logo>
   </Nav>
 
-  <Body class="mt-8 mb-28 grid grid-rows-[minmax(--spacing(20),auto)_auto_auto]">
+  <Body class="row-[body-start/body-end] grid grid-rows-subgrid">
     {
       Astro.slots.has('meta') && (
-        <p class="row-start-1 mb-1 self-end text-xs text-dynamic-muted">
+        <p class="row-[meta] mb-1 self-end text-xs text-dynamic-muted">
           <slot name="meta" />
         </p>
       )
     }
 
     <Title
-      class="row-start-2 text-2xl/japanese-tight font-bold text-pretty [word-break:auto-phrase] kerning-all"
+      class="row-[title] text-2xl/japanese-tight font-bold text-pretty [word-break:auto-phrase] kerning-all"
       set:html={title}
     />
 
@@ -51,7 +53,7 @@ const Title = isHome ? 'p' : 'h1';
       Astro.slots.has('default') && (
         <div
           class:list={[
-            'row-start-3 pb-4 text-dynamic-muted [hanging-punctuation:allow-end]',
+            'row-[description] pb-4 text-dynamic-muted [hanging-punctuation:allow-end]',
             '*:mt-4',
             '[&_a:any-link]:text-dynamic',
           ]}
