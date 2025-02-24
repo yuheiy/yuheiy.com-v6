@@ -104,7 +104,7 @@ function setInert(el) {
   });
 
   return () => {
-    while (undos.length) undos.pop()();
+    while (undos.length > 0) undos.pop()();
   };
 }
 
@@ -125,7 +125,7 @@ function crawlSiblingsUp(el, callback) {
 
 ```javascript
 const dialogEl = document.querySelector('[role="dialog"]');
-let undoInert;
+let undoInert = null;
 
 function openDialog() {
   undoInert = setInert(dialogEl);
@@ -133,6 +133,7 @@ function openDialog() {
 
 function closeDialog() {
   undoInert();
+  undoInert = null;
 }
 ```
 
@@ -142,10 +143,10 @@ function closeDialog() {
 
 ---
 
-`inert`属性を使う以外のやり方としては、特定の要素の中だけにフォーカスを閉じ込めるフォーカス・トラップというテクニックがある。ただし、フォーカス・トラップではドキュメントの外側にフォーカスを移せなくなるので、通常のタブ・ナビゲーションのようにブラウザのアドレスバーなどにフォーカスする操作ができなくなってしまうことが問題である。これについては次の資料でも言及されている。
+`inert`属性を使う以外のやり方としては、特定の要素の中だけにフォーカスを閉じ込めるフォーカス・トラップというテクニックがある。しかし、フォーカス・トラップではドキュメントの外側にフォーカスを移せなくなるので、通常のタブ・ナビゲーションのようにブラウザのアドレスバーなどにフォーカスする操作ができなくなってしまうことが問題である。これについては次の資料でも言及されている。
 
 - [Allow modal dialogs to trap focus, avoiding tabbing to the URL bar · Issue #8339 · whatwg/html](https://github.com/whatwg/html/issues/8339)
 - [The current state of modal dialog accessibility - TPGi](https://www.tpgi.com/the-current-state-of-modal-dialog-accessibility/)
 - [Having an open dialog (archival post) | scottohara.me](https://www.scottohara.me/blog/2019/03/05/open-dialog.html)
 
-また、フォーカス・トラップを採用するにしても、モーダルダイアログの外側の要素に`aria-hidden`属性を適用する処理は依然必要になることがある。WAI-ARIA 1.1で導入された`aria-modal`属性をサポートする支援技術では、`aria-modal="true"`が指定された要素より外側は、不活性状態として読み上げ対象から除外される（[`aria-modal`属性のサポート状況](https://a11ysupport.io/tech/aria/aria-modal_attribute)）。しかし`aria-modal`属性をサポートしない支援技術では、そのままでは外側の要素も通常通り操作できてしまうため、明示的に`aria-hidden="true"`を適用しなければならない。これについては、[ARIA Authoring Practices Guideの“Notes on aria-modal and aria-hidden”](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/#:~:text=Notes%20on%20aria%2Dmodal%20and%20aria%2Dhidden)で解説されている。
+また、フォーカス・トラップを採用するにしても、モーダルダイアログの外側の要素に`aria-hidden`属性を適用する処理は依然必要になることがある。WAI-ARIA 1.1で導入された`aria-modal`属性をサポートする支援技術では、`aria-modal="true"`が指定された要素より外側は、不活性状態として読み上げ対象から除外される。しかし`aria-modal`属性をサポートしない支援技術では、そのままでは外側の要素も通常通り操作できてしまうため、明示的に`aria-hidden="true"`を適用しなければならない。これについては、[ARIA Authoring Practices Guideの“Notes on aria-modal and aria-hidden”](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/#:~:text=Notes%20on%20aria%2Dmodal%20and%20aria%2Dhidden)で解説されている。[`aria-modal`属性のサポート状況](https://a11ysupport.io/tech/aria/aria-modal_attribute)はまだ十分ではないため、このようなフォールバック処理は重要だ。
