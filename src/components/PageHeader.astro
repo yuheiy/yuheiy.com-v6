@@ -11,12 +11,14 @@ const isHome = Astro.props.isHome === true;
 
 const { title } = Astro.props;
 
+const Root = isHome ? 'header' : Fragment;
 const Nav = isHome ? Fragment : 'nav';
 const Logo = isHome ? 'h1' : 'p';
+const Body = isHome ? 'div' : 'header';
 const Title = isHome ? 'p' : 'h1';
 ---
 
-<header>
+<Root>
   <Nav>
     <Logo class="text-sm/none text-dynamic-muted kerning-normal">
       {/* eslint-disable-next-line astro/jsx-a11y/anchor-is-valid */}
@@ -31,7 +33,7 @@ const Title = isHome ? 'p' : 'h1';
     </Logo>
   </Nav>
 
-  <div class="mt-8 mb-28 grid grid-rows-[minmax(--spacing(20),auto)_auto_auto]">
+  <Body class="mt-8 mb-28 grid grid-rows-[minmax(--spacing(20),auto)_auto_auto]">
     {
       Astro.slots.has('meta') && (
         <p class="row-start-1 mb-1 self-end text-xs text-dynamic-muted">
@@ -58,5 +60,5 @@ const Title = isHome ? 'p' : 'h1';
         </div>
       )
     }
-  </div>
-</header>
+  </Body>
+</Root>
