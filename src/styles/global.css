@@ -23,6 +23,8 @@
     color-mix(in oklch, var(--color-zinc-800), var(--color-zinc-900))
   );
 
+  --text-decoration-color-dynamic: light-dark(var(--color-gray-400), var(--color-zinc-400));
+
   --text-color-dynamic: light-dark(var(--color-gray-800), var(--color-zinc-50));
   --text-color-dynamic-muted: light-dark(var(--color-gray-500), var(--color-zinc-400));
 
@@ -65,7 +67,8 @@
 
   a:where(:any-link) {
     text-decoration: underline;
-    text-decoration-thickness: from-font;
+    text-decoration-color: var(--text-decoration-color-dynamic);
+    text-decoration-thickness: 1px;
   }
 
   em {
