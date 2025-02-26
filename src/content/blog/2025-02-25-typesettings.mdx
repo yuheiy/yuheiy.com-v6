@@ -22,7 +22,7 @@ import BaselineStatus from '../../components/BaselineStatus.astro';
 - [行末の句読点のぶら下げ](#行末の句読点のぶら下げ)
 - [文節区切りの改行](#文節区切りの改行)
 - [折り返しのバランスの制御](#折り返しのバランスの制御)
-- [下線との距離の調整](#下線との距離の調整)
+- [下線のスタイルの調整](#下線のスタイルの調整)
 - [テキスト種別の適用例](#テキスト種別の適用例)
 
 ## ベタ組みとプロポーショナル組み
@@ -302,7 +302,21 @@ h1 {
 - [日本語における text-wrap プロパティの運用](/2024-07-22-text-wrap-in-japanese)
 - [Balancing Text In CSS](https://ishadeed.com/article/balancing-text-css/)
 
-## 下線との距離の調整
+## 下線のスタイルの調整
+
+https://x.com/_yuheiy/status/1894628953752834342
+
+```css
+*,
+::after,
+::before {
+  text-decoration-thickness: from-font;
+}
+
+html {
+  text-underline-position: from-font;
+}
+```
 
 ```css
 html {
