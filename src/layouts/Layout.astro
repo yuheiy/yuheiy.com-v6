@@ -56,7 +56,7 @@ const resolvedOgImage = new URL(ogImage, Astro.url);
 -->
 <html
   class:list={[
-    '@container/root bg-dynamic text-[106.25%]/japanese-normal [overflow-wrap:anywhere] text-dynamic underline-offset-[0.25em] scheme-light-dark kerning-none [line-break:normal] [text-spacing-trim:trim-start] [text-underline-position:from-font]',
+    '@container/root bg-dynamic text-[clamp(100%,0.625svmin+75%,112.5%)]/japanese-normal [overflow-wrap:anywhere] text-dynamic underline-offset-[0.25em] scheme-light-dark kerning-none [line-break:normal] [text-spacing-trim:trim-start] [text-underline-position:from-font]',
     'motion-safe:focus-within:scroll-smooth',
   ]}
   lang={siteLang}
@@ -98,7 +98,8 @@ const resolvedOgImage = new URL(ogImage, Astro.url);
 
   <body
     class:list={[
-      'mt-8 mb-12 box-content max-w-(--body-column) pr-(--body-padding-right) pl-(--body-padding-left)',
+      // `+0.1px` compensates for the miscalculation in `round()`
+      'mt-8 mb-12 box-content max-w-[calc(var(--body-column)+0.1px)] pr-(--body-padding-right) pl-(--body-padding-left)',
       '*:mx-auto *:w-[round(down,100%,1rem)]',
     ]}
   >
