@@ -29,8 +29,7 @@
   --ring-color-dynamic: var(--border-color-dynamic);
 
   --spacing: 0.125rlh;
-  --spacing-rect: calc(1rlh + (1rlh - 1rem) / 2);
-  --spacing-rect2: calc(1rlh + (1rlh - 1rem));
+  --spacing-half-leading: calc((1lh - 1em) / 2);
 
   --text-*: initial;
   --text-xs: 0.75rem;
