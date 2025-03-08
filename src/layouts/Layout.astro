@@ -99,7 +99,7 @@ const resolvedOgImage = new URL(ogImage, Astro.url);
   <body
     class:list={[
       // `+0.1px` compensates for the miscalculation in `round()`
-      'mt-8 mb-12 box-content max-w-[calc(var(--body-column)+0.1px)] pr-(--body-padding-right) pl-(--body-padding-left)',
+      'mt-[max(5svh,--spacing(8))] mb-[max(7.5svh,--spacing(12))] box-content max-w-[calc(var(--body-column)+0.1px)] pr-(--body-padding-right) pl-(--body-padding-left)',
       '*:mx-auto *:w-[round(down,100%,1rem)]',
     ]}
   >
