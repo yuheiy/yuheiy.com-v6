@@ -47,15 +47,15 @@
   }
 
   pre {
-    margin-inline: calc((100cqi - 100%) / 2 * -1);
+    margin-inline: calc((100cqw - 100%) / 2 * -1);
     margin-block: calc(--spacing(8) + var(--spacing-half-leading));
-    padding: --spacing(5) calc((100cqi - 100%) / 2);
+    padding: --spacing(5) calc((100cqw - 100%) / 2);
     line-height: var(--leading-latin-normal);
 
     /* Apply when the container reaches `inline-size: 42rem`. */
     /* container size = 42rem / (100% - 2 * 5%) */
     @container root (inline-size >= 46.666rem) {
-      margin-right: calc((100cqi - var(--body-padding-left) - 100%) * -1);
+      margin-right: calc((100cqw - var(--body-padding-left) - 100%) * -1);
       margin-left: calc(var(--body-padding-left) * -1);
       padding-right: var(--body-padding-right);
       padding-left: var(--body-padding-left);
