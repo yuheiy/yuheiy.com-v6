@@ -46,9 +46,6 @@
     "typescript": "5.8.2",
     "typescript-eslint": "8.26.1"
   },
-  "engines": {
-    "node": "22"
-  },
   "packageManager": "pnpm@10.6.3",
   "pnpm": {
     "onlyBuiltDependencies": [
