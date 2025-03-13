@@ -36,4 +36,8 @@ export default defineConfig({
       },
     },
   },
+  experimental: {
+    preserveScriptOrder: true,
+    headingIdCompat: true,
+  },
 });
