@@ -1,4 +1,4 @@
 {
-  "extends": "astro/tsconfigs/strictest",
-  "exclude": ["dist"] // https://github.com/withastro/language-tools/issues/643#issuecomment-1699486909
+  "extends": "astro/tsconfigs/strict",
+  "exclude": ["dist"]
 }
