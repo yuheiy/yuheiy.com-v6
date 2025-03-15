@@ -29,7 +29,6 @@
   --ring-color-dynamic: var(--border-color-dynamic);
 
   --spacing: 0.125rlh;
-  --spacing-half-leading: calc((1lh - 1em) / 2);
 
   --text-*: initial;
   --text-xs: 0.75rem;
@@ -47,6 +46,8 @@
 
 @layer base {
   :root {
+    --half-leading: calc((1lh - 1em) / 2);
+
     --body-column: 42rem;
     --body-padding-without-safe-area: clamp(
       1rem,

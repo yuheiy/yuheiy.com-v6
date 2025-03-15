@@ -41,14 +41,14 @@
   }
 
   hr {
-    margin-block: calc(--spacing(8) + var(--spacing-half-leading));
+    margin-block: calc(--spacing(8) + var(--half-leading));
     border-block-start: 4px solid var(--border-color-dynamic);
     inline-size: --spacing(32);
   }
 
   pre {
     margin-inline: calc((100cqw - 100%) / 2 * -1);
-    margin-block: calc(--spacing(8) + var(--spacing-half-leading));
+    margin-block: calc(--spacing(8) + var(--half-leading));
     padding: --spacing(5) calc((100cqw - 100%) / 2);
     line-height: var(--leading-latin-normal);
 
@@ -74,7 +74,7 @@
 
   blockquote:not(.twitter-tweet)::before {
     position: absolute;
-    inset-block: var(--spacing-half-leading);
+    inset-block: var(--half-leading);
     inset-inline-start: 0;
     border-inline-start: 4px solid var(--border-color-dynamic);
     content: '';
@@ -100,7 +100,7 @@
   }
 
   figure {
-    margin-block: calc(--spacing(8) + var(--spacing-half-leading));
+    margin-block: calc(--spacing(8) + var(--half-leading));
   }
 
   figcaption {
@@ -127,7 +127,7 @@
 
   table {
     display: block;
-    margin-block: calc(--spacing(8) + var(--spacing-half-leading));
+    margin-block: calc(--spacing(8) + var(--half-leading));
     border-spacing: 0;
     max-inline-size: 100%;
     overflow-x: auto;
@@ -154,7 +154,7 @@
   }
 
   :is(astro-embed-tweet, baseline-status, lite-youtube, .codepen, .cp_embed_wrapper) {
-    margin-block: calc(--spacing(8) + var(--spacing-half-leading));
+    margin-block: calc(--spacing(8) + var(--half-leading));
   }
 
   :is(
@@ -181,6 +181,6 @@
       .codepen,
       .cp_embed_wrapper
     ) {
-    margin-block-start: calc(--spacing(8) + var(--spacing-half-leading) * 2);
+    margin-block-start: calc(--spacing(8) + var(--half-leading) * 2);
   }
 }
