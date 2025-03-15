@@ -55,10 +55,10 @@
     /* Apply when the container reaches `inline-size: 42rem`. */
     /* container size = 42rem / (100% - 2 * 5%) */
     @container root (inline-size >= 46.666rem) {
-      margin-right: calc((100cqw - var(--body-padding-left) - 100%) * -1);
-      margin-left: calc(var(--body-padding-left) * -1);
-      padding-right: var(--body-padding-right);
-      padding-left: var(--body-padding-left);
+      margin-right: calc((100cqw - var(--padding-left-body) - 100%) * -1);
+      margin-left: calc(var(--padding-left-body) * -1);
+      padding-right: var(--padding-right-body);
+      padding-left: var(--padding-left-body);
     }
   }
 

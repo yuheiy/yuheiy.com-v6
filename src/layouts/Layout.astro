@@ -54,13 +54,7 @@ const resolvedOgImage = new URL(ogImage, Astro.url);
   https://bugs.chromium.org/p/chromium/issues/detail?id=1378462
   https://schepp.dev/posts/smooth-scrolling-and-page-search/
 -->
-<html
-  class:list={[
-    '@container/root bg-dynamic text-[clamp(100%,0.625svmin+75%,112.5%)]/japanese-normal [overflow-wrap:anywhere] text-dynamic underline-offset-[0.25em] scheme-light-dark kerning-none [line-break:normal] [text-spacing-trim:trim-start] [text-underline-position:from-font]',
-    'motion-safe:focus-within:scroll-smooth',
-  ]}
-  lang={siteLang}
->
+<html lang={siteLang}>
   <head>
     {
       /**
@@ -96,13 +90,7 @@ const resolvedOgImage = new URL(ogImage, Astro.url);
     <link rel="icon" href={faviconImage.src} type="image/svg+xml" />
   </head>
 
-  <body
-    class:list={[
-      // `+0.1px` compensates for the miscalculation in `round()`
-      'mt-[max(5svh,--spacing(8))] mb-[max(7.5svh,--spacing(12))] box-content max-w-[calc(var(--body-column)+0.1px)] pr-(--body-padding-right) pl-(--body-padding-left)',
-      '*:mx-auto *:w-[round(down,100%,1rem)]',
-    ]}
-  >
+  <body>
     <slot />
 
     <footer class="space-y-2 text-xs text-dynamic-muted">

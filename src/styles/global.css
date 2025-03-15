@@ -48,14 +48,53 @@
   :root {
     --half-leading: calc((1lh - 1em) / 2);
 
-    --body-column: 42rem;
-    --body-padding-without-safe-area: clamp(
+    container-name: root;
+    container-type: inline-size;
+    background-color: var(--background-color-dynamic);
+    color: var(--text-color-dynamic);
+    color-scheme: light dark;
+    font-size: clamp(100%, 0.625svmin + 75%, 112.5%);
+    line-height: var(--leading-japanese-normal);
+    font-kerning: none;
+    line-break: normal;
+    text-underline-offset: 0.25em;
+    overflow-wrap: anywhere;
+    text-spacing-trim: trim-start;
+    text-underline-position: from-font;
+  }
+
+  :root:focus-within {
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    /* `+0.1px` compensates for the miscalculation in `round()` */
+    --max-inline-size-body: calc(42rem + 0.1px);
+    --padding-inline-without-safe-area-body: clamp(
       1rem,
-      max((100cqw - var(--body-column)) / 2, 5cqw),
+      max((100cqw - var(--max-inline-size-body)) / 2, 5cqw),
       10cqw
     );
-    --body-padding-right: calc(var(--body-padding-without-safe-area) + env(safe-area-inset-right));
-    --body-padding-left: calc(var(--body-padding-without-safe-area) + env(safe-area-inset-left));
+    --padding-right-body: calc(
+      var(--padding-inline-without-safe-area-body) + env(safe-area-inset-right)
+    );
+    --padding-left-body: calc(
+      var(--padding-inline-without-safe-area-body) + env(safe-area-inset-left)
+    );
+
+    box-sizing: content-box;
+    margin-top: max(5svh, calc(var(--spacing) * 8));
+    margin-bottom: max(7.5svh, calc(var(--spacing) * 12));
+    padding-right: var(--padding-right-body);
+    padding-left: var(--padding-left-body);
+    max-inline-size: var(--max-inline-size-body);
+  }
+
+  body > * {
+    margin-inline: auto;
+    inline-size: round(down, 100%, 1rem);
   }
 
   pre {
