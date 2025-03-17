@@ -68,6 +68,7 @@ const resolvedOgImage = new URL(ogImage, Astro.url);
 
     <title set:html={title} />
 
+    <meta name="color-scheme" content="light dark" />
     {description && <meta name="description" content={description} />}
     <meta name="generator" content={Astro.generator} />
     <meta name="twitter:card" content={twitterCard} />

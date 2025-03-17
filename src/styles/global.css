@@ -52,7 +52,6 @@
     container-type: inline-size;
     background-color: var(--background-color-dynamic);
     color: var(--text-color-dynamic);
-    color-scheme: light dark;
     font-size: clamp(100%, 0.625svmin + 75%, 112.5%);
     line-height: var(--leading-japanese-normal);
     font-kerning: none;
