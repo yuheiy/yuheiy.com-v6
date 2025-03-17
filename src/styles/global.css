@@ -56,10 +56,9 @@
     line-height: var(--leading-japanese-normal);
     font-kerning: none;
     line-break: normal;
-    text-underline-offset: 0.25em;
+    text-underline-offset: 0.3em;
     overflow-wrap: anywhere;
     text-spacing-trim: trim-start;
-    text-underline-position: from-font;
   }
 
   :root:focus-within {
@@ -103,7 +102,7 @@
 
   a:where(:any-link) {
     text-decoration: underline;
-    text-decoration-color: oklch(from currentcolor l c h / 0.5);
+    text-decoration-color: oklch(from currentcolor l c h / 50%);
     text-decoration-thickness: 1px;
   }
 
