@@ -1,0 +1,41 @@
+---
+title: 'リンクの下線の視覚的ノイズを軽減する'
+pubDate: 2025-03-18T04:30:00.000+09:00
+---
+
+“[Designing dyslexia-friendly navigational components](https://uxdesign.cc/improving-hyperlink-accessibility-and-readability-7f14ba4cb6c2)”によれば、`text-decoration: underline`によるデフォルトの下線はアクセシブルではないと言う。理由としては大きく二つ。
+
+- 下線がディセンダーと重なることで文字の判読性や可読性が損なわれる
+- コンテンツの邪魔になって読み手の気を散らす
+
+これは特にディスレクシアなど、認知機能に困難があるユーザーへの影響が大きい。
+
+加えて、デフォルトの下線は美観としても好ましくないという評価を受けることが多い。視覚的に煩雑な印象を与えるからという、上記と類似する理由によるものだろう。
+
+件の記事では、そうした問題を踏まえた改善案が紹介されている。これを参考に、このサイトでは次のような実装を採用した。
+
+```css
+html {
+  /* 下線と文字の距離を離す */
+  text-underline-offset: 0.3em;
+}
+
+a:any-link {
+  /* UAスタイルシートに含まれているが、説明のために記述 */
+  text-decoration: underline;
+  /* リンクの文字色よりも薄い下線の色。背景と3:1以上のコントラスト比を確保する */
+  text-decoration-color: oklch(0.67 0 0);
+  /* 下線を細くする */
+  text-decoration-thickness: 1px;
+}
+```
+
+また、文字と下線の距離が離れることに合わせて、`line-height`プロパティを少し広めに設定している。
+
+これにより視覚的なノイズや判読性の問題を軽減できるほか、美観としても好ましくなったように思う。
+
+## 参考情報
+
+- [Designing dyslexia-friendly navigational components: accessibility insights and atomic design patterns | UX Collective](https://uxdesign.cc/improving-hyperlink-accessibility-and-readability-7f14ba4cb6c2)
+- [Katja G | Navigational components - accessibility enhancements](https://katjag.com/projects/NavigationalComponents.html)
+- [達成基準 1.4.11: 非テキストのコントラストを理解する](https://waic.jp/translations/WCAG21/Understanding/non-text-contrast.html)
