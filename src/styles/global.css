@@ -59,6 +59,7 @@
     color: var(--text-color-dynamic);
     font-size: clamp(100%, 0.625svmin + 75%, 112.5%);
     line-height: var(--leading-japanese-normal);
+    /* https://bugs.chromium.org/p/chromium/issues/detail?id=1378462 */
     font-kerning: none;
     line-break: normal;
     text-underline-offset: 0.3em;
@@ -66,6 +67,7 @@
     text-spacing-trim: trim-start;
   }
 
+  /* https://schepp.dev/posts/smooth-scrolling-and-page-search/ */
   :root:focus-within {
     @media (prefers-reduced-motion: no-preference) {
       scroll-behavior: smooth;

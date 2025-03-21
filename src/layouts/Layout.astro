@@ -50,10 +50,6 @@ const title = isHome ? siteTitle : Astro.props.title;
 const resolvedOgImage = new URL(ogImage, Astro.url);
 ---
 
-<!--
-  https://bugs.chromium.org/p/chromium/issues/detail?id=1378462
-  https://schepp.dev/posts/smooth-scrolling-and-page-search/
--->
 <html lang={siteLang}>
   <head>
     {
