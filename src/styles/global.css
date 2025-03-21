@@ -105,7 +105,7 @@
     text-spacing-trim: space-all;
   }
 
-  a:where(:any-link) {
+  a:any-link {
     text-decoration: underline;
     text-decoration-color: var(--text-decoration-color-dynamic);
     text-decoration-thickness: 1px;
