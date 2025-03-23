@@ -56,6 +56,7 @@
     container-name: root;
     container-type: inline-size;
     background-color: var(--background-color-dynamic);
+    scrollbar-gutter: stable;
     color: var(--text-color-dynamic);
     font-size: clamp(100%, 0.625svmin + 75%, 112.5%);
     line-height: var(--leading-japanese-normal);
