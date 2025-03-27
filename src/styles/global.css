@@ -98,11 +98,6 @@
     max-inline-size: var(--max-inline-size-body);
   }
 
-  body > * {
-    margin-inline: auto;
-    inline-size: round(down, 100%, 1rem);
-  }
-
   pre {
     /* https://hail2u.net/blog/text-spacing-trim-property-and-pre-element.html */
     text-spacing-trim: space-all;

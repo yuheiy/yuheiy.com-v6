@@ -88,7 +88,7 @@ const resolvedOgImage = new URL(ogImage, Astro.url);
     <link rel="icon" href={faviconImage.src} type="image/svg+xml" />
   </head>
 
-  <body>
+  <body class="*:mx-auto *:w-[round(down,100%,1rem)]">
     <slot />
 
     <footer class="space-y-2 text-xs text-dynamic-muted">
