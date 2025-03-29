@@ -133,20 +133,17 @@
     overflow-x: auto;
   }
 
-  td {
+  :is(td, th) {
     vertical-align: top;
     border-block-end: 1px solid var(--border-color-dynamic);
     padding: --spacing(1) --spacing(3);
-    white-space: pre;
+    text-wrap-mode: nowrap;
+    white-space-collapse: preserve-breaks;
   }
 
   th {
-    vertical-align: top;
-    border-block-end: 1px solid var(--border-color-dynamic);
     background-color: var(--background-color-dynamic-inset);
-    padding: --spacing(1) --spacing(3);
     text-align: inherit;
-    white-space: pre;
   }
 
   details {
