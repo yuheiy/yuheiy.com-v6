@@ -109,13 +109,6 @@
     font-size: var(--text-sm);
   }
 
-  /* The `quotes` property does not work correctly in Safari */
-  /* https://bugs.webkit.org/show_bug.cgi?id=260425 */
-  code::before,
-  code::after {
-    content: '`';
-  }
-
   pre > code::before,
   pre > code::after {
     content: normal;
