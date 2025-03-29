@@ -118,9 +118,3 @@
     scroll-margin-block-start: --spacing(4);
   }
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
-  }
-}
