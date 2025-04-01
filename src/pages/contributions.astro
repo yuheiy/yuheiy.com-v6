@@ -2,8 +2,9 @@
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { getCollection } from 'astro:content';
 import DateTime from '../components/DateTime.astro';
-import TeaserList, { type TeaserListItem } from '../components/TeaserList.astro';
 import PageHeader from '../components/PageHeader.astro';
+import PageNav from '../components/PageNav.astro';
+import TeaserList, { type TeaserListItem } from '../components/TeaserList.astro';
 import Layout from '../layouts/Layout.astro';
 
 const title = '外部サイトの投稿';
@@ -31,6 +32,7 @@ const items: TeaserListItem[] = await Promise.all(
 ---
 
 <Layout title={title} description={description}>
+  <PageNav />
   <PageHeader title={title}>
     <p>
       {description}

@@ -1,64 +1,41 @@
 ---
-import { Image } from 'astro:assets';
-import { siteTitle } from '../consts';
-
 interface Props {
   title: string;
   isHome?: boolean | undefined;
 }
 
 const isHome = Astro.props.isHome === true;
-
 const { title } = Astro.props;
 
-const Root = isHome ? 'header' : Fragment;
-const Nav = isHome ? Fragment : 'nav';
-const Logo = isHome ? 'h1' : 'p';
-const Body = isHome ? 'div' : 'header';
-const Title = isHome ? 'p' : 'h1';
+const Wrapper = isHome ? 'div' : 'header';
+const HeadingOrParagraph = isHome ? 'p' : 'h1';
 ---
 
-<Root>
-  <Nav>
-    <Logo class="text-sm/none text-dynamic-muted">
-      {/* eslint-disable-next-line astro/jsx-a11y/anchor-is-valid */}
-      <a class="flex w-fit items-center gap-x-3.5" href={isHome ? null : '/'}>
-        <Image
-          class="my-0.5 w-7 rounded-full ring-1 ring-dynamic"
-          src={import('../assets/favicon.svg')}
-          alt=""
-        />
-        {siteTitle}
-      </a>
-    </Logo>
-  </Nav>
+<Wrapper class="mt-8 mb-28 grid grid-rows-[minmax(--spacing(20),auto)_auto_auto]">
+  {
+    Astro.slots.has('meta') && (
+      <p class="row-start-1 mb-1.5 self-end text-xs text-dynamic-muted">
+        <slot name="meta" />
+      </p>
+    )
+  }
 
-  <Body class="mt-8 mb-28 grid grid-rows-[minmax(--spacing(20),auto)_auto_auto]">
-    {
-      Astro.slots.has('meta') && (
-        <p class="row-start-1 mb-1.5 self-end text-xs text-dynamic-muted">
-          <slot name="meta" />
-        </p>
-      )
-    }
+  <HeadingOrParagraph
+    class="row-start-2 text-2xl/japanese-tight font-bold text-pretty [word-break:auto-phrase] kerning-all"
+    set:html={title}
+  />
 
-    <Title
-      class="row-start-2 text-2xl/japanese-tight font-bold text-pretty [word-break:auto-phrase] kerning-all"
-      set:html={title}
-    />
-
-    {
-      Astro.slots.has('default') && (
-        <div
-          class:list={[
-            'row-start-3 pb-4 text-dynamic-muted [hanging-punctuation:allow-end]',
-            '*:mt-4',
-            '[&_a:any-link]:text-dynamic',
-          ]}
-        >
-          <slot />
-        </div>
-      )
-    }
-  </Body>
-</Root>
+  {
+    Astro.slots.has('default') && (
+      <div
+        class:list={[
+          'row-start-3 pb-4 text-dynamic-muted [hanging-punctuation:allow-end]',
+          '*:mt-4',
+          '[&_a:any-link]:text-dynamic',
+        ]}
+      >
+        <slot />
+      </div>
+    )
+  }
+</Wrapper>
