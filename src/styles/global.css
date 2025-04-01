@@ -55,7 +55,7 @@
   }
 
   html {
-    container-name: root / inline-size;
+    container: root / inline-size;
     background-color: var(--background-color-dynamic);
     scrollbar-gutter: stable;
     color: var(--text-color-dynamic);
