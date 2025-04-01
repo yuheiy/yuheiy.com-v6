@@ -63,7 +63,6 @@
     line-height: var(--leading-japanese-normal);
     /* https://bugs.chromium.org/p/chromium/issues/detail?id=1378462 */
     font-kerning: none;
-    line-break: normal;
     text-underline-offset: 0.3em;
     overflow-wrap: anywhere;
     text-autospace: normal;
