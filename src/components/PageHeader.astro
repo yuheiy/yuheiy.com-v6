@@ -1,11 +1,10 @@
 ---
 interface Props {
-  title: string;
   isHome?: boolean | undefined;
+  title: string;
 }
 
-const isHome = Astro.props.isHome === true;
-const { title } = Astro.props;
+const { isHome = false, title } = Astro.props;
 
 const Wrapper = isHome ? 'div' : 'header';
 const HeadingOrParagraph = isHome ? 'p' : 'h1';

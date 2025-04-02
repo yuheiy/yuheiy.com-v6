@@ -6,7 +6,7 @@ interface Props {
   isHome?: boolean | undefined;
 }
 
-const isHome = Astro.props.isHome === true;
+const { isHome = false } = Astro.props;
 
 const Wrapper = isHome ? 'header' : 'nav';
 const ParagraphOrHeading = isHome ? 'h1' : 'p';
