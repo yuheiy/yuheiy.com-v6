@@ -97,11 +97,11 @@ for (const card of document.querySelectorAll('.card')) {
 
 これによって、ブロックリンクのどこをクリックされても、リンクがクリックされたときと同等の振る舞いがエミュレーションされる。本物のリンクがクリックされたときには、処理が二重に実行されることを防ぐべく、`event.target`がリンクであれば早期リターンする。
 
-ユーザーがテキスト選択しようとしているときにはリンクを反応させず、テキスト選択ができるようにするために、現在の選択状態をもとに処理を分岐する。`pointerup`イベントの段階でもしテキストが選択されていれば、何もしない。
+そして、ユーザーがテキスト選択しようとしているときにはリンクを反応させず、テキスト選択ができるようにするために、現在の選択状態をもとに処理を分岐する。`pointerup`イベントの段階でもしテキストが選択されていれば、何もしない。
 
 しかしながらこれでは、修飾キーの入力を無視した振る舞いになってしまう。たとえば通常の場合、<kbd>Command</kbd>を押しながらリンクをクリックすると、リンク先が新しいタブで開く。一方この実装では、その類の機能が無効化されてしまい、常に普通のページ遷移になってしまう。
 
-修飾キーに紐づく機能を無効化させないためには、修飾キーの入力に応じた処理の分岐を行う必要があるが、ブラウザやOSごとの仕様の違いを考慮するのが大変なので、既存のライブラリで解決できると好ましい。[@react-aria/utils](https://www.npmjs.com/package/@react-aria/utils)にある[`openLink`関数](https://github.com/adobe/react-spectrum/blob/%40react-aria/utils%403.28.2/packages/%40react-aria/utils/src/openLink.tsx#L89-L114)がまさにそれだ。これを使って`link.click()`を置き換える。
+修飾キーに紐づく機能を無効化させないためには、修飾キーの入力に応じた処理の分岐を行う必要があるが、ブラウザやOSごとの仕様の違いを網羅するのは容易ではない。したがって、既存のライブラリで解決できると好ましい。[@react-aria/utils](https://www.npmjs.com/package/@react-aria/utils)にある[`openLink`関数](https://github.com/adobe/react-spectrum/blob/%40react-aria/utils%403.28.2/packages/%40react-aria/utils/src/openLink.tsx#L89-L114)がまさにそれだ。これを使って`link.click()`を置き換える。
 
 ```js
 import { openLink } from '@react-aria/utils';
