@@ -1,0 +1,136 @@
+---
+title: 'ブロックリンク（もしくはカードUI）のアクセシビリティ上の問題と解決策'
+pubDate: 2025-04-17T11:05:00.000+09:00
+---
+
+import CodePen from '../../components/CodePen.astro';
+
+複数のテキスト要素や画像がグループ化されて、そのグループ全体が一つのリンクになっているというUI表現がある。ブロックリンクやカードUIなどと呼ばれるものだ。たとえば次のような実装になる。
+
+```html
+<article>
+  <a href="news.html">
+    <h3>Budget Debate Continues in Parliament</h3>
+    <p class="subhead">
+      <img class="alertimg" src="alerticon.png" alt="Breaking News" height="30" width="30" />
+      Members of Parliament continued vigorous debate on three challenging issues surrounding the
+      upcoming year's budget.
+    </p>
+    <p>Read more</p>
+  </a>
+</article>
+```
+
+これはWCAGの[Technique H30](https://www.w3.org/WAI/WCAG22/Techniques/html/H30 'H30: Providing link text that describes the purpose of a link for anchor elements | WAI | W3C')にかつて存在した例だが、[良い例でないとして現在は削除されている](https://github.com/w3c/wcag/pull/2481 'Address issue 2211, fix out of date content, delete one working example by fstrr · Pull Request #2481 · w3c/wcag')。
+
+ブロックリンクの問題としては、[リンク選択時の読み上げが冗長になることが指摘されている](https://adrianroselli.com/2020/02/block-links-cards-clickable-regions-etc.html)。リンクのタイトルだけでなく、説明文などの副次的な情報も合わせて一気に読み上げられてしまうので、最後まで読み終わるのに余計な時間が掛かる。かつスクリーンリーダーによっては、名前の読み上げが終わるまでそれがリンクであることがわからない。
+
+また、リンクの入れ子の問題もある。もしこのブロックリンクの内側に、別のリンクも含めたいという要件があった場合、このように`a`要素で全体を囲うマークアップでは実現が難しい。JavaScriptを使って無理やり実現することもできなくはないが、やはりアクセシビリティ上の問題を孕んでしまうだろう。
+
+こうした事情を踏まえて、`a`要素の疑似要素を使ってターゲット領域を広げる手法が用いられることがある。
+
+```html
+<article style="position: relative">
+  <h3><a href="news.html" class="stretched-link">Budget Debate Continues in Parliament</a></h3>
+  <p class="subhead">
+    <img class="alertimg" src="alerticon.png" alt="Breaking News" height="30" width="30" />
+    Members of Parliament continued vigorous debate on three challenging issues surrounding the
+    upcoming year's budget.
+  </p>
+  <p class="colophon">By <a href="author.html" class="isolation: isolate">John Smith</a></p>
+</article>
+```
+
+```css
+.stretched-link::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+}
+```
+
+[stretched linkはBootstrapで採用されているものだ](https://getbootstrap.com/docs/5.3/helpers/stretched-link/)。
+
+これによって、前述の問題は回避できる。しかしこの場合でも、リンクのテキスト選択ができなくなってしまうというまた別の問題が生じる。
+
+通常、リンクのテキストを選択しようとしても、リンク自体を掴むようなインタラクションが生じてテキスト選択ができないが、<kbd>Alt</kbd>を押しながらだとテキスト選択ができる機能がある。ところが、この例のように疑似要素で覆い被されているとそれが機能しなくなる。
+
+そこで、代わりにJavaScriptを使って、リンクの外側がクリックされたときにもリンクが反応するように実装する。
+
+```html
+<article class="card">
+  <h3><a href="news.html">Budget Debate Continues in Parliament</a></h3>
+  <p class="subhead">
+    <img class="alertimg" src="alerticon.png" alt="Breaking News" height="30" width="30" />
+    Members of Parliament continued vigorous debate on three challenging issues surrounding the
+    upcoming year's budget.
+  </p>
+  <p class="colophon">By <a href="author.html">John Smith</a></p>
+</article>
+```
+
+```js
+for (const card of document.querySelectorAll('.card')) {
+  const link = card.querySelector('h3 a');
+
+  card.addEventListener('pointerup', (event) => {
+    if (event.target.closest('a:any-link')) {
+      return;
+    }
+
+    if (document.getSelection().isCollapsed) {
+      link.click();
+    }
+  });
+}
+```
+
+加えて、JavaScriptが利用可能な環境においてのみ要素全体に`cursor: pointer`を適用するため、メディアクエリの`scripting`を使用する。
+
+```css
+.card {
+  @media (scripting: enabled) {
+    cursor: pointer;
+  }
+}
+```
+
+これによって、ブロックリンクのどこをクリックされても、リンクがクリックされたときと同等の振る舞いがエミュレーションされる。本物のリンクがクリックされたときには、処理が二重に実行されることを防ぐべく、`event.target`がリンクであれば早期リターンする。
+
+ユーザーがテキスト選択しようとしているときにはリンクを反応させず、テキスト選択ができるようにするために、現在の選択状態をもとに処理を分岐する。`pointerup`イベントの段階でもしテキストが選択されていれば、何もしない。
+
+しかしながらこれでは、修飾キーの入力を無視した振る舞いになってしまう。たとえば通常の場合、<kbd>Command</kbd>を押しながらリンクをクリックすると、リンク先が新しいタブで開く。一方この実装では、その類の機能が無効化されてしまい、常に普通のページ遷移になってしまう。
+
+修飾キーに紐づく機能を無効化させないためには、修飾キーの入力に応じた処理の分岐を行う必要があるが、ブラウザやOSごとの仕様の違いを考慮するのが大変なので、既存のライブラリで解決できると好ましい。[@react-aria/utils](https://www.npmjs.com/package/@react-aria/utils)にある[`openLink`関数](https://github.com/adobe/react-spectrum/blob/%40react-aria/utils%403.28.2/packages/%40react-aria/utils/src/openLink.tsx#L89-L114)がまさにそれだ。これを使って`link.click()`を置き換える。
+
+```js
+import { openLink } from '@react-aria/utils';
+
+for (const card of document.querySelectorAll('.card')) {
+  const link = card.querySelector('h3 a');
+
+  card.addEventListener('pointerup', (event) => {
+    if (event.target.closest('a:any-link')) {
+      return;
+    }
+
+    if (document.getSelection().isCollapsed) {
+      openLink(link, event);
+    }
+  });
+}
+```
+
+<CodePen user="yuheiy" slug="raaBodB" height={350} />
+
+おそらくこれが、僕が考え得るかぎりで最もマシな実装だと思う。
+
+---
+
+このような要件に対応するための[Link Area Delegation](https://open-ui.org/components/link-area-delegation-explainer/)という提案もある。将来的には、これを採用することでより適切な実装ができるようになるかもしれない。
+
+## 参考文献
+
+- [Card — Inclusive Components](https://inclusive-components.design/cards/)
+- [Block Links, Cards, Clickable Regions, Rows, Etc. — Adrian Roselli](https://adrianroselli.com/2020/02/block-links-cards-clickable-regions-etc.html)
+- [「リンクの中にあるリンク」「ボタンの中にあるボタン」を正しく実装する #朝までマークアップ](https://cssnite.doorkeeper.jp/events/163736)
