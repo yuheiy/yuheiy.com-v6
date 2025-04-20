@@ -61,7 +61,7 @@
     color: var(--text-color-dynamic);
     font-size: clamp(100%, 0.625svmin + 75%, 112.5%);
     line-height: var(--leading-japanese-normal);
-    text-underline-offset: 0.3em;
+    text-underline-offset: 0.25em;
     overflow-wrap: anywhere;
     text-autospace: normal;
     text-spacing-trim: trim-start;
