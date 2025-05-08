@@ -30,10 +30,9 @@ const endDate = end && convertYearMonthToDate(end);
 const formattedEndDate = endDate && yearMonthFormatter.format(endDate);
 ---
 
-<time datetime={startDate.toISOString().slice(0, 7)}>{formattedStartDate}</time>{
+<time datetime={startDate.toISOString().slice(0, 7)}>{formattedStartDate}</time> &ndash;{
   endDate && (
     <Fragment>
-      &ndash;
       <time datetime={endDate.toISOString().slice(0, 7)}>{formattedEndDate}</time>
     </Fragment>
   )
