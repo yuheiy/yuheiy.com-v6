@@ -16,7 +16,7 @@ const isHome = Astro.props.isHome === true;
 const { description } = Astro.props;
 ---
 
-<header class="mb-28 pb-2">
+<header class="mb-28">
   <PageNav isHome={isHome} />
 
   {
@@ -38,7 +38,7 @@ const { description } = Astro.props;
 
   {
     description && (
-      <p class:list={['mt-4 [hanging-punctuation:allow-end]', !isHome && 'text-dynamic-muted']}>
+      <p class:list={['mt-3 [hanging-punctuation:allow-end]', !isHome && 'text-dynamic-muted']}>
         {description}
       </p>
     )
