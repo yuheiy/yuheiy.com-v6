@@ -8,7 +8,7 @@ interface Props {
 
 const { isHome = false } = Astro.props;
 
-const Wrapper = isHome ? 'header' : 'nav';
+const Wrapper = isHome ? Fragment : 'nav';
 const ParagraphOrHeading = isHome ? 'h1' : 'p';
 const AnchorOrSpan = isHome ? 'span' : 'a';
 ---

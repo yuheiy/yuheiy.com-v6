@@ -1,40 +1,45 @@
 ---
-interface Props {
-  isHome?: boolean | undefined;
-  title: string;
-}
+import PageNav from './PageNav.astro';
 
-const { isHome = false, title } = Astro.props;
+type Props =
+  | {
+      isHome: true;
+    }
+  | {
+      isHome?: false | undefined;
+      title: string;
+    };
 
-const Wrapper = isHome ? 'div' : 'header';
-const HeadingOrParagraph = isHome ? 'p' : 'h1';
+const isHome = Astro.props.isHome === true;
 ---
 
-<Wrapper class="mt-8 mb-28 grid grid-rows-[minmax(--spacing(20),auto)_auto_auto]">
-  {
-    Astro.slots.has('meta') && (
-      <p class="row-start-1 mb-1.5 self-end text-xs text-dynamic-muted">
-        <slot name="meta" />
-      </p>
-    )
-  }
+<header>
+  <PageNav isHome={isHome} />
 
-  <HeadingOrParagraph
-    class="row-start-2 text-2xl/japanese-tight font-bold text-pretty [word-break:auto-phrase] kerning-all"
-    set:html={title}
-  />
+  <div class="mt-28 mb-28 pb-2">
+    {
+      Astro.slots.has('meta') && (
+        <p class="mb-1.5 text-xs text-dynamic-muted">
+          <slot name="meta" />
+        </p>
+      )
+    }
 
-  {
-    Astro.slots.has('default') && (
-      <div
-        class:list={[
-          'row-start-3 pb-4 text-dynamic-muted [hanging-punctuation:allow-end]',
-          '*:mt-4',
-          '[&_a:any-link]:text-dynamic',
-        ]}
-      >
-        <slot />
-      </div>
-    )
-  }
-</Wrapper>
+    {
+      !isHome && (
+        <h1
+          class="text-2xl/japanese-tight font-bold text-pretty [word-break:auto-phrase] kerning-all"
+          set:html={Astro.props.title}
+        />
+      )
+    }
+
+    {
+      Astro.slots.has('default') && (
+        <div class:list={['mt-4 [hanging-punctuation:allow-end]', !isHome && 'text-dynamic-muted']}>
+          <slot />
+        </div>
+      )
+    }
+  </div>
+</header>

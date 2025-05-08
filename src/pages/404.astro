@@ -1,7 +1,6 @@
 ---
 import invariant from 'tiny-invariant';
 import PageHeader from '../components/PageHeader.astro';
-import PageNav from '../components/PageNav.astro';
 import Layout from '../layouts/Layout.astro';
 
 const title = 'ページが見つかりません';
@@ -12,7 +11,6 @@ searchURL.searchParams.set('q', `site:${Astro.site.host}`);
 ---
 
 <Layout is404 title={title}>
-  <PageNav />
   <PageHeader title={title} />
 
   <main class="prose">

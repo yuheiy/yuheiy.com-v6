@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import DateTime from '../components/DateTime.astro';
 import PageHeader from '../components/PageHeader.astro';
-import PageNav from '../components/PageNav.astro';
 import Layout from '../layouts/Layout.astro';
 import { getBlogDescription } from '../lib/blog';
 
@@ -25,7 +24,6 @@ const { Content } = await entry.render();
   ogType="article"
   twitterCard={entry.data.twitterCard}
 >
-  <PageNav />
   <PageHeader title={entry.data.title}>
     <DateTime date={entry.data.pubDate} slot="meta" />
   </PageHeader>

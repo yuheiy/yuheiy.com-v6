@@ -3,7 +3,6 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { getCollection, getEntry } from 'astro:content';
 import DateTime from '../components/DateTime.astro';
 import PageHeader from '../components/PageHeader.astro';
-import PageNav from '../components/PageNav.astro';
 import type { TeaserListItem } from '../components/TeaserList.astro';
 import TeaserList from '../components/TeaserList.astro';
 import YearMonthRange from '../components/YearMonthRange.astro';
@@ -113,18 +112,13 @@ const latestBlogItems: TeaserListItem[] = await Promise.all(
 ---
 
 <Layout isHome description={siteDescription}>
-  <PageNav isHome />
+  <PageHeader isHome>
+    <p>
+      安田祐平（やすだゆうへい）の個人ウェブサイトです。HTML/WAI-ARIA、CSS、JavaScript/TypeScript、ウェブサイトおよびウェブアプリケーション開発、アクセシビリティ、インターフェースデザイン、デザインシステム、DevOpsなどに関心があり、それらについて書いています。
+    </p>
+  </PageHeader>
 
   <main>
-    <PageHeader isHome title="安田 祐平">
-      <p>{siteDescription}</p>
-      <p>
-        監訳を担当した書籍『<a href={blogPath(everylayoutEntry!)}
-          >Every Layout&mdash;&mdash;モジュラーなレスポンシブデザインを実現するCSS設計論</a
-        >』が<a href="https://www.amazon.co.jp/dp/486246517X">Amazonなどで発売中</a>。
-      </p>
-    </PageHeader>
-
     <section>
       <h2 class="mt-24 mb-10 text-lg/japanese-tight font-bold text-dynamic-muted kerning-all">
         おもな投稿
