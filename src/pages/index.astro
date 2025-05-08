@@ -13,25 +13,18 @@ import { getBlogDescription } from '../lib/blog';
 import { blogPath } from '../paths';
 
 const primaryItems: TeaserListItem[] = [
+  await getEntry('contributions', '2025-05-08-introduction-to-accessibility')!,
   await getEntry('blog', '2024-12-01-i-am-not-a-visual-thinker')!,
-  await getEntry(
-    'contributions',
-    '2024-11-14-build-original-system-to-distribute-constants-files-instead-of-using-npm-packages',
-  )!,
-  await getEntry('contributions', '2024-08-05-analyze-internal-ui-library-usage')!,
   await getEntry('blog', '2024-07-22-text-wrap-in-japanese')!,
   await getEntry('contributions', '2023-07-24-gihyojp-tailwindcss')!,
   await getEntry('blog', '2022-11-03-how-to-understand-the-markup')!,
-  await getEntry('blog', '2022-08-14-same-width-buttons')!,
   await getEntry('blog', '2022-08-01-declarative-design')!,
   await getEntry('blog', '2022-06-11-css-components')!,
-  await getEntry('contributions', '2022-05-27-body-typography')!,
   await getEntry('contributions', '2021-12-27-shiftbrain-everylayout')!,
   await getEntry('blog', '20211011-publication-of-everylayout')!,
   await getEntry('blog', '20210127-prefer-margin-top')!,
   await getEntry('contributions', '2020-05-25-css-utility-classes-and-separation-of-concerns')!,
   await getEntry('contributions', '2019-03-08-html-for-creators')!,
-  await getEntry('contributions', '2018-10-26-shiftbrain-in-page-links-and-click-event')!,
 ].map((entry) => {
   switch (entry.collection) {
     case 'blog':
