@@ -112,11 +112,7 @@ const latestBlogItems: TeaserListItem[] = await Promise.all(
 ---
 
 <Layout isHome description={siteDescription}>
-  <PageHeader isHome>
-    <p>
-      安田祐平（やすだゆうへい）の個人ウェブサイトです。HTML/WAI-ARIA、CSS、JavaScript/TypeScript、ウェブサイトおよびウェブアプリケーション開発、アクセシビリティ、インターフェースデザイン、デザインシステム、DevOpsなどに関心があり、それらについて書いています。
-    </p>
-  </PageHeader>
+  <PageHeader isHome description={siteDescription} />
 
   <main>
     <section>

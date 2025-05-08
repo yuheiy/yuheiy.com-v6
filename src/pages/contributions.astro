@@ -31,11 +31,7 @@ const items: TeaserListItem[] = await Promise.all(
 ---
 
 <Layout title={title} description={description}>
-  <PageHeader title={title}>
-    <p>
-      {description}
-    </p>
-  </PageHeader>
+  <PageHeader title={title} description={description} />
 
   <main>
     <TeaserList headingLevel={2} items={items} />

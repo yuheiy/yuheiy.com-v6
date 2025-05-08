@@ -4,13 +4,16 @@ import PageNav from './PageNav.astro';
 type Props =
   | {
       isHome: true;
+      description?: string | undefined;
     }
   | {
       isHome?: false | undefined;
       title: string;
+      description?: string | undefined;
     };
 
 const isHome = Astro.props.isHome === true;
+const { description } = Astro.props;
 ---
 
 <header>
@@ -35,10 +38,10 @@ const isHome = Astro.props.isHome === true;
     }
 
     {
-      Astro.slots.has('default') && (
-        <div class:list={['mt-4 [hanging-punctuation:allow-end]', !isHome && 'text-dynamic-muted']}>
-          <slot />
-        </div>
+      description && (
+        <p class:list={['mt-4 [hanging-punctuation:allow-end]', !isHome && 'text-dynamic-muted']}>
+          {description}
+        </p>
       )
     }
   </div>
