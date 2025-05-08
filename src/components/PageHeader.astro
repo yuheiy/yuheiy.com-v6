@@ -16,33 +16,31 @@ const isHome = Astro.props.isHome === true;
 const { description } = Astro.props;
 ---
 
-<header>
+<header class="mb-28 pb-2">
   <PageNav isHome={isHome} />
 
-  <div class="mt-28 mb-28 pb-2">
-    {
-      Astro.slots.has('meta') && (
-        <p class="mb-1.5 text-xs text-dynamic-muted">
-          <slot name="meta" />
-        </p>
-      )
-    }
+  {
+    Astro.slots.has('meta') && (
+      <p class="mb-1.5 text-xs text-dynamic-muted">
+        <slot name="meta" />
+      </p>
+    )
+  }
 
-    {
-      !isHome && (
-        <h1
-          class="text-2xl/japanese-tight font-bold text-pretty [word-break:auto-phrase] kerning-all"
-          set:html={Astro.props.title}
-        />
-      )
-    }
+  {
+    !isHome && (
+      <h1
+        class="text-2xl/japanese-tight font-bold text-pretty [word-break:auto-phrase] kerning-all"
+        set:html={Astro.props.title}
+      />
+    )
+  }
 
-    {
-      description && (
-        <p class:list={['mt-4 [hanging-punctuation:allow-end]', !isHome && 'text-dynamic-muted']}>
-          {description}
-        </p>
-      )
-    }
-  </div>
+  {
+    description && (
+      <p class:list={['mt-4 [hanging-punctuation:allow-end]', !isHome && 'text-dynamic-muted']}>
+        {description}
+      </p>
+    )
+  }
 </header>
