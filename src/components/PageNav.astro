@@ -1,27 +1,17 @@
 ---
 import { Image } from 'astro:assets';
 import { siteTitle } from '../consts';
-
-interface Props {
-  isHome?: boolean | undefined;
-}
-
-const { isHome = false } = Astro.props;
-
-const Wrapper = isHome ? Fragment : 'nav';
-const ParagraphOrHeading = isHome ? 'h1' : 'p';
-const AnchorOrSpan = isHome ? 'span' : 'a';
 ---
 
-<Wrapper>
-  <ParagraphOrHeading class="mb-28 text-sm/none text-dynamic-muted">
-    <AnchorOrSpan class="flex w-fit items-center gap-x-3.5" href={isHome ? null : '/'}>
+<nav>
+  <p class="text-sm/none text-dynamic-muted">
+    <a class="flex w-fit items-center gap-x-3.5" href="/">
       <Image
         class="my-0.5 w-7 rounded-full ring-1 ring-dynamic"
         src={import('../assets/favicon.svg')}
         alt=""
       />
       {siteTitle}
-    </AnchorOrSpan>
-  </ParagraphOrHeading>
-</Wrapper>
+    </a>
+  </p>
+</nav>

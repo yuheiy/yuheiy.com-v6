@@ -1,24 +1,17 @@
 ---
-import PageNav from './PageNav.astro';
+import { Image } from 'astro:assets';
 
-type Props =
-  | {
-      isHome: true;
-      description?: string | undefined;
-    }
-  | {
-      isHome?: false | undefined;
-      title: string;
-      description?: string | undefined;
-    };
+interface Props {
+  isHome?: boolean | undefined;
+  title: string;
+  description?: string | undefined;
+}
 
 const isHome = Astro.props.isHome === true;
-const { description } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
-<header class="mb-28">
-  <PageNav isHome={isHome} />
-
+<header class:list={['mb-28', isHome ? 'pt-20' : 'mt-28']}>
   {
     Astro.slots.has('meta') && (
       <p class="mb-1.5 text-xs text-dynamic-muted">
@@ -27,20 +20,24 @@ const { description } = Astro.props;
     )
   }
 
-  {
-    !isHome && (
-      <h1
-        class="text-2xl/japanese-tight font-bold text-pretty [word-break:auto-phrase] kerning-all"
-        set:html={Astro.props.title}
-      />
-    )
-  }
+  <h1
+    class="flex items-center gap-[1ch] text-2xl/japanese-tight font-bold text-pretty [word-break:auto-phrase] kerning-all"
+  >
+    {
+      isHome && (
+        <Image
+          class="size-[1.75cap] rounded-full ring-1 ring-dynamic"
+          src={import('../assets/favicon.svg')}
+          alt=""
+        />
+      )
+    }
+    <Fragment set:html={title} />
+  </h1>
 
   {
     description && (
-      <p class:list={['mt-3 [hanging-punctuation:allow-end]', !isHome && 'text-dynamic-muted']}>
-        {description}
-      </p>
+      <p class="mt-4 text-dynamic-muted [hanging-punctuation:allow-end]">{description}</p>
     )
   }
 </header>
