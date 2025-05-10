@@ -14,7 +14,7 @@ const { title, description } = Astro.props;
 <header class:list={['mb-28', isHome ? 'pt-20' : 'mt-28']}>
   {
     Astro.slots.has('meta') && (
-      <p class="mb-1.5 text-xs text-dynamic-muted">
+      <p class="mt-[calc(-1lh/2)] mb-1.5 text-xs text-dynamic-muted">
         <slot name="meta" />
       </p>
     )
