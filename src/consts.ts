@@ -7,4 +7,4 @@ export const siteBlueskyId = 'yuheiy.com';
 export const siteGithubId = 'yuheiy';
 export const siteHatenaId = 'yuheiy';
 export const siteDescription =
-  '安田祐平（やすだゆうへい）の個人ウェブサイトです。HTML/WAI-ARIA、CSS、JavaScript/TypeScript、ウェブサイトおよびウェブアプリケーション開発、インターフェースデザイン、アクセシビリティ、デザインシステム、DevOpsなどに関心があり、それらについての話題が多いです。';
+  '安田祐平（やすだゆうへい）の個人ウェブサイトです。HTML/WAI-ARIA、CSS、JavaScript/TypeScript、ウェブサイトおよびウェブアプリケーション開発、インターフェースデザイン、アクセシビリティ、デザインシステム、DevOpsなどにまつわる話題が多いです。';
