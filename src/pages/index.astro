@@ -12,19 +12,21 @@ import { getBlogDescription } from '../lib/blog';
 import { blogPath } from '../paths';
 
 const primaryItems: TeaserListItem[] = [
-  await getEntry('contributions', '2025-05-08-introduction-to-accessibility')!,
-  await getEntry('blog', '2024-12-01-i-am-not-a-visual-thinker')!,
-  await getEntry('blog', '2024-07-22-text-wrap-in-japanese')!,
-  await getEntry('contributions', '2023-07-24-gihyojp-tailwindcss')!,
-  await getEntry('blog', '2022-11-03-how-to-understand-the-markup')!,
-  await getEntry('blog', '2022-08-01-declarative-design')!,
-  await getEntry('blog', '2022-06-11-css-components')!,
-  await getEntry('contributions', '2021-12-27-shiftbrain-everylayout')!,
-  await getEntry('blog', '20211011-publication-of-everylayout')!,
-  await getEntry('blog', '20210127-prefer-margin-top')!,
-  await getEntry('contributions', '2020-05-25-css-utility-classes-and-separation-of-concerns')!,
-  await getEntry('contributions', '2019-03-08-html-for-creators')!,
+  await getEntry('contributions', '2025-05-08-introduction-to-accessibility'),
+  await getEntry('blog', '2024-12-01-i-am-not-a-visual-thinker'),
+  await getEntry('blog', '2024-07-22-text-wrap-in-japanese'),
+  await getEntry('contributions', '2023-07-24-gihyojp-tailwindcss'),
+  await getEntry('blog', '2022-11-03-how-to-understand-the-markup'),
+  await getEntry('blog', '2022-08-01-declarative-design'),
+  await getEntry('blog', '2022-06-11-css-components'),
+  await getEntry('contributions', '2021-12-27-shiftbrain-everylayout'),
+  await getEntry('blog', '20211011-publication-of-everylayout'),
+  await getEntry('blog', '20210127-prefer-margin-top'),
+  await getEntry('contributions', '2020-05-25-css-utility-classes-and-separation-of-concerns'),
+  await getEntry('contributions', '2019-03-08-html-for-creators'),
 ].map((entry) => {
+  if (!entry) throw new Error('entry is undefined.');
+
   switch (entry.collection) {
     case 'blog':
       return {
