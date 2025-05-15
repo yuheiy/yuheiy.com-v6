@@ -90,7 +90,7 @@
     );
 
     box-sizing: content-box;
-    margin-block: max(5svh, calc(var(--spacing) * 8)) max(7.5svh, calc(var(--spacing) * 12));
+    margin-block: max(5svh, calc(var(--spacing) * 8)) max(30svh, calc(var(--spacing) * 16));
     padding-right: var(--padding-right-body);
     padding-left: var(--padding-left-body);
     max-inline-size: var(--max-inline-size-body);
