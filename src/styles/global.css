@@ -15,11 +15,11 @@
   --font-serif: serif;
   --font-mono: monospace, monospace;
 
-  --border-color-dynamic: light-dark(var(--color-gray-200), var(--color-zinc-700));
+  --border-color-dynamic: light-dark(var(--color-gray-300), var(--color-zinc-700));
 
   --background-color-dynamic: light-dark(var(--color-white), var(--color-zinc-900));
   --background-color-dynamic-inset: light-dark(
-    color-mix(in oklch, var(--color-white), var(--color-slate-100)),
+    color-mix(in oklch, var(--color-white), var(--color-gray-100)),
     color-mix(in oklch, var(--color-zinc-800), var(--color-zinc-900))
   );
 
@@ -28,7 +28,7 @@
     color-mix(in oklch, var(--color-zinc-400), var(--color-zinc-500) 90%)
   );
 
-  --text-color-dynamic: light-dark(var(--color-gray-800), var(--color-zinc-50));
+  --text-color-dynamic: light-dark(var(--color-gray-700), var(--color-zinc-300));
   --text-color-dynamic-muted: light-dark(var(--color-gray-500), var(--color-zinc-400));
 
   --ring-color-dynamic: var(--border-color-dynamic);
