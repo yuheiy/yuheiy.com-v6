@@ -99,6 +99,8 @@
   pre {
     /* https://hail2u.net/blog/text-spacing-trim-property-and-pre-element.html */
     text-spacing-trim: space-all;
+    /* https://hail2u.net/blog/best-value-for-text-autospace-property.html */
+    text-autospace: no-autospace;
   }
 
   a:any-link {
@@ -114,6 +116,11 @@
 
   cite {
     font-style: normal;
+  }
+
+  time {
+    /* https://hail2u.net/blog/best-value-for-text-autospace-property.html */
+    text-autospace: no-autospace;
   }
 
   [id] {
