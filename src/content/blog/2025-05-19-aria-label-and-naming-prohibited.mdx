@@ -1,0 +1,96 @@
+---
+title: 'aria-label属性は何にでもつけられるわけじゃない'
+pubDate: 2025-05-19T16:15:00.000+09:00
+---
+
+[ARIA in HTML](https://www.w3.org/TR/html-aria/)では、要素の名前付けの可否について次のように定義されている。
+
+<figure>
+{/* prettier-ignore */}
+> 著者は、名前付けできない暗黙のWAI-ARIAロールをもつ要素で、`aria-label`または`aria-labelledby`を指定*してはならない*。著者由来の名前付けを禁止する暗黙のWAI-ARIAロールは、[<bdi class="secno">4. </bdi> HTMLでARIA属性を使用するための文書適合性要件](https://momdo.github.io/html-aria/#docconformance)で特定されたHTML要素で特定される。
+>
+> 次のマークアップの例は、著者由来の名前付けを禁止する暗黙のARIAロールをもつHTML要素の選択を示す。
+>
+> <div id="example-elements-with-implicit-aria-roles-which-prohibit-naming-from-authors">
+> [例<bdi>14</bdi>](#example-elements-with-implicit-aria-roles-which-prohibit-naming-from-authors)
+> <span class="example-title">：著者由来の名前付けを禁止する暗黙のARIAロールをもつ要素</span>
+>
+> ```html
+> <!-- DO NOT do the following! -->
+> <p aria-label="...">...</p>
+>
+> <span aria-label="...">...<span>
+>
+> <code aria-label="...">...<code>
+>
+> <div aria-labelledby="...">...</div>
+> ```
+> </div>
+
+<figcaption>[ARIA in HTML 日本語訳: 4.1 要素に名前を付けるためのARIA属性の使用に関する要件](https://momdo.github.io/html-aria/#docconformance-naming)</figcaption>
+</figure>
+
+つまり、`aria-label`属性や`aria-labelledby`属性を適用できる要素の種類は決まっていて、何にでもつけられるわけじゃない。WAI-ARIAでは、名前付けができないロールが次のように定義されている。
+
+<figure>
+> ## <bdi>5.2.8.6</bdi> 名前を付けることができないロール（名前は禁止されている）
+>
+> - [`caption`](https://momdo.github.io/wai-aria-1.2/#caption)
+> - [`code`](https://momdo.github.io/wai-aria-1.2/#code)
+> - [`deletion`](https://momdo.github.io/wai-aria-1.2/#deletion)
+> - [`emphasis`](https://momdo.github.io/wai-aria-1.2/#emphasis)
+> - [`generic`](https://momdo.github.io/wai-aria-1.2/#generic)
+> - [`insertion`](https://momdo.github.io/wai-aria-1.2/#insertion)
+> - [`paragraph`](https://momdo.github.io/wai-aria-1.2/#paragraph)
+> - [`presentation`](https://momdo.github.io/wai-aria-1.2/#presentation)
+> - [`strong`](https://momdo.github.io/wai-aria-1.2/#strong)
+> - [`subscript`](https://momdo.github.io/wai-aria-1.2/#subscript)
+> - [`superscript`](https://momdo.github.io/wai-aria-1.2/#superscript)
+
+<figcaption>[Accessible Rich Internet Applications (WAI-ARIA) 1.2 日本語訳: 5.2.8.6 名前を付けることができないロール（名前は禁止されている）](https://momdo.github.io/wai-aria-1.2/#namefromprohibited)</figcaption>
+</figure>
+
+HTML要素にはそれぞれデフォルトのロールが定義されているが、例として挙げられている`p`要素、`span`要素、`code`要素、`div`要素のロールはこの「名前をつけることができないロール」に該当する。
+
+逆に、これらに該当しないロールであれば、名前付けをすることは妥当とみなされる。
+
+```html
+<svg role="img" aria-label="">...</svg>
+
+<button type="button" aria-label="...">...</button>
+```
+
+では、名前付けができないロールに対して`aria-label`属性を使用することは何が問題か。それは、ブラウザや支援技術において安定して動作しないからである。仕様では[<q>要素は著者由来の名前をサポートしない</q>](https://momdo.github.io/wai-aria-1.2/#namecalculation)と明言されており、基本的にブラウザや支援技術はこれに則って実装される。実装によってはこの限りではないが、あくまでそれは例外であり、サポート状況の幅広さや前方互換性の観点で堅牢性に欠ける。
+
+しかし、そのように使用したいケースが存在することも事実である。たとえば、スタイリングの都合により、文字を一文字ずつ分割して`span`要素で囲うような場合。このように分割されたノードは、利用環境によっては連続した文字列として正しく読み上げられないことがある。その対処として`aria-label`属性が使用されることがよくある。
+
+{/* prettier-ignore */}
+```html
+<!-- 次のようにしてはならない！ -->
+<p aria-label="Lorem ipsum">
+  <span aria-hidden="true">L</span><span aria-hidden="true">o</span><span aria-hidden="true">r</span><span aria-hidden="true">e</span><span aria-hidden="true">m</span>
+  <span aria-hidden="true">i</span><span aria-hidden="true">p</span><span aria-hidden="true">s</span><span aria-hidden="true">u</span><span aria-hidden="true">m</span>
+</p>
+```
+
+この場合の妥当な代替策としては、[visually hidden](https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html)を使うという手がある。次のようにすることで、`aria-label`属性を使うことなく代替コンテンツを設定できる。
+
+{/* prettier-ignore */}
+```html
+<p>
+  <span class="visually-hidden">Lorem ipsum</span>
+  <span aria-hidden="true">L</span><span aria-hidden="true">o</span><span aria-hidden="true">r</span><span aria-hidden="true">e</span><span aria-hidden="true">m</span>
+  <span aria-hidden="true">i</span><span aria-hidden="true">p</span><span aria-hidden="true">s</span><span aria-hidden="true">u</span><span aria-hidden="true">m</span>
+</p>
+```
+
+```css
+.visually-hidden {
+  position: absolute;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+```
