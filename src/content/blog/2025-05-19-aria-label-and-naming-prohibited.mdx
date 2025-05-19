@@ -77,20 +77,20 @@ HTML要素にはそれぞれデフォルトのロールが定義されている�
 
 {/* prettier-ignore */}
 ```html
+<style>
+  .visually-hidden {
+    position: absolute;
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+</style>
+
 <p>
   <span class="visually-hidden">Lorem ipsum</span>
   <span aria-hidden="true">L</span><span aria-hidden="true">o</span><span aria-hidden="true">r</span><span aria-hidden="true">e</span><span aria-hidden="true">m</span>
   <span aria-hidden="true">i</span><span aria-hidden="true">p</span><span aria-hidden="true">s</span><span aria-hidden="true">u</span><span aria-hidden="true">m</span>
 </p>
-```
-
-```css
-.visually-hidden {
-  position: absolute;
-  clip-path: inset(50%);
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  white-space: nowrap;
-}
 ```
