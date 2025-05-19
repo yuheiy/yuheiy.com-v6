@@ -112,6 +112,10 @@
     font-weight: bolder;
   }
 
+  cite {
+    font-style: normal;
+  }
+
   [id] {
     scroll-margin-block-start: --spacing(4);
   }
