@@ -10,6 +10,10 @@
     word-break: auto-phrase;
   }
 
+  blockquote h2:first-child {
+    margin-block-start: --spacing(8);
+  }
+
   h3 {
     margin-block-start: --spacing(12);
     font-weight: bold;
@@ -23,6 +27,10 @@
 
   h2 + h3 {
     margin-block-start: --spacing(4);
+  }
+
+  blockquote :is(h2, h3):first-child {
+    margin-block-start: --spacing(8);
   }
 
   p {
@@ -74,15 +82,8 @@
   blockquote:not(.twitter-tweet) {
     position: relative;
     margin-block-start: --spacing(8);
-    padding-inline-start: 2rem;
-  }
-
-  blockquote:not(.twitter-tweet)::before {
-    position: absolute;
-    inset-block: 0;
-    inset-inline-start: 0;
     border-inline-start: 4px solid var(--border-color-dynamic);
-    content: '';
+    padding-inline-start: calc(2rem - 4px);
   }
 
   :is(ol, ul) {

@@ -6,14 +6,11 @@ pubDate: 2025-05-19T16:15:00.000+09:00
 [ARIA in HTML](https://www.w3.org/TR/html-aria/)では、要素の名前付けの可否について次のようにある。
 
 <figure>
-{/* prettier-ignore */}
-> 著者は、名前付けできない暗黙のWAI-ARIAロールをもつ要素で、`aria-label`または`aria-labelledby`を指定*してはならない*。著者由来の名前付けを禁止する暗黙のWAI-ARIAロールは、[<bdi class="secno">4. </bdi> HTMLでARIA属性を使用するための文書適合性要件](https://momdo.github.io/html-aria/#docconformance)で特定されたHTML要素で特定される。
+> 著者は、名前付けできない暗黙のWAI-ARIAロールをもつ要素で、`aria-label`または`aria-labelledby`を指定*してはならない*。著者由来の名前付けを禁止する暗黙のWAI-ARIAロールは、[<bdi>4. </bdi> HTMLでARIA属性を使用するための文書適合性要件](https://momdo.github.io/html-aria/#docconformance)で特定されたHTML要素で特定される。
 >
 > 次のマークアップの例は、著者由来の名前付けを禁止する暗黙のARIAロールをもつHTML要素の選択を示す。
 >
-> <div id="example-elements-with-implicit-aria-roles-which-prohibit-naming-from-authors">
-> [例<bdi>14</bdi>](#example-elements-with-implicit-aria-roles-which-prohibit-naming-from-authors)
-> <span class="example-title">：著者由来の名前付けを禁止する暗黙のARIAロールをもつ要素</span>
+> [例<bdi>14</bdi>](https://momdo.github.io/html-aria/#example-elements-with-implicit-aria-roles-which-prohibit-naming-from-authors)：著者由来の名前付けを禁止する暗黙のARIAロールをもつ要素
 >
 > ```html
 > <!-- DO NOT do the following! -->
@@ -25,9 +22,8 @@ pubDate: 2025-05-19T16:15:00.000+09:00
 >
 > <div aria-labelledby="...">...</div>
 > ```
-> </div>
 
-<figcaption>[ARIA in HTML 日本語訳: 4.1 要素に名前を付けるためのARIA属性の使用に関する要件](https://momdo.github.io/html-aria/#docconformance-naming)</figcaption>
+<figcaption>[ARIA in HTML 日本語訳 § 4.1 要素に名前を付けるためのARIA属性の使用に関する要件](https://momdo.github.io/html-aria/#docconformance-naming)</figcaption>
 </figure>
 
 つまり、`aria-label`属性や`aria-labelledby`属性を適用できる要素の種類は決まっていて、何にでもつけられるわけじゃない。名前付けができないロールは次のように定義されている。
@@ -47,22 +43,32 @@ pubDate: 2025-05-19T16:15:00.000+09:00
 > - [`subscript`](https://momdo.github.io/wai-aria-1.2/#subscript)
 > - [`superscript`](https://momdo.github.io/wai-aria-1.2/#superscript)
 
-<figcaption>[Accessible Rich Internet Applications (WAI-ARIA) 1.2 日本語訳: 5.2.8.6 名前を付けることができないロール（名前は禁止されている）](https://momdo.github.io/wai-aria-1.2/#namefromprohibited)</figcaption>
+<figcaption>[Accessible Rich Internet Applications (WAI-ARIA) 1.2 日本語訳 § 5.2.8.6 名前を付けることができないロール（名前は禁止されている）](https://momdo.github.io/wai-aria-1.2/#namefromprohibited)</figcaption>
 </figure>
 
-HTML要素にはそれぞれデフォルトのロールが定義されているが、例として挙げられている`p`要素、`span`要素、`code`要素、`div`要素のロールはこの「名前をつけることができないロール」に該当する。
+HTML要素にはそれぞれデフォルトのロール（暗黙のWAI-ARIAロール）が定義されているが、例として挙げられている`p`要素、`span`要素、`code`要素、`div`要素のロールはこの<q>名前をつけることができないロール</q>に該当する。
 
 逆に、これらに該当しないロールであれば、名前付けをすることは妥当とみなされる。
 
-```html
-<svg role="img" aria-label="...">...</svg>
+<figure>
+> 次のマークアップの例は、著者由来の名前付けを可能にする明示的なWAI-ARIAロールを持つ要素を示す。これらの要素で指定される明示的なロールのために、`aria-label`および`aria-labelledby`属性は許可される。
+>
+> [例<bdi>15</bdi>](https://momdo.github.io/html-aria/#example-elements-with-explicit-aria-roles-which-allow-naming-from-authors)：著者由来の名前付けを可能にする明示的なARIAロールをもつ要素
+>
+> ```html
+> <p role="link" tabindex="0" aria-label="...">...</p>
+>
+> <span role="button" tabindex="0" aria-label="...">...<span>
+>
+> <div role="article" aria-labelledby="...">...</div>
+> ```
 
-<button type="button" aria-label="...">...</button>
-```
+<figcaption>[ARIA in HTML 日本語訳 § 4.1 要素に名前を付けるためのARIA属性の使用に関する要件](https://momdo.github.io/html-aria/#docconformance-naming)</figcaption>
+</figure>
 
-では、名前付けができないロールに対して`aria-label`属性を使用することは何が問題か。それは、ブラウザや支援技術において安定して動作しないことである。仕様では[<q>要素は著者由来の名前をサポートしない</q>](https://momdo.github.io/wai-aria-1.2/#namecalculation)と明言されており、基本的にブラウザや支援技術はこれに則って実装される。実装によってはこの限りではないが、あくまでそれは例外であり、サポート状況の幅広さや前方互換性の観点で堅牢性に欠ける。
+では、名前付けができないロールに対して`aria-label`属性を使用することは何が問題か。それは、ブラウザや支援技術において安定して動作しないことである。仕様では[<q>要素は著者由来の名前をサポートしない</q>](https://momdo.github.io/wai-aria-1.2/#namecalculation)と明言されており、基本的にブラウザや支援技術はこれに則って実装される。一部の実装ではこの限りではないが、あくまでそれは例外であり、サポート状況の幅広さや前方互換性の観点で堅牢さに欠ける。
 
-しかし、そのように使用したいケースが存在することもまた事実である。たとえば、スタイリングの都合により、文字を一文字ずつ分割して`span`要素で囲うような場合。このように分割されたノードは、利用環境によっては連続した文字列として正しく読み上げられないことがある。そのための対処として`aria-label`属性が使用されることがよくある。
+しかし、そのように使用したい場面が存在することもまた事実である。たとえば、スタイリングの都合により、文字を一文字ずつ分割して`span`要素で囲うような場合。このように分割されたノードは、利用環境によっては連続した文字列として正しく読み上げられないことがある。そのための対処として`aria-label`属性がよく使用される。
 
 {/* prettier-ignore */}
 ```html
@@ -73,7 +79,7 @@ HTML要素にはそれぞれデフォルトのロールが定義されている�
 </p>
 ```
 
-この場合の妥当な代替策としては、[visually hidden](https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html)を使う手がある。次のようにすることで、`aria-label`属性を使うことなく代替コンテンツを設定できる。
+この場合の妥当な代替策は、[visually hidden](https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html)を使うことだ。次のようにすれば、`aria-label`属性を使うことなく代替コンテンツを設定できる。
 
 {/* prettier-ignore */}
 ```html
