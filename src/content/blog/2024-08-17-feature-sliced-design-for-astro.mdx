@@ -22,7 +22,9 @@ my-system
 │  ├─ payment-model.js
 ```
 
-<figcaption>[Structure your solution by components](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/breakintcomponents.md)</figcaption>
+<figcaption>
+  &mdash; <cite>[Structure your solution by components](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/breakintcomponents.md)</cite>
+</figcaption>
 </figure>
 
 この代わりに、次のように構成すべきという考えである。
@@ -43,7 +45,9 @@ my-system
 │  ├─ authenticator
 ```
 
-<figcaption>[Structure your solution by components](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/breakintcomponents.md)</figcaption>
+<figcaption>
+  &mdash; <cite>[Structure your solution by components](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/breakintcomponents.md)</cite>
+</figcaption>
 </figure>
 
 同様の議論はこれまでにいくつもあって、方向性としては僕も賛同するが、それだけでは体系として不十分であるとも感じていた。フィーチャーの観点だけでアプリケーションが構成できるわけではないので、もっと踏み込んだ整理が必要だと思っていた。
@@ -54,7 +58,9 @@ Feature-Sliced Designにおいてもっとも特徴的なのが、「Layers」�
 
 <figure>
   ![](./assets/2024-08-17-feature-sliced-design-for-astro/feature-sliced-design-scheme.jpg)
-  <figcaption>[Feature-Sliced Design](https://feature-sliced.design/)</figcaption>
+  <figcaption>
+    &mdash; <cite>[Feature-Sliced Design](https://feature-sliced.design/)</cite>
+  </figcaption>
 </figure>
 
 各Layersには決まった役割があり、その中にSlicesとSegmentsがそれぞれ入れ子になる。ただし、appとsharedにはSlicesを含めずにSegmentsが直接配置される。またSegmentsの名前としては、「ui」「api」「model」「lib」「config」が基本的な例として提案されている。

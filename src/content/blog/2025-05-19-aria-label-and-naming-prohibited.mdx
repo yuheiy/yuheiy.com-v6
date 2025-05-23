@@ -23,7 +23,9 @@ pubDate: 2025-05-19T16:15:00.000+09:00
 > <div aria-labelledby="...">...</div>
 > ```
 
-<figcaption><cite>[ARIA in HTML 日本語訳 § 4.1 要素に名前を付けるためのARIA属性の使用に関する要件](https://momdo.github.io/html-aria/#docconformance-naming)</cite></figcaption>
+<figcaption>
+  &mdash; <cite>[ARIA in HTML 日本語訳 § 4.1 要素に名前を付けるためのARIA属性の使用に関する要件](https://momdo.github.io/html-aria/#docconformance-naming)</cite>
+</figcaption>
 </figure>
 
 つまり、`aria-label`属性や`aria-labelledby`属性を適用できる要素の種類は決まっていて、何にでもつけられるわけじゃない。名前付けができないロールは次のように定義されている。
@@ -43,7 +45,9 @@ pubDate: 2025-05-19T16:15:00.000+09:00
 > - [`subscript`](https://momdo.github.io/wai-aria-1.2/#subscript)
 > - [`superscript`](https://momdo.github.io/wai-aria-1.2/#superscript)
 
-<figcaption><cite>[Accessible Rich Internet Applications (WAI-ARIA) 1.2 日本語訳 § 5.2.8.6 名前を付けることができないロール（名前は禁止されている）](https://momdo.github.io/wai-aria-1.2/#namefromprohibited)</cite></figcaption>
+<figcaption>
+  &mdash; <cite>[Accessible Rich Internet Applications (WAI-ARIA) 1.2 日本語訳 § 5.2.8.6 名前を付けることができないロール（名前は禁止されている）](https://momdo.github.io/wai-aria-1.2/#namefromprohibited)</cite>
+</figcaption>
 </figure>
 
 HTML要素にはそれぞれデフォルトのロール（暗黙のWAI-ARIAロール）が定義されているが、例として挙げられている`p`要素、`span`要素、`code`要素、`div`要素のロールはこの<q>名前をつけることができないロール</q>に該当する。
@@ -63,7 +67,9 @@ HTML要素にはそれぞれデフォルトのロール（暗黙のWAI-ARIAロ�
 > <div role="article" aria-labelledby="...">...</div>
 > ```
 
-<figcaption><cite>[ARIA in HTML 日本語訳 § 4.1 要素に名前を付けるためのARIA属性の使用に関する要件](https://momdo.github.io/html-aria/#docconformance-naming)</cite></figcaption>
+<figcaption>
+  &mdash; <cite>[ARIA in HTML 日本語訳 § 4.1 要素に名前を付けるためのARIA属性の使用に関する要件](https://momdo.github.io/html-aria/#docconformance-naming)</cite>
+</figcaption>
 </figure>
 
 では、名前付けができないロールに対して`aria-label`属性を使用することは何が問題か。それは、ブラウザや支援技術において安定して動作しないことである。仕様では[<q>要素は著者由来の名前をサポートしない</q>](https://momdo.github.io/wai-aria-1.2/#namecalculation)と明言されており、基本的にブラウザや支援技術はこれに則って実装される。一部の実装ではこの限りではないが、あくまでそれは例外であり、サポート状況の幅広さや前方互換性の観点で堅牢さに欠ける。
