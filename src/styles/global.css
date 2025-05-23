@@ -19,7 +19,7 @@
 
   --background-color-dynamic: light-dark(var(--color-white), var(--color-zinc-900));
   --background-color-dynamic-inset: light-dark(
-    color-mix(in oklch, var(--color-white), var(--color-gray-100)),
+    color-mix(in oklch, var(--color-white), var(--color-gray-100) 60%),
     color-mix(in oklch, var(--color-zinc-800), var(--color-zinc-900))
   );
 

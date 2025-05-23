@@ -57,7 +57,7 @@
   pre {
     margin-inline: calc((100cqw - 100%) / 2 * -1);
     margin-block: calc(--spacing(8) + var(--half-leading));
-    padding: --spacing(5) calc((100cqw - 100%) / 2);
+    padding: --spacing(4) calc((100cqw - 100%) / 2);
     line-height: var(--leading-latin-normal);
 
     /* Apply when the container reaches `inline-size: 42rem`. */
@@ -70,13 +70,17 @@
     }
   }
 
+  pre + pre {
+    margin-block-start: --spacing(4);
+  }
+
   figure pre {
     margin-block-end: 0;
   }
 
   blockquote pre {
     margin-inline: 0;
-    padding-inline: --spacing(6);
+    padding-inline: 1rem;
   }
 
   blockquote:not(.twitter-tweet) {
