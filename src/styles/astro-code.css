@@ -10,3 +10,7 @@
     text-decoration: var(--shiki-dark-text-decoration) !important;
   }
 }
+
+.astro-code[data-language='plaintext'] {
+  white-space: normal;
+}
