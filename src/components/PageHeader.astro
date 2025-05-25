@@ -11,10 +11,10 @@ const isHome = Astro.props.isHome === true;
 const { title, description } = Astro.props;
 ---
 
-<header class="mb-28 pt-28">
+<header class="mb-32 pt-32">
   {
     Astro.slots.has('meta') && (
-      <p class="mt-[calc(-1lh/2)] mb-1.5 text-xs text-dynamic-muted">
+      <p class="mb-1.5 text-xs text-dynamic-muted">
         <slot name="meta" />
       </p>
     )
@@ -23,7 +23,7 @@ const { title, description } = Astro.props;
   <h1
     class:list={[
       'text-2xl/japanese-tight font-bold text-pretty [word-break:auto-phrase] kerning-all',
-      isHome && 'mt-[calc(-1lh/2)] flex items-center gap-[1ch] pb-[calc((1lh-1cap)/2)]',
+      isHome && 'mt-[-1lh] flex items-center gap-[1ch] pb-[calc((1lh-1cap)/2)]',
     ]}
   >
     {
