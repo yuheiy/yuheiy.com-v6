@@ -3,7 +3,7 @@ title: 'VSCodeのGenerate alt textを使って代替テキストを自動生成�
 pubDate: 2025-05-25T16:10:00.000+09:00
 ---
 
-VSCodeの2025年5月8日のリリースにて、[画像の代替テキストを自動生成できる機能が追加された](https://code.visualstudio.com/updates/v1_100#_generate-alt-text-in-html-or-markdown)。これはGitHub Copilotの一部として提供されるものである。
+VSCodeエクステンションのGitHub Copilot Chat 0.27にて、[画像の代替テキストを自動生成できる機能が追加された](https://marketplace.visualstudio.com/items/GitHub.copilot-chat/changelog#user-content-generate-alt-text-in-html-or-markdown)。
 
 <figure>
   <video controls playsinline>
@@ -31,13 +31,13 @@ Refine the existing alt text for clarity and usefulness for screen readers. Crea
 
 ## 自動生成の使いどころと注意点
 
-いくつかの数の記事や画像に対してこの機能を試してみたが、内容にかかわらずそこそこの精度の出力ができた。たとえば複雑な図表でもかなり正確に内容を出力できる。少なくとも、ほとんどの人にとっては自力で記述するよりも良い結果になる可能性が高い。注意点もいくつかあるので順を追って説明する。
+いくつかの記事や画像に対してこの機能を試してみたが、内容にかかわらずそこそこの精度の出力ができた。たとえば複雑な図表でもかなり正確に内容を出力できる。少なくとも、ほとんどの人にとっては自力で記述するよりも良い結果になる可能性が高い。注意点もあるので順を追って説明する。
 
-まず、この自動生成の使いどころとしては、ブログなどの記事中で登場する画像のために使うのが適切だと思われる。代替テキストの書き方にはいくつかパターンがあるが、[`alt`ディシジョンツリー](https://www.w3.org/WAI/tutorials/images/decision-tree/ja)に則れば、「[意味のある画像](https://www.w3.org/WAI/tutorials/images/informative/)」もしくは「[複雑な画像](https://www.w3.org/WAI/tutorials/images/complex/)」に当てはまる例に適用するのに向いている。
+まず、この自動生成機能は、ブログなどの記事中で登場する画像のために使うのが適切だと思われる。代替テキストの書き方にはいくつかパターンがあるが、[`alt`ディシジョンツリー](https://www.w3.org/WAI/tutorials/images/decision-tree/ja)に則れば、「[意味のある画像](https://www.w3.org/WAI/tutorials/images/informative/)」もしくは「[複雑な画像](https://www.w3.org/WAI/tutorials/images/complex/)」に当てはまる例に適用するのに向いている。
 
 それ以外のパターンについては、この自動生成を用いると冗長になりがちであり、より簡潔な内容を人が自ら記述したほうがうまくいく。たとえば単なる「[文字画像](https://www.w3.org/WAI/tutorials/images/textual/#styled-text-decorative-effect)」や、ボタンのなかで使用するアイコンなど（「[機能を持つ画像](https://www.w3.org/WAI/tutorials/images/functional/)」）については、制作者自身にとっては自明なのでわざわざAIに頼る必要もないだろう。言い換えれば、自動生成ができるとしても、`alt`ディシジョンツリーくらいは最低限理解しておく必要がある。
 
-また自動生成の結果は、対象の画像に含まれる情報だけでなく、同ファイルの記述内容や前後の文脈も踏まえたものになる。したがって、同一のファイル内に本文もいっしょに記述された形式であるほうが好ましい。つまり、記事データがマークダウンで管理されているブログなどに向いている。
+また自動生成の結果は、対象の画像に含まれる情報だけでなく、同ファイルの記述内容や前後の文脈も踏まえたものになる。したがって、同一ファイルに本文もいっしょに記述された形式であることが望ましい。つまり、マークダウンファイルで記事データが管理されているブログなどに向いている。先に本文を書き切ってから、最後に代替テキストを生成すると精度が上がるだろう。
 
 あとは、代替テキストがたまに英語で出力されてしまうことがある。プロンプトが英語であるせいでそれに引っ張られてしまうようだ。インラインチャットで続けて「as japanese」などと要求すれば日本語にしてくれる。
 
@@ -47,9 +47,9 @@ Refine the existing alt text for clarity and usefulness for screen readers. Crea
 
 ## Generate alt textの実装を調べる
 
-この機能はコードアクションとして提供されているが、たとえばVSCode以外のエディタやその他のAIエージェントなど、別の経路からも実行できると便利だ。そこで、これがどのように実装されているかを理解するため、VSCodeのソースコードを調べてみる。
+この機能はコードアクションとして提供されているものだが、たとえばVSCode以外のエディタやその他のAIエージェントなど、別の経路からも実行できると便利だ。そこで、これがどのように実装されているかを理解するため、エクステンションのソースコードを調べてみる。
 
-まず、[VSCodeのリポジトリ](https://github.com/microsoft/vscode)で「Generate alt text」の文字列を検索したが、見つからない。GitHub Copilotのほうのソースコードに含まれていると推測して`~/.vscode/extensions/`を対象に検索すると、`~/.vscode/extensions/github.copilot-chat-0.27.0/dist/extension.js`のなかにその記述が見つかった。
+GitHub Copilotのリポジトリは公開されていないので、ローカルにある`~/.vscode/extensions/`を対象に「Generate alt text」の文字列を検索すると、`~/.vscode/extensions/github.copilot-chat-0.27.0/dist/extension.js`のなかにその記述が見つかった。
 
 `extension.js`はminifyされているため、Prettierでフォーマットする。検索で見つかった該当箇所は次のようになっていた。
 
