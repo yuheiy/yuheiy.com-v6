@@ -23,7 +23,7 @@ const { title, description } = Astro.props;
   <h1
     class:list={[
       'text-2xl/japanese-tight font-bold text-pretty [word-break:auto-phrase] kerning-all',
-      isHome && 'mt-[-1lh] flex items-center gap-[1ch] pb-[calc((1lh-1cap)/2)]',
+      isHome && 'mt-[calc(-1lh/2)] flex items-center gap-[1ch] pb-[calc((1lh-1cap)/2)]',
     ]}
   >
     {
