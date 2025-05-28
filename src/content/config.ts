@@ -12,7 +12,7 @@ const blog = defineCollection({
     }),
 });
 
-const contributions = defineCollection({
+const external = defineCollection({
   type: 'data',
   // Type-check frontmatter using a schema
   schema: () =>
@@ -28,5 +28,5 @@ const contributions = defineCollection({
 
 export const collections = {
   blog,
-  contributions,
+  external,
 };

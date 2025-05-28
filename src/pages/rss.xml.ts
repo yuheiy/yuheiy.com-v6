@@ -32,7 +32,7 @@ export async function GET(context: APIContext) {
           });
         })(),
       })),
-      ...(await getCollection('contributions')).map((entry) => ({
+      ...(await getCollection('external')).map((entry) => ({
         link: entry.data.link,
         title: entry.data.title,
         pubDate: entry.data.pubDate,
