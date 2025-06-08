@@ -42,9 +42,8 @@
   --text-2xl: 1.625rem;
 
   --leading-*: initial;
-  --leading-japanese-tight: 1.5;
-  --leading-japanese-normal: 1.85;
-  --leading-latin-normal: 1.5;
+  --leading-tight: 1.5;
+  --leading-normal: 1.85;
 }
 
 @layer base {
@@ -58,7 +57,7 @@
     scrollbar-gutter: stable;
     color: var(--text-color-dynamic);
     font-size: clamp(100%, 0.625svmin + 75%, 112.5%);
-    line-height: var(--leading-japanese-normal);
+    line-height: var(--leading-normal);
     text-underline-offset: 0.25em;
     overflow-wrap: anywhere;
     text-autospace: normal;

@@ -3,7 +3,7 @@
     margin-block-start: --spacing(16);
     font-weight: bold;
     font-size: var(--text-xl);
-    line-height: var(--leading-japanese-tight);
+    line-height: var(--leading-tight);
     font-kerning: normal;
     font-feature-settings: 'palt';
     text-wrap: pretty;
@@ -18,7 +18,7 @@
     margin-block-start: --spacing(12);
     font-weight: bold;
     font-size: var(--text-lg);
-    line-height: var(--leading-japanese-tight);
+    line-height: var(--leading-tight);
     font-kerning: normal;
     font-feature-settings: 'palt';
     text-wrap: pretty;
@@ -58,7 +58,7 @@
     margin-inline: calc((100cqw - 100%) / 2 * -1);
     margin-block: calc(--spacing(8) + var(--half-leading));
     padding: --spacing(4) calc((100cqw - 100%) / 2);
-    line-height: var(--leading-latin-normal);
+    line-height: var(--leading-tight);
 
     /* Apply when the container reaches `inline-size: 42rem`. */
     /* container size = 42rem / (100% - 2 * 5%) */
