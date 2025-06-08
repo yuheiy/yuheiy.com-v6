@@ -48,7 +48,7 @@
 
 @layer base {
   :root {
-    --half-leading: calc((1rlh - 1cap) / 2);
+    --half-leading: calc((1lh - 1cap) / 2);
   }
 
   html {
