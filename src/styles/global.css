@@ -31,8 +31,6 @@
   --text-color-dynamic: light-dark(var(--color-gray-700), var(--color-zinc-300));
   --text-color-dynamic-muted: light-dark(var(--color-gray-500), var(--color-zinc-400));
 
-  --ring-color-dynamic: var(--border-color-dynamic);
-
   --spacing: 0.125rlh;
 
   --text-*: initial;
