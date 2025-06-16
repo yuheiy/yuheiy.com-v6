@@ -56,7 +56,7 @@
     background-color: var(--background-color-dynamic);
     scrollbar-gutter: stable;
     color: var(--text-color-dynamic);
-    font-size: clamp(100%, 0.625svmin + 75%, 112.5%);
+    font-size: round(clamp(100%, 0.625svmin + 75%, 112.5%), 1px);
     line-height: var(--leading-normal);
     text-underline-offset: 0.25em;
     overflow-wrap: anywhere;
@@ -72,8 +72,7 @@
   }
 
   body {
-    /* `+0.1px` compensates for the miscalculation in `round()` */
-    --max-inline-size-body: calc(42rem + 0.1px);
+    --max-inline-size-body: 42rem;
     --padding-inline-without-safe-area-body: clamp(
       1rem,
       max((100cqw - var(--max-inline-size-body)) / 2, 5cqw),
