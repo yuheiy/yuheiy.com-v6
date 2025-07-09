@@ -1,16 +1,7 @@
 ---
 import appleTouchIconImage from '../assets/apple-touch-icon.png';
 import faviconImage from '../assets/favicon.svg';
-import {
-  siteBlueskyId,
-  siteEmail,
-  siteGithubId,
-  siteHatenaId,
-  siteLang,
-  siteRegion,
-  siteTitle,
-  siteTwitterId,
-} from '../consts';
+import config from '../config';
 import '../styles/global.css';
 
 interface BaseProps {
@@ -46,11 +37,11 @@ const {
   twitterCard = 'summary',
 } = Astro.props;
 
-const title = isHome ? siteTitle : Astro.props.title;
+const title = isHome ? config.siteTitle : Astro.props.title;
 const resolvedOgImage = new URL(ogImage, Astro.url);
 ---
 
-<html lang={siteLang}>
+<html lang={config.lang}>
   <head>
     {
       /**
@@ -68,7 +59,7 @@ const resolvedOgImage = new URL(ogImage, Astro.url);
     {description && <meta name="description" content={description} />}
     <meta name="generator" content={Astro.generator} />
     <meta name="twitter:card" content={twitterCard} />
-    <meta name="twitter:site" content={`@${siteTwitterId}`} />
+    <meta name="twitter:site" content={`@${config.twitter}`} />
     <meta name="twitter:title" content={title} />
 
     <meta property="og:title" content={title} />
@@ -76,13 +67,13 @@ const resolvedOgImage = new URL(ogImage, Astro.url);
     <meta property="og:image" content={resolvedOgImage} />
     {!is404 && <meta property="og:url" content={Astro.url} />}
     {description && <meta property="og:description" content={description} />}
-    <meta property="og:site_name" content={siteTitle} />
-    <meta property="og:locale" content={`${siteLang}_${siteRegion}`} />
+    <meta property="og:site_name" content={config.siteTitle} />
+    <meta property="og:locale" content={`${config.lang}_${config.region}`} />
 
     <link rel="alternate" href="/rss.xml" type="application/rss+xml" />
     <link rel="apple-touch-icon" href={appleTouchIconImage.src} />
-    <link rel="author" href={`mailto:${siteEmail}`} />
-    <link rel="author" href={`https://www.hatena.ne.jp/${siteHatenaId}/`} />
+    <link rel="author" href={`mailto:${config.email}`} />
+    <link rel="author" href={`https://www.hatena.ne.jp/${config.hatena}/`} />
     {!is404 && <link rel="canonical" href={Astro.url} />}
     <link rel="icon" href={faviconImage.src} type="image/svg+xml" />
   </head>
@@ -99,10 +90,10 @@ const resolvedOgImage = new URL(ogImage, Astro.url);
       </p>
       <p>
         <a href="https://creativecommons.org/licenses/by/4.0/deed.ja">CC BY 4.0</a
-        >&#x2003;/&#x2003;<a href={`https://x.com/${siteTwitterId}`}>X</a>&#x2003;<a
-          href={`https://bsky.app/profile/${siteBlueskyId}`}>Bluesky</a
-        >&#x2003;<a href={`https://github.com/${siteGithubId}`}>GitHub</a>&#x2003;<a
-          href={`mailto:${siteEmail}`}>メール</a
+        >&#x2003;/&#x2003;<a href={`https://x.com/${config.twitter}`}>X</a>&#x2003;<a
+          href={`https://bsky.app/profile/${config.bluesky}`}>Bluesky</a
+        >&#x2003;<a href={`https://github.com/${config.github}`}>GitHub</a>&#x2003;<a
+          href={`mailto:${config.email}`}>メール</a
         >
       </p>
     </footer>

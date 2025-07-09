@@ -6,7 +6,7 @@ import { loadRenderers } from 'astro:container';
 import { getCollection } from 'astro:content';
 import sanitizeHtml from 'sanitize-html';
 import invariant from 'tiny-invariant';
-import { siteTitle } from '../consts';
+import config from '../config';
 import { getBlogDescription } from '../lib/blog';
 import { blogPath } from '../paths';
 
@@ -41,7 +41,7 @@ export async function GET(context: APIContext) {
   ).toSorted((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
   return rss({
-    title: siteTitle,
+    title: config.siteTitle,
     description:
       'ウェブデザインやフロントエンドにまつわる雑記と、外部サイトに寄稿した記事などの紹介。',
     site: context.site,

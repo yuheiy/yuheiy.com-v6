@@ -6,10 +6,13 @@ import PageHeader from '../components/PageHeader.astro';
 import type { TeaserListItem } from '../components/TeaserList.astro';
 import TeaserList from '../components/TeaserList.astro';
 import YearMonthRange from '../components/YearMonthRange.astro';
-import { siteDescription, siteTitle } from '../consts';
+import config from '../config';
 import Layout from '../layouts/Layout.astro';
 import { getBlogDescription } from '../lib/blog';
 import { blogPath } from '../paths';
+
+const description =
+  '安田祐平（やすだゆうへい）の個人ウェブサイトです。HTML/WAI-ARIA、CSS、JavaScript/TypeScript、ウェブサイトおよびウェブアプリケーション開発、インターフェースデザイン、アクセシビリティ、デザインシステム、DevOpsなどの話題が多いです。';
 
 const primaryItems: TeaserListItem[] = [
   // html, accessibility
@@ -48,7 +51,7 @@ const primaryItems: TeaserListItem[] = [
         return {
           title: entry.data.title,
           link: blogPath(entry),
-          meta: siteTitle,
+          meta: config.siteTitle,
         };
 
       case 'external':
@@ -129,8 +132,8 @@ const latestBlogItems: TeaserListItem[] = await Promise.all(
 );
 ---
 
-<Layout isHome description={siteDescription}>
-  <PageHeader isHome title={siteTitle} description={siteDescription} />
+<Layout isHome description={description}>
+  <PageHeader isHome title={config.siteTitle} description={description} />
 
   <main>
     <section>

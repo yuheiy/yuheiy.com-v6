@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { siteTitle } from '../consts';
+import config from '../config';
 ---
 
 <nav>
@@ -11,7 +11,7 @@ import { siteTitle } from '../consts';
         src={import('../assets/favicon.svg')}
         alt=""
       />
-      {siteTitle}
+      {config.siteTitle}
     </a>
   </p>
 </nav>

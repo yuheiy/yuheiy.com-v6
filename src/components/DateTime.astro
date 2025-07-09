@@ -1,5 +1,5 @@
 ---
-import { siteLang, siteRegion } from '../consts';
+import config from '../config';
 
 interface Props {
   date: Date;
@@ -7,7 +7,7 @@ interface Props {
 
 const { date } = Astro.props;
 
-const dateFormatter = new Intl.DateTimeFormat(`${siteLang}-${siteRegion}`, {
+const dateFormatter = new Intl.DateTimeFormat(`${config.lang}-${config.region}`, {
   dateStyle: 'long',
   timeZone: 'Asia/Tokyo',
 });

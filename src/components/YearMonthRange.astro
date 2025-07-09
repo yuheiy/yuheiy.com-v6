@@ -1,5 +1,5 @@
 ---
-import { siteLang, siteRegion } from '../consts';
+import config from '../config';
 
 interface YearMonth {
   year: number;
@@ -17,7 +17,7 @@ function convertYearMonthToDate({ year, month }: YearMonth) {
   return new Date(Date.UTC(year, month - 1));
 }
 
-const yearMonthFormatter = new Intl.DateTimeFormat(`${siteLang}-${siteRegion}`, {
+const yearMonthFormatter = new Intl.DateTimeFormat(`${config.lang}-${config.region}`, {
   year: 'numeric',
   month: 'long',
   timeZone: 'Asia/Tokyo',
