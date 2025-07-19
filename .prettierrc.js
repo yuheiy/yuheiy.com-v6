@@ -1,4 +1,7 @@
-/** @type {import('prettier').Config} */
+/**
+ * @see https://prettier.io/docs/configuration
+ * @type {import('prettier').Config}
+ */
 export default {
   plugins: [
     'prettier-plugin-astro',
@@ -8,9 +11,15 @@ export default {
   ],
   printWidth: 100,
   singleQuote: true,
+
+  // prettier-plugin-organize-imports
   organizeImportsSkipDestructiveCodeActions: true,
+
+  // prettier-plugin-tailwindcss
   tailwindStylesheet: './src/styles/global.css',
+
   overrides: [
+    // prettier-plugin-astro
     {
       files: '*.astro',
       options: {
