@@ -20,7 +20,12 @@ const remarkInjectDescription: Pluggable = () => {
 export default defineConfig({
   site: 'https://yuheiy.com',
   trailingSlash: 'never',
-  integrations: [mdx({ remarkPlugins: [remarkInjectDescription] }), sitemap()],
+  integrations: [
+    mdx({
+      remarkPlugins: [remarkInjectDescription],
+    }),
+    sitemap(),
+  ],
   compressHTML: false,
   vite: {
     plugins: [tailwindcss()],
