@@ -3,6 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 import { toString } from 'mdast-util-to-string';
+import rehypeMermaid from 'rehype-mermaid';
 import type { Pluggable } from 'unified';
 import { select, type Node } from 'unist-util-select';
 
@@ -40,6 +41,19 @@ export default defineConfig({
         dark: 'github-dark-default',
       },
     },
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: ['mermaid', 'math'],
+    },
+    rehypePlugins: [
+      [
+        rehypeMermaid,
+        {
+          dark: true,
+          strategy: 'img-svg',
+        },
+      ],
+    ],
   },
   experimental: {
     preserveScriptOrder: true,

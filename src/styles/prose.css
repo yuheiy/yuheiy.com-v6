@@ -128,6 +128,10 @@
     border: 1px solid var(--border-color-dynamic);
   }
 
+  img[id^='mermaid-'] {
+    border: 0;
+  }
+
   table {
     display: block;
     margin-block: calc(--spacing(8) + var(--half-leading));
