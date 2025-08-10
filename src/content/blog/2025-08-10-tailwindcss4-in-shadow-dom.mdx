@@ -16,7 +16,7 @@ import styleSheetURL from './index.css?url';
 
 function Button() {
   return (
-    <button className="transform rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 font-semibold text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:from-blue-600 hover:to-purple-700">
+    <button className="rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 font-semibold text-white shadow-lg transition duration-300 hover:scale-105 hover:from-blue-600 hover:to-purple-700">
       Save changes
     </button>
   );
@@ -144,10 +144,11 @@ Tailwind 4では、@propertyルールを使ってカスタムプロパティを�
 `postcss.config.ts`:
 
 ```ts
+import type { Plugin } from 'postcss';
 import type { Config } from 'postcss-load-config';
 
 // @propertyルールはShadow DOM内で動作しないため削除する
-const removeAtProperty = {
+const removeAtProperty: Plugin = {
   postcssPlugin: 'remove-at-property',
   AtRule: {
     property(atRule) {
@@ -158,7 +159,7 @@ const removeAtProperty = {
 
 // `@layer properties`の内側にあるフィーチャークエリを取り除いて、@propertyルールのフォールバックをすべてのブラウザで有効化する
 // https://github.com/tailwindlabs/tailwindcss/blob/v4.1.11/packages/tailwindcss/src/ast.ts#L697-L705
-const transformPropertiesLayer = {
+const transformPropertiesLayer: Plugin = {
   postcssPlugin: 'transform-properties-layer',
   AtRule: {
     layer(atRule) {
