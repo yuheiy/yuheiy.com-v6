@@ -1,3 +1,5 @@
+engineStrict: true
+
 onlyBuiltDependencies:
   - '@tailwindcss/oxide'
   - esbuild
@@ -5,3 +7,7 @@ onlyBuiltDependencies:
 
 patchedDependencies:
   astro: patches/astro.patch
+
+strictDepBuilds: true
+
+strictPeerDependencies: true
