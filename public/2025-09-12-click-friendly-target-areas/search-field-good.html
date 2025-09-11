@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>検索フィールドの例（良い例）</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        line-height: 1.5;
+        font-family: 'Inter', sans-serif;
+      }
+
+      body {
+        margin: 2em;
+        background-color: #fafafa;
+      }
+
+      .target {
+        position: relative;
+      }
+
+      .target::before {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(255, 45, 85, 0.3);
+        pointer-events: none;
+        content: '';
+      }
+
+      .search-field {
+        display: inline-block;
+        position: relative;
+      }
+
+      .search-field svg {
+        position: absolute;
+        margin: 4px 8px;
+        pointer-events: none;
+      }
+
+      .search-field input {
+        display: block;
+        border: 1px solid;
+        background-color: white;
+        padding: 8px 8px 8px 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <label class="search-field target">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m21 21-4.34-4.34" />
+        <circle cx="11" cy="11" r="8" />
+      </svg>
+      <input type="text" />
+    </label>
+  </body>
+</html>

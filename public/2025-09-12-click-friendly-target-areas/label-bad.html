@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>ラベルの例（悪い例）</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        line-height: 1.5;
+        font-family: 'Inter', sans-serif;
+      }
+
+      body {
+        margin: 2em;
+        background-color: #fafafa;
+      }
+
+      .target {
+        position: relative;
+      }
+
+      .target::before {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(255, 45, 85, 0.3);
+        pointer-events: none;
+        content: '';
+      }
+
+      .text-field {
+        display: inline-block;
+      }
+
+      .text-field label {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="text-field">
+      <label class="target" for="name">Name</label>
+      <input id="name" name="name" type="text" />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>縦にスタックしたナビゲーションのデモ（悪い例）</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        line-height: 1.5;
+        font-family: 'Inter', sans-serif;
+      }
+
+      body {
+        margin: 2em;
+        background-color: #fafafa;
+      }
+
+      .target {
+        position: relative;
+      }
+
+      .target::before {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(255, 45, 85, 0.3);
+        pointer-events: none;
+        content: '';
+      }
+
+      nav {
+        font-weight: 500;
+        font-size: 2em;
+      }
+
+      nav > * + * {
+        margin-top: 0.5em;
+      }
+
+      a {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="target" href="#">Home</a>
+      <a class="target" href="#">About</a>
+      <a class="target" href="#">Blog</a>
+      <a class="target" href="#">Contact</a>
+    </nav>
+  </body>
+</html>
