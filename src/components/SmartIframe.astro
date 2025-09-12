@@ -1,0 +1,59 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { chromium } from 'playwright';
+import invariant from 'tiny-invariant';
+
+interface Props extends HTMLAttributes<'iframe'> {
+  src: string;
+}
+
+// render from Astro Container API
+if (Astro.url.href === 'https://example.com/') {
+  return;
+}
+
+const { src, ...attrs } = Astro.props;
+
+invariant(typeof src === 'string', 'SmartIframe requires a src prop');
+
+const url = new URL(src, Astro.url).href;
+
+const browser = await chromium.launch();
+const page = await browser.newPage();
+
+await page.setViewportSize({ width: 756, height: 720 });
+await page.goto(url);
+await page.waitForLoadState('domcontentloaded');
+
+const [title, height] = await page.evaluate(() => [
+  // eslint-disable-next-line no-undef
+  document.title,
+  // eslint-disable-next-line no-undef
+  document.documentElement.offsetHeight,
+]);
+
+await browser.close();
+---
+
+<iframe
+  src={src}
+  title={title}
+  height={height}
+  style={{ width: '100%' }}
+  {...attrs}
+  data-smart-iframe></iframe>
+
+<script>
+  for (const iframe of document.querySelectorAll<HTMLIFrameElement>('[data-smart-iframe]')) {
+    iframe.addEventListener('load', () => {
+      const resizeObserver = new ResizeObserver(([entry]) => {
+        const { blockSize } = entry.contentBoxSize[0];
+        iframe.height = blockSize.toString();
+      });
+
+      if (iframe.contentDocument) {
+        resizeObserver.observe(iframe.contentDocument.documentElement);
+      }
+    });
+  }
+</script>

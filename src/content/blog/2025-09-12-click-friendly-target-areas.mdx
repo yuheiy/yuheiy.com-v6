@@ -3,6 +3,8 @@ title: 'クリックしやすいターゲットエリアを実装する #web_ui_
 pubDate: 2025-09-12T01:20:00.000+09:00
 ---
 
+import SmartIframe from '../../components/SmartIframe.astro';
+
 この記事は、「[Web UI 実装勉強会 #1](https://ui-devs.connpass.com/event/364448/)」での同タイトルの発表をもとにしたものです。
 
 ## ターゲットエリアを広げる工夫
@@ -12,23 +14,13 @@ pubDate: 2025-09-12T01:20:00.000+09:00
 しかし場合によっては、これではあまり使い勝手が良くならないことがあります。要素自体のサイズが小さいと押すことができる領域も狭くなるので、その分正確性が求められて押しづらくなります。
 
 <figure>
-  <iframe
-    title="ナビゲーションバーのデモ（悪い例）"
-    height="128"
-    src="/2025-09-12-click-friendly-target-areas/navbar-bad.html"
-    style="width: 100%"
-  ></iframe>
+  <SmartIframe src="/2025-09-12-click-friendly-target-areas/navbar-bad.html" />
 </figure>
 
 そういうときには、視覚的なサイズよりも余分にターゲットエリアを広げるテクニックを使います。`padding`プロパティを使って要素自体のサイズを広げつつ、レイアウトが崩れないように同じ大きさのネガティブマージンを適用します。
 
 <figure>
-  <iframe
-    title="ナビゲーションバーのデモ（良い例）"
-    height="128"
-    src="/2025-09-12-click-friendly-target-areas/navbar-good.html"
-    style="width: 100%"
-  ></iframe>
+  <SmartIframe src="/2025-09-12-click-friendly-target-areas/navbar-good.html" />
 </figure>
 
 ```css
@@ -41,23 +33,13 @@ a {
 一方、プレーンなテキストリンクと違って、背景色などがついたボタンなどの場合、`padding`プロパティのテクニックは少し使いづらいです。
 
 <figure>
-  <iframe
-    title="ボタンのデモ（悪い例）"
-    height="92"
-    src="/2025-09-12-click-friendly-target-areas/button-bad.html"
-    style="width: 100%"
-  ></iframe>
+  <SmartIframe src="/2025-09-12-click-friendly-target-areas/button-bad.html" />
 </figure>
 
 そのような場合は、擬似要素を使って相対的な位置指定をするのが簡単です。
 
 <figure>
-  <iframe
-    title="ボタンのデモ（良い例）"
-    height="92"
-    src="/2025-09-12-click-friendly-target-areas/button-good.html"
-    style="width: 100%"
-  ></iframe>
+  <SmartIframe src="/2025-09-12-click-friendly-target-areas/button-good.html" />
 </figure>
 
 ```css
@@ -124,12 +106,7 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 また別の例として、本来押せそうに見えるのに押せないようになっている実装をたまに見かけることがあります。わかりやすい例としては、チェックボックスです。チェックボタンを押せば反応するけど、そのラベルを押しても反応しないようになっていることがあります。
 
 <figure>
-  <iframe
-    title="チェックボックスのデモ（悪い例）"
-    height="88"
-    src="/2025-09-12-click-friendly-target-areas/checkbox-bad.html"
-    style="width: 100%"
-  ></iframe>
+  <SmartIframe src="/2025-09-12-click-friendly-target-areas/checkbox-bad.html" />
 </figure>
 
 ```html
@@ -139,12 +116,7 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 慣習的に考えても、チェックボックスはラベルまで含めて押せるようになっているべきです。実装としては、`label`要素で囲えばそれを実現できます。
 
 <figure>
-  <iframe
-    title="チェックボックスのデモ（良い例）"
-    height="88"
-    src="/2025-09-12-click-friendly-target-areas/checkbox-good.html"
-    style="width: 100%"
-  ></iframe>
+  <SmartIframe src="/2025-09-12-click-friendly-target-areas/checkbox-good.html" />
 </figure>
 
 ```html
@@ -154,12 +126,7 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 もう少し複雑な例として、アイコンと`input`要素の組み合わせからなる検索フィールドの実装についても考えてみます。こうしたUI要素は、マークアップとして見れば複数の要素を組み合わせた複合的なコンポーネントですが、ユーザーにとっては単一の入力フィールドです。このことを意識せずに、見た目だけを再現するつもりで実装すると、限られたエリアしか押すことができない次のような実装になってしまいます。
 
 <figure>
-  <iframe
-    title="検索フィールドの例（悪い例）"
-    height="99"
-    src="/2025-09-12-click-friendly-target-areas/search-field-bad.html"
-    style="width: 100%"
-  ></iframe>
+  <SmartIframe src="/2025-09-12-click-friendly-target-areas/search-field-bad.html" />
 </figure>
 
 ```html
@@ -187,12 +154,7 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 これは実装モデルに引っ張られてしまったがゆえの失敗です。理想的には、複数の要素の組み合わせであることをユーザーに意識させないような実装になっているべきです。つまり、普通の入力フィールドと同じようにどこを押してもフォーカスできるようになっているのが良いでしょう。
 
 <figure>
-  <iframe
-    title="検索フィールドの例（良い例）"
-    height="97"
-    src="/2025-09-12-click-friendly-target-areas/search-field-good.html"
-    style="width: 100%"
-  ></iframe>
+  <SmartIframe src="/2025-09-12-click-friendly-target-areas/search-field-good.html" />
 </figure>
 
 ```html
@@ -227,12 +189,7 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 リスト項目が縦にスタックしたようなナビゲーションがあるとします。そのなかのリンクに`display: block`を適用すると、コンテナサイズいっぱいまでターゲットエリアが拡張されます。
 
 <figure>
-  <iframe
-    title="縦にスタックしたナビゲーションのデモ（悪い例）"
-    height="304"
-    src="/2025-09-12-click-friendly-target-areas/menu-bad.html"
-    style="width: 100%"
-  ></iframe>
+  <SmartIframe src="/2025-09-12-click-friendly-target-areas/menu-bad.html" />
 </figure>
 
 ```css
@@ -246,12 +203,7 @@ a {
 この改善例としては、`width: fit-content`などを適用して必要以上に伸び広がらないように制御するのが良いでしょう。また`padding`のテクニックも併用して、周辺に少しだけ広げる工夫もするとなお良いです。
 
 <figure>
-  <iframe
-    title="縦にスタックしたナビゲーションのデモ（良い例）"
-    height="304"
-    src="/2025-09-12-click-friendly-target-areas/menu-good.html"
-    style="width: 100%"
-  ></iframe>
+  <SmartIframe src="/2025-09-12-click-friendly-target-areas/menu-good.html" />
 </figure>
 
 ```css
@@ -266,12 +218,7 @@ a {
 似たような例として、入力フィールドのラベルのターゲットエリアがあります。レイアウトの都合で`display: block`を適用することはよくありますが、その場合も同様の問題が起こります。
 
 <figure>
-  <iframe
-    title="ラベルのデモ（悪い例）"
-    height="112"
-    src="/2025-09-12-click-friendly-target-areas/label-bad.html"
-    style="width: 100%"
-  ></iframe>
+  <SmartIframe src="/2025-09-12-click-friendly-target-areas/label-bad.html" />
 </figure>
 
 ```css
@@ -283,12 +230,7 @@ label {
 こうしたときにも、`width: fit-content`などを適用して範囲を制御するのがよいと思います。
 
 <figure>
-  <iframe
-    title="ラベルのデモ（良い例）"
-    height="112"
-    src="/2025-09-12-click-friendly-target-areas/label-good.html"
-    style="width: 100%"
-  ></iframe>
+  <SmartIframe src="/2025-09-12-click-friendly-target-areas/label-good.html" />
 </figure>
 
 ```css
