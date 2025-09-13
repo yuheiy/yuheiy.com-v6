@@ -46,8 +46,8 @@ await browser.close();
 <script>
   for (const iframe of document.querySelectorAll<HTMLIFrameElement>('[data-smart-iframe]')) {
     iframe.addEventListener('load', () => {
-      const resizeObserver = new ResizeObserver(([entry]) => {
-        const { blockSize } = entry.contentBoxSize[0];
+      const resizeObserver = new ResizeObserver((entries) => {
+        const { blockSize } = entries[0].contentBoxSize[0];
         iframe.height = blockSize.toString();
       });
 
