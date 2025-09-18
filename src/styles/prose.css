@@ -49,7 +49,7 @@
   }
 
   hr {
-    margin-block: calc(--spacing(8) + var(--half-leading));
+    margin-block: calc(--spacing(12) + var(--half-leading));
     border-block-start: 4px solid var(--border-color-dynamic);
     inline-size: --spacing(32);
   }
