@@ -5,7 +5,7 @@ pubDate: 2022-08-11T20:25:00.000+09:00
 
 import { Tweet } from 'astro-embed';
 import { Image } from 'astro:assets';
-import CodePen from '../../components/CodePen.astro';
+import SmartIframe from '../../components/SmartIframe.astro';
 
 テキストの行の末尾にアイコンを付随させるというレイアウトがある。
 
@@ -70,7 +70,9 @@ import CodePen from '../../components/CodePen.astro';
 
 まずテキスト要素の`padding-right`によって、アイコンとその間の余白を加えた分の空間が末尾に確保されるようになる。そしてその空間を埋めるように、アイコン要素の位置を`margin-left`のネガティブ値で移動させる。それによって、アイコンが必ずテキストの末尾に隣り合って配置されるようになる。
 
-<CodePen user="yuheiy" slug="gOedOyN" height={300} />
+<figure>
+  <SmartIframe src="/2022-08-11-text-with-accompanying-icon/demo.html" />
+</figure>
 
 注意点としては、テキスト要素とアイコン要素の間にソースコード上でホワイトスペースが入らないようにすることだ。ホワイトスペースの分の幅ができると、アイコンのために確保した空間をはみ出してしまうため、改行方法が正しく制御されなくなる。
 

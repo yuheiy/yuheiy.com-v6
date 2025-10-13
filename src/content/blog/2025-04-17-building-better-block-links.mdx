@@ -3,7 +3,7 @@ title: 'ブロックリンク（もしくはカードUI）のアクセシビリ�
 pubDate: 2025-04-17T11:05:00.000+09:00
 ---
 
-import CodePen from '../../components/CodePen.astro';
+import SmartIframe from '../../components/SmartIframe.astro';
 
 複数のテキスト要素や画像がグループ化されて、そのグループ全体が一つのリンクになっているというUI表現がある。ブロックリンクやカードUIなどと呼ばれるものだ。たとえば次のような実装になる。
 
@@ -121,7 +121,9 @@ for (const card of document.querySelectorAll('.card')) {
 }
 ```
 
-<CodePen user="yuheiy" slug="raaBodB" height={350} />
+<figure>
+  <SmartIframe src="/2025-04-17-building-better-block-links/demo.html" />
+</figure>
 
 おそらくこれが、僕が考え得るかぎりで最もマシな実装だと思う。
 

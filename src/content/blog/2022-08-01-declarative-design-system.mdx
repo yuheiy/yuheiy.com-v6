@@ -3,7 +3,7 @@ title: '宣言的デザインシステム（翻訳）'
 pubDate: 2022-08-01T09:00:00.001+09:00
 ---
 
-import CodePen from '../../components/CodePen.astro';
+import SmartIframe from '../../components/SmartIframe.astro';
 
 この記事は、[Jeremy Keith](https://adactio.com/)氏による「[Declarative design systems](https://adactio.com/journal/19131)」の日本語訳です。掲載に当たって著者の許諾を得ています。
 
@@ -57,7 +57,9 @@ import CodePen from '../../components/CodePen.astro';
 
 カスタムプロパティとしてエンコードされた色相、彩度、明度を使用して、異なる色のボタンを宣言するCSSをいくつか紹介しました。これが、[さまざまなボタンの例を含むCodePen](https://codepen.io/adactio/pen/xxwovRZ)です。
 
-<CodePen user="adactio" slug="xxwovRZ" height={300} />
+<figure>
+  <SmartIframe src="/2022-08-01-declarative-design-system/button-colours.html" />
+</figure>
 
 {/* If these buttons were in an imperative design system, then the output would be the important part. The design system would supply the code needed to make those buttons exactly. If you need a different button, it would have to be added to the design system as a variation. */}
 

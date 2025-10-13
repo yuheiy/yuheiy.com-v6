@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>ハーフレディングの問題</title>
+
+    <style>
+      :root {
+        --space-default: 1rlh;
+      }
+
+      html {
+        line-height: 1.5;
+      }
+
+      body {
+        margin: 0 0 var(--space-default);
+      }
+
+      p {
+        --half-leading: calc((1lh - 1em) / 2);
+        --bg: rgb(255 0 0 / 25%);
+        margin-block: var(--space-default) 0;
+        background: linear-gradient(
+          to bottom,
+          var(--bg) var(--half-leading),
+          transparent var(--half-leading) calc(100% - var(--half-leading)),
+          var(--bg) calc(100% - var(--half-leading))
+        );
+      }
+
+      figure {
+        margin: var(--space-default) 0;
+      }
+
+      img {
+        display: inline-block;
+        vertical-align: bottom;
+        max-inline-size: 100%;
+        block-size: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>
+      垂直方向に複数の段落と画像が並ぶとき、間隔を均一にしたければ、それぞれ同じ大きさの<code>margin</code>プロパティを適用するだろう。
+    </p>
+    <p>
+      しかし実際には、このようにすると段落と画像の間隔がやや詰まって見える。段落同士の間隔に比べて、段落と画像の間隔が少し狭く感じる。
+    </p>
+    <p>
+      これはハーフレディングが原因の現象だ。<code>line-height</code>プロパティの仕様上、テキストの行の上端と下端には余白が設けられる。たとえば<code>font-size</code>プロパティが<code>16px</code>で、<code>line-height</code>プロパティが<code>24px</code>であれば、上下に<code>4px</code>の余白ができる。
+    </p>
+    <figure>
+      <img src="https://picsum.photos/1600/900" width="1600" height="900" alt="" />
+    </figure>
+    <p>
+      段落が連続する場合、<code>margin</code>プロパティの値に加えてこのハーフレディングを加えた分の大きさの余白ができる。前の段落の下端のハーフレディングと、後の段落の上端のハーフレディングが組み合わされるため、ハーフレディングの2倍分の余白が含まれることになる。<code>margin</code>プロパティが<code>24px</code>で、ハーフレディングが<code>4px</code>であれば、大きさは合計で<code>32px</code>になる。
+    </p>
+  </body>
+</html>

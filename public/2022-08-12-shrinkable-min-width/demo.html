@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>buttons with min-width</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        font-size: 200%;
+      }
+
+      body {
+        margin: 1em;
+      }
+
+      button {
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1em;
+        border: 0;
+        border-radius: 0.25em;
+        background-color: dodgerblue;
+        padding: 0.5em 1em;
+        min-width: min(10em, 100%);
+        color: white;
+        font: inherit;
+        text-align: left;
+      }
+
+      button svg {
+        flex: none;
+        fill: currentcolor;
+        margin-right: -0.25em;
+        margin-left: -0.125em;
+        width: 1em;
+        height: 1em;
+      }
+
+      .stack > * + * {
+        margin-top: 1em;
+      }
+
+      .box {
+        border: 0.125em solid;
+        background-color: silver;
+        padding: 1em;
+        max-width: 10em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <svg display="none">
+      <symbol id="icon" xmlns="http://www.w3.org/2000/svg" height="20" width="20">
+        <path d="m6 18-1.417-1.417L11.167 10 4.583 3.417 6 2l8 8Z" />
+      </symbol>
+    </svg>
+
+    <div class="stack">
+      <div>
+        <button type="button">
+          Hello
+          <svg viewBox="0 0 20 20"><use href="#icon" /></svg>
+        </button>
+      </div>
+
+      <div>
+        <button type="button">
+          Lorem ipsum dolor sit consectetur
+          <svg viewBox="0 0 20 20"><use href="#icon" /></svg>
+        </button>
+      </div>
+
+      <div class="box">
+        <button type="button">
+          Hello
+          <svg viewBox="0 0 20 20"><use href="#icon" /></svg>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

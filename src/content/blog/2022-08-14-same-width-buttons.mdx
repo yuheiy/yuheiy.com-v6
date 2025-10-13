@@ -3,7 +3,7 @@ title: '横並びになったボタンを同じ幅で配置するCSS'
 pubDate: 2022-08-14T08:20:00.000+09:00
 ---
 
-import CodePen from '../../components/CodePen.astro';
+import SmartIframe from '../../components/SmartIframe.astro';
 
 複数のボタンを横並びにしつつ、それぞれのボタンが同じ幅になるように合わせたいということがある。ボタンに同じ`width`を指定すれば合わせられるが、するとラベルの長さに応じた幅にできなくなる。
 
@@ -26,7 +26,9 @@ import CodePen from '../../components/CodePen.astro';
 }
 ```
 
-<CodePen user="yuheiy" slug="eYMPZLo" height={270} />
+<figure>
+  <SmartIframe src="/2022-08-14-same-width-buttons/vertical.html" />
+</figure>
 
 この例では、ボタンの幅は親要素いっぱいになりつつ、親要素の幅は最も幅の広いボタンにフィットするようになる。
 
@@ -42,6 +44,8 @@ import CodePen from '../../components/CodePen.astro';
 }
 ```
 
-<CodePen user="yuheiy" slug="ExEdKrx" height={160} />
+<figure>
+  <SmartIframe src="/2022-08-14-same-width-buttons/horizontal.html" />
+</figure>
 
 `grid-auto-columns`と`grid-auto-flow`を指定することで、どのように[暗黙的なグリッド](https://developer.mozilla.org/ja/docs/Learn/CSS/CSS_layout/Grids#the_implicit_and_explicit_grid)が生成されるかを定義できる。例のような場合、明示的なグリッドを使用すると、要素内に含めるボタンの個数に応じてグリッドの設定を変更する必要があるが、暗黙的なグリッドを使用すれば、ボタンの個数にかかわらず自ずと適切に処理されるようになる。

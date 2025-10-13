@@ -3,7 +3,7 @@ title: '複数の要素を重ね合わせつつ、その中で最も大きい要
 pubDate: 2022-08-25T23:00:00.000+09:00
 ---
 
-import CodePen from '../../components/CodePen.astro';
+import SmartIframe from '../../components/SmartIframe.astro';
 
 複数の要素を重ね合わせるためには、従来、`position: absolute`を使うことが多かった。親要素に`position: relative`を、その子要素に`position: absolute`を設定するというもの。
 
@@ -47,8 +47,12 @@ import CodePen from '../../components/CodePen.astro';
 
 これを使うと、たとえば、ボタンのラベルの長さが変わってもボタン自体の幅は変化しないようにすることができる。
 
-<CodePen user="yuheiy" slug="MWVdeBE" height={150} />
+<figure>
+  <SmartIframe src="/2022-08-25-sizing-based-on-multiple-overlapping-elements/button.html" />
+</figure>
 
 あるいは、複数の画像がクロスフェードするギャラリーのようなUIを作成するときに、画像自体に基づいてサイズを設定することもできる。
 
-<CodePen user="yuheiy" slug="zYWQBeL" height={610} />
+<figure>
+  <SmartIframe src="/2022-08-25-sizing-based-on-multiple-overlapping-elements/gallery.html" />
+</figure>

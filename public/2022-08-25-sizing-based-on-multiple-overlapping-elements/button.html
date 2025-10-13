@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Button</title>
+
+    <style>
+      button {
+        display: inline-grid;
+        border: 0;
+        border-radius: 0.25em;
+        background-color: dodgerblue;
+        padding: 0.5em 1em;
+        color: white;
+      }
+
+      button > * {
+        grid-row: 1 / -1;
+        grid-column: 1 / -1;
+      }
+
+      button[aria-pressed='true'] > :first-child,
+      button[aria-pressed='false'] > :last-child {
+        visibility: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button
+      type="button"
+      aria-pressed="false"
+      onclick="this.ariaPressed = !(this.ariaPressed === 'true')"
+    >
+      <span>Play</span>
+      <span>Pause</span>
+    </button>
+  </body>
+</html>
