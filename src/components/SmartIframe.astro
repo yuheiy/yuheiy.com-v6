@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { chromium } from 'playwright';
+import puppeteer from 'puppeteer';
 import invariant from 'tiny-invariant';
 
 interface Props extends HTMLAttributes<'iframe'> {
@@ -18,19 +18,24 @@ invariant(typeof src === 'string', 'SmartIframe requires a src prop');
 
 const url = new URL(src, Astro.url).href;
 
-const browser = await chromium.launch();
+const browser = await puppeteer.launch({
+  headless: 'shell',
+  args: ['--no-sandbox', '--disable-setuid-sandbox'],
+});
 const page = await browser.newPage();
 
-await page.setViewportSize({ width: 756, height: 720 });
-await page.goto(url);
-await page.waitForLoadState('load');
+await page.setViewport({ width: 756, height: 720 });
+await page.goto(url, { waitUntil: 'load' });
 
-const [title, height] = await page.evaluate(() => [
-  // eslint-disable-next-line no-undef
-  document.title,
-  // eslint-disable-next-line no-undef
-  document.documentElement.offsetHeight,
-]);
+const [title, height] = await page.evaluate(
+  () =>
+    [
+      // eslint-disable-next-line no-undef
+      document.title,
+      // eslint-disable-next-line no-undef
+      document.documentElement.offsetHeight,
+    ] as const,
+);
 
 await browser.close();
 ---

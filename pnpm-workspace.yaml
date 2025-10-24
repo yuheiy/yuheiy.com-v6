@@ -5,6 +5,7 @@ minimumReleaseAge: 1440
 onlyBuiltDependencies:
   - '@tailwindcss/oxide'
   - esbuild
+  - puppeteer
   - sharp
 
 patchedDependencies:
