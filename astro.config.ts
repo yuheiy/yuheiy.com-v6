@@ -40,10 +40,6 @@ export default defineConfig({
         dark: 'github-dark-default',
       },
     },
-    syntaxHighlight: {
-      type: 'shiki',
-      excludeLangs: ['mermaid', 'math'],
-    },
   },
   experimental: {
     preserveScriptOrder: true,
