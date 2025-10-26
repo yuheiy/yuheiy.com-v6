@@ -43,7 +43,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: config.siteTitle,
     description:
-      'ウェブデザインやフロントエンドにまつわる雑記と、外部サイトに寄稿した記事などの紹介。',
+      'ウェブデザインやフロントエンドに関する雑記と、外部サイトに寄稿した記事などの紹介。',
     site: context.site,
     items,
     trailingSlash: false,
