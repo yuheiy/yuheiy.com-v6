@@ -84,11 +84,10 @@
     padding-inline: 1rem;
   }
 
-  blockquote:not(.twitter-tweet) {
+  blockquote:not([class]) {
     position: relative;
+    margin-inline-start: 2rem;
     margin-block-start: --spacing(8);
-    border-inline-start: 4px solid var(--border-color-dynamic);
-    padding-inline-start: calc(2rem - 4px);
   }
 
   :is(ol, ul) {
@@ -118,6 +117,10 @@
     margin-block-start: --spacing(3);
     hanging-punctuation: allow-end;
     font-size: var(--text-sm);
+  }
+
+  blockquote + figcaption {
+    margin-block-start: --spacing(8);
   }
 
   pre > code::before,
