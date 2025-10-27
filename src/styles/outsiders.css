@@ -52,3 +52,8 @@ astro-embed-tweet .twitter-tweet:not(.twitter-tweet-rendered) p {
   color: var(--color-gray-800);
   font-size: var(--text-base);
 }
+
+/* <YouTube> component in Astro Embed */
+:root lite-youtube {
+  max-width: none;
+}

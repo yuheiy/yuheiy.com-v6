@@ -132,16 +132,19 @@
     border: 1px solid var(--border-color-dynamic);
   }
 
-  img[id^='mermaid-'] {
-    border: 0;
-  }
-
   table {
     display: block;
     margin-block: calc(--spacing(8) + var(--half-leading));
     border-spacing: 0;
     max-inline-size: 100%;
     overflow-x: auto;
+  }
+
+  caption {
+    margin-block-end: --spacing(3);
+    /* caption-side: bottom; */
+    font-size: var(--text-sm);
+    /* text-align: start; */
   }
 
   :is(td, th) {
@@ -161,23 +164,12 @@
     margin-block-start: --spacing(8);
   }
 
-  :is(astro-embed-tweet, baseline-status, lite-youtube) {
+  :is(astro-embed-tweet, baseline-status) {
     margin-block: calc(--spacing(8) + var(--half-leading));
   }
 
-  :is(
-      hr,
-      pre,
-      figure,
-      table,
-      astro-embed-tweet,
-      baseline-status,
-      baseline-status + script,
-      lite-youtube,
-      lite-youtube + script,
-
-    )
-    + :is(hr, pre, figure, table, astro-embed-tweet, baseline-status, lite-youtube) {
+  :is(hr, pre, figure, table, astro-embed-tweet, baseline-status, baseline-status + script, )
+    + :is(hr, pre, figure, table, astro-embed-tweet, baseline-status) {
     margin-block-start: calc(--spacing(8) + var(--half-leading) * 2);
   }
 }

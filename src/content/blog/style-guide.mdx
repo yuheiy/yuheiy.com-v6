@@ -1,0 +1,123 @@
+---
+title: 'スタイルガイド'
+pubDate: 2035-10-13T05:50:00.000+09:00
+---
+
+import { YouTube } from 'astro-embed';
+import { Tweet } from 'astro-embed';
+import SmartIframe from '../../components/SmartIframe.astro';
+
+## Code block
+
+<figure>
+  ```js
+  <iframe
+    src="/2025-09-12-click-friendly-target-areas/navbar-bad.html"
+    title="ナビゲーションバーのデモ（悪い例）"
+    height="128"
+    style="width: 100%"
+  ></iframe>
+  ```
+
+  <figcaption>
+    &mdash; <cite>[iframe要素の中身のコンテンツに応じて属性を自動設定できるAstroコンポーネントを作る](https://utopia.fyi/blog/designing-with-fluid-type-scales)</cite>
+  </figcaption>
+</figure>
+
+## Blockquote
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum aspernatur enim, fugiat cupiditate itaque quaerat necessitatibus facilis laborum, perspiciatis tempore quo accusamus voluptas, non deserunt deleniti eveniet nisi cumque soluta.
+
+<figure>
+> 著者は、名前付けできない暗黙のWAI-ARIAロールをもつ要素で、`aria-label`または`aria-labelledby`を指定*してはならない*。著者由来の名前付けを禁止する暗黙のWAI-ARIAロールは、[<bdi>4. </bdi> HTMLでARIA属性を使用するための文書適合性要件](https://momdo.github.io/html-aria/#docconformance)で特定されたHTML要素で特定される。
+
+<figcaption>
+  &mdash; <cite>[ARIA in HTML 日本語訳 § 4.1 要素に名前を付けるためのARIA属性の使用に関する要件](https://momdo.github.io/html-aria/#docconformance-naming)</cite>
+</figcaption>
+</figure>
+
+Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit voluptates aliquid fugiat adipisci aspernatur fugit perspiciatis ducimus error, veritatis animi architecto doloribus vitae deserunt iusto temporibus amet officia veniam id.
+
+<figure>
+> 著者は、名前付けできない暗黙のWAI-ARIAロールをもつ要素で、`aria-label`または`aria-labelledby`を指定*してはならない*。著者由来の名前付けを禁止する暗黙のWAI-ARIAロールは、[<bdi>4. </bdi> HTMLでARIA属性を使用するための文書適合性要件](https://momdo.github.io/html-aria/#docconformance)で特定されたHTML要素で特定される。
+
+<figcaption>
+  基本的にブラウザや支援技術はこれに則って実装される。一部の実装ではこの限りではないが、あくまでそれは例外であり、サポート状況の幅広さや前方互換性の観点で堅牢さに欠ける。
+</figcaption>
+</figure>
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis fuga voluptatum adipisci vitae eveniet, saepe maiores quidem fugit voluptas commodi qui esse natus porro asperiores ipsam voluptates amet, iusto quas.
+
+<figure>
+> 著者は、名前付けできない暗黙のWAI-ARIAロールをもつ要素で、`aria-label`または`aria-labelledby`を指定*してはならない*。著者由来の名前付けを禁止する暗黙のWAI-ARIAロールは、[<bdi>4. </bdi> HTMLでARIA属性を使用するための文書適合性要件](https://momdo.github.io/html-aria/#docconformance)で特定されたHTML要素で特定される。
+>
+> 著者は、名前付けできない暗黙のWAI-ARIAロールをもつ要素で、`aria-label`または`aria-labelledby`を指定*してはならない*。著者由来の名前付けを禁止する暗黙のWAI-ARIAロールは、[<bdi>4. </bdi> HTMLでARIA属性を使用するための文書適合性要件](https://momdo.github.io/html-aria/#docconformance)で特定されたHTML要素で特定される。
+>
+> 著者は、名前付けできない暗黙のWAI-ARIAロールをもつ要素で、`aria-label`または`aria-labelledby`を指定*してはならない*。著者由来の名前付けを禁止する暗黙のWAI-ARIAロールは、[<bdi>4. </bdi> HTMLでARIA属性を使用するための文書適合性要件](https://momdo.github.io/html-aria/#docconformance)で特定されたHTML要素で特定される。
+
+<figcaption>
+  &mdash; <cite>[ARIA in HTML 日本語訳 § 4.1 要素に名前を付けるためのARIA属性の使用に関する要件](https://momdo.github.io/html-aria/#docconformance-naming)</cite>
+</figcaption>
+</figure>
+
+## Image
+
+<figure>
+  ![H1、H2、H3、H4、Pという要素の値が、320pxから1500pxというビューポート幅において流動的に増大する](./assets/2022-01-24-retrospective-on-utopia/fluid-type-scale-visualisation.png)
+
+  <figcaption>
+    &mdash; <cite>[Designing with fluid type scales | Utopia](https://utopia.fyi/blog/designing-with-fluid-type-scales)</cite>
+  </figcaption>
+</figure>
+
+## Embed
+
+<figure>
+  <SmartIframe src="/2025-09-12-click-friendly-target-areas/navbar-bad.html" />
+
+  <figcaption>
+    &mdash; <cite>[クリックしやすいターゲットエリアを実装する #web_ui_devs](https://utopia.fyi/blog/designing-with-fluid-type-scales)</cite>
+  </figcaption>
+</figure>
+
+<figure>
+  <YouTube id="https://youtu.be/DxoANgf4Oto" params="start=449" />
+
+  <figcaption>
+    &mdash; <cite>[Re: #deisui_html_radio #52](https://utopia.fyi/blog/designing-with-fluid-type-scales)</cite>
+  </figcaption>
+</figure>
+
+<figure>
+  <Tweet id="https://x.com/jjenzz/status/1423766700885954562" />
+</figure>
+
+## Table
+
+<table>
+  <caption>He-Man and Skeletor facts</caption>
+  <tr>
+    <td></td>
+    <th scope="col" class="heman">
+      He-Man
+    </th>
+    <th scope="col" class="skeletor">
+      Skeletor
+    </th>
+  </tr>
+  <tr>
+    <th scope="row">Role</th>
+    <td>Hero</td>
+    <td>Villain</td>
+  </tr>
+  <tr>
+    <th scope="row">Weapon</th>
+    <td>Power Sword</td>
+    <td>Havoc Staff</td>
+  </tr>
+  <tr>
+    <th scope="row">Dark secret</th>
+    <td>Expert florist</td>
+    <td>Cries at romcoms</td>
+  </tr>
+</table>
