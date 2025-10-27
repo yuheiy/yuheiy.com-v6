@@ -1,0 +1,101 @@
+---
+slug: 2022-08-01-declarative-design
+title: '宣言的デザイン（翻訳）'
+pubDate: 2022-08-01T09:00:00.000+09:00
+---
+
+この記事は、[Jeremy Keith](https://adactio.com/)氏による「[Declarative design](https://adactio.com/journal/18982)」の日本語訳です。掲載に当たって著者の許諾を得ています。
+
+---
+
+{/* I feel like in the past few years there’s been a number of web design approaches that share a similar mindset. [Intrinsic web design](https://www.youtube.com/watch?v=AMPKmh98XLY) by Jen; [Every Layout](https://every-layout.dev/) by Andy and Heydon; [Utopia](https://utopia.fyi/) by Trys and James. */}
+
+ここ数年で、同じようなマインドセットを共有するウェブデザインのアプローチがいくつか現れたように思います。Jenの[Intrinsic web design](https://www.youtube.com/watch?v=AMPKmh98XLY)、AndyとHeydonの[Every Layout](https://every-layout.dev/)、TrysとJamesの[Utopia](https://utopia.fyi/)です。
+
+{/* To some extent, their strengths lie in technological advances in CSS: flexbox, grid, calc, and so on. But more importantly, they share an approach. They all focus on creating the right _inputs_ rather than trying to control every possible _output_. Leave the final calculations for those outputs to the browser—that’s what computers are good at. */}
+
+FlexboxやGrid、calcのような、CSSという技術独自の機能を活用していることも特色ではあります。しかしそれ以上に重要なのは、アプローチを共有していることです。これらはすべて、適切な「入力」を生み出すことに焦点を当てています。ありとあらゆる「出力」を制御しようとするのではなく。出力のための最終的な計算はブラウザに任せてしまう。それがコンピュータの得意とするところです。
+
+{/* As [Andy](https://set.studio/) puts it: */}
+
+[Andy](https://set.studio/)はこう言います。
+
+{/* > Be the browser’s mentor, not its micromanager. */}
+
+> ブラウザのマイクロマネジャーではなく、メンターになること。
+
+{/* Reflecting on Utopia’s approach, [Jim Nielsen wrote](https://blog.jim-nielsen.com/2022/exerting-control-with-media-queries/): */}
+
+Jim NielsenはUtopiaのアプローチを振り返って、次のように[書いています](https://blog.jim-nielsen.com/2022/exerting-control-with-media-queries/)。
+
+{/* > We say CSS is “declarative”, but the more and more I write breakpoints to accommodate all the different ways a design can change across the viewport spectrum, the more I feel like I’m writing imperative code. **At what quantity does a set of declarative rules begin to look like imperative instructions?** */}
+
+{/* > In contrast, one of the principles of Utopia is to be declarative and “describe what is to be done rather than command how to do it”. This approach declares a set of rules such that you could pick any viewport width and, using a formula, derive what the type size and spacing would be at that size. */}
+
+> CSSは「宣言的」だとは言いますが、ビューポートの範囲全体に渡って、デザインをさまざまな方法で変更するためにブレイクポイントを追加すればするほど、命令的なコードを書いているように感じます。**一連の宣言的なルールが命令的な操作に見えてくるのはいつからでしょうか？**
+>
+> これに対してUtopiaの原則の一つは、宣言的であること、つまり「どのようにするかを指示するのではなく、なにをするかを記述すること」です。Utopiaのアプローチでは、任意のビューポート幅における文字サイズとスペーシングを数式で導き出す、というルールを宣言しています。
+
+{/* Declarative! Maybe that’s the word I’ve been looking for to describe the commonalities between Utopia, Every Layout, and intrinsic web design. */}
+
+宣言的！　これこそ、UtopiaとEvery Layout、Intrinsic web designが共有するものを表現できる言葉なのかもしれません。
+
+{/* So if declarative design is a thing, does that also mean imperative design is also a thing? And what might the tools and technologies for imperative design look like? */}
+
+宣言的デザインがあるのなら、命令的デザインもあるのでしょうか？　それなら、命令的デザインのためのツールや技術はどのようなものでしょうか？
+
+{/* I think that [Tailwind](https://tailwindcss.com/) might be a good example of an imperative design tool. It’s _only_ about the specific outputs. Systematic thinking is actively discouraged; instead you say exactly what you want the final pixels on the screen to be. */}
+
+私が思うに、[Tailwind](https://tailwindcss.com/)は命令的デザインのうまい例です。これは特定の出力をするため*だけ*のものです。システム的な思考は積極的に排除され、代わりに、画面に最終的に表示されるピクセルをどうしたいかを精緻に示すことになります。
+
+{/* I’m not saying that declarative tools—like Utopia—are right and that imperative tools—like Tailwind—are wrong. As always, it depends. In this case, it depends on the mindset you have. */}
+
+Utopiaのような宣言型ツールが正しく、Tailwindのような命令型ツールが間違いだと言っているわけではありません。言うまでもなく、場合によります。それはあなたの考え方次第です。
+
+{/* If you agree with this statement, you should probably use an imperative design tool: */}
+
+もしこの意見に賛同するなら、おそらく命令型デザインツールを使うべきでしょう——
+
+{/* > CSS is broken and I want my tools to work around the way CSS has been designed. */}
+
+> CSSは破綻しているので、CSSの性質をツールによって回避したい。
+
+{/* But if you agree with this statement, you should probably use a declarative design tool: */}
+
+逆にこの意見に賛同するなら、おそらく宣言型デザインツールを使うべきでしょう——
+
+{/* > CSS is awesome and I want my tools to amplify the way that CSS had been designed. */}
+
+> CSSは素晴らしいので、CSSの性質をツールによって増幅したい。
+
+{/* If you agree with the first statement but you then try using a declarative tool like Utopia or Every Layout, you will probably have a bad time. You’ll probably hate it. You may declare the tool to be “bad”. */}
+
+もしあなたが最初の意見に賛同するなら、UtopiaやEvery Layoutのような宣言型ツールを使おうとしたとき、おそらく嫌な思いをするでしょう。たぶん嫌いになるでしょう。そのツールは「悪いもの」だと断定してしまうかもしれません。
+
+{/* Likewise if you agree with the second statement but you then try using an imperative tool like Tailwind, you will probably have a bad time. You’ll probably hate it. You may declare the tool to be “bad”. */}
+
+同様に、もしあなたが二つ目の意見に賛同するなら、Tailwindのような命令型ツールを使おうとしたとき、おそらく嫌な思いをするでしょう。たぶん嫌いになるでしょう。そのツールは「悪いもの」だと断定してしまうかもしれません。
+
+{/* It all depends on whether the philosophy behind the tool matches your own philosophy. If those philosophies match up, then using the tool will be productive and that tool will act as an amplifier—a bicycle for the mind. But if the philosophy of the tool _doesn’t_ match your own philosophy, then you will be fighting the tool at every step—it will slow you down. */}
+
+そのツールの背後にある哲学が、自分の哲学と一致するかどうかにかかっているのです。哲学が一致すれば、そのツールは生産的になり、知性の自転車として機能するでしょう。しかし、ツールの哲学が自分の哲学と一致*しなければ*、いちいちツールとけんかすることになり、足手まといになるでしょう。
+
+{/* Knowing that this spectrum exists between declarative tools and imperative tools can help you when you’re [evaluating technology](https://adactio.com/articles/12839). You can assess whether a web design tool is being marketed on the premise that CSS is broken or on the premise that CSS is awesome. */}
+
+宣言型ツールと命令型ツールの間にこのようなスペクトルが存在することを知っておくと、[技術を評価する](https://adactio.com/articles/12839)ときに役立ちます。あるウェブデザインツールが売り込まれているときに、それはCSSが破綻していることを前提としているのか、それともCSSは素晴らしいということを前提としているのか、評価することができるのです。
+
+{/* I wonder whether your path into web design and development might also factor into which end of the spectrum you’d identify with. Like, if your background is in declarative languages like HTML and CSS, maybe intrisic web design really resonates. But if your background is in imperative languages like JavaScript, perhaps Tailwind makes more sense to you. */}
+
+ウェブデザインや開発についての方針も、このスペクトルのどちらに共感するかに関わってくるのではないでしょうか。たとえば、HTMLやCSSのような宣言型言語を学んできた人なら、Intrisic web designが響くかもしれません。しかし、JavaScriptのような命令型言語が得意な人には、Tailwindの方がより理にかなっているかもしれません。
+
+{/* Again, there’s no right or wrong here. This is about matching the right tool to the right mindset. */}
+
+ここでも、どちらが正しいということはありません。考え方とツールとの適正についての話です。
+
+{/* Personally, the declarative design approach fits me like a glove. It feels like it’s in the tradition of John’s [A Dao Of Web Design](https://alistapart.com/article/dao/) or Ethan’s [Responsive Web Design](https://alistapart.com/article/responsive-web-design/)—ways of working with [the grain of the web](https://frankchimero.com/blog/2015/the-webs-grain/). */}
+
+個人的には、宣言的デザインのアプローチは、グローブのように私にフィットしています。Johnの[A Dao Of Web Design](https://alistapart.com/article/dao/)やEthanの[Responsive Web Design](https://alistapart.com/article/responsive-web-design/)のような、[ウェブの木目](https://frankchimero.com/blog/2015/the-webs-grain/)に沿って作業するという伝統的な流儀を受け継いでいるような気がするのです。
+
+---
+
+「[宣言的デザインシステム（翻訳）](/2022-08-01-declarative-design-system)」に続きます。

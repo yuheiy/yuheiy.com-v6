@@ -1,0 +1,34 @@
+---
+slug: 2024-03-06-object-from-entries
+title: 'Object.fromEntriesを活用してArray#reduceを代替する'
+pubDate: 2024-03-06T06:05:00.000+09:00
+---
+
+JavaScriptにおいて、ある配列をもとにして別のオブジェクトを作成する場合、[`Array#reduce`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)を使用することが多い。
+
+```javascript
+const input = ['foo', 'bar', 'baz'];
+
+const result = input.reduce((accumulator, currentValue) => {
+  accumulator[currentValue] = capitalize(currentValue);
+  return accumulator;
+}, {});
+
+assert.deepStrictEqual(result, { foo: 'Foo', bar: 'Bar', baz: 'Baz' });
+```
+
+しかし例のように、単にキーと値の組み合わせにマッピングするだけなら、あえて`Array#reduce`を使うまでもない。代わりに[`Object.fromEntries`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries)を使えば、記述するコードをもっとシンプルにできる。
+
+```javascript
+const input = ['foo', 'bar', 'baz'];
+
+const result = Object.fromEntries(input.map((element) => [element, capitalize(element)]));
+
+assert.deepStrictEqual(result, { foo: 'Foo', bar: 'Bar', baz: 'Baz' });
+```
+
+まず配列を「キーと値のペアからなる配列」（`[key, value][]`）に変換してから、それを`Object.fromEntries`に渡すことでオブジェクト化できる。
+
+`Object.fromEntries`は[`Object.entries`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/entries)の対になるメソッドである。`Object.entries`は、オブジェクトを「キーと値のペアからなる配列」に変換するものであるのに対して、`Object.fromEntries`はその逆に、「キーと値のペアからなる配列」をオブジェクトに変換する。
+
+ついでに、TypeScriptでは`Array#reduce`を使うと型の取り扱いがやや煩雑になるが、`Object.fromEntries`を使うとそのような問題が起こらない。

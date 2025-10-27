@@ -1,0 +1,78 @@
+---
+slug: 2023-12-31-apply-default-focus-ring-styles
+title: '任意の要素に対してブラウザデフォルトのフォーカスリングを適用する方法'
+pubDate: 2023-12-31T11:00:00.000+09:00
+---
+
+任意の要素に対して、ブラウザデフォルトのフォーカスリングが描画されるように明示的に設定したいことがある。たとえば、スタイリングの都合により一度取り除いたフォーカスリングを、ふたたび適用したいとき。
+
+フォーカスリングのスタイルは、ブラウザの種別や状況によってまちまちであるため、CSSでそれらしいものをエミュレートするのが難しい。そのため、同じものを呼び出せるような特別なやり方を採用できると望ましい。
+
+一つの方法として、`outline: revert`を適用すればデフォルトの挙動を復元できる。
+
+```css
+* {
+  outline: 0;
+}
+
+button {
+  outline: revert;
+}
+```
+
+しかし場合によっては、通常はフォーカスリングが描画されない要素に対して、ブラウザのデフォルトと同じフォーカスリングが描画されるようにしたい、ということもあるだろう。この場合、`outline: revert`ではフォーカスリングを適用できない。
+
+代わりに、次のように指定することでフォーカスリングを描画させられる。
+
+```css
+.card:focus-within {
+  outline: auto;
+  outline: auto -webkit-focus-ring-color; /* for Chrome */
+}
+```
+
+デフォルトのフォーカスリングを適用するための方法はブラウザによって異なるため、この方法では、それぞれに対応するために`outline`プロパティを二重に宣言する。
+
+まずFirefox/Safariでは、次の条件に一致するときにデフォルトのフォーカスリングが描画される。
+
+- `outline-style`として`auto`が指定されている
+- `outline-width`として0より大きい`<length>`が指定されている
+
+`outline-style`の値が`auto`の場合、`outline-color`の値は無視される。
+
+Firefoxにおいては、`accent-color`が指定されている場合、その値がフォーカスリングの色として適用される。
+
+一方Chromeでは、次の条件に一致するときにデフォルトのフォーカスリングが描画される。
+
+- `outline-style`として`auto`が指定されている
+- `outline-width`として0より大きい`<length>`が指定されている
+- `outline-color`として`-webkit-focus-ring-color`が指定されている
+
+`-webkit-focus-ring-color`はブラウザの独自実装であり、標準化されていない。`outline-color`の値を指定しなければ、`currentcolor`がフォーカスリングの色として適用されることになる。
+
+```css
+.card:focus-within {
+  outline: auto; /* `outline-color`は暗黙的にgreenになる */
+  color: green;
+}
+```
+
+これらの二重の宣言はブラウザで次のように動作する。
+
+|         | `outline: auto`                      | `outline: auto -webkit-focus-ring-color` |
+| ------- | ------------------------------------ | ---------------------------------------- |
+| Chrome  | ❌（`currentcolor`で描画される）     | ✅（カスケードによって優先される）       |
+| Firefox | ✅                                   | ❌（パースエラーとなり無視される）       |
+| Safari  | ✅（カスケードによって打ち消される） | ✅（カスケードによって優先される）       |
+
+デフォルトのスタイルを適用するためには、Chromeでは`outline: auto -webkit-focus-ring-color`を使用する必要がある。このやり方の場合、カスケードによって前者の`outline: auto`は打ち消されて、後者の宣言が優先される。
+
+Firefoxでは`outline: auto`を使用する必要がある。後者の`outline: auto -webkit-focus-ring-color`はパースエラーとなり無視されて、前者の宣言が適用される。
+
+Safariではそのどちらの宣言を使用してもデフォルトのスタイルが適用される。標準仕様を採用するという意味では、前者の`outline: auto`を使用するのが好ましいが、このやり方では、カスケードによって後者の`outline: auto -webkit-focus-ring-color`が優先されることになる。
+
+## 参考資料
+
+- [[css-ui] Tweaking outline-style: auto colors. · Issue #7761 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/issues/7761)
+- [[css-ui] Should we drop 'outline-color: invert' · Issue #9199 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/issues/9199)
+- [[css-ui-4] influence of outline-width on auto style outlines · Issue #9201 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/issues/9201)
