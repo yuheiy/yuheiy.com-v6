@@ -25,7 +25,11 @@ const browser = await puppeteer.launch({
 const page = await browser.newPage();
 
 await page.setViewport({ width: 756, height: 720 });
-await page.goto(url, { waitUntil: 'load' });
+
+const response = await page.goto(url, { waitUntil: 'load' });
+if (!response?.ok()) {
+  console.warn(`Response status: ${response?.status()}`);
+}
 
 const [title, height] = await page.evaluate(
   () =>
