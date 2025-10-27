@@ -26,7 +26,10 @@ const page = await browser.newPage();
 
 await page.setViewport({ width: 756, height: 720 });
 
-const response = await page.goto(url, { waitUntil: 'load' });
+const response = await page.goto(url, {
+  timeout: 100000,
+  waitUntil: 'load',
+});
 if (!response?.ok()) {
   console.warn(`Response status: ${response?.status()}`);
 }
