@@ -1,0 +1,307 @@
+---
+slug: 2023-08-12-abstract-react-usestate-as-render-prop
+title: 'ReactのuseStateをrender propとして抽象化して、コンポーネントを分割せずにコードのまとまりをよくする'
+pubDate: 2023-08-12T01:30:00.000+09:00
+---
+
+Reactの`useState`を使用する際、stateのスコープが必要以上に大きくなってしまうことがある。たとえば次の例のように、コンポーネントの中のごく限られた部分でしか使わないstateが、コンポーネントのどこからでも参照できてしまう。
+
+```tsx
+function App() {
+  const [isFirstOpen, setFirstOpen] = useState(false);
+  const [isSecondOpen, setSecondOpen] = useState(false);
+  const [isThirdOpen, setThirdOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setFirstOpen(true)}>First</Button>
+      <Popover isOpen={isFirstOpen} onOpenChange={setFirstOpen}>
+        ...
+      </Popover>
+
+      <Button onClick={() => setSecondOpen(true)}>Second</Button>
+      <Popover isOpen={isSecondOpen} onOpenChange={setSecondOpen}>
+        ...
+      </Popover>
+
+      <Button onClick={() => setThirdOpen(true)}>Third</Button>
+      <Popover isOpen={isThirdOpen} onOpenChange={setThirdOpen}>
+        ...
+      </Popover>
+    </>
+  );
+}
+```
+
+こうした場合の一般的な解決策としては、それぞれのstateに応じた粒度でコンポーネントを分割することだ。次のようにすると、stateのスコープが必要最小限になるように制限できる。
+
+```tsx
+function App() {
+  return (
+    <>
+      <First />
+      <Second />
+      <Third />
+    </>
+  );
+}
+
+function First() {
+  const [isOpen, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>First</Button>
+      <Popover isOpen={isOpen} onOpenChange={setOpen}>
+        ...
+      </Popover>
+    </>
+  );
+}
+
+function Second() {
+  const [isOpen, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Second</Button>
+      <Popover isOpen={isOpen} onOpenChange={setOpen}>
+        ...
+      </Popover>
+    </>
+  );
+}
+
+function Third() {
+  const [isOpen, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Third</Button>
+      <Popover isOpen={isOpen} onOpenChange={setOpen}>
+        ...
+      </Popover>
+    </>
+  );
+}
+```
+
+しかし場合によっては、stateの粒度に基づいてコンポーネントを分割していくと、却ってソースコードの見通しが悪くなることがある。
+
+そこで一つの代替案として、IIFEの中で`useState`を使用するというやり方がある。次のようにすることで、`useState`のスコープを制限できる。
+
+```tsx
+function App() {
+  return (
+    <>
+      {(() => {
+        const [isOpen, setOpen] = useState(false);
+        return (
+          <>
+            <Button onClick={() => setOpen(true)}>First</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        );
+      })()}
+
+      {(() => {
+        const [isOpen, setOpen] = useState(false);
+        return (
+          <>
+            <Button onClick={() => setOpen(true)}>Second</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        );
+      })()}
+
+      {(() => {
+        const [isOpen, setOpen] = useState(false);
+        return (
+          <>
+            <Button onClick={() => setOpen(true)}>Third</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        );
+      })()}
+    </>
+  );
+}
+```
+
+しかしこれでは、条件に応じてそのIIFEの表示を切り替えるようなケースに対応できなくなってしまう。たとえば次のような実装をすると、`isThirdVisible`の値が切り替わった時にフックの整合性が保てなくなってしまう。
+
+```tsx
+function App({ isThirdVisible }: { isThirdVisible: boolean }) {
+  return (
+    <>
+      {(() => {
+        const [isOpen, setOpen] = useState(false);
+        return (
+          <>
+            <Button onClick={() => setOpen(true)}>First</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        );
+      })()}
+
+      {(() => {
+        const [isOpen, setOpen] = useState(false);
+        return (
+          <>
+            <Button onClick={() => setOpen(true)}>Second</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        );
+      })()}
+
+      {isThirdVisible &&
+        (() => {
+          const [isOpen, setOpen] = useState(false);
+          return (
+            <>
+              <Button onClick={() => setOpen(true)}>Third</Button>
+              <Popover isOpen={isOpen} onOpenChange={setOpen}>
+                ...
+              </Popover>
+            </>
+          );
+        })()}
+    </>
+  );
+}
+```
+
+加えて、<q>[最上位レベルのフックのみを呼び出す](https://ja.legacy.reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level)</q>というルールに反しているため、ESLintプラグインの[eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks)を使用すると警告が発生してしまう。あくまでコードスタイルに限っての問題ではあるが。
+
+したがって、IIFEの使用は得策ではなさそうだ。そのためやはり、`useState`のスコープを制限するためにはコンポーネントを分割しなければならないという制約は免れない。
+
+そこで、`useState`の使用を抽象化する汎用的なコンポーネントを作成するとする。これを用いることで、stateのスコープを制限しつつも、ノードの記述はインライン化できるようになる。
+
+```tsx
+import { State } from './State';
+
+function App() {
+  return (
+    <>
+      <State initial={false}>
+        {({ state: isOpen, setState: setOpen }) => (
+          <>
+            <Button onClick={() => setOpen(true)}>First</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        )}
+      </State>
+
+      <State initial={false}>
+        {({ state: isOpen, setState: setOpen }) => (
+          <>
+            <Button onClick={() => setOpen(true)}>Second</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        )}
+      </State>
+
+      <State initial={false}>
+        {({ state: isOpen, setState: setOpen }) => (
+          <>
+            <Button onClick={() => setOpen(true)}>Third</Button>
+            <Popover isOpen={isOpen} onOpenChange={setOpen}>
+              ...
+            </Popover>
+          </>
+        )}
+      </State>
+    </>
+  );
+}
+```
+
+`<State>`の実装は次の通り。
+
+```tsx
+import type { Dispatch, DispatchWithoutAction, ReactNode, SetStateAction } from 'react';
+import { useCallback, useState } from 'react';
+
+/**
+ * The implement a hooks version of React PowerPlug’s `<State>`.
+ * https://renatorib.github.io/react-powerplug/#/docs-components-state
+ *
+ * @example
+ * <State initial={false}>
+ *   {({ state: isOpen, setState: setOpen }) => (
+ *     <>
+ *       <button type="button" onClick={() => setOpen(true)}>Open</button>
+ *       <Popover isOpen={isOpen} onOpenChange={setOpen}>...</Popover>
+ *     </>
+ *   )}
+ * </State>
+ */
+export function State<S>({
+  initial: initialState,
+  children,
+}: {
+  initial: S | (() => S);
+  children: (props: {
+    state: S;
+    setState: Dispatch<SetStateAction<S>>;
+    resetState: DispatchWithoutAction;
+  }) => ReactNode;
+}) {
+  const [state, setState] = useState(initialState);
+  const resetState = useCallback(() => setState(initialState), [initialState]);
+
+  return children({
+    state,
+    setState,
+    resetState,
+  });
+}
+```
+
+`<State>`はその内部で`useState`を保持しつつ、render propを介してその値や操作方法を提供する。これによって、スコープは`<State>`の`children`だけに制限できるようになる。最初の例と比較して、コードのまとまりはよくなったように思う。
+
+この`<State>`は僕が考案したものではなく、[React PowerPlug](https://github.com/renatorib/react-powerplug)というライブラリからアイデアを借用したものだ。残念ながら、React PowerPlugは長らくメンテナンスされておらず、フックスやTypeScriptにも対応していないので、僕は前述のように自分で実装し直して使っている。
+
+もっとも、昨今の気の利いたUIライブラリであれば、こうした冗長なコードを省略できる仕組みもある。たとえば、[Headless UI](https://headlessui.com/)の系譜にある[React Aria Components](https://react-spectrum.adobe.com/react-aria/react-aria-components.html)では、次のようにコンポーネントを構成するだけで、状態管理やイベントの登録が暗黙的に行われるようになっている。
+
+<figure>
+  ```tsx
+  <DialogTrigger>
+    <Button>Open popover</Button>
+    <Popover>
+      <OverlayArrow>
+        <svg width={12} height={12}>
+          <path d="M0 0,L6 6,L12 0" />
+        </svg>
+      </OverlayArrow>
+      <Dialog>This is a popover.</Dialog>
+    </Popover>
+  </DialogTrigger>
+  ```
+  {/* prettier-ignore */}
+  <figcaption>
+    &mdash; <cite>[Popover – React Aria](https://react-spectrum.adobe.com/react-aria/Popover.html)</cite>
+  </figcaption>
+</figure>
+
+こうした仕組みによって、多くの場面には対応できるが、これでは解決できないようなケースではStateコンポーネントを採用するとよいだろう。
+
+---
+
+ついでに言えば、`<Suspense>`を使う場合にも同じ問題がある。これに対して、[React Router](https://reactrouter.com/en/main)では、`<State>`と同じくrender propインターフェースが実装された`<Await>`という独自コンポーネントを提供することで、やはりコンポーネントを分割せずに記述できる仕組みを実現している。
+
+[Deferred Data v6.15.0 | React Router](https://reactrouter.com/en/main/guides/deferred)

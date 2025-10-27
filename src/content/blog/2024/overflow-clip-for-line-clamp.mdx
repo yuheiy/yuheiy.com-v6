@@ -1,0 +1,62 @@
+---
+slug: 2024-12-06-overflow-clip-for-line-clamp
+title: 'line-clampとhanging-punctuationを併用するときはoverflow:hiddenの代わりにclipを使う'
+pubDate: 2024-12-06T00:40:00.000+09:00
+---
+
+CSSの`-webkit-line-clamp`プロパティを使うとき、通常は`overflow: hidden`を併用することが多い。
+
+<figure>![](./assets/overflow-clip-for-line-clamp/1.png)</figure>
+
+```css
+p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+```
+
+しかし、`hanging-punctuation`プロパティを併用する場合、`overflow: hidden`が指定されているとはみ出した役物が見切れてしまう。
+
+<figure>![](./assets/overflow-clip-for-line-clamp/2.png)</figure>
+
+```css
+p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  hanging-punctuation: allow-end;
+}
+```
+
+`-webkit-line-clamp`プロパティを機能させるには、本来は`overflow-y`プロパティを使うだけで十分だ。ただし`overflow-y: hidden`を指定すると、その副作用として横方向にスクロール可能な状態になってしまう。
+
+<figure>![](./assets/overflow-clip-for-line-clamp/3.png)</figure>
+
+```css
+p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow-y: hidden;
+  hanging-punctuation: allow-end;
+}
+```
+
+この問題を解決するのが、`clip`である。`clip`を使うと、単方向の切り取りを実現しつつ、もう一方はスクロール不能な状態のままにできる。
+
+<figure>![](./assets/overflow-clip-for-line-clamp/4.png)</figure>
+
+```css
+p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow-y: clip;
+  hanging-punctuation: allow-end;
+}
+```
+
+`hanging-punctuation`プロパティにかぎらず、横方向にコンテンツのはみ出しが発生する場面においては有効だろう。
