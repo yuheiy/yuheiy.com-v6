@@ -23,11 +23,17 @@
 
   --text-*: initial;
   --text-xs: 0.75rem;
+  --text-xs--line-height: var(--leading-normal);
   --text-sm: 0.875rem;
+  --text-sm--line-height: var(--leading-normal);
   --text-base: 1rem;
+  --text-base--line-height: var(--leading-normal);
   --text-lg: 1.125rem;
+  --text-lg--line-height: var(--leading-tight);
   --text-xl: 1.375rem;
+  --text-xl--line-height: var(--leading-tight);
   --text-2xl: 1.625rem;
+  --text-2xl--line-height: var(--leading-tight);
 
   --leading-*: initial;
   --leading-tight: 1.5;

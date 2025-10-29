@@ -4,7 +4,7 @@
     margin-block-start: --spacing(16);
     font-weight: bold;
     font-size: var(--text-xl);
-    line-height: var(--leading-tight);
+    line-height: var(--text-xl--line-height);
     font-kerning: normal;
     font-feature-settings: 'palt';
     text-wrap: pretty;
@@ -19,7 +19,7 @@
     margin-block-start: --spacing(12);
     font-weight: bold;
     font-size: var(--text-lg);
-    line-height: var(--leading-tight);
+    line-height: var(--text-lg--line-height);
     font-kerning: normal;
     font-feature-settings: 'palt';
     text-wrap: pretty;
@@ -117,6 +117,7 @@
     margin-block-start: --spacing(3);
     hanging-punctuation: allow-end;
     font-size: var(--text-sm);
+    line-height: var(--text-sm--line-height);
   }
 
   blockquote + figcaption {
