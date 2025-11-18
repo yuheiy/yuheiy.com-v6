@@ -87,7 +87,7 @@
   blockquote:not([class]) {
     position: relative;
     margin-inline-start: 2rem;
-    margin-block-start: --spacing(8);
+    margin-block: --spacing(12);
   }
 
   :is(ol, ul) {
