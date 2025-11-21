@@ -29,8 +29,8 @@ importers:
         specifier: ^5.15.6
         version: 5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)
       astro-embed:
-        specifier: ^0.9.1
-        version: 0.9.1(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
+        specifier: ^0.9.2
+        version: 0.9.2(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
       baseline-status:
         specifier: ^1.0.11
         version: 1.0.11
@@ -85,7 +85,7 @@ importers:
         version: 6.10.2(eslint@9.39.1(jiti@2.6.1))
       node:
         specifier: runtime:^24.11.0
-        version: runtime:24.11.0
+        version: runtime:24.11.1
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
@@ -107,39 +107,39 @@ importers:
 
 packages:
 
-  '@astro-community/astro-embed-baseline-status@0.2.0':
-    resolution: {integrity: sha512-OtMNgMLW6Rs32WfUXyoa2Im7QB0orH1g6KD3a6Kq+08XnPtIHJEkcGtlNylYf4jUm5S8uTPloVWP3WS1U/o/OQ==}
+  '@astro-community/astro-embed-baseline-status@0.2.1':
+    resolution: {integrity: sha512-IGEcAzjQ3OVVEbB0yB7GDlYz3TpY1X4ZBDz2+ejRP0yW3VZuPeWyoIffuKm9iGUomnqXs6hoVR6/vK0OmLXZRA==}
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta
 
-  '@astro-community/astro-embed-bluesky@0.1.4':
-    resolution: {integrity: sha512-/844vSLn38Yvk60YPg0GZCVJwvDUo25rPb+r3Y41Z2xSPTJb6ourkxttlLtXHKou5/Z5wh6Ce/zCYGOLIXqK5g==}
+  '@astro-community/astro-embed-bluesky@0.1.5':
+    resolution: {integrity: sha512-/0wruqqgcbB/z8KnUGETURvNwct5cKBcPit/gJus7oOQctT8+wUjWcIlCn3uyqaZUq6ghpbRsj2eSD75rJZzSQ==}
     peerDependencies:
       astro: ^4.0.0 || ^5.0.0-beta.0
 
-  '@astro-community/astro-embed-integration@0.8.1':
-    resolution: {integrity: sha512-lI5oekRcmRdNI0AWluAZuM8ZyIV2S64KDPsOo/bbR6diF//Vic5Jy6Tz0gAPjcNMlZSSGMjXBKuUCQZS338e7w==}
+  '@astro-community/astro-embed-integration@0.8.3':
+    resolution: {integrity: sha512-lJfPOiol8lTay5kJHT3C4CmM6shF6mF2YZR2tSpM4F+D1tj26PZ937r0iHhUcOLPeQPmczZbs9Tx1WwDY4SjOQ==}
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta || ^5.0.0-beta
 
-  '@astro-community/astro-embed-link-preview@0.2.2':
-    resolution: {integrity: sha512-eZ/ORqtPCC3Z2cSH6UvOB1w9CBguEQUC4nFdyLmwHYIR3FhkutQgbaP7fgI1r+qUBDbXImpZjYxKS3RB4m/fOA==}
+  '@astro-community/astro-embed-link-preview@0.2.3':
+    resolution: {integrity: sha512-TLnZOihoQhXOCybvbzE/ImqFkGgG5zSJeWIj+PytM41Q/uhU6w19LD571qmWADf0Grv/u7LtorR1PB6ijQnazQ==}
 
-  '@astro-community/astro-embed-twitter@0.5.8':
-    resolution: {integrity: sha512-O2ptQPw+DfipukK8czjJcTcyVgDsrs3OmrHbc3YmWRglaUTOpSTImzPo076POyNBSWjLaRKloul81DFiAMNjTA==}
+  '@astro-community/astro-embed-twitter@0.5.9':
+    resolution: {integrity: sha512-bTIP/2LB3iEzlZ58L7dFyLJuWLeFDXgzZUQZKlWIfsXiKYqKIfLTQ01U10sh9UiHpm1M+4kOVPpue5LbUpJXHw==}
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta || ^5.0.0-beta
 
-  '@astro-community/astro-embed-utils@0.1.3':
-    resolution: {integrity: sha512-eiMO+vfCdE9GtW6qE7X5Xl6YCKZDCoXJEWqRofQcoC3GHjqN2/WhJlnaxNVRq3demSO03UNtho57Em5p7o7AOA==}
+  '@astro-community/astro-embed-utils@0.1.5':
+    resolution: {integrity: sha512-0RlP7J1YEWrguWDfEDsm4uDCXk4FKn0HHakmSOSwHLg6YR8WNEN/LGMGhhsxLc/mDqO2lRh1VqfJy+yPLLkzsQ==}
 
-  '@astro-community/astro-embed-vimeo@0.3.10':
-    resolution: {integrity: sha512-H7v8BozWXG+EhIOn1DcNKLRO6z3bNXZVESUR25mNFiDd3Ue8MEzp8mWkBeRd6Y2onV9acxR34ZhXN36fsSb8bA==}
+  '@astro-community/astro-embed-vimeo@0.3.11':
+    resolution: {integrity: sha512-uvTLmG5z9WGoyKac86Fxh6YnmBwlEQOalbi1/BatUy9zfQ/5x8rFs+U5xiM1nW38dGmDw/Hj7Nq3ljnZxy6PMA==}
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta || ^5.0.0-beta
 
-  '@astro-community/astro-embed-youtube@0.5.7':
-    resolution: {integrity: sha512-Yq1cw4JCnrjnf/278frWZ9VQyAjyAwUd1CH2XZHFt9pNb5PeFNoRUSPlBvUzN6F/XorkWEEyE2N98rcdyx9mHg==}
+  '@astro-community/astro-embed-youtube@0.5.9':
+    resolution: {integrity: sha512-8Uk2SKbyZVb+jxwqSAMoEpQo+063XYwCI3yRy9cbkyHpu09mDabGZNTF5XrL8CKr3NtR5haBkeYK/kSuKUkJ/g==}
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta || ^5.0.0-beta
 
@@ -1177,8 +1177,8 @@ packages:
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta || ^5.0.0-beta
 
-  astro-embed@0.9.1:
-    resolution: {integrity: sha512-l3lkPsluDOf/FeHWfBU1+7srAcHrByu/Z1dSr3iAheSVYJfSBpAmYnSsHG90NuIK/8Mr3tg0AhNE2JJy3an/zA==}
+  astro-embed@0.9.2:
+    resolution: {integrity: sha512-MUeNrfnNgcrV9E8WqEW9IYK8+Y3etDLyyi8Uf35rM5WJ53wkh511ye9oi15taJuqOaYRk2hQ9P5G2+/JS1Mjxg==}
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta || ^5.0.0-beta
 
@@ -1983,6 +1983,9 @@ packages:
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
 
+  htmlparser2@10.0.0:
+    resolution: {integrity: sha512-TwAZM+zE5Tq3lrEHvOlvwgj1XLWQCtaaibSN11Q+gGBAS7Y1uZSWwXXRe4iF6OXnaq1riyQAPFOBtYc77Mxq0g==}
+
   htmlparser2@8.0.2:
     resolution: {integrity: sha512-GYdjWKDkbRLkZ5geuHs5NY1puJ+PXwP7+fHPRz06Eirsb9ugf6d8kkXav6ADhcODhFFPMIXyxkxSuMf3D6NCFA==}
 
@@ -2320,8 +2323,14 @@ packages:
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
-  linkedom@0.14.26:
-    resolution: {integrity: sha512-mK6TrydfFA7phrnp+1j57ycBwFI5bGSW6YXlw9acHoqF+mP/y+FooEYYyniOt5Ot57FSKB3iwmnuQ1UUyNLm5A==}
+  linkedom@0.18.12:
+    resolution: {integrity: sha512-jalJsOwIKuQJSeTvsgzPe9iJzyfVaEJiEXl+25EkKevsULHvMJzpNqwvj1jOESWdmgKDiXObyjOYwlUqG7wo1Q==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      canvas: '>= 2'
+    peerDependenciesMeta:
+      canvas:
+        optional: true
 
   lit-element@4.2.1:
     resolution: {integrity: sha512-WGAWRGzirAgyphK2urmYOV72tlvnxw7YfyLDgQ+OZnM9vQQBQnumQ7jUJe6unEzwGU3ahFOjuz1iz1jjrpCPuw==}
@@ -2593,94 +2602,94 @@ packages:
   node-mock-http@1.0.3:
     resolution: {integrity: sha512-jN8dK25fsfnMrVsEhluUTPkBFY+6ybu7jSB1n+ri/vOGjJxU8J9CZhpSGkHXSkFjtUhbmoncG/YG9ta5Ludqog==}
 
-  node@runtime:24.11.0:
+  node@runtime:24.11.1:
     resolution:
       type: variations
       variants:
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-AVGoDHkzXAEx+qQIOkGjWIQ1rqFNz2aDBq0+q/3nG2U=
+            integrity: sha256-mLqRmgOQ2MQi1LsxBexbd3I89UFDtMHkudd2kPoHUgY=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-aix-ppc64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-aix-ppc64.tar.gz
           targets:
             - cpu: ppc64
               os: aix
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-C+KrKBak+gLRrP8BSkNPKfVtjZVvWvapi3DO1sX00gE=
+            integrity: sha256-sFqjpm7+aAAj+TC9WvP9u9VCeU2lZEyirXEdaMvU3DU=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-darwin-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-darwin-arm64.tar.gz
           targets:
             - cpu: arm64
               os: darwin
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-OIRnHof0b3c4MtmKCmyrzF7E9jcITw81FbaeZuon8vE=
+            integrity: sha256-CWCBttb83T9boPXx1EpH6DA3rS546tomZxwlL+ZN0RE=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-darwin-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-darwin-x64.tar.gz
           targets:
             - cpu: x64
               os: darwin
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-R4bQDE0lnT/wsjKDB/dk7zztZfLW6VAtQz5o1mI4UJ0=
+            integrity: sha256-Dck+xceYsNNH8GjbbSBdA96ppxdl5qU5IraCuRJl1x8=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-linux-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-linux-arm64.tar.gz
           targets:
             - cpu: arm64
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-fnukMm/oWI8R52PFUhe89F9eC3vL8eJru7siJamuRyE=
+            integrity: sha256-zUFAfzNS3i8GbqJsXF0OqbY2I3TWthg4Wp8una0iBhY=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-linux-ppc64le.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-linux-ppc64le.tar.gz
           targets:
             - cpu: ppc64le
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-evDZLnSweiuOkQie5PzMe1Qz/YtjJZvO06NGaJmMvfc=
+            integrity: sha256-XUyLyl+PJZP5CB3uOYNHYOhaFvphyVDz6G7IWZbwBVA=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-linux-s390x.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-linux-s390x.tar.gz
           targets:
             - cpu: s390x
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-s8BxzfR6q4Z8OyqihyV98S7F18liv5IrMv0zImxClf0=
+            integrity: sha256-WKX/XMjyIA5Fi+oi4ynVwZlKobER1JnKRuwkEdWCOco=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-linux-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-linux-x64.tar.gz
           targets:
             - cpu: x64
               os: linux
         - resolution:
             archive: zip
             bin: node.exe
-            integrity: sha256-EtOxqpaWt0EeEVpPoq71f5VWC17ha7Ys1phD5TXscr4=
-            prefix: node-v24.11.0-win-arm64
+            integrity: sha256-zp7k5Ufr3/NVvrSOMJsWbCTfa+ApHJ6vEDzhXz3p5bQ=
+            prefix: node-v24.11.1-win-arm64
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-win-arm64.zip
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-win-arm64.zip
           targets:
             - cpu: arm64
               os: win32
         - resolution:
             archive: zip
             bin: node.exe
-            integrity: sha256-EFRUC84itU7H5Q68B47F0JBwCndldgelj2pk3yH0n90=
-            prefix: node-v24.11.0-win-x64
+            integrity: sha256-U1WubXxJ7dz959NKw0hoIGAKgxv4HcO9ylyNtqm7DnY=
+            prefix: node-v24.11.1-win-x64
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-win-x64.zip
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-win-x64.zip
           targets:
             - cpu: x64
               os: win32
-    version: 24.11.0
+    version: 24.11.1
     hasBin: true
 
   normalize-path@3.0.0:
@@ -3780,48 +3789,60 @@ packages:
 
 snapshots:
 
-  '@astro-community/astro-embed-baseline-status@0.2.0(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))':
+  '@astro-community/astro-embed-baseline-status@0.2.1(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))':
     dependencies:
-      '@astro-community/astro-embed-utils': 0.1.3
+      '@astro-community/astro-embed-utils': 0.1.5
       astro: 5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)
+    transitivePeerDependencies:
+      - canvas
 
-  '@astro-community/astro-embed-bluesky@0.1.4(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))':
+  '@astro-community/astro-embed-bluesky@0.1.5(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))':
     dependencies:
       '@atproto/api': 0.13.35
       astro: 5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)
       ts-pattern: 5.9.0
 
-  '@astro-community/astro-embed-integration@0.8.1(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))':
+  '@astro-community/astro-embed-integration@0.8.3(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))':
     dependencies:
-      '@astro-community/astro-embed-bluesky': 0.1.4(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
-      '@astro-community/astro-embed-link-preview': 0.2.2
-      '@astro-community/astro-embed-twitter': 0.5.8(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
-      '@astro-community/astro-embed-vimeo': 0.3.10(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
-      '@astro-community/astro-embed-youtube': 0.5.7(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
+      '@astro-community/astro-embed-bluesky': 0.1.5(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
+      '@astro-community/astro-embed-link-preview': 0.2.3
+      '@astro-community/astro-embed-twitter': 0.5.9(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
+      '@astro-community/astro-embed-vimeo': 0.3.11(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
+      '@astro-community/astro-embed-youtube': 0.5.9(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
       '@types/unist': 2.0.11
       astro: 5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)
       astro-auto-import: 0.4.5(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
       unist-util-select: 4.0.3
+    transitivePeerDependencies:
+      - canvas
 
-  '@astro-community/astro-embed-link-preview@0.2.2':
+  '@astro-community/astro-embed-link-preview@0.2.3':
     dependencies:
-      '@astro-community/astro-embed-utils': 0.1.3
+      '@astro-community/astro-embed-utils': 0.1.5
+    transitivePeerDependencies:
+      - canvas
 
-  '@astro-community/astro-embed-twitter@0.5.8(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))':
+  '@astro-community/astro-embed-twitter@0.5.9(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))':
     dependencies:
-      '@astro-community/astro-embed-utils': 0.1.3
+      '@astro-community/astro-embed-utils': 0.1.5
       astro: 5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)
+    transitivePeerDependencies:
+      - canvas
 
-  '@astro-community/astro-embed-utils@0.1.3':
+  '@astro-community/astro-embed-utils@0.1.5':
     dependencies:
-      linkedom: 0.14.26
+      linkedom: 0.18.12
+    transitivePeerDependencies:
+      - canvas
 
-  '@astro-community/astro-embed-vimeo@0.3.10(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))':
+  '@astro-community/astro-embed-vimeo@0.3.11(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))':
     dependencies:
-      '@astro-community/astro-embed-utils': 0.1.3
+      '@astro-community/astro-embed-utils': 0.1.5
       astro: 5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)
+    transitivePeerDependencies:
+      - canvas
 
-  '@astro-community/astro-embed-youtube@0.5.7(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))':
+  '@astro-community/astro-embed-youtube@0.5.9(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))':
     dependencies:
       astro: 5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)
       lite-youtube-embed: 0.3.4
@@ -4849,16 +4870,18 @@ snapshots:
       acorn: 8.15.0
       astro: 5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)
 
-  astro-embed@0.9.1(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)):
+  astro-embed@0.9.2(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)):
     dependencies:
-      '@astro-community/astro-embed-baseline-status': 0.2.0(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
-      '@astro-community/astro-embed-bluesky': 0.1.4(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
-      '@astro-community/astro-embed-integration': 0.8.1(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
-      '@astro-community/astro-embed-link-preview': 0.2.2
-      '@astro-community/astro-embed-twitter': 0.5.8(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
-      '@astro-community/astro-embed-vimeo': 0.3.10(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
-      '@astro-community/astro-embed-youtube': 0.5.7(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
+      '@astro-community/astro-embed-baseline-status': 0.2.1(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
+      '@astro-community/astro-embed-bluesky': 0.1.5(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
+      '@astro-community/astro-embed-integration': 0.8.3(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
+      '@astro-community/astro-embed-link-preview': 0.2.3
+      '@astro-community/astro-embed-twitter': 0.5.9(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
+      '@astro-community/astro-embed-vimeo': 0.3.11(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
+      '@astro-community/astro-embed-youtube': 0.5.9(astro@5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
       astro: 5.15.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)
+    transitivePeerDependencies:
+      - canvas
 
   astro-eslint-parser@1.2.2:
     dependencies:
@@ -5984,6 +6007,13 @@ snapshots:
 
   html-void-elements@3.0.0: {}
 
+  htmlparser2@10.0.0:
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      domutils: 3.2.2
+      entities: 6.0.1
+
   htmlparser2@8.0.2:
     dependencies:
       domelementtype: 2.3.0
@@ -6276,12 +6306,12 @@ snapshots:
 
   lines-and-columns@1.2.4: {}
 
-  linkedom@0.14.26:
+  linkedom@0.18.12:
     dependencies:
       css-select: 5.2.2
       cssom: 0.5.0
       html-escaper: 3.0.3
-      htmlparser2: 8.0.2
+      htmlparser2: 10.0.0
       uhyphen: 0.2.0
 
   lit-element@4.2.1:
@@ -6812,7 +6842,7 @@ snapshots:
 
   node-mock-http@1.0.3: {}
 
-  node@runtime:24.11.0: {}
+  node@runtime:24.11.1: {}
 
   normalize-path@3.0.0: {}
 
