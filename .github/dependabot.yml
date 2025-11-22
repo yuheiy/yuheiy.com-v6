@@ -16,6 +16,10 @@ updates:
         patterns:
           - 'eslint'
           - '@eslint/*'
+      sanitize-html:
+        patterns:
+          - sanitize-html
+          - '@types/sanitize-html'
       tailwindcss:
         patterns:
           - 'tailwindcss'
