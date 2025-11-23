@@ -11,10 +11,6 @@
     word-break: auto-phrase;
   }
 
-  blockquote h2:first-child {
-    margin-block-start: --spacing(8);
-  }
-
   h3 {
     margin-block-start: --spacing(12);
     font-weight: bold;
