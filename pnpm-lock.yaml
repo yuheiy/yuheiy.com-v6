@@ -38,8 +38,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       puppeteer:
-        specifier: ^24.30.0
-        version: 24.30.0(typescript@5.9.3)
+        specifier: ^24.31.0
+        version: 24.31.0(typescript@5.9.3)
       sanitize-html:
         specifier: ^2.17.0
         version: 2.17.0
@@ -85,7 +85,7 @@ importers:
         version: 6.10.2(eslint@9.39.1(jiti@2.6.1))
       node:
         specifier: runtime:^24.11.0
-        version: runtime:24.11.0
+        version: runtime:24.11.1
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
@@ -2614,94 +2614,94 @@ packages:
   node-mock-http@1.0.3:
     resolution: {integrity: sha512-jN8dK25fsfnMrVsEhluUTPkBFY+6ybu7jSB1n+ri/vOGjJxU8J9CZhpSGkHXSkFjtUhbmoncG/YG9ta5Ludqog==}
 
-  node@runtime:24.11.0:
+  node@runtime:24.11.1:
     resolution:
       type: variations
       variants:
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-AVGoDHkzXAEx+qQIOkGjWIQ1rqFNz2aDBq0+q/3nG2U=
+            integrity: sha256-mLqRmgOQ2MQi1LsxBexbd3I89UFDtMHkudd2kPoHUgY=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-aix-ppc64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-aix-ppc64.tar.gz
           targets:
             - cpu: ppc64
               os: aix
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-C+KrKBak+gLRrP8BSkNPKfVtjZVvWvapi3DO1sX00gE=
+            integrity: sha256-sFqjpm7+aAAj+TC9WvP9u9VCeU2lZEyirXEdaMvU3DU=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-darwin-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-darwin-arm64.tar.gz
           targets:
             - cpu: arm64
               os: darwin
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-OIRnHof0b3c4MtmKCmyrzF7E9jcITw81FbaeZuon8vE=
+            integrity: sha256-CWCBttb83T9boPXx1EpH6DA3rS546tomZxwlL+ZN0RE=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-darwin-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-darwin-x64.tar.gz
           targets:
             - cpu: x64
               os: darwin
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-R4bQDE0lnT/wsjKDB/dk7zztZfLW6VAtQz5o1mI4UJ0=
+            integrity: sha256-Dck+xceYsNNH8GjbbSBdA96ppxdl5qU5IraCuRJl1x8=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-linux-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-linux-arm64.tar.gz
           targets:
             - cpu: arm64
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-fnukMm/oWI8R52PFUhe89F9eC3vL8eJru7siJamuRyE=
+            integrity: sha256-zUFAfzNS3i8GbqJsXF0OqbY2I3TWthg4Wp8una0iBhY=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-linux-ppc64le.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-linux-ppc64le.tar.gz
           targets:
             - cpu: ppc64le
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-evDZLnSweiuOkQie5PzMe1Qz/YtjJZvO06NGaJmMvfc=
+            integrity: sha256-XUyLyl+PJZP5CB3uOYNHYOhaFvphyVDz6G7IWZbwBVA=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-linux-s390x.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-linux-s390x.tar.gz
           targets:
             - cpu: s390x
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-s8BxzfR6q4Z8OyqihyV98S7F18liv5IrMv0zImxClf0=
+            integrity: sha256-WKX/XMjyIA5Fi+oi4ynVwZlKobER1JnKRuwkEdWCOco=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-linux-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-linux-x64.tar.gz
           targets:
             - cpu: x64
               os: linux
         - resolution:
             archive: zip
             bin: node.exe
-            integrity: sha256-EtOxqpaWt0EeEVpPoq71f5VWC17ha7Ys1phD5TXscr4=
-            prefix: node-v24.11.0-win-arm64
+            integrity: sha256-zp7k5Ufr3/NVvrSOMJsWbCTfa+ApHJ6vEDzhXz3p5bQ=
+            prefix: node-v24.11.1-win-arm64
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-win-arm64.zip
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-win-arm64.zip
           targets:
             - cpu: arm64
               os: win32
         - resolution:
             archive: zip
             bin: node.exe
-            integrity: sha256-EFRUC84itU7H5Q68B47F0JBwCndldgelj2pk3yH0n90=
-            prefix: node-v24.11.0-win-x64
+            integrity: sha256-U1WubXxJ7dz959NKw0hoIGAKgxv4HcO9ylyNtqm7DnY=
+            prefix: node-v24.11.1-win-x64
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-win-x64.zip
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-win-x64.zip
           targets:
             - cpu: x64
               os: win32
-    version: 24.11.0
+    version: 24.11.1
     hasBin: true
 
   normalize-path@3.0.0:
@@ -2934,12 +2934,12 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
-  puppeteer-core@24.30.0:
-    resolution: {integrity: sha512-2S3Smy0t0W4wJnNvDe7W0bE7wDmZjfZ3ljfMgJd6hn2Hq/f0jgN+x9PULZo2U3fu5UUIJ+JP8cNUGllu8P91Pg==}
+  puppeteer-core@24.31.0:
+    resolution: {integrity: sha512-pnAohhSZipWQoFpXuGV7xCZfaGhqcBR9C4pVrU0QSrcMi7tQMH9J9lDBqBvyMAHQqe8HCARuREqFuVKRQOgTvg==}
     engines: {node: '>=18'}
 
-  puppeteer@24.30.0:
-    resolution: {integrity: sha512-A5OtCi9WpiXBQgJ2vQiZHSyrAzQmO/WDsvghqlN4kgw21PhxA5knHUaUQq/N3EMt8CcvSS0RM+kmYLJmedR3TQ==}
+  puppeteer@24.31.0:
+    resolution: {integrity: sha512-q8y5yLxLD8xdZdzNWqdOL43NbfvUOp60SYhaLZQwHC9CdKldxQKXOyJAciOr7oUJfyAH/KgB2wKvqT2sFKoVXA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -3675,8 +3675,8 @@ packages:
   web-namespaces@2.0.1:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
 
-  webdriver-bidi-protocol@0.3.8:
-    resolution: {integrity: sha512-21Yi2GhGntMc671vNBCjiAeEVknXjVRoyu+k+9xOMShu+ZQfpGQwnBqbNz/Sv4GXZ6JmutlPAi2nIJcrymAWuQ==}
+  webdriver-bidi-protocol@0.3.9:
+    resolution: {integrity: sha512-uIYvlRQ0PwtZR1EzHlTMol1G0lAlmOe6wPykF9a77AK3bkpvZHzIVxRE2ThOx5vjy2zISe0zhwf5rzuUfbo1PQ==}
 
   which-boxed-primitive@1.1.1:
     resolution: {integrity: sha512-TbX3mj8n0odCBFVlY8AxkqcHASw3L60jIuF8jFP78az3C2YhmGvqbHBpAjTRH2/xqYunrJ9g1jSyjCjpoWzIAA==}
@@ -6866,7 +6866,7 @@ snapshots:
 
   node-mock-http@1.0.3: {}
 
-  node@runtime:24.11.0: {}
+  node@runtime:24.11.1: {}
 
   normalize-path@3.0.0: {}
 
@@ -7120,14 +7120,14 @@ snapshots:
 
   punycode@2.3.1: {}
 
-  puppeteer-core@24.30.0:
+  puppeteer-core@24.31.0:
     dependencies:
       '@puppeteer/browsers': 2.10.13
       chromium-bidi: 11.0.0(devtools-protocol@0.0.1521046)
       debug: 4.4.3
       devtools-protocol: 0.0.1521046
       typed-query-selector: 2.12.0
-      webdriver-bidi-protocol: 0.3.8
+      webdriver-bidi-protocol: 0.3.9
       ws: 8.18.3
     transitivePeerDependencies:
       - bare-abort-controller
@@ -7137,13 +7137,13 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  puppeteer@24.30.0(typescript@5.9.3):
+  puppeteer@24.31.0(typescript@5.9.3):
     dependencies:
       '@puppeteer/browsers': 2.10.13
       chromium-bidi: 11.0.0(devtools-protocol@0.0.1521046)
       cosmiconfig: 9.0.0(typescript@5.9.3)
       devtools-protocol: 0.0.1521046
-      puppeteer-core: 24.30.0
+      puppeteer-core: 24.31.0
       typed-query-selector: 2.12.0
     transitivePeerDependencies:
       - bare-abort-controller
@@ -8049,7 +8049,7 @@ snapshots:
 
   web-namespaces@2.0.1: {}
 
-  webdriver-bidi-protocol@0.3.8: {}
+  webdriver-bidi-protocol@0.3.9: {}
 
   which-boxed-primitive@1.1.1:
     dependencies:
