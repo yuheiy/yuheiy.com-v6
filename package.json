@@ -15,11 +15,11 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.11",
-    "@astrojs/rss": "^4.0.13",
+    "@astrojs/mdx": "^4.3.12",
+    "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
     "@tailwindcss/vite": "^4.1.17",
-    "astro": "^5.15.9",
+    "astro": "^5.16.0",
     "astro-embed": "^0.9.2",
     "baseline-status": "^1.0.11",
     "mdast-util-to-string": "^4.0.0",
