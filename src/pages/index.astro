@@ -16,18 +16,18 @@ const description =
 
 const primaryItems: TeaserListItem[] = [
   // html, accessibility
-  await getEntry('external', '2025/introduction-to-accessibility'),
+  await getEntry('links-elsewhere', '2025/introduction-to-accessibility'),
   await getEntry('blog', '2022-11-03-how-to-understand-the-markup'),
-  await getEntry('external', '2019/html-for-creators'),
+  await getEntry('links-elsewhere', '2019/html-for-creators'),
 
   // tailwindcss
-  await getEntry('external', '2023/gihyojp-tailwindcss'),
+  await getEntry('links-elsewhere', '2023/gihyojp-tailwindcss'),
   await getEntry('blog', '2022-06-11-css-components'),
-  await getEntry('external', '2020/css-utility-classes-and-separation-of-concerns'),
+  await getEntry('links-elsewhere', '2020/css-utility-classes-and-separation-of-concerns'),
 
   // everylayout
   await getEntry('blog', '20211011-publication-of-everylayout'),
-  await getEntry('external', '2021/shiftbrain-everylayout'),
+  await getEntry('links-elsewhere', '2021/shiftbrain-everylayout'),
   await getEntry('blog', '2022-08-01-declarative-design'),
 
   // design
@@ -54,7 +54,7 @@ const primaryItems: TeaserListItem[] = [
           meta: config.siteTitle,
         };
 
-      case 'external':
+      case 'links-elsewhere':
         return {
           title: entry.data.title,
           link: entry.data.link,

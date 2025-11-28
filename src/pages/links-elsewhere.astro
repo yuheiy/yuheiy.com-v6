@@ -13,7 +13,7 @@ const description = '外部サイトに寄稿した記事、登壇したイベ�
 const container = await AstroContainer.create();
 
 const items: TeaserListItem[] = await Promise.all(
-  (await getCollection('external'))
+  (await getCollection('links-elsewhere'))
     .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .map(async (entry) => ({
       title: entry.data.title,
