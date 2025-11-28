@@ -78,14 +78,14 @@ importers:
         specifier: ^1.5.0
         version: 1.5.0(eslint@9.39.1(jiti@2.6.1))
       eslint-plugin-better-tailwindcss:
-        specifier: ^3.7.10
-        version: 3.7.10(eslint@9.39.1(jiti@2.6.1))(tailwindcss@4.1.17)
+        specifier: ^3.7.11
+        version: 3.7.11(eslint@9.39.1(jiti@2.6.1))(tailwindcss@4.1.17)
       eslint-plugin-jsx-a11y:
         specifier: ^6.10.2
         version: 6.10.2(eslint@9.39.1(jiti@2.6.1))
       node:
         specifier: runtime:^24.11.0
-        version: runtime:24.11.0
+        version: runtime:24.11.1
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
@@ -439,8 +439,8 @@ packages:
     resolution: {integrity: sha512-yL/sLrpmtDaFEiUj1osRP4TI2MDz1AddJL+jZ7KSqvBuliN4xqYY54IfdN8qD8Toa6g1iloph1fxQNkjOxrrpQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/css-tree@3.6.6':
-    resolution: {integrity: sha512-C3YiJMY9OZyZ/3vEMFWJIesdGaRY6DmIYvmtyxMT934CbrOKqRs+Iw7NWSRlJQEaK4dPYy2lZ2y1zkaj8z0p5A==}
+  '@eslint/css-tree@3.6.8':
+    resolution: {integrity: sha512-s0f40zY7dlMp8i0Jf0u6l/aSswS0WRAgkhgETgiCJRcxIWb4S/Sp9uScKHWbkM3BnoFLbJbmOYk5AZUDFVxaLA==}
     engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0}
 
   '@eslint/eslintrc@3.3.1':
@@ -1674,8 +1674,8 @@ packages:
     peerDependencies:
       eslint: '>=8.57.0'
 
-  eslint-plugin-better-tailwindcss@3.7.10:
-    resolution: {integrity: sha512-a6Hif4A9lPJZwpoMir2WVs1ZL4IK6fzwbZvVhQQchoqqg3BycL+ZGLHGIuqKBqwnZgOC6olwmu0sDzM3uSkEFw==}
+  eslint-plugin-better-tailwindcss@3.7.11:
+    resolution: {integrity: sha512-A2x5UrBoYLfZLMGvXBq/7epVMKNMxCkDRgRO1w/N1yQbFYM0L1yk6qDZV1l6Otrl0hNuBHSKFG3Uw5TDoSGStA==}
     engines: {node: ^20.11.0 || >=21.2.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
@@ -2614,94 +2614,94 @@ packages:
   node-mock-http@1.0.3:
     resolution: {integrity: sha512-jN8dK25fsfnMrVsEhluUTPkBFY+6ybu7jSB1n+ri/vOGjJxU8J9CZhpSGkHXSkFjtUhbmoncG/YG9ta5Ludqog==}
 
-  node@runtime:24.11.0:
+  node@runtime:24.11.1:
     resolution:
       type: variations
       variants:
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-AVGoDHkzXAEx+qQIOkGjWIQ1rqFNz2aDBq0+q/3nG2U=
+            integrity: sha256-mLqRmgOQ2MQi1LsxBexbd3I89UFDtMHkudd2kPoHUgY=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-aix-ppc64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-aix-ppc64.tar.gz
           targets:
             - cpu: ppc64
               os: aix
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-C+KrKBak+gLRrP8BSkNPKfVtjZVvWvapi3DO1sX00gE=
+            integrity: sha256-sFqjpm7+aAAj+TC9WvP9u9VCeU2lZEyirXEdaMvU3DU=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-darwin-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-darwin-arm64.tar.gz
           targets:
             - cpu: arm64
               os: darwin
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-OIRnHof0b3c4MtmKCmyrzF7E9jcITw81FbaeZuon8vE=
+            integrity: sha256-CWCBttb83T9boPXx1EpH6DA3rS546tomZxwlL+ZN0RE=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-darwin-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-darwin-x64.tar.gz
           targets:
             - cpu: x64
               os: darwin
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-R4bQDE0lnT/wsjKDB/dk7zztZfLW6VAtQz5o1mI4UJ0=
+            integrity: sha256-Dck+xceYsNNH8GjbbSBdA96ppxdl5qU5IraCuRJl1x8=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-linux-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-linux-arm64.tar.gz
           targets:
             - cpu: arm64
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-fnukMm/oWI8R52PFUhe89F9eC3vL8eJru7siJamuRyE=
+            integrity: sha256-zUFAfzNS3i8GbqJsXF0OqbY2I3TWthg4Wp8una0iBhY=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-linux-ppc64le.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-linux-ppc64le.tar.gz
           targets:
             - cpu: ppc64le
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-evDZLnSweiuOkQie5PzMe1Qz/YtjJZvO06NGaJmMvfc=
+            integrity: sha256-XUyLyl+PJZP5CB3uOYNHYOhaFvphyVDz6G7IWZbwBVA=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-linux-s390x.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-linux-s390x.tar.gz
           targets:
             - cpu: s390x
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-s8BxzfR6q4Z8OyqihyV98S7F18liv5IrMv0zImxClf0=
+            integrity: sha256-WKX/XMjyIA5Fi+oi4ynVwZlKobER1JnKRuwkEdWCOco=
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-linux-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-linux-x64.tar.gz
           targets:
             - cpu: x64
               os: linux
         - resolution:
             archive: zip
             bin: node.exe
-            integrity: sha256-EtOxqpaWt0EeEVpPoq71f5VWC17ha7Ys1phD5TXscr4=
-            prefix: node-v24.11.0-win-arm64
+            integrity: sha256-zp7k5Ufr3/NVvrSOMJsWbCTfa+ApHJ6vEDzhXz3p5bQ=
+            prefix: node-v24.11.1-win-arm64
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-win-arm64.zip
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-win-arm64.zip
           targets:
             - cpu: arm64
               os: win32
         - resolution:
             archive: zip
             bin: node.exe
-            integrity: sha256-EFRUC84itU7H5Q68B47F0JBwCndldgelj2pk3yH0n90=
-            prefix: node-v24.11.0-win-x64
+            integrity: sha256-U1WubXxJ7dz959NKw0hoIGAKgxv4HcO9ylyNtqm7DnY=
+            prefix: node-v24.11.1-win-x64
             type: binary
-            url: https://nodejs.org/download/release/v24.11.0/node-v24.11.0-win-x64.zip
+            url: https://nodejs.org/download/release/v24.11.1/node-v24.11.1-win-x64.zip
           targets:
             - cpu: x64
               os: win32
-    version: 24.11.0
+    version: 24.11.1
     hasBin: true
 
   normalize-path@3.0.0:
@@ -4163,7 +4163,7 @@ snapshots:
     dependencies:
       '@types/json-schema': 7.0.15
 
-  '@eslint/css-tree@3.6.6':
+  '@eslint/css-tree@3.6.8':
     dependencies:
       mdn-data: 2.23.0
       source-map-js: 1.2.1
@@ -5548,9 +5548,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-better-tailwindcss@3.7.10(eslint@9.39.1(jiti@2.6.1))(tailwindcss@4.1.17):
+  eslint-plugin-better-tailwindcss@3.7.11(eslint@9.39.1(jiti@2.6.1))(tailwindcss@4.1.17):
     dependencies:
-      '@eslint/css-tree': 3.6.6
+      '@eslint/css-tree': 3.6.8
       enhanced-resolve: 5.18.3
       eslint: 9.39.1(jiti@2.6.1)
       jiti: 2.6.1
@@ -6866,7 +6866,7 @@ snapshots:
 
   node-mock-http@1.0.3: {}
 
-  node@runtime:24.11.0: {}
+  node@runtime:24.11.1: {}
 
   normalize-path@3.0.0: {}
 
