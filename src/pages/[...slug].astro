@@ -1,6 +1,6 @@
 ---
-import Page from '#pages/blog/[...slug].astro';
 import { getCollection } from 'astro:content';
+import Page from '#pages/blog/[...slug].astro';
 
 export async function getStaticPaths() {
   return (await getCollection('blog'))

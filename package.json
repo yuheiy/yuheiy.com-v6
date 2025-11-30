@@ -40,16 +40,16 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
     "@eslint/js": "^9.39.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@types/sanitize-html": "^2.16.0",
     "@typescript-eslint/parser": "^8.48.0",
     "eslint": "^9.39.1",
     "eslint-plugin-astro": "^1.5.0",
     "eslint-plugin-better-tailwindcss": "^3.7.11",
     "eslint-plugin-jsx-a11y": "^6.10.2",
-    "prettier": "^3.7.1",
+    "prettier": "^3.7.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-css-order": "^2.1.2",
-    "prettier-plugin-organize-imports": "^4.3.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0"
   },

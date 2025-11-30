@@ -160,7 +160,7 @@ function Button({ asChild, ...props }) {
 TypeScriptを使用しつつ、`forwardRef`を適用する場合は、次のように記述する。
 
 ```tsx
-import { type ComponentPropsWithRef, forwardRef } from 'react';
+import { forwardRef, type ComponentPropsWithRef } from 'react';
 
 const Button = forwardRef<unknown, ComponentPropsWithRef<'button'> & { asChild?: boolean }>(
   ({ asChild, ...props }, forwardedRef) => {
@@ -369,12 +369,12 @@ import { Primitive } from '@radix-ui/react-primitive';
 import type * as Radix from '@radix-ui/react-primitive';
 import {
   Children,
-  ElementRef,
-  ReactElement,
-  ReactNode,
   cloneElement,
+  ElementRef,
   forwardRef,
   isValidElement,
+  ReactElement,
+  ReactNode,
 } from 'react';
 
 type ButtonElement = ElementRef<typeof Primitive.button>;
@@ -409,9 +409,9 @@ export const Button = forwardRef<ButtonElement, ButtonProps>(
 <summary>`Button`コンポーネントのテストケース</summary>
 
 ```tsx
-import { Button } from './button';
 import renderer from 'react-test-renderer';
 import { describe, expect, it } from 'vitest';
+import { Button } from './button';
 
 describe('empty', () => {
   it('default', async () => {
@@ -597,7 +597,7 @@ describe('mixed', () => {
 先ほどの`asChild` propにおいては、コンポーネントの内側に別の要素が入れ子になっている場合の表現の難しさが問題になった。しかし、このAriakitの`render` propのアイデアを借用すれば、比較的直感的なインターフェースとシンプルな実装を実現することもできる。
 
 ```tsx
-import { ComponentProps, ReactElement, ReactNode, cloneElement, forwardRef } from 'react';
+import { cloneElement, ComponentProps, forwardRef, ReactElement, ReactNode } from 'react';
 
 type ButtonProps = { render?: ReactElement } & ComponentProps<'button'>;
 

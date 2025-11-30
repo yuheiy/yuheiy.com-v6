@@ -117,8 +117,8 @@ function Primary() {
 ```tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import { ToggleButton } from './ToggleButton';
 import { useState } from 'react';
+import { ToggleButton } from './ToggleButton';
 
 const meta = {
   title: 'ToggleButton',
@@ -304,8 +304,8 @@ export const SelectedByDefault = {
 `ToggleButton.tsx`:
 
 ```tsx
-import { ReactNode, useCallback } from 'react';
 import { useControlledState } from '@react-stately/utils';
+import { ReactNode, useCallback } from 'react';
 
 export interface ToggleButtonProps {
   isSelected?: boolean | undefined;

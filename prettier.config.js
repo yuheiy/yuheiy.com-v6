@@ -4,15 +4,15 @@
  */
 export default {
   plugins: [
+    '@ianvs/prettier-plugin-sort-imports',
     'prettier-plugin-astro',
     'prettier-plugin-css-order',
-    'prettier-plugin-organize-imports',
   ],
   printWidth: 100,
   singleQuote: true,
 
-  // prettier-plugin-organize-imports
-  organizeImportsSkipDestructiveCodeActions: true,
+  // @ianvs/prettier-plugin-sort-imports
+  importOrder: ['<BUILTIN_MODULES>', '<THIRD_PARTY_MODULES>', '^#(.*)$', '^[.]'],
 
   overrides: [
     // prettier-plugin-astro
