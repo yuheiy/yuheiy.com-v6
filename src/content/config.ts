@@ -5,6 +5,7 @@ const blog = defineCollection({
   // Type-check frontmatter using a schema
   schema: ({ image }) =>
     z.object({
+      legacyUrl: z.boolean().optional(),
       title: z.string(),
       pubDate: z.date(),
       ogImage: image().optional(),
