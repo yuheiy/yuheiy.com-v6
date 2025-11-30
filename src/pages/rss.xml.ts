@@ -1,3 +1,6 @@
+import config from '#config';
+import { getBlogDescription } from '#lib/blog';
+import { blogPath } from '#paths';
 import { getContainerRenderer } from '@astrojs/mdx';
 import rss, { type RSSFeedItem } from '@astrojs/rss';
 import type { APIContext } from 'astro';
@@ -6,9 +9,6 @@ import { loadRenderers } from 'astro:container';
 import { getCollection } from 'astro:content';
 import sanitizeHtml from 'sanitize-html';
 import invariant from 'tiny-invariant';
-import config from '../config';
-import { getBlogDescription } from '../lib/blog';
-import { blogPath } from '../paths';
 
 export async function GET(context: APIContext) {
   invariant(context.site);

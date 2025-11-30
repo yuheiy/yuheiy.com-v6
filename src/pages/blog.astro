@@ -1,13 +1,13 @@
 ---
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { getCollection } from 'astro:content';
-import DateTime from '../components/DateTime.astro';
-import PageHeader from '../components/PageHeader.astro';
-import PageNav from '../components/PageNav.astro';
-import TeaserList, { type TeaserListItem } from '../components/TeaserList.astro';
-import Layout from '../layouts/Layout.astro';
-import { getBlogDescription } from '../lib/blog';
-import { blogPath } from '../paths';
+import DateTime from '#components/DateTime.astro';
+import PageHeader from '#components/PageHeader.astro';
+import PageNav from '#components/PageNav.astro';
+import TeaserList, { type TeaserListItem } from '#components/TeaserList.astro';
+import Layout from '#layouts/Layout.astro';
+import { getBlogDescription } from '#lib/blog';
+import { blogPath } from '#paths';
 
 const title = 'ブログ';
 const description = 'ウェブデザインやフロントエンドに関する雑記。';

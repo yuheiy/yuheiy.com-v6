@@ -1,15 +1,15 @@
 ---
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { getCollection, getEntry } from 'astro:content';
-import DateTime from '../components/DateTime.astro';
-import PageHeader from '../components/PageHeader.astro';
-import type { TeaserListItem } from '../components/TeaserList.astro';
-import TeaserList from '../components/TeaserList.astro';
-import YearMonthRange from '../components/YearMonthRange.astro';
-import config from '../config';
-import Layout from '../layouts/Layout.astro';
-import { getBlogDescription } from '../lib/blog';
-import { blogPath } from '../paths';
+import DateTime from '#components/DateTime.astro';
+import PageHeader from '#components/PageHeader.astro';
+import type { TeaserListItem } from '#components/TeaserList.astro';
+import TeaserList from '#components/TeaserList.astro';
+import YearMonthRange from '#components/YearMonthRange.astro';
+import config from '#config';
+import Layout from '#layouts/Layout.astro';
+import { getBlogDescription } from '#lib/blog';
+import { blogPath } from '#paths';
 
 const description =
   '安田祐平（やすだゆうへい）の個人ウェブサイトです。HTML/WAI-ARIA、CSS、JavaScript/TypeScript、ウェブサイトおよびウェブアプリケーション開発、インターフェースデザイン、アクセシビリティ、デザインシステム、DevOpsなどの話題が多いです。';
