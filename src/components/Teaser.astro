@@ -1,0 +1,41 @@
+---
+interface Props {
+  headingLevel: 2 | 3;
+  title: string;
+  link: string;
+  description?: string | undefined;
+}
+
+const { headingLevel, title, link, description } = Astro.props;
+
+const Heading = `h${headingLevel}`;
+---
+
+<section>
+  <header>
+    <p class="mt-10 text-xs text-dynamic-muted">
+      <slot name="meta" />
+    </p>
+  </header>
+
+  <Heading
+    class:list={`
+      mt-0.75 pb-[0.125em]
+      [word-break:auto-phrase]
+    `}
+  >
+    <a href={link} set:html={title} />
+  </Heading>
+
+  {
+    description && (
+      <p
+        class={`
+          mt-0.75 line-clamp-5 overflow-x-visible overflow-y-clip text-sm text-dynamic-muted
+          [hanging-punctuation:allow-end]
+        `}
+        set:html={description}
+      />
+    )
+  }
+</section>

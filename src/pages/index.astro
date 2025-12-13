@@ -1,10 +1,8 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import DateTime from '#components/DateTime.astro';
 import PageHeader from '#components/PageHeader.astro';
-import type { TeaserListItem } from '#components/TeaserList.astro';
-import TeaserList from '#components/TeaserList.astro';
+import Teaser from '#components/Teaser.astro';
 import YearMonthRange from '#components/YearMonthRange.astro';
 import config from '#config';
 import Layout from '#layouts/Layout.astro';
@@ -14,7 +12,7 @@ import { blogPath } from '#paths';
 const description =
   '安田祐平（やすだゆうへい）の個人ウェブサイトです。HTML/WAI-ARIA、CSS、JavaScript/TypeScript、ウェブサイトおよびウェブアプリケーション開発、インターフェースデザイン、アクセシビリティ、デザインシステム、DevOpsなどの話題が多いです。';
 
-const primaryItems: TeaserListItem[] = [
+const primaryItems = [
   // html, accessibility
   await getEntry('links-elsewhere', '2025/introduction-to-accessibility'),
   await getEntry('blog', '2022-11-03-how-to-understand-the-markup'),
@@ -67,67 +65,54 @@ const primaryItems: TeaserListItem[] = [
     }
   });
 
-const container = await AstroContainer.create();
+const projectItems = [
+  {
+    title: 'sdenv',
+    link: 'https://github.com/yuheiy/sdenv',
+    yearMonthRange: {
+      start: { year: 2023, month: 7 },
+    },
+    description:
+      'ウェブサイト（not ウェブアプリケーション）のためのフロントエンド開発スターターキット。',
+  },
+  {
+    title: 'accrefs',
+    link: 'https://accrefs.jp/',
+    yearMonthRange: {
+      start: { year: 2019, month: 9 },
+      end: { year: 2023, month: 1 },
+    },
+    description:
+      'ウェブアクセシビリティの参考資料をまとめたサイト。日本語の資料を中心にリンク数は200を超える。サイトのデザインおよび実装に携わる。有志のメンバーにより制作・運営されている。',
+  },
+  {
+    title: 'シフトブレイン／スタンダードデザインユニット',
+    link: 'https://standard.shiftbrain.com/',
+    yearMonthRange: {
+      start: { year: 2018, month: 10 },
+      end: { year: 2020, month: 6 },
+    },
+    description: '自社で所属していたチームのウェブサイト。',
+  },
+  {
+    title: 'yuhei blog',
+    link: 'https://yuheiy.hatenablog.com/',
+    yearMonthRange: {
+      start: { year: 2015, month: 10 },
+      end: { year: 2020, month: 11 },
+    },
+    description: '過去に更新していた個人ブログ。',
+  },
+];
 
-const projectItems: TeaserListItem[] = await Promise.all(
-  [
-    {
-      title: 'sdenv',
-      link: 'https://github.com/yuheiy/sdenv',
-      yearMonthRange: {
-        start: { year: 2023, month: 7 },
-      },
-      description:
-        'ウェブサイト（not ウェブアプリケーション）のためのフロントエンド開発スターターキット。',
-    },
-    {
-      title: 'accrefs',
-      link: 'https://accrefs.jp/',
-      yearMonthRange: {
-        start: { year: 2019, month: 9 },
-        end: { year: 2023, month: 1 },
-      },
-      description:
-        'ウェブアクセシビリティの参考資料をまとめたサイト。日本語の資料を中心にリンク数は200を超える。サイトのデザインおよび実装に携わる。有志のメンバーにより制作・運営されている。',
-    },
-    {
-      title: 'シフトブレイン／スタンダードデザインユニット',
-      link: 'https://standard.shiftbrain.com/',
-      yearMonthRange: {
-        start: { year: 2018, month: 10 },
-        end: { year: 2020, month: 6 },
-      },
-      description: '自社で所属していたチームのウェブサイト。',
-    },
-    {
-      title: 'yuhei blog',
-      link: 'https://yuheiy.hatenablog.com/',
-      yearMonthRange: {
-        start: { year: 2015, month: 10 },
-        end: { year: 2020, month: 11 },
-      },
-      description: '過去に更新していた個人ブログ。',
-    },
-  ].map(async ({ yearMonthRange, ...item }) => ({
-    ...item,
-    meta: await container.renderToString(YearMonthRange, {
-      props: yearMonthRange,
-    }),
-  })),
-);
-
-const latestBlogItems: TeaserListItem[] = await Promise.all(
+const latestBlogItems = await Promise.all(
   (await getCollection('blog'))
     .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .slice(0, 3)
     .map(async (entry) => ({
       title: entry.data.title,
       link: blogPath(entry),
-      meta: await container.renderToString(DateTime, {
-        props: {
-          date: entry.data.pubDate,
-        },
-      }),
+      date: entry.data.pubDate,
       description: await getBlogDescription(entry),
     })),
 );
@@ -140,19 +125,37 @@ const latestBlogItems: TeaserListItem[] = await Promise.all(
     <section>
       <h2 class="mt-24 text-lg font-bold kerning-all">おもな投稿</h2>
 
-      <TeaserList headingLevel={3} items={primaryItems} />
+      {
+        primaryItems.map(({ meta, ...item }) => (
+          <Teaser headingLevel={3} {...item}>
+            <Fragment slot="meta" set:html={meta} />
+          </Teaser>
+        ))
+      }
     </section>
 
     <section>
       <h2 class="mt-24 text-lg font-bold kerning-all">プロジェクト</h2>
 
-      <TeaserList headingLevel={3} items={projectItems} />
+      {
+        projectItems.map(({ yearMonthRange, ...item }) => (
+          <Teaser headingLevel={3} {...item}>
+            <YearMonthRange slot="meta" {...yearMonthRange} />
+          </Teaser>
+        ))
+      }
     </section>
 
     <section>
       <h2 class="mt-24 text-lg font-bold kerning-all">最近のブログ</h2>
 
-      <TeaserList headingLevel={3} items={latestBlogItems} />
+      {
+        latestBlogItems.map(({ date, ...item }) => (
+          <Teaser headingLevel={3} {...item}>
+            <DateTime slot="meta" date={date} />
+          </Teaser>
+        ))
+      }
     </section>
   </main>
 </Layout>

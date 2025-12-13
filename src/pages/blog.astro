@@ -1,10 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import DateTime from '#components/DateTime.astro';
 import PageHeader from '#components/PageHeader.astro';
 import PageNav from '#components/PageNav.astro';
-import TeaserList, { type TeaserListItem } from '#components/TeaserList.astro';
+import Teaser from '#components/Teaser.astro';
 import Layout from '#layouts/Layout.astro';
 import { getBlogDescription } from '#lib/blog';
 import { blogPath } from '#paths';
@@ -12,19 +11,13 @@ import { blogPath } from '#paths';
 const title = 'ブログ';
 const description = 'ウェブデザインやフロントエンドに関する雑記。';
 
-const container = await AstroContainer.create();
-
-const items: TeaserListItem[] = await Promise.all(
+const items = await Promise.all(
   (await getCollection('blog'))
     .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .map(async (entry) => ({
       title: entry.data.title,
       link: blogPath(entry),
-      meta: await container.renderToString(DateTime, {
-        props: {
-          date: entry.data.pubDate,
-        },
-      }),
+      date: entry.data.pubDate,
       description: await getBlogDescription(entry),
     })),
 );
@@ -35,6 +28,12 @@ const items: TeaserListItem[] = await Promise.all(
   <PageHeader title={title} description={description} />
 
   <main>
-    <TeaserList headingLevel={2} items={items} />
+    {
+      items.map(({ date, ...item }) => (
+        <Teaser headingLevel={2} {...item}>
+          <DateTime slot="meta" date={date} />
+        </Teaser>
+      ))
+    }
   </main>
 </Layout>
