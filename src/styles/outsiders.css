@@ -1,56 +1,59 @@
 /* Syntax Highlighting in Astro */
-.astro-code,
-.astro-code span {
-  background-color: var(--background-color-dynamic-inset) !important;
+@scope (.astro-code) {
+  :is(&, span) {
+    background-color: var(--background-color-dynamic-inset) !important;
 
-  /* https://shiki.style/guide/dual-themes#query-based-dark-mode */
-  @media (prefers-color-scheme: dark) {
-    color: var(--shiki-dark) !important;
-    font-style: var(--shiki-dark-font-style) !important;
-    font-weight: var(--shiki-dark-font-weight) !important;
-    text-decoration: var(--shiki-dark-text-decoration) !important;
+    /* https://shiki.style/guide/dual-themes#query-based-dark-mode */
+    @media (prefers-color-scheme: dark) {
+      color: var(--shiki-dark) !important;
+      font-style: var(--shiki-dark-font-style) !important;
+      font-weight: var(--shiki-dark-font-weight) !important;
+      text-decoration: var(--shiki-dark-text-decoration) !important;
+    }
+  }
+
+  &[data-language='plaintext'] {
+    white-space: normal;
   }
 }
 
-.astro-code[data-language='plaintext'] {
-  white-space: normal;
-}
-
 /* <Tweet> component in Astro Embed */
-astro-embed-tweet {
-  display: block;
-}
+@scope (astro-embed-tweet) {
+  & {
+    display: block;
+  }
 
-astro-embed-tweet::before {
-  --color-twitter: #1da1f2;
-  display: block;
-  border-inline: 1px solid var(--color-twitter);
-  border-start-start-radius: var(--radius-md);
-  border-start-end-radius: var(--radius-md);
-  background-color: var(--color-twitter);
-  padding: --spacing(1) --spacing(5);
-  content: 'X (Twitter)';
-  color: white;
-  font-weight: bold;
-  font-size: var(--text-xs);
-  line-height: normal;
-}
+  &::before {
+    --color-twitter: #1da1f2;
+    display: block;
+    border-inline: 1px solid var(--color-twitter);
+    border-start-start-radius: var(--radius-md);
+    border-start-end-radius: var(--radius-md);
+    background-color: var(--color-twitter);
+    padding: --spacing(1) --spacing(5);
+    content: 'X (Twitter)';
+    color: white;
+    font-weight: bold;
+    font-size: var(--text-xs);
+    line-height: normal;
+  }
 
-astro-embed-tweet .twitter-tweet:not(.twitter-tweet-rendered) {
-  border-bottom-right-radius: var(--radius-md);
-  border-bottom-left-radius: var(--radius-md);
-  border-inline: 1px solid light-dark(var(--border-color-dynamic), transparent);
-  border-block-end: 1px solid light-dark(var(--border-color-dynamic), transparent);
-  background-color: white;
-  padding: --spacing(4) --spacing(5);
-  color: var(--color-gray-500);
-  font-size: var(--text-sm);
-  line-height: var(--text-sm--line-height);
-}
+  .twitter-tweet:not(.twitter-tweet-rendered) {
+    border-bottom-right-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
+    border-inline: 1px solid light-dark(var(--border-color-dynamic), transparent);
+    border-block-end: 1px solid light-dark(var(--border-color-dynamic), transparent);
+    background-color: white;
+    padding: --spacing(4) --spacing(5);
+    color: var(--color-gray-500);
+    font-size: var(--text-sm);
+    line-height: var(--text-sm--line-height);
+  }
 
-astro-embed-tweet .twitter-tweet:not(.twitter-tweet-rendered) p {
-  margin-block-end: --spacing(3);
-  color: var(--color-gray-800);
-  font-size: var(--text-base);
-  line-height: var(--text-base--line-height);
+  .twitter-tweet:not(.twitter-tweet-rendered) p {
+    margin-block-end: --spacing(3);
+    color: var(--color-gray-800);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+  }
 }

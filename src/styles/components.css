@@ -1,5 +1,5 @@
 /* Prose */
-.prose {
+@scope (.prose) {
   h2 {
     @apply text-xl;
     margin-block-start: --spacing(16);
