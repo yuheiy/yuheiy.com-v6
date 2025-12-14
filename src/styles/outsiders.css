@@ -24,6 +24,7 @@
   }
 
   &::before {
+    @apply text-xs/[normal];
     --color-twitter: #1da1f2;
     display: block;
     border-inline: 1px solid var(--color-twitter);
@@ -34,11 +35,10 @@
     content: 'X (Twitter)';
     color: white;
     font-weight: bold;
-    font-size: var(--text-xs);
-    line-height: normal;
   }
 
   .twitter-tweet:not(.twitter-tweet-rendered) {
+    @apply text-sm;
     border-bottom-right-radius: var(--radius-md);
     border-bottom-left-radius: var(--radius-md);
     border-inline: 1px solid light-dark(var(--border-color-dynamic), transparent);
@@ -46,14 +46,11 @@
     background-color: white;
     padding: --spacing(4) --spacing(5);
     color: var(--color-gray-500);
-    font-size: var(--text-sm);
-    line-height: var(--text-sm--line-height);
   }
 
   .twitter-tweet:not(.twitter-tweet-rendered) p {
+    @apply text-base;
     margin-block-end: --spacing(3);
     color: var(--color-gray-800);
-    font-size: var(--text-base);
-    line-height: var(--text-base--line-height);
   }
 }

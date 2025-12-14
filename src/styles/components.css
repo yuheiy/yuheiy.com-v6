@@ -1,21 +1,17 @@
 /* Prose */
 @scope (.prose) {
   h2 {
-    @apply text-xl;
+    @apply text-xl kerning-all;
     margin-block-start: --spacing(16);
     font-weight: bold;
-    font-kerning: normal;
-    font-feature-settings: 'palt';
     text-wrap: pretty;
     word-break: auto-phrase;
   }
 
   h3 {
-    @apply text-lg;
+    @apply text-lg kerning-all;
     margin-block-start: --spacing(12);
     font-weight: bold;
-    font-kerning: normal;
-    font-feature-settings: 'palt';
     text-wrap: pretty;
     word-break: auto-phrase;
   }
