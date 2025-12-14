@@ -1,6 +1,6 @@
 /* Syntax Highlighting in Astro */
 @scope (.astro-code) {
-  :is(&, span) {
+  :is(:scope, span) {
     background-color: var(--background-color-dynamic-inset) !important;
 
     /* https://shiki.style/guide/dual-themes#query-based-dark-mode */
@@ -19,11 +19,11 @@
 
 /* <Tweet> component in Astro Embed */
 @scope (astro-embed-tweet) {
-  & {
+  :scope {
     display: block;
   }
 
-  &::before {
+  :scope::before {
     @apply text-xs/[normal];
     --color-twitter: #1da1f2;
     display: block;
