@@ -16,7 +16,14 @@
     word-break: auto-phrase;
   }
 
-  h2 + h3 {
+  h4 {
+    margin-block-start: --spacing(8);
+    font-weight: bold;
+    text-wrap: pretty;
+    word-break: auto-phrase;
+  }
+
+  :is(h2 + h3, h3 + h4) {
     margin-block-start: --spacing(4);
   }
 
@@ -29,7 +36,7 @@
     hanging-punctuation: allow-end;
   }
 
-  :is(h2, h3) + p {
+  :is(h2, h3, h4) + p {
     margin-block-start: --spacing(4);
   }
 
@@ -87,7 +94,7 @@
     list-style-type: revert;
   }
 
-  :is(h2, h3) + :is(ol, ul) {
+  :is(h2, h3, h4) + :is(ol, ul) {
     margin-block-start: --spacing(4);
   }
 
