@@ -1,4 +1,5 @@
 ---
+import path from 'node:path';
 import type { HTMLAttributes } from 'astro/types';
 import puppeteer from 'puppeteer';
 import invariant from 'tiny-invariant';
@@ -16,8 +17,6 @@ const { src, ...attrs } = Astro.props;
 
 invariant(typeof src === 'string', 'SmartIframe requires a src prop');
 
-const url = new URL(src, Astro.url).href;
-
 const browser = await puppeteer.launch({
   headless: 'shell',
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -26,12 +25,12 @@ const page = await browser.newPage();
 
 await page.setViewport({ width: 756, height: 720 });
 
-const response = await page.goto(url, {
-  timeout: 100000,
-  waitUntil: 'load',
-});
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const filePath = 'file://' + path.join(__dirname, '../../public', new URL(src, Astro.url).pathname);
+const response = await page.goto(filePath);
+
 if (!response?.ok()) {
-  console.warn(`Response status: ${response?.status()}`);
+  throw new Error(`Response status: ${response?.status()}`);
 }
 
 const [title, height] = await page.evaluate(
