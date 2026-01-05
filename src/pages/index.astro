@@ -16,29 +16,25 @@ const primaryItems = [
   // html, accessibility
   await getEntry('links-elsewhere', '2025/introduction-to-accessibility'),
   await getEntry('blog', '2022-11-03-how-to-understand-the-markup'),
-  await getEntry('links-elsewhere', '2019/html-for-creators'),
+
+  // css
+  await getEntry('blog', '20210127-prefer-margin-top'),
+  await getEntry('blog', '2022-08-01-declarative-design'),
+  await getEntry('blog', '2022-08-14-same-width-buttons'),
+  await getEntry('blog', '2024-07-22-text-wrap-in-japanese'),
+  await getEntry('blog', '2025/designing-the-in-between'),
+  await getEntry('blog', '2025/flexible-layout-compositions'),
 
   // tailwindcss
   await getEntry('links-elsewhere', '2023/gihyojp-tailwindcss'),
-  await getEntry('blog', '2022-06-11-css-components'),
   await getEntry('links-elsewhere', '2020/css-utility-classes-and-separation-of-concerns'),
 
   // everylayout
   await getEntry('blog', '20211011-publication-of-everylayout'),
   await getEntry('links-elsewhere', '2021/shiftbrain-everylayout'),
-  await getEntry('blog', '2022-08-01-declarative-design'),
 
   // design
   await getEntry('blog', '2024-12-01-i-am-not-a-visual-thinker'),
-
-  // typography
-  await getEntry('blog', '2024-07-22-text-wrap-in-japanese'),
-
-  // css
-  await getEntry('blog', '20210127-prefer-margin-top'),
-  await getEntry('blog', '2022-08-14-same-width-buttons'),
-  await getEntry('blog', '2025/designing-the-in-between'),
-  await getEntry('blog', '2025/flexible-layout-compositions'),
 ]
   .map((entry) => {
     if (!entry) throw new Error('the entry is undefined.');
