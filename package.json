@@ -26,7 +26,7 @@
     "@astrojs/sitemap": "^3.6.0",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.6",
-    "astro-embed": "^0.10.0",
+    "astro-embed": "^0.11.0",
     "baseline-status": "^1.1.1",
     "mdast-util-to-string": "^4.0.0",
     "puppeteer": "^24.34.0",
