@@ -18,12 +18,7 @@ const Heading = `h${headingLevel}`;
     </p>
   </header>
 
-  <Heading
-    class:list={`
-      mt-0.75 pb-[0.125em]
-      [word-break:auto-phrase]
-    `}
-  >
+  <Heading class:list={`mt-0.75 pb-[0.125em] [word-break:auto-phrase]`}>
     <a href={link} set:html={title} />
   </Heading>
 
