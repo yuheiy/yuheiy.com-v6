@@ -1,11 +1,13 @@
+allowBuilds:
+  esbuild: true
+  puppeteer: true
+  sharp: true
+
+blockExoticSubdeps: true
+
 engineStrict: true
 
-minimumReleaseAge: 1440
-
-onlyBuiltDependencies:
-  - esbuild
-  - puppeteer
-  - sharp
+minimumReleaseAge: 1440 # At least a day
 
 patchedDependencies:
   astro: patches/astro.patch
@@ -16,6 +18,4 @@ strictPeerDependencies: true
 
 trustPolicy: no-downgrade
 
-trustPolicyExclude:
-  - chokidar@4.0.3
-  - vite@6.4.1
+trustPolicyIgnoreAfter: 10080 # 1 week
