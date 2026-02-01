@@ -53,7 +53,7 @@ Tailwind CSSでは、テーマ変数の`--spacing`に応じてmarginユーティ
 <div class="m-[calc(3/16*1rem)]"><!-- ... --></div>
 ```
 
-また、デフォルトの`--spacing`では常にrem単位が使用されるが、アクセシビリティの観点では好ましくない。具体的には、ブラウザやOSの文字サイズ拡大機能を使用した際、すべてにrem単位を使っていると文字サイズだけでなくすべてが同時に拡大してしまう[Tailwind作者のAdam Wathanもこの設計は失敗だったと認めている](https://x.com/adamwathan/status/2003638134840656373)。本来は、用途に応じてrem単位とpx単位を使い分けるべきだ。
+また、デフォルトの`--spacing`では常にrem単位が使用されるが、アクセシビリティの観点では好ましくない。具体的には、ブラウザやOSの文字サイズ拡大機能を使用した際、すべてにrem単位を使っていると文字サイズだけでなくすべてが同時に拡大してしまう（[Tailwind作者のAdam Wathanもこの設計は失敗だったと認めている](https://x.com/adamwathan/status/2003638134840656373)）。本来は、用途に応じてrem単位とpx単位を使い分けるべきだ。
 
 `--spacing`を無効にすると、使用する単位をプロパティ別に設定できる。`--spacing-*`はあらゆるユーティリティに影響するが、個別のユーティリティにだけ有効なテーマ変数も定義されている。これらのテーマ変数はドキュメント化されていないが、[utilities.ts](https://github.com/tailwindlabs/tailwindcss/blob/v4.1.18/packages/tailwindcss/src/utilities.ts)に実装されている`themeKeys`の値を参考にすれば、次のようにしてプロパティ別のスペーシングを設定できる。
 
