@@ -42,12 +42,14 @@
   --leading-normal: 1.85;
 }
 
+@layer theme {
+  :root {
+    --half-leading: calc((1lh - 1em) / 2);
+  }
+}
+
 @layer base {
   :root {
-    --half-leading: calc((1lh - 1cap) / 2);
-  }
-
-  html {
     container: root / inline-size;
     background-color: var(--background-color-dynamic);
     scrollbar-gutter: stable;
@@ -59,12 +61,12 @@
     text-underline-offset: 0.2em;
     overflow-wrap: anywhere;
     text-spacing-trim: trim-start;
-  }
 
-  /* https://schepp.dev/posts/smooth-scrolling-and-page-search/ */
-  html:focus-within {
-    @media (prefers-reduced-motion: no-preference) {
-      scroll-behavior: smooth;
+    /* https://schepp.dev/posts/smooth-scrolling-and-page-search/ */
+    &:focus-within {
+      @media (prefers-reduced-motion: no-preference) {
+        scroll-behavior: smooth;
+      }
     }
   }
 
