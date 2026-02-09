@@ -90,7 +90,6 @@
   :is(ol, ul) {
     margin-block-start: --spacing(8);
     padding-inline-start: 2rem;
-    hanging-punctuation: allow-end;
     list-style-type: revert;
   }
 
@@ -104,6 +103,7 @@
 
   li {
     margin-block-start: --spacing(1);
+    hanging-punctuation: allow-end;
   }
 
   figure {
