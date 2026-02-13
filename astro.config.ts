@@ -2,9 +2,12 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
+import type { Element } from 'hast';
 import { toString } from 'mdast-util-to-string';
+import rehypeUnwrapImages from 'rehype-unwrap-images';
 import type { Pluggable } from 'unified';
 import { select, type Node } from 'unist-util-select';
+import { visit } from 'unist-util-visit';
 
 const remarkInjectDescription: Pluggable = () => {
   return (tree, { data }) => {
@@ -16,6 +19,25 @@ const remarkInjectDescription: Pluggable = () => {
   };
 };
 
+const rehypeUnwrapFigcaptionParagraphs: Pluggable = () => {
+  return (tree) => {
+    visit(tree, 'element', (node: Element, index, parent) => {
+      if (
+        node.tagName !== 'p' ||
+        index === undefined ||
+        !parent ||
+        parent.type !== 'mdxJsxFlowElement' ||
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (parent as any).name !== 'figcaption'
+      )
+        return;
+
+      parent.children.splice(index, 1, ...node.children);
+      return index;
+    });
+  };
+};
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://yuheiy.com',
@@ -23,6 +45,7 @@ export default defineConfig({
   integrations: [
     mdx({
       remarkPlugins: [remarkInjectDescription],
+      rehypePlugins: [rehypeUnwrapImages, rehypeUnwrapFigcaptionParagraphs],
     }),
     sitemap(),
   ],

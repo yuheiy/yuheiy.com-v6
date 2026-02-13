@@ -39,12 +39,6 @@
     margin-block-start: --spacing(4);
   }
 
-  /* Remove the unnecessary paragraph elements rendered by MDX. */
-  figure > p:has(> img),
-  figcaption > p {
-    display: contents;
-  }
-
   hr {
     margin-block: calc(--spacing(12) + var(--half-leading));
     border-block-start: 4px solid var(--border-color-dynamic);
