@@ -11,6 +11,8 @@ pubDate: 2022-03-21T17:35:00.000+09:00
 
 Sassでは、引数の値に応じて宣言をクラスに注入できるMixinの機能がある。たとえば次のようにすれば、フォントサイズがビューポートの幅に応じて流動的に変化するように実装できる。
 
+<figure>
+
 ```scss
 @function rem($px) {
   @return ($px / 16 * 1rem);
@@ -33,11 +35,15 @@ h1 {
 }
 ```
 
+</figure>
+
 Tailwind CSSを使う場合でも、独自のプラグインを実装することで似たような仕組みが実現できる。
 
 Tailwind CSSによってデフォルトで提供されているクラス群は、内部的には、すべてプラグイン機構を使って実装されている。プラグインの設定によって、クラス名のプリフィックスを決めたり、受け取った値に応じてどのような宣言を適用するかの処理をしたりしている。
 
 プラグインはユーザー側でも簡単に作成できるようになっている。`tailwind.config.js`に次のようなコードを書いていくだけだ。
+
+<figure>
 
 ```javascript
 const plugin = require('tailwindcss/plugin');
@@ -51,15 +57,23 @@ module.exports = {
 };
 ```
 
+</figure>
+
 上記のコード例は公式ドキュメントからの引用。[APIについても公式ドキュメントで解説されている](https://tailwindcss.com/docs/plugins)ので、適宜参照されたし。
 
 これを使って、冒頭で例示したMixinのようなものを実装してみる。次のようなクラス名を記述することで意図した機能が実現できるようにする。
+
+<figure>
 
 ```html
 <div class="fluid-text-[24px,32px]">...</div>
 ```
 
+</figure>
+
 プラグインのAPIにある`matchUtilities`関数を使うと、特定のクラス名の後ろ側に付与された値に応じてユーティリティクラスを生成する仕組みができる。
+
+<figure>
 
 ```javascript
 const fluidText = plugin(function ({ matchUtilities }) {
@@ -81,9 +95,13 @@ const fluidText = plugin(function ({ matchUtilities }) {
 });
 ```
 
+</figure>
+
 `[]`で囲われた文字列はそのままプラグインに渡される。`,`で区切られた箇所も、配列に変換されたりするわけではなく、単純に`45rem,2rem`という文字列を受け取ることになる。その文字列をプラグインの実装で分割する。便宜上`,`で区切っているだけであって、このルールはどこかで決まっているものではない。
 
 そして、このプラグインを使えば、次のようなCSSが生成される。
+
+<figure>
 
 ```css
 .fluid-text-\[24px\2c 32px\] {
@@ -91,7 +109,11 @@ const fluidText = plugin(function ({ matchUtilities }) {
 }
 ```
 
+</figure>
+
 `tailwind.config.js`の全体のコードは次のようになる。
+
+<figure>
 
 ```javascript
 const plugin = require('tailwindcss/plugin');
@@ -129,5 +151,7 @@ module.exports = {
   plugins: [fluidText],
 };
 ```
+
+</figure>
 
 プラグインを使えば、ほかにもいろいろなことができる。少なくとも、Tailwind CSSがデフォルトで提供しているようなことはすべて実現できる。[`corePlugins.js`](https://github.com/tailwindlabs/tailwindcss/blob/master/src/corePlugins.js)の実装を眺めてみてもらえればイメージしやすいと思う。[公式プラグイン](https://tailwindcss.com/docs/typography-plugin)の実装も参考になる。

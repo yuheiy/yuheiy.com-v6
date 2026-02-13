@@ -11,6 +11,8 @@ Storybookにおいて、Reactコンポーネントを使ったstoryを作成す�
 
 `Button.tsx`:
 
+<figure>
+
 ```tsx
 import { MouseEvent, ReactNode } from 'react';
 
@@ -28,7 +30,11 @@ export function Button({ children, onClick }: ButtonProps) {
 }
 ```
 
+</figure>
+
 `Button.stories.tsx`:
+
+<figure>
 
 ```tsx
 import type { Meta, StoryObj } from '@storybook/react';
@@ -53,7 +59,11 @@ export const Primary = {
 } satisfies Story;
 ```
 
+</figure>
+
 このように記述することで、コンポーネントにargsが渡されたうえで描画される。疑似コードで表現すれば次のようになる。
+
+<figure>
 
 ```tsx
 function Primary() {
@@ -65,9 +75,13 @@ function Primary() {
 }
 ```
 
+</figure>
+
 一方、[controlledなコンポーネント](https://ja.react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components)のstoryを作成する場合、そのコンポーネントの状態を外部から制御するための実装が必要になる。たとえば次のように。
 
 `ToggleButton.tsx`:
+
+<figure>
 
 ```tsx
 import { ReactNode, useCallback } from 'react';
@@ -91,7 +105,11 @@ export function ToggleButton({ isSelected, children, onChange }: ToggleButtonPro
 }
 ```
 
+</figure>
+
 `ToggleButton.stories.tsx`:
+
+<figure>
 
 ```tsx
 import { useState } from 'react';
@@ -108,11 +126,15 @@ function Primary() {
 }
 ```
 
+</figure>
+
 ## `render`メソッドの実装
 
 これをstoryとして表現するには、`component`プロパティにコンポーネントを指定するだけでは不十分である。そこでこの描画方法をカスタマイズするために、`render`メソッドを併せて実装する必要がある。
 
 `ToggleButton.stories.tsx`:
+
+<figure>
 
 ```tsx
 import type { Meta, StoryObj } from '@storybook/react';
@@ -143,6 +165,8 @@ export const Primary = {
 } satisfies Story;
 ```
 
+</figure>
+
 metadata（`meta`）として指定された値はstoryに継承されるため、自ずとPrimary storyでは同じ`render`メソッドが再利用される。ちなみに`render`メソッドに`Render`という名前で関数宣言を記述しているのは、[eslint-plugin-react-hooksの`react-hooks/rules-of-hooks`ルールとの競合を回避するため](https://github.com/storybookjs/storybook/issues/21115)だ。
 
 これによって、controlledなコンポーネントを操作可能なstoryをを作成できる。ただしこの実装では、Storybookのcontrolsからargsの値を制御できなくなってしまう。
@@ -162,6 +186,8 @@ metadata（`meta`）として指定された値はstoryに継承されるため�
 そのようなケースに対応すべく、argsの値を操作する[`useArgs`フック](https://storybook.js.org/docs/writing-stories/args#setting-args-from-within-a-story)がStorybookによって提供されている。これを利用することで次のような実装ができる。
 
 `ToggleButton.stories.tsx`:
+
+<figure>
 
 ```tsx
 import { useArgs } from '@storybook/preview-api';
@@ -191,11 +217,15 @@ const meta = {
 } satisfies Meta<typeof ToggleButton>;
 ```
 
+</figure>
+
 残る問題は、argsに設定されている`onChange`が呼び出されていないことである。`onChange`に渡されている[`fn()`はメソッドをモックするための機能](https://storybook.js.org/docs/essentials/actions#via-storybooktest-fn-spy-function)であり、[Jestにあるモック関数](https://jestjs.io/ja/docs/mock-functions)に似たものだ。これを用いることで、呼び出しのたびにStorybookのActionsパネルにログを表示したり、interaction testsにて呼び出し回数を調べたりできる。storyをより有用なものにするには、これが機能している方が良いだろう。
 
 そんなわけで、このモックの呼び出しを有効にするには、次のように実装する。
 
 `ToggleButton.stories.tsx`:
+
+<figure>
 
 ```tsx
 import { useArgs } from '@storybook/preview-api';
@@ -228,6 +258,8 @@ const meta = {
 } satisfies Meta<typeof ToggleButton>;
 ```
 
+</figure>
+
 `onChange` propの呼び出しタイミングでargsの`onChange`メソッドと`updateArgs`フックが同時に呼び出されるようにする。それにより、argsの値を制御可能にしつつ、メソッドの呼び出しのたびにログが表示されるようにできる。
 
 import withUseArgsVideo from './assets/controlled-components-in-storybook/with-useargs.mp4';
@@ -245,6 +277,8 @@ import withUseArgsVideo from './assets/controlled-components-in-storybook/with-u
 そのため、`useArgs`フックを使わないパターンの実装も紹介しておく。次のようになる。
 
 `ToggleButton.stories.tsx`:
+
+<figure>
 
 ```tsx
 import type { Meta, StoryObj } from '@storybook/react';
@@ -281,7 +315,11 @@ const meta = {
 } satisfies Meta<typeof ToggleButton>;
 ```
 
+</figure>
+
 まず、`useArgs`フックの代わりに、前述と同様の`useState`フックを使うようにする。次に、argsに設定した`isSelected`を`useState`フックに渡す。これによって、argsから初期値を制御できるようになる。別のstoryを作成する際に次のように活用できる。
+
+<figure>
 
 ```tsx
 export const SelectedByDefault = {
@@ -290,6 +328,8 @@ export const SelectedByDefault = {
   },
 } satisfies Story;
 ```
+
+</figure>
 
 最後に、argTypesから`isSelected`の`control`を`false`にする。`useArgs`フックを使用しないとcontrolからの制御はできないので、control自体を非表示にしてしまう。
 
@@ -302,6 +342,8 @@ export const SelectedByDefault = {
 [React Spectrum](https://react-spectrum.adobe.com/)で利用されている[@react-stately/utils](https://github.com/adobe/react-spectrum/tree/%40react-stately/utils%403.10.1/packages/%40react-stately/utils)では、そのための`useControlledState`フックが提供されており、次のような実装ができる。
 
 `ToggleButton.tsx`:
+
+<figure>
 
 ```tsx
 import { useControlledState } from '@react-stately/utils';
@@ -332,5 +374,7 @@ export function ToggleButton({ children, ...props }: ToggleButtonProps) {
   );
 }
 ```
+
+</figure>
 
 {/* prettier-ignore */}[その他の使用例は同リポジトリから参照できる](<https://github.com/search?q=repo%3Aadobe%2Freact-spectrum%20useControlledState(&type=code>)。

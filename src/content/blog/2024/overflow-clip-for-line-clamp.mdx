@@ -9,6 +9,8 @@ CSSの`-webkit-line-clamp`プロパティを使うとき、通常は`overflow: h
 
 <figure>![](./assets/overflow-clip-for-line-clamp/1.png)</figure>
 
+<figure>
+
 ```css
 p {
   display: -webkit-box;
@@ -18,9 +20,13 @@ p {
 }
 ```
 
+</figure>
+
 しかし、`hanging-punctuation`プロパティを併用する場合、`overflow: hidden`が指定されているとはみ出した役物が見切れてしまう。
 
 <figure>![](./assets/overflow-clip-for-line-clamp/2.png)</figure>
+
+<figure>
 
 ```css
 p {
@@ -32,9 +38,13 @@ p {
 }
 ```
 
+</figure>
+
 `-webkit-line-clamp`プロパティを機能させるには、本来は`overflow-y`プロパティを使うだけで十分だ。ただし`overflow-y: hidden`を指定すると、その副作用として横方向にスクロール可能な状態になってしまう。
 
 <figure>![](./assets/overflow-clip-for-line-clamp/3.png)</figure>
+
+<figure>
 
 ```css
 p {
@@ -46,9 +56,13 @@ p {
 }
 ```
 
+</figure>
+
 この問題を解決するのが、`clip`である。`clip`を使うと、単方向の切り取りを実現しつつ、もう一方はスクロール不能な状態のままにできる。
 
 <figure>![](./assets/overflow-clip-for-line-clamp/4.png)</figure>
+
+<figure>
 
 ```css
 p {
@@ -59,5 +73,7 @@ p {
   hanging-punctuation: allow-end;
 }
 ```
+
+</figure>
 
 `hanging-punctuation`プロパティにかぎらず、横方向にコンテンツのはみ出しが発生する場面においては有効だろう。

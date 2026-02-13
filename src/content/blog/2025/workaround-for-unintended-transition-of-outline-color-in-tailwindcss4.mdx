@@ -9,6 +9,8 @@ Tailwind CSS 4では、`transition`ユーティリティおよび`transition-col
 
 変更前（Tailwind CSS 3）:
 
+<figure>
+
 {/* prettier-ignore */}
 ```css
 .transition {
@@ -26,7 +28,11 @@ Tailwind CSS 4では、`transition`ユーティリティおよび`transition-col
 }
 ```
 
+</figure>
+
 変更後（Tailwind CSS 4）:
+
+<figure>
 
 {/* prettier-ignore */}
 ```css
@@ -43,11 +49,14 @@ Tailwind CSS 4では、`transition`ユーティリティおよび`transition-col
 }
 ```
 
+</figure>
+
 これにともなって、要素をフォーカスしたときのインジケータの色が一瞬`currentcolor`になってしまう問題が生じることがある。
 
 Chromeのユーザーエージェントスタイルシートでは、フォーカス時の`outline-color`プロパティの値として`-webkit-focus-ring-color`が指定されている。
 
 <figure>
+
 {/* prettier-ignore */}
 ```css
 :focus-visible {
@@ -130,6 +139,8 @@ staticUtility('transition-colors', [
 
 これらを上書きするには、`@utility`ディレクティブを使ってCSSを記述する。ここで指定されている値から`outline-color`プロパティを取り除いて指定する。
 
+<figure>
+
 {/* prettier-ignore */}
 ```css
 @utility transition {
@@ -143,15 +154,21 @@ staticUtility('transition-colors', [
 }
 ```
 
+</figure>
+
 ただし、これらユーティリティのプロパティ値は予期せず変更される可能性があるため、Tailwind CSSのアップデートにともなう変更を監視して追従できるようにしておく必要がある。
 
 ## 2. `transition`ユーティリティの対象プロパティを個別に指定する
 
 `transition`ユーティリティ自体の実装に手を入れずとも、arbitrary valuesとしてユーティリティの値を調整することはできる。次のようにして対象のプロパティだけを個別に指定すれば、意図しないプロパティのtransitionが有効になってしまうことを回避できる。
 
+<figure>
+
 ```html
 <button class="bg-blue-500 transition-[background-color] hover:bg-indigo-500"><!-- ... --></button>
 ```
+
+</figure>
 
 ## 3. フォーカス可能な要素すべての`outline-color`プロパティにデフォルト値を指定する
 
@@ -168,9 +185,13 @@ staticUtility('transition-colors', [
 
 この例はカスタムの`outline-color`プロパティを適用するものだが、ブラウザデフォルトのフォーカスリングを適用したい場合には次のようにする。
 
+<figure>
+
 ```html
 <button class="outline-[-webkit-focus-ring-color] transition"><!-- ... --></button>
 ```
+
+</figure>
 
 これによって、要素がフォーカスされてフォーカスリングが表示される際のtransitionを無効化できる。
 
@@ -179,6 +200,8 @@ Firefoxではフォーカス時の`outline-color`プロパティの値は`curren
 ## 4. すべての要素の`outline-color`プロパティのデフォルト値を上書きする
 
 `outline-color`プロパティを個別に設定するアプローチでは、やはり作業の抜け漏れが生じる可能性がある。それよりも、あらかじめすべての要素のプロパティ値を指定してしまうのが良いだろう。次のようにして実装する。
+
+<figure>
 
 ```css
 @layer base {
@@ -191,3 +214,6 @@ Firefoxではフォーカス時の`outline-color`プロパティの値は`curren
   }
 }
 ```
+
+</figure>
+````

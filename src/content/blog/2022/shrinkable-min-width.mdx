@@ -10,11 +10,15 @@ import SmartIframe from '#components/SmartIframe.astro';
 
 ボタンのラベルが短い場合でも、ボタン自体には最低限ある程度の幅を持たせたいという場合がある。そんなときには、ボタン自体に`min-width`を指定して最低幅を設定する。
 
+<figure>
+
 ```css
 button {
   min-width: 10em;
 }
 ```
+
+</figure>
 
 しかし、そのボタンを配置するコンテナの幅が、ボタン自体の`min-width`の値よりも狭くなってしまうこともある。すると、ボタンがコンテナをはみ出してしまう。
 
@@ -28,11 +32,15 @@ button {
 
 ボタンの幅をコンテナに収めるためには`max-width: 100%`が使えそうにも思えるが、`min-width`の方が優先されてしまうので機能しない。そこで、`min-width`の値として`min()`を使うようにする。
 
+<figure>
+
 ```css
 button {
   min-width: min(10em, 100%);
 }
 ```
+
+</figure>
 
 このようにすると、`min-width`の値が`100%`を超えることを防げる。
 

@@ -9,6 +9,8 @@ import SmartIframe from '#components/SmartIframe.astro';
 
 複数の要素を重ね合わせるためには、従来、`position: absolute`を使うことが多かった。親要素に`position: relative`を、その子要素に`position: absolute`を設定するというもの。
 
+<figure>
+
 ```html
 <div style="position: relative;">
   <div style="position: absolute;"><!-- ... --></div>
@@ -16,7 +18,11 @@ import SmartIframe from '#components/SmartIframe.astro';
 </div>
 ```
 
+</figure>
+
 しかしその場合、子要素自身のサイズに基づいて親要素のサイズを設定するということができない。CSSだけでは実現できないので、JavaScriptを使うことになる。
+
+<figure>
 
 ```html
 <div style="position: relative; height: 421px;">
@@ -25,7 +31,11 @@ import SmartIframe from '#components/SmartIframe.astro';
 </div>
 ```
 
+</figure>
+
 そんなとき、`position: absolute`の代わりにGridを使うと、CSSだけでこれを実現できるようになる。
+
+<figure>
 
 ```html
 <div class="wrapper">
@@ -33,6 +43,10 @@ import SmartIframe from '#components/SmartIframe.astro';
   <div><!-- ... --></div>
 </div>
 ```
+
+</figure>
+
+<figure>
 
 ```css
 .wrapper {
@@ -44,6 +58,8 @@ import SmartIframe from '#components/SmartIframe.astro';
   grid-column: 1 / -1;
 }
 ```
+
+</figure>
 
 このようにすると、自ずと、最も大きい子要素のサイズに基づいて親要素のサイズが設定されるようになる。
 

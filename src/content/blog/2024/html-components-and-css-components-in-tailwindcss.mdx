@@ -47,6 +47,8 @@ export default {
 
 [`shadcn-ui/ui/templates/next-template/components/ui/button.tsx`](https://github.com/shadcn-ui/ui/blob/shadcn-ui%400.8.0/templates/next-template/components/ui/button.tsx):
 
+<figure>
+
 ```tsx
 const buttonVariants = cva(
   "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
@@ -82,6 +84,8 @@ const buttonVariants = cva(
 export { Button, buttonVariants }
 ````
 
+</figure>
+
 この方法では、クラスを構成するためのライブラリとして[clsx](https://github.com/lukeed/clsx)や[Class Variance Authority](https://cva.style/docs)、[Tailwind Variants](https://www.tailwind-variants.org/)が用いられる。また、それらに応じた[専用の正規表現をエディタに設定する](https://github.com/paolotiu/tailwind-intellisense-regex-list)ことで、Tailwindのインテリセンスを機能させることができる。
 
 ---
@@ -89,6 +93,7 @@ export { Button, buttonVariants }
 もう一つが、自分でCSSを書くという方法。
 
 <figure>
+
 ```html
 <!-- Before extracting a custom class -->
 <button
@@ -101,6 +106,10 @@ export { Button, buttonVariants }
 
 <button class="btn-primary">Save changes</button>
 ```
+
+</figure>
+
+<figure>
 
 ```css
 @tailwind base;
@@ -154,11 +163,15 @@ CSSはこうした決まったHTMLのために記述されるものであって�
 
 Tailwindには、[ITCSSから着想を得て取り入れられたレイヤーの概念がある](https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer)。現代的な仕様で言うところの[Cascade Layers](https://drafts.csswg.org/css-cascade-5/#layering)に近いものである。
 
+<figure>
+
 ```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 ```
+
+</figure>
 
 Tailwindから提供されるすべてのクラスは、このbase / components / utilitiesのいずれかのレイヤーに分類されている。ほとんどのクラスはutilitiesレイヤーだが、唯一[`container`クラス](https://tailwindcss.com/docs/container)だけがcomponentsレイヤーに属している（公式プラグインまで含めれば、[`prose`クラス](https://github.com/tailwindlabs/tailwindcss-typography)、[`form-*`クラス](https://github.com/tailwindlabs/tailwindcss-forms)、[`aspect-*`クラス](https://github.com/tailwindlabs/tailwindcss-aspect-ratio)などもcomponentsである）。
 

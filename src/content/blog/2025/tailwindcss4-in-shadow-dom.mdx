@@ -9,6 +9,8 @@ pubDate: 2025-08-10T17:50:00.000+09:00
 
 具体的な実装は次のようなものである。
 
+<figure>
+
 {/* prettier-ignore */}
 ```tsx
 import root from 'react-shadow';
@@ -41,11 +43,14 @@ function App() {
 }
 ```
 
+</figure>
+
 期待される描画結果は次の通り。
 
 <figure>
-  ![shadow
-  rootの内側のボタンにはそれらしいスタイルが適用され、外側のボタンはユーザーエージェントスタイルシートそのままの見た目になっている](./assets/tailwindcss4-in-shadow-dom/preview.png)
+
+![shadow rootの内側のボタンにはそれらしいスタイルが適用され、外側のボタンはユーザーエージェントスタイルシートそのままの見た目になっている](./assets/tailwindcss4-in-shadow-dom/preview.png)
+
 </figure>
 
 しかし実際には背景のグラデーションが適用されず、不完全な状態で表示されてしまった。
@@ -53,6 +58,8 @@ function App() {
 原因を調べてみると、どうやらTailwind 4で使用されている@propertyルールがShadow DOMのなかで動作しないせいであるようだ。Shadow DOMのなかでは@propertyルールが無視されて、カスタムプロパティが未定義扱いになってしまう。
 
 Tailwind 4では、@propertyルールを使ってカスタムプロパティを定義している。一部のユーティリティはこれによって定義されたカスタムプロパティに依存しているため、Shadow DOMのなかでは正しく機能しない。
+
+<figure>
 
 {/* prettier-ignore */}
 ```css
@@ -135,6 +142,8 @@ Tailwind 4では、@propertyルールを使ってカスタムプロパティを�
 }
 ```
 
+</figure>
+
 しかし、@propertyルールが使用できない環境のためのフォールバックも実装されている。`@layer properties`の内側にあるフィーチャークエリがそれである。[MozillaとSafariのためとコメントされている](https://github.com/tailwindlabs/tailwindcss/blob/v4.1.11/packages/tailwindcss/src/ast.ts#L697-L705)が、ブラウザを問わずこれが有効になるように書き換えられればうまく動作するはずだ。
 
 やり方はいくつか考えられるが、PostCSSプラグインとしてASTを経由して書き換えることにした。要件としては次の2つだ。
@@ -145,6 +154,8 @@ Tailwind 4では、@propertyルールを使ってカスタムプロパティを�
 これに準じて次のように実装した。
 
 `postcss.config.ts`:
+
+<figure>
 
 ```ts
 import type { Plugin } from 'postcss';
@@ -189,3 +200,6 @@ const config: Config = {
 
 export default config;
 ```
+
+</figure>
+````

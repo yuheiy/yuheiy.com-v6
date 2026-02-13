@@ -47,11 +47,15 @@ Tailwind CSSでは、テーマ変数の`--spacing`に応じてmarginユーティ
 
 ただしこの場合、クラス名として自由な値を直接記述することはできなくなる。代わりにarbitrary valuesとして記述する必要がある。
 
+<figure>
+
 ```html
 <div class="m-150"><!-- ... --></div>
 
 <div class="m-[calc(3/16*1rem)]"><!-- ... --></div>
 ```
+
+</figure>
 
 また、デフォルトの`--spacing`では常にrem単位が使用されるが、アクセシビリティの観点では好ましくない。具体的には、ブラウザやOSの文字サイズ拡大機能を使用した際、すべてにrem単位を使っていると文字サイズだけでなくすべてが同時に拡大してしまう（[Tailwind作者のAdam Wathanもこの設計は失敗だったと認めている](https://x.com/adamwathan/status/2003638134840656373)）。本来は、用途に応じてrem単位とpx単位を使い分けるべきだ。
 

@@ -21,11 +21,15 @@ import SmartIframe from '#components/SmartIframe.astro';
 
 これは、インライン整形コンテキストにおいてテキストとアイコンを並べて配置することで実現できる。
 
+<figure>
+
 ```html
 <a href="#"
   >テキストの行の末尾に付随するアイコンを…<svg><!-- ... --></svg></a
 >
 ```
+
+</figure>
 
 しかし、その空間の大きさやテキストの分量によっては、末尾のアイコンだけが改行してしまって不恰好に見えることがある。
 
@@ -39,6 +43,8 @@ import SmartIframe from '#components/SmartIframe.astro';
 
 そうした場合には、テキスト要素のパディングとアイコン要素のネガティブマージンを組み合わせることで対処できる。次のようにすると、アイコンだけが単独で改行されることがなく、常にテキストを伴って改行されるようになる。
 
+<figure>
+
 ```html
 <a class="card" href="#">
   <span class="card__label">テキストの行の末尾に付随するアイコンを…</span
@@ -46,6 +52,10 @@ import SmartIframe from '#components/SmartIframe.astro';
 	--><svg class="card__icon"><!-- ... --></svg>
 </a>
 ```
+
+</figure>
+
+<figure>
 
 ```css
 .card {
@@ -63,6 +73,8 @@ import SmartIframe from '#components/SmartIframe.astro';
   height: var(--icon-size);
 }
 ```
+
+</figure>
 
 <figure>
   <video controls playsinline style="width: calc(1560/2/16*1rem);">

@@ -11,6 +11,8 @@ import SmartIframe from '#components/SmartIframe.astro';
 
 縦方向に並んだボタンであれば、いずれか幅の広い方に合わせることは難しくない。次のようにすれば、最も幅の広いボタンに合わせて他のボタンも配置することができる。
 
+<figure>
+
 ```html
 <div class="wrapper">
   <button type="button">Hi</button>
@@ -18,6 +20,10 @@ import SmartIframe from '#components/SmartIframe.astro';
   <button type="button">Lorem ipsum dolor</button>
 </div>
 ```
+
+</figure>
+
+<figure>
 
 ```css
 .wrapper {
@@ -28,6 +34,8 @@ import SmartIframe from '#components/SmartIframe.astro';
 }
 ```
 
+</figure>
+
 <figure>
   <SmartIframe src="/blog/2022/same-width-buttons/demo/vertical.html" />
 </figure>
@@ -35,6 +43,8 @@ import SmartIframe from '#components/SmartIframe.astro';
 この例では、ボタンの幅は親要素いっぱいになりつつ、親要素の幅は最も幅の広いボタンにフィットするようになる。
 
 横方向に並んだボタンの幅を合わせる場合でも、何かしらの方法で、最も幅の広いボタンの大きさを知る必要がある。そこで、Gridの`fr`が使える。グリッドアイテムの幅は等幅になるように指定しつつ、グリッド自体の幅はコンテンツに応じた幅にすることで、すべてのボタンの幅を最も幅の広いボタンに合わせることができる。
+
+<figure>
 
 ```css
 .wrapper {
@@ -45,6 +55,8 @@ import SmartIframe from '#components/SmartIframe.astro';
   width: fit-content;
 }
 ```
+
+</figure>
 
 <figure>
   <SmartIframe src="/blog/2022/same-width-buttons/demo/horizontal.html" />

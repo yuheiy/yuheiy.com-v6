@@ -78,6 +78,8 @@ HTML要素にはそれぞれデフォルトのロール（暗黙のWAI-ARIAロ�
 
 しかし、そのように使用したい場面が存在することもまた事実である。たとえば、スタイリングの都合により、文字を一文字ずつ分割して`span`要素で囲うような場合。このように分割されたノードは、利用環境によっては連続した文字列として正しく読み上げられないことがある。そのための対処として`aria-label`属性がよく使用される。
 
+<figure>
+
 {/* prettier-ignore */}
 ```html
 <!-- 次のようにしてはならない！ -->
@@ -87,7 +89,11 @@ HTML要素にはそれぞれデフォルトのロール（暗黙のWAI-ARIAロ�
 </p>
 ```
 
+</figure>
+
 この場合の妥当な代替策は、[visually hidden](https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html)を使うことだ。次のようにすれば、`aria-label`属性を使うことなく代替コンテンツを設定できる。
+
+<figure>
 
 {/* prettier-ignore */}
 ```html
@@ -108,3 +114,5 @@ HTML要素にはそれぞれデフォルトのロール（暗黙のWAI-ARIAロ�
   <span aria-hidden="true">i</span><span aria-hidden="true">p</span><span aria-hidden="true">s</span><span aria-hidden="true">u</span><span aria-hidden="true">m</span>
 </p>
 ```
+
+</figure>

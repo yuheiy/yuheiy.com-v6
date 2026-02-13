@@ -28,6 +28,8 @@ CSSの`text-wrap`プロパティを使うと、テキストの行の折り返し
 
 日本語においても適切な位置で改行がなされるようにするための手法はいくつかあるが、最も有望なのは`word-break: auto-phrase`を使うことであろう。これによって文節区切りの改行が実現できる。
 
+<figure>
+
 ```html
 <html lang="ja">
   <style>
@@ -39,6 +41,8 @@ CSSの`text-wrap`プロパティを使うと、テキストの行の折り返し
   <h1>窓ぎわのトットちゃん</h1>
 </html>
 ```
+
+</figure>
 
 <figure>
   ![word-break:
@@ -117,6 +121,8 @@ widows and orphansは欧文固有の問題であり、日本語では事情が�
 
 ここまで述べてきた方針は、次のようなCSSとして表現できる。
 
+<figure>
+
 ```css
 .heading {
   font-kerning: normal;
@@ -148,6 +154,8 @@ widows and orphansは欧文固有の問題であり、日本語では事情が�
   }
 }
 ```
+
+</figure>
 
 ## 参考資料
 

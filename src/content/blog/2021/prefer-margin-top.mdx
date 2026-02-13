@@ -26,6 +26,8 @@ import SmartIframe from '#components/SmartIframe.astro';
 
 たとえばページタイトルは必須だけどページの説明文は任意になる場合。
 
+<figure>
+
 ```handlebars
 <h1>{{title}}</h1>
 
@@ -34,7 +36,11 @@ import SmartIframe from '#components/SmartIframe.astro';
 {{/if}}
 ```
 
+</figure>
+
 あるいはカードパターンの下部にあるリンクやボタンが任意になる場合。
+
+<figure>
 
 ```handlebars
 <div class='card'>
@@ -47,7 +53,11 @@ import SmartIframe from '#components/SmartIframe.astro';
 </div>
 ```
 
+</figure>
+
 カードパターンにはタグが含まれていることもあるかもしれない。
+
+<figure>
 
 ```handlebars
 <div class='card'>
@@ -64,11 +74,15 @@ import SmartIframe from '#components/SmartIframe.astro';
 </div>
 ```
 
+</figure>
+
 こういうとき、末尾の要素には`margin-bottom`がついていない方が都合がいい。
 
 カードパターンなどでボックス状の見た目になっているときには、`padding`や`border`を使ってマージンが相殺されない状態になっている。するとボックスの下部には、親の`padding-bottom`と末尾の要素の`margin-bottom`が足し合わされた量の余白ができてしまって不自然な見た目になる。
 
 この問題を回避するために、要素内の末尾の要素からは`margin-bottom`を取り除くやり方がある。
+
+<figure>
 
 ```css
 .card > :last-child {
@@ -76,11 +90,15 @@ import SmartIframe from '#components/SmartIframe.astro';
 }
 ```
 
+</figure>
+
 しかしそもそも最初から`margin-top`を使うようにしておけば、このような規則を追加する必要がない。
 
 もし先頭の要素の存在が任意である場合には、逆に`margin-bottom`を使った方がよくなる。ただ末尾の要素が任意である場合に比べて、先頭の要素が任意である場合の方が経験則上は格段に少ない。僕は実際にそのような場面に出くわしたときのみ例外的に`margin-bottom`を使うこともあるが、そうでない限りは基本的に`margin-top`を使っている。
 
 すべてを`margin-top`に統一したければ、マークアップ側の工夫で`margin-bottom`を使わないこともできる。
+
+<figure>
 
 ```handlebars
 {{#if subtitle}}
@@ -91,15 +109,23 @@ import SmartIframe from '#components/SmartIframe.astro';
 <h1>{{title}}</h1>
 ```
 
+</figure>
+
 ## 2. Stackレイアウトとの取り合わせやすさのため
 
 Stackレイアウトというのは[Every Layoutで紹介されているCSSのパターン](https://every-layout.dev/layouts/stack/)のことで、具体的には次のような実装になる。
+
+<figure>
 
 ```css
 .stack > * + * {
   margin-top: 1.5rem;
 }
 ```
+
+</figure>
+
+<figure>
 
 ```handlebars
 <div class='stack'>
@@ -108,6 +134,8 @@ Stackレイアウトというのは[Every Layoutで紹介されているCSSの�
   <p><a href='{{link}}'>さらに詳しく</a></p>
 </div>
 ```
+
+</figure>
 
 こうすることで自動的に子要素の要素間にのみ同じ大きさの余白ができるようになる。すると末尾の要素の存在が任意になっていたとしても余白は自動的に調整されるので、余白の大きさが等しい場合にはStackレイアウトを採用すると先述の問題を回避できる。
 
@@ -122,6 +150,8 @@ Stackレイアウトというのは[Every Layoutで紹介されているCSSの�
 </figure>
 
 末尾の要素の前に`margin-bottom: auto`を指定すると、要素の高さに関わらず次に来る要素が下部に揃うようになる。
+
+<figure>
 
 ```css
 .stack {
@@ -139,6 +169,8 @@ Stackレイアウトというのは[Every Layoutで紹介されているCSSの�
 }
 ```
 
+</figure>
+
 例では2番目の要素に`margin-bottom: auto`が指定されているが、同時に3番目の要素の`margin-top`が引き続き生きていることが重要になる。2番目の要素の`margin-bottom: auto`によって、余っている領域いっぱいまで3番目の要素が下部へ移動すると同時に、3番目の要素自身の`margin-top`によって、余っている領域の大きさに関わらずつねに空く余白の最低限の大きさが設定される。つまりこのレイアウトには`margin-top`と`margin-bottom`の両方が必要になる。
 
 `margin-bottom`はこのパターンを実現するために温存している。
@@ -146,6 +178,8 @@ Stackレイアウトというのは[Every Layoutで紹介されているCSSの�
 ## 3. 隣接セレクターを使った場合分けができるようにするため
 
 コンポーネント等の組み合わせによって垂直方向の余白の大きさに違いがある場合、隣接セレクターを活用すると余白の大きさを場合分けできるようになる。「デフォルトでは段落の上に`1.5rem`の余白ができて、段落が見出しと隣接する場合には少し狭めの`1rem`にしたい」ということであれば次のようになる。
+
+<figure>
 
 ```css
 p {
@@ -156,5 +190,7 @@ h2 + p {
   margin-top: 1rem;
 }
 ```
+
+</figure>
 
 `margin-bottom`では同様のやり方をするのは難しい。Aの隣のBに対して宣言するという表現になる以上、AとBとの間の余白を設定するためには`margin-top`を使うしかない。隣接セレクターを使って`margin-bottom`を調整できると役に立つ場面もあるかもしれないが、まれだろう。

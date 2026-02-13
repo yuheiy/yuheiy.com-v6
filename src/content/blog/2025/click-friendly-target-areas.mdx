@@ -25,12 +25,16 @@ import SmartIframe from '#components/SmartIframe.astro';
   <SmartIframe src="/blog/2025/click-friendly-target-areas/demo/navbar-good.html" />
 </figure>
 
+<figure>
+
 ```css
 a {
   margin: -4px;
   padding: 4px;
 }
 ```
+
+</figure>
 
 一方、プレーンなテキストリンクと違って、背景色などがついたボタンなどの場合、`padding`プロパティのテクニックは少し使いづらいです。
 
@@ -44,6 +48,8 @@ a {
   <SmartIframe src="/blog/2025/click-friendly-target-areas/demo/button-good.html" />
 </figure>
 
+<figure>
+
 ```css
 button {
   position: relative;
@@ -55,6 +61,8 @@ button {
   }
 }
 ```
+
+</figure>
 
 ## iOSにおけるターゲットエリア
 
@@ -111,9 +119,13 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
   <SmartIframe src="/blog/2025/click-friendly-target-areas/demo/checkbox-bad.html" />
 </figure>
 
+<figure>
+
 ```html
 <input type="checkbox" /> Do you need animations?
 ```
+
+</figure>
 
 慣習的に考えても、チェックボックスはラベルまで含めて押せるようになっているべきです。実装としては、`label`要素で囲えばそれを実現できます。
 
@@ -121,9 +133,13 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
   <SmartIframe src="/blog/2025/click-friendly-target-areas/demo/checkbox-good.html" />
 </figure>
 
+<figure>
+
 ```html
 <label><input type="checkbox" /> Do you need animations?</label>
 ```
+
+</figure>
 
 もう少し複雑な例として、アイコンと`input`要素の組み合わせからなる検索フィールドの実装についても考えてみます。こうしたUI要素は、マークアップとして見れば複数の要素を組み合わせた複合的なコンポーネントですが、ユーザーにとっては単一の入力フィールドです。このことを意識せずに、見た目だけを再現するつもりで実装すると、限られたエリアしか押すことができない次のような実装になってしまいます。
 
@@ -131,12 +147,18 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
   <SmartIframe src="/blog/2025/click-friendly-target-areas/demo/search-field-bad.html" />
 </figure>
 
+<figure>
+
 ```html
 <div class="search-field">
   <svg>...</svg>
   <input type="search" />
 </div>
 ```
+
+</figure>
+
+<figure>
 
 ```css
 .search-field {
@@ -153,11 +175,15 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 }
 ```
 
+</figure>
+
 これは実装モデルに引っ張られてしまったがゆえの失敗です。理想的には、複数の要素の組み合わせであることをユーザーに意識させないような実装になっているべきです。つまり、普通の入力フィールドと同じようにどこを押してもフォーカスできるようになっているのが良いでしょう。
 
 <figure>
   <SmartIframe src="/blog/2025/click-friendly-target-areas/demo/search-field-good.html" />
 </figure>
+
+<figure>
 
 ```html
 <div class="search-field">
@@ -165,6 +191,10 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
   <input type="search" />
 </div>
 ```
+
+</figure>
+
+<figure>
 
 ```css
 .search-field {
@@ -184,6 +214,8 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 }
 ```
 
+</figure>
+
 ## 無闇に広げすぎない
 
 一方、ターゲットエリアは必ずしも広ければ広いほど良いわけでもありません。
@@ -194,11 +226,15 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
   <SmartIframe src="/blog/2025/click-friendly-target-areas/demo/menu-bad.html" />
 </figure>
 
+<figure>
+
 ```css
 a {
   display: block;
 }
 ```
+
+</figure>
 
 一見、ターゲットエリアが広がって良いことのように思えますが、別の側面から見れば、対象の要素と関係なさそうな場所を押しても反応してしまうことになります。すると、「リンクを押すつもりはないのに、意図せず押したことになってしまった」ということが起こり得ます。
 
@@ -207,6 +243,8 @@ a {
 <figure>
   <SmartIframe src="/blog/2025/click-friendly-target-areas/demo/menu-good.html" />
 </figure>
+
+<figure>
 
 ```css
 a {
@@ -217,17 +255,23 @@ a {
 }
 ```
 
+</figure>
+
 似たような例として、入力フィールドのラベルのターゲットエリアがあります。レイアウトの都合で`display: block`を適用することはよくありますが、その場合も同様の問題が起こります。
 
 <figure>
   <SmartIframe src="/blog/2025/click-friendly-target-areas/demo/label-bad.html" />
 </figure>
 
+<figure>
+
 ```css
 label {
   display: block;
 }
 ```
+
+</figure>
 
 こうしたときにも、`width: fit-content`などを適用して範囲を制御するのがよいと思います。
 
@@ -235,12 +279,16 @@ label {
   <SmartIframe src="/blog/2025/click-friendly-target-areas/demo/label-good.html" />
 </figure>
 
+<figure>
+
 ```css
 label {
   display: block;
   width: fit-content;
 }
 ```
+
+</figure>
 
 ## 今回の勉強会についての余談
 

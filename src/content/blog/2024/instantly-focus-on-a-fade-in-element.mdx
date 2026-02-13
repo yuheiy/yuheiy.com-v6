@@ -7,9 +7,15 @@ pubDate: 2024-07-06T19:30:00.000+09:00
 
 CSSの`display: none`や`visibility: hidden`によって不可視状態になっている要素を、表示して即座にフォーカスしたいということがある。たとえば、初期状態では非表示になっている検索ボックスを、ユーザーのインタラクションに応じて表示するような場合。そうしたとき、通常では、スタイルを切り替えてすぐに`focus`メソッドを呼び出すだけで良い。
 
+<figure>
+
 ```html
 <input type="search" />
 ```
+
+</figure>
+
+<figure>
 
 ```css
 input[type='search'] {
@@ -20,6 +26,10 @@ input[type='search'] {
   }
 }
 ```
+
+</figure>
+
+<figure>
 
 ```js
 const searchBoxElement = document.querySelector('input[type="search"]');
@@ -34,7 +44,11 @@ function close() {
 }
 ```
 
+</figure>
+
 しかし場合によっては、表示する際にフェードインなどのアニメーションを伴わせたいこともある。これを簡単に実現するには、CSSの`transition`プロパティを使いつつ、`opacity`プロパティと`visibility`プロパティを操作するとよい。`visibility`プロパティはアニメーション可能（[discrete](https://www.w3.org/TR/web-animations/#discrete)）であるため、`transition`プロパティで制御することができる。
+
+<figure>
 
 ```css
 input[type='search'] {
@@ -51,6 +65,10 @@ input[type='search'] {
 }
 ```
 
+</figure>
+
+<figure>
+
 ```js
 const searchBoxElement = document.querySelector('input[type="search"]');
 
@@ -64,7 +82,11 @@ function close() {
 }
 ```
 
+</figure>
+
 ただし、このような実装ではフォーカスができずに失敗してしまう。なぜなら、スタイルを書き換えた直後にはまだ不可視状態（`visibility: hidden`）のままだからだ。フォーカスさせるには、アニメーションが開始して`visibility: visible`の状態になるまで待機しなければならない。そのために対処として、`requestAnimationFrame`メソッドが使用されがちである。
+
+<figure>
 
 ```js
 function open() {
@@ -76,7 +98,11 @@ function open() {
 }
 ```
 
+</figure>
+
 残念ながら、これは必ずしもうまくいくわけではない。`requestAnimationFrame`メソッドが呼び出される時点ですでにアニメーションが開始しているかどうかは保証されていないからだ。そこで苦肉の策として、`requestAnimationFrame`メソッドを二重に入れ子にすることで成功率を上げるというやり方もあるが、やはり確実ではない。
+
+<figure>
 
 ```js
 requestAnimationFrame(() => {
@@ -86,7 +112,11 @@ requestAnimationFrame(() => {
 });
 ```
 
+</figure>
+
 ここで重要なのは、アニメーションの開始タイミングに合わせて処理をすることである。そのためには、`transitionstart`イベントを使用するのが適切だ。
+
+<figure>
 
 ```js
 function open() {
@@ -102,9 +132,13 @@ function open() {
 }
 ```
 
+</figure>
+
 `visibility`プロパティを`visible`に書き換えると、アニメーションの開始タイミングですぐに`visible`に切り替わる（[Animation of visibility](https://drafts.csswg.org/web-animations-1/#animating-visibility)）。そのため、トランジションの開始をフックにすればうまくいく。
 
 さらには、`transition-behavior`プロパティと`@starting-style`を活用すればより簡単に実現できそうだ。`visibility`プロパティをアニメーションさせるのと違って、`display`プロパティに`allow-discrete`を適用すると、表示の際にはトランジションの開始を待たずに切り替わるらしい。この性質を利用すれば、`focus`メソッドは単に同期的に呼び出すだけでよい。
+
+<figure>
 
 ```css
 input[type='search'] {
@@ -124,6 +158,10 @@ input[type='search'] {
 }
 ```
 
+</figure>
+
+<figure>
+
 ```js
 const searchBoxElement = document.querySelector('input[type="search"]');
 
@@ -136,6 +174,8 @@ function close() {
   searchBoxElement.classList.remove('open');
 }
 ```
+
+</figure>
 
 ## 参考資料
 

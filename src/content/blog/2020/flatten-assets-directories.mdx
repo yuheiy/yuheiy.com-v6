@@ -7,6 +7,8 @@ pubDate: 2020-09-18T18:16:35.149+09:00
 
 ウェブサイトのソースファイルはファイル形式にもとづいてディレクトリ分けされている場合が多いと思う。たとえば次のように。
 
+<figure>
+
 ```bash
 .
 ├── dist/
@@ -41,9 +43,13 @@ pubDate: 2020-09-18T18:16:35.149+09:00
     └── index.html
 ```
 
+</figure>
+
 `images`・`scripts`・`styles`ディレクトリがルートにあって、ファイルはまずそのいずれかに格納される。各ディレクトリの中では、その中にサブディレクトリを作成して、あるファイルが特定の目的にもとづいていることを表現していく。
 
 ここからファイル形式によるディレクトリ分けを取っ払って、最初からその目的にもとづいた構造にしたい。たとえばこうなる。
+
+<figure>
 
 ```bash
 .
@@ -72,9 +78,13 @@ pubDate: 2020-09-18T18:16:35.149+09:00
     └── index.html
 ```
 
+</figure>
+
 ファイル形式で区別するのをやめて、すべてのファイルを`assets`ディレクトリに一元化するようにした。ファイルを探したり編集したりする上ではまずファイルが何のために存在しているかが重要になるし、近い場所に集まっている方がファイル同士に関連性を見いだしやすい。
 
 ちなみに、`components`ディレクトリの直下に`header.js`と`header.scss`が配置されている点については気になる人がいるかもしれない。たぶん次のような構造の方が一般的だろう。
+
+<figure>
 
 ```bash
 .
@@ -86,7 +96,11 @@ pubDate: 2020-09-18T18:16:35.149+09:00
         └── logo.png
 ```
 
+</figure>
+
 しかしこれは、特定のコンポーネントに含まれるファイル数が少ない場合には冗長になる。今回の例では、アプリケーション的ではなくドキュメント的なウェブサイトのソースコードを想定していて、そういう場合、JavaScriptファイルを必要としないCSSだけのコンポーネントがほとんどになったりする。
+
+<figure>
 
 ```bash
 .
@@ -106,7 +120,11 @@ pubDate: 2020-09-18T18:16:35.149+09:00
         └── logo.png
 ```
 
+</figure>
+
 すると、複数ファイルを必要とするごく一部のコンポーネントに合わせたディレクトリ構造を実現するために、その他大多数のコンポーネントを取り扱うための手間が増えてしまう。ならば逆に複数ファイルを必要とするコンポーネントの方を例外として捉えて、単一ファイルでの完結が基本の構造にした方が合理的。
+
+<figure>
 
 ```bash
 .
@@ -122,6 +140,8 @@ pubDate: 2020-09-18T18:16:35.149+09:00
     └── header.scss
 ```
 
+</figure>
+
 ---
 
 このようなディレクトリ構造を実現するためにはこれに合わせたビルド設定を行わなければならない。ブラウザに読み込まれたアセットファイルのキャッシュを破棄するために、[ファイル名にハッシュ文字列を加えるCache busting](https://railsguides.jp/asset_pipeline.html#%E3%83%95%E3%82%A3%E3%83%B3%E3%82%AC%E3%83%BC%E3%83%97%E3%83%AA%E3%83%B3%E3%83%88%E3%81%A8%E6%B3%A8%E6%84%8F%E7%82%B9)が利用できると望ましいので、その利用も前提として解説する。
@@ -130,6 +150,8 @@ webpackで画像などのファイル名をハッシュ化する場合、その�
 
 NG:
 
+<figure>
+
 ```javascript
 // `src/assets/components/header.js`
 
@@ -137,7 +159,11 @@ const img = document.createElement('img');
 img.src = '/assets/components/header/logo.png';
 ```
 
+</figure>
+
 OK:
+
+<figure>
 
 ```javascript
 // `src/assets/components/header.js`
@@ -148,7 +174,11 @@ img.src = logo;
 // -> `/assets/components/header/logo.[contenthash].png`
 ```
 
+</figure>
+
 CSSファイル内の`url()`関数からもファイルを参照するためには、CSSファイル自体もwebpack経由でビルドする必要がある。そのように設定すれば次のように参照できる。
+
+<figure>
 
 ```scss
 // `src/assets/components/header.scss`
@@ -159,9 +189,13 @@ CSSファイル内の`url()`関数からもファイルを参照するために�
 }
 ```
 
+</figure>
+
 またwebpackの外からファイル名を参照したい場合には、[Webpack Manifest Plugin](https://github.com/danethurber/webpack-manifest-plugin)を利用するとファイル名の対応付けをJSONファイルとして出力できる。出力されるJSONファイルを読み込めばwebpackの外の仕組みからもファイル名を参照できるようになる。
 
 これらを前提とすると`webpack.config.js`はだいたい次のような感じになる。いろいろ簡略化している。
+
+<figure>
 
 ```javascript
 const path = require('path');
@@ -226,7 +260,11 @@ module.exports = {
 };
 ```
 
+</figure>
+
 そして`main.js`にはこのように書いておく。
+
+<figure>
 
 ```javascript
 // `components`ディレクトリ直下にあるすべてのSCSSファイルを読み込む
@@ -245,6 +283,8 @@ require.context(
 );
 ```
 
+</figure>
+
 Sassファイルを読み込む上での注意点として、`main.scss`のようなSass用のエントリーポイントを作成せずに、JavaScriptファイルからファイルをひとつずつ読み込むようにしておいた方が良い。Sass固有のモジュール機能を使うと、css-loaderに渡ってくる前にコンパイルが済んで結合されてしまうので、`url()`関数で参照するファイルのパス解決がすべて`main.scss`の位置を基準に行われてしまう。すると`components`ディレクトリ内のファイルにおいても`main.scss`の位置からパスを記述しなければならなくなる。
 
 次に、webpackのモジュールからは読み込まれていないファイルも、出力される`webpack-minifest.json`から参照できるようにするために、あらゆるファイルが自動的に読み込まれるようにしておく。もしこの設定を行わない場合も、JavaScriptから`import`されたり、CSSの`url()`関数に指定されれば、対象のファイルがwebpackのビルドに含まれつつJSONファイルにもパスが追加される。しかしそれ以外のファイルはビルドには含まれなくなってしまうので、JavaScriptやCSSから読み込まれていないファイルをwebpackの外から参照できなくなってしまう。
@@ -252,6 +292,8 @@ Sassファイルを読み込む上での注意点として、`main.scss`のよ�
 ---
 
 Jestを利用している場合、JavaScriptファイルから画像ファイルなどを読み込むとエラーになるので、`jest.config.js`に次のように設定しておくと回避できる。
+
+<figure>
 
 ```javascript
 module.exports = {
@@ -262,11 +304,17 @@ module.exports = {
 };
 ```
 
+</figure>
+
 `src/assets/test/__mocks__/fileMock.js`:
+
+<figure>
 
 ```javascript
 module.exports = 'test-file-stub';
 ```
+
+</figure>
 
 ---
 

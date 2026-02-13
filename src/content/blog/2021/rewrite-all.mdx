@@ -9,6 +9,8 @@ pubDate: 2021-01-01T02:56:21.828Z
 
 具体的には、まずビューポート幅にもとづいたファクターは次のように実装している。
 
+<figure>
+
 ```css
 html {
   --scale-factor: 7;
@@ -53,9 +55,13 @@ html {
 }
 ```
 
+</figure>
+
 もっとも狭いビューポート幅では`7`になって、`1440px`まで広がると`6`になる。そしてこれらの間の幅では間の値で補間される。メディアクエリで地道にやっているのがダサいけど、考え得る限りではこれが一番簡単になりそうだった。[Sassを使えば楽に作れる](https://github.com/yuheiy/yuheiy.com-v5/blob/e836b14653874ebf1b1c866633cda0a19971122d/src/_styles/main.scss#L68-L87)。
 
 続いてこの値を用いて、[調和数列にもとづいた計算方法](https://standard.shiftbrain.com/blog/harmonious-proportions-in-type-sizes)でフォントサイズのスケールを定義する。モジュラースケールでもいいんだけど、問題は[指摘されている通り](https://standard.shiftbrain.com/blog/music-math-typography)。
+
+<figure>
 
 ```css
 html {
@@ -67,7 +73,11 @@ html {
 }
 ```
 
+</figure>
+
 このように宣言しておくことで、次のように計算されるようになる。
+
+<figure>
 
 ```css
 html {
@@ -79,6 +89,10 @@ html {
 }
 ```
 
+</figure>
+
+<figure>
+
 ```css
 html {
   --text-base: 1rem;
@@ -88,6 +102,8 @@ html {
   --text-2xl: calc(6 / (6 - 4) * var(--text-base)); /* 3rem */
 }
 ```
+
+</figure>
 
 余白のサイズもこれにもとづいたものに設定している。外から見えるところとしてはそんなところ。後は裏側の、僕にしかわからないような変更点がいろいろ。
 

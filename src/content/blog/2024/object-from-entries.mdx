@@ -7,6 +7,8 @@ pubDate: 2024-03-06T06:05:00.000+09:00
 
 JavaScriptにおいて、ある配列をもとにして別のオブジェクトを作成する場合、[`Array#reduce`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)を使用することが多い。
 
+<figure>
+
 ```javascript
 const input = ['foo', 'bar', 'baz'];
 
@@ -18,7 +20,11 @@ const result = input.reduce((accumulator, currentValue) => {
 assert.deepStrictEqual(result, { foo: 'Foo', bar: 'Bar', baz: 'Baz' });
 ```
 
+</figure>
+
 しかし例のように、単にキーと値の組み合わせにマッピングするだけなら、あえて`Array#reduce`を使うまでもない。代わりに[`Object.fromEntries`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries)を使えば、記述するコードをもっとシンプルにできる。
+
+<figure>
 
 ```javascript
 const input = ['foo', 'bar', 'baz'];
@@ -27,6 +33,8 @@ const result = Object.fromEntries(input.map((element) => [element, capitalize(el
 
 assert.deepStrictEqual(result, { foo: 'Foo', bar: 'Bar', baz: 'Baz' });
 ```
+
+</figure>
 
 まず配列を「キーと値のペアからなる配列」（`[key, value][]`）に変換してから、それを`Object.fromEntries`に渡すことでオブジェクト化できる。
 

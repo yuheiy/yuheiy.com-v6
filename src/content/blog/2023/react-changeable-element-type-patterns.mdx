@@ -13,6 +13,8 @@ ReactのUIコンポーネントライブラリを使っていると、あるコ�
 
 そのような場合、一般的には、Buttonコンポーネントに`as` propを実装して対処することが多い。
 
+<figure>
+
 ```jsx
 function Button({ as: Component = 'button', ...props }) {
   return <Component {...props} />;
@@ -29,6 +31,8 @@ render(
   </>,
 );
 ```
+
+</figure>
 
 このパターンは、Polymorphicとも呼ばれる。[styled-components](https://styled-components.com/docs/api#as-polymorphic-prop)や[Material UI](https://mui.com/material-ui/guides/composition/#component-prop)、[Chakra UI](https://chakra-ui.com/docs/styled-system/style-props#the-as-prop)など、数多くのライブラリで同等の手法が採用されている。
 
@@ -159,6 +163,8 @@ function Button({ asChild, ...props }) {
 
 TypeScriptを使用しつつ、`forwardRef`を適用する場合は、次のように記述する。
 
+<figure>
+
 ```tsx
 import { forwardRef, type ComponentPropsWithRef } from 'react';
 
@@ -172,7 +178,11 @@ const Button = forwardRef<unknown, ComponentPropsWithRef<'button'> & { asChild?:
 Button.displayName = 'Button';
 ```
 
+</figure>
+
 ただし、こうなってくると定型コードとしてはやや煩雑である。そこで代わりに、Radix UIの内部で使用されている[`@radix-ui/react-primitive`](https://github.com/radix-ui/primitives/tree/main/packages/react/primitive)パッケージを使うことで多少マシになる。
+
+<figure>
 
 ```tsx
 import { Primitive } from '@radix-ui/react-primitive';
@@ -190,11 +200,15 @@ const Button = forwardRef<ButtonElement, ButtonProps>((props, forwardedRef) => (
 Button.displayName = 'Button';
 ```
 
+</figure>
+
 このパッケージの使用方法はドキュメント化されていないので、[Radix UIのソースコードの中で実際に使用されている様子](https://github.com/radix-ui/primitives/tree/1d57ea78007733facfa2ac7fc0cd919a545b39f6/packages/react)を参考にして実装する必要がある。
 
 ### コンポーネント同士のpropsのマージ
 
 `Slot`コンポーネント（および`Primitive.*`コンポーネント）のpropsは、その子のpropsとマージされる仕組みになっている。たとえば、次のようにコンポーネントを使用するとする。
+
+<figure>
 
 ```tsx
 import { Primitive } from '@radix-ui/react-primitive';
@@ -233,7 +247,11 @@ render(
 );
 ```
 
+</figure>
+
 この`Button`コンポーネントのpropsは、擬似的に表現すれば、次のようにマージされることになる。
+
+<figure>
 
 ```tsx
 <a
@@ -253,6 +271,8 @@ render(
 </a>
 ```
 
+</figure>
+
 このpropsのマージには次のルールがある。
 
 - `on`から始まる同名のpropが指定されていれば、それらをcomposeする関数が作成される
@@ -265,6 +285,8 @@ render(
 以上のように、`Slot`コンポーネントのpropsはその子のpropsと自動的にマージされる仕組みになっていることは把握しておきたい。
 
 注意すべきは、`Button`コンポーネントのpropsについては、ユーザー側でマージする実装を行わなければならないということ。もし次のように、`Button`コンポーネントのpropsのマージを考慮しない実装になっていると、`Button`コンポーネントにpropsを指定した際に期待に反する挙動をする。
+
+<figure>
 
 ```tsx
 import { Primitive } from '@radix-ui/react-primitive';
@@ -300,7 +322,11 @@ render(
 );
 ```
 
+</figure>
+
 この`Button`コンポーネントは、次のようにレンダリングされる。
+
+<figure>
 
 ```tsx
 <button
@@ -313,7 +339,11 @@ render(
 </Button>
 ```
 
+</figure>
+
 これでは、期待通り上書きできるものと、期待に反して上書きできないものが、propの種類によってまちまちになってしまう。期待通りのインターフェースを実現するには、`Slot`コンポーネントにpropsが渡される前に、それらの値をマージしておかなければならない。たとえば、次のような実装になる。
+
+<figure>
 
 ```tsx
 import { Primitive } from '@radix-ui/react-primitive';
@@ -348,9 +378,13 @@ const Button = forwardRef<ButtonElement, ButtonProps>((props, forwardedRef) => {
 Button.displayName = 'Button';
 ```
 
+</figure>
+
 ### コンポーネントの中の子を規定する場合
 
 場合によっては、`Button`コンポーネントの実装として、ルートのコンポーネントの内側に別のコンポーネントを入れ子にしたいこともあるだろう。`as` propを使えば、次のように実装することができる。
+
+<figure>
 
 ```jsx
 function Button({ as: Component = 'button', children, ...props }) {
@@ -362,7 +396,11 @@ function Button({ as: Component = 'button', children, ...props }) {
 }
 ```
 
+</figure>
+
 しかし、`asChild` propで同等のことを実現しようとすると、かなり複雑な実装が必要になる。たとえば次のようになる。
+
+<figure>
 
 ```tsx
 import { Primitive } from '@radix-ui/react-primitive';
@@ -405,8 +443,12 @@ export const Button = forwardRef<ButtonElement, ButtonProps>(
 );
 ```
 
+</figure>
+
 <details>
 <summary>`Button`コンポーネントのテストケース</summary>
+
+<figure>
 
 ```tsx
 import renderer from 'react-test-renderer';
@@ -542,11 +584,15 @@ describe('mixed', () => {
 });
 ```
 
+</figure>
+
 </details>
 
 これはあまり現実的な実装方針ではないし、そもそもインターフェースとしてあまり直感的ではないと思う。
 
 もっともシンプルな解決策としては、内側に入れ子になったコンポーネントを別コンポーネントとして切り出してしまうことだろう。そして、利用時にはそれら二つのコンポーネントを組み合わせて使うという規約を設けておく。
+
+<figure>
 
 ```tsx
 <Button>
@@ -559,6 +605,8 @@ describe('mixed', () => {
 	</a>
 </Button>
 ```
+
+</figure>
 
 実際のところ、Radix UIにおいてはこのような設計方針が採用されている。しかし、Radix UIのようなプリミティブなコンポーネントライブラリと違って、一般的なコンポーネントライブラリとしては、これでは使い勝手が悪い場合があるだろう。
 
@@ -590,11 +638,17 @@ describe('mixed', () => {
 
 これは次のような結果になる。
 
+<figure>
+
 ```jsx
 <Link href="/new">New</Link>
 ```
 
+</figure>
+
 先ほどの`asChild` propにおいては、コンポーネントの内側に別の要素が入れ子になっている場合の表現の難しさが問題になった。しかし、このAriakitの`render` propのアイデアを借用すれば、比較的直感的なインターフェースとシンプルな実装を実現することもできる。
+
+<figure>
 
 ```tsx
 import { cloneElement, ComponentProps, forwardRef, ReactElement, ReactNode } from 'react';
@@ -630,6 +684,8 @@ render(
   </>,
 );
 ```
+
+</figure>
 
 必要に応じて、[Ariakitの`createElement`の実装も参照のこと](https://github.com/ariakit/ariakit/blob/845c3b2f0ddba4bf40286743ec6c12feccb3c02f/packages/ariakit-react-core/src/utils/system.tsx#L83-L110)。
 

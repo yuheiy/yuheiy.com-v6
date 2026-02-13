@@ -73,6 +73,8 @@ Feature-Sliced Designにおいてもっとも特徴的なのが、「Layers」�
 
 というのも、Astroの[Project Structure](https://docs.astro.build/en/basics/project-structure/)として紹介されている構成は、まさに技術的な役割が起点になっている例である。これに従ってウェブサイトを構築していくと、たとえば次のような形になり得る。
 
+<figure>
+
 ```sh
 src/
 ├── assets/
@@ -114,9 +116,13 @@ src/
 └── consts.ts
 ```
 
+</figure>
+
 この構成はフレームワークによって強制されているわけではなく、多くは好みに応じて自由に変更できる。
 
 この例では、「about」「blog」「home」などの共通する関心事に基づいたファイルがそれぞれのレイヤーに分散してしまって扱いづらいため、Feature-Sliced Designに基づいて再整理してみる。次のようになる。
+
+<figure>
 
 ```sh
 src/
@@ -164,6 +170,8 @@ src/
         ├── Button.astro
         └── Header.astro
 ```
+
+</figure>
 
 このようにすると、おおむね関心事に基づいた構成にできたように思う。
 
