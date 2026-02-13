@@ -97,8 +97,11 @@
     margin-block: calc(--spacing(8) + var(--half-leading));
   }
 
-  figure:has(> pre) + figure:has(> pre) {
+  figure:has(> pre) + figure:has(> pre)::before {
+    display: block;
+    mask-image: linear-gradient(to right, black calc(100% - --spacing(32)), transparent);
     border-block-start: 1px dashed var(--border-color-dynamic);
+    content: '';
   }
 
   figure:has(> blockquote:not([class])) {
