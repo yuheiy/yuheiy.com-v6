@@ -101,7 +101,7 @@
     border-block-start: 1px dashed var(--border-color-dynamic);
   }
 
-  figure:has(> blockquote) {
+  figure:has(> blockquote:not([class])) {
     margin-block: --spacing(12);
   }
 
