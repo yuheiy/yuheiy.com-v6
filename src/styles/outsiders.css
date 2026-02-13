@@ -1,7 +1,7 @@
 /* Syntax Highlighting in Astro */
 @scope (.astro-code) {
   :is(:scope, span) {
-    background-color: var(--background-color-dynamic-inset) !important;
+    background-color: transparent !important;
 
     /* https://shiki.style/guide/dual-themes#query-based-dark-mode */
     @media (prefers-color-scheme: dark) {

@@ -1,4 +1,3 @@
-/* Prose */
 @scope (.prose) {
   h2 {
     @apply text-xl kerning-all;
@@ -53,9 +52,8 @@
   }
 
   pre {
-    margin-inline: calc((100cqw - 100%) / 2 * -1);
-    margin-block: calc(--spacing(8) + var(--half-leading));
-    padding: --spacing(4) calc((100cqw - 100%) / 2);
+    margin: calc(--spacing(8) + (1rlh - 1rem) / 2) calc((100cqw - 100%) / 2 * -1);
+    padding-inline: calc((100cqw - 100%) / 2);
     line-height: var(--leading-tight);
 
     /* Apply when the container reaches `inline-size: 42rem`. */
@@ -68,23 +66,18 @@
     }
   }
 
-  pre + pre {
-    margin-block-start: --spacing(4);
-  }
-
-  figure pre {
-    margin-block-end: 0;
-  }
-
-  blockquote pre {
+  blockquote:not([class]) pre {
     margin-inline: 0;
-    padding-inline: 1rem;
+    padding-inline: 0;
+  }
+
+  pre:has(+ figcaption) {
+    margin-block-end: --spacing(7);
   }
 
   blockquote:not([class]) {
-    position: relative;
     margin-inline-start: 2rem;
-    margin-block: --spacing(12);
+    margin-block-end: --spacing(10);
   }
 
   :is(ol, ul) {
@@ -110,29 +103,24 @@
     margin-block: calc(--spacing(8) + var(--half-leading));
   }
 
+  figure:has(> pre) + figure:has(> pre) {
+    border-block-start: 1px dashed var(--border-color-dynamic);
+  }
+
+  figure:has(> blockquote) {
+    margin-block: --spacing(12);
+  }
+
   figcaption {
     @apply text-sm;
-    margin-block-start: --spacing(3);
+    margin-block-start: --spacing(2.5);
     hanging-punctuation: allow-end;
-  }
-
-  blockquote + figcaption {
-    margin-block-start: --spacing(8);
-  }
-
-  pre > code::before,
-  pre > code::after {
-    content: normal;
   }
 
   img {
     outline: 1px solid
       color-mix(in oklab, light-dark(var(--color-gray-950), var(--color-zinc-50)) 15%, transparent);
     outline-offset: -1px;
-  }
-
-  img[id^='mermaid-'] {
-    border: 0;
   }
 
   table {
@@ -162,21 +150,5 @@
 
   :is(astro-embed-tweet, baseline-status, lite-youtube) {
     margin-block: calc(--spacing(8) + var(--half-leading));
-  }
-
-  :is(
-      hr,
-      pre,
-      figure,
-      table,
-      astro-embed-tweet,
-      baseline-status,
-      baseline-status + script,
-      lite-youtube,
-      lite-youtube + script,
-
-    )
-    + :is(hr, pre, figure, table, astro-embed-tweet, baseline-status, lite-youtube) {
-    margin-block-start: calc(--spacing(8) + var(--half-leading) * 2);
   }
 }
