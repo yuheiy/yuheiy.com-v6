@@ -3,23 +3,36 @@ title: '画像を囲うボーダーの色を半透明にしてコンテンツに
 pubDate: 2026-02-14T13:45:00.000+09:00
 ---
 
-import SmartIframe from '#components/SmartIframe.astro';
-
 CSSの`border`プロパティに半透明の色を指定すると、ボーダーが透過してその背景と合成される。
 
 <figure>
 
-```css
-button {
-  border: 1px solid oklch(0 0 0 / 0.1);
-  background-color: rebeccapurple;
-}
+```html demo
+<style>
+  button {
+    zoom: 1.5;
+    border: 2px solid oklch(0 0 0 / 0.25);
+    border-radius: 0.375rem;
+    background-color: rebeccapurple;
+    padding: 0.125em 0.625em;
+    font: inherit;
+  }
+</style>
+
+<button type="button">Hello</button>
 ```
 
 </figure>
 
 <figure>
-  <SmartIframe src="/blog/2026/semi-transparent-image-borders/demo/button.html" />
+
+```css
+button {
+  border: 2px solid oklch(0 0 0 / 0.25);
+  background-color: rebeccapurple;
+}
+```
+
 </figure>
 
 ボーダーの色はその背景に応じたものになり、単なる不透明なグレーを使うよりも馴染んで見えるようになる。背景が単色であれば、必ずしも半透明でなくても個別に調整した色を使うことができるが、特に画像やグラデーションが用いられている場合はこの手法が効果的である。
@@ -44,15 +57,56 @@ img {
 というのも画像の周囲のボーダーは、画像と背景を同化させずに際立たせるためのものであり、たとえば白背景のページに白い画像を配置するときに境界線として機能させることを目的としている。一方黒い画像を使う場合、その画像があるだけで境界は明らかなので、ボーダーは必要ない。ところがCSSで一律ボーダーを適用していると、そのような区別がなく、不要なものにもボーダーが付与されて不恰好に見えることがよくある。
 
 <figure>
-  <SmartIframe src="/blog/2026/semi-transparent-image-borders/demo/opaque.html" />
-  <figcaption>不透明なボーダーを適用</figcaption>
+
+```html demo
+<style>
+  img {
+    display: block;
+    outline: 4px solid light-dark(oklch(87.2% 0.01 258.338), oklch(37% 0.013 285.805));
+    outline-offset: -4px;
+    width: 100%;
+    max-width: 24rem;
+
+    & + & {
+      margin-top: 2em;
+    }
+  }
+</style>
+
+<img src="/blog/2026/semi-transparent-image-borders/light.avif" title="明るい写真" />
+<img src="/blog/2026/semi-transparent-image-borders/dark.avif" title="暗い写真" />
+```
+
+<figcaption>不透明なボーダーを適用</figcaption>
+
 </figure>
 
 だが半透明なボーダーであれば、黒い画像には同化して目立たなくなる。より正確に言えば、そのボーダーに近い色の画像と重なり合うと、ということだ。だからもし逆に、黒い背景に白い半透明なボーダーが使われていれば、白い画像に同化する。
 
 <figure>
-  <SmartIframe src="/blog/2026/semi-transparent-image-borders/demo/semi-transparent.html" />
-  <figcaption>半透明なボーダーを適用</figcaption>
+
+```html demo
+<style>
+  img {
+    display: block;
+    outline: 4px solid
+      color-mix(in oklab, light-dark(oklch(13% 0.028 261.692), oklch(98.5% 0 0)) 15%, transparent);
+    outline-offset: -4px;
+    width: 100%;
+    max-width: 24rem;
+
+    & + & {
+      margin-top: 2em;
+    }
+  }
+</style>
+
+<img src="/blog/2026/semi-transparent-image-borders/light.avif" title="明るい写真" />
+<img src="/blog/2026/semi-transparent-image-borders/dark.avif" title="暗い写真" />
+```
+
+<figcaption>半透明なボーダーを適用</figcaption>
+
 </figure>
 
 こうした仕組みによって、冗長にならない場合にのみボーダーが「見える」ことになる。

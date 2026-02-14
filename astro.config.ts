@@ -9,6 +9,68 @@ import type { Pluggable } from 'unified';
 import { select, type Node } from 'unist-util-select';
 import { visit } from 'unist-util-visit';
 
+const remarkDemoCodeBlock: Pluggable = () => {
+  return (tree) => {
+    visit(tree, 'code', (node, index, parent) => {
+      if (index === undefined || !parent) return;
+      if (!node.meta?.includes('demo')) return;
+
+      const content = `<style>:host { all: initial; display: block; }</style>${node.value}`;
+      const htmlValue = JSON.stringify(content);
+
+      parent.children[index] = {
+        type: 'mdxJsxFlowElement',
+        name: 'div',
+        attributes: [
+          {
+            type: 'mdxJsxAttribute',
+            name: 'role',
+            value: 'group',
+          },
+        ],
+        children: [
+          {
+            type: 'mdxJsxFlowElement',
+            name: 'template',
+            attributes: [
+              {
+                type: 'mdxJsxAttribute',
+                name: 'shadowrootmode',
+                value: 'closed',
+              },
+              {
+                type: 'mdxJsxAttribute',
+                name: 'set:html',
+                value: {
+                  type: 'mdxJsxAttributeValueExpression',
+                  value: htmlValue,
+                  data: {
+                    estree: {
+                      type: 'Program',
+                      sourceType: 'module',
+                      body: [
+                        {
+                          type: 'ExpressionStatement',
+                          expression: {
+                            type: 'Literal',
+                            value: content,
+                            raw: htmlValue,
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+              },
+            ],
+            children: [],
+          },
+        ],
+      };
+    });
+  };
+};
+
 const remarkInjectDescription: Pluggable = () => {
   return (tree, { data }) => {
     const firstParagraph = select('paragraph', tree as Node);
@@ -44,7 +106,7 @@ export default defineConfig({
   trailingSlash: 'never',
   integrations: [
     mdx({
-      remarkPlugins: [remarkInjectDescription],
+      remarkPlugins: [remarkDemoCodeBlock, remarkInjectDescription],
       rehypePlugins: [rehypeUnwrapImages, rehypeUnwrapFigcaptionParagraphs],
     }),
     sitemap(),
