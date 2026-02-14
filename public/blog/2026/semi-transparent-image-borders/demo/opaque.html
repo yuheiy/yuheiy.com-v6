@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Opaque</title>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      img {
+        display: block;
+        outline: 4px solid light-dark(oklch(87.2% 0.01 258.338), oklch(37% 0.013 285.805));
+        outline-offset: -4px;
+        width: 100%;
+        max-width: 24rem;
+
+        & + & {
+          margin-top: 2em;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <img src="./light.avif" title="Light photo" />
+    <img src="./dark.avif" title="Dark photo" />
+  </body>
+</html>
