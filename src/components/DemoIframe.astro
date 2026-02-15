@@ -1,0 +1,39 @@
+---
+interface Props {
+  title: string;
+  lang?: string;
+}
+
+const { title, lang = 'ja' } = Astro.props;
+
+const content = await Astro.slots.render('default');
+
+const srcdoc = `<!DOCTYPE html>
+<html lang="${lang}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>${title}</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body { margin: 0; }
+    </style>
+  </head>
+  <body>${content}</body>
+</html>`;
+---
+
+<iframe class="w-full" srcdoc={srcdoc} title={title} data-demo-iframe></iframe>
+
+<script>
+  for (const iframe of document.querySelectorAll<HTMLIFrameElement>('[data-demo-iframe]')) {
+    if (iframe.contentDocument) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        const { blockSize } = entries[0].contentBoxSize[0];
+        iframe.height = blockSize.toString();
+      });
+
+      resizeObserver.observe(iframe.contentDocument.documentElement);
+    }
+  }
+</script>

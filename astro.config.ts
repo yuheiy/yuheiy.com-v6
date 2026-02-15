@@ -5,69 +5,108 @@ import { defineConfig } from 'astro/config';
 import type { Element } from 'hast';
 import { toString } from 'mdast-util-to-string';
 import rehypeUnwrapImages from 'rehype-unwrap-images';
+import invariant from 'tiny-invariant';
 import type { Pluggable } from 'unified';
 import { select, type Node } from 'unist-util-select';
 import { visit } from 'unist-util-visit';
 
 const remarkDemoCodeBlock: Pluggable = () => {
+  function parseMeta(meta: string): Record<string, string> {
+    const result: Record<string, string> = {};
+    for (const match of meta.matchAll(/(\w+)(?:="([^"]*)")?/g)) {
+      result[match[1]] = match[2] ?? '';
+    }
+    return result;
+  }
+
+  function createExpressionAttribute(value: string) {
+    const raw = JSON.stringify(value);
+    return {
+      type: 'mdxJsxAttributeValueExpression',
+      value: raw,
+      data: {
+        estree: {
+          type: 'Program',
+          sourceType: 'module',
+          body: [
+            {
+              type: 'ExpressionStatement',
+              expression: { type: 'Literal', value, raw },
+            },
+          ],
+        },
+      },
+    };
+  }
+
+  function createImportNode(name: string, source: string) {
+    return {
+      type: 'mdxjsEsm',
+      value: `import ${name} from '${source}'`,
+      data: {
+        estree: {
+          type: 'Program',
+          sourceType: 'module',
+          body: [
+            {
+              type: 'ImportDeclaration',
+              specifiers: [
+                {
+                  type: 'ImportDefaultSpecifier',
+                  local: { type: 'Identifier', name },
+                },
+              ],
+              source: {
+                type: 'Literal',
+                value: source,
+                raw: `'${source}'`,
+              },
+            },
+          ],
+        },
+      },
+    };
+  }
+
   return (tree) => {
+    let hasDemoBlock = false;
+
     visit(tree, 'code', (node, index, parent) => {
       if (index === undefined || !parent) return;
-      if (!node.meta?.includes('demo')) return;
+      if (!node.meta) return;
 
-      const content = `<style>:host { all: initial; display: block; }</style>${node.value}`;
-      const htmlValue = JSON.stringify(content);
+      const { demo, ...attributes } = parseMeta(node.meta);
+      if (demo === undefined) return;
+
+      invariant(
+        typeof attributes.title === 'string',
+        'Demo code block requires a title attribute (e.g. ```html demo title="...")',
+      );
+
+      hasDemoBlock = true;
 
       parent.children[index] = {
         type: 'mdxJsxFlowElement',
-        name: 'div',
+        name: 'DemoIframe',
         attributes: [
+          ...Object.entries(attributes).map(([name, value]) => ({
+            type: 'mdxJsxAttribute',
+            name,
+            value,
+          })),
           {
             type: 'mdxJsxAttribute',
-            name: 'role',
-            value: 'group',
+            name: 'set:html',
+            value: createExpressionAttribute(node.value),
           },
         ],
-        children: [
-          {
-            type: 'mdxJsxFlowElement',
-            name: 'template',
-            attributes: [
-              {
-                type: 'mdxJsxAttribute',
-                name: 'shadowrootmode',
-                value: 'closed',
-              },
-              {
-                type: 'mdxJsxAttribute',
-                name: 'set:html',
-                value: {
-                  type: 'mdxJsxAttributeValueExpression',
-                  value: htmlValue,
-                  data: {
-                    estree: {
-                      type: 'Program',
-                      sourceType: 'module',
-                      body: [
-                        {
-                          type: 'ExpressionStatement',
-                          expression: {
-                            type: 'Literal',
-                            value: content,
-                            raw: htmlValue,
-                          },
-                        },
-                      ],
-                    },
-                  },
-                },
-              },
-            ],
-            children: [],
-          },
-        ],
+        children: [],
       };
     });
+
+    if (hasDemoBlock) {
+      tree.children.unshift(createImportNode('DemoIframe', '#components/DemoIframe.astro'));
+    }
   };
 };
 
