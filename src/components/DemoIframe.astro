@@ -27,13 +27,16 @@ const srcdoc = `<!DOCTYPE html>
 
 <script>
   for (const iframe of document.querySelectorAll<HTMLIFrameElement>('[data-demo-iframe]')) {
-    if (iframe.contentDocument) {
-      const resizeObserver = new ResizeObserver((entries) => {
-        const { blockSize } = entries[0].contentBoxSize[0];
-        iframe.height = blockSize.toString();
-      });
+    const setup = () => {
+      if (!iframe.contentDocument) return;
+      new ResizeObserver((entries) => {
+        iframe.height = entries[0].contentBoxSize[0].blockSize.toString();
+      }).observe(iframe.contentDocument.documentElement);
+    };
 
-      resizeObserver.observe(iframe.contentDocument.documentElement);
+    iframe.addEventListener('load', setup);
+    if (iframe.contentDocument?.readyState === 'complete') {
+      setup();
     }
   }
 </script>
