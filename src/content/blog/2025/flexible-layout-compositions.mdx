@@ -3,8 +3,6 @@ title: 'コンテンツに自律的に適応するレイアウトとコンポジ
 pubDate: 2025-12-30T08:10:00.000+09:00
 ---
 
-import SmartIframe from '#components/SmartIframe.astro';
-
 「[ウェブはデフォルトでレスポンシブ](https://web.archive.org/web/20170522090129/http://blog.andyhume.net/responsive-by-default/)」とかねてより言われている。それを妨げるようなスタイリングをしないかぎり、ウェブページのレイアウトはブラウザの表示幅に合わせて自動的に調整される。
 
 レスポンシブデザインが普及する前、ウェブページは960pxの固定幅で作成することが一般的だった。当時のディスプレイ解像度は多くが1024pxの幅だったため、それに決め打ちした設計であった。
@@ -90,10 +88,26 @@ Every Layoutの共著者である[Andy Bell](https://bell.bz/links/)は、後に
 垂直方向に積み重ねられた要素の間に一律したマージンを設定する。特定の要素の余白だけ調整することもできる。
 
 <figure>
-  <SmartIframe src="./flexible-layout-compositions/demo/flow.html" />
-</figure>
 
-🔗 [Flowのデモページを開く](./flexible-layout-compositions/demo/flow.html)
+```html demo title="Flow (Stack)" lang="en"
+<link rel="stylesheet" href="/blog/2025/flexible-layout-compositions/demo.css" />
+<div class="flow">
+  <p class="box">
+    Nullam id dolor id nibh ultricies vehicula ut id elit. Nulla vitae elit libero, a pharetra
+    augue.
+  </p>
+  <p class="box">
+    Nulla vitae elit libero, a pharetra augue. Cras justo odio, dapibus ac facilisis in, egestas
+    eget quam.
+  </p>
+  <p class="box" style="--flow-space: 3em">
+    <code>--flow-space</code> set with an inline style to 3em:
+    <code>style="--flow-space: 3em"</code>
+  </p>
+</div>
+```
+
+</figure>
 
 <figure>
 
@@ -140,10 +154,15 @@ Info about this implementation: https://piccalil.li/quick-tip/flow-utility/
 コンテンツを水平方向に中央配置して、最大幅を制限する。左右の余白を確保することで、狭い画面でもコンテンツが端に張り付かないようになっている。
 
 <figure>
-  <SmartIframe src="./flexible-layout-compositions/demo/wrapper.html" />
-</figure>
 
-🔗 [Wrapperのデモページを開く](./flexible-layout-compositions/demo/wrapper.html)
+```html demo title="Wrapper (Center)" lang="en"
+<link rel="stylesheet" href="/blog/2025/flexible-layout-compositions/demo.css" />
+<div class="wrapper">
+  <p class="box">I am centered and have a nice, consistent gutter.</p>
+</div>
+```
+
+</figure>
 
 <figure>
 
@@ -188,10 +207,22 @@ A common wrapper/container
 要素を水平方向に並べて、スペースが足りなくなったら自動的に折り返す。ラベルの長さに応じたレイアウトができる。
 
 <figure>
-  <SmartIframe src="./flexible-layout-compositions/demo/cluster.html" />
-</figure>
 
-🔗 [Clusterのデモページを開く](./flexible-layout-compositions/demo/cluster.html)
+```html demo title="Cluster" lang="en"
+<link rel="stylesheet" href="/blog/2025/flexible-layout-compositions/demo.css" />
+<div class="cluster">
+  <div class="box">Item 1</div>
+  <div class="box">Item 2</div>
+  <div class="box">Item 3</div>
+  <div class="box">Item 4</div>
+  <div class="box">Item 5</div>
+  <div class="box">Item 6</div>
+  <div class="box">Item 7</div>
+  <div class="box">Item 8</div>
+</div>
+```
+
+</figure>
 
 <figure>
 
@@ -255,10 +286,16 @@ Can be any acceptable flexbox alignment value.
 2つの要素を両端に配置し、スペースがあるときは引き離し、スペースが足りなくなったら積み重ねる。Every Layoutには存在しないパターン。
 
 <figure>
-  <SmartIframe src="./flexible-layout-compositions/demo/repel.html" />
-</figure>
 
-🔗 [Repelのデモページを開く](./flexible-layout-compositions/demo/repel.html)
+```html demo title="Repel" lang="en"
+<link rel="stylesheet" href="/blog/2025/flexible-layout-compositions/demo.css" />
+<div class="repel">
+  <div class="box">Item 1 repels item 2</div>
+  <div class="box">Item 2 repels item 1</div>
+</div>
+```
+
+</figure>
 
 <figure>
 
@@ -311,10 +348,26 @@ Can be any acceptable flexbox alignment value.
 サイドバーとメインコンテンツを横に並べるパターン。サイドバーは指定した幅になり、メインコンテンツは残りのスペースを埋める。ビューポートの幅が狭くなり、両方を横に並べるスペースがなくなると、自動的に縦に積み重なる。
 
 <figure>
-  <SmartIframe src="./flexible-layout-compositions/demo/sidebar.html" />
-</figure>
 
-🔗 [Sidebarのデモページを開く](./flexible-layout-compositions/demo/sidebar.html)
+```html demo title="Sidebar" lang="en"
+<link rel="stylesheet" href="/blog/2025/flexible-layout-compositions/demo.css" />
+<div class="sidebar" style="--sidebar-target-width: 12rem; --sidebar-content-min-width: 55%">
+  <div class="box">I am the sidebar</div>
+  <div class="box flow">
+    <h1>I am the content</h1>
+    <p>
+      Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet
+      fermentum.
+    </p>
+    <p>
+      Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      Vestibulum id ligula porta felis euismod semper.
+    </p>
+  </div>
+</div>
+```
+
+</figure>
 
 <figure>
 
@@ -391,10 +444,16 @@ EXCEPTIONS
 2つの要素を横に並べ、コンテナの幅が指定した閾値を下回ると縦に積み重なる。
 
 <figure>
-  <SmartIframe src="./flexible-layout-compositions/demo/switcher.html" />
-</figure>
 
-🔗 [Switcherのデモページを開く](./flexible-layout-compositions/demo/switcher.html)
+```html demo title="Switcher" lang="en"
+<link rel="stylesheet" href="/blog/2025/flexible-layout-compositions/demo.css" />
+<div class="switcher">
+  <div class="box">Item 1</div>
+  <div class="box">Item 2</div>
+</div>
+```
+
+</figure>
 
 <figure>
 
@@ -463,10 +522,22 @@ so anything greater than 2 is full width */
 グリッドレイアウトを自動的に生成する。指定した最小幅を保ちながら、利用可能なスペースに応じて列数を自動調整する。
 
 <figure>
-  <SmartIframe src="./flexible-layout-compositions/demo/grid.html" />
-</figure>
 
-🔗 [Gridのデモページを開く](./flexible-layout-compositions/demo/grid.html)
+```html demo title="Grid" lang="en"
+<link rel="stylesheet" href="/blog/2025/flexible-layout-compositions/demo.css" />
+<div class="grid" style="--grid-min-item-size: 14rem">
+  <div class="box">Item 1</div>
+  <div class="box">Item 2</div>
+  <div class="box">Item 3</div>
+  <div class="box">Item 4</div>
+  <div class="box">Item 5</div>
+  <div class="box">Item 6</div>
+  <div class="box">Item 7</div>
+  <div class="box">Item 8</div>
+</div>
+```
+
+</figure>
 
 <figure>
 

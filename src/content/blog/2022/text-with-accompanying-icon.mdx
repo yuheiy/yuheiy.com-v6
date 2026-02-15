@@ -7,7 +7,6 @@ pubDate: 2022-08-11T20:25:00.000+09:00
 
 import { Tweet } from 'astro-embed';
 import { Image } from 'astro:assets';
-import SmartIframe from '#components/SmartIframe.astro';
 
 テキストの行の末尾にアイコンを付随させるというレイアウトがある。
 
@@ -85,7 +84,147 @@ import SmartIframe from '#components/SmartIframe.astro';
 まずテキスト要素の`padding-right`によって、アイコンとその間の余白を加えた分の空間が末尾に確保されるようになる。そしてその空間を埋めるように、アイコン要素の位置を`margin-left`のネガティブ値で移動させる。それによって、アイコンが必ずテキストの末尾に隣り合って配置されるようになる。
 
 <figure>
-  <SmartIframe src="/blog/2022/text-with-accompanying-icon/demo/demo.html" />
+
+```html demo title="テキストの行の末尾にアイコンが付随するレイアウト"
+<style>
+  body {
+    margin: 1em;
+    background-color: #eee;
+  }
+
+  hr {
+    margin-top: 3em;
+    margin-bottom: 3em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+  }
+
+  .card {
+    --icon-size: 1em;
+    --icon-margin: 0.25em;
+    border-radius: 4px;
+    background-color: white;
+    padding: 1em 1.25em;
+    color: inherit;
+    line-height: 1.5;
+    text-decoration: none;
+  }
+
+  .card__label {
+    padding-right: var(--icon-margin);
+  }
+
+  .card--improved .card__label {
+    padding-right: calc(var(--icon-margin) + var(--icon-size));
+  }
+
+  .card__icon {
+    vertical-align: -0.125em;
+    fill: blue;
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
+
+  .card--improved .card__icon {
+    margin-left: calc(var(--icon-size) * -1);
+  }
+</style>
+
+<svg display="none">
+  <symbol id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+    <path
+      d="M4.5 17q-.625 0-1.062-.438Q3 16.125 3 15.5v-11q0-.625.438-1.062Q3.875 3 4.5 3H10v1.5H4.5v11h11V10H17v5.5q0 .625-.438 1.062Q16.125 17 15.5 17Zm3.562-4L7 11.938 14.438 4.5H12V3h5v5h-1.5V5.562Z"
+    />
+  </symbol>
+</svg>
+
+<p>通常版:</p>
+
+<div class="grid">
+  <a class="card" href="#"
+    ><span class="card__label">青い天鵞絨を張った腰掛け</span
+    ><!--
+--><svg class="card__icon" viewBox="0 0 20 20"><use href="#icon" /></svg
+  ></a>
+
+  <a class="card" href="#"
+    ><span class="card__label">銀河ステーションと言う声がしたというの</span
+    ><!--
+--><svg class="card__icon" viewBox="0 0 20 20"><use href="#icon" /></svg
+  ></a>
+
+  <a class="card" href="#"
+    ><span class="card__label">ごめんなさいジョバンニはまっすぐに立って</span
+    ><!--
+--><svg class="card__icon" viewBox="0 0 20 20"><use href="#icon" /></svg
+  ></a>
+
+  <a class="card" href="#"
+    ><span class="card__label">森の中からでもかおりだしたというふうにして</span
+    ><!--
+--><svg class="card__icon" viewBox="0 0 20 20"><use href="#icon" /></svg
+  ></a>
+
+  <a class="card" href="#"
+    ><span class="card__label">姿勢のまままた水の中へ</span
+    ><!--
+--><svg class="card__icon" viewBox="0 0 20 20"><use href="#icon" /></svg
+  ></a>
+
+  <a class="card" href="#"
+    ><span class="card__label">やって来るのを待っていました</span
+    ><!--
+--><svg class="card__icon" viewBox="0 0 20 20"><use href="#icon" /></svg
+  ></a>
+</div>
+
+<hr />
+
+<p>改良版:</p>
+
+<div class="grid">
+  <a class="card card--improved" href="#"
+    ><span class="card__label">青い天鵞絨を張った腰掛け</span
+    ><!--
+--><svg class="card__icon" viewBox="0 0 20 20"><use href="#icon" /></svg
+  ></a>
+
+  <a class="card card--improved" href="#"
+    ><span class="card__label">銀河ステーションと言う声がしたというの</span
+    ><!--
+--><svg class="card__icon" viewBox="0 0 20 20"><use href="#icon" /></svg
+  ></a>
+
+  <a class="card card--improved" href="#"
+    ><span class="card__label">ごめんなさいジョバンニはまっすぐに立って</span
+    ><!--
+--><svg class="card__icon" viewBox="0 0 20 20"><use href="#icon" /></svg
+  ></a>
+
+  <a class="card card--improved" href="#"
+    ><span class="card__label">森の中からでもかおりだしたというふうにして</span
+    ><!--
+--><svg class="card__icon" viewBox="0 0 20 20"><use href="#icon" /></svg
+  ></a>
+
+  <a class="card card--improved" href="#"
+    ><span class="card__label">姿勢のまままた水の中へ</span
+    ><!--
+--><svg class="card__icon" viewBox="0 0 20 20"><use href="#icon" /></svg
+  ></a>
+
+  <a class="card card--improved" href="#"
+    ><span class="card__label">やって来るのを待っていました</span>
+    <!--
+--><svg class="card__icon" viewBox="0 0 20 20"><use href="#icon" /></svg
+  ></a>
+</div>
+```
+
 </figure>
 
 注意点としては、テキスト要素とアイコン要素の間にソースコード上でホワイトスペースが入らないようにすることだ。ホワイトスペースの分の幅ができると、アイコンのために確保した空間をはみ出してしまうため、改行方法が正しく制御されなくなる。

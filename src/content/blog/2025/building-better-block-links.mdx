@@ -5,8 +5,6 @@ title: 'ブロックリンク（もしくはカードUI）のアクセシビリ�
 pubDate: 2025-04-17T11:05:00.000+09:00
 ---
 
-import SmartIframe from '#components/SmartIframe.astro';
-
 複数のテキスト要素や画像がグループ化されて、そのグループ全体が一つのリンクになっているというUI表現がある。ブロックリンクやカードUIなどと呼ばれるものだ。たとえば次のような実装になる。
 
 <figure>
@@ -152,7 +150,84 @@ for (const card of document.querySelectorAll('.card')) {
 </figure>
 
 <figure>
-  <SmartIframe src="/blog/2025/building-better-block-links/demo/demo.html" />
+
+```html demo lang="en" title="Better Block Link"
+<style>
+  body {
+    margin: 1em;
+    background-color: whitesmoke;
+    max-width: 30em;
+  }
+
+  .card {
+    border: 2px solid gainsboro;
+    border-radius: 12px;
+    background-color: white;
+    padding-inline: 1em;
+
+    @media (scripting: enabled) {
+      cursor: pointer;
+    }
+  }
+
+  .card:hover:not(:has(.colophon a:hover)) {
+    @media (scripting: enabled) and (hover: hover) {
+      background-color: yellow;
+    }
+  }
+
+  .card h3 a:hover {
+    @media not (scripting: enabled) {
+      background-color: yellow;
+    }
+  }
+
+  .colophon {
+    text-align: end;
+  }
+
+  .colophon a {
+    margin-inline: -0.5ch;
+    border-radius: 6px;
+    padding: 0.5ch;
+  }
+
+  .colophon a:hover {
+    @media (hover: hover) {
+      background-color: yellow;
+    }
+  }
+</style>
+
+<script type="module">
+  import { openLink } from 'https://esm.sh/@react-aria/utils';
+
+  for (const card of document.querySelectorAll('.card')) {
+    const link = card.querySelector('h3 a');
+
+    card.addEventListener('pointerup', (event) => {
+      if (event.target.closest('a:any-link')) {
+        return;
+      }
+
+      if (document.getSelection().isCollapsed) {
+        openLink(link, event);
+      }
+    });
+  }
+</script>
+
+<article class="card">
+  <h3><a href="news.html">Budget Debate Continues in Parliament</a></h3>
+  <p class="subhead">
+    <img class="alertimg" src="alerticon.png" alt="Breaking News" height="30" width="30" />
+    Members of Parliament continued vigorous debate on three challenging issues surrounding the
+    upcoming year's budget.
+  </p>
+  <p class="colophon">By <a href="author.html">John Smith</a></p>
+</article>
+```
+
 </figure>
 
 おそらくこれが、僕が考え得るかぎりで最もマシな実装だと思う。

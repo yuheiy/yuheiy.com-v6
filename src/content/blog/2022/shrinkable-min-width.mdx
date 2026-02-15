@@ -6,7 +6,6 @@ pubDate: 2022-08-12T15:40:00.000+09:00
 ---
 
 import { Image } from 'astro:assets';
-import SmartIframe from '#components/SmartIframe.astro';
 
 ボタンのラベルが短い場合でも、ボタン自体には最低限ある程度の幅を持たせたいという場合がある。そんなときには、ボタン自体に`min-width`を指定して最低幅を設定する。
 
@@ -45,7 +44,87 @@ button {
 このようにすると、`min-width`の値が`100%`を超えることを防げる。
 
 <figure>
-  <SmartIframe src="/blog/2022/shrinkable-min-width/demo/demo.html" />
+
+```html demo title="buttons with min-width" lang="en"
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 200%;
+  }
+
+  body {
+    margin: 1em;
+  }
+
+  button {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    border: 0;
+    border-radius: 0.25em;
+    background-color: dodgerblue;
+    padding: 0.5em 1em;
+    min-width: min(10em, 100%);
+    color: white;
+    font: inherit;
+    text-align: left;
+  }
+
+  button svg {
+    flex: none;
+    fill: currentcolor;
+    margin-right: -0.25em;
+    margin-left: -0.125em;
+    width: 1em;
+    height: 1em;
+  }
+
+  .stack > * + * {
+    margin-top: 1em;
+  }
+
+  .box {
+    border: 0.125em solid;
+    background-color: silver;
+    padding: 1em;
+    max-width: 10em;
+  }
+</style>
+
+<svg display="none">
+  <symbol id="icon" xmlns="http://www.w3.org/2000/svg" height="20" width="20">
+    <path d="m6 18-1.417-1.417L11.167 10 4.583 3.417 6 2l8 8Z" />
+  </symbol>
+</svg>
+
+<div class="stack">
+  <div>
+    <button type="button">
+      Hello
+      <svg viewBox="0 0 20 20"><use href="#icon" /></svg>
+    </button>
+  </div>
+
+  <div>
+    <button type="button">
+      Lorem ipsum dolor sit consectetur
+      <svg viewBox="0 0 20 20"><use href="#icon" /></svg>
+    </button>
+  </div>
+
+  <div class="box">
+    <button type="button">
+      Hello
+      <svg viewBox="0 0 20 20"><use href="#icon" /></svg>
+    </button>
+  </div>
+</div>
+```
+
 </figure>
 
 ---
