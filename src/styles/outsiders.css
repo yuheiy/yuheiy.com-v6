@@ -1,7 +1,9 @@
 /* Syntax Highlighting in Astro */
 @scope (.astro-code) {
-  overflow: clip;
-  text-box: trim-both text text;
+  :scope {
+    overflow: clip;
+    text-box: trim-both text text;
+  }
 
   :is(:scope, span) {
     background-color: transparent !important;
