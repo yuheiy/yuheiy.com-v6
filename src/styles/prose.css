@@ -129,8 +129,7 @@
   }
 
   img {
-    outline: 1px solid
-      color-mix(in oklab, light-dark(var(--color-gray-950), var(--color-zinc-50)) 15%, transparent);
+    outline: 1px solid var(--border-color-dynamic);
     outline-offset: -1px;
   }
 

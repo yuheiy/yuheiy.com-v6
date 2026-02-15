@@ -5,7 +5,10 @@
   --font-serif: serif;
   --font-mono: monospace, monospace;
 
-  --border-color-dynamic: light-dark(var(--color-gray-300), var(--color-zinc-700));
+  --border-color-dynamic: light-dark(
+    --alpha(var(--color-gray-950) / 15%),
+    --alpha(var(--color-gray-50) / 15%)
+  );
 
   --background-color-dynamic: light-dark(var(--color-white), var(--color-zinc-900));
   --background-color-dynamic-inset: light-dark(
