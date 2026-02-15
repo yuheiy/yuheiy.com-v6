@@ -15,8 +15,10 @@ const srcdoc = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width">
     <title>${title}</title>
     <style>
-      :root { color-scheme: light dark; font-size: sans-serif; }
-      body { margin: 0; }
+      @layer {
+        :root { color-scheme: light dark; font-size: sans-serif; }
+        body { margin: 0; }
+      }
     </style>
   </head>
   <body>${content}</body>

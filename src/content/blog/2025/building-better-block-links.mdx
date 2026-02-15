@@ -154,15 +154,13 @@ for (const card of document.querySelectorAll('.card')) {
 ```html demo lang="en" title="Better Block Link"
 <style>
   body {
-    margin: 1em;
-    background-color: whitesmoke;
     max-width: 30em;
   }
 
   .card {
-    border: 2px solid gainsboro;
+    border: 2px solid;
     border-radius: 12px;
-    background-color: white;
+    background-color: light-dark(white, black);
     padding-inline: 1em;
 
     @media (scripting: enabled) {
@@ -173,6 +171,7 @@ for (const card of document.querySelectorAll('.card')) {
   .card:hover:not(:has(.colophon a:hover)) {
     @media (scripting: enabled) and (hover: hover) {
       background-color: yellow;
+      color: black;
     }
   }
 
