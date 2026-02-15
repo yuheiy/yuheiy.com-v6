@@ -29,17 +29,18 @@ const srcdoc = `<!DOCTYPE html>
 
 <script>
   for (const iframe of document.querySelectorAll<HTMLIFrameElement>('[data-demo-iframe]')) {
+    const resizeObserver = new ResizeObserver((entries) => {
+      iframe.height = entries[0].contentBoxSize[0].blockSize.toString();
+    });
+
     function setup() {
       if (!iframe.contentDocument) return;
-      new ResizeObserver((entries) => {
-        iframe.height = entries[0].contentBoxSize[0].blockSize.toString();
-      }).observe(iframe.contentDocument.documentElement);
+      resizeObserver.observe(iframe.contentDocument.documentElement);
     }
 
     if (iframe.contentDocument?.readyState === 'complete') {
       setup();
-    } else {
-      iframe.addEventListener('load', setup);
     }
+    iframe.addEventListener('load', setup);
   }
 </script>
