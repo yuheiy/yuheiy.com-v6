@@ -126,6 +126,10 @@
     @apply text-sm;
     margin-block-start: --spacing(2.5);
     hanging-punctuation: allow-end;
+
+    :not(blockquote:not([class])) + & {
+      margin-block-end: calc(var(--half-leading) / -2);
+    }
   }
 
   img {
