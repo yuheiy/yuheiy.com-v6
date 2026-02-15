@@ -65,9 +65,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --prod
 
-      - name: Install Puppeteer Browsers
-        run: pnpm exec puppeteer browsers install chrome-headless-shell
-
       - name: Build
         run: pnpm run build
 
