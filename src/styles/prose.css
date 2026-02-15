@@ -1,4 +1,12 @@
 @scope (.prose) {
+  :is(hr, pre, figure, table, astro-embed-tweet, baseline-status, lite-youtube) {
+    margin-block: calc(--spacing(8) + var(--root-half-leading));
+
+    & + & {
+      margin-block-start: calc(--spacing(8) + var(--root-half-leading) * 2);
+    }
+  }
+
   h2 {
     @apply text-xl kerning-all;
     margin-block-start: --spacing(16);
@@ -13,6 +21,10 @@
     font-weight: bold;
     text-wrap: pretty;
     word-break: auto-phrase;
+
+    h2 + & {
+      margin-block-start: --spacing(4);
+    }
   }
 
   h4 {
@@ -20,33 +32,28 @@
     font-weight: bold;
     text-wrap: pretty;
     word-break: auto-phrase;
-  }
 
-  :is(h2 + h3, h3 + h4) {
-    margin-block-start: --spacing(4);
-  }
-
-  blockquote :is(h2, h3):first-child {
-    margin-block-start: --spacing(8);
+    h3 + & {
+      margin-block-start: --spacing(4);
+    }
   }
 
   p {
     margin-block-start: --spacing(8);
     hanging-punctuation: allow-end;
-  }
 
-  :is(h2, h3, h4) + p {
-    margin-block-start: --spacing(4);
+    :is(h2, h3, h4) + & {
+      margin-block-start: --spacing(4);
+    }
   }
 
   hr {
-    margin-block: calc(--spacing(12) + var(--half-leading));
     border-block-start: 4px solid var(--border-color-dynamic);
     inline-size: --spacing(32);
   }
 
   pre {
-    margin: calc(--spacing(8) + (1rlh - 1rem) / 2) calc((100cqw - 100%) / 2 * -1);
+    margin-inline: calc((100cqw - 100%) / 2 * -1);
     padding-inline: calc((100cqw - 100%) / 2);
     line-height: var(--leading-tight);
 
@@ -58,34 +65,42 @@
       padding-right: var(--padding-right-body);
       padding-left: var(--padding-left-body);
     }
-  }
 
-  blockquote:not([class]) pre {
-    margin-inline: 0;
-    padding-inline: 0;
-  }
+    blockquote:not([class]) & {
+      margin-inline: 0;
+      padding-inline: 0;
+    }
 
-  pre:has(+ figcaption) {
-    margin-block-end: --spacing(7);
+    &:has(+ figcaption) {
+      margin-block-end: --spacing(7);
+    }
   }
 
   blockquote:not([class]) {
     margin-inline-start: 2rem;
-    margin-block-end: --spacing(10);
+    margin-block: --spacing(12);
+
+    &:has(+ figcaption) {
+      margin-block-end: --spacing(10);
+    }
+
+    > :first-child {
+      margin-block-start: 0;
+    }
   }
 
   :is(ol, ul) {
     margin-block-start: --spacing(8);
     padding-inline-start: 2rem;
     list-style-type: revert;
-  }
 
-  :is(h2, h3, h4) + :is(ol, ul) {
-    margin-block-start: --spacing(4);
-  }
+    :is(h2, h3, h4) + & {
+      margin-block-start: --spacing(4);
+    }
 
-  :is(ol, ul) :is(ol, ul) {
-    margin-block-start: 0;
+    & & {
+      margin-block-start: 0;
+    }
   }
 
   li {
@@ -94,18 +109,17 @@
   }
 
   figure {
-    margin-block: calc(--spacing(8) + var(--half-leading));
-  }
+    &:has(> blockquote:not([class])) {
+      margin-block: --spacing(12);
+    }
 
-  figure:has(> pre) + figure:has(> pre)::before {
-    display: block;
-    mask-image: linear-gradient(to right, black calc(100% - --spacing(32)), transparent);
-    border-block-start: 1px dashed var(--border-color-dynamic);
-    content: '';
-  }
-
-  figure:has(> blockquote:not([class])) {
-    margin-block: --spacing(12);
+    &:has(> pre) + &:has(> pre)::before {
+      display: block;
+      mask-image: linear-gradient(to right, black calc(100% - --spacing(32)), transparent);
+      margin-block-end: calc(--spacing(8) + var(--half-leading) * 2);
+      border-block-start: 1px dashed var(--border-color-dynamic);
+      content: '';
+    }
   }
 
   figcaption {
@@ -122,7 +136,6 @@
 
   table {
     display: block;
-    margin-block: calc(--spacing(8) + var(--half-leading));
     border-spacing: 0;
     max-inline-size: 100%;
     overflow-x: auto;
@@ -143,9 +156,5 @@
 
   details {
     margin-block-start: --spacing(8);
-  }
-
-  :is(astro-embed-tweet, baseline-status, lite-youtube) {
-    margin-block: calc(--spacing(8) + var(--half-leading));
   }
 }
