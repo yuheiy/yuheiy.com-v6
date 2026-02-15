@@ -34,9 +34,9 @@ importers:
       baseline-status:
         specifier: ^1.1.1
         version: 1.1.1
-      mdast-util-to-string:
-        specifier: ^4.0.0
-        version: 4.0.0
+      hast-util-to-string:
+        specifier: ^3.0.1
+        version: 3.0.1
       rehype-unwrap-images:
         specifier: ^1.0.0
         version: 1.0.0
@@ -55,9 +55,6 @@ importers:
       unified:
         specifier: ^11.0.5
         version: 11.0.5
-      unist-util-select:
-        specifier: ^5.1.0
-        version: 5.1.0
       unist-util-visit:
         specifier: ^5.1.0
         version: 5.1.0
@@ -2088,6 +2085,9 @@ packages:
 
   hast-util-to-parse5@8.0.1:
     resolution: {integrity: sha512-MlWT6Pjt4CG9lFCjiz4BH7l9wmrMkfkJYCxFwKQic8+RTZgWPuWxwAfjJElsXkex7DJjfSJsQIt931ilUgmwdA==}
+
+  hast-util-to-string@3.0.1:
+    resolution: {integrity: sha512-XelQVTDWvqcl3axRfI0xSeoVKzyIFPwsAGSLIsKdJKQMXDYJS4WYrBNF/8J7RdhIcFI2BOHgAifggsvsxp/3+A==}
 
   hast-util-to-text@4.0.2:
     resolution: {integrity: sha512-KK6y/BN8lbaq654j7JgBydev7wuNMcID54lkRav1P0CaE1e47P72AWWPiGKXTJU271ooYzcvTAn/Zt0REnvc7A==}
@@ -5996,6 +5996,10 @@ snapshots:
       space-separated-tokens: 2.0.2
       web-namespaces: 2.0.1
       zwitch: 2.0.4
+
+  hast-util-to-string@3.0.1:
+    dependencies:
+      '@types/hast': 3.0.4
 
   hast-util-to-text@4.0.2:
     dependencies:

@@ -3,12 +3,11 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 import type { Element } from 'hast';
-import { toString } from 'mdast-util-to-string';
+import { toString } from 'hast-util-to-string';
 import rehypeUnwrapImages from 'rehype-unwrap-images';
 import invariant from 'tiny-invariant';
 import type { Pluggable } from 'unified';
-import { select, type Node } from 'unist-util-select';
-import { visit } from 'unist-util-visit';
+import { EXIT, visit } from 'unist-util-visit';
 
 const remarkDemoCodeBlock: Pluggable = () => {
   function parseMeta(meta: string): Record<string, string> {
@@ -110,13 +109,14 @@ const remarkDemoCodeBlock: Pluggable = () => {
   };
 };
 
-const remarkInjectDescription: Pluggable = () => {
+const rehypeInjectDescription: Pluggable = () => {
   return (tree, { data }) => {
-    const firstParagraph = select('paragraph', tree as Node);
-    if (firstParagraph) {
+    visit(tree, 'element', (node: Element) => {
+      if (node.tagName !== 'p') return;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (data.astro as any).frontmatter.description = toString(firstParagraph);
-    }
+      (data.astro as any).frontmatter.description = toString(node);
+      return EXIT;
+    });
   };
 };
 
@@ -145,8 +145,12 @@ export default defineConfig({
   trailingSlash: 'never',
   integrations: [
     mdx({
-      remarkPlugins: [remarkDemoCodeBlock, remarkInjectDescription],
-      rehypePlugins: [rehypeUnwrapImages, rehypeUnwrapFigcaptionParagraphs],
+      remarkPlugins: [remarkDemoCodeBlock],
+      rehypePlugins: [
+        rehypeUnwrapImages,
+        rehypeUnwrapFigcaptionParagraphs,
+        rehypeInjectDescription,
+      ],
     }),
     sitemap(),
   ],
