@@ -78,11 +78,6 @@
 
   blockquote:not([class]) {
     margin-inline-start: 2rem;
-    margin-block: --spacing(12);
-
-    &:has(+ figcaption) {
-      margin-block-end: --spacing(10);
-    }
 
     > :first-child {
       margin-block-start: 0;
@@ -130,6 +125,10 @@
     @apply text-sm;
     margin-block-start: --spacing(2.5);
     hanging-punctuation: allow-end;
+
+    blockquote:not([class]) + & {
+      margin-block-start: --spacing(10);
+    }
 
     :not(blockquote:not([class])) + & {
       margin-block-end: calc(var(--half-leading) / -2);
