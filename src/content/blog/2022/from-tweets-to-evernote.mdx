@@ -35,8 +35,6 @@ Pocketははてブと同じくブックマーク専用ツール。EvernoteとNot
 
 アーカイブはHTMLでできたSPAになっていて、ブラウザで開くとビューアーとして機能する。ツイートのXMLやJSONが含まれているわけではないけど、いちおうツイートのデータだけを含んで切り出された次のようなJavaScriptのファイル（`data/tweet.js`）があるので、それをもとにしていろいろ処理していく。
 
-<figure>
-
 ```javascript
 window.YTD.tweet.part0 = [
   { ... },
@@ -44,8 +42,6 @@ window.YTD.tweet.part0 = [
   { ... }
 ]
 ```
-
-</figure>
 
 まずはこの中から、ツイートしたURLのみを抽出したい。Twitterではツイートの本文データの中にURLもいっしょに含まれているので、URLのみを抽出するためにはTwitter公式のパーサーである[twitter-text](https://github.com/twitter/twitter-text)を使う。
 

@@ -7,7 +7,6 @@ pubDate: 2024-08-17T14:50:00.000+09:00
 
 昨今、特にフロントエンドのアプリケーションにおいて、技術的な役割よりもフィーチャー（feature）を起点としてディレクトリを構成する（package by feature）というする考えが一般化しつつある。たとえば、技術的な役割を起点としたディレクトリ構成（package by layer）は次のようなものだ。
 
-<figure>
 ```sh
 my-system
 ├─ controllers
@@ -25,13 +24,15 @@ my-system
 ```
 
 <figcaption>
-  &mdash; <cite>[Structure your solution by components](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/breakintcomponents.md)</cite>
+  &mdash;{' '}
+  <cite>
+    [Structure your solution by
+    components](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/breakintcomponents.md)
+  </cite>
 </figcaption>
-</figure>
 
 この代わりに、次のように構成すべきという考えである。
 
-<figure>
 ```sh
 my-system
 ├─ apps (components)
@@ -48,9 +49,12 @@ my-system
 ```
 
 <figcaption>
-  &mdash; <cite>[Structure your solution by components](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/breakintcomponents.md)</cite>
+  &mdash;{' '}
+  <cite>
+    [Structure your solution by
+    components](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/breakintcomponents.md)
+  </cite>
 </figcaption>
-</figure>
 
 同様の議論はこれまでにいくつもあって、方向性としては僕も賛同するが、それだけでは体系として不十分であるとも感じていた。フィーチャーの観点だけでアプリケーションが構成できるわけではないので、もっと踏み込んだ整理が必要だと思っていた。
 
@@ -58,12 +62,11 @@ my-system
 
 Feature-Sliced Designにおいてもっとも特徴的なのが、「Layers」「Slices」「Segments」という階層構造になったスキームである。
 
-<figure>
-  ![](./assets/feature-sliced-design-for-astro/feature-sliced-design-scheme.jpg)
-  <figcaption>
-    &mdash; <cite>[Feature-Sliced Design](https://feature-sliced.design/)</cite>
-  </figcaption>
-</figure>
+![](./assets/feature-sliced-design-for-astro/feature-sliced-design-scheme.jpg)
+
+<figcaption>
+  &mdash; <cite>[Feature-Sliced Design](https://feature-sliced.design/)</cite>
+</figcaption>
 
 各Layersには決まった役割があり、その中にSlicesとSegmentsがそれぞれ入れ子になる。ただし、appとsharedにはSlicesを含めずにSegmentsが直接配置される。またSegmentsの名前としては、「ui」「api」「model」「lib」「config」が基本的な例として提案されている。
 
@@ -72,8 +75,6 @@ Feature-Sliced Designにおいてもっとも特徴的なのが、「Layers」�
 そして、Feature-Sliced Designはフロントエンドのアプリケーション全般に適用できる方法論として紹介されている。その典型的な例としては、ReactやVue.jsなどを使ったSPAが当てはまるのだろうが、今回は、同様の問題を抱えがちなAstroを使ったプロジェクトに適用する例について考えてみたい。
 
 というのも、Astroの[Project Structure](https://docs.astro.build/en/basics/project-structure/)として紹介されている構成は、まさに技術的な役割が起点になっている例である。これに従ってウェブサイトを構築していくと、たとえば次のような形になり得る。
-
-<figure>
 
 ```sh
 src/
@@ -116,13 +117,9 @@ src/
 └── consts.ts
 ```
 
-</figure>
-
 この構成はフレームワークによって強制されているわけではなく、多くは好みに応じて自由に変更できる。
 
 この例では、「about」「blog」「home」などの共通する関心事に基づいたファイルがそれぞれのレイヤーに分散してしまって扱いづらいため、Feature-Sliced Designに基づいて再整理してみる。次のようになる。
-
-<figure>
 
 ```sh
 src/
@@ -170,8 +167,6 @@ src/
         ├── Button.astro
         └── Header.astro
 ```
-
-</figure>
 
 このようにすると、おおむね関心事に基づいた構成にできたように思う。
 

@@ -11,8 +11,6 @@ VS Codeの拡張機能である[Tailwind CSS IntelliSense](https://marketplace.v
 
 これに対する解決策は、[Tailwindプラグイン](https://tailwindcss.com/docs/plugins)としてCSSを実装することだ。たとえば次のようにすることで、IntelliSenseから`card`クラスを検出できるようになる。
 
-<figure>
-
 ```js
 const plugin = require('tailwindcss/plugin');
 
@@ -33,13 +31,9 @@ module.exports = {
 };
 ```
 
-</figure>
-
 ただしこの場合、JavaScriptとしてCSSを記述しなければならないという制約がある。普通のCSSと異なる書き方をしなければならないという点では、やや不便だろう。
 
 そこで、代わりに次のような実装をすることで、普通のCSSとして記述されたファイルをプラグインとして読み込むことができる。
-
-<figure>
 
 ```js
 const fs = require('fs');
@@ -58,11 +52,7 @@ module.exports = {
 };
 ```
 
-</figure>
-
 `card.css`は次のようになる。
-
-<figure>
 
 ```css
 .card {
@@ -73,8 +63,6 @@ module.exports = {
 }
 ```
 
-</figure>
-
 `styles.nodes`には、CSSをパースしてオブジェクト化された結果が格納されており、これをそのまま読み込むことでスタイルを登録できる。これは、[Core pluginsのpreflightの実装方法](https://github.com/tailwindlabs/tailwindcss/blob/4c34b2ed34a162750df581af460121322132e88d/src/corePlugins.js#L499-L505)を参考にしたものだ。
 
 これによってCSSファイルを読み込めるようにはなったが、ただ、さらに言うならば、CSSファイルが増えたり名前が変わったりした際には、その都度プラグインの実装に手を入れる必要があり、余計な手間は生じる。それを省力化すべく、CSSのファイル名に応じて自動的にスタイルが読み込まれる仕組み（convention over configuration）を作ってみよう。
@@ -84,8 +72,6 @@ module.exports = {
 プラグインの引数である`addBase`、`addComponents`、`addUtilities`は、それらのレイヤーに基づいており、ユーザーは、適切なレイヤーに対応する関数を選択して使用することになる。CSSファイルがどのレイヤーに属するかの区分をするために、ファイル名のプレフィックスとしてレイヤー名を含めるという規約を設けるのがよいだろう。
 
 これを踏まえると、次のような実装になった。
-
-<figure>
 
 ```js
 /**
@@ -126,13 +112,9 @@ module.exports = {
 };
 ```
 
-</figure>
-
 しかし、まだ一つ問題が残る。それは、開発時にビルドツールなどを使ってソースコードの変更を監視する場合、CSSファイルを変更してもそれが検知されないため、再ビルドが自動的に実行されないということだ。
 
 これについての解決策としては、ビルドツールとは別に監視プロセスを設けるという手がある。CSSファイルが変更されるたびに`tailwind.config.js`のタイムスタンプを更新することで、ビルドツールが再ビルドを実行するように促すことができる。npm scriptsとして、[Chokidar CLI](https://github.com/open-cli-tools/chokidar-cli)や[concurrently](https://github.com/open-cli-tools/concurrently)を使用することで、次のように実現できる。
-
-<figure>
 
 ```json
 {
@@ -144,5 +126,3 @@ module.exports = {
   // ...
 }
 ```
-
-</figure>

@@ -15,8 +15,6 @@ pubDate: 2024-03-16T19:10:00.000+09:00
 
 Tailwind CSSを使っていると、Sassで言うところのmixinのような仕組みが欲しくなることがたまにある。たとえば次のように、三角形を描画するための定型表現を形式化したいとき。
 
-<figure>
-
 ```scss
 // https://qiita.com/degudegu2510/items/09f34d4b218c9df6bb57
 @mixin triangle($size) {
@@ -31,15 +29,11 @@ Tailwind CSSを使っていると、Sassで言うところのmixinのような�
 }
 ```
 
-</figure>
-
 似たようなことを実現するためのやり方はいくつかあるが、今回はこれをTailwind CSSプラグインとして実装してみる。
 
 ## 1値の引数を取る仕組み
 
 まず引数を取る仕組みを作るには、プラグインの`matchUtilities`関数を使う。ほかにも`matchComponents`関数や`matchVariant`関数というのもあるが、今回はユーティリティなのでこれが順当である。次のようにして使う。
-
-<figure>
 
 ```js
 const plugin = require('tailwindcss/plugin');
@@ -68,11 +62,7 @@ module.exports = {
 };
 ```
 
-</figure>
-
 例のように実装すると、次のようなクラスが使えるようになる。
-
-<figure>
 
 ```html
 <!-- テーマを参照する例: -->
@@ -86,10 +76,6 @@ module.exports = {
 </div>
 ```
 
-</figure>
-
-<figure>
-
 ```css
 .tab-4 {
   tab-size: 4;
@@ -100,11 +86,7 @@ module.exports = {
 }
 ```
 
-</figure>
-
 これを見ればわかる通り、`matchUtilities`関数のコールバック関数が返すオブジェクトがそのままCSSとして出力されるという仕組みになっている。なのでたとえば、`value`を元にして動的に宣言を組み立てることもできる。
-
-<figure>
 
 ```js
 matchComponents({
@@ -115,15 +97,11 @@ matchComponents({
 });
 ```
 
-</figure>
-
 ただし、このやり方では引数を一つしか受け取ることができない。そのため、複数の引数に応じた処理をしたい場合には使いづらい。
 
 ## 2値の引数を取る仕組み
 
 そこで参考として、Tailwindのコアプラグインの実装を調べてみる。[fontSizeプラグイン](https://tailwindcss.com/docs/font-size)では、次のようにして2値を引数として指定できる。
-
-<figure>
 
 ```html
 <p class="text-base/6 ...">So I started to walk into the water...</p>
@@ -131,13 +109,9 @@ matchComponents({
 <p class="text-base/loose ...">So I started to walk into the water...</p>
 ```
 
-</figure>
-
 `base`が`font-size`、`6`/`7`/`loose`が`line-height`である。この実装は次のようになっている。
 
 [`tailwindcss/src/corePlugins.js#L2100-L2120`](https://github.com/tailwindlabs/tailwindcss/blob/master/src/corePlugins.js#L2100-L2120):
-
-<figure>
 
 ```js
 text: (value, { modifier }) => {
@@ -163,15 +137,11 @@ text: (value, { modifier }) => {
 },
 ```
 
-</figure>
-
 注目すべきは、関数の第二引数から`modifier`という値を受け取っていること。クラス名のなかのスラッシュの後ろ側の値がこれに対応している。2値を取るプラグインはこれと同じ要領で実現できる。ただそれでも、3値以上の引数が必要になる場合に対応できない。
 
 ## 0値以上の引数を取る仕組み
 
 そうした場合、カスタムプロパティを活用すると、3値以上（正確に言えば0値以上）の引数を取ることができる。たとえば、Tailwindでは`transform`プロパティに関するクラスを次のように併せて記述できる。
-
-<figure>
 
 ```html
 <div class="translate-x-4 scale-75 skew-y-3">
@@ -179,11 +149,7 @@ text: (value, { modifier }) => {
 </div>
 ```
 
-</figure>
-
 この場合、対応するCSSは次のように生成される。
-
-<figure>
 
 {/* prettier-ignore */}
 ```css
@@ -215,8 +181,6 @@ text: (value, { modifier }) => {
 }
 ```
 
-</figure>
-
 通常、`transform`プロパティに複数の座標変換関数を適用するには、マルチクラスの設計では実現しづらい（もっとも昨今では、それぞれに独立したプロパティが利用できるため、必ずしも`transform`プロパティを使用する必要はないが、それは別の話）。しかしTailwindでは、このように値を部分的に挿入できるようにすることで、マルチクラスによって引数のような仕組みを実現している。
 
 同じような仕組みを実装するには、[`transform`プロパティに関するプラグイン](https://github.com/tailwindlabs/tailwindcss/blob/v3.4.1/src/corePlugins.js#L910-L991)や、同様の手法を採用している[`gradientColorStops`プラグイン](https://github.com/tailwindlabs/tailwindcss/blob/v3.4.1/src/corePlugins.js#L1835-L1933)のソースコードを参考にしていただければできるはずだ。
@@ -226,8 +190,6 @@ text: (value, { modifier }) => {
 たとえば、コミュニティによるプラグインの[tailwindcss-text-scale](https://github.com/matiasngf/tailwindcss-text-scale)では、カスタムプロパティとして2つの数値を受け取った上で、それをCSSの`calc`関数を用いて計算するという実装方法が採用されている。
 
 [`tailwindcss-text-scale/src/index.ts#L58-L87`](https://github.com/matiasngf/tailwindcss-text-scale/blob/63254a98dba6bfe1c5247fbfabca4049bce028a0/src/index.ts#L58-L87):
-
-<figure>
 
 ```js
 addBase({
@@ -264,11 +226,7 @@ addBase({
 });
 ```
 
-</figure>
-
 [`tailwindcss-text-scale/src/index.ts#L92-L122`](https://github.com/matiasngf/tailwindcss-text-scale/blob/63254a98dba6bfe1c5247fbfabca4049bce028a0/src/index.ts#L92-L122):
-
-<figure>
 
 ```js
 matchUtilities(
@@ -309,5 +267,3 @@ matchUtilities(
   },
 );
 ```
-
-</figure>

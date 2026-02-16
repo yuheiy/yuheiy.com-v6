@@ -17,7 +17,6 @@ pubDate: 2025-02-24T04:50:00.000+09:00
 
 要素を不活性化するには`inert`属性を使う。要素に`inert`属性が適用されると、その子孫まで不活性状態が継承される。
 
-<figure>
 ```html
 <div>
   <label for="button1">Button 1</label>
@@ -31,14 +30,14 @@ pubDate: 2025-02-24T04:50:00.000+09:00
 ```
 
 <figcaption>
-  &mdash; <cite>[HTMLElement: inert property - Web APIs |
-  MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/inert#html)</cite>
+  &mdash;{' '}
+  <cite>
+    [HTMLElement: inert property - Web APIs |
+    MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/inert#html)
+  </cite>
 </figcaption>
-</figure>
 
 そのため、モーダルダイアログ以外のすべての要素が一つの要素の中に囲われていれば、`inert`属性を一箇所に適用するだけで済む。
-
-<figure>
 
 ```html
 <div inert>
@@ -53,11 +52,7 @@ pubDate: 2025-02-24T04:50:00.000+09:00
 </div>
 ```
 
-</figure>
-
 とはいえ、いつもこのような構造を実現できるとはかぎらない。場合によっては、モーダルダイアログが別の要素の中に入れ子になった、もっと複雑な文書構造になることもあるだろう。
-
-<figure>
 
 ```html
 <h1><!-- ... --></h1>
@@ -76,11 +71,7 @@ pubDate: 2025-02-24T04:50:00.000+09:00
 </section>
 ```
 
-</figure>
-
 このような場合、モーダルダイアログを除いた上端にあたる要素すべてに`inert`属性を適用しなければならない。
-
-<figure>
 
 ```html
 <h1 inert><!-- ... --></h1>
@@ -99,11 +90,7 @@ pubDate: 2025-02-24T04:50:00.000+09:00
 </section>
 ```
 
-</figure>
-
 これを実現するには、次のような処理を実装する。
-
-<figure>
 
 ```javascript
 function setInert(el) {
@@ -137,11 +124,7 @@ function crawlSiblingsUp(el, callback) {
 }
 ```
 
-</figure>
-
 これを次のように使用する。
-
-<figure>
 
 ```javascript
 const dialogEl = document.querySelector('[role="dialog"]');
@@ -156,8 +139,6 @@ function closeDialog() {
   undoInert = null;
 }
 ```
-
-</figure>
 
 モーダルダイアログを開くタイミングで`setInert`関数を実行する。これにより、モーダルダイアログを除くすべての要素の上端に`inert`属性が適用される。閉じるタイミングでその戻り値を実行することで、開くときに適用した`inert`属性はすべて取り除かれる。なおこの実装は、[Alpine.jsのFocusプラグイン](https://alpinejs.dev/plugins/focus)を参考にしたものである。
 

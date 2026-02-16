@@ -1,12 +1,4 @@
 @scope (.prose) {
-  :is(hr, pre, figure, table, astro-embed-tweet, baseline-status, lite-youtube) {
-    margin-block: calc(--spacing(8) + var(--root-half-leading));
-
-    & + & {
-      margin-block-start: calc(--spacing(8) + var(--root-half-leading) * 2);
-    }
-  }
-
   h2 {
     @apply text-xl kerning-all;
     margin-block-start: --spacing(16);
@@ -44,6 +36,14 @@
 
     :is(h2, h3, h4) + & {
       margin-block-start: --spacing(4);
+    }
+  }
+
+  :is(hr, figure, table) {
+    margin-block: calc(--spacing(8) + var(--root-half-leading));
+
+    & + & {
+      margin-block-start: calc(--spacing(8) + var(--root-half-leading) * 2);
     }
   }
 

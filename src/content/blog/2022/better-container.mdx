@@ -11,8 +11,6 @@ pubDate: 2022-11-27T16:05:00.000+09:00
 
 具体的には、次のような実装になる。前述の記事からの抜粋。
 
-<figure>
-
 ```css
 /* 幅広・全幅ブロック以外にデフォルトコンテンツ幅を指定 */
 .entry-content > *:not(.alignwide):not(.alignfull) {
@@ -31,11 +29,7 @@ pubDate: 2022-11-27T16:05:00.000+09:00
 }
 ```
 
-</figure>
-
 ここまでは以前の記事で紹介したやり方とあまり変わらない。しかし、コンテナの外側にできる余白の実装が少し違う。
-
-<figure>
 
 ```css
 .entry-content {
@@ -49,13 +43,9 @@ pubDate: 2022-11-27T16:05:00.000+09:00
 }
 ```
 
-</figure>
-
 最大幅の実装は個々の要素が担いつつ、外側の余白は親要素に持たせておくようになっている。そして、ページいっぱいまでに広がる要素（alignfull）は例外として、ネガティブマージンで処理されている。
 
 参考として[Twenty Twenty-Twoの実装](https://github.com/WordPress/wordpress-develop/tree/trunk/src/wp-content/themes/twentytwentytwo)を調べてみると、[style.css](https://github.com/WordPress/wordpress-develop/blob/trunk/src/wp-content/themes/twentytwentytwo/style.css)に同様の記述があった。
-
-<figure>
 
 ```css
 .wp-site-blocks,
@@ -85,13 +75,9 @@ body > .is-root-container > .wp-block-template-part > .wp-block-cover,
 }
 ```
 
-</figure>
-
 [`settings.useRootPaddingAwareAlignments`についての解説](https://qiita.com/TetsuakiHamano/items/4c1576131a71fc41ef41#settingsuserootpaddingawarealignments)も参考になった。
 
 これらの例はWordPress向けの実装になっているので、少し手を加えて、単独で実装パターンとして成立するように整理した。
-
-<figure>
 
 ```html
 <div class="entry-content">
@@ -108,10 +94,6 @@ body > .is-root-container > .wp-block-template-part > .wp-block-cover,
   <figure class="alignfull">...</figure>
 </div>
 ```
-
-</figure>
-
-<figure>
 
 ```css
 :root {
@@ -143,11 +125,7 @@ body > .is-root-container > .wp-block-template-part > .wp-block-cover,
 }
 ```
 
-</figure>
-
 参考までに、Tailwind CSSっぽい疑似コードも示しておく。
-
-<figure>
 
 ```html
 <div class="px-outer">
@@ -164,5 +142,3 @@ body > .is-root-container > .wp-block-template-part > .wp-block-cover,
   <figure class="-mx-outer">...</figure>
 </div>
 ```
-
-</figure>

@@ -7,33 +7,23 @@ pubDate: 2025-05-25T16:10:00.000+09:00
 
 VSCodeエクステンションのGitHub Copilot Chat 0.27にて、[画像の代替テキストを自動生成できる機能が追加された](https://marketplace.visualstudio.com/items/GitHub.copilot-chat/changelog#user-content-generate-alt-text-in-html-or-markdown)。
 
-<figure>
-  <video controls playsinline width="794" height="438">
-    <source src={(await import('./assets/generate-alt-text-in-vscode/preview.mp4')).default} />
-  </video>
-</figure>
+<video controls playsinline width="794" height="438">
+  <source src={(await import('./assets/generate-alt-text-in-vscode/preview.mp4')).default} />
+</video>
 
 この機能を使用するには、HTMLファイルまたはMarkdownファイル内の画像がある行までカーソルを移したうえで、キーボードショートカットの<kbd>⌘.</kbd>を使うか、行の上部に表示される電球アイコンを選択する。`alt`属性の値が空であれば「Generate alt text」、すでに存在すれば「Refine alt text」がコードアクションとして表示される。
 
 アクションを実行するとインラインチャットが立ち上がり、「Generate alt text」の場合は次のプロンプトが実行される。
 
-<figure>
-
 ```
 Create an alt text description that is helpful for screen readers and people who are blind or have visual impairment. Never start alt text with "Image of..." or "Picture of...". Please clearly identify the primary subject or subjects of the image. Describe what the subject is doing, if applicable. Please add a short description of the wider environment. If there is text in the image please transcribe and include it. Please describe the emotional tone of the image, if applicable. Do not use single or double quotes in the alt text.
 ```
 
-</figure>
-
 「Refine alt text」であれば次のようになる。
-
-<figure>
 
 ```
 Refine the existing alt text for clarity and usefulness for screen readers. Create an alt text description that is helpful for screen readers and people who are blind or have visual impairment. Never start alt text with "Image of..." or "Picture of...". Please clearly identify the primary subject or subjects of the image. Describe what the subject is doing, if applicable. Please add a short description of the wider environment. If there is text in the image please transcribe and include it. Please describe the emotional tone of the image, if applicable. Do not use single or double quotes in the alt text.
 ```
-
-</figure>
 
 チャットからのレスポンスが返ってきたタイミングで、その結果が値として挿入される。
 
@@ -60,8 +50,6 @@ Refine the existing alt text for clarity and usefulness for screen readers. Crea
 GitHub Copilotのリポジトリは公開されていないので、ローカルにある`~/.vscode/extensions/`を対象に「Generate alt text」の文字列を検索すると、`~/.vscode/extensions/github.copilot-chat-0.27.0/dist/extension.js`のなかにその記述が見つかった。
 
 `extension.js`はminifyされているため、Prettierでフォーマットする。検索で見つかった該当箇所は次のようになっていた。
-
-<figure>
 
 ```js
 async provideAltTextQuickFix(e, t) {
@@ -96,11 +84,7 @@ async provideAltTextQuickFix(e, t) {
 }
 ```
 
-</figure>
-
 この`provideAltTextQuickFix`が呼び出されている場所を調べると、次のソースコードが出てくる。
-
-<figure>
 
 ```js
 async provideCodeActions(e, t, n) {
@@ -131,21 +115,13 @@ async provideCodeActions(e, t, n) {
   ) {
 ```
 
-</figure>
-
 `github.copilot.chat.generateAltText`というコマンドに目をつけて調べると、次のような定義が見つかった。
-
-<figure>
 
 ```js
 p.add(
   Ot.commands.registerCommand("github.copilot.chat.generateAltText", N),
 ),
 ```
-
-</figure>
-
-<figure>
 
 ```js
 N = async (M) => {
@@ -175,8 +151,6 @@ N = async (M) => {
   }
 },
 ```
-
-</figure>
 
 どうやらこの実装では、インラインチャットに対して、先ほどのプロンプトといっしょに画像もコンテキストとして渡しているようだ。
 

@@ -13,8 +13,6 @@ ReactのUIコンポーネントライブラリを使っていると、あるコ�
 
 そのような場合、一般的には、Buttonコンポーネントに`as` propを実装して対処することが多い。
 
-<figure>
-
 ```jsx
 function Button({ as: Component = 'button', ...props }) {
   return <Component {...props} />;
@@ -31,8 +29,6 @@ render(
   </>,
 );
 ```
-
-</figure>
 
 このパターンは、Polymorphicとも呼ばれる。[styled-components](https://styled-components.com/docs/api#as-polymorphic-prop)や[Material UI](https://mui.com/material-ui/guides/composition/#component-prop)、[Chakra UI](https://chakra-ui.com/docs/styled-system/style-props#the-as-prop)など、数多くのライブラリで同等の手法が採用されている。
 
@@ -51,13 +47,12 @@ render(
 
 一つは、TypeScriptのエラーメッセージが複雑になってしまうこと。たとえば、Reactの要素に間違ったpropが渡されたとき、通常の`a`要素と、`as` propとしてa要素が指定されたコンポーネントを比較すると、明らかに後者の方がユーザーにとって理解しづらい。
 
-<figure>![](./assets/react-changeable-element-type-patterns/as-prop-error.png)</figure>
+![](./assets/react-changeable-element-type-patterns/as-prop-error.png)
 
 次に、TypeScriptのパフォーマンスを悪化させること。`as` propの型定義においては、高度な型推論や条件型、ジェネリクスを多用することになり、コンパイルするための負荷が高まってしまう。
 
 そして、`as` propを使うと、元のコンポーネントと`as`に当たるコンポーネントの双方に対するpropを同時に記述することになり、どのpropがどのコンポーネントのためのものかが理解しづらくなる。さらに、元のコンポーネントと`as`に当たるコンポーネントに同じ名前のpropがあるとコンフリクトしてしまう。
 
-<figure>
 ```jsx
 const ComponentOwnProps = {
 	onChange(thing: boolean): void;
@@ -68,36 +63,38 @@ const Component = () => {/* ... */};
 // thing would be `event` type from `input`
 return <Component as="input" onChange={thing => console.log(thing)} />;
 
-````
+```
 
 <figcaption>
-  &mdash; <cite>[\[Polymorphic\] Allow `ComponentType` props to override by jjenzz · Pull Request #779 · radix-ui/primitives](https://github.com/radix-ui/primitives/pull/779#issuecomment-879257075)</cite>
+  &mdash;{' '}
+  <cite>
+    [\[Polymorphic\] Allow `ComponentType` props to override by jjenzz · Pull Request #779 ·
+    radix-ui/primitives](https://github.com/radix-ui/primitives/pull/779#issuecomment-879257075)
+  </cite>
 </figcaption>
-</figure>
 
 ## `asChild` prop
 
 これらの問題を解決するために、新たに`asChild` propが考案された。次のようにして使用する。
 
-<figure>
 ```jsx
-import * as React from 'react';
 import * as Tooltip from '@radix-ui/react-tooltip';
+import * as React from 'react';
 
 export default () => (
-	<Tooltip.Root>
-		<Tooltip.Trigger asChild>
-			<a href="https://www.radix-ui.com/">Radix UI</a>
-		</Tooltip.Trigger>
-		<Tooltip.Portal>…</Tooltip.Portal>
-	</Tooltip.Root>
+  <Tooltip.Root>
+    <Tooltip.Trigger asChild>
+      <a href="https://www.radix-ui.com/">Radix UI</a>
+    </Tooltip.Trigger>
+    <Tooltip.Portal>…</Tooltip.Portal>
+  </Tooltip.Root>
 );
-````
+```
 
 <figcaption>
-  &mdash; <cite>[Composition – Radix UI](https://www.radix-ui.com/docs/primitives/guides/composition)</cite>
+  &mdash;{' '}
+  <cite>[Composition – Radix UI](https://www.radix-ui.com/docs/primitives/guides/composition)</cite>
 </figcaption>
-</figure>
 
 レンダリングする要素を変更する対象のコンポーネントに対して、`as` propの代わりに`asChild` propを付与する。その`children` propとして任意のノードを指定する。
 
@@ -105,65 +102,60 @@ export default () => (
 
 おまけに、`asChild` propの特性としてもたらされるのが、`asChild` propを指定されたコンポーネントを複数に入れ子にできる機能である。次のように記述することで、親に当たるコンポーネントの機能を継承していくことができる。
 
-<figure>
 ```jsx
-import * as React from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as Tooltip from '@radix-ui/react-tooltip';
+import * as React from 'react';
 
 const MyButton = React.forwardRef((props, forwardedRef) => (
-
-<button {...props} ref={forwardedRef} />
+  <button {...props} ref={forwardedRef} />
 ));
 
 export default () => {
-	return (
-		<Dialog.Root>
-			<Tooltip.Root>
-				<Tooltip.Trigger asChild>
-					<Dialog.Trigger asChild>
-						<MyButton>Open dialog</MyButton>
-					</Dialog.Trigger>
-				</Tooltip.Trigger>
-				<Tooltip.Portal>…</Tooltip.Portal>
-			</Tooltip.Root>
+  return (
+    <Dialog.Root>
+      <Tooltip.Root>
+        <Tooltip.Trigger asChild>
+          <Dialog.Trigger asChild>
+            <MyButton>Open dialog</MyButton>
+          </Dialog.Trigger>
+        </Tooltip.Trigger>
+        <Tooltip.Portal>…</Tooltip.Portal>
+      </Tooltip.Root>
 
-    		<Dialog.Portal>...</Dialog.Portal>
+      <Dialog.Portal>...</Dialog.Portal>
     </Dialog.Root>
-
-);
+  );
 };
-
-````
+```
 
 <figcaption>
-  &mdash; <cite>[Composition – Radix UI](https://www.radix-ui.com/docs/primitives/guides/composition#composing-multiple-primitives)</cite>
+  &mdash;{' '}
+  <cite>
+    [Composition – Radix
+    UI](https://www.radix-ui.com/docs/primitives/guides/composition#composing-multiple-primitives)
+  </cite>
 </figcaption>
-</figure>
 
 ### 自前のコンポーネントに`asChild` propを組み込む
 
 `asChild` propはRadix UIのコンポーネントで提供されている機能だが、自前のコンポーネントにも容易に実装できる。[`@radix-ui/react-slot`](https://www.radix-ui.com/docs/primitives/utilities/slot)パッケージを使用するのがよい。
 
-<figure>
 ```jsx
-import React from 'react';
 import { Slot } from '@radix-ui/react-slot';
+import React from 'react';
 
 function Button({ asChild, ...props }) {
   const Comp = asChild ? Slot : 'button';
   return <Comp {...props} />;
 }
-````
+```
 
 <figcaption>
   &mdash; <cite>[Slot – Radix UI](https://www.radix-ui.com/docs/primitives/utilities/slot)</cite>
 </figcaption>
-</figure>
 
 TypeScriptを使用しつつ、`forwardRef`を適用する場合は、次のように記述する。
-
-<figure>
 
 ```tsx
 import { forwardRef, type ComponentPropsWithRef } from 'react';
@@ -178,11 +170,7 @@ const Button = forwardRef<unknown, ComponentPropsWithRef<'button'> & { asChild?:
 Button.displayName = 'Button';
 ```
 
-</figure>
-
 ただし、こうなってくると定型コードとしてはやや煩雑である。そこで代わりに、Radix UIの内部で使用されている[`@radix-ui/react-primitive`](https://github.com/radix-ui/primitives/tree/main/packages/react/primitive)パッケージを使うことで多少マシになる。
-
-<figure>
 
 ```tsx
 import { Primitive } from '@radix-ui/react-primitive';
@@ -200,15 +188,11 @@ const Button = forwardRef<ButtonElement, ButtonProps>((props, forwardedRef) => (
 Button.displayName = 'Button';
 ```
 
-</figure>
-
 このパッケージの使用方法はドキュメント化されていないので、[Radix UIのソースコードの中で実際に使用されている様子](https://github.com/radix-ui/primitives/tree/1d57ea78007733facfa2ac7fc0cd919a545b39f6/packages/react)を参考にして実装する必要がある。
 
 ### コンポーネント同士のpropsのマージ
 
 `Slot`コンポーネント（および`Primitive.*`コンポーネント）のpropsは、その子のpropsとマージされる仕組みになっている。たとえば、次のようにコンポーネントを使用するとする。
-
-<figure>
 
 ```tsx
 import { Primitive } from '@radix-ui/react-primitive';
@@ -247,11 +231,7 @@ render(
 );
 ```
 
-</figure>
-
 この`Button`コンポーネントのpropsは、擬似的に表現すれば、次のようにマージされることになる。
-
-<figure>
 
 ```tsx
 <a
@@ -271,8 +251,6 @@ render(
 </a>
 ```
 
-</figure>
-
 このpropsのマージには次のルールがある。
 
 - `on`から始まる同名のpropが指定されていれば、それらをcomposeする関数が作成される
@@ -285,8 +263,6 @@ render(
 以上のように、`Slot`コンポーネントのpropsはその子のpropsと自動的にマージされる仕組みになっていることは把握しておきたい。
 
 注意すべきは、`Button`コンポーネントのpropsについては、ユーザー側でマージする実装を行わなければならないということ。もし次のように、`Button`コンポーネントのpropsのマージを考慮しない実装になっていると、`Button`コンポーネントにpropsを指定した際に期待に反する挙動をする。
-
-<figure>
 
 ```tsx
 import { Primitive } from '@radix-ui/react-primitive';
@@ -322,11 +298,7 @@ render(
 );
 ```
 
-</figure>
-
 この`Button`コンポーネントは、次のようにレンダリングされる。
-
-<figure>
 
 ```tsx
 <button
@@ -339,11 +311,7 @@ render(
 </Button>
 ```
 
-</figure>
-
 これでは、期待通り上書きできるものと、期待に反して上書きできないものが、propの種類によってまちまちになってしまう。期待通りのインターフェースを実現するには、`Slot`コンポーネントにpropsが渡される前に、それらの値をマージしておかなければならない。たとえば、次のような実装になる。
-
-<figure>
 
 ```tsx
 import { Primitive } from '@radix-ui/react-primitive';
@@ -378,13 +346,9 @@ const Button = forwardRef<ButtonElement, ButtonProps>((props, forwardedRef) => {
 Button.displayName = 'Button';
 ```
 
-</figure>
-
 ### コンポーネントの中の子を規定する場合
 
 場合によっては、`Button`コンポーネントの実装として、ルートのコンポーネントの内側に別のコンポーネントを入れ子にしたいこともあるだろう。`as` propを使えば、次のように実装することができる。
-
-<figure>
 
 ```jsx
 function Button({ as: Component = 'button', children, ...props }) {
@@ -396,11 +360,7 @@ function Button({ as: Component = 'button', children, ...props }) {
 }
 ```
 
-</figure>
-
 しかし、`asChild` propで同等のことを実現しようとすると、かなり複雑な実装が必要になる。たとえば次のようになる。
-
-<figure>
 
 ```tsx
 import { Primitive } from '@radix-ui/react-primitive';
@@ -443,12 +403,8 @@ export const Button = forwardRef<ButtonElement, ButtonProps>(
 );
 ```
 
-</figure>
-
 <details>
 <summary>`Button`コンポーネントのテストケース</summary>
-
-<figure>
 
 ```tsx
 import renderer from 'react-test-renderer';
@@ -584,15 +540,11 @@ describe('mixed', () => {
 });
 ```
 
-</figure>
-
 </details>
 
 これはあまり現実的な実装方針ではないし、そもそもインターフェースとしてあまり直感的ではないと思う。
 
 もっともシンプルな解決策としては、内側に入れ子になったコンポーネントを別コンポーネントとして切り出してしまうことだろう。そして、利用時にはそれら二つのコンポーネントを組み合わせて使うという規約を設けておく。
-
-<figure>
 
 ```tsx
 <Button>
@@ -606,49 +558,43 @@ describe('mixed', () => {
 </Button>
 ```
 
-</figure>
-
 実際のところ、Radix UIにおいてはこのような設計方針が採用されている。しかし、Radix UIのようなプリミティブなコンポーネントライブラリと違って、一般的なコンポーネントライブラリとしては、これでは使い勝手が悪い場合があるだろう。
 
 ## Ariakitにおける`render` prop
 
 [Ariakit](https://ariakit.org/)では、レンダリングする要素を`render` propを介して変更できるように設計されている。
 
-<figure>
 ```jsx
 <Combobox render={<textarea rows={5} />} />
 ```
 
 <figcaption>
-  &mdash; <cite>[Composition - Ariakit](https://ariakit.org/guide/composition#changing-the-html-element)</cite>
+  &mdash;{' '}
+  <cite>
+    [Composition - Ariakit](https://ariakit.org/guide/composition#changing-the-html-element)
+  </cite>
 </figcaption>
-</figure>
 
 興味深いのは、その`render` propに渡された要素に対して、内部的に管理されたpropsなどが暗黙的に渡される仕組みになっていること。たとえばあるコンポーネントに対して、`render` propと`children` propを同時に指定すると、`render` propに指定した要素に対してその`children` propが渡される仕組みになっている。
 
-<figure>
 ```jsx
 <Tab render={<Link href="/new" />}>New</Tab>
 ```
 
 <figcaption>
-  &mdash; <cite>[Composition - Ariakit](https://ariakit.org/guide/composition#composing-with-custom-components)</cite>
+  &mdash;{' '}
+  <cite>
+    [Composition - Ariakit](https://ariakit.org/guide/composition#composing-with-custom-components)
+  </cite>
 </figcaption>
-</figure>
 
 これは次のような結果になる。
-
-<figure>
 
 ```jsx
 <Link href="/new">New</Link>
 ```
 
-</figure>
-
 先ほどの`asChild` propにおいては、コンポーネントの内側に別の要素が入れ子になっている場合の表現の難しさが問題になった。しかし、このAriakitの`render` propのアイデアを借用すれば、比較的直感的なインターフェースとシンプルな実装を実現することもできる。
-
-<figure>
 
 ```tsx
 import { cloneElement, ComponentProps, forwardRef, ReactElement, ReactNode } from 'react';
@@ -685,15 +631,12 @@ render(
 );
 ```
 
-</figure>
-
 必要に応じて、[Ariakitの`createElement`の実装も参照のこと](https://github.com/ariakit/ariakit/blob/845c3b2f0ddba4bf40286743ec6c12feccb3c02f/packages/ariakit-react-core/src/utils/system.tsx#L83-L110)。
 
 ## Base UIにおける`slots` propと`slotProps` prop
 
 [Base UI](https://mui.com/base/getting-started/overview/)では、[コンポーネントの内部の構造まで上書きすることができる`slots` propおよび`slotProps` propが提供されている](https://mui.com/base/guides/overriding-component-structure/)。
 
-<figure>
 ```jsx
 <Select slots={{ listbox: 'ol' }} defaultValue="First option">
   <Option value="First option">First option</Option>
@@ -702,19 +645,24 @@ render(
 ```
 
 <figcaption>
-  &mdash; <cite>[Overriding component structure - Base UI](https://mui.com/base/guides/overriding-component-structure/#the-slots-prop)</cite>
+  &mdash;{' '}
+  <cite>
+    [Overriding component structure - Base
+    UI](https://mui.com/base/guides/overriding-component-structure/#the-slots-prop)
+  </cite>
 </figcaption>
-</figure>
 
-<figure>
 ```jsx
 <Badge slotProps={{ badge: { className: 'my-badge' } }} />
 ```
 
 <figcaption>
-  &mdash; <cite>[Overriding component structure - Base UI](https://mui.com/base/guides/overriding-component-structure/#the-slotprops-prop)</cite>
+  &mdash;{' '}
+  <cite>
+    [Overriding component structure - Base
+    UI](https://mui.com/base/guides/overriding-component-structure/#the-slotprops-prop)
+  </cite>
 </figcaption>
-</figure>
 
 `as` propではルートのコンポーネントしか変更できなかったのに対して、Base UIの`slots` propでは、そのコンポーネントの内部のサブコンポーネントまで変更することができる。`slotProps` propを使えば、ルートおよびサブコンポーネントのpropsを変更できる。
 

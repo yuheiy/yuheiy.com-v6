@@ -13,8 +13,6 @@ pubDate: 2025-09-12T01:20:00.000+09:00
 
 しかし場合によっては、これではあまり使い勝手が良くならないことがあります。要素自体のサイズが小さいと押すことができる領域も狭くなるので、その分正確性が求められて押しづらくなります。
 
-<figure>
-
 ```html demo title="ナビゲーションバーのデモ（悪い例）" lang="en"
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -76,11 +74,7 @@ pubDate: 2025-09-12T01:20:00.000+09:00
 </nav>
 ```
 
-</figure>
-
 そういうときには、視覚的なサイズよりも余分にターゲットエリアを広げるテクニックを使います。`padding`プロパティを使って要素自体のサイズを広げつつ、レイアウトが崩れないように同じ大きさのネガティブマージンを適用します。
-
-<figure>
 
 ```html demo title="ナビゲーションバーのデモ（良い例）" lang="en"
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -145,10 +139,6 @@ pubDate: 2025-09-12T01:20:00.000+09:00
 </nav>
 ```
 
-</figure>
-
-<figure>
-
 ```css
 a {
   margin: -4px;
@@ -156,11 +146,7 @@ a {
 }
 ```
 
-</figure>
-
 一方、プレーンなテキストリンクと違って、背景色などがついたボタンなどの場合、`padding`プロパティのテクニックは少し使いづらいです。
-
-<figure>
 
 ```html demo title="ボタンのデモ（悪い例）" lang="en"
 <style>
@@ -224,11 +210,7 @@ a {
 </button>
 ```
 
-</figure>
-
 そのような場合は、擬似要素を使って相対的な位置指定をするのが簡単です。
-
-<figure>
 
 ```html demo title="ボタンのデモ（良い例）" lang="en"
 <style>
@@ -292,10 +274,6 @@ a {
 </button>
 ```
 
-</figure>
-
-<figure>
-
 ```css
 button {
   position: relative;
@@ -308,38 +286,33 @@ button {
 }
 ```
 
-</figure>
-
 ## iOSにおけるターゲットエリア
 
 このような工夫は僕が独自に考えたものではなくて、昔からさまざまな実装に採用されています。たとえばiOSにおいては、ナビゲーションバーのボタンではボタン自体の大きさよりも大きなターゲットエリアが確保されているそうです（参考: [iPhone の当たり判定を検証した](https://www.sociomedia.co.jp/4152)）。
 
-<figure>
-  ![ナビゲーションバーの左側のEditボタンと右側の+ボタンには、その見た目よりも大きなターゲットエリアが設定されている](./assets/click-friendly-target-areas/navbar-marked.png)
-  <figcaption>
-    — [ソシオメディア | iPhone の当たり判定を検証した](https://www.sociomedia.co.jp/4152)
-  </figcaption>
-</figure>
+![ナビゲーションバーの左側のEditボタンと右側の+ボタンには、その見た目よりも大きなターゲットエリアが設定されている](./assets/click-friendly-target-areas/navbar-marked.png)
+
+<figcaption>
+  — [ソシオメディア | iPhone の当たり判定を検証した](https://www.sociomedia.co.jp/4152)
+</figcaption>
 
 興味深いのは、キーボードのターゲットエリアはタイピングの途中で動的に変化するようになっていることです。ユーザーが一文字タイプするたびに、次にくる文字を予測して、キーごとに重み付けがされているのです。
 
 QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲットエリアのサイズは32ptです。
 
-<figure>
-  ![Dキーのターゲットエリアの幅は32pt](./assets/click-friendly-target-areas/keyboard-marked.png)
-  <figcaption>
-    — [ソシオメディア | iPhone の当たり判定を検証した](https://www.sociomedia.co.jp/4152)
-  </figcaption>
-</figure>
+![Dキーのターゲットエリアの幅は32pt](./assets/click-friendly-target-areas/keyboard-marked.png)
+
+<figcaption>
+  — [ソシオメディア | iPhone の当たり判定を検証した](https://www.sociomedia.co.jp/4152)
+</figcaption>
 
 しかし、「WORLD」という単語を打つつもりで「WORL」までをタイプすると、次に来る可能性が高いDキーのターゲットエリアが広がって44ptになるそうです。
 
-<figure>
-  ![Dキーのターゲットエリアの幅は44pt](./assets/click-friendly-target-areas/keyboard-enlarged-marked.png)
-  <figcaption>
-    — [ソシオメディア | iPhone の当たり判定を検証した](https://www.sociomedia.co.jp/4152)
-  </figcaption>
-</figure>
+![Dキーのターゲットエリアの幅は44pt](./assets/click-friendly-target-areas/keyboard-enlarged-marked.png)
+
+<figcaption>
+  — [ソシオメディア | iPhone の当たり判定を検証した](https://www.sociomedia.co.jp/4152)
+</figcaption>
 
 このような高度な実装をしてまでも、ターゲットエリアの大きさを確保することが重要なのだと思います。
 
@@ -360,8 +333,6 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 ## 押せそうな場所は押せるようにする
 
 また別の例として、本来押せそうに見えるのに押せないようになっている実装をたまに見かけることがあります。わかりやすい例としては、チェックボックスです。チェックボタンを押せば反応するけど、そのラベルを押しても反応しないようになっていることがあります。
-
-<figure>
 
 ```html demo title="チェックボックスのデモ（悪い例）" lang="en"
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -401,19 +372,11 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 <span class="target"><input type="checkbox" name="animations" /></span> Do you need animations?
 ```
 
-</figure>
-
-<figure>
-
 ```html
 <input type="checkbox" /> Do you need animations?
 ```
 
-</figure>
-
 慣習的に考えても、チェックボックスはラベルまで含めて押せるようになっているべきです。実装としては、`label`要素で囲えばそれを実現できます。
-
-<figure>
 
 ```html demo title="チェックボックスのデモ（良い例）" lang="en"
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -450,19 +413,11 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 <label class="target"><input type="checkbox" name="animations" /> Do you need animations?</label>
 ```
 
-</figure>
-
-<figure>
-
 ```html
 <label><input type="checkbox" /> Do you need animations?</label>
 ```
 
-</figure>
-
 もう少し複雑な例として、アイコンと`input`要素の組み合わせからなる検索フィールドの実装についても考えてみます。こうしたUI要素は、マークアップとして見れば複数の要素を組み合わせた複合的なコンポーネントですが、ユーザーにとっては単一の入力フィールドです。このことを意識せずに、見た目だけを再現するつもりで実装すると、限られたエリアしか押すことができない次のような実装になってしまいます。
-
-<figure>
 
 ```html demo title="検索フィールドの例（悪い例）" lang="en"
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -534,20 +489,12 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 </div>
 ```
 
-</figure>
-
-<figure>
-
 ```html
 <div class="search-field">
   <svg>...</svg>
   <input type="search" />
 </div>
 ```
-
-</figure>
-
-<figure>
 
 ```css
 .search-field {
@@ -564,11 +511,7 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 }
 ```
 
-</figure>
-
 これは実装モデルに引っ張られてしまったがゆえの失敗です。理想的には、複数の要素の組み合わせであることをユーザーに意識させないような実装になっているべきです。つまり、普通の入力フィールドと同じようにどこを押してもフォーカスできるようになっているのが良いでしょう。
-
-<figure>
 
 ```html demo title="検索フィールドの例（良い例）" lang="en"
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -640,20 +583,12 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 </label>
 ```
 
-</figure>
-
-<figure>
-
 ```html
 <div class="search-field">
   <svg>...</svg>
   <input type="search" />
 </div>
 ```
-
-</figure>
-
-<figure>
 
 ```css
 .search-field {
@@ -673,15 +608,11 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 }
 ```
 
-</figure>
-
 ## 無闇に広げすぎない
 
 一方、ターゲットエリアは必ずしも広ければ広いほど良いわけでもありません。
 
 リスト項目が縦にスタックしたようなナビゲーションがあるとします。そのなかのリンクに`display: block`を適用すると、コンテナサイズいっぱいまでターゲットエリアが拡張されます。
-
-<figure>
 
 ```html demo title="縦にスタックしたナビゲーションのデモ（悪い例）" lang="en"
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -739,23 +670,15 @@ QWERTYキーボードのキーの幅はかなり狭く、通常時のターゲ�
 </nav>
 ```
 
-</figure>
-
-<figure>
-
 ```css
 a {
   display: block;
 }
 ```
 
-</figure>
-
 一見、ターゲットエリアが広がって良いことのように思えますが、別の側面から見れば、対象の要素と関係なさそうな場所を押しても反応してしまうことになります。すると、「リンクを押すつもりはないのに、意図せず押したことになってしまった」ということが起こり得ます。
 
 この改善例としては、`width: fit-content`などを適用して必要以上に伸び広がらないように制御するのが良いでしょう。また`padding`のテクニックも併用して、周辺に少しだけ広げる工夫もするとなお良いです。
-
-<figure>
 
 ```html demo title="縦にスタックしたナビゲーションのデモ（良い例）" lang="en"
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -816,10 +739,6 @@ a {
 </nav>
 ```
 
-</figure>
-
-<figure>
-
 ```css
 a {
   display: block;
@@ -829,11 +748,7 @@ a {
 }
 ```
 
-</figure>
-
 似たような例として、入力フィールドのラベルのターゲットエリアがあります。レイアウトの都合で`display: block`を適用することはよくありますが、その場合も同様の問題が起こります。
-
-<figure>
 
 ```html demo title="ラベルの例（悪い例）" lang="en"
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -882,21 +797,13 @@ a {
 </div>
 ```
 
-</figure>
-
-<figure>
-
 ```css
 label {
   display: block;
 }
 ```
 
-</figure>
-
 こうしたときにも、`width: fit-content`などを適用して範囲を制御するのがよいと思います。
-
-<figure>
 
 ```html demo title="ラベルの例（良い例）" lang="en"
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -946,10 +853,6 @@ label {
 </div>
 ```
 
-</figure>
-
-<figure>
-
 ```css
 label {
   display: block;
@@ -957,32 +860,27 @@ label {
 }
 ```
 
-</figure>
-
 ## 今回の勉強会についての余談
 
 今回のこの勉強会に参加したのは、開催者の[Katashinさん](https://x.com/ktsn)が以前投稿していた「[UI の実装に関する勉強会をやりたい](https://sizu.me/ktsn/posts/tsuuvsk35ed1)」という問題意識に共感したからだ。
 
-<figure>
-  > 最近また勉強会に参加するようになって色々と行っているうちに、ふと UI の実装に関する勉強会ってほとんどないなと思った。UI デザインはちらほら見かけるけど、UI 実装は見かけない。
-  >
-  > たいてい TypeScript、Vue、Biome みたいに言語、ライブラリ、ツールをテーマにしたものが多くて、UI を切り口にしているものを見かけない。もちろん、他のテーマの勉強会で UI を絡めた話がある場合もあるけど、UI 実装をテーマに据えた会でいろいろな話を聞いてみたい。
+> 最近また勉強会に参加するようになって色々と行っているうちに、ふと UI の実装に関する勉強会ってほとんどないなと思った。UI デザインはちらほら見かけるけど、UI 実装は見かけない。
+>
+> たいてい TypeScript、Vue、Biome みたいに言語、ライブラリ、ツールをテーマにしたものが多くて、UI を切り口にしているものを見かけない。もちろん、他のテーマの勉強会で UI を絡めた話がある場合もあるけど、UI 実装をテーマに据えた会でいろいろな話を聞いてみたい。
 
-  <figcaption>
-    — [UI の実装に関する勉強会をやりたい](https://sizu.me/ktsn/posts/tsuuvsk35ed1)
-  </figcaption>
-</figure>
+<figcaption>
+  — [UI の実装に関する勉強会をやりたい](https://sizu.me/ktsn/posts/tsuuvsk35ed1)
+</figcaption>
 
 同日に投稿されていた、[橋本麦さん](https://x.com/_baku89)の「[Jul 24, 2025: 詰め方の問題](https://scrapbox.io/glisp/Jul_24,_2025:_%E8%A9%B0%E3%82%81%E6%96%B9%E3%81%AE%E5%95%8F%E9%A1%8C)」にも感化された部分がある。
 
-<figure>
-  > 結局のところ、ぼくが気になっているのは、ものごとを媒介する関係性や構造ばかりが語られて、肝心のそれ自体——グラフィックであれ、アニメーションであれ、画面に現れる[表層](https://scrapbox.io/glisp/%E8%A1%A8%E5%B1%A4)的な“何か”そのものが、語られることなくどこかへ押しやられていることだ。もちろん、それをめぐる構造、物語性、組織や経済がどう影響しているかは、無視できるわけじゃない。でも、だからといってそれ「ばかり」に意識を向けるのは、[Lev
-  Manovich](https://scrapbox.io/glisp/Lev_Manovich)が言うように、画面の「出力」だけを見てその背後にあるプログラムのアーキテクチャを問わないのと同じくらい片手落ちだ。それは生存戦略として間違っちゃいないにせよ、グラフィックデザイン文化としては貧しいと思う。
+> 結局のところ、ぼくが気になっているのは、ものごとを媒介する関係性や構造ばかりが語られて、肝心のそれ自体——グラフィックであれ、アニメーションであれ、画面に現れる[表層](https://scrapbox.io/glisp/%E8%A1%A8%E5%B1%A4)的な“何か”そのものが、語られることなくどこかへ押しやられていることだ。もちろん、それをめぐる構造、物語性、組織や経済がどう影響しているかは、無視できるわけじゃない。でも、だからといってそれ「ばかり」に意識を向けるのは、[Lev
+> Manovich](https://scrapbox.io/glisp/Lev_Manovich)が言うように、画面の「出力」だけを見てその背後にあるプログラムのアーキテクチャを問わないのと同じくらい片手落ちだ。それは生存戦略として間違っちゃいないにせよ、グラフィックデザイン文化としては貧しいと思う。
 
-  <figcaption>
-    — [Jul 24, 2025: 詰め方の問題](https://scrapbox.io/glisp/Jul_24,_2025:_%E8%A9%B0%E3%82%81%E6%96%B9%E3%81%AE%E5%95%8F%E9%A1%8C)
-  </figcaption>
-</figure>
+<figcaption>
+  — [Jul 24, 2025:
+  詰め方の問題](https://scrapbox.io/glisp/Jul_24,_2025:_%E8%A9%B0%E3%82%81%E6%96%B9%E3%81%AE%E5%95%8F%E9%A1%8C)
+</figcaption>
 
 個人的には、自分の近辺のコミュニティで、UIそのものについて語られる機会が少ないと思っていた。みんなある程度のキャリアを経ると、そういう手前の話は「通過済み」のものとして理解されてしまうのかもしれない。けれど僕にとっては最初と変わらず喫緊の問題だし、いつまで経っても、世の中に新たな出来の悪いUIが生み出され続けていることに辟易としている。
 

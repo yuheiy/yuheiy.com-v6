@@ -9,8 +9,6 @@ pubDate: 2025-09-13T05:50:00.000+09:00
 
 これをシンプルに実装すると次のようになる。
 
-<figure>
-
 ```mdx
 <iframe
   src="/2025-09-12-click-friendly-target-areas/navbar-bad.html"
@@ -20,13 +18,9 @@ pubDate: 2025-09-13T05:50:00.000+09:00
 ></iframe>
 ```
 
-</figure>
-
 このうち、`title`属性にはそのドキュメントのタイトルを設定する。そして、`iframe`要素をそのドキュメントとピッタリ同じ高さにするために、ドキュメントの高さを`height`属性に設定する。これらを手動で設定するのはやや手間なので、次のようにして自動化した。
 
 `src/content/blog/2025-09-12-click-friendly-target-areas.mdx`:
-
-<figure>
 
 ```mdx
 import SmartIframe from '../../components/SmartIframe.astro';
@@ -34,11 +28,7 @@ import SmartIframe from '../../components/SmartIframe.astro';
 <SmartIframe src="/2025-09-12-click-friendly-target-areas/navbar-bad.html" />
 ```
 
-</figure>
-
 `src/components/SmartIframe.astro`:
-
-<figure>
 
 ```astro
 ---
@@ -74,13 +64,9 @@ await browser.close();
 <iframe src={src} title={title} height={height} style={{ width: '100%' }} {...attrs}></iframe>;
 ```
 
-</figure>
-
 Playwrightを使ってドキュメントを実際に描画し、そのタイトルと高さを取得して`iframe`要素に割り当てている。これによって、`src`属性さえ指定すれば、それ以外の属性の手動指定は不要になる。
 
 また、`iframe`要素のなかのドキュメントの高さは、`iframe`要素が描画される際の幅によって変化することがある。`iframe`要素の高さをこれに応じたものにするために、クライアントサイドでの動的な処理を追加する。ResizeObserverを使ってドキュメントの高さの変化を監視し、それを`iframe`要素に反映する。
-
-<figure>
 
 ```astro
 <iframe
@@ -106,7 +92,5 @@ Playwrightを使ってドキュメントを実際に描画し、そのタイト�
   }
 </script>
 ```
-
-</figure>
 
 これによって、ドキュメントの実際の高さに応じて動的に変化するレスポンシブな`iframe`要素を実現できた。

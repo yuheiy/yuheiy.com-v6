@@ -7,25 +7,21 @@ pubDate: 2025-12-30T08:10:00.000+09:00
 
 レスポンシブデザインが普及する前、ウェブページは960pxの固定幅で作成することが一般的だった。当時のディスプレイ解像度は多くが1024pxの幅だったため、それに決め打ちした設計であった。
 
-<figure>
 ```css
 body {
   width: 960px;
 }
 ```
-</figure>
 
 固定幅のレイアウトは、余計なことをしなければ得られたはずのレスポンシブな性質を損なうものである。こうした固定的な設定を避けて、より柔軟なレイアウト手法で置き換えるのがレスポンシブデザインという戦略だ。
 
 たとえば固定幅のレイアウトは、代わりに最大幅を指定することで、表示幅が狭くてもそれに適応して収縮するようなレイアウトになる。
 
-<figure>
 ```css
 body {
   max-width: 960px;
 }
 ```
-</figure>
 
 このとき、960pxという値は絶対のものではなくなる。幅は常に960pxではなく、広い範囲の中でのいずれかの値を取ることになる。960pxは境界値でしかない。あくまで妥当なレイアウトを実現するためのルールを提示しているのであって、唯一の解を強制するわけではないということ。
 
@@ -37,37 +33,33 @@ body {
 
 メディアクエリの問題は、特定の要素自身の大きさに基づいたルールを記述できないことにある。コンポーネントは300pxの幅のコンテナの中に配置されることもあれば、より広い500pxの幅のコンテナの中に配置されることもある。コンテナの大きさが異なれば、それに応じたレイアウトの調整が必要になることもあるが、メディアクエリではビューポートの幅に基づいたルールしか記述できない。
 
-<figure>
-  ![同じ幅の2つのビューポートを示す。1つ目のビューポートではコンポーネントが全幅を占め、2つ目のビューポートでは狭いコンテナによって幅が制限される](./assets/flexible-layout-compositions/sidebar_viewport_constant.svg)
-  <figcaption>
-    — <cite>[The Sidebar: Every Layout](https://every-layout.dev/layouts/sidebar/)</cite>
-  </figcaption>
-</figure>
+![同じ幅の2つのビューポートを示す。1つ目のビューポートではコンポーネントが全幅を占め、2つ目のビューポートでは狭いコンテナによって幅が制限される](./assets/flexible-layout-compositions/sidebar_viewport_constant.svg)
+
+<figcaption>
+  — <cite>[The Sidebar: Every Layout](https://every-layout.dev/layouts/sidebar/)</cite>
+</figcaption>
 
 こうした問題を克服すべく、レイアウトプリミティブでは、要素自身の大きさに基づいたレイアウト調整ができるCSSの手法が組み込まれている。これによって要素の配置や折り返し位置が自動で処理されることになるため、個別にメディアクエリを記述して制御する必要がなくなる。
 
 さらにEvery Layoutでは、[ウェブにおけるレイアウトの多くはレイアウトプリミティブの組み合わせだけで実現できる](https://every-layout.dev/rudiments/composition/)と述べられている。メディアクエリに依存する従来のレイアウト手法では、個々の要素に応じた制御が難しく、その結果として汎用性や再利用性が制約されがちだった。しかしこれを打開することで、再利用の可能性が一気に開ける。
 
-<figure>
-  ![ダイアログは、Cluster、Stack、Box、Centerといったレイアウトプリミティブを利用することで、個々のレイアウト要素に分解されている](./assets/flexible-layout-compositions/composition_dialog_primitives.svg)
-  <figcaption>
-    — <cite>[Composition: Every Layout](https://every-layout.dev/rudiments/composition/)</cite>
-  </figcaption>
-</figure>
+![ダイアログは、Cluster、Stack、Box、Centerといったレイアウトプリミティブを利用することで、個々のレイアウト要素に分解されている](./assets/flexible-layout-compositions/composition_dialog_primitives.svg)
 
-<figure>
-  ![Cluster、Stack、Box、Centerといったレイアウトプリミティブと、ラベルと入力フィールドのペアをネストしたStackを使って作成された、3つのフィールドと送信ボタンを持つフォーム](./assets/flexible-layout-compositions/composition_form.svg)
-  <figcaption>
-    — <cite>[Composition: Every Layout](https://every-layout.dev/rudiments/composition/)</cite>
-  </figcaption>
-</figure>
+<figcaption>
+  — <cite>[Composition: Every Layout](https://every-layout.dev/rudiments/composition/)</cite>
+</figcaption>
 
-<figure>
-  ![中央にテキスト、下部に前後のボタンが配置されたスライド。Cover、Box、Stack、Sidebarのプリミティブを使用して作成している](./assets/flexible-layout-compositions/composition_slide.svg)
-  <figcaption>
-    — <cite>[Composition: Every Layout](https://every-layout.dev/rudiments/composition/)</cite>
-  </figcaption>
-</figure>
+![Cluster、Stack、Box、Centerといったレイアウトプリミティブと、ラベルと入力フィールドのペアをネストしたStackを使って作成された、3つのフィールドと送信ボタンを持つフォーム](./assets/flexible-layout-compositions/composition_form.svg)
+
+<figcaption>
+  — <cite>[Composition: Every Layout](https://every-layout.dev/rudiments/composition/)</cite>
+</figcaption>
+
+![中央にテキスト、下部に前後のボタンが配置されたスライド。Cover、Box、Stack、Sidebarのプリミティブを使用して作成している](./assets/flexible-layout-compositions/composition_slide.svg)
+
+<figcaption>
+  — <cite>[Composition: Every Layout](https://every-layout.dev/rudiments/composition/)</cite>
+</figcaption>
 
 言い換えれば、コンテンツに自律的に適応するレイアウト要素を組み合わせることで、より複雑なレイアウトを自己組織化によって成立させられるということ。スクリーンサイズごとのレイアウトをトップダウンに規定するのではなく、局所的なルールから全体がボトムアップに立ち上がる。[内からの構成](https://terkel.jp/archives/2021/11/every-layout/)と言ってもよいだろう。
 
@@ -86,8 +78,6 @@ Every Layoutの共著者である[Andy Bell](https://bell.bz/links/)は、後に
 ## Flow (Stack)
 
 垂直方向に積み重ねられた要素の間に一律したマージンを設定する。特定の要素の余白だけ調整することもできる。
-
-<figure>
 
 ```html demo title="Flow (Stack)" lang="en"
 <link rel="stylesheet" href="./flexible-layout-compositions/demo.css" />
@@ -108,10 +98,6 @@ Every Layoutの共著者である[Andy Bell](https://bell.bz/links/)は、後に
 </div>
 ```
 
-</figure>
-
-<figure>
-
 {/* prettier-ignore */}
 ```html
 <div class="flow">
@@ -120,10 +106,6 @@ Every Layoutの共著者である[Andy Bell](https://bell.bz/links/)は、後に
   <p style="--flow-space: 3em"><code>--flow-space</code> set with an inline style to 3em: <code>style="--flow-space: 3em"</code></p>
 </div>
 ```
-
-</figure>
-
-<figure>
 
 {/* prettier-ignore */}
 ```css
@@ -141,7 +123,6 @@ Info about this implementation: https://piccalil.li/quick-tip/flow-utility/
   — [cube-boilerplate/src/css/compositions/flow.css at main ·
   Set-Creative-Studio/cube-boilerplate](https://github.com/Set-Creative-Studio/cube-boilerplate/blob/main/src/css/compositions/flow.css)
 </figcaption>
-</figure>
 
 ### 参考資料
 
@@ -154,8 +135,6 @@ Info about this implementation: https://piccalil.li/quick-tip/flow-utility/
 
 コンテンツを水平方向に中央配置して、最大幅を制限する。左右の余白を確保することで、狭い画面でもコンテンツが端に張り付かないようになっている。
 
-<figure>
-
 ```html demo title="Wrapper (Center)" lang="en"
 <link rel="stylesheet" href="./flexible-layout-compositions/demo.css" />
 
@@ -164,19 +143,11 @@ Info about this implementation: https://piccalil.li/quick-tip/flow-utility/
 </div>
 ```
 
-</figure>
-
-<figure>
-
 ```html
 <div class="wrapper">
   <p>I am centered and have a nice, consistent gutter.</p>
 </div>
 ```
-
-</figure>
-
-<figure>
 
 {/* prettier-ignore */}
 ```css
@@ -197,7 +168,6 @@ A common wrapper/container
   — [cube-boilerplate/src/css/compositions/wrapper.css at main ·
   Set-Creative-Studio/cube-boilerplate](https://github.com/Set-Creative-Studio/cube-boilerplate/blob/main/src/css/compositions/wrapper.css)
 </figcaption>
-</figure>
 
 ### 参考資料
 
@@ -207,8 +177,6 @@ A common wrapper/container
 ## Cluster
 
 要素を水平方向に並べて、スペースが足りなくなったら自動的に折り返す。ラベルの長さに応じたレイアウトができる。
-
-<figure>
 
 ```html demo title="Cluster" lang="en"
 <link rel="stylesheet" href="./flexible-layout-compositions/demo.css" />
@@ -225,10 +193,6 @@ A common wrapper/container
 </div>
 ```
 
-</figure>
-
-<figure>
-
 ```html
 <div class="cluster">
   <div>Item 1</div>
@@ -241,10 +205,6 @@ A common wrapper/container
   <div>Item 8</div>
 </div>
 ```
-
-</figure>
-
-<figure>
 
 {/* prettier-ignore */}
 ```css
@@ -278,7 +238,6 @@ Can be any acceptable flexbox alignment value.
   — [cube-boilerplate/src/css/compositions/cluster.css at main ·
   Set-Creative-Studio/cube-boilerplate](https://github.com/Set-Creative-Studio/cube-boilerplate/blob/main/src/css/compositions/cluster.css)
 </figcaption>
-</figure>
 
 ### 参考資料
 
@@ -287,8 +246,6 @@ Can be any acceptable flexbox alignment value.
 ## Repel
 
 2つの要素を両端に配置し、スペースがあるときは引き離し、スペースが足りなくなったら積み重ねる。Every Layoutには存在しないパターン。
-
-<figure>
 
 ```html demo title="Repel" lang="en"
 <link rel="stylesheet" href="./flexible-layout-compositions/demo.css" />
@@ -299,20 +256,12 @@ Can be any acceptable flexbox alignment value.
 </div>
 ```
 
-</figure>
-
-<figure>
-
 ```html
 <div class="repel">
   <div>Item 1 repels item 2</div>
   <div>Item 2 repels item 1</div>
 </div>
 ```
-
-</figure>
-
-<figure>
 
 {/* prettier-ignore */}
 ```css
@@ -345,13 +294,10 @@ Can be any acceptable flexbox alignment value.
   — [cube-boilerplate/src/css/compositions/repel.css at main ·
   Set-Creative-Studio/cube-boilerplate](https://github.com/Set-Creative-Studio/cube-boilerplate/blob/main/src/css/compositions/repel.css)
 </figcaption>
-</figure>
 
 ## Sidebar
 
 サイドバーとメインコンテンツを横に並べるパターン。サイドバーは指定した幅になり、メインコンテンツは残りのスペースを埋める。ビューポートの幅が狭くなり、両方を横に並べるスペースがなくなると、自動的に縦に積み重なる。
-
-<figure>
 
 ```html demo title="Sidebar" lang="en"
 <link rel="stylesheet" href="./flexible-layout-compositions/demo.css" />
@@ -372,10 +318,6 @@ Can be any acceptable flexbox alignment value.
 </div>
 ```
 
-</figure>
-
-<figure>
-
 {/* prettier-ignore */}
 ```html
 <div class="sidebar">
@@ -387,10 +329,6 @@ Can be any acceptable flexbox alignment value.
   </div>
 </div>
 ```
-
-</figure>
-
-<figure>
 
 {/* prettier-ignore */}
 ```css
@@ -436,7 +374,6 @@ EXCEPTIONS
   — [cube-boilerplate/src/css/compositions/sidebar.css at main ·
   Set-Creative-Studio/cube-boilerplate](https://github.com/Set-Creative-Studio/cube-boilerplate/blob/main/src/css/compositions/sidebar.css)
 </figcaption>
-</figure>
 
 ### 参考資料
 
@@ -448,8 +385,6 @@ EXCEPTIONS
 
 2つの要素を横に並べ、コンテナの幅が指定した閾値を下回ると縦に積み重なる。
 
-<figure>
-
 ```html demo title="Switcher" lang="en"
 <link rel="stylesheet" href="./flexible-layout-compositions/demo.css" />
 
@@ -459,20 +394,12 @@ EXCEPTIONS
 </div>
 ```
 
-</figure>
-
-<figure>
-
 ```html
 <div class="switcher">
   <div>Item 1</div>
   <div>Item 2</div>
 </div>
 ```
-
-</figure>
-
-<figure>
 
 {/* prettier-ignore */}
 ```css
@@ -515,7 +442,6 @@ so anything greater than 2 is full width */
   — [cube-boilerplate/src/css/compositions/switcher.css at main ·
   Set-Creative-Studio/cube-boilerplate](https://github.com/Set-Creative-Studio/cube-boilerplate/blob/main/src/css/compositions/switcher.css)
 </figcaption>
-</figure>
 
 ### 参考資料
 
@@ -526,8 +452,6 @@ so anything greater than 2 is full width */
 ## Grid
 
 グリッドレイアウトを自動的に生成する。指定した最小幅を保ちながら、利用可能なスペースに応じて列数を自動調整する。
-
-<figure>
 
 ```html demo title="Grid" lang="en"
 <link rel="stylesheet" href="./flexible-layout-compositions/demo.css" />
@@ -544,10 +468,6 @@ so anything greater than 2 is full width */
 </div>
 ```
 
-</figure>
-
-<figure>
-
 ```html
 <div class="grid">
   <div>Item 1</div>
@@ -560,10 +480,6 @@ so anything greater than 2 is full width */
   <div>Item 8</div>
 </div>
 ```
-
-</figure>
-
-<figure>
 
 {/* prettier-ignore */}
 ```css
@@ -609,7 +525,6 @@ to change how empty grid tracks are handled */
   — [cube-boilerplate/src/css/compositions/grid.css at main ·
   Set-Creative-Studio/cube-boilerplate](https://github.com/Set-Creative-Studio/cube-boilerplate/blob/main/src/css/compositions/grid.css)
 </figcaption>
-</figure>
 
 ### 参考資料
 

@@ -10,17 +10,13 @@ import { Image } from 'astro:assets';
 
 テキストの行の末尾にアイコンを付随させるというレイアウトがある。
 
-<figure>
-  <Image
-    src={import('./assets/text-with-accompanying-icon/1.png')}
-    alt=""
-    style="width: calc(716/2/16*1rem);"
-  />
-</figure>
+<Image
+  src={import('./assets/text-with-accompanying-icon/1.png')}
+  alt=""
+  style="width: calc(716/2/16*1rem);"
+/>
 
 これは、インライン整形コンテキストにおいてテキストとアイコンを並べて配置することで実現できる。
-
-<figure>
 
 ```html
 <a href="#"
@@ -28,21 +24,15 @@ import { Image } from 'astro:assets';
 >
 ```
 
-</figure>
-
 しかし、その空間の大きさやテキストの分量によっては、末尾のアイコンだけが改行してしまって不恰好に見えることがある。
 
-<figure>
-  <Image
-    src={import('./assets/text-with-accompanying-icon/2.png')}
-    alt=""
-    style="width: calc(780/2/16*1rem);"
-  />
-</figure>
+<Image
+  src={import('./assets/text-with-accompanying-icon/2.png')}
+  alt=""
+  style="width: calc(780/2/16*1rem);"
+/>
 
 そうした場合には、テキスト要素のパディングとアイコン要素のネガティブマージンを組み合わせることで対処できる。次のようにすると、アイコンだけが単独で改行されることがなく、常にテキストを伴って改行されるようになる。
-
-<figure>
 
 ```html
 <a class="card" href="#">
@@ -51,10 +41,6 @@ import { Image } from 'astro:assets';
 	--><svg class="card__icon"><!-- ... --></svg>
 </a>
 ```
-
-</figure>
-
-<figure>
 
 ```css
 .card {
@@ -73,17 +59,11 @@ import { Image } from 'astro:assets';
 }
 ```
 
-</figure>
-
-<figure>
-  <video controls playsinline style="width: calc(1560/2/16*1rem);">
-    <source src={(await import('./assets/text-with-accompanying-icon/3.mp4')).default} />
-  </video>
-</figure>
+<video controls playsinline style="width: calc(1560/2/16*1rem);">
+  <source src={(await import('./assets/text-with-accompanying-icon/3.mp4')).default} />
+</video>
 
 まずテキスト要素の`padding-right`によって、アイコンとその間の余白を加えた分の空間が末尾に確保されるようになる。そしてその空間を埋めるように、アイコン要素の位置を`margin-left`のネガティブ値で移動させる。それによって、アイコンが必ずテキストの末尾に隣り合って配置されるようになる。
-
-<figure>
 
 ```html demo title="テキストの行の末尾にアイコンが付随するレイアウト"
 <style>
@@ -228,8 +208,6 @@ import { Image } from 'astro:assets';
   ></a>
 </div>
 ```
-
-</figure>
 
 注意点としては、テキスト要素とアイコン要素の間にソースコード上でホワイトスペースが入らないようにすることだ。ホワイトスペースの分の幅ができると、アイコンのために確保した空間をはみ出してしまうため、改行方法が正しく制御されなくなる。
 

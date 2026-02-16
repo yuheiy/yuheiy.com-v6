@@ -7,8 +7,6 @@ pubDate: 2022-08-25T23:00:00.000+09:00
 
 複数の要素を重ね合わせるためには、従来、`position: absolute`を使うことが多かった。親要素に`position: relative`を、その子要素に`position: absolute`を設定するというもの。
 
-<figure>
-
 ```html
 <div style="position: relative;">
   <div style="position: absolute;"><!-- ... --></div>
@@ -16,11 +14,7 @@ pubDate: 2022-08-25T23:00:00.000+09:00
 </div>
 ```
 
-</figure>
-
 しかしその場合、子要素自身のサイズに基づいて親要素のサイズを設定するということができない。CSSだけでは実現できないので、JavaScriptを使うことになる。
-
-<figure>
 
 ```html
 <div style="position: relative; height: 421px;">
@@ -29,11 +23,7 @@ pubDate: 2022-08-25T23:00:00.000+09:00
 </div>
 ```
 
-</figure>
-
 そんなとき、`position: absolute`の代わりにGridを使うと、CSSだけでこれを実現できるようになる。
-
-<figure>
 
 ```html
 <div class="wrapper">
@@ -41,10 +31,6 @@ pubDate: 2022-08-25T23:00:00.000+09:00
   <div><!-- ... --></div>
 </div>
 ```
-
-</figure>
-
-<figure>
 
 ```css
 .wrapper {
@@ -57,13 +43,9 @@ pubDate: 2022-08-25T23:00:00.000+09:00
 }
 ```
 
-</figure>
-
 このようにすると、自ずと、最も大きい子要素のサイズに基づいて親要素のサイズが設定されるようになる。
 
 これを使うと、たとえば、ボタンのラベルの長さが変わってもボタン自体の幅は変化しないようにすることができる。
-
-<figure>
 
 ```html demo title="Button" lang="en"
 <style>
@@ -97,11 +79,7 @@ pubDate: 2022-08-25T23:00:00.000+09:00
 </button>
 ```
 
-</figure>
-
 あるいは、複数の画像がクロスフェードするギャラリーのようなUIを作成するときに、画像自体に基づいてサイズを設定することもできる。
-
-<figure>
 
 ```html demo title="Gallery" lang="en"
 <style>
@@ -145,5 +123,3 @@ pubDate: 2022-08-25T23:00:00.000+09:00
   <img src="https://picsum.photos/1600/900" width="400" height="225" alt="" aria-hidden="true" />
 </div>
 ```
-
-</figure>

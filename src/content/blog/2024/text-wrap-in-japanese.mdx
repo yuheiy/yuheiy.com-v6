@@ -9,14 +9,15 @@ import { Image } from 'astro:assets';
 
 CSSの`text-wrap`プロパティを使うと、テキストの行の折り返し方法を変更できる。`text-wrap: balance`を適用すると、適用しない場合と比べて次のように変化する。
 
-<figure>
-  ![2つの例があり、一方はunbalanced、もう一方はbalancedとラベリングされている。unbalancedの例では、文字は行の終端まで到達してから改行されており、balancedの例では、それぞれの行の長さが均等になる位置で改行されている](./assets/text-wrap-in-japanese/balance.png)
-  {/* prettier-ignore */}
-  <figcaption>
-    &mdash; <cite>[CSS text-wrap: balance  |  CSS and UI  |  Chrome for
-    Developers](https://developer.chrome.com/docs/css-ui/css-text-wrap-balance)</cite>
-  </figcaption>
-</figure>
+![2つの例があり、一方はunbalanced、もう一方はbalancedとラベリングされている。unbalancedの例では、文字は行の終端まで到達してから改行されており、balancedの例では、それぞれの行の長さが均等になる位置で改行されている](./assets/text-wrap-in-japanese/balance.png)
+
+<figcaption>
+  &mdash;{' '}
+  <cite>
+    [CSS text-wrap: balance  |  CSS and UI  |  Chrome for
+    Developers](https://developer.chrome.com/docs/css-ui/css-text-wrap-balance)
+  </cite>
+</figcaption>
 
 `text-wrap: balance`が適用された下の例では、すべての行の長さが均等になるように制御されている。
 
@@ -27,8 +28,6 @@ CSSの`text-wrap`プロパティを使うと、テキストの行の折り返し
 ## 文節区切りでの改行の実現
 
 日本語においても適切な位置で改行がなされるようにするための手法はいくつかあるが、最も有望なのは`word-break: auto-phrase`を使うことであろう。これによって文節区切りの改行が実現できる。
-
-<figure>
 
 ```html
 <html lang="ja">
@@ -42,17 +41,16 @@ CSSの`text-wrap`プロパティを使うと、テキストの行の折り返し
 </html>
 ```
 
-</figure>
+![word-break:
+auto-phaseを使うと文節に応じて行が折り返される](./assets/text-wrap-in-japanese/auto-phrase.png)
 
-<figure>
-  ![word-break:
-  auto-phaseを使うと文節に応じて行が折り返される](./assets/text-wrap-in-japanese/auto-phrase.png)
-  {/* prettier-ignore */}
-  <figcaption>
-    &mdash; <cite>[Introducing four new international features in CSS  |  Blog  |  Chrome for
-    Developers](https://developer.chrome.com/blog/css-i18n-features)</cite>
-  </figcaption>
-</figure>
+<figcaption>
+  &mdash;{' '}
+  <cite>
+    [Introducing four new international features in CSS  |  Blog  |  Chrome for
+    Developers](https://developer.chrome.com/blog/css-i18n-features)
+  </cite>
+</figcaption>
 
 改行位置を手動で調整するやり方もあるが、この手法ではそれが自動的に行えるという点画期的だ。現状、[このプロパティのサポート状況は十分ではない](https://caniuse.com/mdn-css_properties_word-break_auto-phrase)ため、必要に応じて[BudouX](https://developers-jp.googleblog.com/2023/09/budoux-adobe.html)の使用なども検討すると良いだろう。
 
@@ -60,33 +58,35 @@ CSSの`text-wrap`プロパティを使うと、テキストの行の折り返し
 
 `text-wrap`プロパティの値としては`balance`が取り立てて紹介されがちだが、それ以上に有用な`pretty`という値もある。`balance`ではすべての行が同じくらいの長さになるように調整されるのに対して、`pretty`は最後の行が一つの単語だけで終わることを防ぐ。
 
-<figure>
-  <Image
-    class="bg-white"
-    src={import('./assets/text-wrap-in-japanese/widows-orphans.svg')}
-    alt="段落の冒頭にwidowが、末尾にorphanが配置されており、それと比較するようにwidowやorphanのない例が並べられている"
-  />
-  {/* prettier-ignore */}
-  <figcaption>
-    &mdash; <cite>[Widows & orphans – Fonts Knowledge - Google
-    Fonts](https://fonts.google.com/knowledge/glossary/widows_orphans)</cite>
-  </figcaption>
-</figure>
+<Image
+  class="bg-white"
+  src={import('./assets/text-wrap-in-japanese/widows-orphans.svg')}
+  alt="段落の冒頭にwidowが、末尾にorphanが配置されており、それと比較するようにwidowやorphanのない例が並べられている"
+/>
+
+<figcaption>
+  &mdash;{' '}
+  <cite>
+    [Widows & orphans – Fonts Knowledge - Google
+    Fonts](https://fonts.google.com/knowledge/glossary/widows_orphans)
+  </cite>
+</figcaption>
 
 欧文組版においては、最後の行に一つだけ配置された単語を[widows and orphans](https://fonts.google.com/knowledge/glossary/widows_orphans)と呼び、これがあるとテキストが読みにくくなるとして避けられている。`pretty`はこの問題を解決するためのものである。
 
 また、`pretty`は欧文の本文に適用するためのものであるようにしばしば紹介されるが、見出しなどでも有効に活用できる。見出しのレイアウトにおいては、中央揃えなら`balance`だが、行頭揃えなら`pretty`の方が見栄えがよくなるという個人的な経験則がある。なぜなら行頭揃えの見出しに`balance`を適用してしまうと、行の幅がその周辺のコンテンツよりもやけに狭く見えたり、行末方向にできた余白が不自然に大きく見えてしまったりしがちだ。これは日本語や英語に特有の問題ではなく、一般的な現象である。
 
-<figure>
-  <video controls playsinline>
-    <source src={(await import('./assets/text-wrap-in-japanese/balance-left.mp4')).default} />
-  </video>
-  {/* prettier-ignore */}
-  <figcaption>
-    &mdash; <cite>[CSS text-wrap: balance  |  CSS and UI  |  Chrome for
-    Developers](https://developer.chrome.com/docs/css-ui/css-text-wrap-balance)</cite>
-  </figcaption>
-</figure>
+<video controls playsinline>
+  <source src={(await import('./assets/text-wrap-in-japanese/balance-left.mp4')).default} />
+</video>
+
+<figcaption>
+  &mdash;{' '}
+  <cite>
+    [CSS text-wrap: balance  |  CSS and UI  |  Chrome for
+    Developers](https://developer.chrome.com/docs/css-ui/css-text-wrap-balance)
+  </cite>
+</figcaption>
 
 代わりに`pretty`を適用することで、行の幅は自然なままにしつつ、折り返しが不自然になることは回避できる。
 
@@ -100,28 +100,23 @@ widows and orphansは欧文固有の問題であり、日本語では事情が�
 
 ここまでの説明を経てルールがやや複雑になってきたので、フローチャートを用いて整理してみる。英語の場合、行揃えの方向によって使い方が異なる。
 
-<figure>![](./assets/text-wrap-in-japanese/flowchart-latin.png "欧文のフローチャート")</figure>
+![](./assets/text-wrap-in-japanese/flowchart-latin.png '欧文のフローチャート')
 
 行頭揃えの見出しには`text-wrap: pretty`、中央揃えの見出しには`text-wrap: balance`。本文は常に`text-wrap: pretty`。
 
 日本語の場合、見出しか本文かによってテキストの組み方が異なる。
 
-<figure>![](./assets/text-wrap-in-japanese/flowchart-japanese.png "和文のフローチャート")</figure>
+![](./assets/text-wrap-in-japanese/flowchart-japanese.png '和文のフローチャート')
 
 行頭揃えの見出しには`text-wrap: pretty`、中央揃えの見出しには`text-wrap: balance`。本文には`text-wrap`プロパティは使用しない。これに当てはまらないリードやキャプションなどについては、方針に応じていずれかの組み方に合わせる。
 
 また、見出しは文節改行かつ[プロポーショナル](https://github.com/fontplus/web-typography-glossary/blob/master/terms/proportional-metrics.md)詰め、本文はベタ組みにするのが一般的であるため、フローチャートでは次のように整理できる。
 
-<figure>
-  ![](./assets/text-wrap-in-japanese/flowchart-overall.png
-  "欧文と和文のフローチャートに加えて、それぞれの方針を示したもの")
-</figure>
+![](./assets/text-wrap-in-japanese/flowchart-overall.png '欧文と和文のフローチャートに加えて、それぞれの方針を示したもの')
 
 欧文は常にプロポーショナル詰めになる。和文の場合は、見出しの場合は文節改行かつプロポーショナル詰めだが、本文ではベタ組みになる。
 
 ここまで述べてきた方針は、次のようなCSSとして表現できる。
-
-<figure>
 
 ```css
 .heading {
@@ -154,8 +149,6 @@ widows and orphansは欧文固有の問題であり、日本語では事情が�
   }
 }
 ```
-
-</figure>
 
 ## 参考資料
 

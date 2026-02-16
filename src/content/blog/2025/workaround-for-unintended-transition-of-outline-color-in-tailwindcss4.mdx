@@ -9,8 +9,6 @@ Tailwind CSS 4では、`transition`ユーティリティおよび`transition-col
 
 変更前（Tailwind CSS 3）:
 
-<figure>
-
 {/* prettier-ignore */}
 ```css
 .transition {
@@ -28,11 +26,7 @@ Tailwind CSS 4では、`transition`ユーティリティおよび`transition-col
 }
 ```
 
-</figure>
-
 変更後（Tailwind CSS 4）:
-
-<figure>
 
 {/* prettier-ignore */}
 ```css
@@ -49,13 +43,9 @@ Tailwind CSS 4では、`transition`ユーティリティおよび`transition-col
 }
 ```
 
-</figure>
-
 これにともなって、要素をフォーカスしたときのインジケータの色が一瞬`currentcolor`になってしまう問題が生じることがある。
 
 Chromeのユーザーエージェントスタイルシートでは、フォーカス時の`outline-color`プロパティの値として`-webkit-focus-ring-color`が指定されている。
-
-<figure>
 
 {/* prettier-ignore */}
 ```css
@@ -64,35 +54,36 @@ Chromeのユーザーエージェントスタイルシートでは、フォー�
 }
 ```
 
-<figcaption>— [third_party/blink/renderer/core/html/resources/html.css - chromium/src.git - Git at Google](https://chromium.googlesource.com/chromium/src.git/+/refs/tags/140.0.7306.1/third_party/blink/renderer/core/html/resources/html.css#1344)</figcaption>
-</figure>
+<figcaption>
+  — [third_party/blink/renderer/core/html/resources/html.css - chromium/src.git - Git at
+  Google](https://chromium.googlesource.com/chromium/src.git/+/refs/tags/140.0.7306.1/third_party/blink/renderer/core/html/resources/html.css#1344)
+</figcaption>
 
 通常は即座にこの色に変化するが、`transition`の対象になっていると、`currentcolor`を開始点として`-webkit-focus-ring-color`に遷移するという挙動になる。これによって、一瞬黒く見えてしまう。
 
-<figure>
-  <video controls playsinline>
-    <source
-      src={
-        (
-          await import('./assets/workaround-for-unintended-transition-of-outline-color-in-tailwindcss4/transitioning.mp4')
-        ).default
-      }
-    />
-  </video>
-</figure>
+<video controls playsinline>
+  <source
+    src={
+      (
+        await import('./assets/workaround-for-unintended-transition-of-outline-color-in-tailwindcss4/transitioning.mp4')
+      ).default
+    }
+  />
+</video>
 
 このような挙動になるのはChromeのみで、SafariやFirefoxではtransitionが有効にならない。とはいえ、このような挙動は好ましくないため、何かしらの方法で修正する必要がある。
 
 Tailwind CSSのUpgrade Guideでは、そのための回避策として、条件にかかわらず`outline-color`の値が変化しないように指定することが提案されている。
 
-<figure>
 ```diff
 -<button class="transition hover:outline-2 hover:outline-cyan-500"></button>
 +<button class="outline-cyan-500 transition hover:outline-2"></button>
 ```
 
-<figcaption>— [Upgrade guide - Getting started - Tailwind CSS](https://tailwindcss.com/docs/upgrade-guide#transitioning-outline-color)</figcaption>
-</figure>
+<figcaption>
+  — [Upgrade guide - Getting started - Tailwind
+  CSS](https://tailwindcss.com/docs/upgrade-guide#transitioning-outline-color)
+</figcaption>
 
 しかし、フォーカス可能なすべての要素に対してこのような指定をすることは現実的ではない。このような個別の指定が必要になると、必然的に間違いが起こるだろう。そのため、代わりとなる別のアプローチをいくつか挙げて検討してみる。
 
@@ -102,7 +93,6 @@ Tailwind CSSのUpgrade Guideでは、そのための回避策として、条件�
 
 まず、`transition`ユーティリティは次のように実装されている。
 
-<figure>
 ```ts
 functionalUtility('transition', {
   defaultValue:
@@ -113,15 +103,16 @@ functionalUtility('transition', {
     decl('transition-timing-function', defaultTimingFunction),
     decl('transition-duration', defaultDuration),
   ],
-})
+});
 ```
 
-<figcaption>— [tailwindcss/packages/tailwindcss/src/utilities.ts at v4.1.11 · tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss/blob/v4.1.11/packages/tailwindcss/src/utilities.ts#L4502-L4511)</figcaption>
-</figure>
+<figcaption>
+  — [tailwindcss/packages/tailwindcss/src/utilities.ts at v4.1.11 ·
+  tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss/blob/v4.1.11/packages/tailwindcss/src/utilities.ts#L4502-L4511)
+</figcaption>
 
 もう一方の、`transition-colors`ユーティリティは次のように実装されている。
 
-<figure>
 ```ts
 staticUtility('transition-colors', [
   [
@@ -130,16 +121,15 @@ staticUtility('transition-colors', [
   ],
   ['transition-timing-function', defaultTimingFunction],
   ['transition-duration', defaultDuration],
-])
+]);
 ```
 
-<figcaption>— [tailwindcss/packages/tailwindcss/src/utilities.ts at v4.1.11 ·
-  tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss/blob/v4.1.11/packages/tailwindcss/src/utilities.ts#L4478)</figcaption>
-</figure>
+<figcaption>
+  — [tailwindcss/packages/tailwindcss/src/utilities.ts at v4.1.11 ·
+  tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss/blob/v4.1.11/packages/tailwindcss/src/utilities.ts#L4478)
+</figcaption>
 
 これらを上書きするには、`@utility`ディレクティブを使ってCSSを記述する。ここで指定されている値から`outline-color`プロパティを取り除いて指定する。
-
-<figure>
 
 {/* prettier-ignore */}
 ```css
@@ -154,44 +144,35 @@ staticUtility('transition-colors', [
 }
 ```
 
-</figure>
-
 ただし、これらユーティリティのプロパティ値は予期せず変更される可能性があるため、Tailwind CSSのアップデートにともなう変更を監視して追従できるようにしておく必要がある。
 
 ## 2. `transition`ユーティリティの対象プロパティを個別に指定する
 
 `transition`ユーティリティ自体の実装に手を入れずとも、arbitrary valuesとしてユーティリティの値を調整することはできる。次のようにして対象のプロパティだけを個別に指定すれば、意図しないプロパティのtransitionが有効になってしまうことを回避できる。
 
-<figure>
-
 ```html
 <button class="bg-blue-500 transition-[background-color] hover:bg-indigo-500"><!-- ... --></button>
 ```
-
-</figure>
 
 ## 3. フォーカス可能な要素すべての`outline-color`プロパティにデフォルト値を指定する
 
 先ほどの説明の繰り返しになるが、`outline-color`プロパティの値が変化しないように指定すれば意図しないtransitionを回避できる。
 
-<figure>
 ```diff
 -<button class="transition hover:outline-2 hover:outline-cyan-500"></button>
 +<button class="outline-cyan-500 transition hover:outline-2"></button>
 ```
 
-<figcaption>— [Upgrade guide - Getting started - Tailwind CSS](https://tailwindcss.com/docs/upgrade-guide#transitioning-outline-color)</figcaption>
-</figure>
+<figcaption>
+  — [Upgrade guide - Getting started - Tailwind
+  CSS](https://tailwindcss.com/docs/upgrade-guide#transitioning-outline-color)
+</figcaption>
 
 この例はカスタムの`outline-color`プロパティを適用するものだが、ブラウザデフォルトのフォーカスリングを適用したい場合には次のようにする。
-
-<figure>
 
 ```html
 <button class="outline-[-webkit-focus-ring-color] transition"><!-- ... --></button>
 ```
-
-</figure>
 
 これによって、要素がフォーカスされてフォーカスリングが表示される際のtransitionを無効化できる。
 
@@ -200,8 +181,6 @@ Firefoxではフォーカス時の`outline-color`プロパティの値は`curren
 ## 4. すべての要素の`outline-color`プロパティのデフォルト値を上書きする
 
 `outline-color`プロパティを個別に設定するアプローチでは、やはり作業の抜け漏れが生じる可能性がある。それよりも、あらかじめすべての要素のプロパティ値を指定してしまうのが良いだろう。次のようにして実装する。
-
-<figure>
 
 ```css
 @layer base {
@@ -214,6 +193,3 @@ Firefoxではフォーカス時の`outline-color`プロパティの値は`curren
   }
 }
 ```
-
-</figure>
-````

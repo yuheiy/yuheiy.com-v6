@@ -9,7 +9,6 @@ Tailwind CSSにおいて、スタイルの組み合わせを抽象化したい�
 
 もっとも一般的なのは、コンポーネントやパーシャルとして、クラス属性値とHTMLをセットで抽出する方法。
 
-<figure>
 ```vue
 <template>
   <div>
@@ -31,13 +30,15 @@ export default {
   props: ['img', 'imgAlt', 'eyebrow', 'title', 'pricing', 'url'],
 };
 </script>
-
-````
+```
 
 <figcaption>
-  &mdash; <cite>[Reusing Styles - Tailwind CSS](https://tailwindcss.com/docs/reusing-styles#extracting-components-and-partials)</cite>
+  &mdash;{' '}
+  <cite>
+    [Reusing Styles - Tailwind
+    CSS](https://tailwindcss.com/docs/reusing-styles#extracting-components-and-partials)
+  </cite>
 </figcaption>
-</figure>
 
 これによってスタイルに関するコードが一元化されるため、新たにCSSを記述せずとも共通化の役割を果たせる。
 
@@ -47,52 +48,43 @@ export default {
 
 [`shadcn-ui/ui/templates/next-template/components/ui/button.tsx`](https://github.com/shadcn-ui/ui/blob/shadcn-ui%400.8.0/templates/next-template/components/ui/button.tsx):
 
-<figure>
-
 ```tsx
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
+  'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background',
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "border border-input hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "underline-offset-4 hover:underline text-primary",
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        outline: 'border border-input hover:bg-accent hover:text-accent-foreground',
+        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        link: 'underline-offset-4 hover:underline text-primary',
       },
       size: {
-        default: "h-10 py-2 px-4",
-        sm: "h-9 px-3 rounded-md",
-        lg: "h-11 px-8 rounded-md",
-        icon: "h-10 w-10",
+        default: 'h-10 py-2 px-4',
+        sm: 'h-9 px-3 rounded-md',
+        lg: 'h-11 px-8 rounded-md',
+        icon: 'h-10 w-10',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
-  }
-)
+  },
+);
 
 // （中略）
 
-export { Button, buttonVariants }
-````
-
-</figure>
+export { Button, buttonVariants };
+```
 
 この方法では、クラスを構成するためのライブラリとして[clsx](https://github.com/lukeed/clsx)や[Class Variance Authority](https://cva.style/docs)、[Tailwind Variants](https://www.tailwind-variants.org/)が用いられる。また、それらに応じた[専用の正規表現をエディタに設定する](https://github.com/paolotiu/tailwind-intellisense-regex-list)ことで、Tailwindのインテリセンスを機能させることができる。
 
 ---
 
 もう一つが、自分でCSSを書くという方法。
-
-<figure>
 
 ```html
 <!-- Before extracting a custom class -->
@@ -107,10 +99,6 @@ export { Button, buttonVariants }
 <button class="btn-primary">Save changes</button>
 ```
 
-</figure>
-
-<figure>
-
 ```css
 @tailwind base;
 @tailwind components;
@@ -124,9 +112,12 @@ export { Button, buttonVariants }
 ```
 
 <figcaption>
-  &mdash; <cite>[Reusing Styles - Tailwind CSS](https://tailwindcss.com/docs/reusing-styles#extracting-classes-with-apply)</cite>
+  &mdash;{' '}
+  <cite>
+    [Reusing Styles - Tailwind
+    CSS](https://tailwindcss.com/docs/reusing-styles#extracting-classes-with-apply)
+  </cite>
 </figcaption>
-</figure>
 
 ある意味、これがもっともTailwindらしくないやり方ではあるが、有効になる場面もある。
 
@@ -138,12 +129,11 @@ export { Button, buttonVariants }
 
 従来のBEM的なアプローチを思い返せば、CSSのためのクラスとHTMLは一対一の関係になっているのが基本だった。
 
-<figure>
 ```html
 <!-- Even with custom CSS, you still need to duplicate this HTML structure -->
 <div class="chat-notification">
   <div class="chat-notification-logo-wrapper">
-    <img class="chat-notification-logo" src="/img/logo.svg" alt="ChitChat Logo">
+    <img class="chat-notification-logo" src="/img/logo.svg" alt="ChitChat Logo" />
   </div>
   <div class="chat-notification-content">
     <h4 class="chat-notification-title">ChitChat</h4>
@@ -153,9 +143,12 @@ export { Button, buttonVariants }
 ```
 
 <figcaption>
-  &mdash; <cite>[Reusing Styles - Tailwind CSS](https://tailwindcss.com/docs/reusing-styles#compared-to-css-abstractions)</cite>
+  &mdash;{' '}
+  <cite>
+    [Reusing Styles - Tailwind
+    CSS](https://tailwindcss.com/docs/reusing-styles#compared-to-css-abstractions)
+  </cite>
 </figcaption>
-</figure>
 
 CSSはこうした決まったHTMLのために記述されるものであって、そこからは独立して存在できないように意図されている。その場合は1つ目の方法を採用するのが妥当だ。これはHTMLまでまとめてパターン化するものなので、便宜上「HTMLのコンポーネント化」と呼ぶこととする。一般に、ほとんどの場面ではこの選択になるだろう。
 
@@ -163,15 +156,11 @@ CSSはこうした決まったHTMLのために記述されるものであって�
 
 Tailwindには、[ITCSSから着想を得て取り入れられたレイヤーの概念がある](https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer)。現代的な仕様で言うところの[Cascade Layers](https://drafts.csswg.org/css-cascade-5/#layering)に近いものである。
 
-<figure>
-
 ```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 ```
-
-</figure>
 
 Tailwindから提供されるすべてのクラスは、このbase / components / utilitiesのいずれかのレイヤーに分類されている。ほとんどのクラスはutilitiesレイヤーだが、唯一[`container`クラス](https://tailwindcss.com/docs/container)だけがcomponentsレイヤーに属している（公式プラグインまで含めれば、[`prose`クラス](https://github.com/tailwindlabs/tailwindcss-typography)、[`form-*`クラス](https://github.com/tailwindlabs/tailwindcss-forms)、[`aspect-*`クラス](https://github.com/tailwindlabs/tailwindcss-aspect-ratio)などもcomponentsである）。
 
