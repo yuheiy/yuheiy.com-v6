@@ -157,6 +157,10 @@ export default defineConfig({
   compressHTML: false,
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      minify: false,
+      cssMinify: false,
+    },
   },
   build: {
     format: 'preserve',
