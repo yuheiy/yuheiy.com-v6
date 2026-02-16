@@ -109,7 +109,7 @@ const remarkDemoCodeBlock: Pluggable = () => {
   };
 };
 
-const rehypeInjectDescription: Pluggable = () => {
+const rehypeExtractDescription: Pluggable = () => {
   return (tree, { data }) => {
     visit(tree, 'element', (node: Element) => {
       if (node.tagName !== 'p') return;
@@ -149,7 +149,7 @@ export default defineConfig({
       rehypePlugins: [
         rehypeUnwrapImages,
         rehypeUnwrapFigcaptionParagraphs,
-        rehypeInjectDescription,
+        rehypeExtractDescription,
       ],
     }),
     sitemap(),
