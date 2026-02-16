@@ -40,10 +40,10 @@
   }
 
   :is(hr, figure, table) {
-    margin-block: calc(--spacing(8) + var(--root-half-leading));
+    margin-block: calc(--spacing(8) + var(--half-leading));
 
     & + & {
-      margin-block-start: calc(--spacing(8) + var(--root-half-leading) * 2);
+      margin-block-start: calc(--spacing(8) + var(--half-leading) * 2);
     }
   }
 
