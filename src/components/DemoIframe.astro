@@ -16,7 +16,7 @@ const srcdoc = `<!DOCTYPE html>
     <title>${title}</title>
     <style>
       @layer {
-        :root { color-scheme: light dark; font-size: sans-serif; }
+        :root { color-scheme: light dark; font-family: sans-serif; }
         body { margin: 0; }
       }
     </style>
@@ -38,9 +38,9 @@ const srcdoc = `<!DOCTYPE html>
       resizeObserver.observe(iframe.contentDocument.documentElement);
     }
 
+    iframe.addEventListener('load', setup);
     if (iframe.contentDocument?.readyState === 'complete') {
       setup();
     }
-    iframe.addEventListener('load', setup);
   }
 </script>
