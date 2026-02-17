@@ -20,27 +20,16 @@ const srcdoc = `<!DOCTYPE html>
         body { margin: 0; }
       }
     </style>
+    <script>
+      new ResizeObserver((entries) => {
+        window.frameElement.height = entries[0].contentBoxSize[0].blockSize;
+      }).observe(document.documentElement);
+    </script>
   </head>
-  <body>${content}</body>
+  <body>
+    ${content}
+  </body>
 </html>`;
 ---
 
-<iframe class="w-full" srcdoc={srcdoc} title={title} data-demo-iframe></iframe>
-
-<script>
-  for (const iframe of document.querySelectorAll<HTMLIFrameElement>('[data-demo-iframe]')) {
-    const resizeObserver = new ResizeObserver((entries) => {
-      iframe.height = entries[0].contentBoxSize[0].blockSize.toString();
-    });
-
-    function setup() {
-      if (!iframe.contentDocument) return;
-      resizeObserver.observe(iframe.contentDocument.documentElement);
-    }
-
-    iframe.addEventListener('load', setup);
-    if (iframe.contentDocument?.readyState === 'complete') {
-      setup();
-    }
-  }
-</script>
+<iframe class="w-full" srcdoc={srcdoc} title={title}></iframe>
