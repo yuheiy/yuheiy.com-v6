@@ -2,7 +2,7 @@
 @scope (.astro-code) {
   :scope {
     overflow: clip;
-    text-box: trim-both text text;
+    text-box: trim-both;
   }
 
   :is(:scope, span) {
