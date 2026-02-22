@@ -111,14 +111,6 @@
     &:has(> blockquote:not([class])) {
       margin-block: --spacing(12);
     }
-
-    &:has(> pre) + &:has(> pre)::before {
-      display: block;
-      mask-image: linear-gradient(to right, black calc(100% - --spacing(32)), transparent);
-      margin-block-end: calc(--spacing(8) + var(--half-leading) * 2);
-      border-block-start: 1px dashed var(--border-color-dynamic);
-      content: '';
-    }
   }
 
   figcaption {
