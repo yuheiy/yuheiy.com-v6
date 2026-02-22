@@ -91,7 +91,7 @@ background: var(--red-if-toggler, green); /* will be green! */
 }
 ```
 
-デフォルトでは`--light`が無効なので`500`が採用され、`--dark`は有効なので単なる空白文字になる。`color-scheme: light dark`も併用することで、ブラウザのUIのカラースキームを変更したり`light-dark()`を機能させたりできる。
+デフォルトでは`--light`が無効なので`500`が採用され、`--dark`は有効なので単なる空白文字になる。`color-scheme: light dark`を併用することで`light-dark()`も機能させられる。
 
 そして、`prefers-color-scheme`を使わずに値を固定することで、常にライトモードもしくはダークモードに相当する状態も表現できる。ユーティリティクラスにするなら次の通り。
 
