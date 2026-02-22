@@ -52,7 +52,7 @@ button {
 }
 ```
 
-とはいえ、`color-scheme()`はまだ実装が存在せず、`if()`はいくつかあるものの十分ではない。
+とはいえ、`color-scheme()`はまだ実装が存在せず、`if()`は実装状況が十分ではない。
 
 代替案として、現状ではSpace Toggleハックを使うと同様のことが実現できる。Space Toggleハックとは、`--foo: ;`のようにカスタムプロパティの値として空白文字が有効であるという仕様を用いて、条件に応じた値の切り替えをする手法だ。たとえば次のようになる。
 
@@ -68,9 +68,9 @@ background: var(--red-if-toggler, green); /* will be red! */
 background: var(--red-if-toggler, green); /* will be green! */
 ```
 
-`--toggler`を`--red-if-toggler`に含めることで、`--toggler: ;`の場合は`red`が空白文字とともに出力され、`initial`の場合は無効なプロパティとして評価されてフォールバック値が優先される仕組みになっている（コード例は[propjockey/css-sweeper](https://github.com/propjockey/css-sweeper?tab=readme-ov-file#basics-of-space-toggle)より）。値の周囲に空白文字があっても実際の動作には影響せず無視されるというCSSの仕様によって成り立つ。
+`--toggler`を`--red-if-toggler`に含めることで、`--toggler: ;`の場合は`red`が空白文字とともに出力され、`initial`の場合は無効なプロパティとして評価されてフォールバック値が優先される仕組みになっている（コード例は[propjockey/css-sweeper](https://github.com/propjockey/css-sweeper?tab=readme-ov-file#basics-of-space-toggle)より）。値の前後に空白文字があっても実際の動作には影響せず無視されるというCSSの仕様によって成り立つものだ。
 
-これを応用して、次のように`prefers-color-scheme`によって`--toggler`に相当する値を切り替えることで、`light-dark()`と同様の仕組みを実現できる。
+これを応用して、次のように`prefers-color-scheme`によって`--toggler`に相当する値を切り替えると、`light-dark()`と同様の仕組みを実現できる。
 
 ```css
 :root {
@@ -91,9 +91,9 @@ background: var(--red-if-toggler, green); /* will be green! */
 }
 ```
 
-デフォルトでは`--light`が無効なので`500`が採用され、`--dark`は有効なので単なる空白文字になる。`color-scheme: light dark;`も併用することで、ブラウザのUIを変更したり`light-dark()`を機能させたりできる。
+デフォルトでは`--light`が無効なので`500`が採用され、`--dark`は有効なので単なる空白文字になる。`color-scheme: light dark`も併用することで、ブラウザのUIのカラースキームを変更したり`light-dark()`を機能させたりできる。
 
-そして、`prefers-color-scheme`を使わずに値を固定することで、常にライトモードもしくはダークモードに相当する状態も表現できる。ユーティリティクラスにするなら次のように。
+そして、`prefers-color-scheme`を使わずに値を固定することで、常にライトモードもしくはダークモードに相当する状態も表現できる。ユーティリティクラスにするなら次の通り。
 
 ```css
 .scheme-light {
@@ -136,7 +136,9 @@ background: var(--red-if-toggler, green); /* will be green! */
 
 これらの実装は[React Spectrumから着想を得た](https://github.com/adobe/react-spectrum/blob/%40react-spectrum/s2%401.1.0/packages/%40react-spectrum/s2/src/page.macro.ts)。
 
-さらに言えば、カラースキーム以外のテーマを切り替える使い方もできる。たとえば、設定に応じて余白の大きさが変化する設計を考える。
+---
+
+カラースキーム以外のテーマを切り替える使い方もできる。たとえば、設定に応じて余白の大きさが変化する設計を考える。
 
 | Name | Base | Compact | Comfortable |
 | ---- | ---: | ------: | ----------: |
