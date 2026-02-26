@@ -120,7 +120,7 @@ const latestBlogItems = await Promise.all(
 
   <main>
     <section>
-      <h2 class="mt-24 text-lg font-bold kerning-all">おもな投稿</h2>
+      <h2 class="mt-24 kerning-all text-lg font-bold">おもな投稿</h2>
 
       {
         primaryItems.map(({ meta, ...item }) => (
@@ -132,7 +132,7 @@ const latestBlogItems = await Promise.all(
     </section>
 
     <section>
-      <h2 class="mt-24 text-lg font-bold kerning-all">プロジェクト</h2>
+      <h2 class="mt-24 kerning-all text-lg font-bold">プロジェクト</h2>
 
       {
         projectItems.map(({ yearMonthRange, ...item }) => (
@@ -144,7 +144,7 @@ const latestBlogItems = await Promise.all(
     </section>
 
     <section>
-      <h2 class="mt-24 text-lg font-bold kerning-all">最近のブログ</h2>
+      <h2 class="mt-24 kerning-all text-lg font-bold">最近のブログ</h2>
 
       {
         latestBlogItems.map(({ date, ...item }) => (
