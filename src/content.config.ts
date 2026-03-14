@@ -1,8 +1,9 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const blog = defineCollection({
-  type: 'content',
-  // Type-check frontmatter using a schema
+  loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
   schema: ({ image }) =>
     z.object({
       legacyUrl: z.boolean().optional(),
@@ -14,13 +15,12 @@ const blog = defineCollection({
 });
 
 const linksElsewhere = defineCollection({
-  type: 'data',
-  // Type-check frontmatter using a schema
+  loader: glob({ base: './src/content/links-elsewhere', pattern: '**/*.yml' }),
   schema: () =>
     z.object({
       title: z.string(),
       pubDate: z.date(),
-      link: z.string().url(),
+      link: z.url(),
       channel: z.string(),
       channelDetail: z.string().optional(),
       description: z.string().optional(),

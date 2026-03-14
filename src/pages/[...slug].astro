@@ -6,7 +6,7 @@ export async function getStaticPaths() {
   return (await getCollection('blog'))
     .filter((entry) => entry.data.legacyUrl)
     .map((entry) => ({
-      params: { slug: entry.slug },
+      params: { slug: entry.id },
       props: { entry },
     }));
 }

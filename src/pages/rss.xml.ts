@@ -2,7 +2,7 @@ import { getContainerRenderer } from '@astrojs/mdx';
 import rss, { type RSSFeedItem } from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { loadRenderers } from 'astro:container';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import sanitizeHtml from 'sanitize-html';
 import invariant from 'tiny-invariant';
@@ -25,7 +25,7 @@ export async function GET(context: APIContext) {
         pubDate: entry.data.pubDate,
         description: await getBlogDescription(entry),
         content: await (async () => {
-          const { Content } = await entry.render();
+          const { Content } = await render(entry);
           const content = await container.renderToString(Content);
           return sanitizeHtml(content, {
             allowedTags: [...sanitizeHtml.defaults.allowedTags, 'img'],
