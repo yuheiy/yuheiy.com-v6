@@ -27,9 +27,7 @@ jobs:
           cache: true
 
       - run: pnpm install
-
       - run: pnpm run check
-
       - run: pnpm run build
 
       - name: Upload Pages artifact
