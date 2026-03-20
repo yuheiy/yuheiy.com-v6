@@ -1,18 +1,12 @@
 @scope (.prose) {
   h2 {
-    @apply text-xl kerning-all;
+    @apply heading-xl;
     margin-block-start: --spacing(16);
-    font-weight: bold;
-    text-wrap: pretty;
-    word-break: auto-phrase;
   }
 
   h3 {
-    @apply text-lg kerning-all;
+    @apply heading-lg;
     margin-block-start: --spacing(12);
-    font-weight: bold;
-    text-wrap: pretty;
-    word-break: auto-phrase;
 
     h2 + & {
       margin-block-start: --spacing(4);
@@ -20,10 +14,8 @@
   }
 
   h4 {
+    @apply heading-base;
     margin-block-start: --spacing(8);
-    font-weight: bold;
-    text-wrap: pretty;
-    word-break: auto-phrase;
 
     h3 + & {
       margin-block-start: --spacing(4);

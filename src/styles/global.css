@@ -28,17 +28,11 @@
 
   --text-*: initial;
   --text-xs: 0.75rem;
-  --text-xs--line-height: var(--leading-normal);
   --text-sm: 0.875rem;
-  --text-sm--line-height: var(--leading-normal);
   --text-base: 1rem;
-  --text-base--line-height: var(--leading-normal);
   --text-lg: 1.125rem;
-  --text-lg--line-height: var(--leading-tight);
   --text-xl: 1.375rem;
-  --text-xl--line-height: var(--leading-tight);
   --text-2xl: 1.625rem;
-  --text-2xl--line-height: var(--leading-tight);
 
   --leading-*: initial;
   --leading-tight: 1.5;
@@ -126,24 +120,43 @@
   }
 }
 
-/*
-  Handle font kerning based on a method described in a CSS Working Group Drafts issue.
-  (https://github.com/w3c/csswg-drafts/issues/6723#issuecomment-1411487571)
-*/
-
-@utility kerning-none {
-  font-kerning: none;
-  font-feature-settings: normal;
+@utility heading-base {
+  font-weight: bold;
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  line-break: strict;
+  text-wrap: pretty;
+  word-break: auto-phrase;
 }
 
-@utility kerning-normal {
-  font-kerning: normal;
-  font-feature-settings: normal;
-}
-
-@utility kerning-all {
-  font-kerning: normal;
+@utility heading-lg {
+  font-weight: bold;
+  font-size: var(--text-lg);
+  line-height: var(--leading-tight);
   font-feature-settings: 'palt';
+  line-break: strict;
+  text-wrap: pretty;
+  word-break: auto-phrase;
+}
+
+@utility heading-xl {
+  font-weight: bold;
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
+  font-feature-settings: 'palt';
+  line-break: strict;
+  text-wrap: pretty;
+  word-break: auto-phrase;
+}
+
+@utility heading-2xl {
+  font-weight: bold;
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+  font-feature-settings: 'palt';
+  line-break: strict;
+  text-wrap: pretty;
+  word-break: auto-phrase;
 }
 
 @import './prose.css' layer(components);
