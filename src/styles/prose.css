@@ -14,7 +14,7 @@
   }
 
   h4 {
-    @apply heading-base;
+    @apply heading-md;
     margin-block-start: --spacing(8);
 
     h3 + & {
