@@ -7,12 +7,10 @@ interface Props {
 
 const { date } = Astro.props;
 
-const dateFormatter = new Intl.DateTimeFormat(`${SITE.lang}-${SITE.region}`, {
+const formattedDate = date.toLocaleDateString(`${SITE.lang}-${SITE.region}`, {
   dateStyle: 'long',
   timeZone: 'Asia/Tokyo',
 });
-
-const formattedDate = dateFormatter.format(date);
 ---
 
 <time datetime={date.toISOString()}>{formattedDate}</time>
