@@ -5,44 +5,26 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-
-permissions:
-  contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
-  cancel-in-progress: ${{ github.ref_name != 'main' }}
+  group: ${{ github.workflow }}
 
 jobs:
   build:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - uses: withastro/action@74d664f13f9f9063e37b49d74a74613dbf94db3c # v6.0.0
         with:
-          cache: true
-
-      - run: pnpm install
-      - run: pnpm run check
-      - run: pnpm run build
-
-      - name: Upload Pages artifact
-        if: github.ref_name == 'main'
-        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
-        with:
-          path: dist/
+          build-cmd: pnpm run check && pnpm run build
 
   deploy:
     permissions:
       pages: write
       id-token: write
-    needs:
-      - build
-    if: github.ref_name == 'main'
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
