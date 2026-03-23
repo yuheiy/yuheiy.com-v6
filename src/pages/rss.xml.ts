@@ -7,8 +7,7 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import sanitizeHtml from 'sanitize-html';
 import invariant from 'tiny-invariant';
 import { SITE } from '#config';
-import { getBlogDescription } from '#lib/blog';
-import { blogPath } from '#paths';
+import { getDescription, getPermalink } from '#utils/blog';
 
 export async function GET(context: APIContext) {
   invariant(context.site);
@@ -20,10 +19,10 @@ export async function GET(context: APIContext) {
   const items: RSSFeedItem[] = (
     await Promise.all([
       ...(await getCollection('blog')).map(async (entry) => ({
-        link: blogPath(entry),
+        link: getPermalink(entry),
         title: entry.data.title,
         pubDate: entry.data.pubDate,
-        description: await getBlogDescription(entry),
+        description: await getDescription(entry),
         content: await (async () => {
           const { Content } = await render(entry);
           const content = await container.renderToString(Content);

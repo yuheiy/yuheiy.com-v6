@@ -6,8 +6,7 @@ import Teaser from '#components/Teaser.astro';
 import YearMonthRange from '#components/YearMonthRange.astro';
 import { SITE } from '#config';
 import Layout from '#layouts/Layout.astro';
-import { getBlogDescription } from '#lib/blog';
-import { blogPath } from '#paths';
+import { getDescription, getPermalink } from '#utils/blog';
 
 const description =
   '安田祐平（やすだゆうへい）の個人ウェブサイトです。HTML/WAI-ARIA、CSS、JavaScript/TypeScript、ウェブサイトおよびウェブアプリケーション開発、インターフェースデザイン、アクセシビリティ、デザインシステム、DevOpsなどの話題が多いです。';
@@ -46,7 +45,7 @@ const primaryItems = [
       case 'blog':
         return {
           title: entry.data.title,
-          link: blogPath(entry),
+          link: getPermalink(entry),
           meta: SITE.title,
         };
 
@@ -108,9 +107,9 @@ const latestBlogItems = await Promise.all(
     .slice(0, 3)
     .map(async (entry) => ({
       title: entry.data.title,
-      link: blogPath(entry),
+      link: getPermalink(entry),
       date: entry.data.pubDate,
-      description: await getBlogDescription(entry),
+      description: await getDescription(entry),
     })),
 );
 ---

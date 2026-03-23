@@ -5,8 +5,7 @@ import PageHeader from '#components/PageHeader.astro';
 import PageNav from '#components/PageNav.astro';
 import Teaser from '#components/Teaser.astro';
 import Layout from '#layouts/Layout.astro';
-import { getBlogDescription } from '#lib/blog';
-import { blogPath } from '#paths';
+import { getDescription, getPermalink } from '#utils/blog';
 
 const title = 'ブログ';
 const description = 'ウェブデザインやフロントエンドに関する雑記。';
@@ -16,9 +15,9 @@ const items = await Promise.all(
     .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .map(async (entry) => ({
       title: entry.data.title,
-      link: blogPath(entry),
+      link: getPermalink(entry),
       date: entry.data.pubDate,
-      description: await getBlogDescription(entry),
+      description: await getDescription(entry),
     })),
 );
 ---

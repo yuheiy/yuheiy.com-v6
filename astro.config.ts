@@ -3,13 +3,13 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 import rehypeUnwrapImages from 'rehype-unwrap-images';
-import rehypeExtractDescription from './scripts/lib/rehype-extract-description';
+import rehypeExtractDescription from './src/utils/rehype-extract-description';
 import {
   rehypeUnwrapCiteParagraphs,
   rehypeUnwrapFigcaptionParagraphs,
-} from './scripts/lib/rehype-unwrap-paragraphs';
-import rehypeWrapFigure from './scripts/lib/rehype-wrap-figure';
-import remarkDemoCodeBlock from './scripts/lib/remark-demo-code-block';
+} from './src/utils/rehype-unwrap-paragraphs';
+import rehypeWrapFigure from './src/utils/rehype-wrap-figure';
+import remarkDemoCodeBlock from './src/utils/remark-demo-code-block';
 
 // https://astro.build/config
 export default defineConfig({
