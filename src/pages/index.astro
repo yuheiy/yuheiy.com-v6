@@ -4,7 +4,7 @@ import DateTime from '#components/DateTime.astro';
 import PageHeader from '#components/PageHeader.astro';
 import Teaser from '#components/Teaser.astro';
 import YearMonthRange from '#components/YearMonthRange.astro';
-import config from '#config';
+import { SITE } from '#config';
 import Layout from '#layouts/Layout.astro';
 import { getBlogDescription } from '#lib/blog';
 import { blogPath } from '#paths';
@@ -47,7 +47,7 @@ const primaryItems = [
         return {
           title: entry.data.title,
           link: blogPath(entry),
-          meta: config.siteTitle,
+          meta: SITE.title,
         };
 
       case 'links-elsewhere':
@@ -116,7 +116,7 @@ const latestBlogItems = await Promise.all(
 ---
 
 <Layout isHome description={description}>
-  <PageHeader isHome title={config.siteTitle} description={description} />
+  <PageHeader isHome title={SITE.title} description={description} />
 
   <main>
     <section>

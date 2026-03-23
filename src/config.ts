@@ -1,5 +1,5 @@
-const config = {
-  siteTitle: 'yuheiy',
+export const SITE = {
+  title: 'yuheiy',
   lang: 'ja',
   region: 'JP',
   email: 'yuhei.yasuda1003@gmail.com',
@@ -8,5 +8,3 @@ const config = {
   github: 'yuheiy',
   hatena: 'yuheiy',
 };
-
-export default config;
