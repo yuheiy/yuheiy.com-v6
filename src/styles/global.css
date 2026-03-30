@@ -55,7 +55,6 @@
     font-size: max(100%, 18px);
     line-height: var(--leading-normal);
     text-autospace: normal;
-    text-underline-offset: 0.2em;
     overflow-wrap: anywhere;
     text-spacing-trim: trim-start;
 
@@ -99,6 +98,7 @@
     text-decoration: underline;
     text-decoration-color: var(--text-decoration-color-dynamic);
     text-decoration-thickness: 1px;
+    text-underline-offset: 0.12em;
   }
 
   em {
