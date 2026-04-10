@@ -15,7 +15,7 @@
     "dev": "portless run astro dev",
     "fmt": "prettier --write . --log-level warn",
     "lint": "eslint",
-    "preview": "astro preview"
+    "preview": "portless run astro preview"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
