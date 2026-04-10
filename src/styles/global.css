@@ -94,11 +94,11 @@
     text-autospace: no-autospace;
   }
 
-  a:any-link {
+  a {
     text-decoration: underline;
     text-decoration-color: var(--text-decoration-color-dynamic);
     text-decoration-thickness: 1px;
-    text-underline-offset: 0.12em;
+    text-underline-offset: calc(var(--half-leading) / 2);
   }
 
   em {
