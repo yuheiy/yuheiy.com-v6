@@ -133,7 +133,6 @@
   font-weight: bold;
   font-size: var(--text-lg);
   line-height: var(--leading-tight);
-  font-feature-settings: 'palt';
   line-break: strict;
   text-wrap: pretty;
   word-break: auto-phrase;
@@ -143,7 +142,6 @@
   font-weight: bold;
   font-size: var(--text-xl);
   line-height: var(--leading-tight);
-  font-feature-settings: 'palt';
   line-break: strict;
   text-wrap: pretty;
   word-break: auto-phrase;
