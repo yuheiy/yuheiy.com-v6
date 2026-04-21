@@ -15,7 +15,7 @@ importers:
     dependencies:
       '@astrojs/mdx':
         specifier: ^5.0.3
-        version: 5.0.3(astro@6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))
+        version: 5.0.3(astro@6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))
       '@astrojs/rss':
         specifier: ^4.0.18
         version: 4.0.18
@@ -26,11 +26,11 @@ importers:
         specifier: ^4.2.2
         version: 4.2.2(vite@7.3.2(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.3))
       astro:
-        specifier: ^6.1.5
-        version: 6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)
+        specifier: ^6.1.6
+        version: 6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)
       astro-embed:
         specifier: ^0.12.0
-        version: 0.12.0(astro@6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))
+        version: 0.12.0(astro@6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))
       baseline-status:
         specifier: ^1.1.1
         version: 1.1.1
@@ -91,7 +91,7 @@ importers:
         version: 6.10.2(eslint@9.39.4(jiti@2.6.1))
       node:
         specifier: runtime:^24.14.1
-        version: runtime:24.14.1
+        version: runtime:24.15.0
       portless:
         specifier: ^0.10.0
         version: 0.10.0
@@ -103,7 +103,7 @@ importers:
         version: 0.14.1
       prettier-plugin-css-order:
         specifier: ^2.2.0
-        version: 2.2.0(postcss@8.5.9)(prettier@3.8.1)
+        version: 2.2.0(postcss@8.5.10)(prettier@3.8.1)
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
@@ -1238,8 +1238,8 @@ packages:
     resolution: {integrity: sha512-+QDcgc7e+au6EZ0YjMmRRjNoQo5bDMlaR45aWDoFsuxQTCM9qmCHRoiKJPELgckJ8Wmr7vcfpa9eCDHBFh6G4w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  astro@6.1.5:
-    resolution: {integrity: sha512-AJVw/JlssxUCBFi3Hp4djL8Pt7wUQqStBBawCd8cNGBBM2lBzp/rXGguzt4OcMfW+86fs0hpFwMyopHM2r6d3g==}
+  astro@6.1.6:
+    resolution: {integrity: sha512-pRsz+kYriwCV/AUcY/I9OVKtVHuYFs2DtCszAxprXded/kTE53nMwxfnK0Nf6FPfaX9vcUiLnigcSIhuFoKntA==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -2253,8 +2253,8 @@ packages:
   longest-streak@3.1.0:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
 
-  lru-cache@11.3.3:
-    resolution: {integrity: sha512-JvNw9Y81y33E+BEYPr0U7omo+U9AySnsMsEiXgwT6yqd31VQWTLNQqmT4ou5eqPFUrTfIDFta2wKhB1hyohtAQ==}
+  lru-cache@11.3.5:
+    resolution: {integrity: sha512-NxVFwLAnrd9i7KUBxC4DrUhmgjzOs+1Qm50D3oF1/oL+r1NpZ4gA7xvG0/zJ8evR7zIKn4vLf7qTNduWFtCrRw==}
     engines: {node: 20 || >=22}
 
   magic-string@0.30.21:
@@ -2491,94 +2491,94 @@ packages:
   node-mock-http@1.0.4:
     resolution: {integrity: sha512-8DY+kFsDkNXy1sJglUfuODx1/opAGJGyrTuFqEoN90oRc2Vk0ZbD4K2qmKXBBEhZQzdKHIVfEJpDU8Ak2NJEvQ==}
 
-  node@runtime:24.14.1:
+  node@runtime:24.15.0:
     resolution:
       type: variations
       variants:
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-VvbBjF6XvrAFlMJOs8+jxwtyR8QDsAyn6udbujC4XOU=
+            integrity: sha256-3UvHfctfTJoslkNzm7WTUAzLCUE+xCyqD47w5e8RYJU=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-aix-ppc64.tar.gz
+            url: https://nodejs.org/download/release/v24.15.0/node-v24.15.0-aix-ppc64.tar.gz
           targets:
             - cpu: ppc64
               os: aix
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-JUlf+FvYni2KJNiFZtfi+CfGsNPYcrLOv3U3H5P8sf4=
+            integrity: sha256-NyMxuWl3mrXRW5SYhPxur4jVr+h73ouogdZAC5EA/8Q=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-darwin-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.15.0/node-v24.15.0-darwin-arm64.tar.gz
           targets:
             - cpu: arm64
               os: darwin
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-JSYjCtfZIr6C1P2x5+4ehDA+Ez47Sw7Ewol6sx3gJT0=
+            integrity: sha256-/9XuKTRnkn8+5zGlU+uI/R9Iz3TuvC10prq+SvIoZzs=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-darwin-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.15.0/node-v24.15.0-darwin-x64.tar.gz
           targets:
             - cpu: x64
               os: darwin
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-c0/wT6f47S6KeNQMrPWsP8RRXawoWHV8urMT60g7qKI=
+            integrity: sha256-c6/CNNVYwkkZh19RwtHqACoq2k6m+DYBo4OGn++mTu0=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-linux-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.15.0/node-v24.15.0-linux-arm64.tar.gz
           targets:
             - cpu: arm64
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-BoJCkui0C39lpvmXPz1g88wAAakWgjS8PW4wqhNkn9I=
+            integrity: sha256-sfiJAKSxY2XqulYmkwT8Edp1gdvwNVLUSV+azh/AX20=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-linux-ppc64le.tar.gz
+            url: https://nodejs.org/download/release/v24.15.0/node-v24.15.0-linux-ppc64le.tar.gz
           targets:
             - cpu: ppc64le
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-OuVz9DyT2v2v7cgIY/oqBAv+qhXmq4PBqOAQHwmVLcQ=
+            integrity: sha256-+YVFVDnVL+m43mqPbQe/7MxzbepSfofqyv5ajXUWo4A=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-linux-s390x.tar.gz
+            url: https://nodejs.org/download/release/v24.15.0/node-v24.15.0-linux-s390x.tar.gz
           targets:
             - cpu: s390x
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-rOn6EEmS7QgpZCYpxGynvX/W52J4y5bJWMSzh9KWWOo=
+            integrity: sha256-RINoctmuxJ8ea1KpqSKHLbmisC0jWmFqVoG2qF/sjYk=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-linux-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.15.0/node-v24.15.0-linux-x64.tar.gz
           targets:
             - cpu: x64
               os: linux
         - resolution:
             archive: zip
             bin: node.exe
-            integrity: sha256-p7fGhJDkqM3hkh/loM+zAB1T+cg55BaQPk8o5ye2L2A=
-            prefix: node-v24.14.1-win-arm64
+            integrity: sha256-yet0Au2ibiun5EtnJ/yFqN5WxQlbH3Hr0wYokiEaoRY=
+            prefix: node-v24.15.0-win-arm64
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-win-arm64.zip
+            url: https://nodejs.org/download/release/v24.15.0/node-v24.15.0-win-arm64.zip
           targets:
             - cpu: arm64
               os: win32
         - resolution:
             archive: zip
             bin: node.exe
-            integrity: sha256-blDOVJjAzrwg/TmrP/Xfg27S+KMaoJPOythJfP8SbXA=
-            prefix: node-v24.14.1-win-x64
+            integrity: sha256-zFFJ6r1Td5zh573FQBZDYi0MfmgAreGJKKdn6UC7DmI=
+            prefix: node-v24.15.0-win-x64
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-win-x64.zip
+            url: https://nodejs.org/download/release/v24.15.0/node-v24.15.0-win-x64.zip
           targets:
             - cpu: x64
               os: win32
-    version: 24.14.1
+    version: 24.15.0
     hasBin: true
 
   normalize-path@3.0.0:
@@ -2728,12 +2728,12 @@ packages:
     resolution: {integrity: sha512-orRsuYpJVw8LdAwqqLykBj9ecS5/cRHlI5+nvTo8LcCKmzDmqVORXtOIYEEQuL9D4BxtA1lm5isAqzQZCoQ6Eg==}
     engines: {node: '>=4'}
 
-  postcss@8.5.8:
-    resolution: {integrity: sha512-OW/rX8O/jXnm82Ey1k44pObPtdblfiuWnrd8X7GJ7emImCOstunGbXUpp7HdBrFQX6rJzn3sPT397Wp5aCwCHg==}
+  postcss@8.5.10:
+    resolution: {integrity: sha512-pMMHxBOZKFU6HgAZ4eyGnwXF/EvPGGqUr0MnZ5+99485wwW41kW91A4LOGxSHhgugZmSChL5AlElNdwlNgcnLQ==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postcss@8.5.9:
-    resolution: {integrity: sha512-7a70Nsot+EMX9fFU3064K/kdHWZqGVY+BADLyXc8Dfv+mTLLVl6JzJpPaCZ2kQL9gIJvKXSLMHhqdRRjwQeFtw==}
+  postcss@8.5.8:
+    resolution: {integrity: sha512-OW/rX8O/jXnm82Ey1k44pObPtdblfiuWnrd8X7GJ7emImCOstunGbXUpp7HdBrFQX6rJzn3sPT397Wp5aCwCHg==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.2.1:
@@ -3553,7 +3553,7 @@ snapshots:
     dependencies:
       '@astro-community/astro-embed-utils': 0.2.0
 
-  '@astro-community/astro-embed-integration@0.11.0(astro@6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))':
+  '@astro-community/astro-embed-integration@0.11.0(astro@6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))':
     dependencies:
       '@astro-community/astro-embed-bluesky': 0.1.6
       '@astro-community/astro-embed-gist': 0.1.0
@@ -3563,8 +3563,8 @@ snapshots:
       '@astro-community/astro-embed-vimeo': 0.3.12
       '@astro-community/astro-embed-youtube': 0.5.10
       '@types/unist': 3.0.3
-      astro: 6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)
-      astro-auto-import: 0.4.6(astro@6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))
+      astro: 6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)
+      astro-auto-import: 0.4.6(astro@6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))
       unist-util-select: 5.1.0
 
   '@astro-community/astro-embed-link-preview@0.3.1':
@@ -3662,12 +3662,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@5.0.3(astro@6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))':
+  '@astrojs/mdx@5.0.3(astro@6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))':
     dependencies:
       '@astrojs/markdown-remark': 7.1.0
       '@mdx-js/mdx': 3.1.1
       acorn: 8.16.0
-      astro: 6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)
+      astro: 6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)
       es-module-lexer: 2.0.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -4656,23 +4656,23 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro-auto-import@0.4.6(astro@6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)):
+  astro-auto-import@0.4.6(astro@6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)):
     dependencies:
       acorn: 8.16.0
-      astro: 6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)
+      astro: 6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)
 
-  astro-embed@0.12.0(astro@6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)):
+  astro-embed@0.12.0(astro@6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)):
     dependencies:
       '@astro-community/astro-embed-baseline-status': 0.2.2
       '@astro-community/astro-embed-bluesky': 0.1.6
       '@astro-community/astro-embed-gist': 0.1.0
-      '@astro-community/astro-embed-integration': 0.11.0(astro@6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))
+      '@astro-community/astro-embed-integration': 0.11.0(astro@6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))
       '@astro-community/astro-embed-link-preview': 0.3.1
       '@astro-community/astro-embed-mastodon': 0.1.1
       '@astro-community/astro-embed-twitter': 0.5.11
       '@astro-community/astro-embed-vimeo': 0.3.12
       '@astro-community/astro-embed-youtube': 0.5.10
-      astro: 6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)
+      astro: 6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)
 
   astro-eslint-parser@1.4.0:
     dependencies:
@@ -4691,7 +4691,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  astro@6.1.5(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3):
+  astro@6.1.6(patch_hash=36d103807d77bda3cc833b85998d5d43d29eb09281cc21c95b7cd07e56126d23)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3):
     dependencies:
       '@astrojs/compiler': 3.0.1
       '@astrojs/internal-helpers': 0.8.0
@@ -4909,9 +4909,9 @@ snapshots:
     dependencies:
       uncrypto: 0.1.3
 
-  css-declaration-sorter@7.3.1(postcss@8.5.9):
+  css-declaration-sorter@7.3.1(postcss@8.5.10):
     dependencies:
-      postcss: 8.5.9
+      postcss: 8.5.10
 
   css-select@5.2.2:
     dependencies:
@@ -5960,7 +5960,7 @@ snapshots:
 
   longest-streak@3.1.0: {}
 
-  lru-cache@11.3.3: {}
+  lru-cache@11.3.5: {}
 
   magic-string@0.30.21:
     dependencies:
@@ -6456,7 +6456,7 @@ snapshots:
 
   node-mock-http@1.0.4: {}
 
-  node@runtime:24.14.1: {}
+  node@runtime:24.15.0: {}
 
   normalize-path@3.0.0: {}
 
@@ -6598,26 +6598,26 @@ snapshots:
 
   possible-typed-array-names@1.1.0: {}
 
-  postcss-less@6.0.0(postcss@8.5.9):
+  postcss-less@6.0.0(postcss@8.5.10):
     dependencies:
-      postcss: 8.5.9
+      postcss: 8.5.10
 
-  postcss-scss@4.0.9(postcss@8.5.9):
+  postcss-scss@4.0.9(postcss@8.5.10):
     dependencies:
-      postcss: 8.5.9
+      postcss: 8.5.10
 
   postcss-selector-parser@7.1.1:
     dependencies:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
 
-  postcss@8.5.8:
+  postcss@8.5.10:
     dependencies:
       nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  postcss@8.5.9:
+  postcss@8.5.8:
     dependencies:
       nanoid: 3.3.11
       picocolors: 1.1.1
@@ -6631,11 +6631,11 @@ snapshots:
       prettier: 3.8.1
       sass-formatter: 0.7.9
 
-  prettier-plugin-css-order@2.2.0(postcss@8.5.9)(prettier@3.8.1):
+  prettier-plugin-css-order@2.2.0(postcss@8.5.10)(prettier@3.8.1):
     dependencies:
-      css-declaration-sorter: 7.3.1(postcss@8.5.9)
-      postcss-less: 6.0.0(postcss@8.5.9)
-      postcss-scss: 4.0.9(postcss@8.5.9)
+      css-declaration-sorter: 7.3.1(postcss@8.5.10)
+      postcss-less: 6.0.0(postcss@8.5.10)
+      postcss-scss: 4.0.9(postcss@8.5.10)
       prettier: 3.8.1
     transitivePeerDependencies:
       - postcss
@@ -7320,7 +7320,7 @@ snapshots:
       chokidar: 5.0.0
       destr: 2.0.5
       h3: 1.15.11
-      lru-cache: 11.3.3
+      lru-cache: 11.3.5
       node-fetch-native: 1.6.7
       ofetch: 1.5.1
       ufo: 1.6.3
@@ -7355,7 +7355,7 @@ snapshots:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.4)
       picomatch: 4.0.4
-      postcss: 8.5.9
+      postcss: 8.5.10
       rollup: 4.60.1
       tinyglobby: 0.2.16
     optionalDependencies:
