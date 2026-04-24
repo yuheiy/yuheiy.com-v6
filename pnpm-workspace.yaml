@@ -8,9 +8,6 @@ engineStrict: true
 
 minimumReleaseAge: 4320 # 3 days
 
-patchedDependencies:
-  astro: patches/astro.patch
-
 strictDepBuilds: true
 
 strictPeerDependencies: true
