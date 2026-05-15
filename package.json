@@ -63,5 +63,6 @@
       "version": "^11.1.2",
       "onFail": "download"
     }
-  }
+  },
+  "packageManager": "pnpm@11.1.2"
 }
