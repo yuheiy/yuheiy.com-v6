@@ -1,2 +1,4 @@
 # lockfiles
 pnpm-lock.yaml
+
+src/content/blog/**/~*.mdx
