@@ -3,7 +3,10 @@
   "private": true,
   "type": "module",
   "imports": {
-    "#/*": "./src/*"
+    "#/*": [
+      "./src/*",
+      "./src/*.ts"
+    ]
   },
   "scripts": {
     "build": "astro build",
