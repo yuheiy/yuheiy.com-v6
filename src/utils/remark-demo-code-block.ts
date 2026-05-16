@@ -97,7 +97,7 @@ const remarkDemoCodeBlock: Pluggable = () => {
     });
 
     if (hasDemoBlock) {
-      tree.children.unshift(createImportNode('DemoIframe', '#components/DemoIframe.astro'));
+      tree.children.unshift(createImportNode('DemoIframe', '#/components/DemoIframe.astro'));
     }
   };
 };

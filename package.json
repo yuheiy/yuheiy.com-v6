@@ -3,10 +3,7 @@
   "private": true,
   "type": "module",
   "imports": {
-    "#*": [
-      "./src/*",
-      "./src/*.ts"
-    ]
+    "#/*": "./src/*"
   },
   "scripts": {
     "build": "astro build",
@@ -49,7 +46,7 @@
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-css-order": "^2.2.0",
-    "typescript": "~5.9.3",
+    "typescript": "~6.0.3",
     "typescript-eslint": "^8.59.3"
   },
   "devEngines": {

@@ -6,8 +6,8 @@ import { getCollection, render } from 'astro:content';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import sanitizeHtml from 'sanitize-html';
 import invariant from 'tiny-invariant';
-import { SITE } from '#config';
-import { getDescription, getPermalink } from '#utils/blog';
+import { SITE } from '#/config';
+import { getDescription, getPermalink } from '#/utils/blog';
 
 export async function GET(context: APIContext) {
   invariant(context.site);
