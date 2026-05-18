@@ -32,7 +32,7 @@
   }
 
   hr {
-    margin-block: calc(--spacing(8) + var(--half-leading));
+    margin-block: --spacing(12);
     border-block-start: 4px solid var(--border-color-dynamic);
     inline-size: --spacing(32);
   }
