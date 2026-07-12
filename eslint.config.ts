@@ -19,7 +19,7 @@ export default defineConfig(
     },
   },
 
-  astro.configs['flat/jsx-a11y-recommended'],
+  astro.configs['jsx-a11y-recommended'],
 
   {
     extends: [betterTailwindcss.configs.recommended as never],

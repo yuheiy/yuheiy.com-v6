@@ -1,5 +1,5 @@
+import type { RemarkPlugin } from '@astrojs/markdown-remark';
 import invariant from 'tiny-invariant';
-import type { Pluggable } from 'unified';
 import { visit } from 'unist-util-visit';
 
 function parseMeta(meta: string): Record<string, string> {
@@ -59,7 +59,7 @@ function createImportNode(name: string, source: string) {
   };
 }
 
-const remarkDemoCodeBlock: Pluggable = () => {
+const remarkDemoCodeBlock: RemarkPlugin = () => {
   return (tree) => {
     let hasDemoBlock = false;
 
@@ -77,6 +77,7 @@ const remarkDemoCodeBlock: Pluggable = () => {
 
       hasDemoBlock = true;
 
+      // mdast の型には MDX のノード型が含まれないためキャストする
       parent.children[index] = {
         type: 'mdxJsxFlowElement',
         name: 'DemoIframe',
@@ -93,11 +94,13 @@ const remarkDemoCodeBlock: Pluggable = () => {
           },
         ],
         children: [],
-      };
+      } as never;
     });
 
     if (hasDemoBlock) {
-      tree.children.unshift(createImportNode('DemoIframe', '#/components/DemoIframe.astro'));
+      tree.children.unshift(
+        createImportNode('DemoIframe', '#/components/DemoIframe.astro') as never,
+      );
     }
   };
 };

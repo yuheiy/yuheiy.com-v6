@@ -1,3 +1,4 @@
+import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
@@ -15,19 +16,7 @@ import remarkDemoCodeBlock from './src/utils/remark-demo-code-block';
 export default defineConfig({
   site: 'https://yuheiy.com',
   trailingSlash: 'never',
-  integrations: [
-    mdx({
-      remarkPlugins: [remarkDemoCodeBlock],
-      rehypePlugins: [
-        rehypeUnwrapFigcaptionParagraphs,
-        rehypeUnwrapCiteParagraphs,
-        rehypeUnwrapImages,
-        rehypeWrapFigure,
-        rehypeExtractDescription,
-      ],
-    }),
-    sitemap(),
-  ],
+  integrations: [mdx(), sitemap()],
   compressHTML: false,
   vite: {
     plugins: [tailwindcss()],
@@ -43,6 +32,16 @@ export default defineConfig({
     enabled: false,
   },
   markdown: {
+    processor: unified({
+      remarkPlugins: [remarkDemoCodeBlock],
+      rehypePlugins: [
+        rehypeUnwrapFigcaptionParagraphs,
+        rehypeUnwrapCiteParagraphs,
+        rehypeUnwrapImages,
+        rehypeWrapFigure,
+        rehypeExtractDescription,
+      ],
+    }),
     shikiConfig: {
       themes: {
         light: 'github-light-default',

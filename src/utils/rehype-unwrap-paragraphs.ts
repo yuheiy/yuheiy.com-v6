@@ -1,8 +1,8 @@
+import type { RehypePlugin } from '@astrojs/markdown-remark';
 import type { Element } from 'hast';
-import type { Pluggable } from 'unified';
 import { visit } from 'unist-util-visit';
 
-function createRehypeUnwrapParagraphs(containerName: string): Pluggable {
+function createRehypeUnwrapParagraphs(containerName: string): RehypePlugin {
   return () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (tree: any) => {

@@ -1,9 +1,9 @@
+import type { RehypePlugin } from '@astrojs/markdown-remark';
 import type { Element } from 'hast';
 import { toString } from 'hast-util-to-string';
-import type { Pluggable } from 'unified';
 import { EXIT, visit } from 'unist-util-visit';
 
-const rehypeExtractDescription: Pluggable = () => {
+const rehypeExtractDescription: RehypePlugin = () => {
   return (tree, { data }) => {
     visit(tree, 'element', (node: Element) => {
       if (node.tagName !== 'p') return;

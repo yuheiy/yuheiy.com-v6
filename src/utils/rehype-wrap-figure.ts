@@ -1,5 +1,5 @@
+import type { RehypePlugin } from '@astrojs/markdown-remark';
 import type { Element } from 'hast';
-import type { Pluggable } from 'unified';
 
 interface AstNode {
   type: string;
@@ -70,7 +70,7 @@ function processNode(node: AstNode): void {
   }
 }
 
-const rehypeWrapFigure: Pluggable = () => {
+const rehypeWrapFigure: RehypePlugin = () => {
   return (tree) => {
     processNode(tree as AstNode);
   };
