@@ -1,0 +1,63 @@
+---
+title: 'LLMを使ってコミット履歴をもとにしたユーザー向けのリリースノートを作成する'
+pubDate: 2026-07-12T23:40:00.000+09:00
+---
+
+GitHubリポジトリのリリースノートは、毎回手動で記述するのではなく、何かしらの仕組みで自動生成されることが多い。
+
+よくあるやり方としては、以前のリリースから現在までのコミットメッセージもしくはプルリクエストのタイトルを、そのまま列挙するというものだ。[Conventional Commits](https://www.conventionalcommits.org/ja/v1.0.0/)に則ってグループ化されることもある。しかし、本来開発者自身のために記述されるはずのメッセージがそのままユーザーにも提供されてしまうのは、必ずしも理想的ではない。
+
+別のアプローチとして、[Changesets](https://changesets.dev/)を利用すれば、プルリクエストごとにユーザー向けのメッセージを個別に記述できる。とはいえ、プルリクエストが必ずしもユーザーにとって意味のある単位で作成されるとは限らない。たとえば、ある機能が完成したと思って一つ目のプルリクエストをマージした後、追って改善のために別のプルリクエストを作成することもある。これらの変更は、ユーザーにはひとまとまりにして伝えるべきだ。
+
+こうした問題はリリース時に手動で修正することもできるが、今ならLLMを使ったアプローチも選択肢に入る。LLMであれば、コミット履歴を元にしながらも、開発者向けの記述をユーザー向けの表現に書き直したり、複数のプルリクエストにまたがる変更をひとまとまりに整理し直したりできる。実例として、[Codex](https://openai.com/ja-JP/codex/)や[Vite+](https://viteplus.dev/)のリリースノートはLLMで作成されているようだ。
+
+- [Release 0.144.0 · openai/codex](https://github.com/openai/codex/releases/tag/rust-v0.144.0)
+- [Release vite-plus v0.2.0 · voidzero-dev/vite-plus](https://github.com/voidzero-dev/vite-plus/releases/tag/v0.2.0)
+
+後者のVite+については、[リリースのためのエージェントスキルが一般公開されている](https://github.com/voidzero-dev/vite-plus/blob/v0.2.4/.claude/skills/release-manager/SKILL.md)。スキルによれば、だいたい次の方法でリリースノートが作成されている。
+
+1. 前回のバージョン以降のプルリクエストのリストを取得
+1. リリースノートの文書構造を定義
+   ```md
+   Release vite-plus vX.Y.Z: <theme>.
+
+   <One or two sentences on the release theme. When a blog post accompanies the release, read it first (via its preview URL if not yet deployed), align the theme with it, and link the final URL here even if that URL is not live yet.>
+
+   ### Highlights
+
+   ### Features
+
+   ### Fixes & Enhancements
+
+   ### Refactor
+
+   ### Docs
+
+   ### Chore
+
+   ### Bundled Versions
+
+   ### Upgrade
+
+   ### New Contributors
+
+   **Full Changelog**: https://github.com/voidzero-dev/vite-plus/compare/v<prev>...v<curr>
+
+   ---
+
+   Merging this PR will trigger the release workflow.
+   ```
+1. プルリクエストを種類に応じて分類する
+1. 記述するのはバージョン間で最終的に何が変わったかであり、その間の経緯ではない。挙動を入れて後から戻したなど、複数のプルリクエストが絡む変更は最終的な内容を1エントリにまとめて全プルリクエストの番号を列挙する。「リグレッションが入って直った」という経緯は書かない
+1. ユーザーにとっての見どころを3〜5個ハイライトとして選出する。新機能、セキュリティに関する変更、大きな修正など。内部的な変更は除外する
+1. 実装の中身ではなくユーザーに見える挙動を記述する
+
+こうして作成したドラフトをスキルを実行した人に提示し、承認を得たら適用するという流れ。内容が気に入らなければこのタイミングで修正できる。
+
+自身のプロジェクトにも同様の仕組みを取り入れる場合、リリースノートの形式は要件に応じて調整するとよい。たとえばモノレポで複数パッケージを公開しているなら、パッケージごとにセクションを分割する。破壊的変更を目立たせたいなら、冒頭に専用のセクションを追加するなど。
+
+また、どのような経路でリリースノートを作成して公開するかは、リリース方式によって異なる。Vite+の場合、リリース時には専用のプルリクエストをGitHub Actions経由で作成する。そのプルリクエストの本文にリリースノートの元となるテキストが書き込まれ、マージするとそれが実際のリリースノートとして転記される。実装方法についてはVite+を参考にできる。
+
+一方、リリース用のプルリクエストを作らず、デフォルトブランチから直接リリースするパターンもある。`npm version`などでリリースコミットの作成とタグづけをして、そのタグがプッシュされたことをトリガーにリリースが実行される。この場合、プルリクエストからの転記はできないため、代わりにそのコミットメッセージにリリースノートを埋め込むという方法がある。GitHub Actionsではそれを読み取ってリリースノートに転記する。Codexはこれに近い方法を取っているが、仕組みが完全には公開されておらず参考にしづらいため、[自分で似たようなリリースフローを構築してみた](https://github.com/yuheiy/llm-powered-release-notes-generation-demo)。
+
+ちなみに、どちらの方式にするにしても、プルリクエストのマージ方式は「Squash and merge」にしておくとよいだろう。1プルリクエストが1コミットに対応するため、コミット履歴がそのまま変更単位の一覧になり、LLMにとっても処理しやすくなると思われる。

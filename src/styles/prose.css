@@ -51,7 +51,7 @@
       padding-left: var(--padding-left-body);
     }
 
-    blockquote:not([class]) & {
+    :is(blockquote:not([class]), li) & {
       margin-inline: 0;
       padding-inline: 0;
     }
@@ -97,6 +97,10 @@
 
     &:has(> blockquote:not([class])) {
       margin-block: --spacing(12);
+    }
+
+    li & {
+      margin-block: --spacing(4);
     }
   }
 
