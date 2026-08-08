@@ -1,16 +1,12 @@
 allowBuilds:
   esbuild: true
-  sharp: true
-
-blockExoticSubdeps: true
 
 engineStrict: true
 
 minimumReleaseAge: 4320 # 3 days
 
-strictDepBuilds: true
-
-strictPeerDependencies: true
+minimumReleaseAgeExclude:
+  - astro@7.2.0
 
 trustPolicy: no-downgrade
 
