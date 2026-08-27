@@ -97,7 +97,7 @@
   a {
     text-decoration: underline;
     text-decoration-color: var(--text-decoration-color-dynamic);
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: from-font;
     text-underline-offset: calc(var(--half-leading) / 2);
   }
 
