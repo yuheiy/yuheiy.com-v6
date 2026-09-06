@@ -19,7 +19,7 @@ jobs:
 
       - uses: withastro/action@e84f40bd8d2caa9e768ec82ad30dd81f0b280853 # v6.1.2
         with:
-          build-cmd: pnpm run check && pnpm run build
+          build-cmd: node --run check && node --run build
 
   deploy:
     permissions:
